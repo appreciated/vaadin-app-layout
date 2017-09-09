@@ -1,4 +1,4 @@
-package com.github.appreciated.layout.drawerlayout;
+package com.github.appreciated.layout.drawer;
 
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
@@ -21,11 +21,11 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-drawerlayout/app-drawer/app-drawer.html")
 @HtmlImport("vaadin://bower_components/app-drawerlayout/app-drawer-drawerlayout/app-drawer-drawerlayout.html")
 
-public class AppLayoutResponsive extends CustomLayout {
+public class Responsive extends CustomLayout {
     private final VerticalLayout contentHolder = new VerticalLayout();
 
-    public AppLayoutResponsive() throws IOException {
-        super(AppLayoutResponsive.class.getResourceAsStream("responsive.html"));
+    public Responsive() throws IOException {
+        super(Responsive.class.getResourceAsStream("responsive.html"));
         setSizeFull();
         addStyleName("app-drawerlayout-responsive");
         super.addComponent(contentHolder, "content");

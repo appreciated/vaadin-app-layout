@@ -1,6 +1,6 @@
 package com.github.appreciated.demo;
 
-import com.github.appreciated.layout.drawerlayout.AppLayoutResponsive;
+import com.github.appreciated.layout.drawer.Responsive;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -24,7 +24,7 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         try {
-            AppLayoutResponsive layout = new AppLayoutResponsive();
+            Responsive layout = new Responsive();
             for (int i = 0; i < 100; i++) {
                 layout.addComponent(new Label("Test1234123412341234"));
             }
