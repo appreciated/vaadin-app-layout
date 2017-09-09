@@ -1,0 +1,27 @@
+@import "../valo/valo.scss";
+@import "../../addons/circular-progressbar/circular-progressbar.scss";
+
+$gray: #d1d1cf;
+$green: #40b527;
+$darkgreen: darken($green, 30%);
+
+/* Import and include this mixin into your project theme to include the addon themes */
+
+// Prefix all selectors in your theme with .demo
+.demo {
+
+	// Include valo theme styles in your theme
+	@include valo;
+    @include circular-progressbar;
+
+	// You can style your demo app right here
+	.demoContentLayout {
+		@include radial-gradient(circle, #d0d0d0, #adadad);
+	}
+
+	.rotate svg .circular-progressbar-circle-part {
+        transform-origin: 50% 50%; // change the origin to rotate at the correct point
+        transform: rotate(225deg); // rotate by 225°
+    }
+
+}

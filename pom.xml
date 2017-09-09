@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.appreciated</groupId>
+	<artifactId>app-layout-root</artifactId>
+	<packaging>pom</packaging>
+	<version>0.5.0</version>
+	<name>App Layout Addon Root Project</name>
+
+	<prerequisites>
+		<maven>3</maven>
+	</prerequisites>
+
+	<modules>
+		<module>app-layout-addon</module>
+		<module>app-layout-demo</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<!-- Vaadin pre-release repositories -->
+			<id>vaadin-prerelease</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			
+			<repositories>
+				<repository>
+					<id>vaadin-prereleases</id>
+					<url>http://maven.vaadin.com/vaadin-prereleases</url>
+				</repository>
+				<repository>
+					<id>vaadin-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>vaadin-prereleases</id>
+					<url>http://maven.vaadin.com/vaadin-prereleases</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>vaadin-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+
+</project>
