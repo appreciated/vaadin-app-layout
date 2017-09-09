@@ -120,7 +120,7 @@
                         <manifestEntries>
                             <Vaadin-Package-Version>1</Vaadin-Package-Version>
                             <Vaadin-License-Title>${Vaadin-License-Title}</Vaadin-License-Title>
-                            <Vaadin-Stylesheets>VAADIN/addons/vaadin-app-layout/vaadin-app-layout.scss
+                            <Vaadin-Stylesheets>VAADIN/addons/app-layout/app-layout.scss
                             </Vaadin-Stylesheets>
                         </manifestEntries>
                     </archive>

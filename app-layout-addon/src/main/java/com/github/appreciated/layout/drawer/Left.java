@@ -17,8 +17,8 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/iron-icons/iron-icons.html")
 @HtmlImport("vaadin://bower_components/paper-icon-button/paper-icon-button.html")
 @HtmlImport("vaadin://bower_components/paper-item/paper-icon-item.html")
-@HtmlImport("vaadin://bower_components/app-drawerlayout/app-toolbar/app-toolbar.html")
-@HtmlImport("vaadin://bower_components/app-drawerlayout/app-drawer/app-drawer.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 
 public class Left extends CustomLayout {
     private final VerticalLayout contentHolder = new VerticalLayout();
@@ -26,7 +26,7 @@ public class Left extends CustomLayout {
     public Left() throws IOException {
         super(Left.class.getResourceAsStream("left-drawer.html"));
         setSizeFull();
-        addStyleName("app-drawerlayout");
+        addStyleName("app-drawer-left");
         super.addComponent(contentHolder, "content");
     }
 

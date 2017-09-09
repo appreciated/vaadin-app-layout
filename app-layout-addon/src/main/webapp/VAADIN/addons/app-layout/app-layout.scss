@@ -1,0 +1,28 @@
+@mixin app-layout {
+  .app-drawer-left {
+    .app-toolbar {
+      background-color: #4285f4;
+      color: #fff;
+    }
+    .app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
+      --app-drawer-content-container: {
+        background-color: #B0BEC5;
+      }
+    }
+  }
+  .app-drawer-responsive {
+    app-toolbar {
+      background-color: #4285f4;
+      color: #fff;
+    }
+    app-drawer-layout:not([narrow]) [drawer-toggle] {
+      display: none;
+    }
+    app-drawer {
+      --app-drawer-content-container: {
+        background-color: #B0BEC5;
+      }
+    }
+  }
+}

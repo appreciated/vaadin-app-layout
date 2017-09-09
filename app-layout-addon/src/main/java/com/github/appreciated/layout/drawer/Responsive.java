@@ -17,9 +17,9 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/iron-icons/iron-icons.html")
 @HtmlImport("vaadin://bower_components/paper-icon-button/paper-icon-button.html")
 @HtmlImport("vaadin://bower_components/paper-item/paper-icon-item.html")
-@HtmlImport("vaadin://bower_components/app-drawerlayout/app-toolbar/app-toolbar.html")
-@HtmlImport("vaadin://bower_components/app-drawerlayout/app-drawer/app-drawer.html")
-@HtmlImport("vaadin://bower_components/app-drawerlayout/app-drawer-drawerlayout/app-drawer-drawerlayout.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
 
 public class Responsive extends CustomLayout {
     private final VerticalLayout contentHolder = new VerticalLayout();
@@ -27,7 +27,7 @@ public class Responsive extends CustomLayout {
     public Responsive() throws IOException {
         super(Responsive.class.getResourceAsStream("responsive.html"));
         setSizeFull();
-        addStyleName("app-drawerlayout-responsive");
+        addStyleName("app-drawer-responsive");
         super.addComponent(contentHolder, "content");
     }
 
