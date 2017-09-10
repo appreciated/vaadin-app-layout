@@ -27,6 +27,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         appBar.addComponents(titleWrapper, appBarElementHolder);
         appBar.setSizeFull();
         appBar.setComponentAlignment(appBarElementHolder,Alignment.TOP_RIGHT);
+        titleWrapper.setHeight(100,Unit.PERCENTAGE);
+        titleWrapper.setComponentAlignment(title,Alignment.MIDDLE_LEFT);
         addComponent(connector);
     }
 
@@ -44,6 +46,21 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         appBarElementHolder.addComponent(component);
     }
 
+    public HorizontalLayout getAppBar() {
+        return appBar;
+    }
+
+    public HorizontalLayout getAppBarElementHolder() {
+        return appBarElementHolder;
+    }
+
+    public Label getTitle() {
+        return title;
+    }
+
+    public HorizontalLayout getTitleWrapper() {
+        return titleWrapper;
+    }
 
     public VerticalLayout getContentHolder() {
         return contentHolder;
