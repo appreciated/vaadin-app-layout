@@ -1,5 +1,6 @@
 package com.github.appreciated.layout.drawer;
 
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
 import java.io.IOException;

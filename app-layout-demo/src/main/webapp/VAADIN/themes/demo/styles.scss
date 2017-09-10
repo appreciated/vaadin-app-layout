@@ -1,5 +1,5 @@
 @import "../valo/valo.scss";
-@import "../../addons/circular-progressbar/circular-progressbar.scss";
+@import "../../addons/app-layout/app-layout.scss"; // don't do it this way in production,
 
 $gray: #d1d1cf;
 $green: #40b527;
@@ -12,7 +12,7 @@ $darkgreen: darken($green, 30%);
 
 	// Include valo theme styles in your theme
 	@include valo;
-    @include circular-progressbar;
+    @include app-layout;
 
 	// You can style your demo app right here
 	.demoContentLayout {
