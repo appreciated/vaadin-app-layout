@@ -1,6 +1,7 @@
 *.iml
 .idea
 **/**/target
+*.css
 
 # Logs
 logs
