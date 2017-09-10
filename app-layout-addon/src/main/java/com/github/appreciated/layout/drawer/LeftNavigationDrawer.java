@@ -2,9 +2,6 @@ package com.github.appreciated.layout.drawer;
 
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.VerticalLayout;
 
 import java.io.IOException;
 
@@ -20,18 +17,14 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 
-public class Left extends CustomLayout {
-    private final VerticalLayout contentHolder = new VerticalLayout();
+public class LeftNavigationDrawer extends AbstractNavigationDrawer {
 
-    public Left() throws IOException {
-        super(Left.class.getResourceAsStream("left-drawer.html"));
-        setSizeFull();
-        addStyleName("app-drawer-left");
-        super.addComponent(contentHolder, "content");
+    public LeftNavigationDrawer() throws IOException {
+        super("left-navigation-drawer.html");
     }
 
     @Override
-    public void addComponent(Component c) {
-        contentHolder.addComponent(c);
+    public String getStyleName() {
+        return "app-drawer-left";
     }
 }
