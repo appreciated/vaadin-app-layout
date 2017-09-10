@@ -12,9 +12,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementHolder = new HorizontalLayout();
-    private final Label title = new Label("Title");
+    private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
-    AppLayoutConnector connector = new AppLayoutConnector();
 
     public AbstractNavigationDrawer(String filename) throws IOException {
         super(AbstractNavigationDrawer.class.getResourceAsStream(filename));
@@ -28,9 +27,9 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         appBar.addComponents(titleWrapper, appBarElementHolder);
         appBar.setSizeFull();
         appBar.setComponentAlignment(appBarElementHolder,Alignment.TOP_RIGHT);
+        appBarElementHolder.setSpacing(false);
         titleWrapper.setHeight(100,Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title,Alignment.MIDDLE_LEFT);
-        addComponent(connector);
     }
 
     @Override
@@ -39,6 +38,13 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     }
 
     public abstract String getStyleName();
+
+    public void addNavigationHeaderElement(Component component) {
+        menuElementHolder.addComponent(component);
+    }
+    public void addNavigationFooterElement(Component component) {
+        menuElementHolder.addComponent(component);
+    }
 
     public void addNavigationElement(Component component) {
         menuElementHolder.addComponent(component);

@@ -10,7 +10,6 @@ import java.io.IOException;
  */
 @JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 
-@HtmlImport("vaadin://bower_components/font-roboto/roboto.html")
 @HtmlImport("vaadin://bower_components/iron-icons/iron-icons.html")
 @HtmlImport("vaadin://bower_components/paper-icon-button/paper-icon-button.html")
 @HtmlImport("vaadin://bower_components/paper-item/paper-icon-item.html")
