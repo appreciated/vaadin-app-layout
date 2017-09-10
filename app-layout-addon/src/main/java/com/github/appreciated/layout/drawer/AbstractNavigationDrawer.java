@@ -1,8 +1,6 @@
 package com.github.appreciated.layout.drawer;
 
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import java.io.IOException;
 
@@ -11,7 +9,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
     private final VerticalLayout contentHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
-
+    private final HorizontalLayout appBar = new HorizontalLayout();
+    private final HorizontalLayout appBarElementHolder = new HorizontalLayout();
+    private final Label title = new Label("Title");
+    private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
     AppLayoutConnector connector = new AppLayoutConnector();
 
     public AbstractNavigationDrawer(String filename) throws IOException {
@@ -22,6 +23,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         addStyleName(getStyleName());
         super.addComponent(contentHolder, "content");
         super.addComponent(menuElementHolder, "menu-elements");
+        super.addComponent(appBar, "app-bar-elements");
+        appBar.addComponents(titleWrapper, appBarElementHolder);
+        appBar.setSizeFull();
+        appBar.setComponentAlignment(appBarElementHolder,Alignment.TOP_RIGHT);
         addComponent(connector);
     }
 
@@ -35,6 +40,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public void addNavigationElement(Component component) {
         menuElementHolder.addComponent(component);
     }
+    public void addAppBarElement(Component component) {
+        appBarElementHolder.addComponent(component);
+    }
+
 
     public VerticalLayout getContentHolder() {
         return contentHolder;

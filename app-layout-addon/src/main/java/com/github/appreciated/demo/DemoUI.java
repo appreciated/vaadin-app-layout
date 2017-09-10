@@ -4,6 +4,7 @@ import com.github.appreciated.layout.drawer.ResponsiveNavigationDrawer;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
@@ -33,6 +34,9 @@ public class DemoUI extends UI {
             }
             for (int i = 0; i < 10; i++) {
                 layout.addNavigationElement(new Button("Test"+i));
+            }
+            for (int i = 0; i < 3; i++) {
+                layout.addAppBarElement(new Button(VaadinIcons.ABACUS));
             }
             setContent(layout);
         } catch (IOException e) {
