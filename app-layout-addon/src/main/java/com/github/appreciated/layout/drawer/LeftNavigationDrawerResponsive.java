@@ -15,15 +15,16 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/paper-item/paper-icon-item.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
+@HtmlImport("vaadin://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
 
-public class LeftOverlayNavigationDrawer extends AbstractNavigationDrawer {
+public class LeftNavigationDrawerResponsive extends AbstractNavigationDrawer {
 
-    public LeftOverlayNavigationDrawer() throws IOException {
-        super("left-navigation-drawer-overlay.html");
+    public LeftNavigationDrawerResponsive() throws IOException {
+        super("left-navigation-drawer-responsive.html");
     }
 
     @Override
     public String getStyleName() {
-        return "app-drawer-left-overlay";
+        return "left-navigation-drawer-responsive";
     }
 }

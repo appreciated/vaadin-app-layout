@@ -1,6 +1,6 @@
 package com.github.appreciated.demo;
 
-import com.github.appreciated.layout.drawer.LeftResponsiveNavigationDrawer;
+import com.github.appreciated.layout.drawer.LeftNavigationDrawerResponsiveOverlay;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Push
 public class DemoUI extends UI {
 
-    private LeftResponsiveNavigationDrawer layout;
+    private LeftNavigationDrawerResponsiveOverlay layout;
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
@@ -29,7 +29,7 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         try {
-            layout = new LeftResponsiveNavigationDrawer();
+            layout = new LeftNavigationDrawerResponsiveOverlay();
             for (int i = 0; i < 100; i++) {
                 layout.addComponent(new Label("Test"+i));
             }
