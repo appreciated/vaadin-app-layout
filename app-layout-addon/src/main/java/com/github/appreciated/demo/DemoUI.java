@@ -1,5 +1,6 @@
 package com.github.appreciated.demo;
 
+import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.layout.drawer.LeftNavigationDrawerResponsiveOverlay;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Title;
@@ -19,7 +20,7 @@ import java.io.IOException;
 @Push
 public class DemoUI extends UI {
 
-    private LeftNavigationDrawerResponsiveOverlay layout;
+    private AbstractNavigationDrawer layout;
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
@@ -31,10 +32,10 @@ public class DemoUI extends UI {
         try {
             layout = new LeftNavigationDrawerResponsiveOverlay();
             for (int i = 0; i < 100; i++) {
-                layout.addComponent(new Label("Test"+i));
+                layout.addComponent(new Label("Test" + i));
             }
             for (int i = 0; i < 100; i++) {
-                layout.addNavigationElement(new Button("Test"+i));
+                layout.addNavigationElement(new Button("Test" + i));
             }
             for (int i = 0; i < 3; i++) {
                 layout.addAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ABACUS));

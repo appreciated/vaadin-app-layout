@@ -1,34 +1,63 @@
+$app-bar-shadow: 20px 2px 20px rgba(0, 0, 0, 0.5) !default;
+$drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
+
 @mixin app-layout {
-  .app-drawer-left-overlay {
-    .app-toolbar {
+  .left-navigation-drawer-overlay {
+    app-toolbar {
       background-color: #4285f4;
       color: #fff;
+      box-shadow: $app-bar-shadow;
     }
-    .app-drawer {
+    app-drawer {
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
       --app-drawer-content-container: {
         background-color: #B0BEC5;
       }
     }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+    }
   }
-  .app-drawer-responsive {
+  .left-navigation-drawer-responsive-overlay {
     app-toolbar {
       background-color: #4285f4;
       color: #fff;
-    }
-    app-drawer-layout:not([narrow]) [drawer-toggle] {
-      display: none;
+      box-shadow: $app-bar-shadow;
     }
     app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
       --app-drawer-content-container: {
         background-color: #B0BEC5;
       }
     }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+    }
   }
-  .app-drawer-left {
+
+  .left-navigation-drawer {
+    app-toolbar {
+      background-color: #4285f4;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      box-shadow: $app-bar-shadow;
+    }
+    app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    }
+    .drawer-content {
+      margin-top: 64px;
+      height: calc(100% - 64px);
+      overflow: auto;
+      box-shadow: $drawer-shadow;
+    }
+  }
+  .left-navigation-drawer-responsive {
     app-header app-toolbar {
       background-color: #4285f4;
       color: #fff;
+      box-shadow: $app-bar-shadow;
     }
 
     app-header paper-icon-button {
@@ -45,9 +74,10 @@
       }
     }
     .drawer-content {
-      margin-top: 80px;
-      height: calc(100% - 80px);
+      margin-top: 64px;
+      height: calc(100% - 64px);
       overflow: auto;
+      box-shadow: $drawer-shadow;
     }
   }
 }
