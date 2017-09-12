@@ -3,7 +3,7 @@ A "port" of the polymer app-layout
 
 ## Vaadin Directory
 
-For download and reviews, go to https://vaadin.com/directory#!addon/circular-progressbar-add-on1
+For download and reviews, go to https://vaadin.com/directory#!addon/app-layout-add-on
 
 ## Installation
 
