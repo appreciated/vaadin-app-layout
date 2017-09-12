@@ -22,6 +22,7 @@ public class NavigationDrawerBuilder {
     private Navigator navigator;
     private NavigationViewComponentProvider viewComponentProvider = new DefaultViewComponentProvider();
     private String title;
+    private AbstractNavigationDrawer instance = null;
 
     private NavigationDrawerBuilder() {
     }
@@ -32,6 +33,11 @@ public class NavigationDrawerBuilder {
 
     public NavigationDrawerBuilder withVariant(DrawerVariant variant) {
         this.variant = variant;
+        return this;
+    }
+
+    public NavigationDrawerBuilder withCustomVariant(AbstractNavigationDrawer variant) {
+        this.instance = variant;
         return this;
     }
 
@@ -70,7 +76,9 @@ public class NavigationDrawerBuilder {
     }
 
     public AbstractNavigationDrawer build() {
-        AbstractNavigationDrawer instance = variant.getInstance();
+        if (instance == null) {
+            instance = variant.getInstance();
+        }
         instance.setTitle(title);
         navigationElements.forEach(instance::addNavigationElement);
         if (hasNavigatior) {
