@@ -16,7 +16,7 @@ public class NavigationDrawerBuilder {
 
     DrawerVariant variant = DrawerVariant.LEFT;
     List<Component> navigationElements = new ArrayList<>();
-    List<java.util.Map.Entry<String, View>> navigationViews = new ArrayList<>();
+    List<java.util.Map.Entry<String, Object>> navigationViews = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
     private boolean hasNavigatior = false;
     private Navigator navigator;
@@ -41,16 +41,19 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-    public void withTitle(String title) {
+    public NavigationDrawerBuilder withTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public void withNavigator() {
+    public NavigationDrawerBuilder withNavigator() {
         this.hasNavigatior = true;
+        return this;
     }
 
-    public void withNavigationViewComponentProvider(NavigationViewComponentProvider provider) {
+    public NavigationDrawerBuilder withNavigationViewComponentProvider(NavigationViewComponentProvider provider) {
         this.viewComponentProvider = provider;
+        return this;
     }
 
 
@@ -66,6 +69,17 @@ public class NavigationDrawerBuilder {
     }
 
     public NavigationDrawerBuilder withNavigationView(String view, View element) {
+        if (hasNavigatior == false) {
+            hasNavigatior = true;
+        }
+        this.navigationViews.add(new AbstractMap.SimpleEntry<>(view, element));
+        return this;
+    }
+
+    public NavigationDrawerBuilder withNavigationView(String view, Class<? extends View> element) {
+        if (hasNavigatior == false) {
+            hasNavigatior = true;
+        }
         this.navigationViews.add(new AbstractMap.SimpleEntry<>(view, element));
         return this;
     }
@@ -84,8 +98,13 @@ public class NavigationDrawerBuilder {
         if (hasNavigatior) {
             navigator = new Navigator(UI.getCurrent(), instance.getContentHolder());
             navigationViews.forEach(view -> {
-                navigator.addView(view.getKey(), view.getValue());
-                instance.addNavigationElement(viewComponentProvider.getComponentForView(view.getKey(), view.getValue()));
+                if (view.getValue() instanceof Class) {
+                    navigator.addView(view.getKey(), (Class<? extends View>) view.getValue());
+                    instance.addNavigationElement(viewComponentProvider.getComponentForViewClass(view.getKey(), (Class<? extends View>) view.getValue()));
+                } else if (view.getValue() instanceof View) {
+                    navigator.addView(view.getKey(), (View) view.getValue());
+                    instance.addNavigationElement(viewComponentProvider.getComponentForView(view.getKey(), (View) view.getValue()));
+                }
             });
         }
         appBarElements.forEach(instance::addAppBarElement);
