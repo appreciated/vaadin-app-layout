@@ -32,7 +32,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement {
         button.setIcon(icon);
         button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         button.addStyleName("app-layout-menu-button");
-        button.addStyleName("no-border-radius");
+        button.addStyleName("no-border-radius"); // for material theme only
         button.setWidth(100, Sizeable.Unit.PERCENTAGE);
         button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(name));
         return button;
