@@ -7,9 +7,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
 @mixin app-layout {
 
   .app-layout-menu-section {
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 14px;
   }
 
   .app-layout-menu-button {
@@ -19,7 +17,6 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
     }
   }
 
-  .app-layout-menu-button
   .left-navigation-drawer {
     app-toolbar {
       background-color: $app-bar-color;

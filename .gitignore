@@ -62,3 +62,4 @@ typings/
 # dotenv environment variables file
 .env
 
+/app-layout-demo/src/main/webapp/VAADIN/themes/demo/styles.scss.cache
