@@ -35,6 +35,7 @@ public class DemoUI extends UI {
                 .withTitle("my Title")
                 .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
                 .withNavigationElement(new Button("Test1234"))
+                .withDefaultNavigationView(View2.class)
                 .withNavigationView("MyView1", View1.class)
                 .withNavigationView("MyView2", new View2())
                 .withNavigationView("MyView3", View3.class)

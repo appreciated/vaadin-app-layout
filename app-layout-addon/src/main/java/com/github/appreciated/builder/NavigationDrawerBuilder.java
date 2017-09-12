@@ -23,6 +23,7 @@ public class NavigationDrawerBuilder {
     private NavigationViewComponentProvider viewComponentProvider = new DefaultViewComponentProvider();
     private String title;
     private AbstractNavigationDrawer instance = null;
+    private Object defaultNavigationView;
 
     private NavigationDrawerBuilder() {
     }
@@ -68,6 +69,22 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    public NavigationDrawerBuilder withDefaultNavigationView(View element) {
+        if (hasNavigatior == false) {
+            hasNavigatior = true;
+        }
+        defaultNavigationView = element;
+        return this;
+    }
+
+    public NavigationDrawerBuilder withDefaultNavigationView(Class<? extends View> element) {
+        if (hasNavigatior == false) {
+            hasNavigatior = true;
+        }
+        defaultNavigationView = element;
+        return this;
+    }
+
     public NavigationDrawerBuilder withNavigationView(String view, View element) {
         if (hasNavigatior == false) {
             hasNavigatior = true;
@@ -97,17 +114,48 @@ public class NavigationDrawerBuilder {
         navigationElements.forEach(instance::addNavigationElement);
         if (hasNavigatior) {
             navigator = new Navigator(UI.getCurrent(), instance.getContentHolder());
+            if (defaultNavigationView == null) {
+                defaultNavigationView = navigationViews.get(0).getValue();
+            }
+            addViewToNavigator("", defaultNavigationView);
             navigationViews.forEach(view -> {
-                if (view.getValue() instanceof Class) {
-                    navigator.addView(view.getKey(), (Class<? extends View>) view.getValue());
-                    instance.addNavigationElement(viewComponentProvider.getComponentForViewClass(view.getKey(), (Class<? extends View>) view.getValue()));
-                } else if (view.getValue() instanceof View) {
-                    navigator.addView(view.getKey(), (View) view.getValue());
-                    instance.addNavigationElement(viewComponentProvider.getComponentForView(view.getKey(), (View) view.getValue()));
-                }
+                addViewToNavigator(view.getKey(), view.getValue());
+                addViewComponent(view.getKey(), view.getValue());
             });
         }
         appBarElements.forEach(instance::addAppBarElement);
         return instance;
+    }
+
+    private void addViewToNavigator(String viewName, Object o) {
+        if (o instanceof Class) {
+            addViewToNavigator(viewName, (Class<? extends View>) o);
+        } else if (o instanceof View) {
+            addViewToNavigator(viewName, (View) o);
+        }
+    }
+
+    private void addViewComponent(String viewName, Object o) {
+        if (o instanceof Class) {
+            addViewComponent(viewName, (Class<? extends View>) o);
+        } else if (o instanceof View) {
+            addViewComponent(viewName, (View) o);
+        }
+    }
+
+    private void addViewComponent(String viewName, Class<? extends View> view) {
+        instance.addNavigationElement(viewComponentProvider.getComponentForViewClass(viewName, view));
+    }
+
+    private void addViewComponent(String viewName, View view) {
+        instance.addNavigationElement(viewComponentProvider.getComponentForView(viewName, view));
+    }
+
+    private void addViewToNavigator(String viewName, Class<? extends View> view) {
+        navigator.addView(viewName, view);
+    }
+
+    private void addViewToNavigator(String viewName, View view) {
+        navigator.addView(viewName, view);
     }
 }

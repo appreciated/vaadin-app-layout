@@ -4,6 +4,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
 
@@ -22,6 +23,7 @@ public class DefaultViewComponentProvider implements NavigationViewComponentProv
         Button button = new Button(caption);
         button.setStyleName(ValoTheme.BUTTON_BORDERLESS);
         button.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(caption));
         return button;
     }
 }
