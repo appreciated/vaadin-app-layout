@@ -40,11 +40,11 @@ To see the demo, navigate to http://localhost:8080/
 
 ## Working with Vaadin Designer 1 or 2
 
-The Designer won't be able to successfully compile the SCSS as long as it doesn't have access to the theme files. To fix this you will either need to unzip the jar and copy the needed files to src/main/webapp/VAADIN/addons/ or you could use the following maven plugin that does the job for you.
+The Designer won't be able to successfully compile the SCSS as long as it doesn't have access to the addon theme files. To fix this you will either need to unzip the jar and copy the needed files to src/main/webapp/VAADIN/addons/ or you could use the following maven plugin that does the job for you.
 
 Notes:
 
-Every time you are updating the Theme to a new version you need to run a mvn install otherwise the designer and the scss compiler will continue to use the old theme.
+Every time you are updating the Addon to a new version you need to run a mvn install otherwise the designer and the scss compiler will continue to use the old theme.
 I do not recommend to include this job for jenkins builds, only for developement purposes.
 To avoid pushing unecessary files to git you might want to add src/main/webapp/VAADIN/addons/ to your .gitignore.
 ````
