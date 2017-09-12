@@ -30,16 +30,19 @@ mvn install
 
 ## Building and running demo
 
-1. 
+#### 1. 
+
 ```
 git clone git@github.com:appreciated/vaadin-app-layout.git
 ```
-2. (bower needs ofcause to be installed for this)
+#### 2. (bower needs ofcause to be installed for this)
+
 ```
 cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
 bower install PolymerElements/app-layout --save
 ```
-3. 
+#### 3. 
+
 ```
 mvn clean install
 cd demo
