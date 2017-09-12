@@ -49,7 +49,7 @@ public class DemoUI extends UI {
 
     private Button getBorderlessButtonWithIcon(VaadinIcons icon) {
         Button button = new Button(icon);
-        button.addStyleNames(ValoTheme.BUTTON_BORDERLESS);
+        button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
         return button;
     }
 }
