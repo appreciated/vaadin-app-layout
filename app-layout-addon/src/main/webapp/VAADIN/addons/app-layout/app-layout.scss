@@ -42,12 +42,16 @@ $drawer-inset-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
       --app-drawer-content-container: {
         background-color: #eee;
       }
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     .drawer-content {
       margin-top: 64px;
       height: calc(100% - 64px);
       overflow: auto;
       box-shadow: $drawer-shadow;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: none;
     }
   }
   .left-navigation-drawer-overlay {

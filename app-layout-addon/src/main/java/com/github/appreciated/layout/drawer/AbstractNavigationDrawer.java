@@ -25,10 +25,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         super.addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementHolder);
         appBar.setSizeFull();
-        appBar.setComponentAlignment(appBarElementHolder,Alignment.TOP_RIGHT);
+        appBar.setComponentAlignment(appBarElementHolder, Alignment.TOP_RIGHT);
         appBarElementHolder.setSpacing(false);
-        titleWrapper.setHeight(100,Unit.PERCENTAGE);
-        titleWrapper.setComponentAlignment(title,Alignment.MIDDLE_LEFT);
+        titleWrapper.setHeight(100, Unit.PERCENTAGE);
+        titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
     @Override
@@ -41,6 +41,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public void addNavigationHeaderElement(Component component) {
         menuElementHolder.addComponent(component);
     }
+
     public void addNavigationFooterElement(Component component) {
         menuElementHolder.addComponent(component);
     }
@@ -48,6 +49,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public void addNavigationElement(Component component) {
         menuElementHolder.addComponent(component);
     }
+
     public void addAppBarElement(Component component) {
         appBarElementHolder.addComponent(component);
     }
@@ -62,6 +64,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
     public Label getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.setValue(title);
     }
 
     public HorizontalLayout getTitleWrapper() {
