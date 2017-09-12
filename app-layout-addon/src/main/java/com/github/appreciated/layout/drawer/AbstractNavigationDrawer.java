@@ -18,6 +18,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         super(AbstractNavigationDrawer.class.getResourceAsStream(filename));
         contentHolder.setMargin(false);
         menuElementHolder.setMargin(false);
+        menuElementHolder.setWidth(99, Unit.PERCENTAGE);
         setSizeFull();
         addStyleName(getStyleName());
         super.addComponent(contentHolder, "content");
