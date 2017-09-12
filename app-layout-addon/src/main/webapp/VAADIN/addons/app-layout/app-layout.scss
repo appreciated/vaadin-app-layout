@@ -84,4 +84,23 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       box-shadow: $persitent-drawer-shadow;
     }
   }
+
+  .left-navigation-drawer-responsive-overlay-no-app-bar {
+    app-drawer[persistent] + app-toolbar {
+      display: none;
+    }
+    app-toolbar {
+      background-color: $app-bar-color;
+      color: $app-bar-font-color;
+      box-shadow: $app-bar-shadow;
+    }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+      height: 100%;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: $persitent-drawer-shadow;
+    }
+  }
+
 }

@@ -6,7 +6,8 @@ public enum DrawerVariant {
     LEFT(LeftNavigationDrawer.class),
     LEFT_RESPONSIVE(LeftNavigationDrawerResponsive.class),
     LEFT_OVERLAY(LeftNavigationDrawerOverlay.class),
-    LEFT_RESPONSIVE_OVERLAY(LeftNavigationDrawerResponsiveOverlay.class);
+    LEFT_RESPONSIVE_OVERLAY(LeftNavigationDrawerResponsiveOverlay.class),
+    LEFT_RESPONSIVE_OVERLAY_NOAPPBAR(LeftNavigationDrawerResponsiveOverlayNoAppBar.class);
 
     private Class<? extends AbstractNavigationDrawer> aClass;
 

@@ -31,7 +31,7 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         setContent(NavigationDrawerBuilder.get()
-                .withVariant(DrawerVariant.LEFT_RESPONSIVE_OVERLAY)
+                .withVariant(DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NOAPPBAR)
                 .withTitle("my Title")
                 .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
                 .withNavigationElement(new Button("Test1234"))
