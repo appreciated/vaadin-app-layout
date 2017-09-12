@@ -31,14 +31,16 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         setContent(NavigationDrawerBuilder.get()
-                .withVariant(DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NOAPPBAR)
+                .withVariant(DrawerVariant.LEFT)
                 .withTitle("my Title")
                 .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
-                .withNavigationElement(new Button("Test1234"))
                 .withDefaultNavigationView(View2.class)
-                .withNavigationView("MyView1", View1.class)
-                .withNavigationView("MyView2", new View2())
-                .withNavigationView("MyView3", View3.class)
+                .withSection("Home")
+                .withNavigationElement("MyView1", View1.class)
+                .withNavigationElement("MyView2", new View2())
+                .withNavigationElement("MyView3", View3.class)
+                .withSection("Settings")
+                .withNavigationElement("Preferences", View1.class)
                 .build());
     }
 

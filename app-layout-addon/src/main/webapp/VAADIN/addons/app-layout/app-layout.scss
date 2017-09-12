@@ -5,6 +5,14 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 
 @mixin app-layout {
+
+  .app-layout-menu-section {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid grey;
+  }
+
   .left-navigation-drawer {
     app-toolbar {
       background-color: $app-bar-color;
