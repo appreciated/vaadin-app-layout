@@ -37,6 +37,12 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    /**
+     * This will cause parameters set with "withVariant(...)" to be ignored
+     *
+     * @param variant
+     * @return
+     */
     public NavigationDrawerBuilder withCustomVariant(AbstractNavigationDrawer variant) {
         this.instance = variant;
         return this;
