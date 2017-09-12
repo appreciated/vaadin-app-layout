@@ -25,10 +25,11 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         super.addComponent(menuElementHolder, "menu-elements");
         super.addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementHolder);
-        appBar.setSizeFull();
-        appBar.setComponentAlignment(appBarElementHolder, Alignment.TOP_RIGHT);
+        appBar.setWidth(100, Unit.PERCENTAGE);
+        appBar.setHeight(45, Unit.PIXELS);
+        appBar.setComponentAlignment(appBarElementHolder, Alignment.MIDDLE_RIGHT);
         appBarElementHolder.setSpacing(false);
-        titleWrapper.setHeight(45, Unit.PIXELS);
+        titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
