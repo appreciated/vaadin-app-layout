@@ -29,13 +29,20 @@ mvn install
 ```
 
 ## Building and running demo
+
+1. 
 ```
-git clone git@github.com:appreciated/circular-progressbar.git
+git clone git@github.com:appreciated/vaadin-app-layout.git
 mvn clean install
 cd demo
 mvn jetty:run
 ```
 
+2. 
+```
+cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
+bower install PolymerElements/app-layout --save
+```
 To see the demo, navigate to http://localhost:8080/
 
 ## Working with Vaadin Designer 1 or 2
