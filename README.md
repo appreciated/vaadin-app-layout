@@ -48,26 +48,26 @@ Every time you are updating the Theme to a new version you need to run a mvn ins
 I do not recommend to include this job for jenkins builds, only for developement purposes.
 To avoid pushing unecessary files to git you might want to add src/main/webapp/VAADIN/addons/ to your .gitignore.
 ````
-              <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-one</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeGroupIds>com.github.appreciated</includeGroupIds>
-                            <includeArtifactIds>app-layout-addon</includeArtifactIds>
-                            <type>zip</type>
-                            <excludes>*</excludes>
-                            <includes>VAADIN/addons/**</includes>
-                            <outputDirectory>src/main/webapp/</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+ <plugin>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>unpack-one</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+                <includeGroupIds>com.github.appreciated</includeGroupIds>
+                <includeArtifactIds>app-layout-addon</includeArtifactIds>
+                <type>zip</type>
+                <excludes>*</excludes>
+                <includes>VAADIN/addons/**</includes>
+                <outputDirectory>src/main/webapp/</outputDirectory>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
 ````
 
 ## Issue tracking
