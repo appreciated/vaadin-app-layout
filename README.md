@@ -33,16 +33,19 @@ mvn install
 1. 
 ```
 git clone git@github.com:appreciated/vaadin-app-layout.git
+```
+2. (bower needs ofcause to be installed for this)
+```
+cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
+bower install PolymerElements/app-layout --save
+```
+3. 
+```
 mvn clean install
 cd demo
 mvn jetty:run
 ```
 
-2. 
-```
-cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
-bower install PolymerElements/app-layout --save
-```
 To see the demo, navigate to http://localhost:8080/
 
 ## Working with Vaadin Designer 1 or 2
