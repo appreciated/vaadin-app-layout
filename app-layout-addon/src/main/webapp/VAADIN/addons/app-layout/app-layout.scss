@@ -10,9 +10,16 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 1px solid grey;
   }
 
+  .app-layout-menu-button {
+    text-align: left !important;
+    .v-icon + .v-captiontext, .v-icon + span {
+      margin-left: 16px;
+    }
+  }
+
+  .app-layout-menu-button
   .left-navigation-drawer {
     app-toolbar {
       background-color: $app-bar-color;

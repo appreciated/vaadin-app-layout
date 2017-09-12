@@ -32,15 +32,15 @@ public class DemoUI extends UI {
     protected void init(VaadinRequest request) {
         setContent(NavigationDrawerBuilder.get()
                 .withVariant(DrawerVariant.LEFT)
-                .withTitle("my Title")
+                .withTitle("App Layout Demo")
                 .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
                 .withDefaultNavigationView(View2.class)
                 .withSection("Home")
-                .withNavigationElement("MyView1", View1.class)
+                .withNavigationElement("MyView1", VaadinIcons.ABACUS, View1.class)
                 .withNavigationElement("MyView2", new View2())
-                .withNavigationElement("MyView3", View3.class)
+                .withNavigationElement("MyView3", VaadinIcons.ABACUS, View3.class)
                 .withSection("Settings")
-                .withNavigationElement("Preferences", View1.class)
+                .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
                 .build());
     }
 

@@ -29,6 +29,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement {
 
     public Component getComponent() {
         Button button = new Button(name);
+        button.setIcon(icon);
         button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         button.addStyleName("app-layout-menu-button");
         button.setWidth(100, Sizeable.Unit.PERCENTAGE);
