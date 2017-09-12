@@ -5,7 +5,7 @@
 	<groupId>com.github.appreciated</groupId>
 	<artifactId>app-layout-demo</artifactId>
 	<packaging>war</packaging>
-	<version>0.5.0</version>
+	<version>0.6.0</version>
 	<name>App Layout Add-on Demo</name>
 
 	<prerequisites>
