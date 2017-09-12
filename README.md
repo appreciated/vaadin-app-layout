@@ -38,7 +38,7 @@ mvn jetty:run
 
 To see the demo, navigate to http://localhost:8080/
 
-Working with Vaadin Designer 1 or 2
+## Working with Vaadin Designer 1 or 2
 
 The Designer won't be able to successfully compile the SCSS as long as it doesn't have access to the theme files. To fix this you will either need to unzip the jar and copy the needed files to src/main/webapp/VAADIN/addons/ or you could use the following maven plugin that does the job for you.
 
