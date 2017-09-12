@@ -1,5 +1,5 @@
 ## Integration of the Polymer Component app-layout as a Add-on for Vaadin 8
-A "port" of the polymer app-layout
+A A collection of ready to use templates for the polymer component [app-layout](https://www.webcomponents.org/element/PolymerElements/app-layout)
 
 ## Vaadin Directory
 
