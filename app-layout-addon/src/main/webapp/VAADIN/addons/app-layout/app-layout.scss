@@ -1,40 +1,8 @@
-$app-bar-shadow: 20px 2px 20px rgba(0, 0, 0, 0.5) !default;
+$app-bar-shadow: -2px 4px 20px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
+$drawer-inset-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 
 @mixin app-layout {
-  .left-navigation-drawer-overlay {
-    app-toolbar {
-      background-color: #4285f4;
-      color: #fff;
-      box-shadow: $app-bar-shadow;
-    }
-    app-drawer {
-      --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
-      --app-drawer-content-container: {
-        background-color: #B0BEC5;
-      }
-    }
-    .drawer-content {
-      box-shadow: $drawer-shadow;
-    }
-  }
-  .left-navigation-drawer-responsive-overlay {
-    app-toolbar {
-      background-color: #4285f4;
-      color: #fff;
-      box-shadow: $app-bar-shadow;
-    }
-    app-drawer {
-      --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
-      --app-drawer-content-container: {
-        background-color: #B0BEC5;
-      }
-    }
-    .drawer-content {
-      box-shadow: $drawer-shadow;
-    }
-  }
-
   .left-navigation-drawer {
     app-toolbar {
       background-color: #4285f4;
@@ -58,6 +26,8 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
       background-color: #4285f4;
       color: #fff;
       box-shadow: $app-bar-shadow;
+      position: relative;
+      z-index: 1;
     }
 
     app-header paper-icon-button {
@@ -78,6 +48,29 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
       height: calc(100% - 64px);
       overflow: auto;
       box-shadow: $drawer-shadow;
+    }
+  }
+  .left-navigation-drawer-overlay {
+    app-toolbar {
+      background-color: #4285f4;
+      color: #fff;
+      box-shadow: $app-bar-shadow;
+    }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+    }
+  }
+  .left-navigation-drawer-responsive-overlay {
+    app-toolbar {
+      background-color: #4285f4;
+      color: #fff;
+      box-shadow: $app-bar-shadow;
+    }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: $drawer-inset-shadow;
     }
   }
 }
