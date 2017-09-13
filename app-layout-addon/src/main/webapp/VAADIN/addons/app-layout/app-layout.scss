@@ -83,6 +83,9 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
         color: $app-bar-font-color !important;
       }
     }
+    app-drawer-layout[narrow] {
+      z-index: 1;
+    }
     .drawer-content {
       box-shadow: $drawer-shadow;
       height: 100%;
@@ -107,6 +110,9 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
     app-drawer[persistent] .drawer-content {
       box-shadow: $persitent-drawer-shadow;
     }
+    app-drawer-layout[narrow] {
+      z-index: 1;
+    }
   }
 
   .left-navigation-drawer-responsive-overlay-no-app-bar {
@@ -127,6 +133,9 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: $persitent-drawer-shadow;
+    }
+    app-drawer-layout[narrow] {
+      z-index: 1;
     }
   }
 
