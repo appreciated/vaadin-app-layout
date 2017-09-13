@@ -86,7 +86,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       }
       padding-right: 0px;
     }
-    app-drawer-layout[narrow] {
+    app-drawer {
       z-index: 1;
     }
     .drawer-content {
