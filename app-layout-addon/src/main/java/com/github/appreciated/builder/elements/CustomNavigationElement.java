@@ -2,15 +2,16 @@ package com.github.appreciated.builder.elements;
 
 import com.vaadin.ui.Component;
 
-public class CustomNavigationElement extends AbstractNavigationElement {
+public class CustomNavigationElement extends AbstractNavigationElement<CustomNavigationElement> {
     private Component element;
 
     public CustomNavigationElement(Component element) {
         this.element = element;
+        setProvider(info -> element);
     }
 
     @Override
-    public Component getComponent() {
-        return element;
+    CustomNavigationElement getInfo() {
+        return this;
     }
 }

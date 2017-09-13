@@ -3,13 +3,8 @@ package com.github.appreciated.builder.elements;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
-import com.vaadin.server.Sizeable;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.themes.ValoTheme;
 
-public class NavigatorNavigationElement extends AbstractNavigationElement {
+public class NavigatorNavigationElement extends AbstractNavigationElement<NavigatorNavigationElement> {
     private final String name;
     private View view;
     private Resource icon;
@@ -25,17 +20,6 @@ public class NavigatorNavigationElement extends AbstractNavigationElement {
         this.name = name;
         this.icon = icon;
         this.view = view;
-    }
-
-    public Component getComponent() {
-        Button button = new Button(name);
-        button.setIcon(icon);
-        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        button.addStyleName("app-layout-menu-button");
-        button.addStyleName("no-border-radius"); // for material theme only
-        button.setWidth(100, Sizeable.Unit.PERCENTAGE);
-        button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(name));
-        return button;
     }
 
     public void addViewToNavigator(Navigator navigator) {
@@ -54,4 +38,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Resource getIcon() {
+        return icon;
+    }
+
+    @Override
+    NavigatorNavigationElement getInfo() {
+        return this;
+    }
 }

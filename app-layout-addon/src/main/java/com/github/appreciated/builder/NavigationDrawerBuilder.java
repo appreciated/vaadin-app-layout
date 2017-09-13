@@ -4,6 +4,8 @@ import com.github.appreciated.builder.elements.AbstractNavigationElement;
 import com.github.appreciated.builder.elements.CustomNavigationElement;
 import com.github.appreciated.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.builder.elements.SectionNavigationElement;
+import com.github.appreciated.builder.providers.DefaultNavigationElementComponentProvider;
+import com.github.appreciated.builder.providers.DefaultSectionElementComponentProvider;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -24,6 +26,9 @@ public class NavigationDrawerBuilder {
     private String title;
     private AbstractNavigationDrawer instance = null;
     private NavigatorNavigationElement defaultNavigationElement;
+    private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationElementComponentProvider();
+    private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
+    ;
 
     private NavigationDrawerBuilder() {
     }
@@ -81,7 +86,6 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-
     public NavigationDrawerBuilder withSection(String name) {
         this.navigationElements.add(new SectionNavigationElement(name));
         return this;
@@ -93,6 +97,16 @@ public class NavigationDrawerBuilder {
 
     public NavigationDrawerBuilder withNavigationElement(String view, View element) {
         return withNavigationElement(view, null, element);
+    }
+
+    public NavigationDrawerBuilder withNavigationElementProvider(ComponentProvider<NavigatorNavigationElement> provider) {
+        this.navigationElementProvider = provider;
+        return this;
+    }
+
+    public NavigationDrawerBuilder withSectionElementProvider(ComponentProvider<SectionNavigationElement> provider) {
+        this.sectionElementProvider = provider;
+        return this;
     }
 
     public NavigationDrawerBuilder withNavigationElement(String view, Resource icon, Class<? extends View> element) {
@@ -124,13 +138,18 @@ public class NavigationDrawerBuilder {
                         .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
             }
             defaultNavigationElement.addViewToNavigator(navigator);
-            navigationElements.forEach(element -> {
-                addViewComponent(element);
-                if (element instanceof NavigatorNavigationElement) {
-                    ((NavigatorNavigationElement) element).addViewToNavigator(navigator);
-                }
-            });
         }
+        navigationElements.forEach(element -> {
+            if (element instanceof NavigatorNavigationElement) {
+                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+                nelement.setProvider(navigationElementProvider);
+                nelement.addViewToNavigator(navigator);
+            } else if (element instanceof SectionNavigationElement) {
+                SectionNavigationElement selement = (SectionNavigationElement) element;
+                selement.setProvider(sectionElementProvider);
+            }
+            addViewComponent(element);
+        });
         appBarElements.forEach(instance::addAppBarElement);
         return instance;
     }

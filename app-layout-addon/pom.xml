@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-addon</artifactId>
     <packaging>jar</packaging>
-    <version>0.6.4</version>
+    <version>0.6.5</version>
     <name>App Layout Add-on</name>
 
     <prerequisites>
@@ -18,7 +18,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <vaadin.version>8.1.3</vaadin.version>
         <vaadin.plugin.version>8.1.3</vaadin.plugin.version>
-        <vaadin.widgetset.mode>fetch</vaadin.widgetset.mode>
+        <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
 
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <!-- ZIP Manifest fields -->
