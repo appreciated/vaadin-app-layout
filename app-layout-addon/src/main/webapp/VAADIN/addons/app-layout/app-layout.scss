@@ -27,6 +27,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       .v-button {
         color: $app-bar-font-color !important;
       }
+      padding-right: 0px;
     }
     app-drawer {
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
@@ -48,6 +49,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       .v-button {
         color: $app-bar-font-color !important;
       }
+      padding-right: 0px;
     }
 
     app-header paper-icon-button {
@@ -82,6 +84,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       .v-button {
         color: $app-bar-font-color !important;
       }
+      padding-right: 0px;
     }
     app-drawer-layout[narrow] {
       z-index: 1;
@@ -102,6 +105,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       .v-button {
         color: $app-bar-font-color !important;
       }
+      padding-right: 0px;
     }
     .drawer-content {
       box-shadow: $drawer-shadow;
@@ -126,6 +130,7 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
       .v-button {
         color: $app-bar-font-color !important;
       }
+      padding-right: 0px;
     }
     .drawer-content {
       box-shadow: $drawer-shadow;
