@@ -10,6 +10,8 @@ import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.event.ShortcutAction;
+import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -43,7 +45,15 @@ public class DemoUI extends UI {
             setDrawerVariant(left, valueChangeEvent.getValue());
         });
         variants.setValue(DrawerVariant.LEFT);
-        right.addComponent(new Panel("Variants", new VerticalLayout(variants)));
+        Panel panel = new Panel("Variants", new VerticalLayout(new Label("Press F to toggle \"fullscreen\""), variants));
+        right.addComponent(panel);
+
+        addShortcutListener(new ShortcutListener("Shortcut Name", ShortcutAction.KeyCode.F, null) {
+            @Override
+            public void handleAction(Object sender, Object target) {
+                right.setVisible(!right.isVisible());
+            }
+        });
 
         HorizontalLayout layout = new HorizontalLayout(left, right);
         layout.setSpacing(false);
