@@ -1,6 +1,7 @@
 package com.github.appreciated.builder;
 
 import com.github.appreciated.layout.drawer.*;
+import com.vaadin.navigator.Navigator;
 
 public enum DrawerVariant {
     LEFT(LeftNavigationDrawer.class),
@@ -10,6 +11,7 @@ public enum DrawerVariant {
     LEFT_RESPONSIVE_OVERLAY_NOAPPBAR(LeftNavigationDrawerResponsiveOverlayNoAppBar.class);
 
     private Class<? extends AbstractNavigationDrawer> aClass;
+    private Navigator navigator;
 
     DrawerVariant(Class<? extends AbstractNavigationDrawer> aClass) {
         this.aClass = aClass;
@@ -26,4 +28,7 @@ public enum DrawerVariant {
         return null;
     }
 
+    public void setNavigator(Navigator navigator) {
+        this.navigator = navigator;
+    }
 }

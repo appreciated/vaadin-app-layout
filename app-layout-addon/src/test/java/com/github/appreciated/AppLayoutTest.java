@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 // JUnit tests here
-public class CircularProgressbarTest {
+public class AppLayoutTest {
 
 	@Test
 	public void thisAlwaysPasses() {

@@ -15,8 +15,17 @@ import com.vaadin.ui.UI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class NavigationDrawerBuilder {
+
+    private NavigationConsumer navigatorConsumer;
+
+    public NavigationDrawerBuilder withNavigator(Navigator navigator) {
+        this.requiresNavigatior = true;
+        this.navigator = navigator;
+        return this;
+    }
 
     DrawerVariant variant = DrawerVariant.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
@@ -28,7 +37,6 @@ public class NavigationDrawerBuilder {
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationElementComponentProvider();
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
-    ;
 
     private NavigationDrawerBuilder() {
     }
@@ -58,9 +66,45 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigator() {
+    public NavigationDrawerBuilder withNavigatorConsumer(NavigationConsumer consumer) {
         this.requiresNavigatior = true;
+        this.navigatorConsumer = consumer;
         return this;
+    }
+
+    public AbstractNavigationDrawer build() {
+        if (instance == null) {
+            instance = variant.getInstance();
+        }
+        instance.setTitle(title);
+        if (requiresNavigatior) {
+            if (navigator == null) {
+                navigator = new Navigator(UI.getCurrent(), instance.getContentHolder());
+            }
+            if (navigatorConsumer != null) {
+                navigatorConsumer.accept(navigator);
+            }
+            variant.setNavigator(navigator);
+            if (defaultNavigationElement == null) {
+                defaultNavigationElement = navigationElements.stream()
+                        .filter(element -> element instanceof NavigatorNavigationElement)
+                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
+            }
+            defaultNavigationElement.addViewToNavigator(navigator);
+        }
+        navigationElements.forEach(element -> {
+            if (element instanceof NavigatorNavigationElement) {
+                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+                nelement.setProvider(navigationElementProvider);
+                nelement.addViewToNavigator(navigator);
+            } else if (element instanceof SectionNavigationElement) {
+                SectionNavigationElement selement = (SectionNavigationElement) element;
+                selement.setProvider(sectionElementProvider);
+            }
+            addViewComponent(element);
+        });
+        appBarElements.forEach(instance::addAppBarElement);
+        return instance;
     }
 
     /**
@@ -125,33 +169,7 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-    public AbstractNavigationDrawer build() {
-        if (instance == null) {
-            instance = variant.getInstance();
-        }
-        instance.setTitle(title);
-        if (requiresNavigatior) {
-            navigator = new Navigator(UI.getCurrent(), instance.getContentHolder());
-            if (defaultNavigationElement == null) {
-                defaultNavigationElement = navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-            }
-            defaultNavigationElement.addViewToNavigator(navigator);
-        }
-        navigationElements.forEach(element -> {
-            if (element instanceof NavigatorNavigationElement) {
-                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
-                nelement.setProvider(navigationElementProvider);
-                nelement.addViewToNavigator(navigator);
-            } else if (element instanceof SectionNavigationElement) {
-                SectionNavigationElement selement = (SectionNavigationElement) element;
-                selement.setProvider(sectionElementProvider);
-            }
-            addViewComponent(element);
-        });
-        appBarElements.forEach(instance::addAppBarElement);
-        return instance;
+    interface NavigationConsumer extends Consumer<Navigator> {
     }
 
     private void addViewComponent(AbstractNavigationElement element) {
