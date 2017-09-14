@@ -1,5 +1,19 @@
-@mixin left-navigation-drawer-responsive-collapsible {
-  .left-navigation-drawer-responsive-collapsible {
+@mixin left-navigation-drawer-responsive-small {
+  .left-navigation-drawer-responsive-small {
+    app-drawer[persistent] {
+      width: var(--app-drawer-width, 64px);
+    }
+    app-drawer[persistent] .app-layout-menu-button {
+      height: 64px;
+      font-size: 20px;
+      .v-icon {
+        width: 100%;
+        text-align: center;
+      }
+      .v-button-caption {
+        display: none;
+      }
+    }
     app-drawer[persistent] + app-toolbar paper-icon-button {
       display: none;
     }
@@ -11,10 +25,12 @@
         color: $app-bar-font-color !important;
       }
       padding-right: 0px;
+      z-index: 2;
     }
     .drawer-content {
+      margin-top: 64px;
+      height: calc(100% - 64px);
       box-shadow: $drawer-shadow;
-      height: 100%;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: $persistent-drawer-shadow;
@@ -22,5 +38,6 @@
     app-drawer-layout[narrow] {
       z-index: 1;
     }
+
   }
 }

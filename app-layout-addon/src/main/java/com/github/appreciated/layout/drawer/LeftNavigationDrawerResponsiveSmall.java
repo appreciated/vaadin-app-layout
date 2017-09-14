@@ -17,14 +17,14 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
 
-public class LeftNavigationDrawerResponsiveCollapsible extends AbstractNavigationDrawer {
+public class LeftNavigationDrawerResponsiveSmall extends AbstractNavigationDrawer {
 
-    public LeftNavigationDrawerResponsiveCollapsible() throws IOException {
-        super("left-navigation-drawer-responsive-overlay-collapsable.html");
+    public LeftNavigationDrawerResponsiveSmall() throws IOException {
+        super("left-navigation-drawer-responsive-small.html");
     }
 
     @Override
     public String getStyleName() {
-        return "left-navigation-drawer-responsive-overlay-collapsable";
+        return "left-navigation-drawer-responsive-small";
     }
 }

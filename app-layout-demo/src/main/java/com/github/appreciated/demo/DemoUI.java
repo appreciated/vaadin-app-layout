@@ -9,8 +9,6 @@ import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -27,6 +25,8 @@ import javax.servlet.annotation.WebServlet;
 @Push
 public class DemoUI extends UI {
 
+    private VerticalLayout left;
+
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
     public static class Servlet extends VaadinServlet {
@@ -34,35 +34,10 @@ public class DemoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        VerticalLayout left = new VerticalLayout();
+        left = new VerticalLayout();
         left.setMargin(false);
-        VerticalLayout right = new VerticalLayout();
-        right.setWidthUndefined();
-
         setDrawerVariant(left, DrawerVariant.LEFT);
-
-        ComboBox<DrawerVariant> variants = new ComboBox<>();
-        variants.setPopupWidth("250px");
-        variants.setItems(DrawerVariant.LEFT, DrawerVariant.LEFT_OVERLAY, DrawerVariant.LEFT_RESPONSIVE, DrawerVariant.LEFT_RESPONSIVE_OVERLAY, DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NOAPPBAR, DrawerVariant.LEFT_RESPONSIVE_COLLAPSIBLE);
-        variants.addValueChangeListener(valueChangeEvent -> {
-            setDrawerVariant(left, valueChangeEvent.getValue());
-        });
-        variants.setValue(DrawerVariant.LEFT);
-        Panel panel = new Panel("Variants", new VerticalLayout(new Label("Press F to toggle \"fullscreen\""), variants));
-        right.addComponent(panel);
-
-        addShortcutListener(new ShortcutListener("Shortcut Name", ShortcutAction.KeyCode.F, null) {
-            @Override
-            public void handleAction(Object sender, Object target) {
-                right.setVisible(!right.isVisible());
-            }
-        });
-
-        HorizontalLayout layout = new HorizontalLayout(left, right);
-        layout.setSpacing(false);
-        layout.setExpandRatio(left, 1);
-        layout.setSizeFull();
-        setContent(layout);
+        setContent(left);
     }
 
     private void setDrawerVariant(VerticalLayout rightside, DrawerVariant variant) {
@@ -71,7 +46,7 @@ public class DemoUI extends UI {
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
                 .withTitle("App Layout Demo")
-                .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
+                .withAppBarElement(getVariantCombo(variant))
                 .withDefaultNavigationView(View1.class)
                 .withNavigationElement(getMenuButton("Home", VaadinIcons.HOME))
                 .withNavigationElement(getMenuButton("Charts", VaadinIcons.SPLINE_CHART))
@@ -84,6 +59,18 @@ public class DemoUI extends UI {
                 .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
                 .build();
         rightside.addComponent(drawer);
+    }
+
+    ComboBox getVariantCombo(DrawerVariant variant) {
+        ComboBox<DrawerVariant> variants = new ComboBox<>();
+        variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
+        variants.setWidth("300px");
+        variants.setItems(DrawerVariant.LEFT, DrawerVariant.LEFT_OVERLAY, DrawerVariant.LEFT_RESPONSIVE, DrawerVariant.LEFT_RESPONSIVE_OVERLAY, DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NOAPPBAR, DrawerVariant.LEFT_RESPONSIVE_SMALL);
+        variants.setValue(variant);
+        variants.addValueChangeListener(valueChangeEvent -> {
+            setDrawerVariant(left, valueChangeEvent.getValue());
+        });
+        return variants;
     }
 
     private Button getBorderlessButtonWithIcon(VaadinIcons icon) {

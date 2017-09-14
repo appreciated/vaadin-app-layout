@@ -15,9 +15,11 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class NavigationDrawerBuilder {
 
@@ -119,6 +121,11 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    public NavigationDrawerBuilder withNavigationElements(Component... element) {
+        this.navigationElements.addAll(Arrays.stream(element).map(component -> new CustomNavigationElement(component)).collect(Collectors.toList()));
+        return this;
+    }
+
     public NavigationDrawerBuilder withDefaultNavigationView(View element) {
         requiresNavigatior = true;
         defaultNavigationElement = new NavigatorNavigationElement("", null, element);
@@ -167,6 +174,11 @@ public class NavigationDrawerBuilder {
 
     public NavigationDrawerBuilder withAppBarElement(Component element) {
         this.appBarElements.add(element);
+        return this;
+    }
+
+    public NavigationDrawerBuilder withAppBarElements(Component... element) {
+        this.appBarElements.addAll(Arrays.asList(element));
         return this;
     }
 
