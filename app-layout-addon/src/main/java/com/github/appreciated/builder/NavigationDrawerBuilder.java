@@ -11,6 +11,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.function.Function;
 public class NavigationDrawerBuilder {
 
     private NavigationConsumer navigatorConsumer;
-    private NavigatorProducer navigatorProducer;
+    private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
 
     DrawerVariant variant = DrawerVariant.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
@@ -80,9 +81,7 @@ public class NavigationDrawerBuilder {
         }
         instance.setTitle(title);
         if (requiresNavigatior) {
-            if (navigator == null) {
-                navigator = navigatorProducer.apply(instance.getContentHolder());
-            }
+            navigator = navigatorProducer.apply(instance.getContentHolder());
             if (navigatorConsumer != null) {
                 navigatorConsumer.accept(navigator);
             }
@@ -171,10 +170,10 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-    interface NavigationConsumer extends Consumer<Navigator> {
+    public interface NavigationConsumer extends Consumer<Navigator> {
     }
 
-    interface NavigatorProducer extends Function<VerticalLayout, Navigator> {
+    public interface NavigatorProducer extends Function<VerticalLayout, Navigator> {
     }
 
     private void addViewComponent(AbstractNavigationElement element) {
