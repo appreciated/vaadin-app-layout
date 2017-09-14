@@ -1,7 +1,7 @@
 @mixin left-navigation-drawer-responsive {
   .left-navigation-drawer-responsive {
     app-header app-toolbar {
-      background-color: $app-bar-color;
+      background-color: $app-bar-background-color;
       color: $app-bar-font-color;
       box-shadow: $app-bar-shadow;
       position: relative;
@@ -31,6 +31,8 @@
       height: calc(100% - 64px);
       overflow: auto;
       box-shadow: $drawer-shadow;
+      background: $drawer-background-color;
+      color: $drawer-font-color !important;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: $persistent-drawer-shadow;

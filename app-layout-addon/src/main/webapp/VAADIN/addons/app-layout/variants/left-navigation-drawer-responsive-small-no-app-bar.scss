@@ -6,8 +6,21 @@
     app-drawer[persistent] + app-toolbar {
       display: none;
     }
+
+    app-drawer[persistent] .app-layout-menu-button {
+      height: 64px;
+      font-size: 20px;
+      .v-icon {
+        width: 100%;
+        text-align: center;
+      }
+      .v-button-caption {
+        display: none;
+      }
+    }
+
     app-toolbar {
-      background-color: $app-bar-color;
+      background-color: $app-bar-background-color;
       color: $app-bar-font-color;
       box-shadow: $app-bar-shadow;
       .v-button {
@@ -18,6 +31,8 @@
     .drawer-content {
       box-shadow: $drawer-shadow;
       height: 100%;
+      background: $drawer-background-color;
+      color: $drawer-font-color !important;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: $persistent-drawer-shadow;

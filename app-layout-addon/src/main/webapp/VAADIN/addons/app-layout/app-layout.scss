@@ -1,7 +1,9 @@
-$app-bar-color: #4285f4 !default;
-$app-bar-font-color: white !default;
+$app-bar-background-color: #4285f4 !default;
+$app-bar-font-color: valo-font-color($app-bar-background-color) !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
+$drawer-background-color: white !default;
+$drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 
 @import "variants/left-navigation-drawer.scss";

@@ -1,7 +1,7 @@
 @mixin left-navigation-drawer {
   .left-navigation-drawer {
     app-toolbar {
-      background-color: $app-bar-color;
+      background-color: $app-bar-background-color;
       color: $app-bar-font-color;
       position: relative;
       z-index: 1;
@@ -19,6 +19,8 @@
       height: calc(100% - 64px);
       overflow: auto;
       box-shadow: $drawer-shadow;
+      background: $drawer-background-color;
+      color: $drawer-font-color !important;
     }
   }
 }
