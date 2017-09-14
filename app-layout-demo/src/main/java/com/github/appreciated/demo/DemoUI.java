@@ -65,7 +65,13 @@ public class DemoUI extends UI {
         ComboBox<DrawerVariant> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
         variants.setWidth("300px");
-        variants.setItems(DrawerVariant.LEFT, DrawerVariant.LEFT_OVERLAY, DrawerVariant.LEFT_RESPONSIVE, DrawerVariant.LEFT_RESPONSIVE_OVERLAY, DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NOAPPBAR, DrawerVariant.LEFT_RESPONSIVE_SMALL);
+        variants.setItems(DrawerVariant.LEFT,
+                DrawerVariant.LEFT_OVERLAY,
+                DrawerVariant.LEFT_RESPONSIVE,
+                DrawerVariant.LEFT_RESPONSIVE_OVERLAY,
+                DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
+                DrawerVariant.LEFT_RESPONSIVE_SMALL,
+                DrawerVariant.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> {
             setDrawerVariant(left, valueChangeEvent.getValue());

@@ -1,0 +1,29 @@
+@mixin left-navigation-drawer-responsive-small-no-app-bar {
+  .left-navigation-drawer-responsive-small-no-app-bar {
+    app-drawer[persistent] {
+      width: var(--app-drawer-width, 64px);
+    }
+    app-drawer[persistent] + app-toolbar {
+      display: none;
+    }
+    app-toolbar {
+      background-color: $app-bar-color;
+      color: $app-bar-font-color;
+      box-shadow: $app-bar-shadow;
+      .v-button {
+        color: $app-bar-font-color !important;
+      }
+      padding-right: 0px;
+    }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+      height: 100%;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: $persistent-drawer-shadow;
+    }
+    app-drawer-layout[narrow] {
+      z-index: 1;
+    }
+  }
+}

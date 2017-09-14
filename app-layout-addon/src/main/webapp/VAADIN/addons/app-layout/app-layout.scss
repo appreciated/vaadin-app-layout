@@ -10,6 +10,7 @@ $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !defaul
 @import "variants/left-navigation-drawer-responsive-overlay.scss";
 @import "variants/left-navigation-drawer-responsive-overlay-no-app-bar.scss";
 @import "variants/left-navigation-drawer-responsive-small.scss";
+@import "variants/left-navigation-drawer-responsive-small-no-app-bar.scss";
 
 @mixin app-layout {
 
@@ -30,4 +31,5 @@ $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !defaul
   @include left-navigation-drawer-responsive-overlay;
   @include left-navigation-drawer-responsive-overlay-no-app-bar;
   @include left-navigation-drawer-responsive-small;
+  @include left-navigation-drawer-responsive-small-no-app-bar;
 }
