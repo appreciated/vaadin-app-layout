@@ -2,7 +2,14 @@ $app-bar-color: #4285f4 !default;
 $app-bar-font-color: white !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
-$persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
+$persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
+
+@import "variants/left-navigation-drawer.scss";
+@import "variants/left-navigation-drawer-overlay.scss";
+@import "variants/left-navigation-drawer-responsive.scss";
+@import "variants/left-navigation-drawer-responsive-overlay.scss";
+@import "variants/left-navigation-drawer-responsive-overlay-no-app-bar.scss";
+@import "variants/left-navigation-drawer-responsive-collapsible.scss";
 
 @mixin app-layout {
 
@@ -17,131 +24,10 @@ $persitent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default
     }
   }
 
-  .left-navigation-drawer {
-    app-toolbar {
-      background-color: $app-bar-color;
-      color: $app-bar-font-color;
-      position: relative;
-      z-index: 1;
-      box-shadow: $app-bar-shadow;
-      .v-button {
-        color: $app-bar-font-color !important;
-      }
-      padding-right: 0px;
-    }
-    app-drawer {
-      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
-    }
-    .drawer-content {
-      margin-top: 64px;
-      height: calc(100% - 64px);
-      overflow: auto;
-      box-shadow: $drawer-shadow;
-    }
-  }
-  .left-navigation-drawer-responsive {
-    app-header app-toolbar {
-      background-color: $app-bar-color;
-      color: $app-bar-font-color;
-      box-shadow: $app-bar-shadow;
-      position: relative;
-      z-index: 1;
-      .v-button {
-        color: $app-bar-font-color !important;
-      }
-      padding-right: 0px;
-    }
-
-    app-header paper-icon-button {
-      --paper-icon-button-ink-color: #fff;
-    }
-
-    app-drawer-layout {
-      --app-drawer-layout-content-transition: margin 0.2s;
-    }
-
-    app-drawer {
-      --app-drawer-content-container: {
-        background-color: #eee;
-      }
-      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
-    }
-    .drawer-content {
-      margin-top: 64px;
-      height: calc(100% - 64px);
-      overflow: auto;
-      box-shadow: $drawer-shadow;
-    }
-    app-drawer[persistent] .drawer-content {
-      box-shadow: $persitent-drawer-shadow;
-    }
-  }
-  .left-navigation-drawer-overlay {
-    app-toolbar {
-      background-color: $app-bar-color;
-      color: $app-bar-font-color;
-      box-shadow: $app-bar-shadow;
-      .v-button {
-        color: $app-bar-font-color !important;
-      }
-      padding-right: 0px;
-    }
-    app-drawer {
-      z-index: 1;
-    }
-    .drawer-content {
-      box-shadow: $drawer-shadow;
-      height: 100%;
-    }
-  }
-  .left-navigation-drawer-responsive-overlay {
-    app-drawer[persistent] + app-toolbar paper-icon-button {
-      display: none;
-    }
-    app-toolbar {
-      background-color: $app-bar-color;
-      color: $app-bar-font-color;
-      box-shadow: $app-bar-shadow;
-      .v-button {
-        color: $app-bar-font-color !important;
-      }
-      padding-right: 0px;
-    }
-    .drawer-content {
-      box-shadow: $drawer-shadow;
-      height: 100%;
-    }
-    app-drawer[persistent] .drawer-content {
-      box-shadow: $persitent-drawer-shadow;
-    }
-    app-drawer-layout[narrow] {
-      z-index: 1;
-    }
-  }
-
-  .left-navigation-drawer-responsive-overlay-no-app-bar {
-    app-drawer[persistent] + app-toolbar {
-      display: none;
-    }
-    app-toolbar {
-      background-color: $app-bar-color;
-      color: $app-bar-font-color;
-      box-shadow: $app-bar-shadow;
-      .v-button {
-        color: $app-bar-font-color !important;
-      }
-      padding-right: 0px;
-    }
-    .drawer-content {
-      box-shadow: $drawer-shadow;
-      height: 100%;
-    }
-    app-drawer[persistent] .drawer-content {
-      box-shadow: $persitent-drawer-shadow;
-    }
-    app-drawer-layout[narrow] {
-      z-index: 1;
-    }
-  }
-
+  @include left-navigation-drawer;
+  @include left-navigation-drawer-overlay;
+  @include left-navigation-drawer-responsive;
+  @include left-navigation-drawer-responsive-overlay;
+  @include left-navigation-drawer-responsive-overlay-no-app-bar;
+  @include left-navigation-drawer-responsive-collapsible;
 }

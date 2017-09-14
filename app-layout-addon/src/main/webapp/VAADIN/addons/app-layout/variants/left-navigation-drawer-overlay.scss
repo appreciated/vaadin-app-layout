@@ -1,0 +1,20 @@
+@mixin left-navigation-drawer-overlay {
+  .left-navigation-drawer-overlay {
+    app-toolbar {
+      background-color: $app-bar-color;
+      color: $app-bar-font-color;
+      box-shadow: $app-bar-shadow;
+      .v-button {
+        color: $app-bar-font-color !important;
+      }
+      padding-right: 0px;
+    }
+    app-drawer {
+      z-index: 1;
+    }
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+      height: 100%;
+    }
+  }
+}

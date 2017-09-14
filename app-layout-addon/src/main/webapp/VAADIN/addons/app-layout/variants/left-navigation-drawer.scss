@@ -1,0 +1,24 @@
+@mixin left-navigation-drawer {
+  .left-navigation-drawer {
+    app-toolbar {
+      background-color: $app-bar-color;
+      color: $app-bar-font-color;
+      position: relative;
+      z-index: 1;
+      box-shadow: $app-bar-shadow;
+      .v-button {
+        color: $app-bar-font-color !important;
+      }
+      padding-right: 0px;
+    }
+    app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    }
+    .drawer-content {
+      margin-top: 64px;
+      height: calc(100% - 64px);
+      overflow: auto;
+      box-shadow: $drawer-shadow;
+    }
+  }
+}

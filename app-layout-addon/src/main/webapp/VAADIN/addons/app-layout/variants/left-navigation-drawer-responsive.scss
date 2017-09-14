@@ -1,0 +1,39 @@
+@mixin left-navigation-drawer-responsive {
+  .left-navigation-drawer-responsive {
+    app-header app-toolbar {
+      background-color: $app-bar-color;
+      color: $app-bar-font-color;
+      box-shadow: $app-bar-shadow;
+      position: relative;
+      z-index: 1;
+      .v-button {
+        color: $app-bar-font-color !important;
+      }
+      padding-right: 0px;
+    }
+
+    app-header paper-icon-button {
+      --paper-icon-button-ink-color: #fff;
+    }
+
+    app-drawer-layout {
+      --app-drawer-layout-content-transition: margin 0.2s;
+    }
+
+    app-drawer {
+      --app-drawer-content-container: {
+        background-color: #eee;
+      }
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    }
+    .drawer-content {
+      margin-top: 64px;
+      height: calc(100% - 64px);
+      overflow: auto;
+      box-shadow: $drawer-shadow;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: $persistent-drawer-shadow;
+    }
+  }
+}
