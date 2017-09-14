@@ -3,6 +3,9 @@ package com.github.appreciated.demo;
 
 import com.github.appreciated.builder.DrawerVariant;
 import com.github.appreciated.builder.NavigationDrawerBuilder;
+import com.github.appreciated.demo.views.View1;
+import com.github.appreciated.demo.views.View2;
+import com.github.appreciated.demo.views.View3;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -11,6 +14,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
@@ -70,15 +74,18 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("App Layout Demo")
                 .withAppBarElement(getBorderlessButtonWithIcon(VaadinIcons.ELLIPSIS_DOTS_V))
-                .withNavigationElement(getMenuButton("Home", VaadinIcons.HOME))
-                .withNavigationElement(getMenuButton("Charts", VaadinIcons.SPLINE_CHART))
-                .withNavigationElement(getMenuButton("Contact", VaadinIcons.CONNECT))
+                .withNavigatorProducer(components -> new Navigator(UI.getCurrent(), components))
+                .withNavigatorConsumer(navigator -> { /*...*/ })
+                .withDefaultNavigationView(View1.class)
+                .withNavigationElement("Home", VaadinIcons.HOME, View1.class)
+                .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
+                .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withSection("More")
-                .withNavigationElement(getMenuButton("More", VaadinIcons.PLUS))
-                .withNavigationElement(getMenuButton("Menu", VaadinIcons.MENU))
-                .withNavigationElement(getMenuButton("Elements", VaadinIcons.LIST))
+                .withNavigationElement("More", VaadinIcons.PLUS, View1.class)
+                .withNavigationElement("Menu", VaadinIcons.MENU, View2.class)
+                .withNavigationElement("Elements", VaadinIcons.LIST, View3.class)
                 .withSection("Settings")
-                .withNavigationElement(getMenuButton("Preferences", VaadinIcons.COG))
+                .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
                 .build();
         rightside.addComponent(drawer);
     }
