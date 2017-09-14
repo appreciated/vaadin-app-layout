@@ -1,9 +1,7 @@
-package com.github.appreciated.demo;
-
+package org.vaadin.vaadinfiddle;
 
 import com.github.appreciated.builder.DrawerVariant;
 import com.github.appreciated.builder.NavigationDrawerBuilder;
-import com.github.appreciated.demo.views.View1;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -20,15 +18,15 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
 
-@Theme("demo")
+@Theme("mytheme")
 @Title("App Layout Add-on Demo")
 @Push
-public class DemoUI extends UI {
+public class MyUI extends UI {
 
     private VerticalLayout left;
 
     @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
+    @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
     public static class Servlet extends VaadinServlet {
     }
 
@@ -55,7 +53,7 @@ public class DemoUI extends UI {
                 .withNavigationElement(getMenuButton("Menu", VaadinIcons.MENU))
                 .withNavigationElement(getMenuButton("Elements", VaadinIcons.LIST))
                 .withSection("Settings")
-                .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
+                .withNavigationElement(getMenuButton("Preferences", VaadinIcons.COG))
                 .build();
         rightside.addComponent(drawer);
     }
