@@ -1,8 +1,6 @@
 @mixin left-navigation-drawer-responsive-small-no-app-bar {
   .left-navigation-drawer-responsive-small-no-app-bar {
-    app-drawer[persistent] {
-      width: var(--app-drawer-width, 64px);
-    }
+    --app-drawer-width: 64px;
     app-drawer[persistent] + app-toolbar {
       display: none;
     }

@@ -1,8 +1,6 @@
 @mixin left-navigation-drawer-responsive-small {
   .left-navigation-drawer-responsive-small {
-    app-drawer[persistent] {
-      width: var(--app-drawer-width, 64px);
-    }
+    --app-drawer-width: 64px;
     app-drawer[persistent] .app-layout-menu-button {
       height: 64px;
       font-size: 20px;
