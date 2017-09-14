@@ -11,21 +11,17 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class NavigationDrawerBuilder {
 
     private NavigationConsumer navigatorConsumer;
-
-    public NavigationDrawerBuilder withNavigator(Navigator navigator) {
-        this.requiresNavigatior = true;
-        this.navigator = navigator;
-        return this;
-    }
+    private NavigatorProducer navigatorProducer;
 
     DrawerVariant variant = DrawerVariant.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
@@ -66,6 +62,12 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    public NavigationDrawerBuilder withNavigatorProducer(NavigatorProducer navigator) {
+        this.requiresNavigatior = true;
+        this.navigatorProducer = navigator;
+        return this;
+    }
+
     public NavigationDrawerBuilder withNavigatorConsumer(NavigationConsumer consumer) {
         this.requiresNavigatior = true;
         this.navigatorConsumer = consumer;
@@ -79,7 +81,7 @@ public class NavigationDrawerBuilder {
         instance.setTitle(title);
         if (requiresNavigatior) {
             if (navigator == null) {
-                navigator = new Navigator(UI.getCurrent(), instance.getContentHolder());
+                navigator = navigatorProducer.apply(instance.getContentHolder());
             }
             if (navigatorConsumer != null) {
                 navigatorConsumer.accept(navigator);
@@ -170,6 +172,9 @@ public class NavigationDrawerBuilder {
     }
 
     interface NavigationConsumer extends Consumer<Navigator> {
+    }
+
+    interface NavigatorProducer extends Function<VerticalLayout, Navigator> {
     }
 
     private void addViewComponent(AbstractNavigationElement element) {
