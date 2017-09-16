@@ -5,7 +5,7 @@
 	<groupId>com.github.appreciated</groupId>
 	<artifactId>app-layout-root</artifactId>
 	<packaging>pom</packaging>
-	<version>0.6.7</version>
+	<version>0.6.8</version>
 	<name>App Layout Addon Root Project</name>
 
 	<prerequisites>

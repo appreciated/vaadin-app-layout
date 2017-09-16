@@ -3,7 +3,10 @@ package com.github.appreciated.demo;
 
 import com.github.appreciated.builder.DrawerVariant;
 import com.github.appreciated.builder.NavigationDrawerBuilder;
+import com.github.appreciated.builder.component.NavigationButton;
 import com.github.appreciated.demo.views.View1;
+import com.github.appreciated.demo.views.View2;
+import com.github.appreciated.demo.views.View3;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -12,7 +15,6 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
-import com.vaadin.server.Sizeable;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
@@ -47,15 +49,16 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("App Layout Demo")
                 .withAppBarElement(getVariantCombo(variant))
-                .withNavigationElement(getMenuButton("Home", VaadinIcons.HOME))
-                .withNavigationElement(getMenuButton("Charts", VaadinIcons.SPLINE_CHART))
-                .withNavigationElement(getMenuButton("Contact", VaadinIcons.CONNECT))
+                .withNavigationElement("Home", VaadinIcons.HOME, View1.class)
+                .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
+                .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withSection("More")
-                .withNavigationElement(getMenuButton("More", VaadinIcons.PLUS))
-                .withNavigationElement(getMenuButton("Menu", VaadinIcons.MENU))
-                .withNavigationElement(getMenuButton("Elements", VaadinIcons.LIST))
+                .withNavigationElement("More", VaadinIcons.PLUS, View1.class)
+                .withNavigationElement("Menu", VaadinIcons.MENU, View2.class)
+                .withNavigationElement("Elements", VaadinIcons.LIST, View3.class)
                 .withSection("Settings")
                 .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
+                .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
                 .build();
         rightside.addComponent(drawer);
     }
@@ -87,12 +90,7 @@ public class DemoUI extends UI {
     }
 
     private Button getMenuButton(String name, Resource icon) {
-        Button button = new Button(name);
-        button.setIcon(icon);
-        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        button.addStyleName("app-layout-menu-button");
-        button.addStyleName("no-border-radius"); // for material theme only
-        button.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        NavigationButton button = new NavigationButton(name, icon);
         //button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(name));
         return button;
     }

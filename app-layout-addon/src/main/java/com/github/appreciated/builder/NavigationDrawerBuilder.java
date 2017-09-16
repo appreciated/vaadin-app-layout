@@ -1,15 +1,14 @@
 package com.github.appreciated.builder;
 
-import com.github.appreciated.builder.elements.AbstractNavigationElement;
-import com.github.appreciated.builder.elements.CustomNavigationElement;
-import com.github.appreciated.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.builder.elements.SectionNavigationElement;
+import com.github.appreciated.builder.elements.*;
+import com.github.appreciated.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.builder.providers.DefaultNavigationElementComponentProvider;
 import com.github.appreciated.builder.providers.DefaultSectionElementComponentProvider;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -35,6 +34,7 @@ public class NavigationDrawerBuilder {
     private AbstractNavigationDrawer instance = null;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationElementComponentProvider();
+    private DefaultCustomNavigationElementProvider customNavigationElementProvider = new DefaultCustomNavigationElementProvider();
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
 
     private NavigationDrawerBuilder() {
@@ -77,38 +77,6 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
-    public AbstractNavigationDrawer build() {
-        if (instance == null) {
-            instance = variant.getInstance();
-        }
-        instance.setTitle(title);
-        if (requiresNavigatior) {
-            navigator = navigatorProducer.apply(instance.getContentHolder());
-            if (navigatorConsumer != null) {
-                navigatorConsumer.accept(navigator);
-            }
-            variant.setNavigator(navigator);
-            if (defaultNavigationElement == null) {
-                defaultNavigationElement = navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-            }
-            defaultNavigationElement.addViewToNavigator(navigator);
-        }
-        navigationElements.forEach(element -> {
-            if (element instanceof NavigatorNavigationElement) {
-                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
-                nelement.setProvider(navigationElementProvider);
-                nelement.addViewToNavigator(navigator);
-            } else if (element instanceof SectionNavigationElement) {
-                SectionNavigationElement selement = (SectionNavigationElement) element;
-                selement.setProvider(sectionElementProvider);
-            }
-            addViewComponent(element);
-        });
-        appBarElements.forEach(instance::addAppBarElement);
-        return instance;
-    }
 
     /**
      * If you use this you will need to do the "navigator part" manually, this will simply add a component to the menu
@@ -140,6 +108,15 @@ public class NavigationDrawerBuilder {
 
     public NavigationDrawerBuilder withSection(String name) {
         this.navigationElements.add(new SectionNavigationElement(name));
+        return this;
+    }
+
+    public NavigationDrawerBuilder withClickableElement(String view, Button.ClickListener listener) {
+        return withClickableElement(view, null, listener);
+    }
+
+    public NavigationDrawerBuilder withClickableElement(String view, Resource icon, Button.ClickListener listener) {
+        this.navigationElements.add(new CustomNavigatorNavigationElement(view, icon, listener));
         return this;
     }
 
@@ -190,6 +167,42 @@ public class NavigationDrawerBuilder {
 
     private void addViewComponent(AbstractNavigationElement element) {
         instance.addNavigationElement(element.getComponent());
+    }
+
+    public AbstractNavigationDrawer build() {
+        if (instance == null) {
+            instance = variant.getInstance();
+        }
+        instance.setTitle(title);
+        if (requiresNavigatior) {
+            navigator = navigatorProducer.apply(instance.getContentHolder());
+            if (navigatorConsumer != null) {
+                navigatorConsumer.accept(navigator);
+            }
+            variant.setNavigator(navigator);
+            if (defaultNavigationElement == null) {
+                defaultNavigationElement = navigationElements.stream()
+                        .filter(element -> element instanceof NavigatorNavigationElement)
+                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
+            }
+            defaultNavigationElement.addViewToNavigator(navigator);
+        }
+        navigationElements.forEach(element -> {
+            if (element instanceof NavigatorNavigationElement) {
+                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+                nelement.setProvider(navigationElementProvider);
+                nelement.addViewToNavigator(navigator);
+            } else if (element instanceof CustomNavigatorNavigationElement) {
+                CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
+                cnelement.setProvider(customNavigationElementProvider);
+            } else if (element instanceof SectionNavigationElement) {
+                SectionNavigationElement selement = (SectionNavigationElement) element;
+                selement.setProvider(sectionElementProvider);
+            }
+            addViewComponent(element);
+        });
+        appBarElements.forEach(instance::addAppBarElement);
+        return instance;
     }
 
 }
