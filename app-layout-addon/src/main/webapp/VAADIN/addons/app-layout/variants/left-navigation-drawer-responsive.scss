@@ -19,7 +19,9 @@
     app-drawer-layout {
       --app-drawer-layout-content-transition: margin 0.2s;
     }
-
+    app-drawer[opened] {
+        z-index: $z-index;
+    }
     app-drawer {
       --app-drawer-content-container: {
         background-color: #eee;

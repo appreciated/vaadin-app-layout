@@ -8,11 +8,11 @@ import com.vaadin.ui.themes.ValoTheme;
 
 public class NavigationButton extends Button {
     public NavigationButton(String name, Resource icon) {
-        com.vaadin.ui.Button button = new com.vaadin.ui.Button(name);
-        button.setIcon(icon);
-        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        button.addStyleName("app-layout-menu-button");
-        button.addStyleName("no-border-radius"); // for material theme only
-        button.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        super(name);
+        setIcon(icon);
+        addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        addStyleName("app-layout-menu-button");
+        addStyleName("no-border-radius"); // for material theme only
+        setWidth(100, Sizeable.Unit.PERCENTAGE);
     }
 }

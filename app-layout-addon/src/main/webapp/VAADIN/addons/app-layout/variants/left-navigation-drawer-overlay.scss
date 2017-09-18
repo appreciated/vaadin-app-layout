@@ -9,8 +9,8 @@
       }
       padding-right: 0px;
     }
-    app-drawer {
-      z-index: 1;
+    app-drawer[opened] {
+        z-index: $z-index;
     }
     .drawer-content {
       box-shadow: $drawer-shadow;

@@ -14,6 +14,9 @@
     app-drawer {
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
+    app-drawer[opened] {
+        z-index: $z-index;
+    }
     .drawer-content {
       margin-top: 64px;
       height: calc(100% - 64px);

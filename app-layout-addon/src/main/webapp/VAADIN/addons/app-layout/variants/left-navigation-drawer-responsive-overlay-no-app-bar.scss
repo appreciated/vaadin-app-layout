@@ -21,8 +21,8 @@
     app-drawer[persistent] .drawer-content {
       box-shadow: $persistent-drawer-shadow;
     }
-    app-drawer-layout[narrow] {
-      z-index: 1;
+    app-drawer[opened] {
+        z-index: $z-index;
     }
   }
 }

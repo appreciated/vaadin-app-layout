@@ -5,6 +5,7 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $drawer-background-color: white !default;
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
+$z-index: 10 !default;
 
 @import "variants/left-navigation-drawer.scss";
 @import "variants/left-navigation-drawer-overlay.scss";
@@ -18,6 +19,13 @@ $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !defaul
 
   .app-layout-menu-section {
     padding-left: 14px;
+  }
+
+  #app-bar-content {
+      left: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
   }
 
   .app-layout-menu-button {

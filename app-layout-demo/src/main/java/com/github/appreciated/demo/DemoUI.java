@@ -49,6 +49,7 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("App Layout Demo")
                 .withAppBarElement(getVariantCombo(variant))
+                .withDefaultNavigationView(View1.class)
                 .withNavigationElement("Home", VaadinIcons.HOME, View1.class)
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
@@ -61,6 +62,7 @@ public class DemoUI extends UI {
                 .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
                 .build();
         rightside.addComponent(drawer);
+        drawer.addComponent(new DateTimeField());
     }
 
     ComboBox getVariantCombo(DrawerVariant variant) {
@@ -79,27 +81,5 @@ public class DemoUI extends UI {
             setDrawerVariant(left, valueChangeEvent.getValue());
         });
         return variants;
-    }
-
-    private Button getBorderlessButtonWithIcon(VaadinIcons icon) {
-        Button button = new Button(icon);
-        button.setWidth("64px");
-        button.setHeight("64px");
-        button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
-        return button;
-    }
-
-    private Button getMenuButton(String name, Resource icon) {
-        NavigationButton button = new NavigationButton(name, icon);
-        //button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(name));
-        return button;
-    }
-
-    class TestView extends VerticalLayout implements View {
-        TestView() {
-            Label l = new Label("MyContent");
-            addComponent(l);
-            setComponentAlignment(l, Alignment.MIDDLE_CENTER);
-        }
     }
 }
