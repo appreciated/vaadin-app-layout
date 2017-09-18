@@ -39,7 +39,7 @@ git clone git@github.com:appreciated/vaadin-app-layout.git
 
 ```
 cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
-bower install PolymerElements/app-layout --save
+bower install --save PolymerElements/app-layout PolymerElements/iron-icons PolymerElements/paper-icon-button
 ```
 #### 3. 
 
