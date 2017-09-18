@@ -23,7 +23,7 @@
         color: $app-bar-font-color !important;
       }
       padding-right: 0px;
-      z-index: 2;
+      z-index: $z-index + 1;
     }
     .drawer-content {
       margin-top: 64px;

@@ -4,7 +4,7 @@
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;
       position: relative;
-      z-index: 1;
+      z-index: $z-index + 1;
       box-shadow: $app-bar-shadow;
       .v-button {
         color: $app-bar-font-color !important;
