@@ -3,6 +3,7 @@ package com.github.appreciated.builder.providers;
 import com.github.appreciated.builder.ComponentProvider;
 import com.github.appreciated.builder.component.NavigationButton;
 import com.github.appreciated.builder.elements.NavigatorNavigationElement;
+import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
@@ -10,7 +11,10 @@ public class DefaultNavigationElementComponentProvider implements ComponentProvi
     @Override
     public Component getComponent(NavigatorNavigationElement element) {
         NavigationButton button = new NavigationButton(element.getName(), element.getIcon());
-        button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(element.getName()));
+        button.addClickListener(clickEvent -> {
+            UI.getCurrent().getNavigator().navigateTo(element.getName());
+            AbstractNavigationDrawer.closeDrawer();
+        });
         return button;
     }
 }

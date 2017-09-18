@@ -1,5 +1,11 @@
 @mixin left-navigation-drawer-overlay {
   .left-navigation-drawer-overlay {
+    .app-bar-content {
+        left: 64px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
     app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;

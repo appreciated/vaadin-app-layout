@@ -1,5 +1,11 @@
 @mixin left-navigation-drawer-responsive {
   .left-navigation-drawer-responsive {
+    .app-bar-content {
+        left: 64px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
     app-header app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;

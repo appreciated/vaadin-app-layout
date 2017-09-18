@@ -3,6 +3,18 @@
     app-drawer[persistent] + app-toolbar paper-icon-button {
       display: none;
     }
+    app-drawer + app-toolbar .app-bar-content {
+        left: 64px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+    app-drawer[persistent] + app-toolbar .app-bar-content {
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
     app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;

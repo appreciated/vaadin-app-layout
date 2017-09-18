@@ -18,15 +18,15 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public void toggleDrawer() {
+    public static void toggleDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
     }
 
-    public void openDrawer() {
+    public static void openDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
     }
 
-    public void closeDrawer() {
+    public static void closeDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
     }
 
