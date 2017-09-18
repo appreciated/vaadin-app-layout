@@ -3,7 +3,6 @@ package com.github.appreciated.demo;
 
 import com.github.appreciated.builder.DrawerVariant;
 import com.github.appreciated.builder.NavigationDrawerBuilder;
-import com.github.appreciated.builder.component.NavigationButton;
 import com.github.appreciated.demo.views.View1;
 import com.github.appreciated.demo.views.View2;
 import com.github.appreciated.demo.views.View3;
@@ -13,8 +12,6 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
@@ -27,7 +24,7 @@ import javax.servlet.annotation.WebServlet;
 @Push
 public class DemoUI extends UI {
 
-    private VerticalLayout left;
+    private VerticalLayout holder;
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
@@ -36,14 +33,15 @@ public class DemoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        left = new VerticalLayout();
-        left.setMargin(false);
-        setDrawerVariant(left, DrawerVariant.LEFT);
-        setContent(left);
+        holder = new VerticalLayout();
+        holder.setMargin(false);
+        setDrawerVariant(DrawerVariant.LEFT);
+        setContent(holder);
+        holder.setSizeFull();
     }
 
-    private void setDrawerVariant(VerticalLayout rightside, DrawerVariant variant) {
-        rightside.removeAllComponents();
+    private void setDrawerVariant(DrawerVariant variant) {
+        holder.removeAllComponents();
 
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
@@ -61,7 +59,7 @@ public class DemoUI extends UI {
                 .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
                 .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
                 .build();
-        rightside.addComponent(drawer);
+        holder.addComponent(drawer);
         drawer.addComponent(new DateTimeField());
     }
 
@@ -77,9 +75,7 @@ public class DemoUI extends UI {
                 DrawerVariant.LEFT_RESPONSIVE_SMALL,
                 DrawerVariant.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         variants.setValue(variant);
-        variants.addValueChangeListener(valueChangeEvent -> {
-            setDrawerVariant(left, valueChangeEvent.getValue());
-        });
+        variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;
     }
 }

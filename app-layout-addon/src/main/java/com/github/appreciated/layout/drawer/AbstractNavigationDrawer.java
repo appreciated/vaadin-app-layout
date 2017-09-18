@@ -1,27 +1,44 @@
 package com.github.appreciated.layout.drawer;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.IOException;
 
 
 public abstract class AbstractNavigationDrawer extends CustomLayout {
 
+
     private final VerticalLayout contentHolder = new VerticalLayout();
+    private final Panel contentPanel = new Panel(contentHolder);
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementHolder = new HorizontalLayout();
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
+    public void toggleDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
+    }
+
+    public void openDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
+    }
+
+    public void closeDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
+    }
+
     public AbstractNavigationDrawer(String filename) throws IOException {
         super(AbstractNavigationDrawer.class.getResourceAsStream(filename));
-        contentHolder.setMargin(false);
+        setSizeFull();
+        contentPanel.setSizeFull();
+        contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         menuElementHolder.setMargin(false);
         menuElementHolder.setWidth(99, Unit.PERCENTAGE);
-        setSizeFull();
         addStyleName(getStyleName());
-        super.addComponent(contentHolder, "content");
+        super.addComponent(contentPanel, "content");
         super.addComponent(menuElementHolder, "menu-elements");
         super.addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementHolder);
@@ -34,10 +51,6 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-    @Override
-    public void addComponent(Component c) {
-        contentHolder.addComponent(c);
-    }
 
     public abstract String getStyleName();
 

@@ -38,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-header fixed effects="waterfall" slot="header">
         <app-toolbar>
             <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
-            <div id="app-bar-content" location="app-bar-elements"></div>
+            <div class="app-bar-content" location="app-bar-elements"></div>
         </app-toolbar>
     </app-header>
 
@@ -46,14 +46,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-drawer slot="drawer" swipe-open>
             <div class="drawer-content" location="menu-elements"></div>
         </app-drawer>
-        <div size="100" location="content"></div>
+        <div class="app-bar-application-content" size="100" location="content"></div>
     </app-drawer-layout>
 
 </app-header-layout>
 
 <script>
     var drawerLayout = document.getElementById('drawerLayout');
-    document.getElementById('toggle').addEventListener('click', function () {
+    document.querySelector('paper-icon-button').addEventListener('click', function () {
         if (drawerLayout.forceNarrow || !drawerLayout.narrow) {
             drawerLayout.forceNarrow = !drawerLayout.forceNarrow;
         } else {

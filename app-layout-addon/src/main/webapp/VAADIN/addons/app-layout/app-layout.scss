@@ -21,11 +21,16 @@ $z-index: 10 !default;
     padding-left: 14px;
   }
 
-  #app-bar-content {
+  .app-bar-content {
       left: 64px;
       position: absolute;
       top: 0px;
       right: 0px;
+  }
+
+  .app-bar-application-content {
+      width: 100%;
+      height: calc(100vh - 64px);
   }
 
   .app-layout-menu-button {
