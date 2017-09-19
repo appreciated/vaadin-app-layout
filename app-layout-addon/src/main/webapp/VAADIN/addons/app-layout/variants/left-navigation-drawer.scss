@@ -1,11 +1,11 @@
 @mixin left-navigation-drawer {
   .left-navigation-drawer {
-      .app-bar-content {
-          left: 64px;
-          position: absolute;
-          top: 0px;
-          right: 0px;
-      }
+    .app-bar-content {
+      left: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
     app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;
@@ -21,7 +21,7 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     app-drawer[opened] {
-        z-index: $z-index;
+      z-index: $z-index;
     }
     .drawer-content {
       margin-top: 64px;

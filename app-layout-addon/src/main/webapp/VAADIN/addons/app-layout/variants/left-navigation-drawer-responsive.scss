@@ -1,10 +1,10 @@
 @mixin left-navigation-drawer-responsive {
   .left-navigation-drawer-responsive {
     .app-bar-content {
-        left: 64px;
-        position: absolute;
-        top: 0px;
-        right: 0px;
+      left: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
     }
     app-header app-toolbar {
       background-color: $app-bar-background-color;
@@ -26,7 +26,7 @@
       --app-drawer-layout-content-transition: margin 0.2s;
     }
     app-drawer[opened] {
-        z-index: $z-index;
+      z-index: $z-index;
     }
     app-drawer {
       --app-drawer-content-container: {

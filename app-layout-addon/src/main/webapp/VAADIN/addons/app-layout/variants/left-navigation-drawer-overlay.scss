@@ -1,10 +1,10 @@
 @mixin left-navigation-drawer-overlay {
   .left-navigation-drawer-overlay {
     .app-bar-content {
-        left: 64px;
-        position: absolute;
-        top: 0px;
-        right: 0px;
+      left: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
     }
     app-toolbar {
       background-color: $app-bar-background-color;
@@ -16,7 +16,7 @@
       padding-right: 0px;
     }
     app-drawer[opened] {
-        z-index: $z-index;
+      z-index: $z-index;
     }
     .drawer-content {
       box-shadow: $drawer-shadow;

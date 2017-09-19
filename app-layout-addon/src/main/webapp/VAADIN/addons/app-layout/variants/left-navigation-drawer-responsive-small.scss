@@ -2,10 +2,10 @@
   .left-navigation-drawer-responsive-small {
     --app-drawer-width: 64px;
     .app-bar-content {
-        left: 64px;
-        position: absolute;
-        top: 0px;
-        right: 0px;
+      left: 64px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
     }
     app-drawer[persistent] .app-layout-menu-button {
       height: 64px;
@@ -42,7 +42,7 @@
       box-shadow: $persistent-drawer-shadow;
     }
     app-drawer[opened] {
-        z-index: $z-index;
+      z-index: $z-index;
     }
   }
 }
