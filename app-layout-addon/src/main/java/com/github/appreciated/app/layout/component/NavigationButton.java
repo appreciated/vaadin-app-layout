@@ -16,6 +16,7 @@ public class NavigationButton extends Button {
         addStyleName(ValoTheme.BUTTON_BORDERLESS);
         addStyleName(Styles.APP_LAYOUT_MENU_BUTTON);
         addStyleName(APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS); // for material theme only
+        setHeight(48, Unit.PIXELS);
         setWidth(100, Sizeable.Unit.PERCENTAGE);
     }
 }

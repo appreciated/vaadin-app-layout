@@ -7,10 +7,7 @@ import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.demo.views.View1;
 import com.github.appreciated.demo.views.View2;
 import com.github.appreciated.demo.views.View3;
-import com.vaadin.annotations.Push;
-import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.Title;
-import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -19,6 +16,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
 
+@Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Add-on Demo")
 @Push

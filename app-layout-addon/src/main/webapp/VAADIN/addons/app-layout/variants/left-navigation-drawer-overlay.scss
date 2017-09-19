@@ -16,7 +16,7 @@
       .v-button {
         color: $app-bar-font-color !important;
       }
-      padding-right: 0px;
+      padding: 0px;
     }
     app-drawer[opened] {
       z-index: $z-index;

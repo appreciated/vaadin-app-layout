@@ -9,6 +9,7 @@ $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 $app-bar-height: 64px !default;
 $drawer-width: 256px !default;
+$disable-active-style: false !default;
 $small-drawer-width: 64px !default;
 $z-index: 10 !default;
 
@@ -26,6 +27,13 @@ $z-index: 10 !default;
     padding-left: 14px;
   }
 
+  paper-icon-button {
+    width: $app-bar-height - 20px; // margin * 2
+    height: $app-bar-height - 20px; // margin * 2
+    margin: 10px;
+    padding: 6px;
+  }
+
   .app-bar-application-content {
     width: 100%;
     height: calc(100vh - $app-bar-height);
@@ -39,9 +47,11 @@ $z-index: 10 !default;
     transition: background 0.3s ease, color 0.3s ease;
   }
 
-  .app-layout-menu-button-active {
-    background: $app-menu-button-active-background-color !important;
-    color: $app-menu-button-active-font-color !important;
+  @if $disable-active-style == false {
+    .app-layout-menu-button-active {
+      background: $app-menu-button-active-background-color !important;
+      color: $app-menu-button-active-font-color !important;
+    }
   }
 
   @include left-navigation-drawer;
