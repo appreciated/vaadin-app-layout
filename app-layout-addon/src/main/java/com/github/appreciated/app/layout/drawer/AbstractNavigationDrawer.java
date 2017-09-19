@@ -11,8 +11,14 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
     private final VerticalLayout contentHolder = new VerticalLayout();
     private final Panel contentPanel = new Panel(contentHolder);
+
+    private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final Panel menuElementPanel = new Panel(menuElementHolder);
+    private final VerticalLayout menuFooterHolder = new VerticalLayout();
+
+    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementPanel, menuFooterHolder);
+
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementHolder = new HorizontalLayout();
     private final Label title = new Label("");
@@ -39,13 +45,17 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.setHeight(100, Unit.PERCENTAGE);
         menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        menuElementPanel.setHeight(100, Unit.PERCENTAGE);
+        menuHolder.setMargin(false);
+        menuHolder.setHeight(100, Unit.PERCENTAGE);
+        menuHeaderHolder.setMargin(false);
         menuElementHolder.setMargin(false);
+        menuFooterHolder.setMargin(false);
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
         addStyleName(getStyleName());
         addComponent(contentPanel, "content");
-        addComponent(menuElementPanel, "menu-elements");
+        addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementHolder);
         appBar.setExpandRatio(appBarElementHolder, 1);
@@ -60,11 +70,11 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public abstract String getStyleName();
 
     public void addNavigationHeaderElement(Component component) {
-        menuElementHolder.addComponent(component);
+        menuHeaderHolder.addComponent(component);
     }
 
     public void addNavigationFooterElement(Component component) {
-        menuElementHolder.addComponent(component);
+        menuFooterHolder.addComponent(component);
     }
 
     public void addNavigationElement(Component component) {

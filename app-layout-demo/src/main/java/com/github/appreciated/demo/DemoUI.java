@@ -16,6 +16,9 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
 
+import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
+import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.HEADER;
+
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Add-on Demo")
@@ -46,7 +49,7 @@ public class DemoUI extends UI {
                 .withTitle("App Layout Demo")
                 .withAppBarElement(getVariantCombo(variant))
                 .withDefaultNavigationView(View1.class)
-                .withNavigationElement("Home", VaadinIcons.HOME, View1.class)
+                .withNavigationElement("Home", VaadinIcons.HOME, View1.class, HEADER)
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withSection("More")
@@ -55,7 +58,7 @@ public class DemoUI extends UI {
                 .withNavigationElement("Elements", VaadinIcons.LIST, View2.class)
                 .withSection("Settings")
                 .withNavigationElement("Preferences", VaadinIcons.COG, View3.class)
-                .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
+                .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"), FOOTER)
                 .build();
         holder.addComponent(drawer);
         drawer.getContentHolder().addComponent(new DateTimeField());
