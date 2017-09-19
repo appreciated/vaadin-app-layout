@@ -46,7 +46,7 @@ bower install --save PolymerElements/app-layout PolymerElements/iron-icons Polym
 ```
 cd <project-root-dir>/vaadin-app-layout
 mvn clean install
-cd app-layout-demo
+cd <project-root-dir>/vaadin-app-layout/app-layout-demo
 mvn jetty:run
 ```
 
