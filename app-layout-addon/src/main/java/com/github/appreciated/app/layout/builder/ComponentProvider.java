@@ -1,4 +1,4 @@
-package com.github.appreciated.builder;
+package com.github.appreciated.app.layout.builder;
 
 import com.vaadin.ui.Component;
 
