@@ -45,10 +45,14 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.setHeight(100, Unit.PERCENTAGE);
+
+        menuHolder.setSizeFull();
         menuHolder.setMargin(false);
-        menuHolder.setHeight(100, Unit.PERCENTAGE);
+        menuHolder.setSpacing(false);
+        menuHolder.setExpandRatio(menuElementPanel, 1);
+
+        menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        menuElementPanel.setSizeFull();
         menuHeaderHolder.setMargin(false);
         menuElementHolder.setMargin(false);
         menuFooterHolder.setMargin(false);

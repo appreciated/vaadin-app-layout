@@ -40,6 +40,7 @@
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;
       color: $drawer-font-color !important;
+      overflow: visible;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: none;

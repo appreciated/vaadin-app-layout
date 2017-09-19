@@ -29,7 +29,7 @@
     .drawer-content {
       margin-top: $app-bar-height;
       height: calc(100% - $app-bar-height);
-      overflow: auto;
+      overflow: visible;
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;
       color: $drawer-font-color !important;
