@@ -53,6 +53,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
         menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         menuElementPanel.setSizeFull();
+        menuHeaderHolder.setVisible(false);
+        menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
         menuElementHolder.setMargin(false);
         menuFooterHolder.setMargin(false);
@@ -74,10 +76,12 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public abstract String getStyleName();
 
     public void addNavigationHeaderElement(Component component) {
+        menuHeaderHolder.setVisible(true);
         menuHeaderHolder.addComponent(component);
     }
 
     public void addNavigationFooterElement(Component component) {
+        menuFooterHolder.setVisible(true);
         menuFooterHolder.addComponent(component);
     }
 
@@ -115,5 +119,13 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
     public VerticalLayout getMenuElementHolder() {
         return menuElementHolder;
+    }
+
+    public VerticalLayout getMenuFooterHolder() {
+        return menuFooterHolder;
+    }
+
+    public VerticalLayout getMenuHeaderHolder() {
+        return menuHeaderHolder;
     }
 }
