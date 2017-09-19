@@ -1,7 +1,7 @@
-package com.github.appreciated.builder.providers;
+package com.github.appreciated.app.layout.builder.providers;
 
-import com.github.appreciated.builder.ComponentProvider;
-import com.github.appreciated.builder.elements.SectionNavigationElement;
+import com.github.appreciated.app.layout.builder.ComponentProvider;
+import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;

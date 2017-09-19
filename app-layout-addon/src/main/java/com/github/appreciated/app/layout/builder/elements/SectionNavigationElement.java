@@ -1,4 +1,4 @@
-package com.github.appreciated.builder.elements;
+package com.github.appreciated.app.layout.builder.elements;
 
 public class SectionNavigationElement extends AbstractNavigationElement<SectionNavigationElement> {
 

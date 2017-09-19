@@ -1,4 +1,4 @@
-package com.github.appreciated.builder.elements;
+package com.github.appreciated.app.layout.builder.elements;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;

@@ -1,8 +1,8 @@
-package com.github.appreciated.builder.providers;
+package com.github.appreciated.app.layout.builder.providers;
 
-import com.github.appreciated.builder.ComponentProvider;
+import com.github.appreciated.app.layout.builder.ComponentProvider;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.builder.component.NavigationButton;
-import com.github.appreciated.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;

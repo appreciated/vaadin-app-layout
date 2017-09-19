@@ -1,4 +1,4 @@
-package com.github.appreciated.layout.drawer;
+package com.github.appreciated.app.layout.drawer;
 
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
@@ -42,9 +42,9 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         menuElementHolder.setMargin(false);
         menuElementHolder.setWidth(99, Unit.PERCENTAGE);
         addStyleName(getStyleName());
-        super.addComponent(contentPanel, "content");
-        super.addComponent(menuElementHolder, "menu-elements");
-        super.addComponent(appBar, "app-bar-elements");
+        addComponent(contentPanel, "content");
+        addComponent(menuElementHolder, "menu-elements");
+        addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementHolder);
         appBar.setExpandRatio(appBarElementHolder, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
@@ -54,7 +54,6 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
-
 
     public abstract String getStyleName();
 

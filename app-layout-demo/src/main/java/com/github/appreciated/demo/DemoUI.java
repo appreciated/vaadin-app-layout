@@ -1,12 +1,12 @@
 package com.github.appreciated.demo;
 
 
-import com.github.appreciated.builder.DrawerVariant;
-import com.github.appreciated.builder.NavigationDrawerBuilder;
+import com.github.appreciated.app.layout.builder.DrawerVariant;
+import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
+import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.demo.views.View1;
 import com.github.appreciated.demo.views.View2;
 import com.github.appreciated.demo.views.View3;
-import com.github.appreciated.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -60,7 +60,7 @@ public class DemoUI extends UI {
                 .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
                 .build();
         holder.addComponent(drawer);
-        drawer.addComponent(new DateTimeField());
+        drawer.getContentHolder().addComponent(new DateTimeField());
     }
 
     ComboBox getVariantCombo(DrawerVariant variant) {

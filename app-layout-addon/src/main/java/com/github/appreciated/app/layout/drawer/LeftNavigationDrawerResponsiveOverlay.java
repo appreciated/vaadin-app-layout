@@ -1,4 +1,4 @@
-package com.github.appreciated.layout.drawer;
+package com.github.appreciated.app.layout.drawer;
 
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
