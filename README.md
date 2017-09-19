@@ -104,7 +104,7 @@ Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.t
 
 The Java Project vaadin-app-layout is written by Appreciated 
 
-The used Polymer Components are distributed under the BSD License
+The used Polymer Components are [distributed under the BSD License](https://github.com/Polymer/polymer/blob/master/LICENSE.txt)
 
 ## Features
 
