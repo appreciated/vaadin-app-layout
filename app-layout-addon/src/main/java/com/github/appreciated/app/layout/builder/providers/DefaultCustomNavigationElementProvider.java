@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.builder.providers;
 
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.CustomNavigatorNavigationElement;
-import com.github.appreciated.builder.component.NavigationButton;
+import com.github.appreciated.app.layout.component.NavigationButton;
 import com.vaadin.ui.Component;
 
 
