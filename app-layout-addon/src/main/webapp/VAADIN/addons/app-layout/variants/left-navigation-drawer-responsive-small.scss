@@ -4,10 +4,11 @@
     --app-bar-height: $app-bar-height;
 
     .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;
+      bottom: 0px;
     }
     app-drawer[persistent] .app-layout-menu-button {
       height: $app-bar-height;

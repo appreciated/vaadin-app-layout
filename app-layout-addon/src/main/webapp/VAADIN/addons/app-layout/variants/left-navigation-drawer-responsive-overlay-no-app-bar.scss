@@ -8,6 +8,7 @@
       position: absolute;
       top: 0px;
       right: 0px;
+      bottom: 0px;
     }
     app-drawer[persistent] + app-toolbar {
       display: none;
