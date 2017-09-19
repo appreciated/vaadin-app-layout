@@ -128,4 +128,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public VerticalLayout getMenuHeaderHolder() {
         return menuHeaderHolder;
     }
+
+    public VerticalLayout getMenuHolder() {
+        return menuHolder;
+    }
 }
