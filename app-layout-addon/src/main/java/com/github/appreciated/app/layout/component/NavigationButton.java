@@ -1,9 +1,12 @@
 package com.github.appreciated.app.layout.component;
 
+import com.github.appreciated.app.layout.Styles;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.ValoTheme;
+
+import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS;
 
 
 public class NavigationButton extends Button {
@@ -11,8 +14,8 @@ public class NavigationButton extends Button {
         super(name);
         setIcon(icon);
         addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        addStyleName("app-layout-menu-button");
-        addStyleName("no-border-radius"); // for material theme only
+        addStyleName(Styles.APP_LAYOUT_MENU_BUTTON);
+        addStyleName(APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS); // for material theme only
         setWidth(100, Sizeable.Unit.PERCENTAGE);
     }
 }

@@ -2,7 +2,9 @@ $app-bar-background-color: #4285f4 !default;
 $app-bar-font-color: valo-font-color($app-bar-background-color) !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
-$drawer-background-color: white !default;
+$drawer-background-color: rgb(255, 255, 255) !default;
+$app-menu-button-active-background-color: valo-font-color($drawer-background-color, 0.1);
+$app-menu-button-active-font-color: $v-focus-color;
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 $app-bar-height: 64px !default;
@@ -25,7 +27,7 @@ $z-index: 10 !default;
   }
 
   .app-bar-application-content {
-      width: 100%;
+    width: 100%;
     height: calc(100vh - $app-bar-height);
   }
 
@@ -34,6 +36,11 @@ $z-index: 10 !default;
     .v-icon + .v-captiontext, .v-icon + span {
       margin-left: 16px;
     }
+  }
+
+  .app-layout-menu-button-active {
+    background: $app-menu-button-active-background-color !important;
+    color: $app-menu-button-active-font-color !important;
   }
 
   @include left-navigation-drawer;

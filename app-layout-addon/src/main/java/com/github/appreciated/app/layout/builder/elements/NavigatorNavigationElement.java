@@ -46,6 +46,18 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return icon;
     }
 
+    public View getView() {
+        return view;
+    }
+
+    public Class<? extends View> getViewClassName() {
+        if (className == null) {
+            return view.getClass();
+        } else {
+            return className;
+        }
+    }
+
     @Override
     NavigatorNavigationElement getInfo() {
         return this;

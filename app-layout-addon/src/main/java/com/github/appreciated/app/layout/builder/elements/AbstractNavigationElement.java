@@ -6,6 +6,7 @@ import com.vaadin.ui.Component;
 public abstract class AbstractNavigationElement<T> {
 
     ComponentProvider<T> provider;
+    private Component component;
 
     abstract T getInfo();
 
@@ -18,7 +19,10 @@ public abstract class AbstractNavigationElement<T> {
     }
 
     public Component getComponent() {
-        return provider.getComponent(getInfo());
+        if (component == null) {
+            component = provider.getComponent(getInfo());
+        }
+        return component;
     }
 
 }

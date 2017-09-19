@@ -52,11 +52,11 @@ public class DemoUI extends UI {
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withSection("More")
-                .withNavigationElement("More", VaadinIcons.PLUS, View1.class)
-                .withNavigationElement("Menu", VaadinIcons.MENU, View2.class)
-                .withNavigationElement("Elements", VaadinIcons.LIST, View3.class)
+                .withNavigationElement("More", VaadinIcons.PLUS, View2.class)
+                .withNavigationElement("Menu", VaadinIcons.MENU, View3.class)
+                .withNavigationElement("Elements", VaadinIcons.LIST, View2.class)
                 .withSection("Settings")
-                .withNavigationElement("Preferences", VaadinIcons.COG, View1.class)
+                .withNavigationElement("Preferences", VaadinIcons.COG, View3.class)
                 .withClickableElement("Custom Action", VaadinIcons.EDIT, clickEvent -> Notification.show("Yay!"))
                 .build();
         holder.addComponent(drawer);

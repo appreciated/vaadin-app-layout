@@ -40,7 +40,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         menuElementHolder.setMargin(false);
-        menuElementHolder.setWidth(99, Unit.PERCENTAGE);
+        menuElementHolder.setWidth(100, Unit.PERCENTAGE);
         addStyleName(getStyleName());
         addComponent(contentPanel, "content");
         addComponent(menuElementHolder, "menu-elements");

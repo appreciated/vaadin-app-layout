@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
+import com.github.appreciated.app.layout.component.NavigationButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -19,6 +20,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_ACTIVE;
+import static com.github.appreciated.app.layout.builder.providers.DefaultNavigationElementComponentProvider.UI_SESSION_KEY;
 
 public class NavigationDrawerBuilder {
 
@@ -190,6 +194,15 @@ public class NavigationDrawerBuilder {
             if (element instanceof NavigatorNavigationElement) {
                 NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
                 nelement.setProvider(navigationElementProvider);
+                if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
+                    NavigationButton button = (NavigationButton) nelement.getComponent();
+                    button.addStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
+                    Object oldMenuButton = UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY);
+                    if (oldMenuButton != null && oldMenuButton instanceof NavigationButton) {
+                        ((NavigationButton) oldMenuButton).removeStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
+                    }
+                    UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, button);
+                }
                 nelement.addViewToNavigator(navigator);
             } else if (element instanceof CustomNavigatorNavigationElement) {
                 CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
