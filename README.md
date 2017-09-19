@@ -38,14 +38,15 @@ git clone git@github.com:appreciated/vaadin-app-layout.git
 #### 2. (certainly [bower](https://bower.io/) needs to be installed to do this)
 
 ```
-cd <project-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp
+cd <project-root-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp/VAADIN/
 bower install --save PolymerElements/app-layout PolymerElements/iron-icons PolymerElements/paper-icon-button
 ```
 #### 3. 
 
 ```
+cd <project-root-dir>/vaadin-app-layout
 mvn clean install
-cd demo
+cd app-layout-demo
 mvn jetty:run
 ```
 
