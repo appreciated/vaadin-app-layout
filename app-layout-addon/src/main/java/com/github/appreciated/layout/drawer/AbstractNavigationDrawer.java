@@ -26,6 +26,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
     }
 
+    public static void closeDrawerIfNotPersistent() {
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
+    }
+
     public static void closeDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
     }

@@ -13,7 +13,7 @@ public class DefaultNavigationElementComponentProvider implements ComponentProvi
         NavigationButton button = new NavigationButton(element.getName(), element.getIcon());
         button.addClickListener(clickEvent -> {
             UI.getCurrent().getNavigator().navigateTo(element.getName());
-            AbstractNavigationDrawer.closeDrawer();
+            AbstractNavigationDrawer.closeDrawerIfNotPersistent();
         });
         return button;
     }
