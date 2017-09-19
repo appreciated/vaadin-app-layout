@@ -5,6 +5,9 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $drawer-background-color: white !default;
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
+$app-bar-height: 64px !default;
+$drawer-width: 256px !default;
+$small-drawer-width: 64px !default;
 $z-index: 10 !default;
 
 @import "variants/left-navigation-drawer.scss";

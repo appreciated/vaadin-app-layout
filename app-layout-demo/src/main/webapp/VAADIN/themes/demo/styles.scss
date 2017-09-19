@@ -1,5 +1,10 @@
+$drawer-width: 250px;
+$small-drawer-width: 60px;
+$app-bar-height: 60px;
+
 @import "../valo/valo.scss";
-// don't do it that way in production, instead run an 'mvn install' and check your addons.scss in your theme
+// don't do it this way in production or developement, instead run an 'mvn install' if you haven't already and check your
+// addons.scss in your theme it should contain automatically an import of the theme
 @import "../../addons/app-layout/app-layout.scss";
 
 .demo {

@@ -1,7 +1,9 @@
 @mixin left-navigation-drawer-overlay {
   .left-navigation-drawer-overlay {
+    --app-drawer-width: $drawer-width;
+    --app-bar-height: $app-bar-height;
     .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;

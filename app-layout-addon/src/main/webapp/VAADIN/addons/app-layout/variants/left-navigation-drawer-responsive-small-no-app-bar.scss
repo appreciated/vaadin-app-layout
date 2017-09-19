@@ -1,8 +1,10 @@
 @mixin left-navigation-drawer-responsive-small-no-app-bar {
   .left-navigation-drawer-responsive-small-no-app-bar {
-    --app-drawer-width: 64px;
+    --app-drawer-width: $small-drawer-width;
+    --app-bar-height: $app-bar-height;
+
     .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;
@@ -12,7 +14,7 @@
     }
 
     app-drawer[persistent] .app-layout-menu-button {
-      height: 64px;
+      height: $app-bar-height;
       font-size: 20px;
       .v-icon {
         width: 100%;

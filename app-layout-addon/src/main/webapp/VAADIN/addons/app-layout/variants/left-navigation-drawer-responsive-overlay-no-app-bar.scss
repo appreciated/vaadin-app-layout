@@ -1,7 +1,10 @@
 @mixin left-navigation-drawer-responsive-overlay-no-app-bar {
   .left-navigation-drawer-responsive-overlay-no-app-bar {
+    --app-drawer-width: $drawer-width;
+    --app-bar-height: $app-bar-height;
+
     .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;

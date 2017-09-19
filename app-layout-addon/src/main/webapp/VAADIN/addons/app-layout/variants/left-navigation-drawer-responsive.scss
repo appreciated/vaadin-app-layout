@@ -1,7 +1,9 @@
 @mixin left-navigation-drawer-responsive {
   .left-navigation-drawer-responsive {
+    --app-drawer-width: $drawer-width;
+    --app-bar-height: $app-bar-height;
     .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;
@@ -35,8 +37,8 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     .drawer-content {
-      margin-top: 64px;
-      height: calc(100% - 64px);
+      margin-top: $app-bar-height;
+      height: calc(100% - $app-bar-height);
       overflow: auto;
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;

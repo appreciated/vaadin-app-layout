@@ -1,10 +1,13 @@
 @mixin left-navigation-drawer-responsive-overlay {
   .left-navigation-drawer-responsive-overlay {
+    --app-drawer-width: $drawer-width;
+    --app-bar-height: $app-bar-height;
+
     app-drawer[persistent] + app-toolbar paper-icon-button {
       display: none;
     }
     app-drawer + app-toolbar .app-bar-content {
-      left: 64px;
+      left: $app-bar-height;
       position: absolute;
       top: 0px;
       right: 0px;

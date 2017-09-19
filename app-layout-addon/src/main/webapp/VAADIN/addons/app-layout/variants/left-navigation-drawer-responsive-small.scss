@@ -1,6 +1,8 @@
 @mixin left-navigation-drawer-responsive-small {
   .left-navigation-drawer-responsive-small {
-    --app-drawer-width: 64px;
+    --app-drawer-width: $small-drawer-width;
+    --app-bar-height: $app-bar-height;
+
     .app-bar-content {
       left: 64px;
       position: absolute;
@@ -8,7 +10,7 @@
       right: 0px;
     }
     app-drawer[persistent] .app-layout-menu-button {
-      height: 64px;
+      height: $app-bar-height;
       font-size: 20px;
       .v-icon {
         width: 100%;
@@ -32,8 +34,8 @@
       z-index: $z-index + 1;
     }
     .drawer-content {
-      margin-top: 64px;
-      height: calc(100% - 64px);
+      margin-top: $app-bar-height;
+      height: calc(100% - $app-bar-height);
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;
       color: $drawer-font-color !important;
