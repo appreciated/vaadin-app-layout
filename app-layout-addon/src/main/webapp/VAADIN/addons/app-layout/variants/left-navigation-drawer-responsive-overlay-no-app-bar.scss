@@ -29,7 +29,17 @@
       color: $drawer-font-color !important;
     }
     app-drawer[persistent] .drawer-content {
+      box-shadow: none;
+    }
+    app-drawer[persistent] .drawer-content:after {
+      position: absolute;
       box-shadow: $persistent-drawer-shadow;
+      content: "";
+      top: 0px;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      pointer-events: none;
     }
     app-drawer[opened] {
       z-index: $z-index;
