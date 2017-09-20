@@ -50,7 +50,7 @@ public class DemoUI extends UI {
 
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
-                .withTitle("App Layout Demo")
+                .withTitle("Demo")
                 .withAppBarElement(getVariantCombo(variant))
                 .withAppBarIconComponent(getResourceButton("50px", "50px"))
                 .withDefaultNavigationView(View1.class)
