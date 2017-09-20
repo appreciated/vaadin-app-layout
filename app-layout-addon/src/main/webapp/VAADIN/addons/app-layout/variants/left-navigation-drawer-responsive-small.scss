@@ -21,6 +21,17 @@
         display: none;
       }
     }
+
+    app-drawer[persistent] .app-layout-menu-button-badge {
+      background: $app-menu-button-badge-background-color;
+      color: transparent;
+      height: 5px;
+      width: 5px;
+      margin: 11px;
+      border-radius: 100%;
+      padding: 0;
+    }
+
     app-drawer[persistent] + app-toolbar paper-icon-button {
       display: none;
     }
