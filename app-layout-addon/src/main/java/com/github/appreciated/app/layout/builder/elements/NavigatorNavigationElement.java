@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.component.NavigationBadgeButton.BadgeCaptionProvider;
+import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -10,7 +10,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private View view;
     private Resource icon;
     private Class<? extends View> className;
-    private BadgeCaptionProvider badgeCaptionProvider;
+    private BadgeStatus badgeStatus;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
         this(name, icon, null, className);
@@ -20,16 +20,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this(name, icon, null, view);
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, BadgeCaptionProvider badgeCaptionProvider, Class<? extends View> className) {
+    public NavigatorNavigationElement(String name, Resource icon, BadgeStatus badgeStatus, Class<? extends View> className) {
         this.name = name;
         this.icon = icon;
-        this.badgeCaptionProvider = badgeCaptionProvider;
+        this.badgeStatus = badgeStatus;
         this.className = className;
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, BadgeCaptionProvider badgeCaptionProvider, View view) {
+    public NavigatorNavigationElement(String name, Resource icon, BadgeStatus badgeStatus, View view) {
         this.name = name;
-        this.badgeCaptionProvider = badgeCaptionProvider;
+        this.badgeStatus = badgeStatus;
         this.icon = icon;
         this.view = view;
     }
@@ -75,8 +75,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return this;
     }
 
-
-    public BadgeCaptionProvider getBadgeCaptionProvider() {
-        return badgeCaptionProvider;
+    public BadgeStatus getBadgeStatus() {
+        return badgeStatus;
     }
 }

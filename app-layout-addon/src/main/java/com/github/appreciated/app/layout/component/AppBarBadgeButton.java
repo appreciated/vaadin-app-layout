@@ -2,37 +2,35 @@ package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.vaadin.server.Resource;
-import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.themes.ValoTheme;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
+import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
 
 
-public class NavigationBadgeButton extends AbsoluteLayout {
+public class AppBarBadgeButton extends AbsoluteLayout {
 
-    private final NavigationButton button;
+    private final AppBarButton button;
     private final Label badge;
 
-    public NavigationBadgeButton(String name, Resource icon, BadgeStatus status) {
-        setHeight(48, Unit.PIXELS);
-        setWidth(100, Sizeable.Unit.PERCENTAGE);
-        button = new NavigationButton(name, icon);
+    public AppBarBadgeButton(String name, Resource icon, BadgeStatus status) {
+        setWidth("64px");
+        setHeight("64px");
+        button = new AppBarButton(icon);
+        button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
         button.setSizeFull();
         badge = new Label();
         if (status != null) {
             status.addStatusListener(newStatus -> setStatus(newStatus));
         }
         setStatus(status);
-
-        badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
-        ComponentPosition badgePosition = new ComponentPosition();
-
+        badge.addStyleName(APP_BAR_BADGE);
         addComponent(button);
         addComponent(badge, "right: 0px;");
     }
 
-    public NavigationButton getButton() {
+    public AppBarButton getButton() {
         return button;
     }
 
@@ -45,3 +43,5 @@ public class NavigationBadgeButton extends AbsoluteLayout {
         }
     }
 }
+
+

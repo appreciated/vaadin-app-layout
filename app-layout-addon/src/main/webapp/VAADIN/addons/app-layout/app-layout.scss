@@ -6,7 +6,7 @@ $drawer-background-color: rgb(255, 255, 255) !default;
 $app-menu-button-active-background-color: valo-font-color($drawer-background-color, 0.1);
 $app-menu-button-active-font-color: $v-focus-color;
 $app-menu-button-badge-background-color: $v-focus-color;
-$app-menu-button-badge-font-color: valo-font-color($v-focus-color);
+$app-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0);
 $app-menu-button-badge-border-radius: 5px;
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
@@ -30,11 +30,18 @@ $z-index: 10 !default;
     padding-left: 14px;
   }
 
-  paper-icon-button {
-    width: $app-bar-height - 20px; // margin * 2
-    height: $app-bar-height - 20px; // margin * 2
-    margin: 10px;
-    padding: 6px;
+  $calc-app-bar-height: $app-bar-height - 20px;
+  @if ($calc-app-bar-height > 0px) {
+    paper-icon-button {
+      width: $app-bar-height - 20px; // margin * 2
+      height: $app-bar-height - 20px; // margin * 2
+      margin: 10px;
+      padding: 6px;
+    }
+  } @else {
+    app-toolbar {
+      display: none;
+    }
   }
 
   .app-bar-application-content {
@@ -57,12 +64,23 @@ $z-index: 10 !default;
     border-radius: $app-menu-button-badge-border-radius;
   }
 
+  .app-bar-badge {
+    background: $app-menu-button-badge-background-color;
+    color: transparent;
+    height: 5px;
+    width: 5px;
+    margin: 11px;
+    border-radius: 100%;
+    padding: 0;
+  }
+
   .app-layout-menu-button {
     text-align: left !important;
     .v-icon + .v-captiontext, .v-icon + span {
       margin-left: 16px;
     }
     transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 0px;
   }
 
   @if $disable-active-style == false {

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.builder.elements.*;
+import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
@@ -24,7 +25,6 @@ import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_ACTIVE;
 import static com.github.appreciated.app.layout.builder.providers.AbstractNavigationElementComponentProvider.UI_SESSION_KEY;
-import static com.github.appreciated.app.layout.component.NavigationBadgeButton.BadgeCaptionProvider;
 
 public class NavigationDrawerBuilder {
 
@@ -139,7 +139,7 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeCaptionProvider provider, Class<? extends View> element) {
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeStatus provider, Class<? extends View> element) {
         return withNavigationElement(caption, icon, provider, element, Position.DEFAULT);
     }
 
@@ -169,7 +169,7 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, null, element, position);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeCaptionProvider provider, Class<? extends View> element, Position position) {
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeStatus provider, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
         addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, provider, element), position);
         return this;
@@ -231,7 +231,7 @@ public class NavigationDrawerBuilder {
                     if (oldMenuButton != null && oldMenuButton instanceof NavigationButton) {
                         ((NavigationButton) oldMenuButton).removeStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
                     }
-                    UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, button);
+                    UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, button.getButton());
                 }
                 nelement.addViewToNavigator(navigator);
             } else if (element instanceof CustomNavigatorNavigationElement) {
