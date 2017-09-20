@@ -52,7 +52,7 @@
       background: $drawer-background-color;
       color: $drawer-font-color !important;
       overflow: visible;
-      width: 256px;
+      width: $drawer-width;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: none;
