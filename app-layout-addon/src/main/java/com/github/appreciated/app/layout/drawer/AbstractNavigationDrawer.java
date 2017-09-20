@@ -137,4 +137,9 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     public VerticalLayout getMenuHolder() {
         return menuHolder;
     }
+
+    public void addAppBarIcon(Component appBarIconComponent) {
+        titleWrapper.addComponentAsFirst(appBarIconComponent);
+        titleWrapper.setComponentAlignment(appBarIconComponent, Alignment.MIDDLE_LEFT);
+    }
 }

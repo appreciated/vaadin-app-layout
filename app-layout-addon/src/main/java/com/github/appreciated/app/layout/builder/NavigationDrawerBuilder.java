@@ -46,6 +46,7 @@ public class NavigationDrawerBuilder {
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
     private List<AbstractNavigationElement> navigationFooterElements = new ArrayList<>();
     private List<AbstractNavigationElement> navigationHeaderElements = new ArrayList<>();
+    private Component appBarIconComponent;
 
     private NavigationDrawerBuilder() {
     }
@@ -224,6 +225,7 @@ public class NavigationDrawerBuilder {
         addComponents(navigationFooterElements, instance::addNavigationFooterElement);
         appBarElements.forEach(instance::addAppBarElement);
         instance.setDesign(design);
+        instance.addAppBarIcon(appBarIconComponent);
         return instance;
     }
 
@@ -260,6 +262,11 @@ public class NavigationDrawerBuilder {
 
     public NavigationDrawerBuilder withAppBarElements(Component... element) {
         this.appBarElements.addAll(Arrays.asList(element));
+        return this;
+    }
+
+    public NavigationDrawerBuilder withAppBarIconComponent(Component resourceButton) {
+        this.appBarIconComponent = resourceButton;
         return this;
     }
 

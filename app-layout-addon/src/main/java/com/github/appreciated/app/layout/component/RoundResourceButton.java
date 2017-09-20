@@ -7,9 +7,13 @@ import static com.github.appreciated.app.layout.Styles.ROUND_RESOURCE_BUTTON;
 
 public class RoundResourceButton extends Button {
     public RoundResourceButton(Resource icon) {
+        this(icon, "75px", "75px");
+    }
+
+    public RoundResourceButton(Resource icon, String width, String height) {
         super(icon);
-        setWidth("75px");
-        setHeight("75px");
+        setWidth(width);
+        setHeight(height);
         addStyleNames(ROUND_RESOURCE_BUTTON);
     }
 }
