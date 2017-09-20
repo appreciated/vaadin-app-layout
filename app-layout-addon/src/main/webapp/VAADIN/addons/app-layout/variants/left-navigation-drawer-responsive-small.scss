@@ -52,9 +52,11 @@
       background: $drawer-background-color;
       color: $drawer-font-color !important;
       overflow: visible;
+      width: 256px;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: none;
+      width: $small-drawer-width;
     }
     app-drawer[persistent] .drawer-content:after {
       position: absolute;
