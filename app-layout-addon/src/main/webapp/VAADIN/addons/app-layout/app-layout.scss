@@ -53,6 +53,11 @@ $z-index: 10 !default;
     height: calc(100vh - $app-bar-height);
   }
 
+  .app-layout-menu-element {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .v-absolutelayout-wrapper-app-layout-menu-button-badge {
     pointer-events: none;
   }

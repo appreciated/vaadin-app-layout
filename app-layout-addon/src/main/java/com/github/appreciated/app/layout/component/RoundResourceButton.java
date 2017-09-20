@@ -5,11 +5,11 @@ import com.vaadin.ui.Button;
 
 import static com.github.appreciated.app.layout.Styles.ROUND_RESOURCE_BUTTON;
 
-public class AppBarButton extends Button {
-    public AppBarButton(Resource icon) {
+public class RoundResourceButton extends Button {
+    public RoundResourceButton(Resource icon) {
         super(icon);
-        setWidth("64px");
-        setHeight("64px");
+        setWidth("75px");
+        setHeight("75px");
         addStyleNames(ROUND_RESOURCE_BUTTON);
     }
 }

@@ -8,7 +8,8 @@ public class Styles {
     public static final String APP_LAYOUT_MENU_BUTTON_BADGE = "app-layout-menu-button-badge";
     public static final String APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS = "no-border-radius";
     public static final String APP_LAYOUT_MENU_BUTTON_ACTIVE = "app-layout-menu-button-active";
-    public static final String APP_BAR_BUTTON = BUTTON_BORDERLESS + " " + BUTTON_ICON_ONLY;
+    public static final String APP_LAYOUT_MENU_BAR_ELEMENT = "app-layout-menu-element";
+    public static final String ROUND_RESOURCE_BUTTON = "app-layout-menu-round-button" + " " + BUTTON_BORDERLESS + " " + BUTTON_ICON_ONLY;
     public static final String APP_BAR_BADGE = "app-bar-badge";
     public static final String APP_BAR_DESIGN_DEFAULT = "default-app-bar-design";
     public static final String APP_BAR_DESIGN_MATERIAL = "material-app-bar-design";
