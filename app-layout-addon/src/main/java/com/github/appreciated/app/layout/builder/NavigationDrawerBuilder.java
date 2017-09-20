@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
+import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
@@ -35,6 +36,7 @@ public class NavigationDrawerBuilder {
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
     private boolean requiresNavigatior = false;
+    private AppBarDesign design = AppBarDesign.DEFAULT;
     private Navigator navigator;
     private String title;
     private AbstractNavigationDrawer instance = null;
@@ -91,6 +93,11 @@ public class NavigationDrawerBuilder {
     public NavigationDrawerBuilder withNavigatorProducer(NavigatorProducer navigator) {
         this.requiresNavigatior = true;
         this.navigatorProducer = navigator;
+        return this;
+    }
+
+    public NavigationDrawerBuilder withDesign(AppBarDesign design) {
+        this.design = design;
         return this;
     }
 
@@ -216,6 +223,7 @@ public class NavigationDrawerBuilder {
         addComponents(navigationElements, instance::addNavigationElement);
         addComponents(navigationFooterElements, instance::addNavigationFooterElement);
         appBarElements.forEach(instance::addAppBarElement);
+        instance.setDesign(design);
         return instance;
     }
 

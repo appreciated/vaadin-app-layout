@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.drawer;
 
+import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -91,6 +92,10 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
 
     public void addAppBarElement(Component component) {
         appBarElementHolder.addComponent(component);
+    }
+
+    public void setDesign(AppBarDesign design) {
+        this.addStyleName(design.getStylename());
     }
 
     public HorizontalLayout getAppBar() {
