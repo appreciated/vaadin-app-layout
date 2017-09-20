@@ -42,11 +42,11 @@ $z-index: 10 !default;
   }
 
   .app-layout-menu-button-badge {
-    line-height: 20px;
-    width: 40px;
+    padding: 0 7px;
     background: $app-menu-button-badge-background-color;
     color: $app-menu-button-badge-font-color;
     height: 24px;
+    line-height: 24px;
     margin: 13px;
     text-align: center;
     border-radius: 5px;
