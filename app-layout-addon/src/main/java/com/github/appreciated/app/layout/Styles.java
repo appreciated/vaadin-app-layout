@@ -10,4 +10,7 @@ public class Styles {
     public static final String APP_LAYOUT_MENU_BUTTON_ACTIVE = "app-layout-menu-button-active";
     public static final String APP_BAR_BUTTON = BUTTON_BORDERLESS + " " + BUTTON_ICON_ONLY;
     public static final String APP_BAR_BADGE = "app-bar-badge";
+    public static final String APP_BAR_DESIGN_DEFAULT = "default-app-bar-design";
+    public static final String APP_BAR_DESIGN_MATERIAL = "material-app-bar-design";
+    public static final String APP_BAR_DESIGN_CUSTOM = "custom-app-bar-design";
 }

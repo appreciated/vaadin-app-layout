@@ -1,7 +1,9 @@
 package com.github.appreciated.app.layout.builder.design;
 
+import com.github.appreciated.app.layout.Styles;
+
 public enum AppBarDesign {
-    DEFAULT("default-app-bar-design"), MATERIAL("material-app-bar-design"), CUSTOM("custom-app-bar-design");
+    DEFAULT(Styles.APP_BAR_DESIGN_DEFAULT), MATERIAL(Styles.APP_BAR_DESIGN_MATERIAL), CUSTOM(Styles.APP_BAR_DESIGN_CUSTOM);
 
     private String stylename;
 
