@@ -2,8 +2,9 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
-import com.github.appreciated.app.layout.builder.providers.DefaultNavigationElementComponentProvider;
+import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
+import com.github.appreciated.app.layout.component.NavigationBadgeButton;
 import com.github.appreciated.app.layout.component.NavigationButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.navigator.Navigator;
@@ -22,7 +23,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_ACTIVE;
-import static com.github.appreciated.app.layout.builder.providers.DefaultNavigationElementComponentProvider.UI_SESSION_KEY;
+import static com.github.appreciated.app.layout.builder.providers.AbstractNavigationElementComponentProvider.UI_SESSION_KEY;
+import static com.github.appreciated.app.layout.component.NavigationBadgeButton.BadgeCaptionProvider;
 
 public class NavigationDrawerBuilder {
 
@@ -37,7 +39,7 @@ public class NavigationDrawerBuilder {
     private String title;
     private AbstractNavigationDrawer instance = null;
     private NavigatorNavigationElement defaultNavigationElement;
-    private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationElementComponentProvider();
+    private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationBadgeElementComponentProvider();
     private DefaultCustomNavigationElementProvider customNavigationElementProvider = new DefaultCustomNavigationElementProvider();
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
     private List<AbstractNavigationElement> navigationFooterElements = new ArrayList<>();
@@ -137,6 +139,10 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, element, Position.DEFAULT);
     }
 
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeCaptionProvider provider, Class<? extends View> element) {
+        return withNavigationElement(caption, icon, provider, element, Position.DEFAULT);
+    }
+
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, View element) {
         return withNavigationElement(caption, icon, element, Position.DEFAULT);
     }
@@ -160,8 +166,12 @@ public class NavigationDrawerBuilder {
     }
 
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element, Position position) {
+        return withNavigationElement(caption, icon, null, element, position);
+    }
+
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeCaptionProvider provider, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, element), position);
+        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, provider, element), position);
         return this;
     }
 
@@ -215,8 +225,8 @@ public class NavigationDrawerBuilder {
                 NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
                 nelement.setProvider(navigationElementProvider);
                 if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
-                    NavigationButton button = (NavigationButton) nelement.getComponent();
-                    button.addStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
+                    NavigationBadgeButton button = (NavigationBadgeButton) nelement.getComponent();
+                    button.getButton().addStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
                     Object oldMenuButton = UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY);
                     if (oldMenuButton != null && oldMenuButton instanceof NavigationButton) {
                         ((NavigationButton) oldMenuButton).removeStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
@@ -245,15 +255,16 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    public enum Position {
+        HEADER, DEFAULT, FOOTER
+    }
+
+    @FunctionalInterface
     public interface NavigationConsumer extends Consumer<Navigator> {
     }
 
+    @FunctionalInterface
     public interface NavigatorProducer extends Function<VerticalLayout, Navigator> {
-    }
-
-
-    public enum Position {
-        HEADER, DEFAULT, FOOTER
     }
 
     @FunctionalInterface

@@ -49,7 +49,7 @@ public class DemoUI extends UI {
                 .withTitle("App Layout Demo")
                 .withAppBarElement(getVariantCombo(variant))
                 .withDefaultNavigationView(View1.class)
-                .withNavigationElement("Home", VaadinIcons.HOME, View1.class, HEADER)
+                .withNavigationElement("Home", VaadinIcons.HOME, label -> "1", View1.class, HEADER)
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withSection("More")

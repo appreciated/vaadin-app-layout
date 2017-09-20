@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.component.NavigationBadgeButton.BadgeCaptionProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -9,15 +10,26 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private View view;
     private Resource icon;
     private Class<? extends View> className;
+    private BadgeCaptionProvider badgeCaptionProvider;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
-        this.name = name;
-        this.icon = icon;
-        this.className = className;
+        this(name, icon, null, className);
     }
 
     public NavigatorNavigationElement(String name, Resource icon, View view) {
+        this(name, icon, null, view);
+    }
+
+    public NavigatorNavigationElement(String name, Resource icon, BadgeCaptionProvider badgeCaptionProvider, Class<? extends View> className) {
         this.name = name;
+        this.icon = icon;
+        this.badgeCaptionProvider = badgeCaptionProvider;
+        this.className = className;
+    }
+
+    public NavigatorNavigationElement(String name, Resource icon, BadgeCaptionProvider badgeCaptionProvider, View view) {
+        this.name = name;
+        this.badgeCaptionProvider = badgeCaptionProvider;
         this.icon = icon;
         this.view = view;
     }
@@ -61,5 +73,10 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     @Override
     NavigatorNavigationElement getInfo() {
         return this;
+    }
+
+
+    public BadgeCaptionProvider getBadgeCaptionProvider() {
+        return badgeCaptionProvider;
     }
 }

@@ -5,6 +5,8 @@ $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $drawer-background-color: rgb(255, 255, 255) !default;
 $app-menu-button-active-background-color: valo-font-color($drawer-background-color, 0.1);
 $app-menu-button-active-font-color: $v-focus-color;
+$app-menu-button-badge-background-color: $v-focus-color;
+$app-menu-button-badge-font-color: valo-font-color($v-focus-color);
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
 $persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
 $app-bar-height: 64px !default;
@@ -37,6 +39,17 @@ $z-index: 10 !default;
   .app-bar-application-content {
     width: 100%;
     height: calc(100vh - $app-bar-height);
+  }
+
+  .app-layout-menu-button-badge {
+    line-height: 20px;
+    width: 40px;
+    background: $app-menu-button-badge-background-color;
+    color: $app-menu-button-badge-font-color;
+    height: 24px;
+    margin: 13px;
+    text-align: center;
+    border-radius: 5px;
   }
 
   .app-layout-menu-button {
