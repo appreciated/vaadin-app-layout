@@ -8,11 +8,9 @@ import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.github.appreciated.app.layout.component.AppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
-import com.github.appreciated.demo.views.View1;
-import com.github.appreciated.demo.views.View2;
-import com.github.appreciated.demo.views.View3;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.navigator.View;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -22,8 +20,8 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BAR_ELEMENT;
 import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
@@ -36,7 +34,7 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 public class DemoUI extends UI {
 
     private VerticalLayout holder;
-    private BadgeStatus badgeStatus;
+    BadgeStatus badgeStatus = new BadgeStatus("0");
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
@@ -45,8 +43,6 @@ public class DemoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        badgeStatus = new BadgeStatus("0");
-
         holder = new VerticalLayout();
         holder.setMargin(false);
         setDrawerVariant(DrawerVariant.LEFT);
@@ -54,28 +50,17 @@ public class DemoUI extends UI {
         holder.setSizeFull();
 
         final int[] i = {0};
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("i = " + i[0]);
-                DemoUI.this.access(() -> {
-                    badgeStatus.setStatus("" + i[0]++);
-                });
-                DemoUI.this.push();
-            }
-        }, 0, 5000);
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> badgeStatus.setStatus("" + i[0]++), 0, 5, TimeUnit.SECONDS);
     }
 
     private void setDrawerVariant(DrawerVariant variant) {
         holder.removeAllComponents();
 
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
-                .withVariant(variant)
+                .withVariant(DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR)
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
-                .withAppBarElement(new AppBarButton(VaadinIcons.ELLIPSIS_V, clickEvent -> {/*Click Event*/}))
+                .withAppBarElement(new AppBarButton(VaadinIcons.ELLIPSIS_DOTS_V, clickEvent -> {/*Click Event*/}))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)
@@ -85,6 +70,7 @@ public class DemoUI extends UI {
                 .withNavigationElement("More", VaadinIcons.PLUS, View2.class)
                 .withNavigationElement("Menu", VaadinIcons.MENU, View3.class)
                 .withNavigationElement("Elements", VaadinIcons.LIST, View2.class)
+                .withClickableElement("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
                 .withNavigationElement("Preferences", VaadinIcons.COG, View3.class, FOOTER)
                 .build();
         holder.addComponent(drawer);
@@ -93,6 +79,16 @@ public class DemoUI extends UI {
         drawer.getContentHolder().addComponent(content);
         drawer.getContentHolder().setComponentAlignment(content, Alignment.TOP_CENTER);
     }
+
+    public static class View1 extends HorizontalLayout implements View {
+    }
+
+    public static class View2 extends HorizontalLayout implements View {
+    }
+
+    public static class View3 extends HorizontalLayout implements View {
+    }
+
 
     ComboBox getVariantCombo(DrawerVariant variant) {
         ComboBox<DrawerVariant> variants = new ComboBox<>();
