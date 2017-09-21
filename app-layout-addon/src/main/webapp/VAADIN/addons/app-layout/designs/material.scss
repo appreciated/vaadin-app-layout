@@ -4,6 +4,7 @@
       padding: 0 10px;
       background: $app-menu-button-badge-background-color;
       color: $app-menu-button-badge-font-color;
+      font-size: 13px;
       height: 20px;
       line-height: 20px;
       margin: 15px;
@@ -32,7 +33,7 @@
       border-radius: 0px;
     }
     @if $disable-active-style == false {
-      .app-layout-menu-button-active {
+      .app-layout-menu-element-active .app-layout-menu-button {
         background: $app-menu-button-active-background-color !important;
         color: $app-menu-button-active-font-color !important;
       }
@@ -46,9 +47,6 @@
       height: 100%;
       border-radius: 100%;
       vertical-align: unset !important;
-    }
-    .app-layout-menu-section {
-      padding-left: 14px;
     }
   }
 }

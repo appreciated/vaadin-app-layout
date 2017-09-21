@@ -55,8 +55,8 @@ public class DemoUI extends UI {
 
         final int[] i = {0};
 
-        Timer caretaker = new Timer();
-        caretaker.schedule(new TimerTask() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 System.out.println("i = " + i[0]);
@@ -66,7 +66,6 @@ public class DemoUI extends UI {
                 DemoUI.this.push();
             }
         }, 0, 5000);
-
     }
 
     private void setDrawerVariant(DrawerVariant variant) {

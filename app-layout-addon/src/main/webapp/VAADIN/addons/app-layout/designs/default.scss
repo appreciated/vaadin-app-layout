@@ -11,7 +11,6 @@
       text-align: center;
       border-radius: 10px;
     }
-
     .app-bar-badge {
       background: $app-menu-button-badge-background-color;
       color: valo-font-color($app-menu-button-badge-background-color);
@@ -40,7 +39,7 @@
         position: relative;
         transition: border 0.3s;
         position: relative;
-        :after {
+        &:after {
           position: absolute;
           margin-left: -5px;
           content: "";
