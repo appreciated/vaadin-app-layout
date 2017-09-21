@@ -3,6 +3,10 @@
     --app-drawer-width: $small-drawer-width;
     --app-bar-height: $app-bar-height;
 
+    .app-bar-application-content {
+      height: 100vh;
+    }
+
     .app-bar-content {
       left: $app-bar-height;
       position: absolute;
@@ -54,18 +58,8 @@
       width: $drawer-width;
     }
     app-drawer[persistent] .drawer-content {
-      box-shadow: none;
-      width: $small-drawer-width;
-    }
-    app-drawer[persistent] .drawer-content:after {
-      position: absolute;
       box-shadow: $persistent-drawer-shadow;
-      content: "";
-      top: 0px;
-      bottom: 0px;
-      right: 0px;
-      left: 0px;
-      pointer-events: none;
+      width: $small-drawer-width;
     }
     app-drawer[opened] {
       z-index: $z-index;

@@ -6,9 +6,8 @@ import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
-import com.github.appreciated.app.layout.component.NavigationBadgeButton;
-import com.github.appreciated.app.layout.component.NavigationButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
+import com.github.appreciated.app.layout.session.NavigationElementHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -23,9 +22,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_ACTIVE;
-import static com.github.appreciated.app.layout.builder.providers.AbstractNavigationElementComponentProvider.UI_SESSION_KEY;
 
 public class NavigationDrawerBuilder {
 
@@ -235,13 +231,7 @@ public class NavigationDrawerBuilder {
                 NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
                 nelement.setProvider(navigationElementProvider);
                 if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
-                    NavigationBadgeButton button = (NavigationBadgeButton) nelement.getComponent();
-                    button.getButton().addStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
-                    Object oldMenuButton = UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY);
-                    if (oldMenuButton != null && oldMenuButton instanceof NavigationButton) {
-                        ((NavigationButton) oldMenuButton).removeStyleName(APP_LAYOUT_MENU_BUTTON_ACTIVE);
-                    }
-                    UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, button.getButton());
+                    NavigationElementHelper.updateActiveElementSessionData(nelement);
                 }
                 nelement.addViewToNavigator(navigator);
             } else if (element instanceof CustomNavigatorNavigationElement) {

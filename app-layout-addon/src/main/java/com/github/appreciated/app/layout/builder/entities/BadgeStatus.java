@@ -13,7 +13,6 @@ public class BadgeStatus {
 
     public BadgeStatus(String status) {
         this.status = status;
-        listeners.forEach(listener -> listener.onStatusChange(this));
     }
 
     public String getStatus() {
@@ -22,6 +21,7 @@ public class BadgeStatus {
 
     public void setStatus(String status) {
         this.status = status;
+        listeners.forEach(badgeStatusListener -> badgeStatusListener.onStatusChange(this));
     }
 
     public void addStatusListener(BadgeStatusListener listener) {

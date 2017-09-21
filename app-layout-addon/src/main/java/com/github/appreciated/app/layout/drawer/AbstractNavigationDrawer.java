@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.drawer;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.server.Page;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -21,7 +22,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementPanel, menuFooterHolder);
 
     private final HorizontalLayout appBar = new HorizontalLayout();
-    private final HorizontalLayout appBarElementHolder = new HorizontalLayout();
+    private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
+    private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
@@ -56,20 +58,23 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         menuElementPanel.setSizeFull();
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(false);
-        menuFooterHolder.setMargin(false);
+        menuHeaderHolder.setMargin(new MarginInfo(true, false, false, false));
+        menuElementHolder.setMargin(new MarginInfo(true, false));
+        menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
         addStyleName(getStyleName());
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementHolder);
-        appBar.setExpandRatio(appBarElementHolder, 1);
+        appBar.addComponents(titleWrapper, appBarElementWrapper);
+        appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
-        appBar.setComponentAlignment(appBarElementHolder, Alignment.MIDDLE_RIGHT);
-        appBarElementHolder.setSpacing(false);
+        appBarElementWrapper.setSpacing(false);
+        appBarElementWrapper.setSizeFull();
+        appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
+        appBarElementContainer.setHeight(100, Unit.PERCENTAGE);
+        appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
@@ -91,7 +96,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
     }
 
     public void addAppBarElement(Component component) {
-        appBarElementHolder.addComponent(component);
+        appBarElementContainer.addComponent(component);
+        appBarElementContainer.setComponentAlignment(component, Alignment.MIDDLE_RIGHT);
     }
 
     public void setDesign(AppBarDesign design) {
@@ -102,8 +108,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout {
         return appBar;
     }
 
-    public HorizontalLayout getAppBarElementHolder() {
-        return appBarElementHolder;
+    public HorizontalLayout getAppBarElementWrapper() {
+        return appBarElementWrapper;
     }
 
     public Label getTitle() {

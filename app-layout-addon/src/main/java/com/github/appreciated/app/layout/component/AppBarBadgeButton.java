@@ -14,7 +14,7 @@ public class AppBarBadgeButton extends AbsoluteLayout {
     private final AppBarButton button;
     private final Label badge;
 
-    public AppBarBadgeButton(String name, Resource icon, BadgeStatus status) {
+    public AppBarBadgeButton(Resource icon, BadgeStatus status) {
         setWidth("64px");
         setHeight("64px");
         button = new AppBarButton(icon);

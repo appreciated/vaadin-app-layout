@@ -25,4 +25,7 @@ public abstract class AbstractNavigationElement<T> {
         return component;
     }
 
+    public void setComponent(Component component) {
+        this.component = component;
+    }
 }

@@ -4,20 +4,26 @@
       padding: 0 10px;
       background: $app-menu-button-badge-background-color;
       color: $app-menu-button-badge-font-color;
+      font-size: 13px;
       height: 20px;
       line-height: 20px;
       margin: 15px;
       text-align: center;
       border-radius: 10px;
     }
+
     .app-bar-badge {
       background: $app-menu-button-badge-background-color;
-      color: transparent;
-      height: 5px;
-      width: 5px;
-      margin: 11px;
-      border-radius: 100%;
-      padding: 0;
+      color: valo-font-color($app-menu-button-badge-background-color);
+      font-size: 11px;
+      min-width: 18px;
+      min-height: 18px;
+      text-align: center;
+      line-height: 18px;
+      margin: 7px;
+      padding-right: 4px;
+      padding-left: 3px;
+      border-radius: 17px;
     }
     .app-layout-menu-button {
       text-align: left !important;
@@ -26,16 +32,37 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
-      border-left: 5px transparent solid;
       transition: border 0.5s;
     }
     @if $disable-active-style == false {
-      .app-layout-menu-button-active {
+      .app-layout-menu-element {
+        border-left: 5px transparent solid !important;
+        position: relative;
+        transition: border 0.3s;
+        position: relative;
+        :after {
+          position: absolute;
+          margin-left: -5px;
+          content: "";
+          left: 0px;
+          top: 0px !important;
+          bottom: 0px !important;
+          width: 5px;
+          box-shadow: 0px 0px 20px 4px rgba($v-focus-color, 0.0);
+          transition: box-shadow 0.3s;
+          overflow: visible;
+        }
+      }
+      .app-layout-menu-element-active {
         color: $v-focus-color !important;
         border-left: 5px $v-focus-color solid !important;
       }
-      .app-layout-menu-button:before, .app-layout-menu-button:after {
-        border-left: 0px transparent !important;
+      .app-layout-menu-element-active:after {
+        box-shadow: 0px 0px 20px 4px rgba($v-focus-color, 0.3);
+      }
+      .app-layout-menu-button:after {
+        box-shadow: none !important;
+        border-left: none;
       }
     }
     .app-layout-menu-round-button img.v-icon {
@@ -43,6 +70,9 @@
       height: 100%;
       border-radius: 100%;
       vertical-align: unset !important;
+    }
+    .app-layout-menu-bar-element {
+      padding-left: 21px;
     }
   }
 }

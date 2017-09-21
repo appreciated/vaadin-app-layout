@@ -70,6 +70,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         }
     }
 
+
     @Override
     NavigatorNavigationElement getInfo() {
         return this;

@@ -9,7 +9,7 @@ $app-menu-button-badge-background-color: $v-focus-color;
 $app-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0);
 $app-menu-button-badge-border-radius: 5px;
 $drawer-font-color: valo-font-color($drawer-background-color) !default;
-$persistent-drawer-shadow: inset -15px 0px 20px -10px rgba(0, 0, 0, 0.3) !default;
+$persistent-drawer-shadow: inset -15px 0px 10px -10px rgba(0, 0, 0, 0.15) !default;
 $app-bar-height: 64px !default;
 $drawer-width: 256px !default;
 $disable-active-style: false !default;
@@ -30,9 +30,7 @@ $z-index: 10 !default;
 
 @mixin app-layout {
 
-  .app-layout-menu-section {
-    padding-left: 14px;
-  }
+
 
   $calc-app-bar-height: $app-bar-height - 20px;
   @if ($calc-app-bar-height > 0px) {
@@ -53,7 +51,7 @@ $z-index: 10 !default;
     height: calc(100vh - $app-bar-height);
   }
 
-  .app-layout-menu-element {
+  .app-layout-menu-bar-element {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -61,6 +59,8 @@ $z-index: 10 !default;
   .v-absolutelayout-wrapper-app-layout-menu-button-badge {
     pointer-events: none;
   }
+
+  box-shadow: none !important;
 
   @include default;
   @include material;
