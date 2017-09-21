@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.builder.DrawerVariant;
 import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
-import com.github.appreciated.app.layout.component.AppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.*;
@@ -57,10 +56,10 @@ public class DemoUI extends UI {
         holder.removeAllComponents();
 
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
-                .withVariant(DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR)
+                .withVariant(variant)
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
-                .withAppBarElement(new AppBarButton(VaadinIcons.ELLIPSIS_DOTS_V, clickEvent -> {/*Click Event*/}))
+                .withAppBarElement(getVariantCombo(variant))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)
