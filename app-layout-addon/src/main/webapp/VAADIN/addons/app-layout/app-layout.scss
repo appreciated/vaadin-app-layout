@@ -3,8 +3,8 @@ $app-bar-font-color: valo-font-color($app-bar-background-color) !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $drawer-background-color: rgb(255, 255, 255) !default;
-$app-menu-button-active-background-color: valo-font-color($drawer-background-color, 0.1);
-$app-menu-button-active-font-color: $v-focus-color;
+$app-menu-button-active-background-color: rgba(valo-font-color($drawer-background-color), 0.1); // currently only used by material
+$app-menu-button-active-font-color: $v-focus-color; // currently only used by material
 $app-menu-button-badge-background-color: $v-focus-color;
 $app-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0);
 $app-menu-button-badge-border-radius: 5px;

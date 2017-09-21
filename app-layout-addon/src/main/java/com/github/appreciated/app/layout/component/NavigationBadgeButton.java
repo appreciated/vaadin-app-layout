@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
@@ -32,6 +33,11 @@ public class NavigationBadgeButton extends AbsoluteLayout {
 
         addComponent(button);
         addComponent(badge, "right: 0px;");
+    }
+
+    public NavigationBadgeButton(String name, Resource icon, BadgeStatus status, Button.ClickListener listener) {
+        this(name, icon, status);
+        button.addClickListener(listener);
     }
 
     public NavigationButton getButton() {

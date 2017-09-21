@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.component;
 import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -28,6 +29,11 @@ public class AppBarBadgeButton extends AbsoluteLayout {
         badge.addStyleName(APP_BAR_BADGE);
         addComponent(button);
         addComponent(badge, "right: 0px;");
+    }
+
+    public AppBarBadgeButton(Resource icon, BadgeStatus status, Button.ClickListener listener) {
+        this(icon, status);
+        button.addClickListener(listener);
     }
 
     public AppBarButton getButton() {

@@ -19,4 +19,9 @@ public class NavigationButton extends Button {
         setHeight(48, Unit.PIXELS);
         setWidth(100, Sizeable.Unit.PERCENTAGE);
     }
+
+    public NavigationButton(String name, Resource icon, Button.ClickListener listener) {
+        this(name, icon);
+        addClickListener(listener);
+    }
 }

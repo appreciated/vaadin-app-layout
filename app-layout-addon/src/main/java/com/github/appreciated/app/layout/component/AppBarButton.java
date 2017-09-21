@@ -12,4 +12,9 @@ public class AppBarButton extends Button {
         setHeight("64px");
         addStyleNames(ROUND_RESOURCE_BUTTON);
     }
+
+    public AppBarButton(Resource icon, ClickListener listener) {
+        this(icon);
+        addClickListener(listener);
+    }
 }

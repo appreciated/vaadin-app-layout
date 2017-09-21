@@ -16,4 +16,14 @@ public class RoundResourceButton extends Button {
         setHeight(height);
         addStyleNames(ROUND_RESOURCE_BUTTON);
     }
+
+    public RoundResourceButton(Resource icon, ClickListener listener) {
+        this(icon);
+        addClickListener(listener);
+    }
+
+    public RoundResourceButton(Resource icon, String width, String height, ClickListener listener) {
+        this(icon, width, height);
+        addClickListener(listener);
+    }
 }

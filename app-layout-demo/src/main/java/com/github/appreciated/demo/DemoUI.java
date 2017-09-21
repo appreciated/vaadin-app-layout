@@ -5,7 +5,7 @@ import com.github.appreciated.app.layout.builder.DrawerVariant;
 import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
-import com.github.appreciated.app.layout.component.AppBarBadgeButton;
+import com.github.appreciated.app.layout.component.AppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.demo.views.View1;
@@ -73,10 +73,9 @@ public class DemoUI extends UI {
 
         AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
-                .withTitle("Demo")
-                .withAppBarElement(new AppBarBadgeButton(VaadinIcons.ALARM, badgeStatus))
-                .withAppBarElement(getVariantCombo(variant))
-                .withAppBarIconComponent(getResourceButton("50px", "50px"))
+                .withTitle("My Appbar Title")
+                .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
+                .withAppBarElement(new AppBarButton(VaadinIcons.ELLIPSIS_V, clickEvent -> {/*Click Event*/}))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)
@@ -114,7 +113,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.1");
+        Label description = new Label("Version 0.8.2");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
