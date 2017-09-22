@@ -53,9 +53,7 @@ public class NotificationWindow extends Window {
 
 
     public void toggleWindow(Button.ClickEvent clickEvent) {
-        if (!isAttached())
-
-        {
+        if (!isAttached()) {
             if (UI.getCurrent().getPage().getBrowserWindowWidth() < clickEvent.getClientX() + 150) {
                 setPositionX(UI.getCurrent().getPage().getBrowserWindowWidth() - 300);
             } else {
@@ -64,9 +62,12 @@ public class NotificationWindow extends Window {
             setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
             UI.getCurrent().addWindow(this);
             focus();
-        } else
-
-        {
+            addBlurListener(blurEvent -> {
+                if (this != null) {
+                    UI.getCurrent().removeWindow(this);
+                }
+            });
+        } else {
             getUI().removeWindow(this);
         }
     }
