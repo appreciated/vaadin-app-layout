@@ -20,6 +20,8 @@ $z-index: 10 !default;
 @import "designs/material.scss";
 @import "designs/custom.scss";
 
+@import "components/notification.scss";
+
 @import "variants/left-navigation-drawer.scss";
 @import "variants/left-navigation-drawer-overlay.scss";
 @import "variants/left-navigation-drawer-responsive.scss";
@@ -65,6 +67,7 @@ $z-index: 10 !default;
   @include default;
   @include material;
   @include custom;
+  @include notification;
   @include left-navigation-drawer;
   @include left-navigation-drawer-overlay;
   @include left-navigation-drawer-responsive;

@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-demo</artifactId>
     <packaging>war</packaging>
-    <version>0.8.4</version>
+    <version>0.8.5</version>
     <name>App Layout Add-on Demo</name>
 
     <prerequisites>
@@ -108,7 +108,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
@@ -127,7 +126,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- The Jetty plugin allows us to easily test the development build by -->
             <!-- running jetty:run on the command line. -->
             <plugin>
@@ -150,7 +148,6 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-
             <repositories>
                 <repository>
                     <id>vaadin-prereleases</id>

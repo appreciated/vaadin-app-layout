@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
+import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -10,7 +10,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private View view;
     private Resource icon;
     private Class<? extends View> className;
-    private BadgeStatus badgeStatus;
+    private NotificationHolder notificationHolder;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
         this(name, icon, null, className);
@@ -20,16 +20,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this(name, icon, null, view);
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, BadgeStatus badgeStatus, Class<? extends View> className) {
+    public NavigatorNavigationElement(String name, Resource icon, NotificationHolder notificationHolder, Class<? extends View> className) {
         this.name = name;
         this.icon = icon;
-        this.badgeStatus = badgeStatus;
+        this.notificationHolder = notificationHolder;
         this.className = className;
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, BadgeStatus badgeStatus, View view) {
+    public NavigatorNavigationElement(String name, Resource icon, NotificationHolder notificationHolder, View view) {
         this.name = name;
-        this.badgeStatus = badgeStatus;
+        this.notificationHolder = notificationHolder;
         this.icon = icon;
         this.view = view;
     }
@@ -76,7 +76,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return this;
     }
 
-    public BadgeStatus getBadgeStatus() {
-        return badgeStatus;
+    public NotificationHolder getNotificationHolder() {
+        return notificationHolder;
     }
 }

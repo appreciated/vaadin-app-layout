@@ -4,7 +4,9 @@ package com.github.appreciated.demo;
 import com.github.appreciated.app.layout.builder.DrawerVariant;
 import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
+import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
+import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.*;
@@ -13,14 +15,11 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.communication.PushMode;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BAR_ELEMENT;
 import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
@@ -29,11 +28,12 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Add-on Demo")
-@Push(PushMode.AUTOMATIC)
+@Push
 public class DemoUI extends UI {
 
     private VerticalLayout holder;
-    BadgeStatus badgeStatus = new BadgeStatus("0");
+    final int[] i = {0};
+    DefaultNotificationHolder nholder = new DefaultNotificationHolder();
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
@@ -47,9 +47,33 @@ public class DemoUI extends UI {
         setDrawerVariant(DrawerVariant.LEFT);
         setContent(holder);
         holder.setSizeFull();
+        nholder.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
 
-        final int[] i = {0};
-        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> badgeStatus.setStatus("" + i[0]++), 0, 5, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+        addNewNotification();
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            getUI().access(() -> {
+                getUI().getNavigator().navigateTo(View1.class);
+                getUI().push();
+            });
+        }).start();
+    }
+
+    private void addNewNotification() {
+        new Thread(() -> {
+            getUI().access(() -> {
+                nholder.addNotification(new DefaultNotification("Title" + i[0], "Description" + i[0]++));
+            });
+        }).start();
     }
 
     private void setDrawerVariant(DrawerVariant variant) {
@@ -59,11 +83,12 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
-                .withAppBarElement(getVariantCombo(variant))
+                //.withAppBarElement(getVariantCombo(variant))
+                .withAppBarElement(new NotificationAppBarButton(nholder))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)
-                .withNavigationElement("Home", VaadinIcons.HOME, badgeStatus, View1.class)
+                .withNavigationElement("Home", VaadinIcons.HOME, nholder, View1.class)
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
                 .withNavigationElement("More", VaadinIcons.PLUS, View2.class)
@@ -88,7 +113,6 @@ public class DemoUI extends UI {
     public static class View3 extends HorizontalLayout implements View {
     }
 
-
     ComboBox getVariantCombo(DrawerVariant variant) {
         ComboBox<DrawerVariant> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
@@ -108,7 +132,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.2");
+        Label description = new Label("Version 0.8.5");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);

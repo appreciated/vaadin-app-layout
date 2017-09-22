@@ -15,4 +15,6 @@ public class Styles {
     public static final String APP_BAR_DESIGN_DEFAULT = "default-app-bar-design";
     public static final String APP_BAR_DESIGN_MATERIAL = "material-app-bar-design";
     public static final String APP_BAR_DESIGN_CUSTOM = "custom-app-bar-design";
+    public static final String APP_BAR_NOTIFICATION_LIST = "app-bar-notification-list";
+    public static final String APP_BAR_NOTIFICATION_WINDOW = "app-bar-notification-window";
 }

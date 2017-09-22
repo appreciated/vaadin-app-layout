@@ -8,7 +8,7 @@ public class DefaultNavigationBadgeElementComponentProvider extends AbstractNavi
 
     @Override
     public Component getComponent(NavigatorNavigationElement element) {
-        NavigationBadgeButton button = new NavigationBadgeButton(element.getName(), element.getIcon(), element.getBadgeStatus());
+        NavigationBadgeButton button = new NavigationBadgeButton(element.getName(), element.getIcon(), element.getNotificationHolder());
         element.setComponent(button);
         setNavigationClickListener(element);
         return button;

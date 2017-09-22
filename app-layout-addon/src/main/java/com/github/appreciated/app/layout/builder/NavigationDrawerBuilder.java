@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.entities.BadgeStatus;
+import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
@@ -143,7 +143,7 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeStatus provider, Class<? extends View> element) {
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, NotificationHolder provider, Class<? extends View> element) {
         return withNavigationElement(caption, icon, provider, element, Position.DEFAULT);
     }
 
@@ -173,7 +173,7 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, null, element, position);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, BadgeStatus provider, Class<? extends View> element, Position position) {
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, NotificationHolder provider, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
         addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, provider, element), position);
         return this;
@@ -206,6 +206,16 @@ public class NavigationDrawerBuilder {
         instance.setTitle(title);
         if (requiresNavigatior) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
+            navigator.addViewChangeListener(viewChangeEvent -> {
+                NavigationElementHelper.removeStyleFromCurrentlyActiveNavigationElement();
+                navigationElements.stream()
+                        .filter(element -> element instanceof NavigatorNavigationElement)
+                        .map(element -> ((NavigatorNavigationElement) element))
+                        .filter(element -> element.getName().equals(viewChangeEvent.getViewName()))
+                        .findFirst().ifPresent(element -> NavigationElementHelper.setActiveNavigationElement(element));
+                return false;
+            });
+
             if (navigatorConsumer != null) {
                 navigatorConsumer.accept(navigator);
             }
@@ -221,7 +231,9 @@ public class NavigationDrawerBuilder {
         addComponents(navigationFooterElements, instance::addNavigationFooterElement);
         appBarElements.forEach(instance::addAppBarElement);
         instance.setDesign(design);
-        instance.addAppBarIcon(appBarIconComponent);
+        if (appBarIconComponent != null) {
+            instance.addAppBarIcon(appBarIconComponent);
+        }
         return instance;
     }
 

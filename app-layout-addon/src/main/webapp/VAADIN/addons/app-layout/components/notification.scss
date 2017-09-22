@@ -1,0 +1,30 @@
+@mixin notification {
+  .app-bar-notification-window {
+    .app-bar-notification-list {
+      > div {
+        border-top: 1px solid valo-font-color($v-background-color, 0.2);
+      }
+      > :last-child {
+        border-bottom: 1px solid valo-font-color($v-background-color, 0.2);
+      }
+    }
+    .v-margin-left {
+      padding-left: 10px;
+    }
+    .v-margin-bottom {
+      padding-bottom: 10px;
+    }
+    .v-margin-right {
+      padding-right: 10px;
+    }
+    .v-margin-top {
+      padding-top: 10px;
+    }
+    &.v-window {
+      @include transform-origin(296px - (2 * $v-unit-size - round($v-unit-size / 3)) -7px);
+      &.v-window-animate-in {
+        @include animation(animate-in-scale-up 260ms cubic-bezier(.68, .37, .51, 1.37));
+      }
+    }
+  }
+}
