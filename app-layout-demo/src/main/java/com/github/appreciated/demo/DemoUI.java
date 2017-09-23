@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.component.AppBarButton;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
@@ -62,7 +63,7 @@ public class DemoUI extends UI {
                 e.printStackTrace();
             }
             getUI().access(() -> {
-                getUI().getNavigator().navigateTo(View1.class);
+                getUI().getNavigator().navigateTo("Charts");
                 getUI().push();
             });
         }).start();
@@ -85,6 +86,9 @@ public class DemoUI extends UI {
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
                 //.withAppBarElement(getVariantCombo(variant))
                 .withAppBarElement(new NotificationAppBarButton(nholder))
+                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)

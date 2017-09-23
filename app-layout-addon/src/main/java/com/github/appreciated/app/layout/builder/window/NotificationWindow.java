@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.builder.window;
 
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -11,6 +10,8 @@ import com.vaadin.ui.themes.ValoTheme;
 public class NotificationWindow extends Window {
 
     private VerticalLayout notificationsView;
+    boolean hasBlurListener = false;
+    private boolean preventBlur;
 
     public NotificationWindow(NotificationHolder holder) {
         super();
@@ -18,7 +19,6 @@ public class NotificationWindow extends Window {
         setClosable(false);
         setResizable(false);
         setDraggable(false);
-        setCloseShortcut(ShortcutAction.KeyCode.ESCAPE, null);
         setContent(getNotificationLayout(holder));
     }
 
@@ -52,7 +52,7 @@ public class NotificationWindow extends Window {
     }
 
 
-    public void toggleWindow(Button.ClickEvent clickEvent) {
+    public void show(Button.ClickEvent clickEvent) {
         if (!isAttached()) {
             if (UI.getCurrent().getPage().getBrowserWindowWidth() < clickEvent.getClientX() + 150) {
                 setPositionX(UI.getCurrent().getPage().getBrowserWindowWidth() - 300);
@@ -62,19 +62,23 @@ public class NotificationWindow extends Window {
             setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
             UI.getCurrent().addWindow(this);
             focus();
-            addBlurListener(blurEvent -> {
-                if (this != null) {
-                    UI.getCurrent().removeWindow(this);
-                }
-            });
+            if (!hasBlurListener) {
+                hasBlurListener = true;
+                addBlurListener(blurEvent -> {
+                    if (this != null) {
+                        UI.getCurrent().removeWindow(this);
+                    }
+                });
+            }
         } else {
-            getUI().removeWindow(this);
+            preventBlur = true;
+            UI.getCurrent().removeWindow(this);
         }
     }
 
     public void addNewNotification(Component component) {
         if (component != null) {
-            while (notificationsView.getComponentCount() > 4) {
+            while (notificationsView.getComponentCount() >= 5) {
                 notificationsView.removeComponent(notificationsView.getComponent(notificationsView.getComponentCount() - 1));
             }
             notificationsView.addComponentAsFirst(component);

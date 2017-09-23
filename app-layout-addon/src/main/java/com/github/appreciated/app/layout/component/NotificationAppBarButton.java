@@ -10,12 +10,11 @@ import static com.vaadin.icons.VaadinIcons.BELL;
 
 public class NotificationAppBarButton extends AppBarBadgeButton {
 
-    private final NotificationWindow window;
     private UI ui;
+    private NotificationWindow window;
 
     public NotificationAppBarButton(NotificationHolder holder) {
         super(BELL, holder);
-        window = new NotificationWindow(holder);
         getButton().addClickListener((Button.ClickListener) this::buttonClick);
     }
 
@@ -26,15 +25,32 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     }
 
     private void buttonClick(Button.ClickEvent clickEvent) {
-        ui.access(() -> {
-            window.toggleWindow(clickEvent);
-        });
+        if (window == null) {
+            ui.access(() -> {
+                window = new NotificationWindow(getNotificationHolder());
+                window.show(clickEvent);
+                window.addCloseListener(closeEvent -> {
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        window = null;
+                    }).start();
+                });
+            });
+        } else {
+            window = null;
+        }
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder, Component component) {
         getUI().access(() -> {
             super.refreshNotifications(notificationHolder, component);
-            window.addNewNotification(component);
+            if (window != null) {
+                window.addNewNotification(component);
+            }
         });
     }
 }
