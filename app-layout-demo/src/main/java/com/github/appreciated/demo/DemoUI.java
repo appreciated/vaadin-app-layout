@@ -32,14 +32,9 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 @Push
 public class DemoUI extends UI {
 
-    private VerticalLayout holder;
     final int[] i = {0};
     DefaultNotificationHolder nholder = new DefaultNotificationHolder();
-
-    @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
-    public static class Servlet extends VaadinServlet {
-    }
+    private VerticalLayout holder;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -108,15 +103,6 @@ public class DemoUI extends UI {
         drawer.getContentHolder().setComponentAlignment(content, Alignment.TOP_CENTER);
     }
 
-    public static class View1 extends HorizontalLayout implements View {
-    }
-
-    public static class View2 extends HorizontalLayout implements View {
-    }
-
-    public static class View3 extends HorizontalLayout implements View {
-    }
-
     ComboBox getVariantCombo(DrawerVariant variant) {
         ComboBox<DrawerVariant> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
@@ -136,7 +122,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.5");
+        Label description = new Label("Version 0.8.6");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
@@ -156,6 +142,20 @@ public class DemoUI extends UI {
             height = "75px";
         }
         return new RoundResourceButton(new ThemeResource("logo.png"), width, height);
+    }
+
+    @WebServlet(value = "/*", asyncSupported = true)
+    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
+    public static class Servlet extends VaadinServlet {
+    }
+
+    public static class View1 extends HorizontalLayout implements View {
+    }
+
+    public static class View2 extends HorizontalLayout implements View {
+    }
+
+    public static class View3 extends HorizontalLayout implements View {
     }
 
 }
