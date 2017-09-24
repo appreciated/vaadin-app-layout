@@ -18,15 +18,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <vaadin.version>8.1.4</vaadin.version>
         <vaadin.plugin.version>8.1.4</vaadin.plugin.version>
-        <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <!-- ZIP Manifest fields -->
-        <Implementation-Version>${project.parent.version}</Implementation-Version>
+        <Implementation-Version>${project.version}</Implementation-Version>
         <!-- Must not change this because of the Directory -->
         <Implementation-Title>${project.name}</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
-        <Vaadin-Addon>${project.artifactId}-${project.parent.version}.jar</Vaadin-Addon>
+        <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
     </properties>
 
     <organization>
