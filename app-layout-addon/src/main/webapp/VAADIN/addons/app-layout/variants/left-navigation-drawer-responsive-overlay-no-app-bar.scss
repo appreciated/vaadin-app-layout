@@ -14,7 +14,7 @@
       right: 0px;
       bottom: 0px;
     }
-    app-drawer[persistent] + app-toolbar {
+    app-drawer[persistent] + app-toolbar, app-drawer[persistent] + #contentContainer app-toolbar {
       display: none;
     }
     app-toolbar {

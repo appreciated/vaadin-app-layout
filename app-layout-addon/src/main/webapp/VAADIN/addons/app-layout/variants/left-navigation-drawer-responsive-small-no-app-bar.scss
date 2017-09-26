@@ -2,11 +2,9 @@
   .left-navigation-drawer-responsive-small-no-app-bar {
     --app-drawer-width: $small-drawer-width;
     --app-bar-height: $app-bar-height;
-
     .app-bar-application-content {
       height: 100vh;
     }
-
     .app-bar-content {
       left: $app-bar-height;
       position: absolute;
@@ -14,10 +12,13 @@
       right: 0px;
       bottom: 0px;
     }
-    app-drawer[persistent] + app-toolbar {
+    app-drawer[persistent] + app-toolbar, app-drawer[persistent] + #contentContainer app-toolbar {
       display: none;
     }
-
+    .app-layout-menu-bar-element {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
     app-drawer[persistent] .app-layout-menu-button {
       height: $app-bar-height;
       font-size: 20px;
@@ -29,7 +30,6 @@
         display: none;
       }
     }
-
     app-drawer[persistent] .app-layout-menu-button-badge {
       background: $app-menu-button-badge-background-color;
       color: transparent;
@@ -39,7 +39,6 @@
       border-radius: 100%;
       padding: 0;
     }
-
     app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;

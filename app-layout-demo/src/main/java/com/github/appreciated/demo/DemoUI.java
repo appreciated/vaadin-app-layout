@@ -6,8 +6,6 @@ import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.component.AppBarButton;
-import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.annotations.*;
@@ -79,11 +77,11 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
-                //.withAppBarElement(getVariantCombo(variant))
-                .withAppBarElement(new NotificationAppBarButton(nholder))
-                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
-                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
-                .withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                .withAppBarElement(getVariantCombo(variant))
+                //.withAppBarElement(new NotificationAppBarButton(nholder))
+                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .withNavigationElement(getMenuHeader(), HEADER)
@@ -118,7 +116,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.7");
+        Label description = new Label("Version 0.8.8");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
