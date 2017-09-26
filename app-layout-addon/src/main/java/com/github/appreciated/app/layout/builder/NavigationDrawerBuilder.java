@@ -213,7 +213,7 @@ public class NavigationDrawerBuilder {
                         .map(element -> ((NavigatorNavigationElement) element))
                         .filter(element -> element.getName().equals(viewChangeEvent.getViewName()))
                         .findFirst().ifPresent(element -> NavigationElementHelper.setActiveNavigationElement(element));
-                return false;
+                return true;
             });
 
             if (navigatorConsumer != null) {

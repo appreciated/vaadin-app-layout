@@ -90,17 +90,13 @@ public class DemoUI extends UI {
                 .withNavigationElement("Home", VaadinIcons.HOME, nholder, View1.class)
                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                 .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
-                .withNavigationElement("More", VaadinIcons.PLUS, View2.class)
-                .withNavigationElement("Menu", VaadinIcons.MENU, View3.class)
-                .withNavigationElement("Elements", VaadinIcons.LIST, View2.class)
+                .withNavigationElement("More", VaadinIcons.PLUS, View4.class)
+                .withNavigationElement("Menu", VaadinIcons.MENU, View5.class)
+                .withNavigationElement("Elements", VaadinIcons.LIST, View6.class)
                 .withClickableElement("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
-                .withNavigationElement("Preferences", VaadinIcons.COG, View3.class, FOOTER)
+                .withNavigationElement("Preferences", VaadinIcons.COG, View7.class, FOOTER)
                 .build();
         holder.addComponent(drawer);
-        Label content = new Label("My Content");
-        content.addStyleName(ValoTheme.LABEL_H2);
-        drawer.getContentHolder().addComponent(content);
-        drawer.getContentHolder().setComponentAlignment(content, Alignment.TOP_CENTER);
     }
 
     ComboBox getVariantCombo(DrawerVariant variant) {
@@ -122,7 +118,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.6");
+        Label description = new Label("Version 0.8.7");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
@@ -150,12 +146,45 @@ public class DemoUI extends UI {
     }
 
     public static class View1 extends HorizontalLayout implements View {
+        public View1() {
+            addComponent(new Label(getClass().getName()));
+        }
     }
 
     public static class View2 extends HorizontalLayout implements View {
+        public View2() {
+            addComponent(new Label(getClass().getName()));
+        }
     }
 
     public static class View3 extends HorizontalLayout implements View {
+        public View3() {
+            addComponent(new Label(getClass().getName()));
+        }
+    }
+
+    public static class View4 extends HorizontalLayout implements View {
+        public View4() {
+            addComponent(new Label(getClass().getName()));
+        }
+    }
+
+    public static class View5 extends HorizontalLayout implements View {
+        public View5() {
+            addComponent(new Label(getClass().getName()));
+        }
+    }
+
+    public static class View6 extends HorizontalLayout implements View {
+        public View6() {
+            addComponent(new Label(getClass().getName()));
+        }
+    }
+
+    public static class View7 extends HorizontalLayout implements View {
+        public View7() {
+            addComponent(new Label(getClass().getName()));
+        }
     }
 
 }
