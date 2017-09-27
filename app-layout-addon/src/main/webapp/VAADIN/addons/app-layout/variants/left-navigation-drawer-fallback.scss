@@ -1,0 +1,49 @@
+@mixin left-navigation-drawer-fallback {
+  .left-navigation-drawer-fallback {
+    .app-bar-content {
+      left: $app-bar-height;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
+    .app-toolbar {
+      background-color: $app-bar-background-color;
+      color: $app-bar-font-color;
+      position: relative;
+      z-index: $z-index + 1;
+      box-shadow: $app-bar-shadow;
+      .v-button {
+        color: $app-bar-font-color !important;
+      }
+      padding-left: 10px;
+    }
+    .drawer-content {
+      overflow: visible;
+      box-shadow: $drawer-shadow;
+      background: $drawer-background-color;
+      color: $drawer-font-color !important;
+    }
+
+    .drawer-content.small .app-layout-menu-button {
+      height: $app-bar-height;
+      font-size: 20px;
+      .v-icon {
+        width: 100%;
+        text-align: center;
+      }
+      .v-button-caption {
+        display: none;
+      }
+    }
+    .drawer-content.small app-layout-menu-button-badge {
+      background: $app-menu-button-badge-background-color;
+      color: transparent;
+      height: 5px;
+      width: 5px;
+      margin: 11px;
+      border-radius: 100%;
+      padding: 0;
+    }
+  }
+}

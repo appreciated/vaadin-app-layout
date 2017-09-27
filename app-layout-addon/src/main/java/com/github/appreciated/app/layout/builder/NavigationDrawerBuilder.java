@@ -7,6 +7,8 @@ import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigati
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
+import com.github.appreciated.app.layout.drawer.AppLayout;
+import com.github.appreciated.app.layout.drawer.LeftNavigationFallBackDrawer;
 import com.github.appreciated.app.layout.session.NavigationElementHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -35,7 +37,7 @@ public class NavigationDrawerBuilder {
     private AppBarDesign design = AppBarDesign.DEFAULT;
     private Navigator navigator;
     private String title;
-    private AbstractNavigationDrawer instance = null;
+    private AppLayout instance = null;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationBadgeElementComponentProvider();
     private DefaultCustomNavigationElementProvider customNavigationElementProvider = new DefaultCustomNavigationElementProvider();
@@ -199,9 +201,13 @@ public class NavigationDrawerBuilder {
         }
     }
 
-    public AbstractNavigationDrawer build() {
+    public AppLayout build() {
         if (instance == null) {
-            instance = variant.getInstance();
+            if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
+                instance = variant.getInstance();
+            } else {
+                instance = new LeftNavigationFallBackDrawer(variant);
+            }
         }
         instance.setTitle(title);
         if (requiresNavigatior) {

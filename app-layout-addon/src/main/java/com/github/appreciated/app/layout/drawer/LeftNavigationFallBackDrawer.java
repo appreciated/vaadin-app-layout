@@ -1,16 +1,12 @@
 package com.github.appreciated.app.layout.drawer;
 
+import com.github.appreciated.app.layout.builder.DrawerVariant;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-import java.io.IOException;
-
-
-public abstract class AbstractNavigationDrawer extends CustomLayout implements AppLayout {
-
+public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppLayout {
     private final VerticalLayout contentHolder = new VerticalLayout();
     private final Panel contentPanel = new Panel(contentHolder);
 
@@ -27,29 +23,19 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public static void toggleDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
-    }
-
-    public static void openDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
-    }
-
-    public static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
-    }
-
-    public static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
-    }
-
-    public AbstractNavigationDrawer(String filename) throws IOException {
-        super(AbstractNavigationDrawer.class.getResourceAsStream(filename));
+    public LeftNavigationFallBackDrawer(DrawerVariant variant) {
+        this.setSpacing(false);
+        this.setMargin(false);
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
-        menuHolder.setSizeFull();
+        menuHolder.setHeight(100, Unit.PERCENTAGE);
+        if (!variant.isSmall()) {
+            menuHolder.setWidth(256, Unit.PIXELS);
+        } else {
+            menuHolder.setWidth(64, Unit.PIXELS);
+        }
         menuHolder.setMargin(false);
         menuHolder.setSpacing(false);
         menuHolder.setExpandRatio(menuElementPanel, 1);
@@ -63,13 +49,45 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
         menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
         addStyleName(getStyleName());
-        addComponent(contentPanel, "content");
-        addComponent(menuHolder, "menu-elements");
-        addComponent(appBar, "app-bar-elements");
+        if (variant.isOverlay()) {
+            VerticalLayout vwrapper;
+            if (variant.hasAppBar()) {
+                vwrapper = new VerticalLayout(appBar, contentHolder);
+            } else {
+                vwrapper = new VerticalLayout(contentHolder);
+            }
+            vwrapper.setMargin(false);
+            vwrapper.setSpacing(false);
+            vwrapper.setExpandRatio(contentHolder, 1.0f);
+            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
+            wrapper.setExpandRatio(vwrapper, 1.0f);
+            menuHolder.addStyleName("drawer-content");
+            if (variant.isSmall()) {
+                menuHolder.addStyleName("small");
+            }
+            wrapper.setSizeFull();
+            wrapper.setSpacing(false);
+            addComponent(wrapper);
+        } else {
+            if (variant.hasAppBar()) {
+                addComponent(appBar);
+            }
+            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, contentPanel);
+            menuHolder.addStyleName("drawer-content");
+            if (variant.isSmall()) {
+                menuHolder.addStyleName("small");
+            }
+            wrapper.setSizeFull();
+            wrapper.setSpacing(false);
+            addComponent(wrapper);
+            wrapper.setExpandRatio(contentPanel, 1.0f);
+            setExpandRatio(wrapper, 1.0f);
+        }
         appBar.addComponents(titleWrapper, appBarElementWrapper);
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
-        appBar.setHeight(100, Unit.PERCENTAGE);
+        appBar.setHeight(64, Unit.PIXELS);
+        appBar.addStyleName("app-toolbar");
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
         appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
@@ -79,7 +97,9 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-    public abstract String getStyleName();
+    public String getStyleName() {
+        return "left-navigation-drawer-fallback";
+    }
 
     public void addNavigationHeaderElement(Component component) {
         menuHeaderHolder.setVisible(true);

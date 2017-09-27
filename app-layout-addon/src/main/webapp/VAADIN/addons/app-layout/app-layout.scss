@@ -24,6 +24,7 @@ $z-index: 10 !default;
 
 @import "variants/left-navigation-drawer.scss";
 @import "variants/left-navigation-drawer-overlay.scss";
+@import "variants/left-navigation-drawer-fallback.scss";
 @import "variants/left-navigation-drawer-responsive.scss";
 @import "variants/left-navigation-drawer-responsive-overlay.scss";
 @import "variants/left-navigation-drawer-responsive-overlay-no-app-bar.scss";
@@ -71,6 +72,7 @@ $z-index: 10 !default;
   @include left-navigation-drawer;
   @include left-navigation-drawer-overlay;
   @include left-navigation-drawer-responsive;
+  @include left-navigation-drawer-fallback;
   @include left-navigation-drawer-responsive-overlay;
   @include left-navigation-drawer-responsive-overlay-no-app-bar;
   @include left-navigation-drawer-responsive-small;

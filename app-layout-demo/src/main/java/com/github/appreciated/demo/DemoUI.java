@@ -7,7 +7,8 @@ import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
-import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
+import com.github.appreciated.app.layout.drawer.AppLayout;
+import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -27,6 +28,7 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Add-on Demo")
+@JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 @Push
 public class DemoUI extends UI {
 
@@ -42,7 +44,6 @@ public class DemoUI extends UI {
         setContent(holder);
         holder.setSizeFull();
         nholder.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
-
     }
 
     @Override
@@ -73,7 +74,7 @@ public class DemoUI extends UI {
     private void setDrawerVariant(DrawerVariant variant) {
         holder.removeAllComponents();
 
-        AbstractNavigationDrawer drawer = NavigationDrawerBuilder.get()
+        AppLayout drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
@@ -116,7 +117,7 @@ public class DemoUI extends UI {
     Component getMenuHeader() {
         Label name = new Label("Vaadin App Layout");
         name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.8");
+        Label description = new Label("Version 0.8.9");
         description.addStyleName(ValoTheme.LABEL_SMALL);
         VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
         layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
