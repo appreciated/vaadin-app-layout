@@ -22,6 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -46,6 +47,7 @@ public class NavigationDrawerBuilder {
     private ComponentProvider<SubmenuNavigationElement> submenuNavigationElementProvider = new DefaultSubmenuNavigationElementProvider();
     private List<AbstractNavigationElement> navigationFooterElements = new ArrayList<>();
     private List<AbstractNavigationElement> navigationHeaderElements = new ArrayList<>();
+    private List<NavigatorNavigationElement> navigatorNavigationElements = new ArrayList<>();
     private Component appBarIconComponent;
 
     private NavigationDrawerBuilder() {
@@ -233,11 +235,7 @@ public class NavigationDrawerBuilder {
             navigator = navigatorProducer.apply(instance.getContentHolder());
             navigator.addViewChangeListener(viewChangeEvent -> {
                 NavigationElementHelper.removeStyleFromCurrentlyActiveNavigationElement();
-                navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element))
-                        .filter(element -> element.getName().equals(viewChangeEvent.getViewName()))
-                        .findFirst().ifPresent(element -> NavigationElementHelper.setActiveNavigationElement(element));
+                findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> NavigationElementHelper.setActiveNavigationElement(element));
                 return true;
             });
 
@@ -262,6 +260,13 @@ public class NavigationDrawerBuilder {
         return instance;
     }
 
+    Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
+        return navigatorNavigationElements.stream()
+                .filter(element -> element instanceof NavigatorNavigationElement)
+                .filter(element -> element.getName().equals(viewName))
+                .findFirst();
+    }
+
     public void addComponents(List<AbstractNavigationElement> elements, ComponentConsumer consumer) {
         elements.forEach(element -> {
             setProvider(element);
@@ -276,6 +281,7 @@ public class NavigationDrawerBuilder {
             if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
                 NavigationElementHelper.updateActiveElementSessionData(nelement);
             }
+            navigatorNavigationElements.add(nelement);
             nelement.addViewToNavigator(navigator);
         } else if (element instanceof CustomNavigatorNavigationElement) {
             CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
