@@ -58,7 +58,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
         menuElementPanel.setSizeFull();
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(new MarginInfo(true, false, false, false));
+        menuHeaderHolder.setMargin(new MarginInfo(false));
         menuElementHolder.setMargin(new MarginInfo(true, false));
         menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
