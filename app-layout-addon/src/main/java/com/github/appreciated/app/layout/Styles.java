@@ -17,4 +17,8 @@ public class Styles {
     public static final String APP_BAR_DESIGN_CUSTOM = "app-bar-custom-design";
     public static final String APP_BAR_NOTIFICATION_LIST = "app-bar-notification-list";
     public static final String APP_BAR_NOTIFICATION_WINDOW = "app-bar-notification-window";
+    public static final String EXPANDING_MENU_CONTAINER_PRIMARY_STYLE = "expanding-menu-container";
+    public static final String EXPANDING_MENU_CONTAINER_OPEN = "expanding-menu-container-open";
+    public static final String EXPANDING_MENU_CONTAINER_BUTTON = "expanding-menu-container-button";
+    public static final String EXPANDING_MENU_SUBMENU_CONTAINER = "submenu-container";
 }

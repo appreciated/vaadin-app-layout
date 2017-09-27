@@ -1,0 +1,32 @@
+@mixin expanding-menu-container {
+  .expanding-menu-container {
+    transition: max-height 0.4s;
+    overflow: hidden;
+    max-height: 48px;
+  }
+  .expanding-menu-container-open {
+    max-height: 300px;
+  }
+  .expanding-menu-container-button {
+    position: relative;
+  }
+  .expanding-menu-container-button:after {
+    position: absolute;
+    content: "\E967";
+    font-family: "Vaadin-Icons";
+    line-height: 48px;
+    text-align: center;
+    width: 48px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+  }
+  .expanding-menu-container-open .expanding-menu-container-button:after {
+    transform: rotate(90deg);
+  }
+  .submenu-container {
+    background: $drawer-submenu-background-color;
+  }
+}

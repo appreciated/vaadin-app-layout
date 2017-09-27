@@ -3,7 +3,7 @@
     --app-drawer-width: $drawer-width;
     --app-bar-height: $app-bar-height;
 
-    app-drawer[persistent] + app-toolbar paper-icon-button, app-drawer + #contentContainer app-toolbar paper-icon-button {
+    app-drawer[persistent] + app-toolbar paper-icon-button, app-drawer[persistent] + #contentContainer app-toolbar paper-icon-button {
       display: none;
     }
     app-drawer + app-toolbar .app-bar-content, app-drawer + #contentContainer app-toolbar .app-bar-content {

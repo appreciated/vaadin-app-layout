@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
+import com.github.appreciated.app.layout.builder.providers.DefaultSubmenuNavigationElementProvider;
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.app.layout.drawer.AppLayout;
 import com.github.appreciated.app.layout.drawer.LeftNavigationFallBackDrawer;
@@ -42,6 +43,7 @@ public class NavigationDrawerBuilder {
     private ComponentProvider<NavigatorNavigationElement> navigationElementProvider = new DefaultNavigationBadgeElementComponentProvider();
     private DefaultCustomNavigationElementProvider customNavigationElementProvider = new DefaultCustomNavigationElementProvider();
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
+    private ComponentProvider<SubmenuNavigationElement> submenuNavigationElementProvider = new DefaultSubmenuNavigationElementProvider();
     private List<AbstractNavigationElement> navigationFooterElements = new ArrayList<>();
     private List<AbstractNavigationElement> navigationHeaderElements = new ArrayList<>();
     private Component appBarIconComponent;
@@ -171,6 +173,11 @@ public class NavigationDrawerBuilder {
         return this;
     }
 
+    public NavigationDrawerBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement> provider) {
+        this.submenuNavigationElementProvider = provider;
+        return this;
+    }
+
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element, Position position) {
         return withNavigationElement(caption, icon, null, element, position);
     }
@@ -184,6 +191,18 @@ public class NavigationDrawerBuilder {
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, View element, Position position) {
         requiresNavigatior = true;
         addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, element), position);
+        return this;
+    }
+
+    public NavigationDrawerBuilder withSubmenuElement(SubmenuNavigationElement element) {
+        requiresNavigatior = true;
+        addNavigationElementToPosition(element, Position.DEFAULT);
+        return this;
+    }
+
+    public NavigationDrawerBuilder withSubmenuElement(SubmenuNavigationElement element, Position position) {
+        requiresNavigatior = true;
+        addNavigationElementToPosition(element, position);
         return this;
     }
 
@@ -245,22 +264,30 @@ public class NavigationDrawerBuilder {
 
     public void addComponents(List<AbstractNavigationElement> elements, ComponentConsumer consumer) {
         elements.forEach(element -> {
-            if (element instanceof NavigatorNavigationElement) {
-                NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
-                nelement.setProvider(navigationElementProvider);
-                if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
-                    NavigationElementHelper.updateActiveElementSessionData(nelement);
-                }
-                nelement.addViewToNavigator(navigator);
-            } else if (element instanceof CustomNavigatorNavigationElement) {
-                CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
-                cnelement.setProvider(customNavigationElementProvider);
-            } else if (element instanceof SectionNavigationElement) {
-                SectionNavigationElement selement = (SectionNavigationElement) element;
-                selement.setProvider(sectionElementProvider);
-            }
+            setProvider(element);
             consumer.accept(element.getComponent());
         });
+    }
+
+    public void setProvider(AbstractNavigationElement element) {
+        if (element instanceof NavigatorNavigationElement) {
+            NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+            nelement.setProvider(navigationElementProvider);
+            if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
+                NavigationElementHelper.updateActiveElementSessionData(nelement);
+            }
+            nelement.addViewToNavigator(navigator);
+        } else if (element instanceof CustomNavigatorNavigationElement) {
+            CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
+            cnelement.setProvider(customNavigationElementProvider);
+        } else if (element instanceof SubmenuNavigationElement) {
+            SubmenuNavigationElement selement = (SubmenuNavigationElement) element;
+            selement.setProvider(submenuNavigationElementProvider);
+            selement.getSubmenuElements().forEach(element1 -> setProvider(element1));
+        } else if (element instanceof SectionNavigationElement) {
+            SectionNavigationElement selement = (SectionNavigationElement) element;
+            selement.setProvider(sectionElementProvider);
+        }
     }
 
     public NavigationDrawerBuilder withAppBarElement(Component element) {
