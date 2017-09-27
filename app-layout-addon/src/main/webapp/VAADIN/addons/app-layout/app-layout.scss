@@ -16,9 +16,9 @@ $disable-active-style: false !default;
 $small-drawer-width: 64px !default;
 $z-index: 10 !default;
 
-@import "designs/default.scss";
-@import "designs/material.scss";
-@import "designs/custom.scss";
+@import "designs/app-bar-default-design.scss";
+@import "designs/app-bar-material-design.scss";
+@import "designs/app-bar-custom-design.scss";
 
 @import "components/notification.scss";
 
@@ -65,9 +65,9 @@ $z-index: 10 !default;
 
   box-shadow: none !important;
 
-  @include default;
-  @include material;
-  @include custom;
+  @include app-bar-default-design;
+  @include app-bar-material-design;
+  @include app-bar-custom-design;
   @include notification;
   @include left-navigation-drawer;
   @include left-navigation-drawer-overlay;

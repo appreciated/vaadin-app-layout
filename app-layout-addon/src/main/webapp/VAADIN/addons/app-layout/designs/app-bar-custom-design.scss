@@ -1,10 +1,9 @@
-@mixin material {
-  .material-app-bar-design {
+@mixin app-bar-custom-design {
+  .app-bar-custom-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
       background: $app-menu-button-badge-background-color;
       color: $app-menu-button-badge-font-color;
-      font-size: 13px;
       height: 20px;
       line-height: 20px;
       margin: 15px;
@@ -13,16 +12,12 @@
     }
     .app-bar-badge {
       background: $app-menu-button-badge-background-color;
-      color: valo-font-color($app-menu-button-badge-background-color);
-      font-size: 11px;
-      min-width: 18px;
-      min-height: 18px;
-      text-align: center;
-      line-height: 18px;
-      margin: 7px;
-      padding-right: 4px;
-      padding-left: 3px;
-      border-radius: 17px;
+      color: transparent;
+      height: 5px;
+      width: 5px;
+      margin: 11px;
+      border-radius: 100%;
+      padding: 0;
     }
     .app-layout-menu-button {
       text-align: left !important;
@@ -33,7 +28,7 @@
       border-radius: 0px;
     }
     @if $disable-active-style == false {
-      .app-layout-menu-element-active .app-layout-menu-button {
+      .app-layout-menu-button-active {
         background: $app-menu-button-active-background-color !important;
         color: $app-menu-button-active-font-color !important;
       }
@@ -47,6 +42,9 @@
       height: 100%;
       border-radius: 100%;
       vertical-align: unset !important;
+    }
+    .app-layout-menu-section {
+      padding-left: 14px;
     }
   }
 }

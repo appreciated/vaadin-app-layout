@@ -1,5 +1,5 @@
-@mixin default {
-  .default-app-bar-design {
+@mixin app-bar-default-design {
+  .app-bar-default-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
       background: $app-menu-button-badge-background-color;
