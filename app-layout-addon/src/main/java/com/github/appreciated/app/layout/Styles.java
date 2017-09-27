@@ -12,9 +12,9 @@ public class Styles {
     public static final String APP_LAYOUT_MENU_BAR_ELEMENT = "app-layout-menu-bar-element";
     public static final String ROUND_RESOURCE_BUTTON = "app-layout-menu-round-button" + " " + BUTTON_BORDERLESS + " " + BUTTON_ICON_ONLY;
     public static final String APP_BAR_BADGE = "app-bar-badge";
-    public static final String APP_BAR_DESIGN_DEFAULT = "default-app-bar-design";
-    public static final String APP_BAR_DESIGN_MATERIAL = "material-app-bar-design";
-    public static final String APP_BAR_DESIGN_CUSTOM = "custom-app-bar-design";
+    public static final String APP_BAR_DESIGN_DEFAULT = "app-bar-default-design";
+    public static final String APP_BAR_DESIGN_MATERIAL = "app-bar-material-design";
+    public static final String APP_BAR_DESIGN_CUSTOM = "app-bar-custom-design";
     public static final String APP_BAR_NOTIFICATION_LIST = "app-bar-notification-list";
     public static final String APP_BAR_NOTIFICATION_WINDOW = "app-bar-notification-window";
 }
