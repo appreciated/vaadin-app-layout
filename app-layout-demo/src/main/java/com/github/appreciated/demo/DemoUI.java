@@ -8,7 +8,6 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
 import com.github.appreciated.app.layout.drawer.AppLayout;
-import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -28,7 +27,6 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Add-on Demo")
-@JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 @Push
 public class DemoUI extends UI {
 
