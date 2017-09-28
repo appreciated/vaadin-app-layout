@@ -72,5 +72,8 @@
     app-drawer[opened] {
       z-index: $z-index;
     }
+    .expanding-menu-container-button:after {
+      display: none;
+    }
   }
 }

@@ -22,6 +22,7 @@
     bottom: 0px;
     transform: rotate(0deg);
     transition: transform 0.3s;
+    pointer-events: none;
   }
   .expanding-menu-container-open .expanding-menu-container-button:after {
     transform: rotate(90deg);
