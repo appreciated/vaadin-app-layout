@@ -24,6 +24,10 @@
       padding-left: 0px;
       padding-right: 0px;
     }
+    app-drawer[swipe-open] .app-layout-menu-bar-element {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
     app-drawer[persistent] .app-layout-menu-button-badge {
       background: $app-menu-button-badge-background-color;
       color: transparent;
