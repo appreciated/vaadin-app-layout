@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
@@ -149,8 +149,8 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, NotificationHolder provider, Class<? extends View> element) {
-        return withNavigationElement(caption, icon, provider, element, Position.DEFAULT);
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+        return withNavigationElement(caption, icon, badgeHolder, element, Position.DEFAULT);
     }
 
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, View element) {
@@ -184,9 +184,9 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, null, element, position);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, NotificationHolder provider, Class<? extends View> element, Position position) {
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, provider, element), position);
+        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
         return this;
     }
 

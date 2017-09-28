@@ -67,7 +67,7 @@ public class MyUI extends UI {
                 .withTitle("My Appbar Title")
                 .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
                 .withAppBarElement(getVariantCombo(variant))
-                .withNavigationElement(getMenuHeader(), HEADER)
+                .withNavigationElement(new MenuHeader(""), HEADER)
                 .withNavigationElement(new NavigationBadgeButton("Home", VaadinIcons.HOME, nholder))
                 .withNavigationElement(new NavigationButton("Charts", VaadinIcons.SPLINE_CHART))
                 .withNavigationElement(new NavigationButton("Contact", VaadinIcons.CONNECT))
@@ -94,19 +94,6 @@ public class MyUI extends UI {
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;
-    }
-
-    Component getMenuHeader() {
-        Label name = new Label("Vaadin App Layout");
-        name.addStyleName(ValoTheme.LABEL_H4);
-        Label description = new Label("Version 0.8.9");
-        description.addStyleName(ValoTheme.LABEL_SMALL);
-        VerticalLayout layout = new VerticalLayout(getResourceButton(), name, description);
-        layout.addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
-        layout.setMargin(false);
-        layout.setSpacing(false);
-        layout.setMargin(new MarginInfo(true, false));
-        return layout;
     }
 
     RoundResourceButton getResourceButton() {

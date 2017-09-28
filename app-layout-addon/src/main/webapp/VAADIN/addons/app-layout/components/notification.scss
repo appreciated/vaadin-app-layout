@@ -27,4 +27,21 @@
       }
     }
   }
+  .v-window.translucent * :not(.app-bar-notification) {
+    background-color: transparent !important;
+    overflow: visible !important;
+  }
+  .v-window.translucent .v-window-outerheader:after {
+    border-top: 1px solid transparent;
+  }
+  .v-window.translucent .app-bar-notification {
+    background: white !important;
+    box-shadow: 0px 4px 5px -1px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+  .v-window.translucent {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 10px;
+  }
 }

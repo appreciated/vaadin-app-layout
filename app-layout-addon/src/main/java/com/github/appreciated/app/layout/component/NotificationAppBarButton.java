@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component;
 
+import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.window.NotificationWindow;
 import com.vaadin.ui.Button;
@@ -13,8 +14,15 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     private UI ui;
     private NotificationWindow window;
 
+    Provider<NotificationWindow, NotificationHolder> provider;
+
     public NotificationAppBarButton(NotificationHolder holder) {
+        this(holder, info -> new NotificationWindow(info));
+    }
+
+    public NotificationAppBarButton(NotificationHolder holder, Provider<NotificationWindow, NotificationHolder> windowProvider) {
         super(BELL, holder);
+        provider = windowProvider;
         getButton().addClickListener((Button.ClickListener) this::buttonClick);
     }
 
@@ -27,7 +35,7 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     private void buttonClick(Button.ClickEvent clickEvent) {
         if (window == null) {
             ui.access(() -> {
-                window = new NotificationWindow(getNotificationHolder());
+                window = provider.getComponent(getNotificationHolder());
                 window.show(clickEvent);
                 window.addCloseListener(closeEvent -> {
                     new Thread(() -> {

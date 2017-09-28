@@ -6,12 +6,14 @@ import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
+import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
+
 
 public class NotificationWindow extends Window {
 
     private VerticalLayout notificationsView;
     boolean hasBlurListener = false;
-    private boolean preventBlur;
+    boolean blurListenerEnabled = true;
 
     public NotificationWindow(NotificationHolder holder) {
         super();
@@ -51,6 +53,9 @@ public class NotificationWindow extends Window {
         return notificationsLayout;
     }
 
+    public VerticalLayout getNotificationsView() {
+        return notificationsView;
+    }
 
     public void show(Button.ClickEvent clickEvent) {
         if (!isAttached()) {
@@ -62,7 +67,7 @@ public class NotificationWindow extends Window {
             setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
             UI.getCurrent().addWindow(this);
             focus();
-            if (!hasBlurListener) {
+            if (!hasBlurListener && blurListenerEnabled) {
                 hasBlurListener = true;
                 addBlurListener(blurEvent -> {
                     if (this != null) {
@@ -71,17 +76,22 @@ public class NotificationWindow extends Window {
                 });
             }
         } else {
-            preventBlur = true;
             UI.getCurrent().removeWindow(this);
         }
     }
 
     public void addNewNotification(Component component) {
+        VerticalLayout view = getNotificationsView();
+        component.addStyleName(APP_BAR_NOTIFICATION);
         if (component != null) {
-            while (notificationsView.getComponentCount() >= 5) {
-                notificationsView.removeComponent(notificationsView.getComponent(notificationsView.getComponentCount() - 1));
+            while (view.getComponentCount() >= 5) {
+                view.removeComponent(view.getComponent(view.getComponentCount() - 1));
             }
-            notificationsView.addComponentAsFirst(component);
+            view.addComponentAsFirst(component);
         }
+    }
+
+    public void setBlurListenerEnabled(boolean blurListener) {
+        this.blurListenerEnabled = blurListener;
     }
 }

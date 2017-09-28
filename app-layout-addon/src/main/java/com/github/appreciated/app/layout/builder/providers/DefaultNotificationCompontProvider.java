@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.builder.providers;
 import com.github.appreciated.app.layout.builder.PairComponentProvider;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.github.appreciated.app.layout.component.RoundResourceButton;
+import com.github.appreciated.app.layout.component.RoundImage;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -21,7 +21,7 @@ public class DefaultNotificationCompontProvider implements PairComponentProvider
 
         HorizontalLayout descriptionWrapper = new HorizontalLayout(description);
         if (info.getImage() != null) {
-            RoundResourceButton image = new RoundResourceButton(info.getImage());
+            RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.addComponent(image);
             descriptionWrapper.setExpandRatio(description, 1.0f);
         }

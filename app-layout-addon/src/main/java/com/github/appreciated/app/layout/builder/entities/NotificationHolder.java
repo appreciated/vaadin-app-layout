@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
+
 public class NotificationHolder<T> {
 
     private ArrayList<NotificationListener> listeners = new ArrayList<>();
@@ -44,7 +46,11 @@ public class NotificationHolder<T> {
 
     public Component[] getCurrentComponents() {
         ArrayList<Component> components = new ArrayList<>();
-        notifications.forEach(t -> components.add(componentProvider.getComponent(this, t)));
+        notifications.forEach(t -> {
+            Component c = componentProvider.getComponent(this, t);
+            c.addStyleName(APP_BAR_NOTIFICATION);
+            components.add(c);
+        });
         return components.toArray(new Component[]{});
     }
 

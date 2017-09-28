@@ -5,9 +5,12 @@ import com.github.appreciated.app.layout.builder.DrawerVariant;
 import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.builder.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.MenuHeader;
+import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.drawer.AppLayout;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
@@ -25,12 +28,12 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
-@Title("App Layout Add-on Demo")
+@Title("App Layout Demo")
 @Push
 public class DemoUI extends UI {
 
-    final int[] i = {0};
-    DefaultNotificationHolder nholder = new DefaultNotificationHolder();
+    DefaultNotificationHolder notifications = new DefaultNotificationHolder();
+    DefaultBadgeHolder badge = new DefaultBadgeHolder();
     private VerticalLayout holder;
 
     @Override
@@ -40,32 +43,30 @@ public class DemoUI extends UI {
         setDrawerVariant(DrawerVariant.LEFT);
         setContent(holder);
         holder.setSizeFull();
-        nholder.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+        notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
     @Override
     public void attach() {
         super.attach();
-        addNewNotification();
+        addNotification();
         new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                addNotification();
             }
-            getUI().access(() -> {
-                getUI().getNavigator().navigateTo("Charts");
-                getUI().push();
-            });
         }).start();
     }
 
-    private void addNewNotification() {
-        new Thread(() -> {
-            getUI().access(() -> {
-                nholder.addNotification(new DefaultNotification("Title" + i[0], "Description" + i[0]++));
-            });
-        }).start();
+    private void addNotification() {
+        DemoUI.this.access(() -> {
+            badge.increase();
+            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount()));
+        });
     }
 
     private void setDrawerVariant(DrawerVariant variant) {
@@ -74,16 +75,16 @@ public class DemoUI extends UI {
 
         AppLayout drawer = NavigationDrawerBuilder.get()
                 .withVariant(variant)
-                .withTitle("App Layout Demo")
+                .withTitle("Demo")
                 .withAppBarElement(getVariantCombo(variant))
-                //.withAppBarElement(new NotificationAppBarButton(nholder))
+                .withAppBarElement(new NotificationAppBarButton(notifications, info -> new MaterialNotificationWindow(info)))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
-                .withNavigationElement(new MenuHeader("App Layout", "Version 0.9.1", new ThemeResource("logo.png")), HEADER)
-                .withNavigationElement("Home", VaadinIcons.HOME, nholder, View1.class)
+                .withNavigationElement(new MenuHeader("App Layout", "Version 0.9.2", new ThemeResource("logo.png")), HEADER)
+                .withNavigationElement("Home", VaadinIcons.HOME, badge, View1.class)
                 .withSubmenuElement(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                                 .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.AbsoluteLayout;
@@ -16,7 +16,7 @@ public class NavigationBadgeButton extends AbsoluteLayout {
     private final NavigationButton button;
     private final Label badge;
 
-    public NavigationBadgeButton(String name, Resource icon, NotificationHolder status) {
+    public NavigationBadgeButton(String name, Resource icon, DefaultBadgeHolder status) {
         addStyleName(APP_LAYOUT_MENU_ELEMENT);
         setHeight(48, Unit.PIXELS);
         setWidth(100, Sizeable.Unit.PERCENTAGE);
@@ -24,7 +24,7 @@ public class NavigationBadgeButton extends AbsoluteLayout {
         button.setSizeFull();
         badge = new Label();
         if (status != null) {
-            status.addStatusListener((newStatus, c) -> setStatus(newStatus));
+            status.addListener((newStatus) -> setStatus(newStatus));
         }
         setStatus(status);
 
@@ -35,7 +35,7 @@ public class NavigationBadgeButton extends AbsoluteLayout {
         addComponent(badge, "right: 0px;");
     }
 
-    public NavigationBadgeButton(String name, Resource icon, NotificationHolder status, Button.ClickListener listener) {
+    public NavigationBadgeButton(String name, Resource icon, DefaultBadgeHolder status, Button.ClickListener listener) {
         this(name, icon, status);
         button.addClickListener(listener);
     }
@@ -44,10 +44,10 @@ public class NavigationBadgeButton extends AbsoluteLayout {
         return button;
     }
 
-    private void setStatus(NotificationHolder status) {
+    private void setStatus(DefaultBadgeHolder status) {
         if (status != null) {
             badge.setVisible(true);
-            badge.setValue(String.valueOf(status.getNotificationSize()));
+            badge.setValue(String.valueOf(status.getCount()));
         } else {
             badge.setVisible(false);
         }

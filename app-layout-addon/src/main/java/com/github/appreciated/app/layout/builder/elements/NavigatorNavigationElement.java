@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -10,7 +10,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private View view;
     private Resource icon;
     private Class<? extends View> className;
-    private NotificationHolder notificationHolder;
+    private DefaultBadgeHolder badgeHolder;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
         this(name, icon, null, className);
@@ -20,16 +20,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this(name, icon, null, view);
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, NotificationHolder notificationHolder, Class<? extends View> className) {
+    public NavigatorNavigationElement(String name, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
         this.name = name;
         this.icon = icon;
-        this.notificationHolder = notificationHolder;
+        this.badgeHolder = badgeHolder;
         this.className = className;
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, NotificationHolder notificationHolder, View view) {
+    public NavigatorNavigationElement(String name, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
         this.name = name;
-        this.notificationHolder = notificationHolder;
+        this.badgeHolder = badgeHolder;
         this.icon = icon;
         this.view = view;
     }
@@ -76,7 +76,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return this;
     }
 
-    public NotificationHolder getNotificationHolder() {
-        return notificationHolder;
+    public DefaultBadgeHolder getBadgeHolder() {
+        return badgeHolder;
     }
 }

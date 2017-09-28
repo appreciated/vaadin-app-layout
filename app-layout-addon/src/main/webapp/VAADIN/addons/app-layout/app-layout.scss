@@ -34,7 +34,6 @@ $z-index: 10 !default;
 @import "variants/left-navigation-drawer-responsive-small-no-app-bar.scss";
 
 @mixin app-layout {
-
   $calc-app-bar-height: $app-bar-height - 20px;
   @if ($calc-app-bar-height > 0px) {
     paper-icon-button {
@@ -48,22 +47,17 @@ $z-index: 10 !default;
       display: none;
     }
   }
-
   .app-bar-application-content {
     width: 100%;
     height: calc(100vh - $app-bar-height);
   }
-
   .app-layout-menu-bar-element {
     padding-left: 16px;
     padding-right: 16px;
   }
-
   .v-absolutelayout-wrapper-app-layout-menu-button-badge {
     pointer-events: none;
   }
-
-  box-shadow: none !important;
 
   @include app-bar-default-design;
   @include app-bar-material-design;
