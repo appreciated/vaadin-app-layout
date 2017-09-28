@@ -82,7 +82,7 @@ public class DemoUI extends UI {
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
-                .withNavigationElement(new MenuHeader("App Layout", "Version 0.9.0", new ThemeResource("logo.png")), HEADER)
+                .withNavigationElement(new MenuHeader("App Layout", "Version 0.9.1", new ThemeResource("logo.png")), HEADER)
                 .withNavigationElement("Home", VaadinIcons.HOME, nholder, View1.class)
                 .withSubmenuElement(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
