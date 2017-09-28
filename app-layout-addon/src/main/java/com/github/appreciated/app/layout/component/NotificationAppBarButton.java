@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.builder.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.builder.window.NotificationWindow;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -17,7 +18,7 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     Provider<NotificationWindow, NotificationHolder> provider;
 
     public NotificationAppBarButton(NotificationHolder holder) {
-        this(holder, info -> new NotificationWindow(info));
+        this(holder, info -> new MaterialNotificationWindow(info));
     }
 
     public NotificationAppBarButton(NotificationHolder holder, Provider<NotificationWindow, NotificationHolder> windowProvider) {

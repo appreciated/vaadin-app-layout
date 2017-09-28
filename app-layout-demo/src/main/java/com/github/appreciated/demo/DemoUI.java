@@ -8,7 +8,6 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.builder.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.drawer.AppLayout;
@@ -77,7 +76,7 @@ public class DemoUI extends UI {
                 .withVariant(variant)
                 .withTitle("Demo")
                 .withAppBarElement(getVariantCombo(variant))
-                .withAppBarElement(new NotificationAppBarButton(notifications, info -> new MaterialNotificationWindow(info)))
+                .withAppBarElement(new NotificationAppBarButton(notifications))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
                 //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
