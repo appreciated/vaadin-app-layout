@@ -38,10 +38,13 @@
     background: white !important;
     box-shadow: 0px 4px 5px -1px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
+    @include animation(animate-in-scale-up 260ms cubic-bezier(.68, .37, .51, 1.37));
   }
   .v-window.translucent {
     background-color: transparent;
     box-shadow: none;
     padding: 10px;
+    max-height: 376px;
+    overflow: auto !important;
   }
 }

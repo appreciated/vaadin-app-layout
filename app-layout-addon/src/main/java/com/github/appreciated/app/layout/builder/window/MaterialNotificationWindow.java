@@ -2,8 +2,12 @@ package com.github.appreciated.app.layout.builder.window;
 
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class MaterialNotificationWindow extends NotificationWindow {
 
@@ -12,10 +16,13 @@ public class MaterialNotificationWindow extends NotificationWindow {
     public MaterialNotificationWindow(NotificationHolder holder) {
         super(holder);
         addStyleName("translucent");
+        //setBlurListenerEnabled(false);
     }
 
     VerticalLayout getNotificationLayout(NotificationHolder notifications) {
-        notificationsView = new VerticalLayout(notifications.getCurrentComponents());
+        List<Component> components = Arrays.asList(notifications.getCurrentComponents());
+        Collections.reverse(components);
+        notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_WINDOW);
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_LIST);
         notificationsView.setMargin(false);

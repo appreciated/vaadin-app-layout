@@ -6,6 +6,10 @@ import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
 
 
@@ -33,7 +37,9 @@ public class NotificationWindow extends Window {
         title.addStyleName(ValoTheme.LABEL_H3);
         title.addStyleName(ValoTheme.LABEL_NO_MARGIN);
         notificationsLayout.addComponent(new VerticalLayout(title));
-        notificationsView = new VerticalLayout(notifications.getCurrentComponents());
+        List<Component> components = Arrays.asList(notifications.getCurrentComponents());
+        Collections.reverse(components);
+        notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_LIST);
         notificationsView.setMargin(false);
         notificationsView.setSpacing(false);
@@ -84,9 +90,6 @@ public class NotificationWindow extends Window {
         VerticalLayout view = getNotificationsView();
         component.addStyleName(APP_BAR_NOTIFICATION);
         if (component != null) {
-            while (view.getComponentCount() >= 5) {
-                view.removeComponent(view.getComponent(view.getComponentCount() - 1));
-            }
             view.addComponentAsFirst(component);
         }
     }
