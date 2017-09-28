@@ -54,11 +54,9 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder, Component component) {
-        getUI().access(() -> {
-            super.refreshNotifications(notificationHolder, component);
-            if (window != null) {
-                window.addNewNotification(component);
-            }
-        });
+        super.refreshNotifications(notificationHolder, component);
+        if (window != null) {
+            window.addNewNotification(component);
+        }
     }
 }
