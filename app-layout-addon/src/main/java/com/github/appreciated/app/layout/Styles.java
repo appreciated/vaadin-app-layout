@@ -7,6 +7,9 @@ public class Styles {
     public static final String APP_LAYOUT_MENU_ELEMENT_ACTIVE = "app-layout-menu-element-active";
     public static final String APP_LAYOUT_MENU_ELEMENT = "app-layout-menu-element";
     public static final String APP_LAYOUT_MENU_BAR_ELEMENT = "app-layout-menu-bar-element";
+    public static final String APP_LAYOUT_MENU_HEADER_ELEMENT = "app-layout-menu-header-element";
+    public static final String APP_LAYOUT_MENU_HEADER_TITLE = "app-layout-menu-header-title";
+    public static final String APP_LAYOUT_MENU_HEADER_SUBTITLE = "app-layout-menu-header-subtitle";
     public static final String APP_LAYOUT_ROUND_IMAGE = "app-layout-round-image";
     public static final String APP_BAR_BADGE = "app-bar-badge";
     public static final String APP_BAR_NOTIFICATION = "app-bar-notification";

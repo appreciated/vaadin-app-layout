@@ -6,17 +6,33 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BAR_ELEMENT;
+import static com.github.appreciated.app.layout.Styles.*;
 
 public class MenuHeader extends VerticalLayout {
+    public MenuHeader(Resource resource) {
+        this(null, null, resource);
+    }
+
+    public MenuHeader(String title, Resource resource) {
+        this(title, null, resource);
+    }
+
     public MenuHeader(String title, String subtitle, Resource resource) {
         Label name = new Label(title);
+        name.addStyleName(APP_LAYOUT_MENU_HEADER_TITLE);
         Label description = new Label(subtitle);
+        description.addStyleName(APP_LAYOUT_MENU_HEADER_TITLE);
         description.addStyleName(ValoTheme.LABEL_SMALL);
         addStyleName(APP_LAYOUT_MENU_BAR_ELEMENT);
+        addStyleName(APP_LAYOUT_MENU_HEADER_ELEMENT);
         setMargin(false);
         setSpacing(false);
         setMargin(new MarginInfo(true, false));
-        addComponents(new RoundImage(resource), name, description);
+        if (resource != null)
+            addComponent(new RoundImage(resource));
+        if (title != null)
+            addComponent(name);
+        if (subtitle != null)
+            addComponent(description);
     }
 }
