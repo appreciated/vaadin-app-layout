@@ -184,6 +184,41 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, icon, null, element, position);
     }
 
+
+    /**
+     * Only use for CDIViews!
+     *
+     * @param caption ViewName
+     * @return
+     */
+    public NavigationDrawerBuilder withNavigationElement(String caption) {
+        return withNavigationElement(caption, null, null, null, Position.DEFAULT);
+    }
+
+
+    /**
+     * Only use for CDIViews!
+     *
+     * @param caption ViewName
+     * @param icon
+     * @return
+     */
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon) {
+        return withNavigationElement(caption, icon, null, null, Position.DEFAULT);
+    }
+
+    /**
+     * Only use for CDIViews!
+     *
+     * @param caption  ViewName
+     * @param icon
+     * @param position HEADER / DEFAULT / FOOTER
+     * @return
+     */
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Position position) {
+        return withNavigationElement(caption, icon, null, null, position);
+    }
+
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
         addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
