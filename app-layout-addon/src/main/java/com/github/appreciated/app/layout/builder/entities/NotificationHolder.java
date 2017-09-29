@@ -39,6 +39,11 @@ public class NotificationHolder<T extends Comparator<T>> {
         listeners.forEach(listener -> listener.onNotificationChanges(this));
     }
 
+    public void removeNotification(T notification) {
+        notifications.remove(notification);
+        listeners.forEach(listener -> listener.onNotificationChanges(this));
+    }
+
     public void addStatusListener(NotificationListener listener) {
         listeners.add(listener);
     }
@@ -61,6 +66,7 @@ public class NotificationHolder<T extends Comparator<T>> {
         }
         return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent(o)).collect(Collectors.toList());
     }
+
 
     public void setNotificationClickedListener(NotificationClickListener<T> listener) {
         this.listener = listener;
