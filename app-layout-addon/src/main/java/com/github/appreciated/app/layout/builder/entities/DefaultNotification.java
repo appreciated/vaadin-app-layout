@@ -6,16 +6,17 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 
-public class DefaultNotification implements Comparable<DefaultNotification> {
+public class DefaultNotification implements Comparator<DefaultNotification> {
     String title;
     String description;
     Resource image;
     private Priority priority;
     private boolean dismissible;
     private LocalDateTime time;
-    
+
     public DefaultNotification(String title, String description) {
         this(title, description, (Resource) null);
     }
@@ -69,15 +70,6 @@ public class DefaultNotification implements Comparable<DefaultNotification> {
         this.image = image;
     }
 
-    @Override
-    public int compareTo(DefaultNotification o) {
-        if (this.priority.getValue().compareTo(priority.getValue()) != 0) {
-            return this.priority.getValue().compareTo(priority.getValue());
-        } else {
-            return time.compareTo(o.getTime());
-        }
-    }
-
     public LocalDateTime getTime() {
         return time;
     }
@@ -98,7 +90,16 @@ public class DefaultNotification implements Comparable<DefaultNotification> {
         return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
-    public enum Priority implements Comparable<Priority> {
+    @Override
+    public int compare(DefaultNotification o1, DefaultNotification o2) {
+        if (o1.priority != o2.priority) {
+            return o1.priority.getValue().compareTo(o2.priority.getValue());
+        } else {
+            return o1.getTime().compareTo(o2.getTime());
+        }
+    }
+
+    public enum Priority {
         HIGH(2), MEDIUM(1), LOW(0);
 
         private Integer priority;

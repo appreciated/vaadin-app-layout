@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
 
-public class NotificationHolder<T extends Comparable<T>> {
+public class NotificationHolder<T extends Comparator<T>> {
 
     private ArrayList<NotificationListener> listeners = new ArrayList<>();
     private ArrayList<T> notifications = new ArrayList<>();
@@ -50,7 +50,7 @@ public class NotificationHolder<T extends Comparable<T>> {
     }
 
     public ArrayList<T> getNotifications() {
-        Collections.sort(notifications, Collections.reverseOrder());
+        Collections.sort(notifications, (o1, o2) -> o1.compare(o2, o1));
         return notifications;
     }
 
@@ -59,7 +59,7 @@ public class NotificationHolder<T extends Comparable<T>> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted(Comparator.naturalOrder()).map(o -> getComponent(o)).collect(Collectors.toList());
+        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent(o)).collect(Collectors.toList());
     }
 
     public void setNotificationClickedListener(NotificationClickListener<T> listener) {

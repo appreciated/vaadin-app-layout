@@ -76,12 +76,12 @@
         }
       }
       &.app-bar-notification-priority-low {
-        background: rgb(223, 223, 223) !important;
+        background: rgb(245, 245, 245) !important;
         .app-bar-notification-subtitle {
-          color: valo-font-color(rgb(255, 255, 255), 0.8);
+          color: valo-font-color(rgb(245, 245, 245), 0.8);
         }
         .app-bar-notification-time {
-          color: valo-font-color(rgb(223, 223, 223), 0.7);
+          color: valo-font-color(rgb(245, 245, 245), 0.7);
         }
       }
       box-shadow: 0px 4px 5px -1px rgba(0, 0, 0, 0.3);

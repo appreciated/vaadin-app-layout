@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 
 import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
 import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.*;
 
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
@@ -49,15 +50,18 @@ public class DemoUI extends UI {
     @Override
     public void attach() {
         super.attach();
-        for (int i = 0; i < 6; i++) {
-            addNotification();
-        }
+        addNotification(LOW);
+        addNotification(MEDIUM);
+        addNotification(HIGH);
+        addNotification(LOW);
+        addNotification(MEDIUM);
+        addNotification(HIGH);
     }
 
-    private void addNotification() {
+    private void addNotification(DefaultNotification.Priority priority) {
         DemoUI.this.access(() -> {
             badge.increase();
-            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount()));
+            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
         });
     }
 
