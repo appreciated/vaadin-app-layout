@@ -15,6 +15,8 @@ import java.util.List;
 
 public class NotificationWindow<T> extends Window {
 
+    int height = 387;
+
     private VerticalLayout notificationsView;
     boolean hasBlurListener = false;
     boolean blurListenerEnabled = true;
@@ -24,7 +26,7 @@ public class NotificationWindow<T> extends Window {
     public NotificationWindow(NotificationHolder holder) {
         super();
         setWidth(300, Sizeable.Unit.PIXELS);
-        setHeight(444, Unit.PIXELS);
+        setHeight(height, Unit.PIXELS);
         setClosable(false);
         setResizable(false);
         setDraggable(false);
@@ -72,6 +74,7 @@ public class NotificationWindow<T> extends Window {
         if (!showAll.value && holder.getNotificationSize() > 4) {
             Button showAllButton = new Button("Show all");
             showAllButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+            showAllButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
             showAllButton.setWidth(100, Unit.PERCENTAGE);
             showAllButton.addClickListener(clickEvent -> {
                 showAll.value = true;
@@ -111,10 +114,10 @@ public class NotificationWindow<T> extends Window {
                 }
                 setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
             } else {
-                if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + 444) {
-                    setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - 444);
+                if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + height) {
+                    setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - height);
                 } else {
-                    setPositionY(clickEvent.getClientY() - 444);
+                    setPositionY(clickEvent.getClientY() - height);
                 }
                 if (clickEvent.getButton() instanceof NavigationButton) {
                     if (!AppLayoutSessionHelper.getActiveVariant().isSmall()) {

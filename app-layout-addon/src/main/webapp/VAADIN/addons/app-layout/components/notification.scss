@@ -29,7 +29,61 @@
       overflow: visible !important;
     }
     .app-bar-notification {
-      background: white !important;
+      .app-bar-notification-time {
+        position: relative;
+        font-size: 12px;
+        line-height: 21px;
+        margin-left: 4px;
+        &::before {
+          content: "\2022";
+          font-size: 17px;
+          line-height: 25px;
+          left: -11px;
+          color: $v-focus-color;
+          position: absolute;
+        }
+      }
+      .app-bar-notification-title {
+        font-weight: 500;
+        color: $v-focus-color;
+      }
+      .app-bar-notification-subtitle {
+        font-size: 14px;
+      }
+      &.app-bar-notification-priority-high {
+        background: $v-focus-color !important;
+        .app-bar-notification-subtitle {
+          color: valo-font-color($v-focus-color, 0.8);
+        }
+        .app-bar-notification-title {
+          font-weight: 500;
+          color: valo-font-color($v-focus-color, 1.0);
+        }
+        .app-bar-notification-time {
+          color: valo-font-color($v-focus-color, 0.7);
+          &::before {
+            color: valo-font-color($v-focus-color, 1.0);
+          }
+        }
+      }
+      &.app-bar-notification-priority-medium {
+        background: rgb(255, 255, 255) !important;
+        .app-bar-notification-subtitle {
+          color: valo-font-color(rgb(255, 255, 255), 0.8);
+        }
+        .app-bar-notification-time {
+          color: valo-font-color(rgb(255, 255, 255), 0.7);
+        }
+      }
+      &.app-bar-notification-priority-low {
+        background: rgb(223, 223, 223) !important;
+        .app-bar-notification-subtitle {
+          color: valo-font-color(rgb(255, 255, 255), 0.8);
+        }
+        .app-bar-notification-time {
+          color: valo-font-color(rgb(223, 223, 223), 0.7);
+        }
+      }
       box-shadow: 0px 4px 5px -1px rgba(0, 0, 0, 0.3);
       border-radius: 3px;
     }

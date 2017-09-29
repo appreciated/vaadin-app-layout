@@ -18,6 +18,12 @@ public class Styles {
     public static final String APP_BAR_DESIGN_CUSTOM = "app-bar-custom-design";
     public static final String APP_BAR_NOTIFICATION_LIST = "app-bar-notification-list";
     public static final String APP_BAR_NOTIFICATION_WINDOW = "app-bar-notification-window";
+    public static final String APP_BAR_NOTIFICATION_TIME = "app-bar-notification-time";
+    public static final String APP_BAR_NOTIFICATION_TITLE = "app-bar-notification-title";
+    public static final String APP_BAR_NOTIFICATION_DESCRIPTION = "app-bar-notification-subtitle";
+    public static final String APP_BAR_NOTIFICATION_PRIORITY_HIGH = "app-bar-notification-priority-high";
+    public static final String APP_BAR_NOTIFICATION_PRIORITY_MEDIUM = "app-bar-notification-priority-medium";
+    public static final String APP_BAR_NOTIFICATION_PRIORITY_LOW = "app-bar-notification-priority-low";
     public static final String EXPANDING_MENU_CONTAINER_PRIMARY_STYLE = "expanding-menu-container";
     public static final String EXPANDING_MENU_CONTAINER_OPEN = "expanding-menu-container-open";
     public static final String EXPANDING_MENU_CONTAINER_BUTTON = "expanding-menu-container-button";

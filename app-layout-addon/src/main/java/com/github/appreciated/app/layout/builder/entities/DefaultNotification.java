@@ -1,8 +1,12 @@
 package com.github.appreciated.app.layout.builder.entities;
 
+import com.github.appreciated.app.layout.Styles;
 import com.vaadin.server.Resource;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class DefaultNotification implements Comparable<DefaultNotification> {
     String title;
@@ -11,7 +15,7 @@ public class DefaultNotification implements Comparable<DefaultNotification> {
     private Priority priority;
     private boolean dismissible;
     private LocalDateTime time;
-
+    
     public DefaultNotification(String title, String description) {
         this(title, description, (Resource) null);
     }
@@ -78,7 +82,23 @@ public class DefaultNotification implements Comparable<DefaultNotification> {
         return time;
     }
 
-    enum Priority implements Comparable<Priority> {
+    public String getStyle() {
+        switch (priority) {
+            case LOW:
+                return Styles.APP_BAR_NOTIFICATION_PRIORITY_LOW;
+            case MEDIUM:
+                return Styles.APP_BAR_NOTIFICATION_PRIORITY_MEDIUM;
+            case HIGH:
+                return Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH;
+        }
+        return "";
+    }
+
+    public String getTimeAgo() {
+        return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
+    }
+
+    public enum Priority implements Comparable<Priority> {
         HIGH(2), MEDIUM(1), LOW(0);
 
         private Integer priority;
