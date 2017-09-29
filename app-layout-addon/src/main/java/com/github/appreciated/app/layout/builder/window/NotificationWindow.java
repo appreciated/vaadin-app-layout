@@ -22,15 +22,16 @@ public class NotificationWindow<T> extends Window {
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
     Holder<Boolean> alignBottom = new Holder<>(false);
+    private NotificationHolder holder;
 
     public NotificationWindow(NotificationHolder holder) {
         super();
+        this.holder = holder;
         setWidth(300, Sizeable.Unit.PIXELS);
         setHeight(height, Unit.PIXELS);
         setClosable(false);
         setResizable(false);
         setDraggable(false);
-        setContent(getCurrentView(holder));
     }
 
     private VerticalLayout getCurrentView(NotificationHolder holder) {
@@ -46,14 +47,7 @@ public class NotificationWindow<T> extends Window {
         VerticalLayout notificationsWrapper = new VerticalLayout();
         notificationsWrapper.setSpacing(false);
         notificationsWrapper.setMargin(true);
-        /*
-        Label title = new Label("Notifications");
-        title.addStyleName(ValoTheme.LABEL_H3);
-        title.addStyleName(ValoTheme.LABEL_NO_MARGIN);
-        VerticalLayout titleWrapper = new VerticalLayout(title);
-        titleWrapper.setMargin(new MarginInfo(false, true));
-        wrapper.addComponent(titleWrapper);
-        */
+
         List<Component> components = holder.getNotifications(showAll.value);
         Collections.reverse(components);
         notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
@@ -108,7 +102,6 @@ public class NotificationWindow<T> extends Window {
             if (addBelow) {
                 if (UI.getCurrent().getPage().getBrowserWindowWidth() < clickEvent.getClientX() + 150) {
                     setPositionX(UI.getCurrent().getPage().getBrowserWindowWidth() - 300);
-                    alignBottom.value = true;
                 } else {
                     setPositionX(clickEvent.getClientX() - 150);
                 }
@@ -116,6 +109,7 @@ public class NotificationWindow<T> extends Window {
             } else {
                 if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + height) {
                     setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - height);
+                    alignBottom.value = true;
                 } else {
                     setPositionY(clickEvent.getClientY() - height);
                 }
@@ -129,6 +123,7 @@ public class NotificationWindow<T> extends Window {
                     setPositionX(256);
                 }
             }
+            setContent(getCurrentView(holder));
             UI.getCurrent().addWindow(this);
             focus();
             if (!hasBlurListener && blurListenerEnabled) {

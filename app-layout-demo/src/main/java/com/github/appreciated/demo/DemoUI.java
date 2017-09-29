@@ -53,9 +53,6 @@ public class DemoUI extends UI {
         addNotification(LOW);
         addNotification(MEDIUM);
         addNotification(HIGH);
-        addNotification(LOW);
-        addNotification(MEDIUM);
-        addNotification(HIGH);
     }
 
     private void addNotification(DefaultNotification.Priority priority) {
