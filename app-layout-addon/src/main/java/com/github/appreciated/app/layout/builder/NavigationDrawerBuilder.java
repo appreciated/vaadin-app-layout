@@ -29,12 +29,11 @@ import java.util.stream.Collectors;
 
 public class NavigationDrawerBuilder {
 
-    private NavigationConsumer navigatorConsumer;
-    private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
-
     DrawerVariant variant = DrawerVariant.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
+    private NavigationConsumer navigatorConsumer;
+    private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private boolean requiresNavigatior = false;
     private AppBarDesign design = AppBarDesign.DEFAULT;
     private Navigator navigator;
@@ -53,6 +52,10 @@ public class NavigationDrawerBuilder {
     private NavigationDrawerBuilder() {
     }
 
+    public static NavigationDrawerBuilder get() {
+        return new NavigationDrawerBuilder();
+    }
+
     /**
      * If you use this you will need to do the "navigator part" manually, this will simply add a component to the menu
      *
@@ -66,10 +69,6 @@ public class NavigationDrawerBuilder {
     public NavigationDrawerBuilder withNavigationElement(Component element, Position position) {
         addNavigationElementToPosition(new CustomNavigationElement(element), position);
         return this;
-    }
-
-    public static NavigationDrawerBuilder get() {
-        return new NavigationDrawerBuilder();
     }
 
     public NavigationDrawerBuilder withVariant(DrawerVariant variant) {
@@ -195,7 +194,6 @@ public class NavigationDrawerBuilder {
         return withNavigationElement(caption, null, null, null, Position.DEFAULT);
     }
 
-
     /**
      * Only use for CDIViews!
      *
@@ -218,6 +216,20 @@ public class NavigationDrawerBuilder {
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Position position) {
         return withNavigationElement(caption, icon, null, null, position);
     }
+
+
+    /**
+     * Only use for CDIViews!
+     *
+     * @param caption  ViewName
+     * @param icon
+     * @param position HEADER / DEFAULT / FOOTER
+     * @return
+     */
+    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Position position) {
+        return withNavigationElement(caption, icon, badgeHolder, null, position);
+    }
+
 
     public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         requiresNavigatior = true;

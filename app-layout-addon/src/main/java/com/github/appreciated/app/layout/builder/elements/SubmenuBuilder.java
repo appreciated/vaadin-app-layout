@@ -31,14 +31,18 @@ public class SubmenuBuilder {
         return new SubmenuBuilder(title, icon);
     }
 
-    public SubmenuBuilder withNavigationElement(String caption, View element) {
-        this.submenuElements.add(new NavigatorNavigationElement(caption, null, element));
+    public SubmenuBuilder withNavigationElement(String caption) {
+        return this.withNavigationElement(caption, (Resource) null);
+    }
+
+
+    public SubmenuBuilder withNavigationElement(String caption, Resource icon) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, icon, (View) null));
         return this;
     }
 
-    public SubmenuBuilder withNavigationElement(Resource icon, View element) {
-        this.submenuElements.add(new NavigatorNavigationElement(null, icon, element));
-        return this;
+    public SubmenuBuilder withNavigationElement(String caption, View element) {
+        return this.withNavigationElement(caption, null, element);
     }
 
     public SubmenuBuilder withNavigationElement(String caption, Resource icon, View element) {
@@ -47,13 +51,7 @@ public class SubmenuBuilder {
     }
 
     public SubmenuBuilder withNavigationElement(String caption, Class<? extends View> element) {
-        this.submenuElements.add(new NavigatorNavigationElement(caption, null, element));
-        return this;
-    }
-
-    public SubmenuBuilder withNavigationElement(Resource icon, Class<? extends View> element) {
-        this.submenuElements.add(new NavigatorNavigationElement(null, icon, element));
-        return this;
+        return this.withNavigationElement(caption, null, element);
     }
 
     public SubmenuBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element) {
