@@ -4,7 +4,6 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -26,7 +25,7 @@ public class AppBarBadgeButton extends AbsoluteLayout {
         button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
         button.setSizeFull();
         badge = new Label();
-        notificationHolder.addStatusListener((newStatus, c) -> refreshNotifications(newStatus, c));
+        notificationHolder.addStatusListener((newStatus) -> refreshNotifications(newStatus));
         badge.addStyleName(APP_BAR_BADGE);
         addComponent(button);
         addComponent(badge, "right: 0px;");
@@ -40,14 +39,14 @@ public class AppBarBadgeButton extends AbsoluteLayout {
     @Override
     public void attach() {
         super.attach();
-        refreshNotifications(notificationHolder, null);
+        refreshNotifications(notificationHolder);
     }
 
     public AppBarButton getButton() {
         return button;
     }
 
-    public void refreshNotifications(NotificationHolder notificationHolder, Component notification) {
+    public void refreshNotifications(NotificationHolder notificationHolder) {
         if (notificationHolder != null) {
             badge.setVisible(true);
             badge.setValue(String.valueOf(notificationHolder.getNotificationSize()));

@@ -5,8 +5,6 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class MaterialNotificationWindow extends NotificationWindow {
@@ -20,8 +18,7 @@ public class MaterialNotificationWindow extends NotificationWindow {
     }
 
     VerticalLayout getNotificationLayout(NotificationHolder notifications) {
-        List<Component> components = Arrays.asList(notifications.getCurrentComponents());
-        Collections.reverse(components);
+        List<Component> components = notifications.getNotifications(isShowAll());
         notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_WINDOW);
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_LIST);

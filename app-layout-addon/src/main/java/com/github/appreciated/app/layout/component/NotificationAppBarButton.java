@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.builder.window.NotificationWindow;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
 import static com.vaadin.icons.VaadinIcons.BELL;
@@ -38,26 +37,18 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
             ui.access(() -> {
                 window = provider.getComponent(getNotificationHolder());
                 window.show(clickEvent);
-                window.addCloseListener(closeEvent -> {
-                    new Thread(() -> {
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        window = null;
-                    }).start();
-                });
+                window.addCloseListener(closeEvent -> window = null);
             });
         } else {
+            window.show(clickEvent);
             window = null;
         }
     }
 
-    public void refreshNotifications(NotificationHolder notificationHolder, Component component) {
-        super.refreshNotifications(notificationHolder, component);
+    public void refreshNotifications(NotificationHolder notificationHolder) {
+        super.refreshNotifications(notificationHolder);
         if (window != null) {
-            window.addNewNotification(component);
+            window.addNewNotification(notificationHolder);
         }
     }
 }
