@@ -64,7 +64,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public Class<? extends View> getViewClassName() {
         if (className == null) {
-            return view.getClass();
+            return view == null ? null : view.getClass();
         } else {
             return className;
         }
