@@ -9,6 +9,7 @@ import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.MenuHeader;
+import com.github.appreciated.app.layout.component.NavigationNotificationButton;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.drawer.AppLayout;
 import com.vaadin.annotations.*;
@@ -48,17 +49,9 @@ public class DemoUI extends UI {
     @Override
     public void attach() {
         super.attach();
-        addNotification();
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                addNotification();
-            }
-        }).start();
+        for (int i = 0; i < 6; i++) {
+            addNotification();
+        }
     }
 
     private void addNotification() {
@@ -93,7 +86,8 @@ public class DemoUI extends UI {
                 .withNavigationElement("Menu", VaadinIcons.MENU, View5.class)
                 .withNavigationElement("Elements", VaadinIcons.LIST, View6.class)
                 .withClickableElement("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
-                .withNavigationElement("Preferences", VaadinIcons.COG, View7.class, FOOTER)
+                .withNavigationElement(new NavigationNotificationButton("News", VaadinIcons.BELL, notifications), FOOTER)
+                //.withNavigationElement("Preferences", VaadinIcons.COG, View7.class, FOOTER)
                 .build();
         holder.addComponent(drawer);
     }

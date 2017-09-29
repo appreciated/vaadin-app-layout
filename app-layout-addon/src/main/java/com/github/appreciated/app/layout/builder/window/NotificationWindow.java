@@ -3,7 +3,6 @@ package com.github.appreciated.app.layout.builder.window;
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.server.Sizeable;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -23,6 +22,7 @@ public class NotificationWindow<T> extends Window {
     public NotificationWindow(NotificationHolder holder) {
         super();
         setWidth(300, Sizeable.Unit.PIXELS);
+        setHeight(444, Unit.PIXELS);
         setClosable(false);
         setResizable(false);
         setDraggable(false);
@@ -33,31 +33,34 @@ public class NotificationWindow<T> extends Window {
         VerticalLayout wrapper = new VerticalLayout();
         wrapper.setMargin(false);
         wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_WINDOW);
+        wrapper.setSizeFull();
         VerticalLayout panelWrapper = new VerticalLayout();
-        panelWrapper.setHeight(325, Unit.PIXELS);
+        panelWrapper.setHeight(100, Unit.PERCENTAGE);
         panelWrapper.setMargin(false);
         panelWrapper.setSpacing(false);
 
         VerticalLayout notificationsWrapper = new VerticalLayout();
         notificationsWrapper.setSpacing(false);
         notificationsWrapper.setMargin(true);
+        /*
         Label title = new Label("Notifications");
         title.addStyleName(ValoTheme.LABEL_H3);
         title.addStyleName(ValoTheme.LABEL_NO_MARGIN);
         VerticalLayout titleWrapper = new VerticalLayout(title);
         titleWrapper.setMargin(new MarginInfo(false, true));
         wrapper.addComponent(titleWrapper);
+        */
         List<Component> components = holder.getNotifications(showAll.value);
         Collections.reverse(components);
         notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
         notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_LIST);
         notificationsView.setMargin(false);
-        notificationsView.setSpacing(false);
 
         Panel panel = new Panel(notificationsWrapper);
         panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         panelWrapper.addComponent(panel);
         wrapper.addComponent(panelWrapper);
+        wrapper.setExpandRatio(panelWrapper, 1.0f);
         if (alignBottom.value) {
             panelWrapper.setComponentAlignment(panel, Alignment.BOTTOM_LEFT);
         }
@@ -95,9 +98,9 @@ public class NotificationWindow<T> extends Window {
         show(clickEvent, true);
     }
 
-    public void show(Button.ClickEvent clickEvent, boolean bottom) {
+    public void show(Button.ClickEvent clickEvent, boolean addBelow) {
         if (!isAttached()) {
-            if (bottom) {
+            if (addBelow) {
                 if (UI.getCurrent().getPage().getBrowserWindowWidth() < clickEvent.getClientX() + 150) {
                     setPositionX(UI.getCurrent().getPage().getBrowserWindowWidth() - 300);
                     alignBottom.value = true;
@@ -106,10 +109,10 @@ public class NotificationWindow<T> extends Window {
                 }
                 setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
             } else {
-                if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + 375) {
-                    setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - 375);
+                if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + 444) {
+                    setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - 444);
                 } else {
-                    setPositionY(clickEvent.getClientY() - 375);
+                    setPositionY(clickEvent.getClientY() - 444);
                 }
                 setPositionX(256);
             }
