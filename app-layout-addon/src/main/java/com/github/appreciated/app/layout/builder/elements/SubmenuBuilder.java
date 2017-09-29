@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
@@ -41,6 +42,11 @@ public class SubmenuBuilder {
         return this;
     }
 
+    public SubmenuBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, icon, badgeHolder, (View) null));
+        return this;
+    }
+
     public SubmenuBuilder withNavigationElement(String caption, View element) {
         return this.withNavigationElement(caption, null, element);
     }
@@ -50,12 +56,23 @@ public class SubmenuBuilder {
         return this;
     }
 
+    public SubmenuBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
+        return this;
+    }
+
+
     public SubmenuBuilder withNavigationElement(String caption, Class<? extends View> element) {
         return this.withNavigationElement(caption, null, element);
     }
 
     public SubmenuBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element) {
         this.submenuElements.add(new NavigatorNavigationElement(caption, icon, element));
+        return this;
+    }
+
+    public SubmenuBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return this;
     }
 
