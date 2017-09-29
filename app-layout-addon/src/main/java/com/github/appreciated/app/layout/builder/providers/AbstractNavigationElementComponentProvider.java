@@ -7,7 +7,7 @@ import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.vaadin.ui.UI;
 
 public abstract class AbstractNavigationElementComponentProvider implements ComponentProvider<NavigatorNavigationElement> {
-    public static String UI_SESSION_KEY = "app-layout-menu-button-active";
+
 
     public void setNavigationClickListener(NavigatorNavigationElement element) {
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();

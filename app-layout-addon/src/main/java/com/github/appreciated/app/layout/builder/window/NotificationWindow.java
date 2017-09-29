@@ -2,6 +2,8 @@ package com.github.appreciated.app.layout.builder.window;
 
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.component.NavigationButton;
+import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -114,7 +116,15 @@ public class NotificationWindow<T> extends Window {
                 } else {
                     setPositionY(clickEvent.getClientY() - 444);
                 }
-                setPositionX(256);
+                if (clickEvent.getButton() instanceof NavigationButton) {
+                    if (!AppLayoutSessionHelper.getActiveVariant().isSmall()) {
+                        setPositionX(256);
+                    } else {
+                        setPositionX(64);
+                    }
+                } else {
+                    setPositionX(256);
+                }
             }
             UI.getCurrent().addWindow(this);
             focus();

@@ -10,7 +10,7 @@ import com.github.appreciated.app.layout.builder.providers.DefaultSubmenuNavigat
 import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
 import com.github.appreciated.app.layout.drawer.AppLayout;
 import com.github.appreciated.app.layout.drawer.LeftNavigationFallBackDrawer;
-import com.github.appreciated.app.layout.session.NavigationElementHelper;
+import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -264,13 +264,14 @@ public class NavigationDrawerBuilder {
             } else {
                 instance = new LeftNavigationFallBackDrawer(variant);
             }
+            AppLayoutSessionHelper.setActiveVariant(variant);
         }
         instance.setTitle(title);
         if (requiresNavigatior) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
             navigator.addViewChangeListener(viewChangeEvent -> {
-                NavigationElementHelper.removeStyleFromCurrentlyActiveNavigationElement();
-                findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> NavigationElementHelper.setActiveNavigationElement(element));
+                AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
+                findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
                 return true;
             });
 
@@ -314,7 +315,7 @@ public class NavigationDrawerBuilder {
             NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
             nelement.setProvider(navigationElementProvider);
             if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
-                NavigationElementHelper.updateActiveElementSessionData(nelement);
+                AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
             }
             navigatorNavigationElements.add(nelement);
             nelement.addViewToNavigator(navigator);
