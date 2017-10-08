@@ -319,7 +319,7 @@ public class AppLayoutBuilder {
     Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
         return navigatorNavigationElements.stream()
                 .filter(element -> element instanceof NavigatorNavigationElement)
-                .filter(element -> element.getName().equals(viewName))
+                .filter(element -> element.getViewName().equals(viewName))
                 .findFirst();
     }
 

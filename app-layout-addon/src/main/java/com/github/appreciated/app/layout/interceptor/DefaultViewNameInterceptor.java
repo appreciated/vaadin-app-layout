@@ -6,7 +6,7 @@ public class DefaultViewNameInterceptor implements ViewNameInterceptor {
     @Override
     public String get(String info) {
         info = Normalizer.normalize(info, Normalizer.Form.NFD);
-        info = info.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        info = info.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
         return info;
     }
 }

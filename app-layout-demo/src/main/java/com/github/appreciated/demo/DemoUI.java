@@ -12,6 +12,7 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.NavigationNotificationButton;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
+import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -74,13 +75,14 @@ public class DemoUI extends UI {
                 //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
                 //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
                 //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
+                .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
                 .add(new MenuHeader("App Layout", "Version 0.9.2", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
+                                .add("ÄÖÜäöüßCharts", VaadinIcons.SPLINE_CHART, View2.class)
                                 .add("Contact", VaadinIcons.CONNECT, View3.class)
                                 .add("More", VaadinIcons.COG, View4.class)
                                 .build())
