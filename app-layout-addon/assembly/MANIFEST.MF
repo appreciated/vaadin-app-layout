@@ -5,5 +5,5 @@ Vaadin-License-Title: ${Vaadin-License-Title}
 Implementation-Vendor: ${Implementation-Vendor}
 Implementation-Title: ${Implementation-Title}
 Implementation-Version: ${Implementation-Version}
-Export-Package: com.github.appreciated.app.layout
+Export-Package: com.github.appreciated.app.layout.*
 Import-Package: *
