@@ -1,5 +1,8 @@
 package com.github.appreciated.app.layout.builder;
 
+import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
@@ -7,9 +10,6 @@ import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigati
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSubmenuNavigationElementProvider;
-import com.github.appreciated.app.layout.drawer.AbstractNavigationDrawer;
-import com.github.appreciated.app.layout.drawer.AppLayout;
-import com.github.appreciated.app.layout.drawer.LeftNavigationFallBackDrawer;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -27,9 +27,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class NavigationDrawerBuilder {
+public class AppLayoutBuilder {
 
-    DrawerVariant variant = DrawerVariant.LEFT;
+    AppLayoutBehaviour variant = AppLayoutBehaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
     private NavigationConsumer navigatorConsumer;
@@ -49,11 +49,11 @@ public class NavigationDrawerBuilder {
     private List<NavigatorNavigationElement> navigatorNavigationElements = new ArrayList<>();
     private Component appBarIconComponent;
 
-    private NavigationDrawerBuilder() {
+    private AppLayoutBuilder() {
     }
 
-    public static NavigationDrawerBuilder get() {
-        return new NavigationDrawerBuilder();
+    public static AppLayoutBuilder get() {
+        return new AppLayoutBuilder();
     }
 
     /**
@@ -62,125 +62,125 @@ public class NavigationDrawerBuilder {
      * @param element
      * @return
      */
-    public NavigationDrawerBuilder withNavigationElement(Component element) {
-        return withNavigationElement(element, Position.DEFAULT);
+    public AppLayoutBuilder add(Component element) {
+        return add(element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(Component element, Position position) {
-        addNavigationElementToPosition(new CustomNavigationElement(element), position);
+    public AppLayoutBuilder add(Component element, Position position) {
+        addToPosition(new CustomNavigationElement(element), position);
         return this;
     }
 
-    public NavigationDrawerBuilder withVariant(DrawerVariant variant) {
+    public AppLayoutBuilder withBehaviour(AppLayoutBehaviour variant) {
         this.variant = variant;
         return this;
     }
 
     /**
-     * This will cause parameters set with "withVariant(...)" to be ignored
+     * This will cause parameters set with "withBehaviour(...)" to be ignored
      *
      * @param variant
      * @return
      */
-    public NavigationDrawerBuilder withCustomVariant(AbstractNavigationDrawer variant) {
+    public AppLayoutBuilder withCustomVariant(AbstractAppLayoutBehaviour variant) {
         this.instance = variant;
         return this;
     }
 
-    public NavigationDrawerBuilder withTitle(String title) {
+    public AppLayoutBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigatorProducer(NavigatorProducer navigator) {
+    public AppLayoutBuilder withNavigatorProducer(NavigatorProducer navigator) {
         this.requiresNavigatior = true;
         this.navigatorProducer = navigator;
         return this;
     }
 
-    public NavigationDrawerBuilder withDesign(AppBarDesign design) {
+    public AppLayoutBuilder withDesign(AppBarDesign design) {
         this.design = design;
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigatorConsumer(NavigationConsumer consumer) {
+    public AppLayoutBuilder withNavigatorConsumer(NavigationConsumer consumer) {
         this.requiresNavigatior = true;
         this.navigatorConsumer = consumer;
         return this;
     }
 
-    public NavigationDrawerBuilder withClickableElement(String caption, Resource icon, Button.ClickListener listener) {
-        return withClickableElement(caption, icon, listener, Position.DEFAULT);
+    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener) {
+        return addClickable(caption, icon, listener, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withClickableElement(String caption, Resource icon, Button.ClickListener listener, Position position) {
-        addNavigationElementToPosition(new CustomNavigatorNavigationElement(caption, icon, listener), position);
+    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener, Position position) {
+        addToPosition(new CustomNavigatorNavigationElement(caption, icon, listener), position);
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigationElements(Component... element) {
+    public AppLayoutBuilder withNavigationElements(Component... element) {
         this.navigationElements.addAll(Arrays.stream(element).map(component -> new CustomNavigationElement(component)).collect(Collectors.toList()));
         return this;
     }
 
-    public NavigationDrawerBuilder withDefaultNavigationView(View element) {
+    public AppLayoutBuilder withDefaultNavigationView(View element) {
         requiresNavigatior = true;
         defaultNavigationElement = new NavigatorNavigationElement("", null, element);
         return this;
     }
 
-    public NavigationDrawerBuilder withDefaultNavigationView(Class<? extends View> element) {
+    public AppLayoutBuilder withDefaultNavigationView(Class<? extends View> element) {
         requiresNavigatior = true;
         defaultNavigationElement = new NavigatorNavigationElement("", null, element);
         return this;
     }
 
-    public NavigationDrawerBuilder withSection(String value) {
+    public AppLayoutBuilder addSection(String value) {
         this.navigationElements.add(new SectionNavigationElement(value));
         return this;
     }
 
-    public NavigationDrawerBuilder withClickableElement(String caption, Button.ClickListener listener) {
-        return withClickableElement(caption, null, listener);
+    public AppLayoutBuilder addClickable(String caption, Button.ClickListener listener) {
+        return addClickable(caption, null, listener);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element) {
-        return withNavigationElement(caption, icon, element, Position.DEFAULT);
+    public AppLayoutBuilder add(String caption, Resource icon, Class<? extends View> element) {
+        return add(caption, icon, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
-        return withNavigationElement(caption, icon, badgeHolder, element, Position.DEFAULT);
+    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+        return add(caption, icon, badgeHolder, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, View element) {
-        return withNavigationElement(caption, icon, element, Position.DEFAULT);
+    public AppLayoutBuilder add(String caption, Resource icon, View element) {
+        return add(caption, icon, element, Position.DEFAULT);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Class<? extends View> element) {
-        return withNavigationElement(caption, null, element);
+    public AppLayoutBuilder add(String caption, Class<? extends View> element) {
+        return add(caption, null, element);
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, View element) {
-        return withNavigationElement(caption, null, element);
+    public AppLayoutBuilder add(String caption, View element) {
+        return add(caption, null, element);
     }
 
-    public NavigationDrawerBuilder withNavigationElementProvider(ComponentProvider<NavigatorNavigationElement> provider) {
+    public AppLayoutBuilder withNavigationElementProvider(ComponentProvider<NavigatorNavigationElement> provider) {
         this.navigationElementProvider = provider;
         return this;
     }
 
-    public NavigationDrawerBuilder withSectionElementProvider(ComponentProvider<SectionNavigationElement> provider) {
+    public AppLayoutBuilder withSectionElementProvider(ComponentProvider<SectionNavigationElement> provider) {
         this.sectionElementProvider = provider;
         return this;
     }
 
-    public NavigationDrawerBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement> provider) {
+    public AppLayoutBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement> provider) {
         this.submenuNavigationElementProvider = provider;
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Class<? extends View> element, Position position) {
-        return withNavigationElement(caption, icon, null, element, position);
+    public AppLayoutBuilder add(String caption, Resource icon, Class<? extends View> element, Position position) {
+        return add(caption, icon, null, element, position);
     }
 
 
@@ -190,8 +190,8 @@ public class NavigationDrawerBuilder {
      * @param caption ViewName
      * @return
      */
-    public NavigationDrawerBuilder withNavigationElement(String caption) {
-        return withNavigationElement(caption, null, null, null, Position.DEFAULT);
+    public AppLayoutBuilder add(String caption) {
+        return add(caption, null, null, null, Position.DEFAULT);
     }
 
     /**
@@ -201,8 +201,8 @@ public class NavigationDrawerBuilder {
      * @param icon
      * @return
      */
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon) {
-        return withNavigationElement(caption, icon, null, null, Position.DEFAULT);
+    public AppLayoutBuilder add(String caption, Resource icon) {
+        return add(caption, icon, null, null, Position.DEFAULT);
     }
 
     /**
@@ -213,8 +213,8 @@ public class NavigationDrawerBuilder {
      * @param position HEADER / DEFAULT / FOOTER
      * @return
      */
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, Position position) {
-        return withNavigationElement(caption, icon, null, null, position);
+    public AppLayoutBuilder add(String caption, Resource icon, Position position) {
+        return add(caption, icon, null, null, position);
     }
 
 
@@ -226,36 +226,36 @@ public class NavigationDrawerBuilder {
      * @param position HEADER / DEFAULT / FOOTER
      * @return
      */
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Position position) {
-        return withNavigationElement(caption, icon, badgeHolder, null, position);
+    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Position position) {
+        return add(caption, icon, badgeHolder, null, position);
     }
 
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
+    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
         return this;
     }
 
-    public NavigationDrawerBuilder withNavigationElement(String caption, Resource icon, View element, Position position) {
+    public AppLayoutBuilder add(String caption, Resource icon, View element, Position position) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(new NavigatorNavigationElement(caption, icon, element), position);
+        addToPosition(new NavigatorNavigationElement(caption, icon, element), position);
         return this;
     }
 
-    public NavigationDrawerBuilder withSubmenuElement(SubmenuNavigationElement element) {
+    public AppLayoutBuilder add(SubmenuNavigationElement element) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(element, Position.DEFAULT);
+        addToPosition(element, Position.DEFAULT);
         return this;
     }
 
-    public NavigationDrawerBuilder withSubmenuElement(SubmenuNavigationElement element, Position position) {
+    public AppLayoutBuilder add(SubmenuNavigationElement element, Position position) {
         requiresNavigatior = true;
-        addNavigationElementToPosition(element, position);
+        addToPosition(element, position);
         return this;
     }
 
-    private void addNavigationElementToPosition(AbstractNavigationElement element, Position position) {
+    private void addToPosition(AbstractNavigationElement element, Position position) {
         switch (position) {
             case HEADER:
                 this.navigationHeaderElements.add(element);
@@ -274,7 +274,7 @@ public class NavigationDrawerBuilder {
             if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
                 instance = variant.getInstance();
             } else {
-                instance = new LeftNavigationFallBackDrawer(variant);
+                instance = new LeftFallBack(variant);
             }
             AppLayoutSessionHelper.setActiveVariant(variant);
         }
@@ -344,17 +344,17 @@ public class NavigationDrawerBuilder {
         }
     }
 
-    public NavigationDrawerBuilder withAppBarElement(Component element) {
+    public AppLayoutBuilder addToAppBar(Component element) {
         this.appBarElements.add(element);
         return this;
     }
 
-    public NavigationDrawerBuilder withAppBarElements(Component... element) {
+    public AppLayoutBuilder addToAppBar(Component... element) {
         this.appBarElements.addAll(Arrays.asList(element));
         return this;
     }
 
-    public NavigationDrawerBuilder withAppBarIconComponent(Component resourceButton) {
+    public AppLayoutBuilder withAppBarIconComponent(Component resourceButton) {
         this.appBarIconComponent = resourceButton;
         return this;
     }

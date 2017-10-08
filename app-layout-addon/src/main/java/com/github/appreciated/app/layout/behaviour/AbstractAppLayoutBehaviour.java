@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.drawer;
+package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.server.Page;
@@ -9,7 +9,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 
 
-public abstract class AbstractNavigationDrawer extends CustomLayout implements AppLayout {
+public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements AppLayout {
 
     private final VerticalLayout contentHolder = new VerticalLayout();
     private final Panel contentPanel = new Panel(contentHolder);
@@ -27,24 +27,8 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public static void toggleDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
-    }
-
-    public static void openDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
-    }
-
-    public static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
-    }
-
-    public static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
-    }
-
-    public AbstractNavigationDrawer(String filename) throws IOException {
-        super(AbstractNavigationDrawer.class.getResourceAsStream(filename));
+    public AbstractAppLayoutBehaviour(String filename) throws IOException {
+        super(AbstractAppLayoutBehaviour.class.getResourceAsStream(filename));
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
@@ -62,7 +46,7 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
         menuElementHolder.setMargin(new MarginInfo(true, false));
         menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
-        addStyleName(getStyleName());
+        addStyleName("app-layout-behaviour-" + getStyleName());
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
@@ -77,6 +61,22 @@ public abstract class AbstractNavigationDrawer extends CustomLayout implements A
         appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
+    }
+
+    public static void toggleDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').toggle();");
+    }
+
+    public static void openDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').open();");
+    }
+
+    public static void closeDrawerIfNotPersistent() {
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-behaviour').hasAttribute('persistent')){document.querySelector('app-behaviour').close();}");
+    }
+
+    public static void closeDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').close();");
     }
 
     public abstract String getStyleName();

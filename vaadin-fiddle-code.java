@@ -8,7 +8,7 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.NavigationBadgeButton;
 import com.github.appreciated.app.layout.component.NavigationButton;
 import com.github.appreciated.app.layout.component.RoundResourceButton;
-import com.github.appreciated.app.layout.drawer.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;

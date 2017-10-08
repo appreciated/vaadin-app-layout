@@ -1,5 +1,5 @@
-@mixin left-navigation-drawer-responsive-small-no-app-bar {
-  .left-navigation-drawer-responsive-small-no-app-bar {
+@mixin app-layout-behaviour-left-responsive-small-no-app-bar {
+  .app-layout-behaviour-left-responsive-small-no-app-bar {
     --app-drawer-width: $small-drawer-width;
     --app-bar-height: $app-bar-height;
     .app-bar-application-content {

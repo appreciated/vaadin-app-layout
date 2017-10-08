@@ -1,5 +1,5 @@
-@mixin left-navigation-drawer-fallback {
-  .left-navigation-drawer-fallback {
+@mixin app-layout-behaviour-left-fallback {
+  .app-layout-behaviour-left-fallback {
     .app-bar-content {
       left: $app-bar-height;
       position: absolute;

@@ -1,5 +1,6 @@
-package com.github.appreciated.app.layout.drawer;
+package com.github.appreciated.app.layout.behaviour.impl;
 
+import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 
@@ -19,14 +20,14 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-header-layout/app-header-layout.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 
-public class LeftNavigationDrawerResponsiveSmallNoAppBar extends AbstractNavigationDrawer {
+public class LeftResponsiveOverlayNoAppBar extends AbstractAppLayoutBehaviour {
 
-    public LeftNavigationDrawerResponsiveSmallNoAppBar() throws IOException {
-        super("left-navigation-drawer-responsive-small-no-app-bar.html");
+    public LeftResponsiveOverlayNoAppBar() throws IOException {
+        super("left-responsive-overlay.html");
     }
 
     @Override
     public String getStyleName() {
-        return "left-navigation-drawer-responsive-small-no-app-bar";
+        return "left-responsive-overlay-no-app-bar";
     }
 }

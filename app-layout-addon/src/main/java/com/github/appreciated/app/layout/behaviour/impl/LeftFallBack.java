@@ -1,12 +1,13 @@
-package com.github.appreciated.app.layout.drawer;
+package com.github.appreciated.app.layout.behaviour.impl;
 
-import com.github.appreciated.app.layout.builder.DrawerVariant;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.builder.AppLayoutBehaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppLayout {
+public class LeftFallBack extends VerticalLayout implements AppLayout {
     private final VerticalLayout contentHolder = new VerticalLayout();
     private final Panel contentPanel = new Panel(contentHolder);
 
@@ -23,7 +24,7 @@ public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppL
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public LeftNavigationFallBackDrawer(DrawerVariant variant) {
+    public LeftFallBack(AppLayoutBehaviour variant) {
         this.setSpacing(false);
         this.setMargin(false);
         setSizeFull();
@@ -61,7 +62,7 @@ public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppL
             vwrapper.setExpandRatio(contentHolder, 1.0f);
             HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
             wrapper.setExpandRatio(vwrapper, 1.0f);
-            menuHolder.addStyleName("drawer-content");
+            menuHolder.addStyleName("behaviour-content");
             if (variant.isSmall()) {
                 menuHolder.addStyleName("small");
             }
@@ -73,7 +74,7 @@ public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppL
                 addComponent(appBar);
             }
             HorizontalLayout wrapper = new HorizontalLayout(menuHolder, contentPanel);
-            menuHolder.addStyleName("drawer-content");
+            menuHolder.addStyleName("behaviour-content");
             if (variant.isSmall()) {
                 menuHolder.addStyleName("small");
             }
@@ -98,7 +99,7 @@ public class LeftNavigationFallBackDrawer extends VerticalLayout implements AppL
     }
 
     public String getStyleName() {
-        return "left-navigation-drawer-fallback";
+        return "left-fallback";
     }
 
     public void addNavigationHeaderElement(Component component) {

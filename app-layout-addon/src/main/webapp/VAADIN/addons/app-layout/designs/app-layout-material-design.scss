@@ -1,5 +1,5 @@
-@mixin app-bar-default-design {
-  .app-bar-default-design {
+@mixin app-layout-material-design {
+  .app-layout-material-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
       background: $app-menu-button-badge-background-color;
@@ -31,33 +31,11 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
-      transition: border 0.5s;
     }
     @if $disable-active-style == false {
-      .app-layout-menu-element {
-        border-left: 5px transparent solid !important;
-        position: relative;
-        transition: border 0.3s;
-        position: relative;
-        &:after {
-          position: absolute;
-          margin-left: -5px;
-          content: "";
-          left: 0px;
-          top: 0px !important;
-          bottom: 0px !important;
-          width: 5px;
-          box-shadow: 0px 0px 20px 4px rgba($v-focus-color, 0.0);
-          transition: box-shadow 0.3s;
-          overflow: visible;
-        }
-      }
-      .app-layout-menu-element-active {
-        color: $v-focus-color !important;
-        border-left: 5px $v-focus-color solid !important;
-      }
-      .app-layout-menu-element-active:after {
-        box-shadow: 0px 0px 20px 4px rgba($v-focus-color, 0.3);
+      .app-layout-menu-element-active .app-layout-menu-button {
+        background: $app-menu-button-active-background-color !important;
+        color: $app-menu-button-active-font-color !important;
       }
       .app-layout-menu-button:after {
         box-shadow: none !important;
@@ -66,9 +44,6 @@
     }
     .app-layout-round-image {
       border-radius: 100%;
-    }
-    .app-layout-menu-bar-element {
-      padding-left: 21px;
     }
   }
 }

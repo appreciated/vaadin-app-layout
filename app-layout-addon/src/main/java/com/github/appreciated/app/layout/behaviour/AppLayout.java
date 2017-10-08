@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.drawer;
+package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.ui.Component;

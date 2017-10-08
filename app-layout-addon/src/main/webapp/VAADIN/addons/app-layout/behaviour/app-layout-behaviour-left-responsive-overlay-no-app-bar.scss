@@ -1,7 +1,12 @@
-@mixin left-navigation-drawer {
-  .left-navigation-drawer {
+@mixin app-layout-behaviour-left-responsive-overlay-no-app-bar {
+  .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     --app-drawer-width: $drawer-width;
     --app-bar-height: $app-bar-height;
+
+    .app-bar-application-content {
+      height: 100vh;
+    }
+
     .app-bar-content {
       left: $app-bar-height;
       position: absolute;
@@ -9,30 +14,30 @@
       right: 0px;
       bottom: 0px;
     }
+    app-drawer[persistent] + app-toolbar, app-drawer[persistent] + #contentContainer app-toolbar {
+      display: none;
+    }
     app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;
-      position: relative;
-      z-index: $z-index + 1;
       box-shadow: $app-bar-shadow;
       .v-button {
         color: $app-bar-font-color !important;
       }
       padding: 0px;
     }
-    app-drawer {
-      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    .drawer-content {
+      box-shadow: $drawer-shadow;
+      height: 100%;
+      overflow: visible;
+      background: $drawer-background-color;
+      color: $drawer-font-color !important;
+    }
+    app-drawer[persistent] .drawer-content {
+      box-shadow: $persistent-drawer-shadow;
     }
     app-drawer[opened] {
       z-index: $z-index;
-    }
-    .drawer-content {
-      margin-top: $app-bar-height;
-      height: calc(100% - $app-bar-height);
-      overflow: visible;
-      box-shadow: $drawer-shadow;
-      background: $drawer-background-color;
-      color: $drawer-font-color !important;
     }
   }
 }

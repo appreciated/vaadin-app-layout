@@ -1,5 +1,5 @@
-@mixin left-navigation-drawer-responsive-overlay {
-  .left-navigation-drawer-responsive-overlay {
+@mixin app-layout-behaviour-left-responsive-overlay {
+  .app-layout-behaviour-left-responsive-overlay {
     --app-drawer-width: $drawer-width;
     --app-bar-height: $app-bar-height;
 

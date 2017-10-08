@@ -1,8 +1,9 @@
 package com.github.appreciated.demo;
 
 
-import com.github.appreciated.app.layout.builder.DrawerVariant;
-import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.builder.AppLayoutBehaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
@@ -11,7 +12,6 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.NavigationNotificationButton;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
-import com.github.appreciated.app.layout.drawer.AppLayout;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -23,8 +23,8 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
 
-import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
-import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.FOOTER;
+import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
 import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.*;
 
 @Viewport("initial-scale=1, maximum-scale=1")
@@ -41,7 +41,7 @@ public class DemoUI extends UI {
     protected void init(VaadinRequest request) {
         holder = new VerticalLayout();
         holder.setMargin(false);
-        setDrawerVariant(DrawerVariant.LEFT);
+        setDrawerVariant(AppLayoutBehaviour.LEFT);
         setContent(holder);
         holder.setSizeFull();
         notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
@@ -62,48 +62,48 @@ public class DemoUI extends UI {
         });
     }
 
-    private void setDrawerVariant(DrawerVariant variant) {
+    private void setDrawerVariant(AppLayoutBehaviour variant) {
         holder.removeAllComponents();
 
 
-        AppLayout drawer = NavigationDrawerBuilder.get()
-                .withVariant(variant)
+        AppLayout drawer = AppLayoutBuilder.get()
+                .withBehaviour(variant)
                 .withTitle("Demo")
-                .withAppBarElement(getVariantCombo(variant))
-                .withAppBarElement(new NotificationAppBarButton(notifications))
-                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
-                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
-                //.withAppBarElement(new AppBarButton(VaadinIcons.SEARCH))
+                .addToAppBar(getVariantCombo(variant))
+                .addToAppBar(new NotificationAppBarButton(notifications))
+                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
+                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
+                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.DEFAULT)
-                .withNavigationElement(new MenuHeader("App Layout", "Version 0.9.2", new ThemeResource("logo.png")), HEADER)
-                .withNavigationElement("Home", VaadinIcons.HOME, badge, View1.class)
-                .withSubmenuElement(
+                .add(new MenuHeader("App Layout", "Version 0.9.2", new ThemeResource("logo.png")), HEADER)
+                .add("Home", VaadinIcons.HOME, badge, View1.class)
+                .add(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .withNavigationElement("Charts", VaadinIcons.SPLINE_CHART, View2.class)
-                                .withNavigationElement("Contact", VaadinIcons.CONNECT, View3.class)
-                                .withNavigationElement("More", VaadinIcons.COG, View4.class)
+                                .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
+                                .add("Contact", VaadinIcons.CONNECT, View3.class)
+                                .add("More", VaadinIcons.COG, View4.class)
                                 .build())
-                .withNavigationElement("Menu", VaadinIcons.MENU, View5.class)
-                .withNavigationElement("Elements", VaadinIcons.LIST, View6.class)
-                .withClickableElement("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
-                .withNavigationElement(new NavigationNotificationButton("News", VaadinIcons.BELL, notifications), FOOTER)
-                //.withNavigationElement("Preferences", VaadinIcons.COG, View7.class, FOOTER)
+                .add("Menu", VaadinIcons.MENU, View5.class)
+                .add("Elements", VaadinIcons.LIST, View6.class)
+                .addClickable("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
+                .add(new NavigationNotificationButton("News", VaadinIcons.BELL, notifications), FOOTER)
+                //.add("Preferences", VaadinIcons.COG, View7.class, FOOTER)
                 .build();
         holder.addComponent(drawer);
     }
 
-    ComboBox getVariantCombo(DrawerVariant variant) {
-        ComboBox<DrawerVariant> variants = new ComboBox<>();
+    ComboBox getVariantCombo(AppLayoutBehaviour variant) {
+        ComboBox<AppLayoutBehaviour> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
         variants.setWidth("300px");
-        variants.setItems(DrawerVariant.LEFT,
-                DrawerVariant.LEFT_OVERLAY,
-                DrawerVariant.LEFT_RESPONSIVE,
-                DrawerVariant.LEFT_RESPONSIVE_OVERLAY,
-                DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
-                DrawerVariant.LEFT_RESPONSIVE_SMALL,
-                DrawerVariant.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+        variants.setItems(AppLayoutBehaviour.LEFT,
+                AppLayoutBehaviour.LEFT_OVERLAY,
+                AppLayoutBehaviour.LEFT_RESPONSIVE,
+                AppLayoutBehaviour.LEFT_RESPONSIVE_OVERLAY,
+                AppLayoutBehaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
+                AppLayoutBehaviour.LEFT_RESPONSIVE_SMALL,
+                AppLayoutBehaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;

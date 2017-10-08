@@ -1,16 +1,16 @@
-@mixin expanding-menu-container {
-  .expanding-menu-container {
+@mixin app-layout-expanding-menu-container {
+  .app-layout-expanding-menu-container {
     transition: max-height 0.4s;
     overflow: hidden;
     max-height: 48px;
   }
-  .expanding-menu-container-open {
+  .app-layout-expanding-menu-container-open {
     max-height: 300px;
   }
-  .expanding-menu-container-button {
+  .app-layout-expanding-menu-container-button {
     position: relative;
   }
-  .expanding-menu-container-button:after {
+  .app-layout-expanding-menu-container-button:after {
     position: absolute;
     content: "\E967";
     font-family: "Vaadin-Icons";
@@ -24,10 +24,10 @@
     transition: transform 0.3s;
     pointer-events: none;
   }
-  .expanding-menu-container-open .expanding-menu-container-button:after {
+  .app-layout-expanding-menu-container-open .app-layout-expanding-menu-container-button:after {
     transform: rotate(90deg);
   }
-  .submenu-container {
+  .app-layout-submenu-container {
     background: $drawer-submenu-background-color;
   }
 }

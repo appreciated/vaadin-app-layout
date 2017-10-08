@@ -17,21 +17,21 @@ $disable-active-style: false !default;
 $small-drawer-width: 64px !default;
 $z-index: 10 !default;
 
-@import "designs/app-bar-default-design.scss";
-@import "designs/app-bar-material-design.scss";
-@import "designs/app-bar-custom-design.scss";
+@import "designs/app-layout-default-design.scss";
+@import "designs/app-layout-material-design.scss";
+@import "designs/app-layout-custom-design.scss";
 
-@import "components/notification.scss";
-@import "components/expanding-menu-container.scss";
+@import "components/app-layout-notification.scss";
+@import "components/app-layout-expanding-menu-container.scss";
 
-@import "variants/left-navigation-drawer.scss";
-@import "variants/left-navigation-drawer-overlay.scss";
-@import "variants/left-navigation-drawer-fallback.scss";
-@import "variants/left-navigation-drawer-responsive.scss";
-@import "variants/left-navigation-drawer-responsive-overlay.scss";
-@import "variants/left-navigation-drawer-responsive-overlay-no-app-bar.scss";
-@import "variants/left-navigation-drawer-responsive-small.scss";
-@import "variants/left-navigation-drawer-responsive-small-no-app-bar.scss";
+@import "behaviour/app-layout-behaviour-left.scss";
+@import "behaviour/app-layout-behaviour-left-overlay.scss";
+@import "behaviour/app-layout-behaviour-left-fallback.scss";
+@import "behaviour/app-layout-behaviour-left-responsive.scss";
+@import "behaviour/app-layout-behaviour-left-responsive-overlay.scss";
+@import "behaviour/app-layout-behaviour-left-responsive-overlay-no-app-bar.scss";
+@import "behaviour/app-layout-behaviour-left-responsive-small.scss";
+@import "behaviour/app-layout-behaviour-left-responsive-small-no-app-bar.scss";
 
 @mixin app-layout {
   $calc-app-bar-height: $app-bar-height - 20px;
@@ -59,17 +59,17 @@ $z-index: 10 !default;
     pointer-events: none;
   }
 
-  @include app-bar-default-design;
-  @include app-bar-material-design;
-  @include app-bar-custom-design;
-  @include notification;
-  @include expanding-menu-container;
-  @include left-navigation-drawer;
-  @include left-navigation-drawer-overlay;
-  @include left-navigation-drawer-responsive;
-  @include left-navigation-drawer-fallback;
-  @include left-navigation-drawer-responsive-overlay;
-  @include left-navigation-drawer-responsive-overlay-no-app-bar;
-  @include left-navigation-drawer-responsive-small;
-  @include left-navigation-drawer-responsive-small-no-app-bar;
+  @include app-layout-default-design;
+  @include app-layout-material-design;
+  @include app-layout-custom-design;
+  @include app-layout-notification;
+  @include app-layout-expanding-menu-container;
+  @include app-layout-behaviour-left;
+  @include app-layout-behaviour-left-overlay;
+  @include app-layout-behaviour-left-responsive;
+  @include app-layout-behaviour-left-fallback;
+  @include app-layout-behaviour-left-responsive-overlay;
+  @include app-layout-behaviour-left-responsive-overlay-no-app-bar;
+  @include app-layout-behaviour-left-responsive-small;
+  @include app-layout-behaviour-left-responsive-small-no-app-bar;
 }
