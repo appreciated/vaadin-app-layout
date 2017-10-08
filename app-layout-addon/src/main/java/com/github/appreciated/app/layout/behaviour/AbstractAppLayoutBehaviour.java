@@ -11,8 +11,7 @@ import java.io.IOException;
 
 public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements AppLayout {
 
-    private final VerticalLayout contentHolder = new VerticalLayout();
-    private final Panel contentPanel = new Panel(contentHolder);
+    private final Panel contentPanel = new Panel();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
@@ -120,12 +119,13 @@ public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements
         this.title.setValue(title);
     }
 
-    public HorizontalLayout getTitleWrapper() {
-        return titleWrapper;
+    @Override
+    public Panel getContentHolder() {
+        return contentPanel;
     }
 
-    public VerticalLayout getContentHolder() {
-        return contentHolder;
+    public HorizontalLayout getTitleWrapper() {
+        return titleWrapper;
     }
 
     public VerticalLayout getMenuElementHolder() {

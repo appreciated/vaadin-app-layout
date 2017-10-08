@@ -1,10 +1,7 @@
 package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 public interface AppLayout extends Component {
     String getStyleName();
@@ -29,7 +26,7 @@ public interface AppLayout extends Component {
 
     HorizontalLayout getTitleWrapper();
 
-    VerticalLayout getContentHolder();
+    Panel getContentHolder();
 
     VerticalLayout getMenuElementHolder();
 

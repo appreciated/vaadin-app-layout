@@ -8,8 +8,8 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class LeftFallBack extends VerticalLayout implements AppLayout {
-    private final VerticalLayout contentHolder = new VerticalLayout();
-    private final Panel contentPanel = new Panel(contentHolder);
+
+    private final Panel contentPanel = new Panel();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
@@ -53,13 +53,13 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         if (variant.isOverlay()) {
             VerticalLayout vwrapper;
             if (variant.hasAppBar()) {
-                vwrapper = new VerticalLayout(appBar, contentHolder);
+                vwrapper = new VerticalLayout(appBar, contentPanel);
             } else {
-                vwrapper = new VerticalLayout(contentHolder);
+                vwrapper = new VerticalLayout(contentPanel);
             }
             vwrapper.setMargin(false);
             vwrapper.setSpacing(false);
-            vwrapper.setExpandRatio(contentHolder, 1.0f);
+            vwrapper.setExpandRatio(contentPanel, 1.0f);
             HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
             wrapper.setExpandRatio(vwrapper, 1.0f);
             menuHolder.addStyleName("behaviour-content");
@@ -145,8 +145,8 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         return titleWrapper;
     }
 
-    public VerticalLayout getContentHolder() {
-        return contentHolder;
+    public Panel getContentHolder() {
+        return contentPanel;
     }
 
     public VerticalLayout getMenuElementHolder() {

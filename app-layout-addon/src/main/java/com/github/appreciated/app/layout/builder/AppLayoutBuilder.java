@@ -17,8 +17,8 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,21 +56,6 @@ public class AppLayoutBuilder {
 
     public static AppLayoutBuilder get() {
         return new AppLayoutBuilder();
-    }
-
-    /**
-     * If you use this you will need to do the "navigator part" manually, this will simply add a component to the menu
-     *
-     * @param element
-     * @return
-     */
-    public AppLayoutBuilder add(Component element) {
-        return add(element, Position.DEFAULT);
-    }
-
-    public AppLayoutBuilder add(Component element, Position position) {
-        addToPosition(new CustomNavigationElement(element), position);
-        return this;
     }
 
     public AppLayoutBuilder withBehaviour(AppLayoutBehaviour variant) {
@@ -117,19 +102,6 @@ public class AppLayoutBuilder {
         return this;
     }
 
-    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener) {
-        return addClickable(caption, icon, listener, Position.DEFAULT);
-    }
-
-    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener, Position position) {
-        addToPosition(new CustomNavigatorNavigationElement(caption, icon, listener), position);
-        return this;
-    }
-
-    public AppLayoutBuilder withNavigationElements(Component... element) {
-        this.navigationElements.addAll(Arrays.stream(element).map(component -> new CustomNavigationElement(component)).collect(Collectors.toList()));
-        return this;
-    }
 
     public AppLayoutBuilder withDefaultNavigationView(View element) {
         requiresNavigatior = true;
@@ -140,6 +112,51 @@ public class AppLayoutBuilder {
     public AppLayoutBuilder withDefaultNavigationView(Class<? extends View> element) {
         requiresNavigatior = true;
         defaultNavigationElement = new NavigatorNavigationElement("", null, element);
+        return this;
+    }
+
+    public AppLayoutBuilder withNavigationElementProvider(ComponentProvider<NavigatorNavigationElement> provider) {
+        this.navigationElementProvider = provider;
+        return this;
+    }
+
+    public AppLayoutBuilder withSectionElementProvider(ComponentProvider<SectionNavigationElement> provider) {
+        this.sectionElementProvider = provider;
+        return this;
+    }
+
+    public AppLayoutBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement> provider) {
+        this.submenuNavigationElementProvider = provider;
+        return this;
+    }
+
+
+    /**
+     * If you use this you will need to do the "navigator part" manually, this will simply add a component to the menu
+     *
+     * @param element
+     * @return
+     */
+    public AppLayoutBuilder add(Component element) {
+        return add(element, Position.DEFAULT);
+    }
+
+    public AppLayoutBuilder add(Component element, Position position) {
+        addToPosition(new CustomNavigationElement(element), position);
+        return this;
+    }
+
+    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener) {
+        return addClickable(caption, icon, listener, Position.DEFAULT);
+    }
+
+    public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener, Position position) {
+        addToPosition(new CustomNavigatorNavigationElement(caption, icon, listener), position);
+        return this;
+    }
+
+    public AppLayoutBuilder add(Component... element) {
+        this.navigationElements.addAll(Arrays.stream(element).map(component -> new CustomNavigationElement(component)).collect(Collectors.toList()));
         return this;
     }
 
@@ -170,21 +187,6 @@ public class AppLayoutBuilder {
 
     public AppLayoutBuilder add(String caption, View element) {
         return add(caption, null, element);
-    }
-
-    public AppLayoutBuilder withNavigationElementProvider(ComponentProvider<NavigatorNavigationElement> provider) {
-        this.navigationElementProvider = provider;
-        return this;
-    }
-
-    public AppLayoutBuilder withSectionElementProvider(ComponentProvider<SectionNavigationElement> provider) {
-        this.sectionElementProvider = provider;
-        return this;
-    }
-
-    public AppLayoutBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement> provider) {
-        this.submenuNavigationElementProvider = provider;
-        return this;
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, Class<? extends View> element, Position position) {
@@ -377,7 +379,7 @@ public class AppLayoutBuilder {
     }
 
     @FunctionalInterface
-    public interface NavigatorProducer extends Function<VerticalLayout, Navigator> {
+    public interface NavigatorProducer extends Function<Panel, Navigator> {
     }
 
     @FunctionalInterface
