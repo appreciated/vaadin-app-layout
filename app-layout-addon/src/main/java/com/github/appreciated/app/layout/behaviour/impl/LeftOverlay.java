@@ -16,14 +16,14 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 
-public class LeftOverlayBehaviour extends AbstractAppLayoutBehaviour {
+public class LeftOverlay extends AbstractAppLayoutBehaviour {
 
-    public LeftOverlayBehaviour() throws IOException {
+    public LeftOverlay() throws IOException {
         super("left-overlay.html");
     }
 
     @Override
     public String getStyleName() {
-        return "left-navigation-behaviour-overlay";
+        return "left-overlay";
     }
 }

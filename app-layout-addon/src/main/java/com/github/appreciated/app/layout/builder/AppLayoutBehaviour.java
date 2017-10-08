@@ -6,7 +6,7 @@ import com.github.appreciated.app.layout.behaviour.impl.*;
 public enum AppLayoutBehaviour {
     LEFT(Left.class, true, false, false),
     LEFT_RESPONSIVE(LeftResponsive.class, true, false, false),
-    LEFT_OVERLAY(LeftOverlayBehaviour.class, true, true, false),
+    LEFT_OVERLAY(LeftOverlay.class, true, true, false),
     LEFT_RESPONSIVE_OVERLAY(LeftResponsiveOverlay.class, true, true, false),
     LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR(LeftResponsiveOverlayNoAppBar.class, false, true, false),
     LEFT_RESPONSIVE_SMALL(LeftResponsiveSmall.class, true, false, true),
