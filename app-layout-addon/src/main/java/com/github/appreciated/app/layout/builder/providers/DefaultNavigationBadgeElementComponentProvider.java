@@ -7,7 +7,7 @@ import com.vaadin.ui.Component;
 public class DefaultNavigationBadgeElementComponentProvider extends AbstractNavigationElementComponentProvider {
 
     @Override
-    public Component getComponent(NavigatorNavigationElement element) {
+    public Component get(NavigatorNavigationElement element) {
         NavigationBadgeButton button = new NavigationBadgeButton(element.getName(), element.getIcon(), element.getBadgeHolder());
         element.setComponent(button);
         setNavigationClickListener(element);

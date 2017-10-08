@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -11,6 +12,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private Resource icon;
     private Class<? extends View> className;
     private DefaultBadgeHolder badgeHolder;
+    private ViewNameInterceptor viewNameInterceptor;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
         this(name, icon, null, className);
@@ -36,9 +38,9 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public void addViewToNavigator(Navigator navigator) {
         if (view != null) {
-            navigator.addView(name, view);
+            navigator.addView(getViewName(), view);
         } else if (className != null) {
-            navigator.addView(name, className);
+            navigator.addView(getViewName(), className);
         }
     }
 
@@ -52,6 +54,14 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public String getName() {
         return name;
+    }
+
+    public String getViewName() {
+        if (viewNameInterceptor == null) {
+            return name;
+        } else {
+            return viewNameInterceptor.get(name);
+        }
     }
 
     public Resource getIcon() {
@@ -78,5 +88,9 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public DefaultBadgeHolder getBadgeHolder() {
         return badgeHolder;
+    }
+
+    public void setViewNameInterceptor(ViewNameInterceptor viewNameInterceptor) {
+        this.viewNameInterceptor = viewNameInterceptor;
     }
 }

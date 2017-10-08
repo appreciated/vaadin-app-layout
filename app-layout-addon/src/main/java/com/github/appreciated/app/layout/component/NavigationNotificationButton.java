@@ -74,7 +74,7 @@ public class NavigationNotificationButton extends AbsoluteLayout {
     private void buttonClick(Button.ClickEvent clickEvent) {
         if (window == null) {
             ui.access(() -> {
-                window = provider.getComponent(notificationHolder);
+                window = provider.get(notificationHolder);
                 window.show(clickEvent, false);
                 window.addCloseListener(closeEvent -> {
                     window = null;

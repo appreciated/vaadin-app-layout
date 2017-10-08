@@ -10,6 +10,7 @@ import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigati
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSubmenuNavigationElementProvider;
+import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -48,6 +49,7 @@ public class AppLayoutBuilder {
     private List<AbstractNavigationElement> navigationHeaderElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorNavigationElements = new ArrayList<>();
     private Component appBarIconComponent;
+    private ViewNameInterceptor interceptor = null;
 
     private AppLayoutBuilder() {
     }
@@ -95,6 +97,12 @@ public class AppLayoutBuilder {
     public AppLayoutBuilder withNavigatorProducer(NavigatorProducer navigator) {
         this.requiresNavigatior = true;
         this.navigatorProducer = navigator;
+        return this;
+    }
+
+    public AppLayoutBuilder withViewNameInterceptor(ViewNameInterceptor interceptor) {
+        this.requiresNavigatior = true;
+        this.interceptor = interceptor;
         return this;
     }
 
@@ -330,6 +338,7 @@ public class AppLayoutBuilder {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
             }
             navigatorNavigationElements.add(nelement);
+            nelement.setViewNameInterceptor(interceptor);
             nelement.addViewToNavigator(navigator);
         } else if (element instanceof CustomNavigatorNavigationElement) {
             CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;

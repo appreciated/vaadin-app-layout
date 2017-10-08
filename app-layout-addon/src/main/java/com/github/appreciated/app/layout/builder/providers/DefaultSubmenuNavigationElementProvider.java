@@ -7,7 +7,7 @@ import com.vaadin.ui.Component;
 
 public class DefaultSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement> {
     @Override
-    public Component getComponent(SubmenuNavigationElement element) {
+    public Component get(SubmenuNavigationElement element) {
         ExpandingMenuContainer container = new ExpandingMenuContainer(element.getTitle(), element.getIcon());
         element.getSubmenuElements().forEach(element1 -> container.addComponent(element1.getComponent()));
         return container;

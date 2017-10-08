@@ -35,7 +35,7 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
     private void buttonClick(Button.ClickEvent clickEvent) {
         if (window == null) {
             ui.access(() -> {
-                window = provider.getComponent(getNotificationHolder());
+                window = provider.get(getNotificationHolder());
                 window.show(clickEvent);
                 window.addCloseListener(closeEvent -> window = null);
             });

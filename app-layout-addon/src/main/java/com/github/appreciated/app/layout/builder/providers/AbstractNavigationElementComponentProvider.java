@@ -12,7 +12,7 @@ public abstract class AbstractNavigationElementComponentProvider implements Comp
     public void setNavigationClickListener(NavigatorNavigationElement element) {
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
         button.getButton().addClickListener(clickEvent -> {
-            UI.getCurrent().getNavigator().navigateTo(element.getName());
+            UI.getCurrent().getNavigator().navigateTo(element.getViewName());
             AbstractAppLayoutBehaviour.closeDrawerIfNotPersistent();
         });
     }

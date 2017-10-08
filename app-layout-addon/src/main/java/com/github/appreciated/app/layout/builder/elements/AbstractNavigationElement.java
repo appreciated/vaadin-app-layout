@@ -20,7 +20,7 @@ public abstract class AbstractNavigationElement<T> {
 
     public Component getComponent() {
         if (component == null) {
-            component = provider.getComponent(getInfo());
+            component = provider.get(getInfo());
         }
         return component;
     }

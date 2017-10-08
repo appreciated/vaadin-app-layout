@@ -8,7 +8,7 @@ import com.vaadin.ui.Component;
 
 public class DefaultCustomNavigationElementProvider implements ComponentProvider<CustomNavigatorNavigationElement> {
     @Override
-    public Component getComponent(CustomNavigatorNavigationElement element) {
+    public Component get(CustomNavigatorNavigationElement element) {
         NavigationButton button = new NavigationButton(element.getName(), element.getIcon());
         button.addClickListener(element.getListener());
         return button;
