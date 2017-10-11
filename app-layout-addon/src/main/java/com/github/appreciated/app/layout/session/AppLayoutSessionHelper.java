@@ -33,8 +33,10 @@ public class AppLayoutSessionHelper {
 
     public static void setActiveNavigationElement(NavigatorNavigationElement element) {
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
-        button.addStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE);
-        UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, element);
+        UI.getCurrent().access(() -> {
+            button.addStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE);
+            UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, element);
+        });
     }
 
     public static AppLayoutBehaviour getActiveVariant() {

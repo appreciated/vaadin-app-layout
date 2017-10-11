@@ -33,7 +33,7 @@ public class AppLayoutBuilder {
     AppLayoutBehaviour variant = AppLayoutBehaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
-    private NavigationConsumer navigatorConsumer;
+    private NavigatorConsumer navigatorConsumer;
     private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private boolean requiresNavigatior = false;
     private AppBarDesign design = AppBarDesign.DEFAULT;
@@ -96,7 +96,7 @@ public class AppLayoutBuilder {
         return this;
     }
 
-    public AppLayoutBuilder withNavigatorConsumer(NavigationConsumer consumer) {
+    public AppLayoutBuilder withNavigatorConsumer(NavigatorConsumer consumer) {
         this.requiresNavigatior = true;
         this.navigatorConsumer = consumer;
         return this;
@@ -296,7 +296,6 @@ public class AppLayoutBuilder {
                 findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
                 return true;
             });
-
             if (navigatorConsumer != null) {
                 navigatorConsumer.accept(navigator);
             }
@@ -314,6 +313,13 @@ public class AppLayoutBuilder {
         instance.setDesign(design);
         if (appBarIconComponent != null) {
             instance.addAppBarIcon(appBarIconComponent);
+        }
+        if (requiresNavigatior && defaultNavigationElement != null) {
+            navigatorNavigationElements.stream()
+                    .filter(element -> element.getViewClassName().equals(defaultNavigationElement.getViewClassName()))
+                    .findFirst().ifPresent(element -> {
+                AppLayoutSessionHelper.setActiveNavigationElement(element);
+            });
         }
         return instance;
     }
@@ -375,7 +381,7 @@ public class AppLayoutBuilder {
     }
 
     @FunctionalInterface
-    public interface NavigationConsumer extends Consumer<Navigator> {
+    public interface NavigatorConsumer extends Consumer<Navigator> {
     }
 
     @FunctionalInterface
