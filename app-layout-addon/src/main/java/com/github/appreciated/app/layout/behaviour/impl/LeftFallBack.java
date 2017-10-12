@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.behaviour.impl;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.AppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
@@ -24,7 +24,7 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public LeftFallBack(AppLayoutBehaviour variant) {
+    public LeftFallBack(Behaviour variant) {
         this.setSpacing(false);
         this.setMargin(false);
         setSizeFull();

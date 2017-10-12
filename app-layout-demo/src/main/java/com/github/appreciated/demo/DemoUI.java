@@ -2,7 +2,7 @@ package com.github.appreciated.demo;
 
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.AppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
@@ -42,7 +42,7 @@ public class DemoUI extends UI {
     protected void init(VaadinRequest request) {
         holder = new VerticalLayout();
         holder.setMargin(false);
-        setDrawerVariant(AppLayoutBehaviour.LEFT);
+        setDrawerVariant(Behaviour.LEFT);
         setContent(holder);
         holder.setSizeFull();
         notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
@@ -63,7 +63,7 @@ public class DemoUI extends UI {
         });
     }
 
-    private void setDrawerVariant(AppLayoutBehaviour variant) {
+    private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
 
 
@@ -95,17 +95,20 @@ public class DemoUI extends UI {
         holder.addComponent(drawer);
     }
 
-    ComboBox getVariantCombo(AppLayoutBehaviour variant) {
-        ComboBox<AppLayoutBehaviour> variants = new ComboBox<>();
+    ComboBox getVariantCombo(Behaviour variant) {
+        ComboBox<Behaviour> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
         variants.setWidth("300px");
-        variants.setItems(AppLayoutBehaviour.LEFT,
-                AppLayoutBehaviour.LEFT_OVERLAY,
-                AppLayoutBehaviour.LEFT_RESPONSIVE,
-                AppLayoutBehaviour.LEFT_RESPONSIVE_OVERLAY,
-                AppLayoutBehaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
-                AppLayoutBehaviour.LEFT_RESPONSIVE_SMALL,
-                AppLayoutBehaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+        variants.setItems(Behaviour.LEFT,
+                Behaviour.LEFT_OVERLAY,
+                Behaviour.LEFT_RESPONSIVE,
+                Behaviour.LEFT_RESPONSIVE_HYBRID,
+                Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_OVERLAY,
+                Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_SMALL,
+                Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;

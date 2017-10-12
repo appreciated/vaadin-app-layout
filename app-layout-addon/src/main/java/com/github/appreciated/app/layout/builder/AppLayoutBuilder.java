@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class AppLayoutBuilder {
 
-    AppLayoutBehaviour variant = AppLayoutBehaviour.LEFT;
+    Behaviour variant = Behaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
     private NavigatorConsumer navigatorConsumer;
@@ -58,7 +59,7 @@ public class AppLayoutBuilder {
         return new AppLayoutBuilder();
     }
 
-    public AppLayoutBuilder withBehaviour(AppLayoutBehaviour variant) {
+    public AppLayoutBuilder withBehaviour(Behaviour variant) {
         this.variant = variant;
         return this;
     }

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.session;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.NavigationBadgeButton;
 import com.vaadin.ui.UI;
@@ -39,11 +39,11 @@ public class AppLayoutSessionHelper {
         });
     }
 
-    public static AppLayoutBehaviour getActiveVariant() {
-        return (AppLayoutBehaviour) UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY_VARIANT);
+    public static Behaviour getActiveVariant() {
+        return (Behaviour) UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY_VARIANT);
     }
 
-    public static void setActiveVariant(AppLayoutBehaviour variant) {
+    public static void setActiveVariant(Behaviour variant) {
         UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY_VARIANT, variant);
     }
 }
