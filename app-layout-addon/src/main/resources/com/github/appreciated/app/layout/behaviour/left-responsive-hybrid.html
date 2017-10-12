@@ -33,28 +33,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 <body unresolved>
 <app-header-layout id="layout-wrapper">
-
     <app-header fixed effects="waterfall" slot="header">
         <app-toolbar style="height: var(--app-bar-height);">
             <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
             <div class="app-bar-content" location="app-bar-elements"></div>
         </app-toolbar>
     </app-header>
-
     <app-drawer-layout id="drawerLayout">
         <app-drawer id="drawer" slot="drawer" swipe-open>
             <div class="drawer-content" location="menu-elements"></div>
         </app-drawer>
         <div class="app-bar-application-content" size="100" location="content"></div>
     </app-drawer-layout>
-
 </app-header-layout>
-
 <script>
     var drawerLayout = document.getElementById('drawerLayout');
     var layoutWrapper = document.getElementById('layout-wrapper');
     var drawer = document.getElementById('drawer');
-
     document.querySelector('paper-icon-button').addEventListener('click', function () {
         if (drawer.persistent) {
             layoutWrapper.classList.toggle("small");
@@ -64,6 +59,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
     });
 </script>
-
 </body>
 </html>
