@@ -59,6 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (drawer.persistent) {
             layoutWrapper.classList.toggle("small");
         } else {
+            layoutWrapper.classList.remove("small");
             drawerLayout.drawer.toggle();
         }
     });

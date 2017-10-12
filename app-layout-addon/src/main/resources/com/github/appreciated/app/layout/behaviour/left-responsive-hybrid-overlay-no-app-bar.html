@@ -46,13 +46,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var drawerLayout = document.getElementById('drawerLayout');
     var drawer = document.getElementById('drawer');
 
-    document.querySelector('paper-icon-button').addEventListener('click', function () {
-        if (drawer.persistent) {
-            drawerLayout.classList.toggle("small");
-            drawerLayout.customStyle['--app-drawer-width'] = '64px';
-        } else {
-            document.querySelector('app-drawer').toggle();
-        }
+    document.getElementById('toggle').addEventListener('click', function () {
+        document.querySelector('app-drawer').toggle();
     });
 </script>
 
