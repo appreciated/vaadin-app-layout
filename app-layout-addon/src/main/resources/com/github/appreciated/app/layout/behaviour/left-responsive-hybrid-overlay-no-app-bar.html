@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             drawerLayout.classList.toggle("small");
             drawerLayout.customStyle['--app-drawer-width'] = '64px';
         } else {
-            drawerLayout.drawer.toggle();
+            document.querySelector('app-drawer').toggle()
         }
     });
 </script>

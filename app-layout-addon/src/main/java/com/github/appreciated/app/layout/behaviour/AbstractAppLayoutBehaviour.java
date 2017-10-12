@@ -63,19 +63,19 @@ public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements
     }
 
     public static void toggleDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').toggle();");
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
     }
 
     public static void openDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').open();");
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
     }
 
     public static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-behaviour').hasAttribute('persistent')){document.querySelector('app-behaviour').close();}");
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
     }
 
     public static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-behaviour').close();");
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
     }
 
     public abstract String getStyleName();

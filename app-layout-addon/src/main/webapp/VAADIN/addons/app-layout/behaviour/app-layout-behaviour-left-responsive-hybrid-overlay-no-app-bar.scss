@@ -1,5 +1,5 @@
 @media only screen and (min-width: 641px) {
-  .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-header app-toolbar {
+  .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar {
     display: none !important;
   }
 }
@@ -78,7 +78,7 @@
       right: 0px;
       bottom: 0px;
     }
-    app-header app-toolbar {
+    app-toolbar {
       background-color: $app-bar-background-color;
       color: $app-bar-font-color;
       box-shadow: $app-bar-shadow;
@@ -90,7 +90,7 @@
       padding: 0px;
     }
 
-    app-header paper-icon-button {
+    app-toolbar paper-icon-button {
       --paper-icon-button-ink-color: #fff;
     }
 
