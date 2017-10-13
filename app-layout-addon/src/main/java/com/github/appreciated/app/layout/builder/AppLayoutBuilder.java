@@ -282,9 +282,13 @@ public class AppLayoutBuilder {
 
     public AppLayout build() {
         if (instance == null) {
-            if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
-                instance = variant.getInstance();
-            } else {
+            try {
+                if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
+                    instance = variant.getInstance();
+                } else {
+                    instance = new LeftFallBack(variant);
+                }
+            } catch (Execption e) {
                 instance = new LeftFallBack(variant);
             }
             AppLayoutSessionHelper.setActiveVariant(variant);
