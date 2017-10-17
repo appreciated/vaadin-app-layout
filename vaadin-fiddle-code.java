@@ -1,14 +1,15 @@
 package org.vaadin.vaadinfiddle;
 
-import com.github.appreciated.app.layout.builder.DrawerVariant;
-import com.github.appreciated.app.layout.builder.NavigationDrawerBuilder;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
+import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.component.NavigationBadgeButton;
-import com.github.appreciated.app.layout.component.NavigationButton;
-import com.github.appreciated.app.layout.component.RoundResourceButton;
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.component.*;
+import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -22,8 +23,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BAR_ELEMENT;
-import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.FOOTER;
-import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.FOOTER;
+import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
 
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("mytheme")
@@ -31,18 +32,16 @@ import static com.github.appreciated.app.layout.builder.NavigationDrawerBuilder.
 @Push
 public class MyUI extends UI {
 
-    final int[] i = {0};
-    DefaultNotificationHolder nholder = new DefaultNotificationHolder();
+    DefaultBadgeHolder badge = new DefaultBadgeHolder();
     private VerticalLayout holder;
 
     @Override
     protected void init(VaadinRequest request) {
         holder = new VerticalLayout();
         holder.setMargin(false);
-        setDrawerVariant(DrawerVariant.LEFT);
+        setDrawerVariant(Behaviour.LEFT);
         setContent(holder);
         holder.setSizeFull();
-        nholder.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
     @Override
@@ -52,64 +51,70 @@ public class MyUI extends UI {
     }
 
     private void addNewNotification() {
-        new Thread(() -> {
-            getUI().access(() -> {
-                nholder.addNotification(new DefaultNotification("Title" + i[0], "Description" + i[0]++));
-            });
-        }).start();
+        badge.increase();
     }
 
-    private void setDrawerVariant(DrawerVariant variant) {
+    private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
 
-        AppLayout drawer = NavigationDrawerBuilder.get()
-                .withVariant(variant)
+        AppLayout drawer = AppLayoutBuilder.get()
+                .withBehaviour(variant)
                 .withTitle("My Appbar Title")
-                .withAppBarIconComponent(new RoundResourceButton(new ThemeResource("logo.png"), "50px", "50px"))
-                .withAppBarElement(getVariantCombo(variant))
-                .withNavigationElement(new MenuHeader(""), HEADER)
-                .withNavigationElement(new NavigationBadgeButton("Home", VaadinIcons.HOME, nholder))
-                .withNavigationElement(new NavigationButton("Charts", VaadinIcons.SPLINE_CHART))
-                .withNavigationElement(new NavigationButton("Contact", VaadinIcons.CONNECT))
-                .withNavigationElement(new NavigationButton("More", VaadinIcons.PLUS))
-                .withNavigationElement(new NavigationButton("Menu", VaadinIcons.MENU))
-                .withNavigationElement(new NavigationButton("Elements", VaadinIcons.LIST))
-                .withClickableElement("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
-                .withNavigationElement(new NavigationButton("Preferences", VaadinIcons.COG), FOOTER)
+                .addToAppBar(getVariantCombo(variant))
+                .add(new MenuHeader("App Layout", "Version 0.9.5", new ThemeResource("logo.png")), HEADER)
+                .add(new NavigationBadgeButton("Home", VaadinIcons.HOME, badge))
+                .add(new NavigationButton("Charts", VaadinIcons.SPLINE_CHART))
+                .add(new NavigationButton("Contact", VaadinIcons.CONNECT))
+                .add(new NavigationButton("More", VaadinIcons.PLUS))
+                .add(new NavigationButton("Menu", VaadinIcons.MENU))
+                .add(new NavigationButton("Elements", VaadinIcons.LIST))
+                .addClickable("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
+                .add(new NavigationButton("Preferences", VaadinIcons.COG), FOOTER)
                 .build();
         holder.addComponent(drawer);
     }
 
-    ComboBox getVariantCombo(DrawerVariant variant) {
-        ComboBox<DrawerVariant> variants = new ComboBox<>();
+    ComboBox getVariantCombo(Behaviour variant) {
+        ComboBox<Behaviour> variants = new ComboBox<>();
         variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
         variants.setWidth("300px");
-        variants.setItems(DrawerVariant.LEFT,
-                DrawerVariant.LEFT_OVERLAY,
-                DrawerVariant.LEFT_RESPONSIVE,
-                DrawerVariant.LEFT_RESPONSIVE_OVERLAY,
-                DrawerVariant.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
-                DrawerVariant.LEFT_RESPONSIVE_SMALL,
-                DrawerVariant.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+        variants.setItems(Behaviour.LEFT,
+                Behaviour.LEFT_OVERLAY,
+                Behaviour.LEFT_RESPONSIVE,
+                Behaviour.LEFT_RESPONSIVE_HYBRID,
+                Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_OVERLAY,
+                Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
+                Behaviour.LEFT_RESPONSIVE_SMALL,
+                Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;
     }
 
-    RoundResourceButton getResourceButton() {
-        return getResourceButton(null, null);
-    }
-
-    RoundResourceButton getResourceButton(String width, String height) {
-        if (width == null || height == null) {
-            width = "75px";
-            height = "75px";
-        }
-        return new RoundResourceButton(new ThemeResource("logo.png"), width, height);
-    }
-
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
     public static class Servlet extends VaadinServlet {
+    }
+
+    public static class View1 extends ExampleView { }
+
+    public static class View2 extends ExampleView { }
+
+    public static class View3 extends ExampleView { }
+
+    public static class View4 extends ExampleView { }
+
+    public static class View5 extends ExampleView { }
+
+    public static class View6 extends ExampleView { }
+
+    public static class View7 extends ExampleView { }
+
+    public static class ExampleView extends HorizontalLayout implements View {
+        public ExampleView() {
+            addComponent(new Label(getClass().getSimpleName()));
+        }
     }
 }
