@@ -28,6 +28,7 @@ $z-index: 10 !default;
 @import "behaviour/app-layout-behaviour-left-overlay.scss";
 @import "behaviour/app-layout-behaviour-left-fallback.scss";
 @import "behaviour/app-layout-behaviour-left-responsive.scss";
+@import "behaviour/app-layout-behaviour-left-hybrid.scss";
 @import "behaviour/app-layout-behaviour-left-responsive-hybrid.scss";
 @import "behaviour/app-layout-behaviour-left-responsive-hybrid-no-app-bar.scss";
 @import "behaviour/app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar.scss";
@@ -69,6 +70,7 @@ $z-index: 10 !default;
   @include app-layout-expanding-menu-container;
 
   @include app-layout-behaviour-left;
+  @include app-layout-behaviour-left-hybrid;
   @include app-layout-behaviour-left-responsive-hybrid;
   @include app-layout-behaviour-left-responsive-hybrid-no-app-bar;
   @include app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar;

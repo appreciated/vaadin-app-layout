@@ -102,6 +102,7 @@ public class DemoUI extends UI {
         variants.setItems(Behaviour.LEFT,
                 Behaviour.LEFT_OVERLAY,
                 Behaviour.LEFT_RESPONSIVE,
+                Behaviour.LEFT_HYBRID,
                 Behaviour.LEFT_RESPONSIVE_HYBRID,
                 Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
                 Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,

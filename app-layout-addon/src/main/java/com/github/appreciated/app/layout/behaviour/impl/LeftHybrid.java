@@ -19,14 +19,15 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-header/app-header.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-header-layout/app-header-layout.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
-public class LeftResponsiveSmall extends AbstractAppLayoutBehaviour {
 
-    public LeftResponsiveSmall() throws IOException {
-        super("left-responsive-small.html");
+public class LeftHybrid extends AbstractAppLayoutBehaviour {
+
+    public LeftHybrid() throws IOException {
+        super("left-hybrid.html");
     }
 
     @Override
     public String getStyleName() {
-        return "left-responsive-small";
+        return "left-hybrid";
     }
 }
