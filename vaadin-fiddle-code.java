@@ -64,9 +64,13 @@ public class MyUI extends UI {
                 .add(new MenuHeader("App Layout", "Version 0.9.5", new ThemeResource("logo.png")), HEADER)
                 .add(new NavigationBadgeButton("Home", VaadinIcons.HOME, badge))
                 .add(new NavigationButton("Charts", VaadinIcons.SPLINE_CHART))
-                .add(new NavigationButton("Contact", VaadinIcons.CONNECT))
-                .add(new NavigationButton("More", VaadinIcons.PLUS))
-                .add(new NavigationButton("Menu", VaadinIcons.MENU))
+                .add(
+                        SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                                .add(new NavigationButton("Contact", VaadinIcons.CONNECT))
+                                .add(new NavigationButton("More", VaadinIcons.PLUS))
+                                .add(new NavigationButton("Menu", VaadinIcons.MENU))
+                                .build())
+
                 .add(new NavigationButton("Elements", VaadinIcons.LIST))
                 .addClickable("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
                 .add(new NavigationButton("Preferences", VaadinIcons.COG), FOOTER)

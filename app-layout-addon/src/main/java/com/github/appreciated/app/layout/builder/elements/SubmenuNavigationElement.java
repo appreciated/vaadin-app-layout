@@ -32,4 +32,15 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
     public String getTitle() {
         return title;
     }
+
+    public boolean requiresNavigator() {
+        for (AbstractNavigationElement submenuElement : submenuElements) {
+            if (submenuElement instanceof NavigatorNavigationElement) {
+                return true;
+            } else if (submenuElement instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) submenuElement).requiresNavigator()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

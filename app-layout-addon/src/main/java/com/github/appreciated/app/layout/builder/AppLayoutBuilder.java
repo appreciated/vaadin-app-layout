@@ -255,13 +255,13 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(SubmenuNavigationElement element) {
-        requiresNavigatior = true;
+        requiresNavigatior = element.requiresNavigator();
         addToPosition(element, Position.DEFAULT);
         return this;
     }
 
     public AppLayoutBuilder add(SubmenuNavigationElement element, Position position) {
-        requiresNavigatior = true;
+        requiresNavigatior = element.requiresNavigator();
         addToPosition(element, position);
         return this;
     }
@@ -282,13 +282,9 @@ public class AppLayoutBuilder {
 
     public AppLayout build() {
         if (instance == null) {
-            try {
-                if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
-                    instance = variant.getInstance();
-                } else {
-                    instance = new LeftFallBack(variant);
-                }
-            } catch (Execption e) {
+            if (!UI.getCurrent().getPage().getWebBrowser().isIE()) {
+                instance = variant.getInstance();
+            } else {
                 instance = new LeftFallBack(variant);
             }
             AppLayoutSessionHelper.setActiveVariant(variant);
