@@ -1,6 +1,11 @@
 @media only screen and (min-width: 641px) {
-  .app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar {
-    display: none !important;
+  .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
+    app-header app-toolbar {
+      display: none !important;
+    }
+    .app-bar-application-content {
+      height: 100vh !important;
+    }
   }
 }
 

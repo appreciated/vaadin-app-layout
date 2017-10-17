@@ -102,20 +102,6 @@ public class MyUI extends UI {
     public static class Servlet extends VaadinServlet {
     }
 
-    public static class View1 extends ExampleView { }
-
-    public static class View2 extends ExampleView { }
-
-    public static class View3 extends ExampleView { }
-
-    public static class View4 extends ExampleView { }
-
-    public static class View5 extends ExampleView { }
-
-    public static class View6 extends ExampleView { }
-
-    public static class View7 extends ExampleView { }
-
     public static class ExampleView extends HorizontalLayout implements View {
         public ExampleView() {
             addComponent(new Label(getClass().getSimpleName()));
