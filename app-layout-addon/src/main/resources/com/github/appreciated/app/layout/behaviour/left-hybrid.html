@@ -51,7 +51,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var layoutWrapper = document.getElementById('layout-wrapper');
     var drawer = document.getElementById('drawer');
     document.querySelector('paper-icon-button').addEventListener('click', function () {
-        if (!drawer.persistent) {
+        if (drawer.persistent) {
+            layoutWrapper.classList.toggle("small");
+        } else {
             layoutWrapper.classList.remove("small");
             drawerLayout.drawer.toggle();
         }
