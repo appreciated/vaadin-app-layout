@@ -7,6 +7,7 @@ import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.providers.DefaultCustomNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.DefaultSectionElementComponentProvider;
@@ -46,6 +47,7 @@ public class AppLayoutBuilder {
     private DefaultCustomNavigationElementProvider customNavigationElementProvider = new DefaultCustomNavigationElementProvider();
     private ComponentProvider<SectionNavigationElement> sectionElementProvider = new DefaultSectionElementComponentProvider();
     private ComponentProvider<SubmenuNavigationElement> submenuNavigationElementProvider = new DefaultSubmenuNavigationElementProvider();
+    private NavigationElementInfoProvider navigationElementInfoProvider = null;
     private List<AbstractNavigationElement> navigationFooterElements = new ArrayList<>();
     private List<AbstractNavigationElement> navigationHeaderElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorNavigationElements = new ArrayList<>();
@@ -83,6 +85,12 @@ public class AppLayoutBuilder {
     public AppLayoutBuilder withNavigatorProducer(NavigatorProducer navigator) {
         this.requiresNavigatior = true;
         this.navigatorProducer = navigator;
+        return this;
+    }
+
+    public AppLayoutBuilder withNavigationElementInfoProvider(NavigationElementInfoProvider provider) {
+        this.requiresNavigatior = true;
+        this.navigationElementInfoProvider = provider;
         return this;
     }
 
@@ -194,53 +202,18 @@ public class AppLayoutBuilder {
         return add(caption, icon, null, element, position);
     }
 
-
-    /**
-     * Only use for CDIViews!
-     *
-     * @param caption ViewName
-     * @return
-     */
-    public AppLayoutBuilder add(String caption) {
-        return add(caption, null, null, null, Position.DEFAULT);
+    public AppLayoutBuilder addView(Class<View> className) {
+        return add(className, Position.DEFAULT);
     }
 
-    /**
-     * Only use for CDIViews!
-     *
-     * @param caption ViewName
-     * @param icon
-     * @return
-     */
-    public AppLayoutBuilder add(String caption, Resource icon) {
-        return add(caption, icon, null, null, Position.DEFAULT);
+    public AppLayoutBuilder add(Class<View> className, Position position) {
+        if (navigationElementInfoProvider == null) {
+            throw new IllegalStateException("when using this method you need to provide a NavigationElementInfoProvider (via withNavigationElementProvider(...))");
+        } else {
+            NavigationElementInfo info = navigationElementInfoProvider.apply(className);
+            return add(new NavigatorNavigationElement(info), position);
+        }
     }
-
-    /**
-     * Only use for CDIViews!
-     *
-     * @param caption  ViewName
-     * @param icon
-     * @param position HEADER / DEFAULT / FOOTER
-     * @return
-     */
-    public AppLayoutBuilder add(String caption, Resource icon, Position position) {
-        return add(caption, icon, null, null, position);
-    }
-
-
-    /**
-     * Only use for CDIViews!
-     *
-     * @param caption  ViewName
-     * @param icon
-     * @param position HEADER / DEFAULT / FOOTER
-     * @return
-     */
-    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Position position) {
-        return add(caption, icon, badgeHolder, null, position);
-    }
-
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         requiresNavigatior = true;
@@ -254,14 +227,16 @@ public class AppLayoutBuilder {
         return this;
     }
 
-    public AppLayoutBuilder add(SubmenuNavigationElement element) {
-        requiresNavigatior = element.requiresNavigator();
-        addToPosition(element, Position.DEFAULT);
-        return this;
+    public AppLayoutBuilder add(AbstractNavigationElement element) {
+        return add(element, Position.DEFAULT);
     }
 
-    public AppLayoutBuilder add(SubmenuNavigationElement element, Position position) {
-        requiresNavigatior = element.requiresNavigator();
+    public AppLayoutBuilder add(AbstractNavigationElement element, Position position) {
+        if (element instanceof NavigatorNavigationElement) {
+            requiresNavigatior = true;
+        } else if (element instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) element).requiresNavigator()) {
+            requiresNavigatior = ((SubmenuNavigationElement) element).requiresNavigator();
+        }
         addToPosition(element, position);
         return this;
     }
@@ -317,7 +292,7 @@ public class AppLayoutBuilder {
         }
         if (requiresNavigatior && defaultNavigationElement != null) {
             navigatorNavigationElements.stream()
-                    .filter(element -> element.getViewClassName().equals(defaultNavigationElement.getViewClassName()))
+                    .filter(element -> (element.getViewClassName() != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())))
                     .findFirst().ifPresent(element -> {
                 AppLayoutSessionHelper.setActiveNavigationElement(element);
             });
@@ -390,6 +365,12 @@ public class AppLayoutBuilder {
     }
 
     @FunctionalInterface
+    public interface NavigationElementInfoProvider extends Function<Class<View>, NavigationElementInfo> {
+    }
+
+    @FunctionalInterface
     interface ComponentConsumer extends Consumer<Component> {
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -12,6 +13,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private Resource icon;
     private Class<? extends View> className;
     private DefaultBadgeHolder badgeHolder;
+    private String navigationName;
     private ViewNameInterceptor viewNameInterceptor;
 
     public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
@@ -34,6 +36,12 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.badgeHolder = badgeHolder;
         this.icon = icon;
         this.view = view;
+    }
+
+    public NavigatorNavigationElement(NavigationElementInfo info) {
+        this.name = info.getCaption();
+        this.icon = info.getIcon();
+        this.navigationName = info.getViewName();
     }
 
     public void addViewToNavigator(Navigator navigator) {
