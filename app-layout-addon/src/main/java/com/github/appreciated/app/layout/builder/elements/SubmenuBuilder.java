@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -14,6 +15,7 @@ public class SubmenuBuilder {
     private final String title;
     private final Resource resource;
     private List<AbstractNavigationElement> submenuElements = new ArrayList<>();
+    private AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider;
 
     public SubmenuBuilder(String title, Resource resource) {
         this.title = title;
@@ -61,6 +63,13 @@ public class SubmenuBuilder {
         return this;
     }
 
+    public SubmenuBuilder add(Class<? extends View> className) {
+        return add(className, null);
+    }
+
+    public SubmenuBuilder add(Class<? extends View> className, Resource icon) {
+        return add(new NavigatorNavigationElement(className, icon));
+    }
 
     public SubmenuBuilder add(String caption, Class<? extends View> element) {
         return this.add(caption, null, element);
@@ -92,6 +101,19 @@ public class SubmenuBuilder {
     public SubmenuBuilder add(Component element) {
         this.submenuElements.add(new CustomNavigationElement(element));
         return this;
+    }
+
+    public SubmenuBuilder add(AbstractNavigationElement element) {
+        this.submenuElements.add(element);
+        return this;
+    }
+
+    public void setNavigationElementInfoProvider(AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider) {
+        this.navigationElementInfoProvider = navigationElementInfoProvider;
+    }
+
+    public List<AbstractNavigationElement> getSubmenuElements() {
+        return submenuElements;
     }
 
     public SubmenuNavigationElement build() {

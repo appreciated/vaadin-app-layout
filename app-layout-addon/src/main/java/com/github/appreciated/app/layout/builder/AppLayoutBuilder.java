@@ -202,17 +202,20 @@ public class AppLayoutBuilder {
         return add(caption, icon, null, element, position);
     }
 
-    public AppLayoutBuilder addView(Class<View> className) {
-        return add(className, Position.DEFAULT);
+    public AppLayoutBuilder add(Class<? extends View> className) {
+        return add(className, null, Position.DEFAULT);
     }
 
-    public AppLayoutBuilder add(Class<View> className, Position position) {
-        if (navigationElementInfoProvider == null) {
-            throw new IllegalStateException("when using this method you need to provide a NavigationElementInfoProvider (via withNavigationElementProvider(...))");
-        } else {
-            NavigationElementInfo info = navigationElementInfoProvider.apply(className);
-            return add(new NavigatorNavigationElement(info), position);
-        }
+    public AppLayoutBuilder add(Class<? extends View> className, Position position) {
+        return add(className, null, position);
+    }
+
+    public AppLayoutBuilder add(Class<? extends View> className, Resource icon) {
+        return add(className, icon, Position.DEFAULT);
+    }
+
+    public AppLayoutBuilder add(Class<? extends View> className, Resource icon, Position position) {
+        return add(new NavigatorNavigationElement(className, icon), position);
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
@@ -317,6 +320,7 @@ public class AppLayoutBuilder {
     public void setProvider(AbstractNavigationElement element) {
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+            nelement.setNavigationElementInfoProvider(navigationElementInfoProvider);
             nelement.setProvider(navigationElementProvider);
             if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
@@ -365,12 +369,11 @@ public class AppLayoutBuilder {
     }
 
     @FunctionalInterface
-    public interface NavigationElementInfoProvider extends Function<Class<View>, NavigationElementInfo> {
+    public interface NavigationElementInfoProvider extends Function<Class<? extends View>, NavigationElementInfo> {
     }
 
     @FunctionalInterface
     interface ComponentConsumer extends Consumer<Component> {
     }
-
 
 }
