@@ -63,6 +63,10 @@ $z-index: 10 !default;
     pointer-events: none;
   }
 
+  app-drawer:not([persistent]):not([opened]) .drawer-content * {
+    overflow: hidden;
+  }
+
   @include app-layout-default-design;
   @include app-layout-material-design;
   @include app-layout-custom-design;
