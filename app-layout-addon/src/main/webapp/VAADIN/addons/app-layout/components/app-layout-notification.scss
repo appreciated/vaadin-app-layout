@@ -28,6 +28,7 @@
       overflow: visible !important;
     }
     .app-layout-notification {
+      transition: border 0.3s ease;
       .app-layout-notification-time {
         position: relative;
         font-size: 12px;
@@ -51,6 +52,12 @@
       }
       &.app-layout-notification-priority-high {
         background: $v-focus-color !important;
+        &:not(.app-layout-notification-read) {
+          border-left: 3px solid valo-font-color($v-focus-color, 1.0);
+        }
+        &.app-layout-notification-read {
+          border-left: 3px solid transparent;
+        }
         .app-layout-notification-subtitle {
           color: valo-font-color($v-focus-color, 0.8);
         }
@@ -67,6 +74,12 @@
       }
       &.app-layout-notification-priority-medium {
         background: rgb(255, 255, 255) !important;
+        &:not(.app-layout-notification-read) {
+          border-left: 3px solid $v-focus-color;
+        }
+        &.app-layout-notification-read {
+          border-left: 3px solid transparent;
+        }
         .app-layout-notification-subtitle {
           color: valo-font-color(rgb(255, 255, 255), 0.8);
         }
@@ -76,6 +89,12 @@
       }
       &.app-layout-notification-priority-low {
         background: rgb(245, 245, 245) !important;
+        &:not(.app-layout-notification-read) {
+          border-left: 3px solid valo-font-color(rgb(245, 245, 245), 0.2);
+        }
+        &.app-layout-notification-read {
+          border-left: 3px solid transparent;
+        }
         .app-layout-notification-subtitle {
           color: valo-font-color(rgb(245, 245, 245), 0.8);
         }
@@ -83,7 +102,7 @@
           color: valo-font-color(rgb(245, 245, 245), 0.7);
         }
       }
-      box-shadow: 0px 8px 9px -4px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 5px 11px -1px rgba(0, 0, 0, 0.4);
       border-radius: 3px;
     }
     .v-window-contents {

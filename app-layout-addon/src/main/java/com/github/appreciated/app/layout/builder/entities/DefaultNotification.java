@@ -15,6 +15,7 @@ public class DefaultNotification implements Comparator<DefaultNotification> {
     Resource image;
     private Priority priority;
     private boolean dismissible;
+    private boolean read;
     private LocalDateTime time;
 
     public DefaultNotification(String title, String description) {
@@ -84,6 +85,22 @@ public class DefaultNotification implements Comparator<DefaultNotification> {
                 return Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH;
         }
         return "";
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
+    public boolean isDismissible() {
+        return dismissible;
+    }
+
+    public void setDismissible(boolean dismissible) {
+        this.dismissible = dismissible;
     }
 
     public String getTimeAgo() {

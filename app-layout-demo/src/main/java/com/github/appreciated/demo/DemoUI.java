@@ -52,7 +52,10 @@ public class DemoUI extends UI {
     public void attach() {
         super.attach();
         addNotification(LOW);
+        addNotification(LOW);
         addNotification(MEDIUM);
+        addNotification(MEDIUM);
+        addNotification(HIGH);
         addNotification(HIGH);
     }
 

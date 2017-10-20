@@ -24,6 +24,7 @@ public class Styles {
     public static final String APP_BAR_NOTIFICATION_PRIORITY_HIGH = "app-layout-notification-priority-high";
     public static final String APP_BAR_NOTIFICATION_PRIORITY_MEDIUM = "app-layout-notification-priority-medium";
     public static final String APP_BAR_NOTIFICATION_PRIORITY_LOW = "app-layout-notification-priority-low";
+    public static final String APP_BAR_NOTIFICATION_READ = "app-layout-notification-read";
     public static final String EXPANDING_MENU_CONTAINER_PRIMARY_STYLE = "app-layout-expanding-menu-container";
     public static final String EXPANDING_MENU_CONTAINER_OPEN = "app-layout-expanding-menu-container-open";
     public static final String EXPANDING_MENU_CONTAINER_BUTTON = "app-layout-expanding-menu-container-button";

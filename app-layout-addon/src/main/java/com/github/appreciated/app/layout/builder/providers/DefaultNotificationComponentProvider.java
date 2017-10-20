@@ -28,9 +28,16 @@ public class DefaultNotificationComponentProvider implements PairComponentProvid
             descriptionWrapper.addComponent(image);
             descriptionWrapper.setExpandRatio(description, 1.0f);
         }
-        wrapper.addComponent(new HorizontalLayout(title, timeAgo));
+        if (info.isRead()) {
+            wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_READ);
+        }
+        wrapper.addComponent(new HorizontalLayout(new HorizontalLayout(title, timeAgo)));
         wrapper.addComponent(descriptionWrapper);
-        wrapper.addLayoutClickListener(layoutClickEvent -> holder.onNotificationClicked(info));
+        wrapper.addLayoutClickListener(layoutClickEvent -> {
+            info.setRead(true);
+            holder.onNotificationClicked(info);
+            wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_READ);
+        });
         wrapper.addStyleName(info.getStyle());
         return wrapper;
     }
