@@ -3,16 +3,22 @@ package com.github.appreciated.app.layout.builder.entities;
 import com.github.appreciated.app.layout.builder.PairComponentProvider;
 import com.vaadin.ui.Component;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
 
-public class NotificationHolder<T extends Comparator<T>> {
+public class NotificationHolder<T extends NotificationHolder.Notification> {
+
+    private PairComponentProvider<NotificationHolder, T> componentProvider;
 
     private ArrayList<NotificationListener> listeners = new ArrayList<>();
     private ArrayList<T> notifications = new ArrayList<>();
-    private PairComponentProvider<NotificationHolder<T>, T> componentProvider;
+
+    public void setComponentProvider(PairComponentProvider<NotificationHolder, T> componentProvider) {
+        this.componentProvider = componentProvider;
+    }
     private NotificationClickListener<T> listener;
 
     public NotificationHolder() {
@@ -30,8 +36,12 @@ public class NotificationHolder<T extends Comparator<T>> {
         return notifications.size();
     }
 
-    public void setComponentProvider(PairComponentProvider<NotificationHolder<T>, T> componentProvider) {
-        this.componentProvider = componentProvider;
+    public List<Component> getNotifications(boolean showAll) {
+        List<T> components = getNotifications();
+        if (!showAll) {
+            components = components.size() > 4 ? components.subList(0, 4) : components;
+        }
+        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -59,12 +69,11 @@ public class NotificationHolder<T extends Comparator<T>> {
         return notifications;
     }
 
-    public List<Component> getNotifications(boolean showAll) {
-        List<T> components = getNotifications();
-        if (!showAll) {
-            components = components.size() > 4 ? components.subList(0, 4) : components;
+    public void onNotificationClicked(T info) {
+        if (listener != null) {
+            listeners.forEach(listener -> listener.onUnreadCountChange(this));
+            listener.onNotificationClicked(info);
         }
-        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent(o)).collect(Collectors.toList());
     }
 
 
@@ -72,14 +81,30 @@ public class NotificationHolder<T extends Comparator<T>> {
         this.listener = listener;
     }
 
-    public void onNotificationClicked(T info) {
-        if (listener != null) {
-            listener.onNotificationClicked(info);
+    public int getUnreadNotifications() {
+        return (int) notifications.stream().filter(notification -> notification.isUnnread()).count();
+    }
+
+    public interface Notification extends Comparator<Notification> {
+        boolean isUnnread();
+
+        DefaultNotification.Priority getPriority();
+
+        LocalDateTime getTime();
+
+        default int compare(Notification o1, Notification o2) {
+            if (o1.getPriority() != o2.getPriority()) {
+                return o1.getPriority().getValue().compareTo(o2.getPriority().getValue());
+            } else {
+                return o1.getTime().compareTo(o2.getTime());
+            }
         }
     }
 
     public interface NotificationListener {
         void onNotificationChanges(NotificationHolder newStatus);
+
+        void onUnreadCountChange(NotificationHolder holder);
     }
 
     public interface NotificationClickListener<T> {

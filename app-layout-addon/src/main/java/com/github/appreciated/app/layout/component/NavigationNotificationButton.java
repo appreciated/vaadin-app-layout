@@ -15,7 +15,7 @@ import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BA
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
 
-public class NavigationNotificationButton extends AbsoluteLayout {
+public class NavigationNotificationButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
 
     private final NavigationButton button;
     private final Label badge;
@@ -39,12 +39,7 @@ public class NavigationNotificationButton extends AbsoluteLayout {
         button.addClickListener(clickEvent -> buttonClick(clickEvent));
         badge = new Label();
         if (notificationHolder != null) {
-            notificationHolder.addStatusListener((newStatus) -> {
-                if (window != null) {
-                    window.addNewNotification(notificationHolder);
-                }
-                setStatus(newStatus);
-            });
+            notificationHolder.addStatusListener(this);
         }
         setStatus(notificationHolder);
         badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
@@ -58,8 +53,17 @@ public class NavigationNotificationButton extends AbsoluteLayout {
 
     private void setStatus(NotificationHolder status) {
         if (status != null) {
-            badge.setVisible(true);
-            badge.setValue(String.valueOf(status.getNotificationSize()));
+            int unreadNotifications = status.getUnreadNotifications();
+            if (unreadNotifications > 0) {
+                badge.setVisible(true);
+                if (unreadNotifications < 10) {
+                    badge.setValue(String.valueOf(unreadNotifications));
+                } else {
+                    badge.setValue("9+");
+                }
+            } else {
+                badge.setVisible(false);
+            }
         } else {
             badge.setVisible(false);
         }
@@ -86,4 +90,16 @@ public class NavigationNotificationButton extends AbsoluteLayout {
         }
     }
 
+    @Override
+    public void onNotificationChanges(NotificationHolder newStatus) {
+        if (window != null) {
+            window.addNewNotification(notificationHolder);
+        }
+        setStatus(newStatus);
+    }
+
+    @Override
+    public void onUnreadCountChange(NotificationHolder holder) {
+
+    }
 }

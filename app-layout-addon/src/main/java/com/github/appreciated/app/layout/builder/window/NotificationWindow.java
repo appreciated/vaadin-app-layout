@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NotificationWindow<T> extends Window {
 
-    int height = 367;
+    int height = 357;
 
     private VerticalLayout notificationsView;
     boolean hasBlurListener = false;

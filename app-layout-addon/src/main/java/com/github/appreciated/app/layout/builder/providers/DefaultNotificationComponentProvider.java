@@ -10,7 +10,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class DefaultNotificationComponentProvider implements PairComponentProvider<NotificationHolder<DefaultNotification>, DefaultNotification> {
+public class DefaultNotificationComponentProvider implements PairComponentProvider<NotificationHolder, DefaultNotification> {
     @Override
     public Component getComponent(NotificationHolder holder, DefaultNotification info) {
         VerticalLayout wrapper = new VerticalLayout();
@@ -28,13 +28,13 @@ public class DefaultNotificationComponentProvider implements PairComponentProvid
             descriptionWrapper.addComponent(image);
             descriptionWrapper.setExpandRatio(description, 1.0f);
         }
-        if (info.isRead()) {
+        if (!info.isUnnread()) {
             wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_READ);
         }
         wrapper.addComponent(new HorizontalLayout(new HorizontalLayout(title, timeAgo)));
         wrapper.addComponent(descriptionWrapper);
         wrapper.addLayoutClickListener(layoutClickEvent -> {
-            info.setRead(true);
+            info.setUnread(false);
             holder.onNotificationClicked(info);
             wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_READ);
         });
