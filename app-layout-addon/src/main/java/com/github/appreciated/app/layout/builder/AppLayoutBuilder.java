@@ -293,17 +293,15 @@ public class AppLayoutBuilder {
         if (appBarIconComponent != null) {
             instance.addAppBarIcon(appBarIconComponent);
         }
-        if (requiresNavigatior && defaultNavigationElement != null) {
-            navigatorNavigationElements.stream()
-                    .filter(element -> (element.getViewClassName() != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())))
-                    .findFirst().ifPresent(element -> {
-                AppLayoutSessionHelper.setActiveNavigationElement(element);
-            });
-        }
         return instance;
     }
 
     Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
+        if (viewName.equals("")) {
+            return navigatorNavigationElements.stream()
+                    .filter(element -> element.getViewClassName().equals(defaultNavigationElement.getViewClassName()) || element.getViewName().equals(""))
+                    .findFirst();
+        }
         return navigatorNavigationElements.stream()
                 .filter(element -> element instanceof NavigatorNavigationElement)
                 .filter(element -> element.getViewName().equals(viewName))
