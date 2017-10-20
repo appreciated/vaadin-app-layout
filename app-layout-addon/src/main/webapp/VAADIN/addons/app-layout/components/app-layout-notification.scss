@@ -49,6 +49,8 @@
       }
       .app-layout-notification-subtitle {
         font-size: 14px;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
       }
       &.app-layout-notification-priority-high {
         background: $v-focus-color !important;

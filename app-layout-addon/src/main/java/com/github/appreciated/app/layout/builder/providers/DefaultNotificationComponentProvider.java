@@ -5,6 +5,7 @@ import com.github.appreciated.app.layout.builder.PairComponentProvider;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.component.RoundImage;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -21,8 +22,10 @@ public class DefaultNotificationComponentProvider implements PairComponentProvid
         Label title = new Label(info.getTitle());
         title.addStyleName(Styles.APP_BAR_NOTIFICATION_TITLE);
         Label description = new Label(info.getDescription());
+        description.setWidth(100, Sizeable.Unit.PERCENTAGE);
         description.addStyleName(Styles.APP_BAR_NOTIFICATION_DESCRIPTION);
         HorizontalLayout descriptionWrapper = new HorizontalLayout(description);
+        descriptionWrapper.setWidth(100, Sizeable.Unit.PERCENTAGE);
         if (info.getImage() != null) {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.addComponent(image);
