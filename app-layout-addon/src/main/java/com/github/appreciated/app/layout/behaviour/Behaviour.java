@@ -15,19 +15,19 @@ public enum Behaviour {
     LEFT_RESPONSIVE_SMALL(LeftResponsiveSmall.class, true, false, true),
     LEFT_RESPONSIVE_SMALL_NO_APP_BAR(LeftResponsiveSmallNoAppBar.class, false, false, true);
 
-    private Class<? extends AbstractAppLayoutBehaviour> className;
+    private Class<? extends AbstractLeftAppLayout> className;
     private boolean hasAppBar;
     private boolean overlay;
     private boolean small;
 
-    Behaviour(Class<? extends AbstractAppLayoutBehaviour> className, boolean hasAppBar, boolean overlay, boolean small) {
+    Behaviour(Class<? extends AbstractLeftAppLayout> className, boolean hasAppBar, boolean overlay, boolean small) {
         this.className = className;
         this.hasAppBar = hasAppBar;
         this.overlay = overlay;
         this.small = small;
     }
 
-    public AbstractAppLayoutBehaviour getInstance() {
+    public AbstractLeftAppLayout getInstance() {
         try {
             return className.newInstance();
         } catch (InstantiationException e) {

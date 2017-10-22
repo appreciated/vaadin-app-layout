@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.impl;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 
@@ -16,7 +16,7 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 
-public class LeftOverlay extends AbstractAppLayoutBehaviour {
+public class LeftOverlay extends AbstractLeftAppLayout {
 
     public LeftOverlay() throws IOException {
         super("left-overlay.html");

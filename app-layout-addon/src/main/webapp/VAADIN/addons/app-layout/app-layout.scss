@@ -22,6 +22,7 @@ $z-index: 10 !default;
 @import "designs/app-layout-custom-design.scss";
 
 @import "components/app-layout-notification.scss";
+@import "components/app-layout-flexbox.scss";
 @import "components/app-layout-expanding-menu-container.scss";
 
 @import "behaviour/app-layout-behaviour-left.scss";
@@ -72,6 +73,7 @@ $z-index: 10 !default;
   @include app-layout-custom-design;
   @include app-layout-notification;
   @include app-layout-expanding-menu-container;
+  @include app-layout-flexbox;
 
   @include app-layout-behaviour-left;
   @include app-layout-behaviour-left-hybrid;

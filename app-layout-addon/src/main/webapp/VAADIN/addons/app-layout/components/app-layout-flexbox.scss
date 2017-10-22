@@ -1,0 +1,31 @@
+@mixin app-layout-flexbox {
+  .v-csslayout.flex-row {
+    @include display(flex);
+    @include flex-direction(row);
+  }
+  .v-csslayout.flex-column {
+    @include display(flex);
+    @include flex-direction(column);
+  }
+  .v-csslayout.flex-row.overflow-auto {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .v-csslayout.flex-column.overflow-auto {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .v-csslayout.flex-row, .v-csslayout.flex-column {
+    > .grow:not(.shrink) {
+      @include flex(1);
+    }
+    > .shrink:not(.grow) {
+      @include flex(0, 1);
+      overflow: auto;
+    }
+    > .grow.shrink {
+      @include flex(1, 1);
+      overflow: auto;
+    }
+  }
+}

@@ -34,7 +34,7 @@ public interface AppLayout extends Component {
 
     VerticalLayout getMenuHeaderHolder();
 
-    VerticalLayout getMenuHolder();
+    Layout getMenuHolder();
 
     void addAppBarIcon(Component appBarIconComponent);
 

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.providers;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.NavigationBadgeButton;
@@ -13,7 +13,7 @@ public abstract class AbstractNavigationElementComponentProvider implements Comp
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
         button.getButton().addClickListener(clickEvent -> {
             UI.getCurrent().getNavigator().navigateTo(element.getViewName());
-            AbstractAppLayoutBehaviour.closeDrawerIfNotPersistent();
+            AbstractLeftAppLayout.closeDrawerIfNotPersistent();
         });
     }
 }

@@ -32,7 +32,7 @@ public class MenuHeader extends VerticalLayout {
         addStyleName(APP_LAYOUT_MENU_HEADER_ELEMENT);
         setMargin(false);
         setSpacing(false);
-        setMargin(new MarginInfo(true, false));
+        setMargin(new MarginInfo(true, false, false, false));
         if (image != null)
             addComponent(image);
         if (title != null)

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
@@ -72,7 +72,7 @@ public class AppLayoutBuilder {
      * @param variant
      * @return
      */
-    public AppLayoutBuilder withCustomVariant(AbstractAppLayoutBehaviour variant) {
+    public AppLayoutBuilder withCustomVariant(AbstractLeftAppLayout variant) {
         this.instance = variant;
         return this;
     }
