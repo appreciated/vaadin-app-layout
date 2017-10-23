@@ -16,15 +16,16 @@
     overflow-x: hidden;
   }
   .v-csslayout.flex-row, .v-csslayout.flex-column {
-    > .grow:not(.shrink) {
-      @include flex(1);
+    .grow:not(.shrink) {
+      @include flex-grow(1);
     }
-    > .shrink:not(.grow) {
-      @include flex(0, 1);
+    .shrink:not(.grow) {
+      @include flex-shrink(1);
       overflow: auto;
     }
-    > .grow.shrink {
-      @include flex(1, 1);
+    .grow.shrink {
+      @include flex-grow(1);
+      @include flex-shrink(1);
       overflow: auto;
     }
   }

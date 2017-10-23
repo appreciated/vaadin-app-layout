@@ -1,6 +1,6 @@
 
 @import "../valo/valo.scss";
-// don't do it this way in production or developement, instead run an 'mvn install' if you haven't already and check your
+// don't do it this way in production or development, instead run an 'mvn install' if you haven't already and check your
 // addons.scss in your theme it should contain automatically an import of the theme
 @import "../../addons/app-layout/app-layout.scss";
 

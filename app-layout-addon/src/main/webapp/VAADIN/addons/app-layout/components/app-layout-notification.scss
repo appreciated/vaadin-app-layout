@@ -30,6 +30,8 @@
     .app-layout-notification {
       //animation: valo-animate-in-slide-left 0.6s ease, valo-animate-in-fade 1s;
       transition: border 0.3s ease;
+      box-shadow: 0px 5px 11px -1px rgba(0, 0, 0, 0.4);
+      border-radius: 3px;
       .app-layout-notification-time {
         position: relative;
         font-size: 12px;
@@ -105,8 +107,6 @@
           color: valo-font-color(rgb(245, 245, 245), 0.7);
         }
       }
-      box-shadow: 0px 5px 11px -1px rgba(0, 0, 0, 0.4);
-      border-radius: 3px;
     }
     .v-window-contents {
       animation: valo-animate-in-fade 0.4s;
