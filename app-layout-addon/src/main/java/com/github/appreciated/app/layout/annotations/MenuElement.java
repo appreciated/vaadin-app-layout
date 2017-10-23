@@ -9,7 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface MenuElement {
-    String name();
-
+    String value();
     VaadinIcons icon();
 }
