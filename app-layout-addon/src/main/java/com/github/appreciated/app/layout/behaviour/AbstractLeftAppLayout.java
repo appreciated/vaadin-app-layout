@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
 import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
@@ -9,16 +10,15 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 
 
-public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements AppLayout {
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout {
 
     private final Panel contentPanel = new Panel();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
-    private final Panel menuElementPanel = new Panel(menuElementHolder);
     private final VerticalLayout menuFooterHolder = new VerticalLayout();
 
-    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementPanel, menuFooterHolder);
+    private final VerticalFlexBoxLayout menuHolder = new VerticalFlexBoxLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -26,19 +26,16 @@ public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public AbstractAppLayoutBehaviour(String filename) throws IOException {
-        super(AbstractAppLayoutBehaviour.class.getResourceAsStream(filename));
+    public AbstractLeftAppLayout(String filename) throws IOException {
+        super(AbstractLeftAppLayout.class.getResourceAsStream(filename));
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
         menuHolder.setSizeFull();
-        menuHolder.setMargin(false);
-        menuHolder.setSpacing(false);
-        menuHolder.setExpandRatio(menuElementPanel, 1);
+        menuHolder.grow(menuElementHolder);
+        menuHolder.setOverflowAuto(true);
 
-        menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.setSizeFull();
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
@@ -140,7 +137,7 @@ public abstract class AbstractAppLayoutBehaviour extends CustomLayout implements
         return menuHeaderHolder;
     }
 
-    public VerticalLayout getMenuHolder() {
+    public Layout getMenuHolder() {
         return menuHolder;
     }
 

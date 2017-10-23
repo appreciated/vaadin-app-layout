@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.impl;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 
@@ -17,7 +17,7 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
 
-public class LeftResponsive extends AbstractAppLayoutBehaviour {
+public class LeftResponsive extends AbstractLeftAppLayout {
 
     public LeftResponsive() throws IOException {
         super("left-responsive.html");

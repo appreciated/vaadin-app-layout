@@ -14,12 +14,11 @@ public class AppLayoutSessionHelper {
     public static String UI_SESSION_KEY_VARIANT = "app-layout-variant-active";
 
     public static void updateActiveElementSessionData(NavigatorNavigationElement element) {
-        removeStyleFromCurrentlyActiveNavigationElement();
         setActiveNavigationElement(element);
     }
 
     public static void removeStyleFromCurrentlyActiveNavigationElement() {
-        getActiveNavigationElement().ifPresent(element1 -> element1.getComponent().removeStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE));
+        getActiveNavigationElement().ifPresent(element1 -> UI.getCurrent().access(() -> element1.getComponent().removeStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE)));
     }
 
     public static Optional<NavigatorNavigationElement> getActiveNavigationElement() {
@@ -32,11 +31,11 @@ public class AppLayoutSessionHelper {
     }
 
     public static void setActiveNavigationElement(NavigatorNavigationElement element) {
+        removeStyleFromCurrentlyActiveNavigationElement();
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
-        UI.getCurrent().access(() -> {
-            button.addStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE);
-            UI.getCurrent().getSession().setAttribute(UI_SESSION_KEY, element);
-        });
+        UI ui = UI.getCurrent();
+        ui.access(() -> button.addStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE));
+        ui.getSession().setAttribute(UI_SESSION_KEY, element);
     }
 
     public static Behaviour getActiveVariant() {

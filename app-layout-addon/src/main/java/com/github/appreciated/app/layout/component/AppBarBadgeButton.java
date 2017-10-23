@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
 
 
-public class AppBarBadgeButton extends AbsoluteLayout {
+public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
 
     private final AppBarButton button;
     private final Label badge;
@@ -25,7 +25,7 @@ public class AppBarBadgeButton extends AbsoluteLayout {
         button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
         button.setSizeFull();
         badge = new Label();
-        notificationHolder.addStatusListener((newStatus) -> refreshNotifications(newStatus));
+        notificationHolder.addStatusListener(this);
         badge.addStyleName(APP_BAR_BADGE);
         addComponent(button);
         addComponent(badge, "right: 0px;");
@@ -47,9 +47,22 @@ public class AppBarBadgeButton extends AbsoluteLayout {
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder) {
+        updateBadgeCount(notificationHolder);
+    }
+
+    private void updateBadgeCount(NotificationHolder notificationHolder) {
         if (notificationHolder != null) {
-            badge.setVisible(true);
-            badge.setValue(String.valueOf(notificationHolder.getNotificationSize()));
+            int unreadNotifications = notificationHolder.getUnreadNotifications();
+            if (unreadNotifications > 0) {
+                badge.setVisible(true);
+                if (unreadNotifications < 10) {
+                    badge.setValue(String.valueOf(unreadNotifications));
+                } else {
+                    badge.setValue("9+");
+                }
+            } else {
+                badge.setVisible(false);
+            }
         } else {
             badge.setVisible(false);
         }
@@ -57,6 +70,16 @@ public class AppBarBadgeButton extends AbsoluteLayout {
 
     public NotificationHolder getNotificationHolder() {
         return notificationHolder;
+    }
+
+    @Override
+    public void onNotificationChanges(NotificationHolder newStatus) {
+        refreshNotifications(newStatus);
+    }
+
+    @Override
+    public void onUnreadCountChange(NotificationHolder holder) {
+        updateBadgeCount(holder);
     }
 }
 

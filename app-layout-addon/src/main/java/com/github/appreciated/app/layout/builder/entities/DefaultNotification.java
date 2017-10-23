@@ -1,20 +1,21 @@
 package com.github.appreciated.app.layout.builder.entities;
 
 import com.github.appreciated.app.layout.Styles;
+import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
 import com.vaadin.server.Resource;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Comparator;
 import java.util.Date;
 
-public class DefaultNotification implements Comparator<DefaultNotification> {
+public class DefaultNotification implements Notification {
     String title;
     String description;
     Resource image;
     private Priority priority;
     private boolean dismissible;
+    private boolean unread;
     private LocalDateTime time;
 
     public DefaultNotification(String title, String description) {
@@ -44,6 +45,7 @@ public class DefaultNotification implements Comparator<DefaultNotification> {
         this.priority = priority;
         this.dismissible = dismissible;
         time = LocalDateTime.now();
+        unread = true;
     }
 
     public String getTitle() {
@@ -86,17 +88,29 @@ public class DefaultNotification implements Comparator<DefaultNotification> {
         return "";
     }
 
-    public String getTimeAgo() {
-        return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
+    public boolean isUnnread() {
+        return unread;
     }
 
     @Override
-    public int compare(DefaultNotification o1, DefaultNotification o2) {
-        if (o1.priority != o2.priority) {
-            return o1.priority.getValue().compareTo(o2.priority.getValue());
-        } else {
-            return o1.getTime().compareTo(o2.getTime());
-        }
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setUnread(boolean unread) {
+        this.unread = unread;
+    }
+
+    public boolean isDismissible() {
+        return dismissible;
+    }
+
+    public void setDismissible(boolean dismissible) {
+        this.dismissible = dismissible;
+    }
+
+    public String getTimeAgo() {
+        return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     public enum Priority {

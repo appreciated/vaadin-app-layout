@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NotificationWindow<T> extends Window {
 
-    int height = 387;
+    int height = 357;
 
     private VerticalLayout notificationsView;
     boolean hasBlurListener = false;
@@ -58,6 +58,7 @@ public class NotificationWindow<T> extends Window {
         panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         panelWrapper.addComponent(panel);
         wrapper.addComponent(panelWrapper);
+        wrapper.setSpacing(false);
         wrapper.setExpandRatio(panelWrapper, 1.0f);
         if (alignBottom.value) {
             panelWrapper.setComponentAlignment(panel, Alignment.BOTTOM_LEFT);
@@ -70,6 +71,7 @@ public class NotificationWindow<T> extends Window {
             showAllButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
             showAllButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
             showAllButton.setWidth(100, Unit.PERCENTAGE);
+            showAllButton.setHeight(28, Unit.PIXELS);
             showAllButton.addClickListener(clickEvent -> {
                 showAll.value = true;
                 showAllButton.setVisible(false);

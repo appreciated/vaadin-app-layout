@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.impl;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 
@@ -20,7 +20,7 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-header-layout/app-header-layout.html")
 @HtmlImport("vaadin://bower_components/app-layout/app-toolbar/app-toolbar.html")
 
-public class LeftResponsiveHybridNoAppBar extends AbstractAppLayoutBehaviour {
+public class LeftResponsiveHybridNoAppBar extends AbstractLeftAppLayout {
 
     public LeftResponsiveHybridNoAppBar() throws IOException {
         super("left-responsive-hybrid-no-app-bar.html");

@@ -45,9 +45,19 @@ public class NavigationBadgeButton extends AbsoluteLayout {
     }
 
     private void setStatus(DefaultBadgeHolder status) {
+
         if (status != null) {
-            badge.setVisible(true);
-            badge.setValue(String.valueOf(status.getCount()));
+            int unreadNotifications = status.getCount();
+            if (unreadNotifications > 0) {
+                badge.setVisible(true);
+                if (unreadNotifications < 10) {
+                    badge.setValue(String.valueOf(unreadNotifications));
+                } else {
+                    badge.setValue("9+");
+                }
+            } else {
+                badge.setVisible(false);
+            }
         } else {
             badge.setVisible(false);
         }

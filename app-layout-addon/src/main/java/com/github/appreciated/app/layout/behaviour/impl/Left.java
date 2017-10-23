@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.impl;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 @JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 
-public class Left extends AbstractAppLayoutBehaviour {
+public class Left extends AbstractLeftAppLayout {
 
     public Left() throws IOException {
         super("left.html");

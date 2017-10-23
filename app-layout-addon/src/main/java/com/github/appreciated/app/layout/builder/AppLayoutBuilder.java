@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AbstractAppLayoutBehaviour;
+import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
@@ -72,7 +72,7 @@ public class AppLayoutBuilder {
      * @param variant
      * @return
      */
-    public AppLayoutBuilder withCustomVariant(AbstractAppLayoutBehaviour variant) {
+    public AppLayoutBuilder withCustomVariant(AbstractLeftAppLayout variant) {
         this.instance = variant;
         return this;
     }
@@ -293,17 +293,15 @@ public class AppLayoutBuilder {
         if (appBarIconComponent != null) {
             instance.addAppBarIcon(appBarIconComponent);
         }
-        if (requiresNavigatior && defaultNavigationElement != null) {
-            navigatorNavigationElements.stream()
-                    .filter(element -> (element.getViewClassName() != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())))
-                    .findFirst().ifPresent(element -> {
-                AppLayoutSessionHelper.setActiveNavigationElement(element);
-            });
-        }
         return instance;
     }
 
     Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
+        if (viewName.equals("")) {
+            return navigatorNavigationElements.stream()
+                    .filter(element -> element.getViewClassName().equals(defaultNavigationElement.getViewClassName()) || element.getViewName().equals(""))
+                    .findFirst();
+        }
         return navigatorNavigationElements.stream()
                 .filter(element -> element instanceof NavigatorNavigationElement)
                 .filter(element -> element.getViewName().equals(viewName))
