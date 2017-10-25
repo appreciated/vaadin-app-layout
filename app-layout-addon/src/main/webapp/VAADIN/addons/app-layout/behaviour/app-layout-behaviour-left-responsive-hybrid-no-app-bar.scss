@@ -12,7 +12,7 @@
 @media only screen and (max-width: 640px) {
   .drawer-content {
     margin-top: $app-bar-height;
-    height: calc(100% - $app-bar-height);
+    height: calc(100% - #{$app-bar-height});
   }
 }
 
