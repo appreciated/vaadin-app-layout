@@ -21,7 +21,7 @@
     top: 0px;
     bottom: 0px;
     transform: rotate(0deg);
-    transition: transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s !important;
     pointer-events: none;
   }
   .app-layout-expanding-menu-container-open .app-layout-expanding-menu-container-button:after {

@@ -9,6 +9,13 @@
   }
 }
 
+@media only screen and (max-width: 640px) {
+  .drawer-content {
+    margin-top: $app-bar-height;
+    height: calc(100% - $app-bar-height);
+  }
+}
+
 @media only screen and (min-width: 641px) and (max-width: 768px) {
   .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
     --app-drawer-width: 64px !important;
@@ -113,8 +120,7 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     .drawer-content {
-      margin-top: $app-bar-height;
-      height: calc(100% - $app-bar-height);
+      height: 100%;
       overflow: visible;
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;
