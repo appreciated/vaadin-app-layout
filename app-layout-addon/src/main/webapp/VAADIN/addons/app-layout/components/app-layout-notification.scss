@@ -17,7 +17,7 @@
     border-top: 1px solid transparent;
   }
   .v-window-contents > .v-scrollable:before {
-    border-top: 1px solid transparent;
+    border-top: 1px solid transparent !important;
   }
   .v-window.translucent {
     background-color: transparent;
