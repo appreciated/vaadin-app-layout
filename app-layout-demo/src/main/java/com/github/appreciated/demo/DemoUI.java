@@ -81,7 +81,7 @@ public class DemoUI extends UI {
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
-                .add(new MenuHeader("App Layout", "Version 0.9.10", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("App Layout", "Version 0.9.11", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
