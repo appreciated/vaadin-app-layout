@@ -45,7 +45,6 @@ public class NavigationBadgeButton extends AbsoluteLayout {
     }
 
     private void setStatus(DefaultBadgeHolder status) {
-
         if (status != null) {
             int unreadNotifications = status.getCount();
             if (unreadNotifications > 0) {

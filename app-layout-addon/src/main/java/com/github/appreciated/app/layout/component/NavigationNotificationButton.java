@@ -100,6 +100,6 @@ public class NavigationNotificationButton extends AbsoluteLayout implements Noti
 
     @Override
     public void onUnreadCountChange(NotificationHolder holder) {
-
+        setStatus(holder);
     }
 }
