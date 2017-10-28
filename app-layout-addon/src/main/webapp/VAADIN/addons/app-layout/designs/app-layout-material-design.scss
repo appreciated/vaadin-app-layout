@@ -14,7 +14,7 @@
     .app-bar-badge {
       background: $app-menu-button-badge-background-color;
       color: valo-font-color($app-menu-button-badge-background-color);
-      font-size: 11px;
+      font-size: 13px;
       min-width: 18px;
       min-height: 18px;
       text-align: center;
@@ -23,6 +23,7 @@
       padding-right: 4px;
       padding-left: 3px;
       border-radius: 17px;
+      box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.4);
     }
     .app-layout-menu-button {
       text-align: left !important;

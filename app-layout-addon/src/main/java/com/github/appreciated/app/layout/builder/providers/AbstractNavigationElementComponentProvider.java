@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.providers;
 
-import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
+import com.github.appreciated.app.layout.behaviour.left.AbstractLeftAppLayout;
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.NavigationBadgeButton;

@@ -112,7 +112,8 @@ public class DemoUI extends UI {
                 Behaviour.LEFT_RESPONSIVE_OVERLAY,
                 Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
                 Behaviour.LEFT_RESPONSIVE_SMALL,
-                Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+                Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
+                Behaviour.TOP);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;

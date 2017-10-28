@@ -25,18 +25,20 @@ $z-index: 10 !default;
 @import "components/app-layout-flexbox.scss";
 @import "components/app-layout-expanding-menu-container.scss";
 
-@import "behaviour/app-layout-behaviour-left.scss";
-@import "behaviour/app-layout-behaviour-left-overlay.scss";
-@import "behaviour/app-layout-behaviour-left-fallback.scss";
-@import "behaviour/app-layout-behaviour-left-responsive.scss";
-@import "behaviour/app-layout-behaviour-left-hybrid.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-hybrid.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-hybrid-no-app-bar.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-overlay.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-overlay-no-app-bar.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-small.scss";
-@import "behaviour/app-layout-behaviour-left-responsive-small-no-app-bar.scss";
+@import "behaviour/left/app-layout-behaviour-left";
+@import "behaviour/left/app-layout-behaviour-left-overlay";
+@import "behaviour/left/app-layout-behaviour-left-fallback";
+@import "behaviour/left/app-layout-behaviour-left-responsive";
+@import "behaviour/left/app-layout-behaviour-left-hybrid";
+@import "behaviour/left/app-layout-behaviour-left-responsive-hybrid";
+@import "behaviour/left/app-layout-behaviour-left-responsive-hybrid-no-app-bar";
+@import "behaviour/left/app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar";
+@import "behaviour/left/app-layout-behaviour-left-responsive-overlay";
+@import "behaviour/left/app-layout-behaviour-left-responsive-overlay-no-app-bar";
+@import "behaviour/left/app-layout-behaviour-left-responsive-small";
+@import "behaviour/left/app-layout-behaviour-left-responsive-small-no-app-bar";
+
+@import "behaviour/top/app-layout-behaviour-top";
 
 @mixin app-layout {
   $calc-app-bar-height: $app-bar-height - 20px;
@@ -87,4 +89,6 @@ $z-index: 10 !default;
   @include app-layout-behaviour-left-responsive-overlay-no-app-bar;
   @include app-layout-behaviour-left-responsive-small;
   @include app-layout-behaviour-left-responsive-small-no-app-bar;
+
+  @include app-layout-behaviour-top;
 }

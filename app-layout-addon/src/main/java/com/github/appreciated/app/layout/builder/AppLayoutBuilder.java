@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.behaviour.impl.LeftFallBack;
+import com.github.appreciated.app.layout.behaviour.left.AbstractLeftAppLayout;
+import com.github.appreciated.app.layout.behaviour.left.LeftFallBack;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;

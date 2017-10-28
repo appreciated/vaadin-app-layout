@@ -1,6 +1,5 @@
-package com.github.appreciated.app.layout.behaviour.impl;
+package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.behaviour.AbstractLeftAppLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 

@@ -1,22 +1,25 @@
-package com.github.appreciated.app.layout.behaviour.impl;
+package com.github.appreciated.app.layout.behaviour.left;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class LeftFallBack extends VerticalLayout implements AppLayout {
+import java.io.IOException;
+
+
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout {
 
     private final Panel contentPanel = new Panel();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
-    private final Panel menuElementPanel = new Panel(menuElementHolder);
     private final VerticalLayout menuFooterHolder = new VerticalLayout();
 
-    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementPanel, menuFooterHolder);
+    private final VerticalFlexBoxLayout menuHolder = new VerticalFlexBoxLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -24,71 +27,30 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
 
-    public LeftFallBack(Behaviour variant) {
-        this.setSpacing(false);
-        this.setMargin(false);
+    public AbstractLeftAppLayout(String filename) throws IOException {
+        super(AbstractLeftAppLayout.class.getResourceAsStream(filename));
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
-        menuHolder.setHeight(100, Unit.PERCENTAGE);
-        if (!variant.isSmall()) {
-            menuHolder.setWidth(256, Unit.PIXELS);
-        } else {
-            menuHolder.setWidth(64, Unit.PIXELS);
-        }
-        menuHolder.setMargin(false);
-        menuHolder.setSpacing(false);
-        menuHolder.setExpandRatio(menuElementPanel, 1);
+        menuHolder.setSizeFull();
+        menuHolder.grow(menuElementHolder);
+        menuHolder.setOverflowAuto(true);
 
-        menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.setSizeFull();
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(new MarginInfo(true, false, false, false));
+        menuHeaderHolder.setMargin(false);
         menuElementHolder.setMargin(new MarginInfo(true, false));
         menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
-        addStyleName(getStyleName());
-        if (variant.isOverlay()) {
-            VerticalLayout vwrapper;
-            if (variant.hasAppBar()) {
-                vwrapper = new VerticalLayout(appBar, contentPanel);
-            } else {
-                vwrapper = new VerticalLayout(contentPanel);
-            }
-            vwrapper.setMargin(false);
-            vwrapper.setSpacing(false);
-            vwrapper.setExpandRatio(contentPanel, 1.0f);
-            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
-            wrapper.setExpandRatio(vwrapper, 1.0f);
-            menuHolder.addStyleName("behaviour-content");
-            if (variant.isSmall()) {
-                menuHolder.addStyleName("small");
-            }
-            wrapper.setSizeFull();
-            wrapper.setSpacing(false);
-            addComponent(wrapper);
-        } else {
-            if (variant.hasAppBar()) {
-                addComponent(appBar);
-            }
-            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, contentPanel);
-            menuHolder.addStyleName("behaviour-content");
-            if (variant.isSmall()) {
-                menuHolder.addStyleName("small");
-            }
-            wrapper.setSizeFull();
-            wrapper.setSpacing(false);
-            addComponent(wrapper);
-            wrapper.setExpandRatio(contentPanel, 1.0f);
-            setExpandRatio(wrapper, 1.0f);
-        }
+        addStyleName("app-layout-behaviour-" + getStyleName());
+        addComponent(contentPanel, "content");
+        addComponent(menuHolder, "menu-elements");
+        addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementWrapper);
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
-        appBar.setHeight(64, Unit.PIXELS);
-        appBar.addStyleName("app-toolbar");
+        appBar.setHeight(100, Unit.PERCENTAGE);
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
         appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
@@ -98,9 +60,23 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-    public String getStyleName() {
-        return "left-fallback";
+    public static void toggleDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
     }
+
+    public static void openDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
+    }
+
+    public static void closeDrawerIfNotPersistent() {
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
+    }
+
+    public static void closeDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
+    }
+
+    public abstract String getStyleName();
 
     public void addNavigationHeaderElement(Component component) {
         menuHeaderHolder.setVisible(true);
@@ -141,12 +117,13 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         this.title.setValue(title);
     }
 
-    public HorizontalLayout getTitleWrapper() {
-        return titleWrapper;
-    }
-
+    @Override
     public Panel getContentHolder() {
         return contentPanel;
+    }
+
+    public HorizontalLayout getTitleWrapper() {
+        return titleWrapper;
     }
 
     public VerticalLayout getMenuElementHolder() {
@@ -161,7 +138,7 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         return menuHeaderHolder;
     }
 
-    public VerticalLayout getMenuHolder() {
+    public Layout getMenuHolder() {
         return menuHolder;
     }
 
