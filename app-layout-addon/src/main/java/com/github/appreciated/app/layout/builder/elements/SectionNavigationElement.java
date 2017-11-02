@@ -1,6 +1,8 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-public class SectionNavigationElement extends AbstractNavigationElement<SectionNavigationElement> {
+import com.vaadin.ui.Component;
+
+public class SectionNavigationElement extends AbstractNavigationElement<Component, SectionNavigationElement> {
 
     private String name;
 

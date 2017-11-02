@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.behaviour.left.*;
 import com.github.appreciated.app.layout.behaviour.top.Top;
+import com.github.appreciated.app.layout.behaviour.top.TopLarge;
 
 public enum Behaviour {
     LEFT(Left.class, false, true, false, false),
@@ -15,7 +16,8 @@ public enum Behaviour {
     LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR(LeftResponsiveOverlayNoAppBar.class, false, false, true, false),
     LEFT_RESPONSIVE_SMALL(LeftResponsiveSmall.class, false, true, false, true),
     LEFT_RESPONSIVE_SMALL_NO_APP_BAR(LeftResponsiveSmallNoAppBar.class, false, false, false, true),
-    TOP(Top.class, true, true, false, false);
+    TOP(Top.class, true, true, false, false),
+    TOP_LARGE(TopLarge.class, true, true, false, false);
 
     private Class<? extends AppLayout> className;
 

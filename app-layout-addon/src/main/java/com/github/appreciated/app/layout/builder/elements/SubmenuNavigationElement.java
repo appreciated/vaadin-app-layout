@@ -1,10 +1,11 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.vaadin.server.Resource;
+import com.vaadin.ui.Component;
 
 import java.util.List;
 
-public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement> {
+public class SubmenuNavigationElement extends AbstractNavigationElement<Component, SubmenuNavigationElement> {
 
     private final String title;
     private final Resource icon;

@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component;
 
+import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
@@ -11,7 +12,7 @@ import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BA
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
 
-public class NavigationBadgeButton extends AbsoluteLayout {
+public class NavigationBadgeButton extends AbsoluteLayout implements NavigationElementComponent {
 
     private final NavigationButton button;
     private final Label badge;
@@ -60,5 +61,15 @@ public class NavigationBadgeButton extends AbsoluteLayout {
         } else {
             badge.setVisible(false);
         }
+    }
+
+    @Override
+    public void setNavigationIcon(Resource resource) {
+        setIcon(resource);
+    }
+
+    @Override
+    public void setNavigationCaption(String string) {
+        setCaption(string);
     }
 }

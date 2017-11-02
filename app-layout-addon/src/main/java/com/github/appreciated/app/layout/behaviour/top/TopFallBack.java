@@ -3,9 +3,12 @@ package com.github.appreciated.app.layout.behaviour.top;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+
+import java.util.List;
 
 public class TopFallBack extends VerticalLayout implements AppLayout {
 
@@ -23,6 +26,7 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private List<NavigatorNavigationElement> list;
 
     public TopFallBack(Behaviour variant) {
         this.setSpacing(false);
@@ -96,6 +100,18 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
         appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
+    }
+
+    @Override
+    public void setNavigatorNavigationElements(List<NavigatorNavigationElement> list) {
+        this.list = list;
+    }
+
+    @Override
+    public void refreshNavigationElementInfo() {
+        if (list != null) {
+            list.forEach(element -> element.refreshInfo());
+        }
     }
 
     public String getStyleName() {

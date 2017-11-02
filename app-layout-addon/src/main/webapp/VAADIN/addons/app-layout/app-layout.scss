@@ -39,6 +39,7 @@ $z-index: 10 !default;
 @import "behaviour/left/app-layout-behaviour-left-responsive-small-no-app-bar";
 
 @import "behaviour/top/app-layout-behaviour-top";
+@import "behaviour/top/app-layout-behaviour-top-large";
 
 @mixin app-layout {
   $calc-app-bar-height: $app-bar-height - 20px;
@@ -91,4 +92,5 @@ $z-index: 10 !default;
   @include app-layout-behaviour-left-responsive-small-no-app-bar;
 
   @include app-layout-behaviour-top;
+  @include app-layout-behaviour-top-large;
 }

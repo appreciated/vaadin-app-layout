@@ -70,8 +70,7 @@ public class DemoUI extends UI {
     private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
 
-        AppLayout drawer = AppLayoutBuilder.get()
-                .withBehaviour(variant)
+        AppLayout drawer = AppLayoutBuilder.get(variant)
                 .withTitle("Demo")
                 .addToAppBar(getVariantCombo(variant))
                 .addToAppBar(new NotificationAppBarButton(notifications))
@@ -113,7 +112,8 @@ public class DemoUI extends UI {
                 Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
                 Behaviour.LEFT_RESPONSIVE_SMALL,
                 Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
-                Behaviour.TOP);
+                Behaviour.TOP,
+                Behaviour.TOP_LARGE);
         variants.setValue(variant);
         variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
         return variants;

@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.builder.elements;
 
 import com.vaadin.ui.Component;
 
-public class CustomNavigationElement extends AbstractNavigationElement<CustomNavigationElement> {
+public class CustomNavigationElement extends AbstractNavigationElement<Component, CustomNavigationElement> {
     private Component element;
 
     public CustomNavigationElement(Component element) {

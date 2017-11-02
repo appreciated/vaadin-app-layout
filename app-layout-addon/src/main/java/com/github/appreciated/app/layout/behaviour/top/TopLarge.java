@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.component.HorizontalFlexBoxLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.HorizontalLayout;
 
 import java.io.IOException;
 
@@ -17,18 +17,17 @@ import java.io.IOException;
 @HtmlImport("vaadin://bower_components/app-layout/app-drawer/app-drawer.html")
 @JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 
-public class Top extends AbstractTopAppLayout {
+public class TopLarge extends AbstractTopAppLayout {
 
-    private final CssLayout appHeaderHolder = new CssLayout();
-    private final CssLayout appElementHolder = new CssLayout();
-    private final CssLayout appFooterHolder = new CssLayout();
+    private final HorizontalLayout appHeaderHolder = new HorizontalLayout();
+    private final HorizontalLayout appElementHolder = new HorizontalLayout();
+    private final HorizontalLayout appFooterHolder = new HorizontalLayout();
 
     private final HorizontalFlexBoxLayout appbarMenuHolder = new HorizontalFlexBoxLayout(appHeaderHolder, appElementHolder, appFooterHolder);
 
-    public Top() throws IOException {
+    public TopLarge() throws IOException {
         super("top.html");
-        getAppBar().addComponent(appbarMenuHolder, 1);
-        appbarMenuHolder.setHeight(100, Unit.PERCENTAGE);
+        addComponent(appbarMenuHolder, "app-bar-menu-content");
     }
 
     public void addNavigationElement(Component component) {

@@ -1,5 +1,6 @@
 @media only screen and (min-width: 641px) {
-  .app-layout-behaviour-top {
+  .app-layout-behaviour-top-large {
+    --app-bar-height: $app-bar-height * 2 !important;
     app-toolbar paper-icon-button#toggle {
       opacity: 0;
       pointer-events: none;
@@ -7,14 +8,25 @@
     .app-bar-content {
       left: 10px !important;
     }
+    .app-bar-menu-content {
+      left: $app-bar-height;
+      position: absolute;
+      top: $app-bar-height !important;
+      right: 0px;
+      bottom: 0px;
+    }
     app-drawer {
       display: none;
+    }
+    .app-bar-menu-content {
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
   }
 }
 
-@mixin app-layout-behaviour-top {
-  .app-layout-behaviour-top {
+@mixin app-layout-behaviour-top-large {
+  .app-layout-behaviour-top-large {
     --app-drawer-width: $drawer-width;
     --app-bar-height: $app-bar-height;
     .app-bar-content {
@@ -22,14 +34,20 @@
       position: absolute;
       top: 0px;
       right: 0px;
-      bottom: 0px;
+      height: $app-bar-height;
       transition: left 0.3s;
     }
+
     app-toolbar paper-icon-button {
       transition: opacity 0.3s;
       opacity: 1.0;
       position: absolute;
       top: 0px;
+    }
+    .app-bar-menu-content {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
     app-toolbar {
       background-color: $app-bar-background-color;

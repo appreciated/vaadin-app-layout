@@ -2,13 +2,14 @@ package com.github.appreciated.app.layout.behaviour.left;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
-import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout {
@@ -26,6 +27,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private List<NavigatorNavigationElement> list;
 
     public AbstractLeftAppLayout(String filename) throws IOException {
         super(AbstractLeftAppLayout.class.getResourceAsStream(filename));
@@ -60,23 +62,19 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-    public static void toggleDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
-    }
-
-    public static void openDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
-    }
-
-    public static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
-    }
-
-    public static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
-    }
-
     public abstract String getStyleName();
+
+    @Override
+    public void setNavigatorNavigationElements(List<NavigatorNavigationElement> list) {
+        this.list = list;
+    }
+
+    @Override
+    public void refreshNavigationElementInfo() {
+        if (list != null) {
+            list.forEach(element -> element.refreshInfo());
+        }
+    }
 
     public void addNavigationHeaderElement(Component component) {
         menuHeaderHolder.setVisible(true);

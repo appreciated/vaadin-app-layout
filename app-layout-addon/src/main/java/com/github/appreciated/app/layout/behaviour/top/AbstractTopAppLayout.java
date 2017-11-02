@@ -2,13 +2,14 @@ package com.github.appreciated.app.layout.behaviour.top;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
-import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayout {
@@ -26,6 +27,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private List<NavigatorNavigationElement> list;
 
     public AbstractTopAppLayout(String filename) throws IOException {
         super(AbstractTopAppLayout.class.getResourceAsStream(filename));
@@ -36,7 +38,6 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         menuHolder.setSizeFull();
         menuHolder.grow(menuElementHolder);
         menuHolder.setOverflowAuto(true);
-
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
@@ -60,20 +61,16 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-    public static void toggleDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
+    @Override
+    public void setNavigatorNavigationElements(List<NavigatorNavigationElement> list) {
+        this.list = list;
     }
 
-    public static void openDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
-    }
-
-    public static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
-    }
-
-    public static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
+    @Override
+    public void refreshNavigationElementInfo() {
+        if (list != null) {
+            list.forEach(element -> element.refreshInfo());
+        }
     }
 
     public abstract String getStyleName();

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -15,7 +15,7 @@ public class SubmenuBuilder {
     private final String title;
     private final Resource resource;
     private List<AbstractNavigationElement> submenuElements = new ArrayList<>();
-    private AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider;
+    private AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider;
 
     public SubmenuBuilder(String title, Resource resource) {
         this.title = title;
@@ -108,7 +108,7 @@ public class SubmenuBuilder {
         return this;
     }
 
-    public void setNavigationElementInfoProvider(AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider) {
+    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
         this.navigationElementInfoProvider = navigationElementInfoProvider;
     }
 

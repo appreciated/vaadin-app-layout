@@ -2,8 +2,9 @@ package com.github.appreciated.app.layout.builder.elements;
 
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 
-public class CustomNavigatorNavigationElement extends AbstractNavigationElement<CustomNavigatorNavigationElement> {
+public class CustomNavigatorNavigationElement extends AbstractNavigationElement<Component, CustomNavigatorNavigationElement> {
     private final String name;
     private Resource icon;
     private Button.ClickListener listener;

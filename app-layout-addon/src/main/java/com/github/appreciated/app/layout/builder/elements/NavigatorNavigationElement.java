@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
@@ -9,36 +10,46 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
 
-public class NavigatorNavigationElement extends AbstractNavigationElement<NavigatorNavigationElement> {
-    private boolean isCDIManaged = false;
-    private String name;
+public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> {
+    private boolean isManaged = false;
+    private String caption;
     private View view;
     private Resource icon;
     private Class<? extends View> className;
+    private String path;
     private DefaultBadgeHolder badgeHolder;
-    private String navigationName;
     private ViewNameInterceptor viewNameInterceptor;
-    private AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider;
+    private AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider;
     private NavigationElementInfo info;
 
 
-    public NavigatorNavigationElement(String name, Resource icon, Class<? extends View> className) {
-        this(name, icon, null, className);
+    public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
+        this(caption, caption, icon, null, className);
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, View view) {
-        this(name, icon, null, view);
+    public NavigatorNavigationElement(String caption, Resource icon, View view) {
+        this(caption, caption, icon, null, view);
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        this.name = name;
+    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        this(caption, caption, icon, null, className);
+    }
+
+    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
+        this(caption, caption, icon, null, view);
+    }
+
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        this.caption = caption;
         this.icon = icon;
+        this.path = path;
         this.badgeHolder = badgeHolder;
         this.className = className;
     }
 
-    public NavigatorNavigationElement(String name, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        this.name = name;
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
+        this.caption = caption;
+        this.path = path;
         this.badgeHolder = badgeHolder;
         this.icon = icon;
         this.view = view;
@@ -47,11 +58,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     public NavigatorNavigationElement(Class<? extends View> className, Resource icon) {
         this.className = className;
         this.icon = icon;
-        isCDIManaged = true;
+        isManaged = true;
     }
 
     public void addViewToNavigator(Navigator navigator) {
-        if (!isCDIManaged) {
+        if (!isManaged) {
             if (view != null) {
                 navigator.addView(getViewName(), view);
             } else if (className != null) {
@@ -68,17 +79,17 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         }
     }
 
-    public String getName() {
-        return name;
+    public String getCaption() {
+        return caption;
     }
 
     public String getViewName() {
-        if (isCDIManaged) {
+        if (isManaged) {
             return info.getViewName();
         } else if (viewNameInterceptor == null) {
-            return name;
+            return path;
         } else {
-            return viewNameInterceptor.get(name);
+            return viewNameInterceptor.get(caption);
         }
     }
 
@@ -111,16 +122,23 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.viewNameInterceptor = viewNameInterceptor;
     }
 
-    public void setNavigationElementInfoProvider(AppLayoutBuilder.NavigationElementInfoProvider navigationElementInfoProvider) {
-        if (isCDIManaged) {
+    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
+        if (isManaged) {
             if (navigationElementInfoProvider == null) {
                 throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
             } else {
-                info = navigationElementInfoProvider.apply(className);
-                name = info.getCaption();
-                if (info.getIcon() != null) {
-                    this.icon = info.getIcon();
-                }
+                this.navigationElementInfoProvider = navigationElementInfoProvider;
+                refreshInfo();
+            }
+        }
+    }
+
+    public void refreshInfo() {
+        if (navigationElementInfoProvider != null) {
+            info = navigationElementInfoProvider.apply(className);
+            caption = info.getCaption();
+            if (info.getIcon() != null) {
+                this.icon = info.getIcon();
             }
         }
     }
