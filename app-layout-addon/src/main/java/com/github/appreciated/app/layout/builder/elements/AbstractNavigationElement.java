@@ -26,6 +26,9 @@ public abstract class AbstractNavigationElement<V extends Component, T> {
     }
 
     public V getComponent() {
+        if (provider == null) {
+            throw new IllegalStateException("Provider must not be null");
+        }
         if (component == null) {
             component = provider.get(getInfo());
         }

@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.builder.providers;
 
 import com.github.appreciated.app.layout.annotations.MenuCaption;
 import com.github.appreciated.app.layout.annotations.MenuIcon;
-import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.vaadin.navigator.View;

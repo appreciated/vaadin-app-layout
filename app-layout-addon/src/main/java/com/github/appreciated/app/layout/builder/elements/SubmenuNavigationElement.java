@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.builder.Provider;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
@@ -10,6 +11,7 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
     private final String title;
     private final Resource icon;
     private List<AbstractNavigationElement> submenuElements;
+    private Provider<String, String> captionInterceptor;
 
     public SubmenuNavigationElement(String title, Resource icon, List<AbstractNavigationElement> submenuElements) {
         this.title = title;
@@ -31,7 +33,11 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
     }
 
     public String getTitle() {
-        return title;
+        if (captionInterceptor == null) {
+            return title;
+        } else {
+            return captionInterceptor.get(title);
+        }
     }
 
     public boolean requiresNavigator() {
@@ -43,5 +49,9 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
             }
         }
         return false;
+    }
+
+    public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
+        this.captionInterceptor = captionInterceptor;
     }
 }

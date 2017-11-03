@@ -2,12 +2,10 @@ package com.github.appreciated.app.layout.builder;
 
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
@@ -17,7 +15,6 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class AppLayoutBuilder {
-
 
     private final AppLayout instance;
     private final AppLayoutConfiguration config;
@@ -50,8 +47,13 @@ public class AppLayoutBuilder {
         return this;
     }
 
-    public AppLayoutBuilder withViewNameInterceptor(ViewNameInterceptor interceptor) {
+    public AppLayoutBuilder withViewNameInterceptor(Provider<String, String> interceptor) {
         config.setViewNameInterceptor(interceptor);
+        return this;
+    }
+
+    public AppLayoutBuilder withCaptionInterceptor(Provider<String, String> captionInterceptor) {
+        config.setCaptionInterceptor(captionInterceptor);
         return this;
     }
 
@@ -153,7 +155,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, String path, Resource icon, Class<? extends View> element, Position position) {
-        return add(caption, icon, null, element, position);
+        return add(caption, path, icon, null, element, position);
     }
 
     public AppLayoutBuilder add(Class<? extends View> className) {
@@ -173,19 +175,16 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
-
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
         return this;
     }
 
     public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
-
-        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
+        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, View element, Position position) {
-
         addToPosition(new NavigatorNavigationElement(caption, icon, element), position);
         return this;
     }
@@ -223,6 +222,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayout build() {
+        config.build();
         return instance;
     }
 

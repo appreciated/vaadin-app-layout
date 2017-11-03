@@ -1,10 +1,11 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
-import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -18,9 +19,10 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private Class<? extends View> className;
     private String path;
     private DefaultBadgeHolder badgeHolder;
-    private ViewNameInterceptor viewNameInterceptor;
+    private Provider<String, String> viewNameInterceptor;
     private AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider;
     private NavigationElementInfo info;
+    private Provider<String, String> captionInterceptor;
 
 
     public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
@@ -45,6 +47,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.path = path;
         this.badgeHolder = badgeHolder;
         this.className = className;
+        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
     }
 
     public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
@@ -53,6 +56,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.badgeHolder = badgeHolder;
         this.icon = icon;
         this.view = view;
+        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
     }
 
     public NavigatorNavigationElement(Class<? extends View> className, Resource icon) {
@@ -80,7 +84,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public String getCaption() {
-        return caption;
+        if (captionInterceptor == null) {
+            return caption;
+        } else {
+            return captionInterceptor.get(caption);
+        }
     }
 
     public String getViewName() {
@@ -118,8 +126,12 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return badgeHolder;
     }
 
-    public void setViewNameInterceptor(ViewNameInterceptor viewNameInterceptor) {
+    public void setViewNameInterceptor(Provider<String, String> viewNameInterceptor) {
         this.viewNameInterceptor = viewNameInterceptor;
+    }
+
+    public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
+        this.captionInterceptor = captionInterceptor;
     }
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {

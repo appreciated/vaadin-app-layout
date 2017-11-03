@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;

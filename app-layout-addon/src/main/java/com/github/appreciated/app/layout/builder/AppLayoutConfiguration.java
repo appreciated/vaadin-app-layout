@@ -1,8 +1,7 @@
-package com.github.appreciated.app.layout.behaviour;
+package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.builder.ComponentProvider;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
@@ -11,7 +10,6 @@ import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavig
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
-import com.github.appreciated.app.layout.interceptor.ViewNameInterceptor;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -46,13 +44,14 @@ public class AppLayoutConfiguration {
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
     private Component appBarIconComponent;
-    private ViewNameInterceptor viewNameInterceptor = null;
     private boolean requiresNavigator = false;
 
     private AppLayout instance;
 
-    public AppLayoutConfiguration(AppLayout instance) {
+    private Provider<String, String> viewNameInterceptor = null;
+    private Provider<String, String> captionInterceptor;
 
+    public AppLayoutConfiguration(AppLayout instance) {
         this.instance = instance;
     }
 
@@ -76,7 +75,7 @@ public class AppLayoutConfiguration {
             else
                 sectionProvider = new DefaultLeftSectionElementComponentProvider();
         }
-        if (sectionProvider == null) {
+        if (submenuProvider == null) {
             if (variant.isTop())
                 submenuProvider = new DefaultTopSubmenuNavigationElementProvider();
             else
@@ -84,7 +83,7 @@ public class AppLayoutConfiguration {
         }
 
         setTitle(title);
-        if (requiresNavigator) {
+        if (true) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
             navigator.addViewChangeListener(viewChangeEvent -> {
                 AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
@@ -142,16 +141,19 @@ public class AppLayoutConfiguration {
             }
             navigatorElements.add(nelement);
             nelement.setViewNameInterceptor(viewNameInterceptor);
+            nelement.setCaptionInterceptor(captionInterceptor);
             nelement.addViewToNavigator(navigator);
         } else if (element instanceof CustomNavigatorNavigationElement) {
             CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
             cnelement.setProvider(customElementProvider);
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement selement = (SubmenuNavigationElement) element;
+            selement.setCaptionInterceptor(captionInterceptor);
             selement.setProvider(submenuProvider);
             selement.getSubmenuElements().forEach(element1 -> setComponentProviders(element1));
         } else if (element instanceof SectionNavigationElement) {
             SectionNavigationElement selement = (SectionNavigationElement) element;
+            selement.setCaptionInterceptor(captionInterceptor);
             selement.setProvider(sectionProvider);
         }
     }
@@ -179,9 +181,7 @@ public class AppLayoutConfiguration {
         }
     }
 
-
     /***** Getters and Setters *****/
-
 
     public List<AbstractNavigationElement> getNavigationElements() {
         return navigationElements;
@@ -206,7 +206,6 @@ public class AppLayoutConfiguration {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     public List<Component> getAppBarElements() {
         return appBarElements;
@@ -244,8 +243,12 @@ public class AppLayoutConfiguration {
         this.appBarIconComponent = appBarIconComponent;
     }
 
-    public void setViewNameInterceptor(ViewNameInterceptor viewNameInterceptor) {
+    public void setViewNameInterceptor(Provider<String, String> viewNameInterceptor) {
         this.viewNameInterceptor = viewNameInterceptor;
+    }
+
+    public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
+        this.captionInterceptor = captionInterceptor;
     }
 
     @FunctionalInterface
