@@ -5,7 +5,6 @@ import com.vaadin.server.Resource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.themes.ValoTheme;
 
 import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
 
@@ -22,7 +21,6 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
         setWidth("64px");
         setHeight("64px");
         button = new AppBarButton(icon);
-        button.addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
         button.setSizeFull();
         badge = new Label();
         notificationHolder.addStatusListener(this);
