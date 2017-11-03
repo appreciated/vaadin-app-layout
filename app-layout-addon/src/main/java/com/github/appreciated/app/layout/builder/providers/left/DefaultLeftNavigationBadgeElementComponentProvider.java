@@ -11,6 +11,7 @@ public class DefaultLeftNavigationBadgeElementComponentProvider extends Abstract
     public NavigationElementComponent get(NavigatorNavigationElement element) {
         NavigationBadgeButton button = new NavigationBadgeButton(element.getCaption(), element.getIcon(), element.getBadgeHolder());
         element.setComponent(button);
+        button.setDescription(element.getCaption());
         setNavigationClickListener(element);
         return button;
     }
