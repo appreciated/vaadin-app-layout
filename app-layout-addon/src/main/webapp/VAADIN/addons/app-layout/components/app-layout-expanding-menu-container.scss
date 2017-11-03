@@ -5,7 +5,7 @@
     max-height: 48px;
   }
   .app-layout-expanding-menu-container-open {
-    max-height: 300px;
+    max-height: $submenu-max-height;
   }
   .app-layout-expanding-menu-container-button {
     position: relative;
