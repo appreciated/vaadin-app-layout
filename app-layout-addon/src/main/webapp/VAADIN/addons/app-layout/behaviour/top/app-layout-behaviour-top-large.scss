@@ -7,9 +7,6 @@
     }
     .app-bar-content {
       left: 10px !important;
-      .app-layout-menu-bar-element {
-        display: none;
-      }
     }
     .app-bar-menu-content {
       left: $app-bar-height;
@@ -39,6 +36,11 @@
       right: 0px;
       height: $app-bar-height;
       transition: left 0.3s;
+    }
+    .app-bar-menu-content {
+      .app-layout-menu-bar-element {
+        display: none;
+      }
     }
 
     app-toolbar paper-icon-button {
