@@ -10,6 +10,9 @@
     app-drawer {
       display: none;
     }
+    .app-layout-bar-menu-holder {
+      display: flex !important;
+    }
   }
 }
 
@@ -30,6 +33,7 @@
     }
     .app-layout-bar-menu-holder {
       padding-left: 10px;
+      display: none;
     }
     app-toolbar paper-icon-button {
       transition: opacity 0.3s;

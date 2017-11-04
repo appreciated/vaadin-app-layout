@@ -40,7 +40,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
-    private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(title);
+    private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
