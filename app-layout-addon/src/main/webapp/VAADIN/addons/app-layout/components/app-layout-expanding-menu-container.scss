@@ -31,6 +31,6 @@
     background: $drawer-submenu-background-color;
   }
   .app-layout-top-menu.v-menubar * {
-    color: white !important;
+    color: $app-bar-font-color !important;
   }
 }
