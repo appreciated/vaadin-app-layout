@@ -153,7 +153,9 @@ public class DemoUI extends UI {
                     Behaviour.LEFT_RESPONSIVE_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
                     Behaviour.LEFT_RESPONSIVE_SMALL,
-                    Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+                    Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
+                    Behaviour.TOP,
+                    Behaviour.TOP_LARGE);
             group.setSelectedItem(current);
             layout.addComponent(group);
             group.addSelectionListener(singleSelectionEvent -> {
