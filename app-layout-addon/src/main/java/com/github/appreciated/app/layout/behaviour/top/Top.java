@@ -31,13 +31,24 @@ public class Top extends AbstractTopAppLayout {
         appbarMenuHolder.setHeight(100, Unit.PERCENTAGE);
     }
 
-    public void addNavigationElement(Component component) {
-        super.addNavigationElement(component);
-        appElementHolder.addComponent(component);
-    }
 
     @Override
     public String getStyleName() {
         return "top";
+    }
+
+    @Override
+    public void addToTopHeader(Component component) {
+        appHeaderHolder.addComponent(component);
+    }
+
+    @Override
+    public void addToTop(Component component) {
+        appElementHolder.addComponent(component);
+    }
+
+    @Override
+    public void addToTopFooter(Component component) {
+        appFooterHolder.addComponent(component);
     }
 }

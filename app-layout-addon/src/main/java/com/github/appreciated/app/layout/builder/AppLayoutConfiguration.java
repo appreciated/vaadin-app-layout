@@ -127,7 +127,7 @@ public class AppLayoutConfiguration {
     private void addComponents(List<AbstractNavigationElement> elements, ComponentConsumer consumer) {
         elements.forEach(element -> {
             setComponentProviders(element);
-            consumer.accept(element.getComponent());
+            consumer.accept(element);
         });
     }
 
@@ -135,7 +135,6 @@ public class AppLayoutConfiguration {
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
             nelement.setNavigationElementInfoProvider(navigationElementInfoProvider);
-            nelement.setProvider(navigationElementProvider);
             if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
             }
@@ -143,18 +142,15 @@ public class AppLayoutConfiguration {
             nelement.setViewNameInterceptor(viewNameInterceptor);
             nelement.setCaptionInterceptor(captionInterceptor);
             nelement.addViewToNavigator(navigator);
-        } else if (element instanceof CustomNavigatorNavigationElement) {
-            CustomNavigatorNavigationElement cnelement = (CustomNavigatorNavigationElement) element;
-            cnelement.setProvider(customElementProvider);
+        } else if (element instanceof ClickableNavigationElement) {
+            ClickableNavigationElement cnelement = (ClickableNavigationElement) element;
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement selement = (SubmenuNavigationElement) element;
             selement.setCaptionInterceptor(captionInterceptor);
-            selement.setProvider(submenuProvider);
             selement.getSubmenuElements().forEach(element1 -> setComponentProviders(element1));
         } else if (element instanceof SectionNavigationElement) {
             SectionNavigationElement selement = (SectionNavigationElement) element;
             selement.setCaptionInterceptor(captionInterceptor);
-            selement.setProvider(sectionProvider);
         }
     }
 
@@ -264,7 +260,7 @@ public class AppLayoutConfiguration {
     }
 
     @FunctionalInterface
-    interface ComponentConsumer extends Consumer<Component> {
+    interface ComponentConsumer extends Consumer<AbstractNavigationElement> {
     }
 
 }

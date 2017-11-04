@@ -94,7 +94,7 @@ public class SubmenuBuilder {
     }
 
     public SubmenuBuilder addClickable(String caption, Resource icon, Button.ClickListener listener) {
-        this.submenuElements.add(new CustomNavigatorNavigationElement(caption, icon, listener));
+        this.submenuElements.add(new ClickableNavigationElement(caption, icon, listener));
         return this;
     }
 

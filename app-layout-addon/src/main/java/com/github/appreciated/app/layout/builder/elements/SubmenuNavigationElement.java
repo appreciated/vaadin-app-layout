@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.Provider;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
@@ -37,6 +38,23 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
             return title;
         } else {
             return captionInterceptor.get(title);
+        }
+    }
+
+    @Override
+    public void setProvider(AppLayout provider) {
+        setProvider(provider.getDrawerSubmenuElementProvider());
+    }
+
+    @Override
+    public void setProvider(AppLayout provider, AppLayout.Position position) {
+        switch (position) {
+            case DRAWER:
+                setProvider(provider.getDrawerSubmenuElementProvider());
+                break;
+            case TOP:
+                setProvider(provider.getTopSubmenuElementProvider());
+                break;
         }
     }
 

@@ -1,7 +1,9 @@
 package com.github.appreciated.app.layout.behaviour;
 
+import com.github.appreciated.app.layout.builder.ComponentProvider;
+import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.*;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 
@@ -18,11 +20,23 @@ public interface AppLayout extends Component {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
     }
 
-    void addNavigationHeaderElement(Component component);
+    void addToDrawerHeader(Component component);
 
-    void addNavigationFooterElement(Component component);
+    void addToDrawer(Component component);
 
-    void addNavigationElement(Component component);
+    void addToDrawerFooter(Component component);
+
+    void addToTopHeader(Component component);
+
+    void addToTop(Component component);
+
+    void addToTopFooter(Component component);
+
+    void addNavigationHeaderElement(AbstractNavigationElement component);
+
+    void addNavigationFooterElement(AbstractNavigationElement component);
+
+    void addNavigationElement(AbstractNavigationElement component);
 
     void addAppBarElement(Component component);
 
@@ -62,4 +76,40 @@ public interface AppLayout extends Component {
 
     void refreshNavigationElementInfo();
 
+    ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider();
+
+    void setDrawerNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider);
+
+    ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider();
+
+    void setTopNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider);
+
+    ComponentProvider<Component, SectionNavigationElement> getDrawerSectionElementProvider();
+
+    void setDrawerSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider);
+
+    ComponentProvider<Component, SectionNavigationElement> getTopSectionElementProvider();
+
+    void setTopSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider);
+
+    ComponentProvider<Component, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
+
+    void setDrawerSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider);
+
+    ComponentProvider<Component, SubmenuNavigationElement> getTopSubmenuElementProvider();
+
+    void setTopSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider);
+
+    ComponentProvider<Component, ClickableNavigationElement> getDrawerClickableElementProvider();
+
+    void setDrawerClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
+
+    ComponentProvider<Component, ClickableNavigationElement> getTopClickableElementProvider();
+
+    void setTopClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
+
+
+    public enum Position {
+        TOP, DRAWER
+    }
 }

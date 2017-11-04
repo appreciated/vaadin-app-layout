@@ -112,7 +112,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder addClickable(String caption, Resource icon, Button.ClickListener listener, Position position) {
-        addToPosition(new CustomNavigatorNavigationElement(caption, icon, listener), position);
+        addToPosition(new ClickableNavigationElement(caption, icon, listener), position);
         return this;
     }
 

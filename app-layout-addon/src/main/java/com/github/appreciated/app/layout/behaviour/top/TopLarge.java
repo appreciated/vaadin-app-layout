@@ -26,17 +26,28 @@ public class TopLarge extends AbstractTopAppLayout {
     private final HorizontalFlexBoxLayout appbarMenuHolder = new HorizontalFlexBoxLayout(appHeaderHolder, appElementHolder, appFooterHolder);
 
     public TopLarge() throws IOException {
-        super("top.html");
+        super("top-large.html");
         addComponent(appbarMenuHolder, "app-bar-menu-content");
     }
 
-    public void addNavigationElement(Component component) {
-        super.addNavigationElement(component);
+
+    @Override
+    public void addToTopHeader(Component component) {
+        appHeaderHolder.addComponent(component);
+    }
+
+    @Override
+    public void addToTop(Component component) {
         appElementHolder.addComponent(component);
     }
 
     @Override
+    public void addToTopFooter(Component component) {
+        appFooterHolder.addComponent(component);
+    }
+
+    @Override
     public String getStyleName() {
-        return "top";
+        return "top-large";
     }
 }

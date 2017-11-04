@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.vaadin.ui.Component;
 
@@ -24,6 +25,10 @@ public abstract class AbstractNavigationElement<V extends Component, T> {
     public void setProvider(ComponentProvider<V, T> provider) {
         this.provider = provider;
     }
+
+    public abstract void setProvider(AppLayout provider);
+
+    public abstract void setProvider(AppLayout provider, AppLayout.Position position);
 
     public V getComponent() {
         if (provider == null) {
