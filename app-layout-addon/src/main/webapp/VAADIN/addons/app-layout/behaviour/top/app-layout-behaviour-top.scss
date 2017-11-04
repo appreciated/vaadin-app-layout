@@ -28,9 +28,9 @@
         display: none;
       }
     }
-
-
-
+    .app-layout-bar-menu-holder {
+      padding-left: 10px;
+    }
     app-toolbar paper-icon-button {
       transition: opacity 0.3s;
       opacity: 1.0;

@@ -30,6 +30,7 @@ public class Top extends AbstractTopAppLayout {
         appElementHolder.setAlignCenter();
         appFooterHolder.setAlignCenter();
         getTitleWrapper().addComponent(appbarMenuHolder);
+        appbarMenuHolder.addStyleName("app-layout-bar-menu-holder");
         appbarMenuHolder.setHeight(100, Unit.PERCENTAGE);
     }
 
