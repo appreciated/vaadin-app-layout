@@ -7,11 +7,10 @@
       font-size: 13px;
       height: 20px;
       line-height: 20px;
-      margin: 15px;
+      margin: 15px 5px;
+      margin-left: -50px;
       text-align: center;
       border-radius: 10px;
-    }
-    .v-absolutelayout-wrapper-app-bar-badge {
       pointer-events: none;
     }
     .app-bar-badge {
@@ -35,6 +34,9 @@
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
       transition: border 0.5s;
+    }
+    .app-layout-menu-badge-button {
+      padding-right: 55px;
     }
     @if $disable-active-style == false {
       .app-layout-menu-element {

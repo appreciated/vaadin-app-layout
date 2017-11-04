@@ -5,14 +5,13 @@ import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
 
-public class NavigationBadgeButton extends HorizontalLayout implements NavigationElementComponent {
+public class NavigationBadgeButton extends HorizontalFlexBoxLayout implements NavigationElementComponent {
 
     private final NavigationButton button;
     private final Label badge;
@@ -21,9 +20,11 @@ public class NavigationBadgeButton extends HorizontalLayout implements Navigatio
         addStyleName(APP_LAYOUT_MENU_ELEMENT);
         setHeight(48, Unit.PIXELS);
         setWidth(100, Sizeable.Unit.PERCENTAGE);
-        setSpacing(false);
         button = new NavigationButton(name, icon);
         button.setSizeFull();
+        if (status != null) {
+            button.addStyleName("app-layout-menu-badge-button");
+        }
         badge = new Label();
         if (status != null) {
             status.addListener((newStatus) -> setStatus(newStatus));
@@ -31,7 +32,7 @@ public class NavigationBadgeButton extends HorizontalLayout implements Navigatio
         setStatus(status);
         badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
         addComponent(button);
-        setExpandRatio(button, 1);
+        grow(button);
         addComponent(badge);
     }
 
