@@ -27,10 +27,9 @@ public class Top extends AbstractTopAppLayout {
 
     public Top() throws IOException {
         super("top.html");
-        getAppBar().addComponent(appbarMenuHolder, 1);
+        getTitleWrapper().addComponent(appbarMenuHolder);
         appbarMenuHolder.setHeight(100, Unit.PERCENTAGE);
     }
-
 
     @Override
     public String getStyleName() {

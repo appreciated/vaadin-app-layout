@@ -42,7 +42,7 @@ public interface AppLayout extends Component {
 
     void setDesign(AppBarDesign design);
 
-    HorizontalLayout getAppBar();
+    Layout getAppBar();
 
     HorizontalLayout getAppBarElementWrapper();
 
@@ -50,7 +50,7 @@ public interface AppLayout extends Component {
 
     void setTitle(String title);
 
-    HorizontalLayout getTitleWrapper();
+    Layout getTitleWrapper();
 
     Panel getContentHolder();
 

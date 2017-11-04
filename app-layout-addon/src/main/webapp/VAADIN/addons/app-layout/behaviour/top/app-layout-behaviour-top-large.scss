@@ -7,6 +7,9 @@
     }
     .app-bar-content {
       left: 10px !important;
+      .app-layout-menu-bar-element {
+        display: none;
+      }
     }
     .app-bar-menu-content {
       left: $app-bar-height;

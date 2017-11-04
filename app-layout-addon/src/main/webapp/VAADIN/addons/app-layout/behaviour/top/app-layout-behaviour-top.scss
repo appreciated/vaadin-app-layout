@@ -24,7 +24,13 @@
       right: 0px;
       bottom: 0px;
       transition: left 0.3s;
+      .app-layout-menu-bar-element {
+        display: none;
+      }
     }
+
+
+
     app-toolbar paper-icon-button {
       transition: opacity 0.3s;
       opacity: 1.0;

@@ -10,7 +10,6 @@ import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.MenuHeader;
-import com.github.appreciated.app.layout.component.NavigationNotificationButton;
 import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
@@ -23,6 +22,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
+import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.FOOTER;
 import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
@@ -42,7 +42,7 @@ public class DemoUI extends UI {
     protected void init(VaadinRequest request) {
         holder = new VerticalLayout();
         holder.setMargin(false);
-        setDrawerVariant(Behaviour.LEFT);
+        setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
         setContent(holder);
         holder.setSizeFull();
         notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
@@ -69,54 +69,33 @@ public class DemoUI extends UI {
 
     private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
-
         AppLayout drawer = AppLayoutBuilder.get(variant)
-                .withTitle("Demo")
-                .addToAppBar(getVariantCombo(variant))
+                .withTitle("App Layout")
                 .addToAppBar(new NotificationAppBarButton(notifications))
-                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
-                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
-                //.addToAppBar(new AppBarButton(VaadinIcons.SEARCH))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
-                .add(new MenuHeader("App Layout", "Version 0.9.11", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.10", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(
                         SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .add("ÄÖÜäöüßCharts", VaadinIcons.SPLINE_CHART, View2.class)
+                                .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                                 .add("Contact", VaadinIcons.CONNECT, View3.class)
                                 .add("More", VaadinIcons.COG, View4.class)
                                 .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .addClickable("Click Me", VaadinIcons.QUESTION, clickEvent -> {/*Click Event*/})
-                .add(new NavigationNotificationButton("News", VaadinIcons.BELL, notifications), FOOTER)
-                //.add("Preferences", VaadinIcons.COG, View7.class, FOOTER)
+                .addClickable("Set Behaviour", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
                 .build();
         holder.addComponent(drawer);
+        getNavigator().navigateTo("");
     }
 
-    ComboBox getVariantCombo(Behaviour variant) {
-        ComboBox<Behaviour> variants = new ComboBox<>();
-        variants.addStyleNames(ValoTheme.COMBOBOX_BORDERLESS, ValoTheme.CHECKBOX_SMALL, ValoTheme.TEXTFIELD_ALIGN_RIGHT);
-        variants.setWidth("300px");
-        variants.setItems(Behaviour.LEFT,
-                Behaviour.LEFT_OVERLAY,
-                Behaviour.LEFT_RESPONSIVE,
-                Behaviour.LEFT_HYBRID,
-                Behaviour.LEFT_RESPONSIVE_HYBRID,
-                Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
-                Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
-                Behaviour.LEFT_RESPONSIVE_OVERLAY,
-                Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
-                Behaviour.LEFT_RESPONSIVE_SMALL,
-                Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
-                Behaviour.TOP,
-                Behaviour.TOP_LARGE);
-        variants.setValue(variant);
-        variants.addValueChangeListener(valueChangeEvent -> setDrawerVariant(valueChangeEvent.getValue()));
-        return variants;
+    private void openModeSelector(Behaviour variant) {
+        UI.getCurrent().addWindow(new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)));
+    }
+
+    public static class View1 extends AbstractView {
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
@@ -124,45 +103,63 @@ public class DemoUI extends UI {
     public static class Servlet extends VaadinServlet {
     }
 
-    public static class View1 extends HorizontalLayout implements View {
-        public View1() {
-            addComponent(new Label(getClass().getName()));
+    public static class View2 extends AbstractView {
+    }
+
+    public static class View3 extends AbstractView {
+    }
+
+    public static class View4 extends AbstractView {
+    }
+
+    public static class View5 extends AbstractView {
+    }
+
+    public static class View6 extends AbstractView {
+    }
+
+    static class AbstractView extends HorizontalLayout implements View {
+        public AbstractView() {
+            HorizontalLayout layout = new HorizontalLayout();
+            layout.setSizeFull();
+            Label label = new Label("< My Content >");
+            label.addStyleNames(ValoTheme.LABEL_H2, ValoTheme.LABEL_NO_MARGIN);
+            layout.addComponent(label);
+            layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
+            Panel panel = new Panel(layout);
+            panel.setSizeFull();
+            addComponent(panel);
+            setMargin(true);
+            setSizeFull();
         }
     }
 
-    public static class View2 extends HorizontalLayout implements View {
-        public View2() {
-            addComponent(new Label(getClass().getName()));
-        }
-    }
-
-    public static class View3 extends HorizontalLayout implements View {
-        public View3() {
-            addComponent(new Label(getClass().getName()));
-        }
-    }
-
-    public static class View4 extends HorizontalLayout implements View {
-        public View4() {
-            addComponent(new Label(getClass().getName()));
-        }
-    }
-
-    public static class View5 extends HorizontalLayout implements View {
-        public View5() {
-            addComponent(new Label(getClass().getName()));
-        }
-    }
-
-    public static class View6 extends HorizontalLayout implements View {
-        public View6() {
-            addComponent(new Label(getClass().getName()));
-        }
-    }
-
-    public static class View7 extends HorizontalLayout implements View {
-        public View7() {
-            addComponent(new Label(getClass().getName()));
+    class BehaviourSelector extends Window {
+        public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
+            setModal(true);
+            setClosable(true);
+            setCaption("Select Behaviour");
+            VerticalLayout layout = new VerticalLayout();
+            setContent(layout);
+            RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
+            group.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
+            group.setItems(Behaviour.LEFT,
+                    Behaviour.LEFT_OVERLAY,
+                    Behaviour.LEFT_RESPONSIVE,
+                    Behaviour.LEFT_HYBRID,
+                    Behaviour.LEFT_RESPONSIVE_HYBRID,
+                    Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
+                    Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
+                    Behaviour.LEFT_RESPONSIVE_OVERLAY,
+                    Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
+                    Behaviour.LEFT_RESPONSIVE_SMALL,
+                    Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
+            group.setSelectedItem(current);
+            layout.addComponent(group);
+            group.addSelectionListener(singleSelectionEvent -> {
+                consumer.accept(singleSelectionEvent.getSelectedItem().orElse(Behaviour.LEFT_RESPONSIVE));
+                close();
+            });
         }
     }
 

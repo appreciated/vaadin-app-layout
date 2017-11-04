@@ -23,6 +23,7 @@ public abstract class AbstractNavigationElement<V extends Component, T> {
     }
 
     public void setProvider(ComponentProvider<V, T> provider) {
+        this.component = null;
         this.provider = provider;
     }
 

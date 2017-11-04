@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.builder.providers.top.DefaultTopCustomN
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
+import com.github.appreciated.app.layout.component.HorizontalFlexBoxLayout;
 import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
@@ -35,11 +36,11 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
 
     private final VerticalFlexBoxLayout menuHolder = new VerticalFlexBoxLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
-    private final HorizontalLayout appBar = new HorizontalLayout();
+    private final HorizontalFlexBoxLayout appBar = new HorizontalFlexBoxLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final Label title = new Label("");
-    private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(title);
     private List<NavigatorNavigationElement> list;
 
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
@@ -71,16 +72,14 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
         appBar.addComponents(titleWrapper, appBarElementWrapper);
-        appBar.setExpandRatio(appBarElementWrapper, 1);
+        appBar.grow(titleWrapper);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
         appBarElementWrapper.setSpacing(false);
-        appBarElementWrapper.setSizeFull();
         appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
         appBarElementContainer.setHeight(100, Unit.PERCENTAGE);
         appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
-        titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
     @Override
@@ -107,7 +106,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         this.addStyleName(design.getStylename());
     }
 
-    public HorizontalLayout getAppBar() {
+    public Layout getAppBar() {
         return appBar;
     }
 
@@ -128,7 +127,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         return contentPanel;
     }
 
-    public HorizontalLayout getTitleWrapper() {
+    public Layout getTitleWrapper() {
         return titleWrapper;
     }
 
@@ -150,7 +149,6 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
 
     public void addAppBarIcon(Component appBarIconComponent) {
         titleWrapper.addComponentAsFirst(appBarIconComponent);
-        titleWrapper.setComponentAlignment(appBarIconComponent, Alignment.MIDDLE_LEFT);
     }
 
     @Override

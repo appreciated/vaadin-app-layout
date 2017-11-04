@@ -13,6 +13,7 @@ public class DefaultTopNavigationBadgeElementComponentProvider extends AbstractN
         element.setComponent(button);
         button.setDescription(element.getCaption());
         setNavigationClickListener(element);
+        button.setWidth("100px");
         return button;
     }
 }
