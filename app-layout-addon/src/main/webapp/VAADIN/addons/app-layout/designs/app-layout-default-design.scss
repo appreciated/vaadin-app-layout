@@ -66,12 +66,12 @@
         box-shadow: none !important;
         border-left: none;
       }
-      &.app-layout-behaviour-top .app-layout-menu-element-active {
-        border-bottom: 2px solid white;
+      &.app-layout-behaviour-top .app-layout-menu-element-active, &.app-layout-behaviour-top-large .app-layout-menu-element-active {
+        border-bottom: 2px solid $app-bar-font-color;
       }
-      &.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button {
+      &.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, &.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
         background: rgba(70, 70, 70, 0) !important;
-        color: white !important;
+        color: $app-bar-font-color !important;
       }
     }
     .app-layout-round-image {
