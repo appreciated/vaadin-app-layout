@@ -1,3 +1,11 @@
+@media only screen and (min-width: 641px) {
+  .app-layout-behaviour-left-responsive-overlay-no-app-bar {
+    .app-bar-application-content {
+      height: calc(100vh - #{$app-bar-height}) !important;
+    }
+  }
+}
+
 @mixin app-layout-behaviour-left-responsive-overlay-no-app-bar {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     --app-drawer-width: $drawer-width;
