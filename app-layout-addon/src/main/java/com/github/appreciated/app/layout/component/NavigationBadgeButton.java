@@ -4,15 +4,15 @@ import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
-import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
 
-public class NavigationBadgeButton extends AbsoluteLayout implements NavigationElementComponent {
+public class NavigationBadgeButton extends HorizontalLayout implements NavigationElementComponent {
 
     private final NavigationButton button;
     private final Label badge;
@@ -21,6 +21,7 @@ public class NavigationBadgeButton extends AbsoluteLayout implements NavigationE
         addStyleName(APP_LAYOUT_MENU_ELEMENT);
         setHeight(48, Unit.PIXELS);
         setWidth(100, Sizeable.Unit.PERCENTAGE);
+        setSpacing(false);
         button = new NavigationButton(name, icon);
         button.setSizeFull();
         badge = new Label();
@@ -28,12 +29,10 @@ public class NavigationBadgeButton extends AbsoluteLayout implements NavigationE
             status.addListener((newStatus) -> setStatus(newStatus));
         }
         setStatus(status);
-
         badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
-        ComponentPosition badgePosition = new ComponentPosition();
-
         addComponent(button);
-        addComponent(badge, "right: 0px;");
+        setExpandRatio(button, 1);
+        addComponent(badge);
     }
 
     public NavigationBadgeButton(String name, Resource icon, DefaultBadgeHolder status, Button.ClickListener listener) {

@@ -8,11 +8,14 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationEleme
 import com.vaadin.ui.Component;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.themes.ValoTheme;
 
 public class DefaultTopSubmenuNavigationElementProvider implements ComponentProvider<Component, SubmenuNavigationElement> {
     @Override
     public Component get(SubmenuNavigationElement element) {
         MenuBar barmenu = new MenuBar();
+        barmenu.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+        barmenu.addStyleName(ValoTheme.MENUBAR_SMALL);
         addToMenuBar(barmenu, element);
         return barmenu;
     }

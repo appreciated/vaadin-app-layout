@@ -36,6 +36,7 @@
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
     }
+
     @if $disable-active-style == false {
       .app-layout-menu-element-active .app-layout-menu-button {
         background: $app-menu-button-active-background-color !important;
@@ -44,6 +45,13 @@
       .app-layout-menu-button:after {
         box-shadow: none !important;
         border-left: none;
+      }
+      &.app-layout-behaviour-top .app-layout-menu-element-active {
+        border-bottom: 2px solid white;
+      }
+      &.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button {
+        background: rgba(70, 70, 70, 0) !important;
+        color: white !important;
       }
     }
     .app-layout-round-image {

@@ -80,6 +80,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         appBarElementContainer.setHeight(100, Unit.PERCENTAGE);
         appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
+        titleWrapper.setAlignCenter();
     }
 
     @Override

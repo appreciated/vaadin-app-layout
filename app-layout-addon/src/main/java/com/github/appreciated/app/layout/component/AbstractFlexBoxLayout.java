@@ -39,4 +39,8 @@ public class AbstractFlexBoxLayout extends CssLayout {
             component.addStyleNames(style);
         }
     }
+
+    public void setAlignCenter() {
+        addStyleName("align-center");
+    }
 }
