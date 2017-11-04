@@ -30,4 +30,7 @@
   .app-layout-submenu-container {
     background: $drawer-submenu-background-color;
   }
+  .app-layout-top-menu.v-menubar * {
+    color: white !important;
+  }
 }

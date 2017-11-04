@@ -16,6 +16,7 @@ public class DefaultTopSubmenuNavigationElementProvider implements ComponentProv
         MenuBar barmenu = new MenuBar();
         barmenu.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
         barmenu.addStyleName(ValoTheme.MENUBAR_SMALL);
+        barmenu.addStyleName("app-layout-top-menu");
         addToMenuBar(barmenu, element);
         return barmenu;
     }
