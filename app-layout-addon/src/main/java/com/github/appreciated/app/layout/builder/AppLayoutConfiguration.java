@@ -5,7 +5,7 @@ import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftCustomNavigationElementProvider;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementProvider;
@@ -36,7 +36,7 @@ public class AppLayoutConfiguration {
     private String title;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
-    private DefaultLeftCustomNavigationElementProvider customElementProvider;
+    private DefaultLeftClickableNavigationElementProvider customElementProvider;
     private ComponentProvider<Component, SectionNavigationElement> sectionProvider;
     private ComponentProvider<Component, SubmenuNavigationElement> submenuProvider;
     private NavigationElementInfoProvider navigationElementInfoProvider = null;
@@ -65,9 +65,9 @@ public class AppLayoutConfiguration {
         }
         if (customElementProvider == null) {
             if (variant.isTop())
-                customElementProvider = new DefaultLeftCustomNavigationElementProvider();
+                customElementProvider = new DefaultLeftClickableNavigationElementProvider();
             else
-                customElementProvider = new DefaultLeftCustomNavigationElementProvider();
+                customElementProvider = new DefaultLeftClickableNavigationElementProvider();
         }
         if (sectionProvider == null) {
             if (variant.isTop())

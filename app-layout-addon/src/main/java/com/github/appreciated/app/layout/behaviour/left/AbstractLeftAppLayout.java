@@ -5,11 +5,11 @@ import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftCustomNavigationElementProvider;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementProvider;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopCustomNavigationElementProvider;
+import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
@@ -41,11 +41,11 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
     private ComponentProvider<Component, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementProvider();
     private ComponentProvider<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentProvider();
-    private ComponentProvider<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftCustomNavigationElementProvider();
+    private ComponentProvider<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementProvider();
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentProvider();
     private ComponentProvider<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentProvider();
     private ComponentProvider<Component, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementProvider();
-    private ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopCustomNavigationElementProvider();
+    private ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementProvider();
 
     public AbstractLeftAppLayout(String filename) throws IOException {
         super(AbstractLeftAppLayout.class.getResourceAsStream(filename));
