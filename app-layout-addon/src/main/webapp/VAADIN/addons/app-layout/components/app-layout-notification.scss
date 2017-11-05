@@ -1,16 +1,16 @@
 @mixin app-layout-notification {
   .app-layout-notification-window {
     .v-margin-left {
-      padding-left: 10px;
+      padding-left: 10px !important;
     }
     .v-margin-bottom {
-      padding-bottom: 10px;
+      padding-bottom: 10px !important;
     }
     .v-margin-right {
-      padding-right: 10px;
+      padding-right: 10px !important;
     }
     .v-margin-top {
-      padding-top: 10px;
+      padding-top: 10px !important;
     }
   }
   .v-window .v-window-outerheader:after {
