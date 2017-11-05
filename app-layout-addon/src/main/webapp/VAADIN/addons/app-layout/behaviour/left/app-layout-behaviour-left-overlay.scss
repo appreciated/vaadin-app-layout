@@ -24,6 +24,7 @@
     .drawer-content {
       box-shadow: $drawer-shadow;
       height: 100%;
+      margin-top: 0px !important;
       overflow: visible;
       background: $drawer-background-color;
       color: $drawer-font-color !important;

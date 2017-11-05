@@ -1,3 +1,11 @@
+@media only screen and (max-width: 640px) {
+  .app-layout-behaviour-left-responsive-overlay {
+    .drawer-content {
+      margin-top: 0px !important;
+    }
+  }
+}
+
 @mixin app-layout-behaviour-left-responsive-overlay {
   .app-layout-behaviour-left-responsive-overlay {
     --app-drawer-width: $drawer-width;

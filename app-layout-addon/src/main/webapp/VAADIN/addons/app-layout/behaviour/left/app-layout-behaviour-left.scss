@@ -28,7 +28,10 @@
     }
     .drawer-content {
       margin-top: $app-bar-height;
-      height: calc(100% - #{$app-bar-height});
+      box-sizing: border-box;
+      height: 100%;
+      margin-bottom: -$app-bar-height;
+      padding-bottom: $app-bar-height;
       overflow: visible;
       box-shadow: $drawer-shadow;
       background: $drawer-background-color;

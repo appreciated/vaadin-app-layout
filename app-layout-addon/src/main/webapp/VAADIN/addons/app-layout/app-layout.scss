@@ -58,7 +58,10 @@ $z-index: 10 !default;
   }
   .app-bar-application-content {
     width: 100%;
-    height: calc(100vh - #{$app-bar-height});
+    box-sizing: border-box;
+    height: 100vh;
+    margin-bottom: -$app-bar-height;
+    padding-bottom: $app-bar-height;
   }
   .app-layout-menu-bar-element {
     padding-left: 16px;
