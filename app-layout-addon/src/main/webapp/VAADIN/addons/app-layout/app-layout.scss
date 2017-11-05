@@ -1,3 +1,6 @@
+@if not variable-exists(v-background-color) {
+  $v-background-color: #fafafa !default;
+}
 $app-bar-background-color: #4285f4 !default;
 $app-bar-font-color: valo-font-color($app-bar-background-color) !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
@@ -36,7 +39,6 @@ $z-index: 10 !default;
   margin-bottom: -$margin-top !important;
   padding-bottom: $margin-top !important;
 }
-
 
 @import "designs/app-layout-default-design.scss";
 @import "designs/app-layout-material-design.scss";

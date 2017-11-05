@@ -1,5 +1,15 @@
 @mixin app-layout-behaviour-left-fallback {
   .app-layout-behaviour-left-fallback {
+    .app-toolbar .app-layout-menu-bar-element {
+      padding: 0px;
+      .app-layout-round-image {
+        width: 50px !important;
+        height: 50px !important;
+      }
+      .app-layout-menu-header-title {
+        display: none;
+      }
+    }
     .app-bar-content {
       left: $app-bar-height;
       position: absolute;
@@ -45,5 +55,14 @@
       border-radius: 100%;
       padding: 0;
     }
+
+    .app-toolbar .app-layout-menu-element-active {
+      border-bottom: 2px solid $app-bar-font-color;
+    }
+    .app-toolbar .app-layout-menu-element-active .app-layout-menu-button {
+      background: rgba(70, 70, 70, 0) !important;
+      color: $app-bar-font-color !important;
+    }
+
   }
 }

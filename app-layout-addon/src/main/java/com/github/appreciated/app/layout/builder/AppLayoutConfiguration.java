@@ -56,7 +56,7 @@ public class AppLayoutConfiguration {
     }
 
     public AppLayout build() {
-        AppLayoutSessionHelper.setActiveVariant(variant);
+
         if (navigationElementProvider == null) {
             if (variant.isTop())
                 navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
@@ -81,6 +81,8 @@ public class AppLayoutConfiguration {
             else
                 submenuProvider = new DefaultLeftSubmenuNavigationElementProvider();
         }
+
+        AppLayoutSessionHelper.setActiveVariant(variant);
 
         setTitle(title);
         if (true) {

@@ -67,7 +67,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         menuElementHolder.setMargin(new MarginInfo(true, false));
         menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
         menuElementHolder.setWidth(100, Unit.PERCENTAGE);
-        addStyleName("app-layout-behaviour-" + getStyleName());
+        addStyleNames("app-layout-behaviour-" + getStyleName(), "app-layout");
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");

@@ -30,10 +30,7 @@
   .app-layout-submenu-container {
     background: $drawer-submenu-background-color;
   }
-  .app-layout-top-menu.v-menubar {
-    vertical-align: sub;
-    * {
-      color: $app-bar-font-color !important;
-    }
+  .app-layout-top-menu.v-menubar * {
+    color: $app-bar-font-color !important;
   }
 }

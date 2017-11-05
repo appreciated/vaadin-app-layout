@@ -14,31 +14,30 @@ import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickab
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
-import com.vaadin.shared.ui.MarginInfo;
+import com.github.appreciated.app.layout.component.HorizontalFlexBoxLayout;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.List;
 
-import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.DRAWER;
 import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.TOP;
 
 public class TopFallBack extends VerticalLayout implements AppLayout {
 
     private final Panel contentPanel = new Panel();
 
-    private final VerticalLayout menuHeaderHolder = new VerticalLayout();
-    private final VerticalLayout menuElementHolder = new VerticalLayout();
-    private final Panel menuElementPanel = new Panel(menuElementHolder);
-    private final VerticalLayout menuFooterHolder = new VerticalLayout();
-
-    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementPanel, menuFooterHolder);
-
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
+
+    private final HorizontalFlexBoxLayout appBarHeaderMenuContainer = new HorizontalFlexBoxLayout();
+    private final HorizontalFlexBoxLayout appBarMenuContainer = new HorizontalFlexBoxLayout();
+    private final HorizontalFlexBoxLayout appBarFooterMenuContainer = new HorizontalFlexBoxLayout();
+    private final HorizontalFlexBoxLayout appBarMenuContainerWrapper = new HorizontalFlexBoxLayout(appBarHeaderMenuContainer, appBarMenuContainer, appBarFooterMenuContainer);
+    private final HorizontalLayout titleWrapper = new HorizontalLayout(title, appBarMenuContainerWrapper);
+
     private final Label title = new Label("");
-    private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    VerticalLayout wrapper = new VerticalLayout(appBar, contentPanel);
     private List<NavigatorNavigationElement> list;
 
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
@@ -51,65 +50,21 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
     private ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementProvider();
 
     public TopFallBack(Behaviour variant) {
+        addStyleNames("app-layout-behaviour-" + getStyleName(), "app-layout");
         this.setSpacing(false);
         this.setMargin(false);
         setSizeFull();
         contentPanel.setSizeFull();
+
+        appBarMenuContainerWrapper.setHeight(100, Unit.PERCENTAGE);
+        appBarMenuContainerWrapper.setAlignCenter();
+        appBarHeaderMenuContainer.setAlignCenter();
+        appBarMenuContainer.setAlignCenter();
+        appBarFooterMenuContainer.setAlignCenter();
+
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-
-        menuHolder.setHeight(100, Unit.PERCENTAGE);
-        if (!variant.isSmall()) {
-            menuHolder.setWidth(256, Unit.PIXELS);
-        } else {
-            menuHolder.setWidth(64, Unit.PIXELS);
-        }
-        menuHolder.setMargin(false);
-        menuHolder.setSpacing(false);
-        menuHolder.setExpandRatio(menuElementPanel, 1);
-
-        menuElementPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuElementPanel.setSizeFull();
-        menuHeaderHolder.setVisible(false);
-        menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(new MarginInfo(true, false, false, false));
-        menuElementHolder.setMargin(new MarginInfo(true, false));
-        menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
-        menuElementHolder.setWidth(100, Unit.PERCENTAGE);
+        wrapper.setExpandRatio(contentPanel, 1);
         addStyleName(getStyleName());
-        if (variant.isOverlay()) {
-            VerticalLayout vwrapper;
-            if (variant.hasAppBar()) {
-                vwrapper = new VerticalLayout(appBar, contentPanel);
-            } else {
-                vwrapper = new VerticalLayout(contentPanel);
-            }
-            vwrapper.setMargin(false);
-            vwrapper.setSpacing(false);
-            vwrapper.setExpandRatio(contentPanel, 1.0f);
-            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
-            wrapper.setExpandRatio(vwrapper, 1.0f);
-            menuHolder.addStyleName("behaviour-content");
-            if (variant.isSmall()) {
-                menuHolder.addStyleName("small");
-            }
-            wrapper.setSizeFull();
-            wrapper.setSpacing(false);
-            addComponent(wrapper);
-        } else {
-            if (variant.hasAppBar()) {
-                addComponent(appBar);
-            }
-            HorizontalLayout wrapper = new HorizontalLayout(menuHolder, contentPanel);
-            menuHolder.addStyleName("behaviour-content");
-            if (variant.isSmall()) {
-                menuHolder.addStyleName("small");
-            }
-            wrapper.setSizeFull();
-            wrapper.setSpacing(false);
-            addComponent(wrapper);
-            wrapper.setExpandRatio(contentPanel, 1.0f);
-            setExpandRatio(wrapper, 1.0f);
-        }
         appBar.addComponents(titleWrapper, appBarElementWrapper);
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
@@ -122,6 +77,10 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
         appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
         titleWrapper.setHeight(100, Unit.PERCENTAGE);
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
+        addComponent(wrapper);
+        wrapper.setSizeFull();
+        wrapper.setMargin(false);
+        wrapper.setSpacing(false);
     }
 
     @Override
@@ -140,18 +99,9 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
         return "left-fallback";
     }
 
-    public void addNavigationHeaderElement(Component component) {
-        menuHeaderHolder.setVisible(true);
-        menuHeaderHolder.addComponent(component);
-    }
-
-    public void addNavigationFooterElement(Component component) {
-        menuFooterHolder.setVisible(true);
-        menuFooterHolder.addComponent(component);
-    }
 
     public void addNavigationElement(Component component) {
-        menuElementHolder.addComponent(component);
+        appBarMenuContainer.addComponent(component);
     }
 
     public void addAppBarElement(Component component) {
@@ -188,19 +138,19 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
     }
 
     public VerticalLayout getMenuElementHolder() {
-        return menuElementHolder;
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     public VerticalLayout getMenuFooterHolder() {
-        return menuFooterHolder;
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     public VerticalLayout getMenuHeaderHolder() {
-        return menuHeaderHolder;
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     public VerticalLayout getMenuHolder() {
-        return menuHolder;
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     public void addAppBarIcon(Component appBarIconComponent) {
@@ -210,9 +160,7 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
 
     @Override
     public void addNavigationElement(AbstractNavigationElement element) {
-        element.setProvider(drawerNavigationElementProvider);
-        addToDrawer(element.getComponent());
-        element.setProvider(topNavigationElementProvider);
+        element.setProvider(this, TOP);
         addToTop(element.getComponent());
     }
 
@@ -298,49 +246,43 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
 
     @Override
     public void addNavigationFooterElement(AbstractNavigationElement element) {
-        element.setProvider(drawerNavigationElementProvider);
-        addToDrawerFooter(element.getComponent());
-        element.setProvider(topNavigationElementProvider);
+        element.setProvider(this, TOP);
         addToTopFooter(element.getComponent());
     }
 
     @Override
     public void addNavigationHeaderElement(AbstractNavigationElement element) {
         element.setProvider(this, TOP);
-        addToDrawerHeader(element.getComponent());
-        element.setProvider(this, DRAWER);
-        addToTopFooter(element.getComponent());
+        addToTopHeader(element.getComponent());
     }
 
     @Override
     public void addToDrawer(Component component) {
-        menuElementHolder.addComponent(component);
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     @Override
     public void addToDrawerFooter(Component component) {
-        menuFooterHolder.setVisible(true);
-        menuFooterHolder.addComponent(component);
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     @Override
     public void addToDrawerHeader(Component component) {
-        menuHeaderHolder.setVisible(true);
-        menuHeaderHolder.addComponent(component);
+        throw new UnsupportedOperationException("The TopFallBack Layout does not support this operation");
     }
 
     @Override
     public void addToTop(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
+        addNavigationElement(component);
     }
 
     @Override
     public void addToTopFooter(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
+        appBarFooterMenuContainer.addComponent(component);
     }
 
     @Override
     public void addToTopHeader(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
+        appBarHeaderMenuContainer.addComponent(component);
     }
 }

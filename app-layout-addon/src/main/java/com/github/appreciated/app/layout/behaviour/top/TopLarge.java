@@ -4,7 +4,6 @@ import com.github.appreciated.app.layout.component.HorizontalFlexBoxLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
 
 import java.io.IOException;
 
@@ -19,15 +18,18 @@ import java.io.IOException;
 
 public class TopLarge extends AbstractTopAppLayout {
 
-    private final HorizontalLayout appHeaderHolder = new HorizontalLayout();
-    private final HorizontalLayout appElementHolder = new HorizontalLayout();
-    private final HorizontalLayout appFooterHolder = new HorizontalLayout();
+    private final HorizontalFlexBoxLayout appHeaderHolder = new HorizontalFlexBoxLayout();
+    private final HorizontalFlexBoxLayout appElementHolder = new HorizontalFlexBoxLayout();
+    private final HorizontalFlexBoxLayout appFooterHolder = new HorizontalFlexBoxLayout();
 
     private final HorizontalFlexBoxLayout appbarMenuHolder = new HorizontalFlexBoxLayout(appHeaderHolder, appElementHolder, appFooterHolder);
 
     public TopLarge() throws IOException {
         super("top-large.html");
         addComponent(appbarMenuHolder, "app-bar-menu-content");
+        appHeaderHolder.setAlignCenter();
+        appElementHolder.setAlignCenter();
+        appFooterHolder.setAlignCenter();
     }
 
 

@@ -51,6 +51,8 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
         this.setSpacing(false);
         this.setMargin(false);
         setSizeFull();
+
+        addStyleNames("app-layout-behaviour-" + getStyleName(), "app-layout");
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 
@@ -85,7 +87,7 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
             vwrapper.setExpandRatio(contentPanel, 1.0f);
             HorizontalLayout wrapper = new HorizontalLayout(menuHolder, vwrapper);
             wrapper.setExpandRatio(vwrapper, 1.0f);
-            menuHolder.addStyleName("behaviour-content");
+            menuHolder.addStyleNames("behaviour-content", "drawer-content");
             if (variant.isSmall()) {
                 menuHolder.addStyleName("small");
             }
@@ -97,7 +99,7 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
                 addComponent(appBar);
             }
             HorizontalLayout wrapper = new HorizontalLayout(menuHolder, contentPanel);
-            menuHolder.addStyleName("behaviour-content");
+            menuHolder.addStyleNames("behaviour-content", "drawer-content");
             if (variant.isSmall()) {
                 menuHolder.addStyleName("small");
             }

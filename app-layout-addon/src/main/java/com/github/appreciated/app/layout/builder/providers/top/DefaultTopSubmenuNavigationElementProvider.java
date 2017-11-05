@@ -31,11 +31,11 @@ public class DefaultTopSubmenuNavigationElementProvider implements ComponentProv
         }
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement submenu = (NavigatorNavigationElement) element;
-            MenuBar.MenuItem submenuItem = menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().getNavigator().navigateTo(submenu.getViewName()));
+            menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().getNavigator().navigateTo(submenu.getViewName()));
         }
         if (element instanceof ClickableNavigationElement) {
             ClickableNavigationElement submenu = (ClickableNavigationElement) element;
-            MenuBar.MenuItem submenuItem = menuBar.addItem(submenu.getName(), submenu.getIcon(), menuItem -> submenu.getListener().buttonClick(null));
+            menuBar.addItem(submenu.getName(), submenu.getIcon(), menuItem -> submenu.getListener().buttonClick(null));
         }
     }
 
@@ -49,11 +49,11 @@ public class DefaultTopSubmenuNavigationElementProvider implements ComponentProv
         }
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement submenu = (NavigatorNavigationElement) element;
-            MenuBar.MenuItem submenuItem = menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().getNavigator().navigateTo(submenu.getViewName()));
+            menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().getNavigator().navigateTo(submenu.getViewName()));
         }
         if (element instanceof ClickableNavigationElement) {
             ClickableNavigationElement submenu = (ClickableNavigationElement) element;
-            MenuBar.MenuItem submenuItem = menuBar.addItem(submenu.getName(), submenu.getIcon(), menuItem -> submenu.getListener().buttonClick(null));
+            menuBar.addItem(submenu.getName(), submenu.getIcon(), menuItem -> submenu.getListener().buttonClick(null));
         }
     }
 
