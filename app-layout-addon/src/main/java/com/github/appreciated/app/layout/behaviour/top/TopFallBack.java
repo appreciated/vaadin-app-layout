@@ -34,9 +34,10 @@ public class TopFallBack extends VerticalLayout implements AppLayout {
     private final HorizontalFlexBoxLayout appBarMenuContainer = new HorizontalFlexBoxLayout();
     private final HorizontalFlexBoxLayout appBarFooterMenuContainer = new HorizontalFlexBoxLayout();
     private final HorizontalFlexBoxLayout appBarMenuContainerWrapper = new HorizontalFlexBoxLayout(appBarHeaderMenuContainer, appBarMenuContainer, appBarFooterMenuContainer);
-    private final HorizontalLayout titleWrapper = new HorizontalLayout(title, appBarMenuContainerWrapper);
 
     private final Label title = new Label("");
+    private final HorizontalLayout titleWrapper = new HorizontalLayout(title, appBarMenuContainerWrapper);
+
     VerticalLayout wrapper = new VerticalLayout(appBar, contentPanel);
     private List<NavigatorNavigationElement> list;
 
