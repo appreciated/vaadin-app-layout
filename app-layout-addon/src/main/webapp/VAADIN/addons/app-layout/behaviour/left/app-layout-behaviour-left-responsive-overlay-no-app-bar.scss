@@ -1,10 +1,15 @@
 @media only screen and (max-width: 640px) {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     .app-bar-application-content {
-      box-sizing: border-box;
-      height: 100vh;
-      margin-bottom: -$app-bar-height;
-      padding-bottom: $app-bar-height;
+      @include media-application-content(64px, 0px);
+    }
+  }
+}
+
+@media only screen and (min-width: 641px) {
+  .app-layout-behaviour-left-responsive-overlay-no-app-bar {
+    .app-bar-application-content {
+      @include media-application-content (0px, 256px);
     }
   }
 }
@@ -13,10 +18,6 @@
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     --app-drawer-width: $drawer-width;
     --app-bar-height: $app-bar-height;
-
-    .app-bar-application-content {
-      height: 100vh;
-    }
 
     .app-bar-content {
       left: $app-bar-height;

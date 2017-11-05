@@ -52,6 +52,9 @@
     .app-layout-expanding-menu-container-button:after {
       opacity: 0 !important;
     }
+    .app-bar-application-content {
+      @include media-application-content (64px, 64px);
+    }
   }
 }
 

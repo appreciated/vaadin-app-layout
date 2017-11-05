@@ -5,7 +5,7 @@
       display: none !important;
     }
     .app-bar-application-content {
-      height: 100vh !important;
+      @include media-application-content (0px, 64px);
     }
     .app-layout-menu-button-badge {
       background: $app-menu-button-badge-background-color;

@@ -18,6 +18,26 @@ $submenu-max-height: 999px !default;
 $small-drawer-width: 64px !default;
 $z-index: 10 !default;
 
+@mixin application-content($margin-top, $margin-left) {
+  margin-bottom: -$margin-top;
+  padding-bottom: $margin-top;
+  margin-right: -$margin-left;
+  padding-right: $margin-left;
+}
+
+@mixin media-application-content($margin-top, $margin-left) {
+  margin-bottom: -$margin-top !important;
+  padding-bottom: $margin-top !important;
+  margin-right: -$margin-left !important;
+  padding-right: $margin-left !important;
+}
+
+@mixin media-application-content-top($margin-top) {
+  margin-bottom: -$margin-top !important;
+  padding-bottom: $margin-top !important;
+}
+
+
 @import "designs/app-layout-default-design.scss";
 @import "designs/app-layout-material-design.scss";
 @import "designs/app-layout-custom-design.scss";
@@ -56,12 +76,24 @@ $z-index: 10 !default;
       display: none;
     }
   }
+  .app-layout {
+
+  }
   .app-bar-application-content {
+    position: fixed;
     width: 100%;
     box-sizing: border-box;
-    height: 100vh;
-    margin-bottom: -$app-bar-height;
-    padding-bottom: $app-bar-height;
+    height: 100%;
+    transition: margin 0.2s ease, padding 0.2s ease;
+  }
+  app-drawer[opened][persistent] + .app-bar-application-content {
+    @include application-content(64px, 256px);
+  }
+  app-header-layout.small app-drawer[opened] + .app-bar-application-content {
+    @include application-content(64px, 64px);
+  }
+  .app-bar-application-content {
+    @include application-content(64px, 0px);
   }
   .app-layout-menu-bar-element {
     padding-left: 16px;

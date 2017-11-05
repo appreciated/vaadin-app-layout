@@ -4,7 +4,7 @@
       display: none !important;
     }
     .app-bar-application-content {
-      height: 100vh !important;
+      @include media-application-content (0px, 256px);
     }
   }
 }
@@ -51,6 +51,9 @@
     }
     .app-layout-expanding-menu-container-button:after {
       opacity: 0 !important;
+    }
+    .app-bar-application-content {
+      @include media-application-content (0px, 64px);
     }
   }
 }

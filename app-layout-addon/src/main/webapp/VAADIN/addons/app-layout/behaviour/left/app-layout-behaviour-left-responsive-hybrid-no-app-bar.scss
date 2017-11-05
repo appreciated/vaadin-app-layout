@@ -4,18 +4,20 @@
       display: none !important;
     }
     .app-bar-application-content {
-      height: 100vh !important;
+      @include media-application-content-top (0px);
     }
   }
 }
 
 @media only screen and (max-width: 640px) {
-  .drawer-content {
-    margin-top: $app-bar-height;
-    box-sizing: border-box;
-    height: 100%;
-    margin-bottom: -$app-bar-height;
-    padding-bottom: $app-bar-height;
+  .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
+    .drawer-content {
+      margin-top: $app-bar-height;
+      box-sizing: border-box;
+      height: 100%;
+      margin-bottom: -$app-bar-height;
+      padding-bottom: $app-bar-height;
+    }
   }
 }
 
@@ -61,6 +63,9 @@
     }
     .app-layout-expanding-menu-container-button:after {
       opacity: 0 !important;
+    }
+    .app-bar-application-content {
+      @include media-application-content (0px, 64px);
     }
   }
 }
