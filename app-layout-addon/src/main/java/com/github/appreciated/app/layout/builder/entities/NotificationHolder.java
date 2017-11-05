@@ -19,6 +19,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     public void setComponentProvider(PairComponentProvider<NotificationHolder, T> componentProvider) {
         this.componentProvider = componentProvider;
     }
+
     private NotificationClickListener<T> listener;
 
     public NotificationHolder() {
@@ -70,12 +71,11 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public void onNotificationClicked(T info) {
+        listeners.forEach(listener -> listener.onUnreadCountChange(this));
         if (listener != null) {
-            listeners.forEach(listener -> listener.onUnreadCountChange(this));
             listener.onNotificationClicked(info);
         }
     }
-
 
     public void setNotificationClickedListener(NotificationClickListener<T> listener) {
         this.listener = listener;
