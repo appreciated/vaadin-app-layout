@@ -28,7 +28,7 @@ public class AppLayoutBuilder {
     }
 
     public static AppLayoutBuilder get(Behaviour behaviour) {
-        if (true || (Page.getCurrent() != null && Page.getCurrent().getWebBrowser().isIE())) {
+        if (Page.getCurrent() != null && Page.getCurrent().getWebBrowser().isIE()) {
             if (behaviour.isTop()) {
                 return new AppLayoutBuilder(new TopFallBack(behaviour));
             } else {
