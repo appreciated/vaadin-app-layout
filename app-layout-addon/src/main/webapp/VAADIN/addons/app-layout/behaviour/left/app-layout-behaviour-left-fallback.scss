@@ -34,26 +34,47 @@
       background: $drawer-background-color;
       color: $drawer-font-color !important;
     }
-
-    .drawer-content.small .app-layout-menu-button {
-      height: $app-bar-height;
-      font-size: 20px;
-      .v-icon {
-        width: 100%;
-        text-align: center;
+    .drawer-content.small {
+      .app-layout-menu-button-badge {
+        background: $app-menu-button-badge-background-color;
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        margin: 11px !important;
+        border-radius: 100% !important;
+        padding: 0 !important;
       }
-      .v-button-caption {
-        display: none;
+      .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
       }
-    }
-    .drawer-content.small .app-layout-menu-button-badge {
-      background: $app-menu-button-badge-background-color;
-      color: transparent;
-      height: 5px;
-      width: 5px;
-      margin: 11px;
-      border-radius: 100%;
-      padding: 0;
+      .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        .app-layout-round-image {
+          width: 64px !important;
+          height: 64px !important;
+          padding: 7px;
+        }
+        .app-layout-menu-header-title {
+          display: none;
+        }
+        .app-layout-menu-header-title {
+          display: none;
+        }
+      }
+      .app-layout-menu-button {
+        font-size: 20px;
+        .v-icon {
+          width: 100%;
+          text-align: center;
+        }
+        .v-button-caption {
+          display: none;
+        }
+      }
+      .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+      }
     }
 
     .app-toolbar .app-layout-menu-element-active {

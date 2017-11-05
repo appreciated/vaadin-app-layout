@@ -92,6 +92,7 @@ public class LeftFallBack extends VerticalLayout implements AppLayout {
                 menuHolder.addStyleName("small");
             }
             wrapper.setSizeFull();
+            vwrapper.setSizeFull();
             wrapper.setSpacing(false);
             addComponent(wrapper);
         } else {
