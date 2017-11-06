@@ -246,16 +246,20 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     public void addNavigationFooterElement(AbstractNavigationElement element) {
         element.setProvider(this, DRAWER);
         addToDrawerFooter(element.getComponent());
-        element.setProvider(this, TOP);
-        addToTopFooter(element.getComponent());
+        if (!(element instanceof CustomNavigationElement)) { // Components cannot be added twice
+            element.setProvider(this, TOP);
+            addToTopFooter(element.getComponent());
+        }
     }
 
     @Override
     public void addNavigationHeaderElement(AbstractNavigationElement element) {
         element.setProvider(this, TOP);
         addToDrawerHeader(element.getComponent());
-        element.setProvider(this, DRAWER);
-        addToTopHeader(element.getComponent());
+        if (!(element instanceof CustomNavigationElement)) { // Components cannot be added twice
+            element.setProvider(this, TOP);
+            addToTopHeader(element.getComponent());
+        }
     }
 
     @Override
