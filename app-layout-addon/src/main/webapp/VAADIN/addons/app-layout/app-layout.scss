@@ -5,7 +5,7 @@ $app-bar-background-color: #4285f4 !default;
 $app-bar-font-color: valo-font-color($app-bar-background-color) !default;
 $app-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
 $drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
-$drawer-background-color: lighten($v-background-color, 0.1) !default;
+$drawer-background-color: lighten($v-background-color, 5%) !default;
 $app-menu-button-active-background-color: rgba(valo-font-color($drawer-background-color), 0.1) !default; // currently only used by material
 $drawer-submenu-background-color: rgba(valo-font-color($drawer-background-color), 0.05) !default;
 $app-menu-button-active-font-color: $v-focus-color; // currently only used by material
