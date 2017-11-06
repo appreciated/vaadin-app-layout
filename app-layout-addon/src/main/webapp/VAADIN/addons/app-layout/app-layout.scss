@@ -88,10 +88,10 @@ $z-index: 10 !default;
     height: 100%;
     transition: margin 0.2s ease, padding 0.2s ease;
   }
-  app-drawer[opened][persistent] + .app-bar-application-content {
+  app-drawer[opened][persistent] + .app-bar-application-content, app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
     @include application-content(64px, 256px);
   }
-  app-header-layout.small app-drawer[opened] + .app-bar-application-content {
+  app-header-layout.small app-drawer[opened] + .app-bar-application-content, app-header-layout.small app-drawer[opened] + #contentContainer .app-bar-application-content {
     @include application-content(64px, 64px);
   }
   .app-bar-application-content {

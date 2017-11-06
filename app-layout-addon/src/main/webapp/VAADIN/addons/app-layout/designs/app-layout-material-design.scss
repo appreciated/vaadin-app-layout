@@ -7,10 +7,14 @@
       font-size: 13px;
       height: 20px;
       line-height: 20px;
-      margin: 15px 5px;
+      margin: 15px 15px;
       margin-left: -50px;
       text-align: center;
       border-radius: 10px;
+    }
+    &.app-layout-behaviour-top .app-layout-menu-button-badge, &.app-layout-behaviour-top-large .app-layout-menu-button-badge {
+      margin: 15px 5px;
+      margin-left: -40px;
     }
     .v-absolutelayout-wrapper-app-bar-badge {
       pointer-events: none;
@@ -27,7 +31,7 @@
       padding-right: 4px;
       padding-left: 3px;
       border-radius: 17px;
-      box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
     }
     .app-layout-menu-button {
       text-align: left !important;
@@ -38,7 +42,7 @@
       border-radius: 0px;
     }
     .app-layout-menu-badge-button {
-      padding-right: 55px;
+      padding-right: 50px;
     }
 
     @if $disable-active-style == false {
