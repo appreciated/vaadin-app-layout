@@ -31,8 +31,7 @@ let PolymerElementPropertiesMeta;
  */
 let PolymerElementProperties;
 
-let PolymerInit = function () {
-};
+let PolymerInit = function(){};
 /** @type {string} */
 PolymerInit.prototype.is;
 /** @type {(string | undefined)} */
@@ -48,8 +47,7 @@ PolymerInit.prototype.hostAttributes;
 /** @type {(!Object<string, string> | undefined)} */
 PolymerInit.prototype.listeners;
 
-let PolymerElementConstructor = function () {
-};
+let PolymerElementConstructor = function (){};
 /** @type {(string | undefined)} */
 PolymerElementConstructor.is;
 /** @type {(string | undefined)} */
@@ -65,8 +63,7 @@ PolymerElementConstructor.template;
  * @param {!PolymerInit} init
  * @return {!function(new:HTMLElement)}
  */
-function Polymer(init) {
-}
+function Polymer(init){}
 
 /** @type {PolymerElementProperties} */
 Polymer.ElementProperties;
@@ -81,13 +78,10 @@ Polymer.sanitizeDOMValue;
  * @param {Object} obj
  * @return {string}
  */
-function JSCompiler_renameProperty(string, obj) {
-}
+function JSCompiler_renameProperty(string, obj) {}
 
 /** @record */
-function PolymerTelemetry() {
-}
-
+function PolymerTelemetry(){}
 /** @type {number} */
 PolymerTelemetry.instanceCount;
 /** @type {Array<HTMLElement>} */
@@ -97,8 +91,7 @@ PolymerTelemetry._regLog;
 /** @type {function(HTMLElement)} */
 PolymerTelemetry.register;
 /** @type {function(HTMLElement)} */
-PolymerTelemetry.dumpRegistrations;
-;
+PolymerTelemetry.dumpRegistrations;;
 
 /** @type {PolymerTelemetry} */
 Polymer.telemetry;

@@ -26,6 +26,6 @@ style.textContent = ''
     + 'body[unresolved] {'
     + 'opacity: 0; display: block; overflow: hidden; position: relative;'
     + ' } \n'
-;
+    ;
 let head = document.querySelector('head');
 head.insertBefore(style, head.firstChild);

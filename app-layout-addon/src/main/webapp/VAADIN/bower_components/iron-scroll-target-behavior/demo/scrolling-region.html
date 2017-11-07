@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <html>
-<head>
+  <head>
 
     <title>iron-scroll-target-behavior using a scrolling region</title>
 
@@ -24,28 +24,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <style>
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-        #region {
-            height: 50vh;
-            overflow: auto;
-            position: absolute;
-            top: 25vh;
-            left: 25vh;
-            right: 25vh;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
-        }
+      #region {
+        height: 50vh;
+        overflow: auto;
+        position: absolute;
+        top: 25vh;
+        left: 25vh;
+        right: 25vh;
+        box-shadow: 0 0 60px rgba(0,0,0,0.5);
+      }
 
     </style>
-</head>
-<body unresolved>
+  </head>
+  <body unresolved>
+    
+    <div id="region">
+      <x-scrollable scroll-target="region"></x-scrollable>
+    </div>
 
-<div id="region">
-    <x-scrollable scroll-target="region"></x-scrollable>
-</div>
-
-</body>
+  </body>
 </html>

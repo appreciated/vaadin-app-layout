@@ -11,43 +11,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'simple-form',
+    is: 'simple-form',
 
-        extends: 'form',
+    extends: 'form',
 
-        properties: {
-            formElements: {
-                type: Object,
-                notify: true
-            }
-        },
+    properties: {
+      formElements: {
+        type: Object,
+        notify: true
+      }
+    },
 
-        listeners: {
-            'iron-form-element-register': '_elementRegistered',
-            'iron-form-element-unregister': '_elementUnregistered'
-        },
+    listeners: {
+      'iron-form-element-register': '_elementRegistered',
+      'iron-form-element-unregister': '_elementUnregistered'
+    },
 
-        ready: function () {
-            this.formElements = [];
-        },
+    ready: function() {
+      this.formElements = [];
+    },
 
-        _elementRegistered: function (e) {
-            this.formElements.push(e.target);
-            e.target._parentForm = this;
-        },
+    _elementRegistered: function(e) {
+      this.formElements.push(e.target);
+      e.target._parentForm = this;
+    },
 
-        _elementUnregistered: function (e) {
-            var target = e.detail.target;
-            if (target) {
-                var index = this.formElements.indexOf(target);
-                if (index > -1) {
-                    this.formElements.splice(index, 1);
-                }
-            }
+    _elementUnregistered: function(e) {
+      var target = e.detail.target;
+      if (target) {
+        var index = this.formElements.indexOf(target);
+        if (index > -1) {
+          this.formElements.splice(index, 1);
         }
+      }
+    }
 
-    });
+  });
 
 </script>

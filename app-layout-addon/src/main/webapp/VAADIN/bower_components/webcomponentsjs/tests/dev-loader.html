@@ -9,24 +9,24 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-<head>
+  <head>
     <title></title>
     <meta charset="UTF-8">
     <script src="../webcomponents-lite.js" log="foo,boo" squid="never" spoo></script>
     <script src="../../web-component-tester/browser.js"></script>
-</head>
-<body>
-<script>
-    suite('Development Loader', function () {
-        test('loader', function () {
-            assert(window.WebComponents, 'WebComponents scope missing');
-            assert.equal(WebComponents.flags.squid, 'never', '"squid" flag missing');
-            assert(WebComponents.flags.spoo, '"spoo" flag missing');
-            assert(WebComponents.flags.log, 'flags.log missing');
-            assert(WebComponents.flags.log.foo, 'flags.log.foo missing');
-            assert(WebComponents.flags.log.boo, 'flags.log.foo missing');
+  </head>
+  <body>
+    <script>
+      suite('Development Loader', function() {
+        test('loader', function() {
+          assert(window.WebComponents, 'WebComponents scope missing');
+          assert.equal(WebComponents.flags.squid, 'never', '"squid" flag missing');
+          assert(WebComponents.flags.spoo, '"spoo" flag missing');
+          assert(WebComponents.flags.log, 'flags.log missing');
+          assert(WebComponents.flags.log.foo, 'flags.log.foo missing');
+          assert(WebComponents.flags.log.boo, 'flags.log.foo missing');
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

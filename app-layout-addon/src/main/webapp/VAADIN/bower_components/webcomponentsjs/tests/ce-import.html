@@ -9,16 +9,16 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-<head>
+  <head>
     <title></title>
     <meta charset="UTF-8">
     <script src="../webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-</head>
-<body>
-<x-foo></x-foo>
-<script>
-    test('ce-import', function (done) {
+  </head>
+  <body>
+    <x-foo></x-foo>
+    <script>
+      test('ce-import', function(done) {
         var xfoo = document.querySelector('x-foo');
         assert.isUndefined(xfoo.isCreated);
 
@@ -26,13 +26,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         link.rel = 'import';
         link.href = 'imports/element-import.html';
         document.head.appendChild(link);
-        link.addEventListener('load', function () {
-            assert.isTrue(xfoo.isCreated, 'element in main document, registered in dynamic import is upgraded');
-            var ix = link.import.querySelector('x-foo');
-            assert.isTrue(ix.isCreated, 'element in import, registered in dynamic import is upgraded');
-            done();
+        link.addEventListener('load', function() {
+          assert.isTrue(xfoo.isCreated, 'element in main document, registered in dynamic import is upgraded');
+          var ix = link.import.querySelector('x-foo');
+          assert.isTrue(ix.isCreated, 'element in import, registered in dynamic import is upgraded');
+          done();
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

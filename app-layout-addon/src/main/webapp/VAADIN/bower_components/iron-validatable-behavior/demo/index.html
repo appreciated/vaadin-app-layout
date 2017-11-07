@@ -11,47 +11,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-    <title>iron-validatable-behavior demo</title>
+  <title>iron-validatable-behavior demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../paper-styles/color.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="cats-only.html">
-    <link rel="import" href="validatable-input.html">
-    <custom-style>
-        <style is="custom-style" include="demo-pages-shared-styles"></style>
-    </custom-style>
+  <link rel="import" href="../../paper-styles/color.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="cats-only.html">
+  <link rel="import" href="validatable-input.html">
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles"></style>
+  </custom-style>
 </head>
 <body>
-<div class="vertical-section-container centered">
+  <div class="vertical-section-container centered">
     <h3>The <code>cats-only</code> validator only accepts the string "cats" and
-        its suffixes ("c", "ca", "cat").</h3>
+      its suffixes ("c", "ca", "cat").</h3>
     <demo-snippet class="centered-demo">
-        <template>
-            <custom-style>
-                <style is="custom-style" include="demo-pages-shared-styles">
-                    validatable-input {
-                        border: 1px solid var(--google-green-500);
-                        color: var(--google-green-500);
-                    }
+      <template>
+        <custom-style>
+          <style is="custom-style" include="demo-pages-shared-styles">
+            validatable-input {
+              border: 1px solid var(--google-green-500);
+              color: var(--google-green-500);
+            }
+            validatable-input[invalid] {
+              border: 1px solid var(--google-red-500);
+              color: var(--google-red-500);
+            }
+          </style>
+        </custom-style>
 
-                    validatable-input[invalid] {
-                        border: 1px solid var(--google-red-500);
-                        color: var(--google-red-500);
-                    }
-                </style>
-            </custom-style>
-
-            <cats-only></cats-only>
-            <validatable-input validator="cats-only"></validatable-input>
-        </template>
+        <cats-only></cats-only>
+        <validatable-input validator="cats-only"></validatable-input>
+      </template>
     </demo-snippet>
-</div>
+  </div>
 </body>
 </html>

@@ -11,7 +11,7 @@
 'use strict';
 
 // Establish scope.
-window['WebComponents'] = window['WebComponents'] || {'flags': {}};
+window['WebComponents'] = window['WebComponents'] || {'flags':{}};
 
 // loading script
 let file = 'webcomponents-lite.js';
@@ -21,43 +21,43 @@ let flagMatcher = /wc-(.+)/;
 // Flags. Convert url arguments to flags
 let flags = {};
 if (!flags['noOpts']) {
-    // from url
-    location.search.slice(1).split('&').forEach(function (option) {
-        let parts = option.split('=');
-        let match;
-        if (parts[0] && (match = parts[0].match(flagMatcher))) {
-            flags[match[1]] = parts[1] || true;
-        }
+  // from url
+  location.search.slice(1).split('&').forEach(function(option) {
+    let parts = option.split('=');
+    let match;
+    if (parts[0] && (match = parts[0].match(flagMatcher))) {
+      flags[match[1]] = parts[1] || true;
+    }
+  });
+  // from script
+  if (script) {
+    for (let i=0, a; (a=script.attributes[i]); i++) {
+      if (a.name !== 'src') {
+        flags[a.name] = a.value || true;
+      }
+    }
+  }
+  // log flags
+  if (flags['log'] && flags['log']['split']) {
+    let parts = flags['log'].split(',');
+    flags['log'] = {};
+    parts.forEach(function(f) {
+      flags['log'][f] = true;
     });
-    // from script
-    if (script) {
-        for (let i = 0, a; (a = script.attributes[i]); i++) {
-            if (a.name !== 'src') {
-                flags[a.name] = a.value || true;
-            }
-        }
-    }
-    // log flags
-    if (flags['log'] && flags['log']['split']) {
-        let parts = flags['log'].split(',');
-        flags['log'] = {};
-        parts.forEach(function (f) {
-            flags['log'][f] = true;
-        });
-    } else {
-        flags['log'] = {};
-    }
+  } else {
+    flags['log'] = {};
+  }
 }
 
 // exports
 window['WebComponents']['flags'] = flags;
 let forceShady = flags['shadydom'];
 if (forceShady) {
-    window['ShadyDOM'] = window['ShadyDOM'] || {};
-    window['ShadyDOM']['force'] = forceShady;
+  window['ShadyDOM'] = window['ShadyDOM'] || {};
+  window['ShadyDOM']['force'] = forceShady;
 }
 
 let forceCE = flags['register'] || flags['ce'];
 if (forceCE && window['customElements']) {
-    window['customElements']['forcePolyfill'] = forceCE;
+  window['customElements']['forcePolyfill'] = forceCE;
 }

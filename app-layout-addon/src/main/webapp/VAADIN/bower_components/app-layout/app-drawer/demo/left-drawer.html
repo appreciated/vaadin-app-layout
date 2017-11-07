@@ -11,62 +11,62 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <title>app-drawer demo</title>
+  <title>app-drawer demo</title>
 
-    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../../font-roboto/roboto.html">
-    <link rel="import" href="../../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../../paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="../../demo/sample-content.html">
-    <link rel="import" href="../../app-toolbar/app-toolbar.html">
-    <link rel="import" href="../app-drawer.html">
+  <link rel="import" href="../../../font-roboto/roboto.html">
+  <link rel="import" href="../../../iron-icons/iron-icons.html">
+  <link rel="import" href="../../../paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="../../demo/sample-content.html">
+  <link rel="import" href="../../app-toolbar/app-toolbar.html">
+  <link rel="import" href="../app-drawer.html">
 
-    <custom-style>
-        <style is="custom-style">
+  <custom-style>
+    <style is="custom-style">
 
-            body {
-                margin: 0;
-                font-family: 'Roboto', 'Noto', sans-serif;
-                background-color: #eee;
-            }
+      body {
+        margin: 0;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        background-color: #eee;
+      }
 
-            app-toolbar {
-                background-color: #4285f4;
-                color: #fff;
-            }
+      app-toolbar {
+        background-color: #4285f4;
+        color: #fff;
+      }
 
-            app-drawer {
-                --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
+      app-drawer {
+        --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
 
-                --app-drawer-content-container: {
-                    background-color: #B0BEC5;
-                }
-            }
+        --app-drawer-content-container: {
+          background-color: #B0BEC5;
+        }
+      }
 
-        </style>
-    </custom-style>
+    </style>
+  </custom-style>
 
 </head>
 <body>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="menu"></paper-icon-button>
-</app-toolbar>
+  </app-toolbar>
 
-<sample-content size="100"></sample-content>
+  <sample-content size="100"></sample-content>
 
-<app-drawer swipe-open></app-drawer>
+  <app-drawer swipe-open></app-drawer>
 
-<script>
+  <script>
     var drawer = document.querySelector('app-drawer');
-    document.querySelector('paper-icon-button').addEventListener('click', function () {
-        drawer.toggle();
+    document.querySelector('paper-icon-button').addEventListener('click', function() {
+      drawer.toggle();
     });
-</script>
+  </script>
 
 </body>
 </html>

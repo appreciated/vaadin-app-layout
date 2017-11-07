@@ -11,16 +11,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../app-scroll-effects-behavior.html">
 
 <script>
+  /**
+   * Toggles the shadow property in app-header when content is scrolled to create a sense of depth
+   * between the element and the content underneath.
+   */
+  Polymer.AppLayout.registerEffect('waterfall', {
     /**
-     * Toggles the shadow property in app-header when content is scrolled to create a sense of depth
-     * between the element and the content underneath.
+     *  @this Polymer.AppLayout.ElementWithBackground
      */
-    Polymer.AppLayout.registerEffect('waterfall', {
-        /**
-         *  @this Polymer.AppLayout.ElementWithBackground
-         */
-        run: function run() {
-            this.shadow = this.isOnScreen() && this.isContentBelow();
-        }
-    });
+    run: function run() {
+      this.shadow = this.isOnScreen() && this.isContentBelow();
+    }
+  });
 </script>

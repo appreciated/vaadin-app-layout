@@ -14,78 +14,78 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'test-control',
+    is: 'test-control',
 
-        behaviors: [
-            Polymer.IronControlState
-        ]
+    behaviors: [
+      Polymer.IronControlState
+    ]
 
-    });
+  });
 
 </script>
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'test-button',
+    is: 'test-button',
 
-        behaviors: [
-            Polymer.IronControlState,
-            Polymer.IronButtonState
-        ],
+    behaviors: [
+      Polymer.IronControlState,
+      Polymer.IronButtonState
+    ],
 
-        _buttonStateChanged: function () {
+    _buttonStateChanged: function() {
 
-        }
+    }
 
-    });
+  });
 
 </script>
 
 <dom-module id="nested-focusable">
 
-    <template>
-        <input id="input">
-    </template>
+  <template>
+    <input id="input">
+  </template>
 
 </dom-module>
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'nested-focusable',
+    is: 'nested-focusable',
 
-        behaviors: [
-            Polymer.IronControlState
-        ]
+    behaviors: [
+      Polymer.IronControlState
+    ]
 
-    });
+  });
 
 </script>
 
 <dom-module id="test-light-dom">
 
-    <template>
-        <slot></slot>
-    </template>
+  <template>
+    <slot></slot>
+  </template>
 
 </dom-module>
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'test-light-dom',
+    is: 'test-light-dom',
 
-        behaviors: [
-            Polymer.IronControlState,
-            Polymer.IronButtonState
-        ]
+    behaviors: [
+      Polymer.IronControlState,
+      Polymer.IronButtonState
+    ]
 
-    });
+  });
 
 </script>

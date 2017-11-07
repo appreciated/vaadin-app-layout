@@ -11,45 +11,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <meta name="theme-color" content="#fafafa">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#fafafa">
 
-    <title>ZUPERK&Uuml;LBLOG</title>
+  <title>ZUPERK&Uuml;LBLOG</title>
 
-    <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
 
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <!-- Promise polyfill needed for 1.0-hybrid mode since neither iron-request 2.x nor
-      webcomponentsjs 0.x include the Promise polyfill. -->
-    <script src="bower_components/es6-promise/dist/es6-promise.auto.min.js"></script>
+  <!-- Promise polyfill needed for 1.0-hybrid mode since neither iron-request 2.x nor
+    webcomponentsjs 0.x include the Promise polyfill. -->
+  <script src="bower_components/es6-promise/dist/es6-promise.auto.min.js"></script>
 
-    <link rel="import" href="bower_components/font-roboto/roboto.html">
-    <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
-    <link rel="import" href="src/blog-app.html">
+  <link rel="import" href="bower_components/font-roboto/roboto.html">
+  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+  <link rel="import" href="src/blog-app.html">
 
-    <style>
+  <style>
 
-        body {
-            margin: 0;
-            font-family: 'Roboto', 'Noto', sans-serif;
-            background-color: #fafafa;
-        }
+    body {
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      background-color: #fafafa;
+    }
 
-    </style>
+  </style>
 
 </head>
 <body unresolved>
 
-<dom-bind>
+  <dom-bind>
     <template is="dom-bind">
 
-        <iron-ajax url="data/articles.json" auto last-response="{{articles}}"></iron-ajax>
-        <blog-app articles="[[articles]]"></blog-app>
+      <iron-ajax url="data/articles.json" auto last-response="{{articles}}"></iron-ajax>
+      <blog-app articles="[[articles]]"></blog-app>
 
     </template>
-</dom-bind>
+  </dom-bind>
 
 </body>
 </html>

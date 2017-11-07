@@ -16,9 +16,7 @@
  * @constructor
  * @extends {DocumentFragment}
  */
-function StampedTemplate() {
-}
-
+function StampedTemplate() { }
 /** @type {boolean} */
 StampedTemplate.prototype.__noInsertionPoint;
 /** @type {!Array<!Node>} */
@@ -29,9 +27,7 @@ StampedTemplate.prototype.$;
 StampedTemplate.prototype.templateInfo;
 
 /** @interface */
-function NodeInfo() {
-}
-
+function NodeInfo() { }
 /** @type {string} */
 NodeInfo.prototype.id;
 /** @type {!Array<{name: string, value: string}>}*/
@@ -50,9 +46,7 @@ NodeInfo.prototype.infoIndex;
 NodeInfo.prototype.bindings;
 
 /** @interface */
-function TemplateInfo() {
-}
-
+function TemplateInfo() { }
 /** @type {!Array<!NodeInfo>} */
 TemplateInfo.prototype.nodeInfoList;
 /** @type {!Array<!Node>} */
@@ -80,9 +74,7 @@ TemplateInfo.prototype.wasPreBound;
  * @constructor
  * @extends {HTMLTemplateElement}
  */
-function HTMLTemplateElementWithInfo() {
-}
-
+function HTMLTemplateElementWithInfo() { }
 /** @type {TemplateInfo} */
 HTMLTemplateElementWithInfo.prototype._templateInfo;
 

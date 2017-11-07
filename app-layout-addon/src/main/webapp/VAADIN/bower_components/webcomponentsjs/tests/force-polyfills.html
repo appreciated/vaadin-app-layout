@@ -11,30 +11,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 
 <head>
-    <title>Force polyfills</title>
-    <meta charset="UTF-8">
-    <script>
-        window.ShadyDOM = {
-            force: true
-        };
-        if (window.customElements) customElements.forcePolyfill = true;
-        window.webComponentsReadyCount = 0;
-        window.addEventListener('WebComponentsReady', function () {
-            window.webComponentsReadyCount++;
-        });
-    </script>
-    <script src="../webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+  <title>Force polyfills</title>
+  <meta charset="UTF-8">
+  <script>
+    window.ShadyDOM = {
+      force: true
+    };
+    if (window.customElements) customElements.forcePolyfill = true;
+    window.webComponentsReadyCount = 0;
+    window.addEventListener('WebComponentsReady', function() {
+      window.webComponentsReadyCount++;
+    });
+  </script>
+  <script src="../webcomponents-loader.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
 </head>
 
 <body>
-<script>
-    suite('Force polyfill', function () {
-        test('expected boot', function () {
-            assert.equal(window.webComponentsReadyCount, 1, 'failed to fire WebComponentsReady');
-        });
+  <script>
+    suite('Force polyfill', function() {
+      test('expected boot', function() {
+        assert.equal(window.webComponentsReadyCount, 1, 'failed to fire WebComponentsReady');
+      });
     });
-</script>
+  </script>
 </body>
 
 </html>

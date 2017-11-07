@@ -25,106 +25,89 @@ const size = require('gulp-size');
 const runseq = require('run-sequence');
 
 const modules = [
-    'css-parse',
-    'custom-style-element',
-    'make-element',
-    'svg-in-shadow',
-    'style-util',
-    'style-transformer',
-    'style-settings'
+  'css-parse',
+  'custom-style-element',
+  'make-element',
+  'svg-in-shadow',
+  'style-util',
+  'style-transformer',
+  'style-settings'
 ];
 
-const moduleTasks = modules.map((m) = > {
-    gulp.task(`test-module-${m}`, () = > {
+const moduleTasks = modules.map((m) => {
+  gulp.task(`test-module-${m}`, () => {
     return rollup({
-        entry: `tests/module/${m}.js`,
-        format: 'iife',
-        moduleName: m.replace(/-/g, '_')
+      entry: `tests/module/${m}.js`,
+      format: 'iife',
+      moduleName: m.replace(/-/g, '_')
     })
-        .pipe(source(`${m}.js`, 'tests/module'))
-        .pipe(gulp.dest('./tests/module/generated'))
-}
-)
-;
-return `test-module-${m}`;
-})
-;
+    .pipe(source(`${m}.js`, 'tests/module'))
+    .pipe(gulp.dest('./tests/module/generated'))
+  });
+  return `test-module-${m}`;
+});
 
-gulp.task('clean-test-modules', () = > del(['tests/module/generated'])
-)
-;
+gulp.task('clean-test-modules', () => del(['tests/module/generated']));
 
-gulp.task('test-modules', (cb) = > {
-    runseq('clean-test-modules', moduleTasks, cb
-)
-;
-})
-;
+gulp.task('test-modules', (cb) => {
+  runseq('clean-test-modules', moduleTasks, cb);
+});
 
 function closurify(entry) {
-    gulp.task(`closure-${entry}`, () = > {
-        return gulp.src(['src/*.js', 'entrypoints/*.js'], {base: './'})
-            .pipe(sourcemaps.init())
-            .pipe(closure({
-                new_type_inf: true,
-                compilation_level: 'ADVANCED',
-                language_in: 'ES6_STRICT',
-                language_out: 'ES5_STRICT',
-                isolation_mode: 'IIFE',
-                assume_function_wrapper: true,
-                js_output_file: `${entry}.min.js`,
-                entry_point: `./entrypoints/${entry}.js`,
-                dependency_mode: 'STRICT',
-                warning_level: 'VERBOSE',
-                rewrite_polyfills: false,
-                externs: 'externs/shadycss-externs.js'
-            }))
-            .pipe(size({showFiles: true, showTotal: false, gzip: true}))
-            .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest('.'))
-    }
-)
-    ;
-    return `closure-${entry}`;
+  gulp.task(`closure-${entry}`, () => {
+    return gulp.src(['src/*.js', 'entrypoints/*.js'], {base: './'})
+    .pipe(sourcemaps.init())
+    .pipe(closure({
+      new_type_inf: true,
+      compilation_level: 'ADVANCED',
+      language_in: 'ES6_STRICT',
+      language_out: 'ES5_STRICT',
+      isolation_mode: 'IIFE',
+      assume_function_wrapper: true,
+      js_output_file: `${entry}.min.js`,
+      entry_point: `./entrypoints/${entry}.js`,
+      dependency_mode: 'STRICT',
+      warning_level: 'VERBOSE',
+      rewrite_polyfills: false,
+      externs: 'externs/shadycss-externs.js'
+    }))
+    .pipe(size({showFiles: true, showTotal: false, gzip: true}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('.'))
+  });
+  return `closure-${entry}`;
 }
 
 function debugify(entry) {
-    gulp.task(`debug-${entry}`, () = > {
-        return rollup({
-            entry: `entrypoints/${entry}.js`,
-            format: 'iife',
-            moduleName: `${entry}`.replace(/-/g, '_'),
-        })
-            .pipe(source(`${entry}.js`, 'entrypoints'))
-            .pipe(buffer())
-            .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(rename(`${entry}.min.js`))
-            .pipe(size({showFiles: true, showTotal: false, gzip: true}))
-            .pipe(gulp.dest('./'))
-    }
-)
-    ;
-    return `debug-${entry}`;
+  gulp.task(`debug-${entry}`, () => {
+    return rollup({
+      entry: `entrypoints/${entry}.js`,
+      format: 'iife',
+      moduleName: `${entry}`.replace(/-/g, '_'),
+    })
+    .pipe(source(`${entry}.js`, 'entrypoints'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(rename(`${entry}.min.js`))
+    .pipe(size({showFiles: true, showTotal: false, gzip: true}))
+    .pipe(gulp.dest('./'))
+  });
+  return `debug-${entry}`;
 }
 
 const entrypoints = [
-    'scoping-shim',
-    'apply-shim',
-    'custom-style-interface'
+  'scoping-shim',
+  'apply-shim',
+  'custom-style-interface'
 ]
 
-let closureTasks = entrypoints.map((e) = > closurify(e)
-)
-;
-let debugTasks = entrypoints.map((e) = > debugify(e)
-)
-;
+let closureTasks = entrypoints.map((e) => closurify(e));
+let debugTasks = entrypoints.map((e) => debugify(e));
 
 gulp.task('default', ['closure', 'test-modules']);
 
-gulp.task('closure', (cb) = > {
-    runseq.apply(null, closureTasks.concat(cb))
-})
-;
+gulp.task('closure', (cb) => {
+  runseq.apply(null, closureTasks.concat(cb))
+});
 
 gulp.task('debug', debugTasks);

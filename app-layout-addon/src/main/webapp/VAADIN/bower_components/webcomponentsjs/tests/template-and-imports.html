@@ -9,50 +9,50 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-<head>
+  <head>
     <title>Template with HTMLImports Test</title>
     <script src="../webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-</head>
-<body>
-<template id="one">
-    <link rel="import" href="imports/script-1.html">
-</template>
+  </head>
+  <body>
+    <template id="one">
+      <link rel="import" href="imports/script-1.html">
+    </template>
 
-<template id="two">
-    <link rel="import" href="imports/csp-import-1.html">
-</template>
+    <template id="two">
+      <link rel="import" href="imports/csp-import-1.html">
+    </template>
 
-<script>
-    suite('basic', function () {
+    <script>
+      suite('basic', function() {
         var templateOne;
         var templateTwo;
 
-        setup(function () {
-            templateOne = document.querySelector('template#one');
-            templateTwo = document.querySelector('template#two');
+        setup(function() {
+          templateOne = document.querySelector('template#one');
+          templateTwo = document.querySelector('template#two');
         });
 
-        teardown(function () {
-            window.remoteCurrentScriptExecuted = undefined;
-            window.externalScriptParsed1 = undefined;
+        teardown(function() {
+          window.remoteCurrentScriptExecuted = undefined;
+          window.externalScriptParsed1 = undefined;
         });
 
-        test('links are not imported before stamping', function () {
-            assert.equal(window.remoteCurrentScriptExecuted, undefined);
-            assert.equal(window.externalScriptParsed1, undefined);
+        test('links are not imported before stamping', function() {
+          assert.equal(window.remoteCurrentScriptExecuted, undefined);
+          assert.equal(window.externalScriptParsed1, undefined);
         });
 
-        test('links are imported when stamped', function (done) {
-            document.head.appendChild(document.importNode(templateTwo.content, true));
+        test('links are imported when stamped', function(done) {
+          document.head.appendChild(document.importNode(templateTwo.content, true));
 
-            var imp = document.querySelector('[href="imports/csp-import-1.html"]');
-            imp.addEventListener('load', function () {
-                assert.ok(window.externalScriptParsed1);
-                done();
-            });
+          var imp = document.querySelector('[href="imports/csp-import-1.html"]');
+          imp.addEventListener('load', function() {
+            assert.ok(window.externalScriptParsed1);
+            done();
+          });
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

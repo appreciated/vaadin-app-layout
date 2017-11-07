@@ -9,59 +9,59 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-<head>
+  <head>
     <title>Template with HTMLImports Test</title>
     <script src="../webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-</head>
+  </head>
+  <body>
 <body>
-<body>
 
-<template>
-    <x-child></x-child>
-</template>
+    <template>
+      <x-child></x-child>
+    </template>
 
-<template id="before"></template>
-<x-after></x-after>
+    <template id="before"></template>
+    <x-after></x-after>
 
-<script>
-    var created = [];
-    var attached = [];
-    var childCreated = false;
-    var foundTemplate = false;
+    <script>
+      var created = [];
+      var attached = [];
+      var childCreated = false;
+      var foundTemplate = false;
 
-    class XChild extends HTMLElement {
+      class XChild extends HTMLElement {
         constructor() {
-            super();
-            this.custom = true;
-            childCreated = true;
+          super();
+          this.custom = true;
+          childCreated = true;
         }
-    }
+      }
 
-    class XAfter extends HTMLElement {
+      class XAfter extends HTMLElement {
         constructor() {
-            super();
-            this.custom = true;
+          super();
+          this.custom = true;
 
-            var template = document.querySelector('#before');
-            if (template && template.content) {
-                foundTemplate = true;
-            }
+          var template = document.querySelector('#before');
+          if (template && template.content) {
+            foundTemplate = true;
+          }
         }
-    }
+      }
 
-    window.customElements.define('x-child', XChild);
-    window.customElements.define('x-after', XAfter);
+      window.customElements.define('x-child', XChild);
+      window.customElements.define('x-after', XAfter);
 
-    suite('template and custom elements', function () {
-        test('elements within templates not upgraded', function () {
-            assert(!childCreated);
+      suite('template and custom elements', function() {
+        test('elements within templates not upgraded', function() {
+          assert(!childCreated);
         });
 
-        test('templates before elements are bootstrapped before createdCallback', function () {
-            assert(foundTemplate);
+        test('templates before elements are bootstrapped before createdCallback', function() {
+          assert(foundTemplate);
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

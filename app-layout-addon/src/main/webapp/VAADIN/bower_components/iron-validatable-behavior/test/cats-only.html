@@ -13,18 +13,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script>
 
-    Polymer({
+  Polymer({
 
-        is: 'cats-only',
+    is: 'cats-only',
 
-        behaviors: [
-            Polymer.IronValidatorBehavior
-        ],
+    behaviors: [
+      Polymer.IronValidatorBehavior
+    ],
 
-        validate: function (value) {
-            return value === 'cats';
-        }
+    validate: function(value) {
+      return value === 'cats';
+    }
 
-    });
+  });
 
 </script>

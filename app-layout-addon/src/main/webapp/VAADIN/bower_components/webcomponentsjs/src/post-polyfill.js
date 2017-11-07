@@ -19,45 +19,45 @@ let Template = window['HTMLTemplateElement'];
 window.WebComponents = window.WebComponents || {};
 
 if (customElements && customElements['polyfillWrapFlushCallback']) {
-    // Here we ensure that the public `HTMLImports.whenReady`
-    // always comes *after* custom elements have upgraded.
-    let flushCallback;
-    let runAndClearCallback = function runAndClearCallback() {
-        if (flushCallback) {
-            // make sure to run the HTMLTemplateElement polyfill before custom elements upgrade
-            if (Template.bootstrap) {
-                Template.bootstrap(window.document);
-            }
-            let cb = flushCallback;
-            flushCallback = null;
-            cb();
-            return true;
-        }
+  // Here we ensure that the public `HTMLImports.whenReady`
+  // always comes *after* custom elements have upgraded.
+  let flushCallback;
+  let runAndClearCallback = function runAndClearCallback() {
+    if (flushCallback) {
+      // make sure to run the HTMLTemplateElement polyfill before custom elements upgrade
+      if (Template.bootstrap) {
+        Template.bootstrap(window.document);
+      }
+      let cb = flushCallback;
+      flushCallback = null;
+      cb();
+      return true;
     }
-    let origWhenReady = HTMLImports['whenReady'];
-    customElements['polyfillWrapFlushCallback'](function (cb) {
-        flushCallback = cb;
-        origWhenReady(runAndClearCallback);
-    });
+  }
+  let origWhenReady = HTMLImports['whenReady'];
+  customElements['polyfillWrapFlushCallback'](function(cb) {
+    flushCallback = cb;
+    origWhenReady(runAndClearCallback);
+  });
 
-    HTMLImports['whenReady'] = function (cb) {
-        origWhenReady(function () {
-            // custom element code may add dynamic imports
-            // to match processing of native custom elements before
-            // domContentLoaded, we wait for these imports to resolve first.
-            if (runAndClearCallback()) {
-                HTMLImports['whenReady'](cb);
-            } else {
-                cb();
-            }
-        });
-    }
+  HTMLImports['whenReady'] = function(cb) {
+    origWhenReady(function() {
+      // custom element code may add dynamic imports
+      // to match processing of native custom elements before
+      // domContentLoaded, we wait for these imports to resolve first.
+      if (runAndClearCallback()) {
+        HTMLImports['whenReady'](cb);
+      } else {
+        cb();
+      }
+    });
+  }
 
 }
 
-HTMLImports['whenReady'](function () {
-    requestAnimationFrame(function () {
-        window.WebComponents.ready = true;
-        document.dispatchEvent(new CustomEvent('WebComponentsReady', {bubbles: true}));
-    });
+HTMLImports['whenReady'](function() {
+  requestAnimationFrame(function() {
+    window.WebComponents.ready = true;
+    document.dispatchEvent(new CustomEvent('WebComponentsReady', {bubbles: true}));
+  });
 });

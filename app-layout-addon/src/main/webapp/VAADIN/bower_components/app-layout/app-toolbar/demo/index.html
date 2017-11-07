@@ -11,88 +11,88 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <title>app-toolbar demo</title>
+  <title>app-toolbar demo</title>
 
-    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../../font-roboto/roboto.html">
-    <link rel="import" href="../../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../../paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="../../../paper-progress/paper-progress.html">
-    <link rel="import" href="../app-toolbar.html">
+  <link rel="import" href="../../../font-roboto/roboto.html">
+  <link rel="import" href="../../../iron-icons/iron-icons.html">
+  <link rel="import" href="../../../paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="../../../paper-progress/paper-progress.html">
+  <link rel="import" href="../app-toolbar.html">
 
-    <custom-style>
-        <style is="custom-style">
+  <custom-style>
+    <style is="custom-style">
 
-            body {
-                font-family: Roboto, Noto, sans-serif;
-            }
+      body {
+        font-family: Roboto, Noto, sans-serif;
+      }
 
-            app-toolbar {
-                background-color: #4285f4;
-                color: #fff;
-                margin: 20px 0;
-            }
+      app-toolbar {
+        background-color: #4285f4;
+        color: #fff;
+        margin: 20px 0;
+      }
 
-            paper-icon-button {
-                --paper-icon-button-ink-color: white;
-            }
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
 
-            paper-progress {
-                display: block;
-                width: 100%;
-                --paper-progress-active-color: rgba(255, 255, 255, 0.5);
-                --paper-progress-container-color: transparent;
-            }
+      paper-progress {
+        display: block;
+        width: 100%;
+        --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+        --paper-progress-container-color: transparent;
+      }
 
-            paper-icon-button + [main-title] {
-                margin-left: 24px;
-            }
+      paper-icon-button + [main-title] {
+        margin-left: 24px;
+      }
 
-        </style>
-    </custom-style>
+    </style>
+  </custom-style>
 </head>
 <body unresolved>
 
-<app-toolbar>Random Text</app-toolbar>
+  <app-toolbar>Random Text</app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="delete"></paper-icon-button>
     <paper-icon-button icon="search"></paper-icon-button>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <div main-title spacer>App name</div>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <div main-title>App name</div>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="menu"></paper-icon-button>
     <div main-title>App name</div>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="menu"></paper-icon-button>
     <div main-title>App name</div>
     <paper-icon-button icon="search"></paper-icon-button>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="close"></paper-icon-button>
     <div main-title>App name</div>
-</app-toolbar>
+  </app-toolbar>
 
-<app-toolbar>
+  <app-toolbar>
     <paper-icon-button icon="close"></paper-icon-button>
     <div main-title>App name</div>
     <paper-progress value="10" indeterminate bottom-item></paper-progress>
-</app-toolbar>
+  </app-toolbar>
 
 </body>
 </html>
