@@ -2,6 +2,5 @@
 .idea
 **/**/target
 *.css
-bower_components
 !/app-layout-addon/src/main/webapp/VAADIN/bower_components/LICENSE
 /app-layout-demo/src/main/webapp/VAADIN/themes/demo/styles.scss.cache

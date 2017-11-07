@@ -75,6 +75,7 @@ public class DemoUI extends UI {
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
+                .withNavigatorConsumer(navigator -> {/* Do someting with it */})
                 .add(new MenuHeader("Version 0.9.12", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(
@@ -96,6 +97,10 @@ public class DemoUI extends UI {
     }
 
     public static class View1 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
@@ -104,25 +109,45 @@ public class DemoUI extends UI {
     }
 
     public static class View2 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
     public static class View3 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
     public static class View4 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
     public static class View5 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
     public static class View6 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
     }
 
-    static class AbstractView extends HorizontalLayout implements View {
+    static abstract class AbstractView extends HorizontalLayout implements View {
         public AbstractView() {
             HorizontalLayout layout = new HorizontalLayout();
             layout.setSizeFull();
-            Label label = new Label("< My Content >");
+            Label label = new Label("< " + getViewName() + " >");
             label.addStyleNames(ValoTheme.LABEL_H2, ValoTheme.LABEL_NO_MARGIN);
             layout.addComponent(label);
             layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
@@ -132,6 +157,8 @@ public class DemoUI extends UI {
             setMargin(true);
             setSizeFull();
         }
+
+        abstract String getViewName();
     }
 
     class BehaviourSelector extends Window {
