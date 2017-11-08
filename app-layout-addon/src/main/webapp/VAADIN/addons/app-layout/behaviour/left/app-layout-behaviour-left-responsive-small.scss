@@ -1,6 +1,12 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-small {
     --app-drawer-width: 64px !important;
+    app-drawer[persistent].app-drawer-1{
+      width: 64px !important;
+    }
+    .app-bar-application-content {
+      left: 64px !important;
+    }
     app-header app-toolbar paper-icon-button#toggle {
       display: none;
     }

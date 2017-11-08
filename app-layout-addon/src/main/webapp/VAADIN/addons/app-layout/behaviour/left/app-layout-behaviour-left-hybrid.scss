@@ -17,6 +17,12 @@
     }
     .small {
       --app-drawer-width: 64px;
+      app-drawer[persistent].app-drawer-1{
+        width: 64px !important;
+      }
+      .app-bar-application-content {
+        left: 64px !important;
+      }
       .app-layout-menu-button-badge {
         background: $app-menu-button-badge-background-color;
         color: transparent;
