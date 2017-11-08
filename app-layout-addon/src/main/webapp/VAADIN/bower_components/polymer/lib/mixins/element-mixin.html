@@ -6,9 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../utils/boot.html">
+--><link rel="import" href="../utils/boot.html">
 <link rel="import" href="../utils/settings.html">
 <link rel="import" href="../utils/mixin.html">
 <link rel="import" href="../utils/case-map.html">
@@ -18,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="property-effects.html">
 
 <script>
-(function() {
+(function () {
   'use strict';
 
   /**
@@ -90,16 +88,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @summary Element class mixin that provides the core API for Polymer's
    * meta-programming features.
    */
-  Polymer.ElementMixin = Polymer.dedupingMixin(base => {
+
+  Polymer.ElementMixin = Polymer.dedupingMixin(function (base) {
 
     /**
      * @constructor
      * @extends {base}
      * @implements {Polymer_PropertyEffects}
      */
-    const polymerElementBase = Polymer.PropertyEffects(base);
+    var polymerElementBase = Polymer.PropertyEffects(base);
 
-    let caseMap = Polymer.CaseMap;
+    var caseMap = Polymer.CaseMap;
 
     /**
      * Returns the `properties` object specifically on `klass`. Use for:
@@ -112,11 +111,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function ownPropertiesForClass(klass) {
-      if (!klass.hasOwnProperty(
-        JSCompiler_renameProperty('__ownProperties', klass))) {
-        klass.__ownProperties =
-          klass.hasOwnProperty(JSCompiler_renameProperty('properties', klass)) ?
-          /** @type {PolymerElementConstructor} */ (klass).properties : {};
+      if (!klass.hasOwnProperty(JSCompiler_renameProperty('__ownProperties', klass))) {
+        klass.__ownProperties = klass.hasOwnProperty(JSCompiler_renameProperty('properties', klass)) ?
+        /** @type {PolymerElementConstructor} */klass.properties : {};
       }
       return klass.__ownProperties;
     }
@@ -130,11 +127,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function ownObserversForClass(klass) {
-      if (!klass.hasOwnProperty(
-        JSCompiler_renameProperty('__ownObservers', klass))) {
-        klass.__ownObservers =
-          klass.hasOwnProperty(JSCompiler_renameProperty('observers', klass)) ?
-          /** @type {PolymerElementConstructor} */ (klass).observers : [];
+      if (!klass.hasOwnProperty(JSCompiler_renameProperty('__ownObservers', klass))) {
+        klass.__ownObservers = klass.hasOwnProperty(JSCompiler_renameProperty('observers', klass)) ?
+        /** @type {PolymerElementConstructor} */klass.observers : [];
       }
       return klass.__ownObservers;
     }
@@ -149,8 +144,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function flattenProperties(flattenedProps, props) {
-      for (let p in props) {
-        let o = props[p];
+      for (var p in props) {
+        var o = props[p];
         if (typeof o == 'function') {
           o = { type: o };
         }
@@ -171,15 +166,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function propertiesForClass(klass) {
-      if (!klass.hasOwnProperty(
-        JSCompiler_renameProperty('__classProperties', klass))) {
-        klass.__classProperties =
-        flattenProperties({}, ownPropertiesForClass(klass));
-        let superCtor = Object.getPrototypeOf(klass.prototype).constructor;
+      if (!klass.hasOwnProperty(JSCompiler_renameProperty('__classProperties', klass))) {
+        klass.__classProperties = flattenProperties({}, ownPropertiesForClass(klass));
+        var superCtor = Object.getPrototypeOf(klass.prototype).constructor;
         if (superCtor.prototype instanceof PolymerElement) {
-          klass.__classProperties = Object.assign(
-            Object.create(propertiesForClass(/** @type {PolymerElementConstructor} */(superCtor))),
-            klass.__classProperties);
+          klass.__classProperties = Object.assign(Object.create(propertiesForClass( /** @type {PolymerElementConstructor} */superCtor)), klass.__classProperties);
         }
       }
       return klass.__classProperties;
@@ -197,12 +188,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function propertyDefaultsForClass(klass) {
-      if (!klass.hasOwnProperty(
-        JSCompiler_renameProperty('__classPropertyDefaults', klass))) {
+      if (!klass.hasOwnProperty(JSCompiler_renameProperty('__classPropertyDefaults', klass))) {
         klass.__classPropertyDefaults = null;
-        let props = propertiesForClass(klass);
-        for (let p in props) {
-          let info = props[p];
+        var props = propertiesForClass(klass);
+        for (var p in props) {
+          var info = props[p];
           if ('value' in info) {
             klass.__classPropertyDefaults = klass.__classPropertyDefaults || {};
             klass.__classPropertyDefaults[p] = info;
@@ -232,8 +222,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function finalizeClassAndSuper(klass) {
-      let proto = /** @type {PolymerElementConstructor} */ (klass).prototype;
-      let superCtor = Object.getPrototypeOf(proto).constructor;
+      var proto = /** @type {PolymerElementConstructor} */klass.prototype;
+      var superCtor = Object.getPrototypeOf(proto).constructor;
       if (superCtor.prototype instanceof PolymerElement) {
         superCtor.finalize();
       }
@@ -251,24 +241,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     function finalizeClass(klass) {
       klass.__finalized = true;
-      let proto = /** @type {PolymerElementConstructor} */ (klass).prototype;
-      if (klass.hasOwnProperty(
-        JSCompiler_renameProperty('is', klass)) && klass.is) {
+      var proto = /** @type {PolymerElementConstructor} */klass.prototype;
+      if (klass.hasOwnProperty(JSCompiler_renameProperty('is', klass)) && klass.is) {
         Polymer.telemetry.register(proto);
       }
-      let props = ownPropertiesForClass(klass);
+      var props = ownPropertiesForClass(klass);
       if (props) {
         finalizeProperties(proto, props);
       }
-      let observers = ownObserversForClass(klass);
+      var observers = ownObserversForClass(klass);
       if (observers) {
         finalizeObservers(proto, observers, props);
       }
       // note: create "working" template that is finalized at instance time
-      let template = /** @type {PolymerElementConstructor} */ (klass).template;
+      var template = /** @type {PolymerElementConstructor} */klass.template;
       if (template) {
         if (typeof template === 'string') {
-          let t = document.createElement('template');
+          var t = document.createElement('template');
           t.innerHTML = template;
           template = t;
         } else {
@@ -290,7 +279,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function finalizeProperties(proto, properties) {
-      for (let p in properties) {
+      for (var p in properties) {
         createPropertyFromConfig(proto, p, properties[p], properties);
       }
     }
@@ -308,7 +297,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @private
      */
     function finalizeObservers(proto, observers, dynamicFns) {
-      for (let i=0; i < observers.length; i++) {
+      for (var i = 0; i < observers.length; i++) {
         proto._createMethodObserver(observers[i], dynamicFns);
       }
     }
@@ -381,7 +370,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // setup where multiple triggers for setting a property)
       // While we do have `hasComputedEffect` this is set on the property's
       // dependencies rather than itself.
-      if (info.computed  && !proto._hasReadOnlyEffect(name)) {
+      if (info.computed && !proto._hasReadOnlyEffect(name)) {
         proto._createComputedProperty(name, info.computed, allProps);
       }
       if (info.readOnly && !proto._hasReadOnlyEffect(name)) {
@@ -405,129 +394,147 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @unrestricted
      * @implements {Polymer_ElementMixin}
      */
-    class PolymerElement extends polymerElementBase {
 
-      /**
-       * Standard Custom Elements V1 API.  The default implementation returns
-       * a list of dash-cased attributes based on a flattening of all properties
-       * declared in `static get properties()` for this element and any
-       * superclasses.
-       *
-       * @return {Array} Observed attribute list
-       */
-      static get observedAttributes() {
-        if (!this.hasOwnProperty(JSCompiler_renameProperty('__observedAttributes', this))) {
-          let list = [];
-          let properties = propertiesForClass(this);
-          for (let prop in properties) {
-            list.push(Polymer.CaseMap.camelToDashCase(prop));
+    var PolymerElement = function (_polymerElementBase) {
+      babelHelpers.inherits(PolymerElement, _polymerElementBase);
+      babelHelpers.createClass(PolymerElement, null, [{
+        key: 'finalize',
+
+
+        /**
+         * Called automatically when the first element instance is created to
+         * ensure that class finalization work has been completed.
+         * May be called by users to eagerly perform class finalization work
+         * prior to the creation of the first element instance.
+         *
+         * Class finalization work generally includes meta-programming such as
+         * creating property accessors and any property effect metadata needed for
+         * the features used.
+         *
+         * @public
+         */
+        value: function finalize() {
+          if (!hasClassFinalized(this)) {
+            finalizeClassAndSuper(this);
           }
-          this.__observedAttributes = list;
         }
-        return this.__observedAttributes;
-      }
 
-      /**
-       * Called automatically when the first element instance is created to
-       * ensure that class finalization work has been completed.
-       * May be called by users to eagerly perform class finalization work
-       * prior to the creation of the first element instance.
-       *
-       * Class finalization work generally includes meta-programming such as
-       * creating property accessors and any property effect metadata needed for
-       * the features used.
-       *
-       * @public
-       */
-      static finalize() {
-        if (!hasClassFinalized(this)) {
-          finalizeClassAndSuper(this);
+        /**
+         * Returns the template that will be stamped into this element's shadow root.
+         *
+         * If a `static get is()` getter is defined, the default implementation
+         * will return the first `<template>` in a `dom-module` whose `id`
+         * matches this element's `is`.
+         *
+         * Users may override this getter to return an arbitrary template
+         * (in which case the `is` getter is unnecessary). The template returned
+         * may be either an `HTMLTemplateElement` or a string that will be
+         * automatically parsed into a template.
+         *
+         * Note that when subclassing, if the super class overrode the default
+         * implementation and the subclass would like to provide an alternate
+         * template via a `dom-module`, it should override this getter and
+         * return `Polymer.DomModule.import(this.is, 'template')`.
+         *
+         * If a subclass would like to modify the super class template, it should
+         * clone it rather than modify it in place.  If the getter does expensive
+         * work such as cloning/modifying a template, it should memoize the
+         * template for maximum performance:
+         *
+         *   let memoizedTemplate;
+         *   class MySubClass extends MySuperClass {
+         *     static get template() {
+         *       if (!memoizedTemplate) {
+         *         memoizedTemplate = super.template.cloneNode(true);
+         *         let subContent = document.createElement('div');
+         *         subContent.textContent = 'This came from MySubClass';
+         *         memoizedTemplate.content.appendChild(subContent);
+         *       }
+         *       return memoizedTemplate;
+         *     }
+         *   }
+         *
+         * @return {HTMLTemplateElement|string} Template to be stamped
+         */
+
+      }, {
+        key: 'observedAttributes',
+
+
+        /**
+         * Standard Custom Elements V1 API.  The default implementation returns
+         * a list of dash-cased attributes based on a flattening of all properties
+         * declared in `static get properties()` for this element and any
+         * superclasses.
+         *
+         * @return {Array} Observed attribute list
+         */
+        get: function get() {
+          if (!this.hasOwnProperty(JSCompiler_renameProperty('__observedAttributes', this))) {
+            var list = [];
+            var properties = propertiesForClass(this);
+            for (var prop in properties) {
+              list.push(Polymer.CaseMap.camelToDashCase(prop));
+            }
+            this.__observedAttributes = list;
+          }
+          return this.__observedAttributes;
         }
-      }
-
-      /**
-       * Returns the template that will be stamped into this element's shadow root.
-       *
-       * If a `static get is()` getter is defined, the default implementation
-       * will return the first `<template>` in a `dom-module` whose `id`
-       * matches this element's `is`.
-       *
-       * Users may override this getter to return an arbitrary template
-       * (in which case the `is` getter is unnecessary). The template returned
-       * may be either an `HTMLTemplateElement` or a string that will be
-       * automatically parsed into a template.
-       *
-       * Note that when subclassing, if the super class overrode the default
-       * implementation and the subclass would like to provide an alternate
-       * template via a `dom-module`, it should override this getter and
-       * return `Polymer.DomModule.import(this.is, 'template')`.
-       *
-       * If a subclass would like to modify the super class template, it should
-       * clone it rather than modify it in place.  If the getter does expensive
-       * work such as cloning/modifying a template, it should memoize the
-       * template for maximum performance:
-       *
-       *   let memoizedTemplate;
-       *   class MySubClass extends MySuperClass {
-       *     static get template() {
-       *       if (!memoizedTemplate) {
-       *         memoizedTemplate = super.template.cloneNode(true);
-       *         let subContent = document.createElement('div');
-       *         subContent.textContent = 'This came from MySubClass';
-       *         memoizedTemplate.content.appendChild(subContent);
-       *       }
-       *       return memoizedTemplate;
-       *     }
-       *   }
-       *
-       * @return {HTMLTemplateElement|string} Template to be stamped
-       */
-      static get template() {
-        if (!this.hasOwnProperty(JSCompiler_renameProperty('_template', this))) {
-          this._template = Polymer.DomModule && Polymer.DomModule.import(
-            /** @type {PolymerElementConstructor}*/ (this).is, 'template') ||
+      }, {
+        key: 'template',
+        get: function get() {
+          if (!this.hasOwnProperty(JSCompiler_renameProperty('_template', this))) {
+            this._template = Polymer.DomModule && Polymer.DomModule.import(
+            /** @type {PolymerElementConstructor}*/this.is, 'template') ||
             // note: implemented so a subclass can retrieve the super
             // template; call the super impl this way so that `this` points
             // to the superclass.
-            Object.getPrototypeOf(/** @type {PolymerElementConstructor}*/ (this).prototype).constructor.template;
+            Object.getPrototypeOf( /** @type {PolymerElementConstructor}*/this.prototype).constructor.template;
+          }
+          return this._template;
         }
-        return this._template;
-      }
 
-      /**
-       * Path matching the url from which the element was imported.
-       * This path is used to resolve url's in template style cssText.
-       * The `importPath` property is also set on element instances and can be
-       * used to create bindings relative to the import path.
-       * Defaults to the path matching the url containing a `dom-module` element
-       * matching this element's static `is` property.
-       * Note, this path should contain a trailing `/`.
-       *
-       * @return {string} The import path for this element class
-       */
-      static get importPath() {
-        if (!this.hasOwnProperty(JSCompiler_renameProperty('_importPath', this))) {
-            const module = Polymer.DomModule && Polymer.DomModule.import(/** @type {PolymerElementConstructor} */ (this).is);
-            this._importPath = module ? module.assetpath : '' ||
-            Object.getPrototypeOf(/** @type {PolymerElementConstructor}*/ (this).prototype).constructor.importPath;
+        /**
+         * Path matching the url from which the element was imported.
+         * This path is used to resolve url's in template style cssText.
+         * The `importPath` property is also set on element instances and can be
+         * used to create bindings relative to the import path.
+         * Defaults to the path matching the url containing a `dom-module` element
+         * matching this element's static `is` property.
+         * Note, this path should contain a trailing `/`.
+         *
+         * @return {string} The import path for this element class
+         */
+
+      }, {
+        key: 'importPath',
+        get: function get() {
+          if (!this.hasOwnProperty(JSCompiler_renameProperty('_importPath', this))) {
+            var module = Polymer.DomModule && Polymer.DomModule.import( /** @type {PolymerElementConstructor} */this.is);
+            this._importPath = module ? module.assetpath : '' || Object.getPrototypeOf( /** @type {PolymerElementConstructor}*/this.prototype).constructor.importPath;
+          }
+          return this._importPath;
         }
-        return this._importPath;
-      }
+      }]);
 
-      constructor() {
-        super();
+      function PolymerElement() {
+        babelHelpers.classCallCheck(this, PolymerElement);
+
         /** @type {HTMLTemplateElement} */
-        this._template;
+        var _this = babelHelpers.possibleConstructorReturn(this, (PolymerElement.__proto__ || Object.getPrototypeOf(PolymerElement)).call(this));
+
+        _this._template;
         /** @type {string} */
-        this._importPath;
+        _this._importPath;
         /** @type {string} */
-        this.rootPath;
+        _this.rootPath;
         /** @type {string} */
-        this.importPath;
+        _this.importPath;
         /** @type {StampedTemplate | HTMLElement | ShadowRoot} */
-        this.root;
+        _this.root;
         /** @type {!Object<string, !Node>} */
-        this.$;
+        _this.$;
+        return _this;
       }
 
       /**
@@ -541,252 +548,285 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @override
        * @suppress {invalidCasts}
        */
-      _initializeProperties() {
-        Polymer.telemetry.instanceCount++;
-        this.constructor.finalize();
-        const importPath = this.constructor.importPath;
-        // note: finalize template when we have access to `localName` to
-        // avoid dependence on `is` for polyfilling styling.
-        this.constructor._finalizeTemplate(/** @type {!HTMLElement} */(this).localName);
-        super._initializeProperties();
-        // set path defaults
-        this.rootPath = Polymer.rootPath;
-        this.importPath = importPath;
-        // apply property defaults...
-        let p$ = propertyDefaultsForClass(this.constructor);
-        if (!p$) {
-          return;
-        }
-        for (let p in p$) {
-          let info = p$[p];
-          // Don't set default value if there is already an own property, which
-          // happens when a `properties` property with default but no effects had
-          // a property set (e.g. bound) by its host before upgrade
-          if (!this.hasOwnProperty(p)) {
-            let value = typeof info.value == 'function' ?
-              info.value.call(this) :
-              info.value;
-            // Set via `_setProperty` if there is an accessor, to enable
-            // initializing readOnly property defaults
-            if (this._hasAccessor(p)) {
-              this._setPendingProperty(p, value, true);
-            } else {
-              this[p] = value;
+
+
+      babelHelpers.createClass(PolymerElement, [{
+        key: '_initializeProperties',
+        value: function _initializeProperties() {
+          Polymer.telemetry.instanceCount++;
+          this.constructor.finalize();
+          var importPath = this.constructor.importPath;
+          // note: finalize template when we have access to `localName` to
+          // avoid dependence on `is` for polyfilling styling.
+          this.constructor._finalizeTemplate( /** @type {!HTMLElement} */this.localName);
+          babelHelpers.get(PolymerElement.prototype.__proto__ || Object.getPrototypeOf(PolymerElement.prototype), '_initializeProperties', this).call(this);
+          // set path defaults
+          this.rootPath = Polymer.rootPath;
+          this.importPath = importPath;
+          // apply property defaults...
+          var p$ = propertyDefaultsForClass(this.constructor);
+          if (!p$) {
+            return;
+          }
+          for (var p in p$) {
+            var info = p$[p];
+            // Don't set default value if there is already an own property, which
+            // happens when a `properties` property with default but no effects had
+            // a property set (e.g. bound) by its host before upgrade
+            if (!this.hasOwnProperty(p)) {
+              var value = typeof info.value == 'function' ? info.value.call(this) : info.value;
+              // Set via `_setProperty` if there is an accessor, to enable
+              // initializing readOnly property defaults
+              if (this._hasAccessor(p)) {
+                this._setPendingProperty(p, value, true);
+              } else {
+                this[p] = value;
+              }
             }
           }
         }
-      }
 
-      /**
-       * Gather style text for the template
-       *
-       * @param {string} is Tag name for this element
-       * @param {!HTMLTemplateElement} template Template to process
-       * @param {string} baseURI Base URI to rebase CSS paths against
-       * @return {string} The combined CSS text
-       * @protected
-       */
-      static _processStyleText(is, template, baseURI) {
-        return Polymer.StyleGather.cssFromModuleImports(is) +
-          Polymer.StyleGather.cssFromTemplate(template, baseURI);
-      }
+        /**
+         * Gather style text for the template
+         *
+         * @param {string} is Tag name for this element
+         * @param {!HTMLTemplateElement} template Template to process
+         * @param {string} baseURI Base URI to rebase CSS paths against
+         * @return {string} The combined CSS text
+         * @protected
+         */
 
-      /**
-      * Configures an element `proto` to function with a given `template`.
-      * The element name `is` and extends `ext` must be specified for ShadyCSS
-      * style scoping.
-      *
-      * @param {string} is Tag name (or type extension name) for this element
-      * @param {string=} ext For type extensions, the tag name that was extended
-      * @protected
-      */
-      static _finalizeTemplate(is, ext) {
-        /** @const {HTMLTemplateElement} */
-        const template = this.prototype._template;
-        if (template && !template.__polymerFinalized) {
-          template.__polymerFinalized = true;
-          const importPath = this.importPath;
-          const baseURI = importPath ? Polymer.ResolveUrl.resolveUrl(importPath) : '';
-          // support `include="module-name"`
-          let cssText = this._processStyleText(is, template, baseURI);
-          if (cssText) {
-            let style = document.createElement('style');
-            style.textContent = cssText;
-            template.content.insertBefore(style, template.content.firstChild);
+      }, {
+        key: 'connectedCallback',
+
+
+        /**
+         * Provides a default implementation of the standard Custom Elements
+         * `connectedCallback`.
+         *
+         * The default implementation enables the property effects system and
+         * flushes any pending properties, and updates shimmed CSS properties
+         * when using the ShadyCSS scoping/custom properties polyfill.
+         *
+         * @suppress {invalidCasts}
+         */
+        value: function connectedCallback() {
+          if (window.ShadyCSS && this._template) {
+            window.ShadyCSS.styleElement( /** @type {!HTMLElement} */this);
           }
-          if (window.ShadyCSS) {
-            window.ShadyCSS.prepareTemplate(template, is, ext);
+          this._enableProperties();
+        }
+
+        /**
+         * Provides a default implementation of the standard Custom Elements
+         * `disconnectedCallback`.
+         */
+
+      }, {
+        key: 'disconnectedCallback',
+        value: function disconnectedCallback() {}
+
+        /**
+         * Stamps the element template.
+         *
+         * @override
+         */
+
+      }, {
+        key: 'ready',
+        value: function ready() {
+          if (this._template) {
+            this.root = this._stampTemplate(this._template);
+            this.$ = this.root.$;
           }
-          this.prototype._bindTemplate(template);
+          babelHelpers.get(PolymerElement.prototype.__proto__ || Object.getPrototypeOf(PolymerElement.prototype), 'ready', this).call(this);
         }
-      }
 
-      /**
-       * Provides a default implementation of the standard Custom Elements
-       * `connectedCallback`.
-       *
-       * The default implementation enables the property effects system and
-       * flushes any pending properties, and updates shimmed CSS properties
-       * when using the ShadyCSS scoping/custom properties polyfill.
-       *
-       * @suppress {invalidCasts}
-       */
-      connectedCallback() {
-        if (window.ShadyCSS && this._template) {
-          window.ShadyCSS.styleElement(/** @type {!HTMLElement} */(this));
+        /**
+         * Implements `PropertyEffects`'s `_readyClients` call. Attaches
+         * element dom by calling `_attachDom` with the dom stamped from the
+         * element's template via `_stampTemplate`. Note that this allows
+         * client dom to be attached to the element prior to any observers
+         * running.
+         *
+         * @override
+         */
+
+      }, {
+        key: '_readyClients',
+        value: function _readyClients() {
+          if (this._template) {
+            this.root = this._attachDom( /** @type {StampedTemplate} */this.root);
+          }
+          // The super._readyClients here sets the clients initialized flag.
+          // We must wait to do this until after client dom is created/attached
+          // so that this flag can be checked to prevent notifications fired
+          // during this process from being handled before clients are ready.
+          babelHelpers.get(PolymerElement.prototype.__proto__ || Object.getPrototypeOf(PolymerElement.prototype), '_readyClients', this).call(this);
         }
-        this._enableProperties();
-      }
 
-      /**
-       * Provides a default implementation of the standard Custom Elements
-       * `disconnectedCallback`.
-       */
-      disconnectedCallback() {}
+        /**
+         * Attaches an element's stamped dom to itself. By default,
+         * this method creates a `shadowRoot` and adds the dom to it.
+         * However, this method may be overridden to allow an element
+         * to put its dom in another location.
+         *
+         * @throws {Error}
+         * @suppress {missingReturn}
+         * @param {StampedTemplate} dom to attach to the element.
+         * @return {ShadowRoot} node to which the dom has been attached.
+         */
 
-      /**
-       * Stamps the element template.
-       *
-       * @override
-       */
-      ready() {
-        if (this._template) {
-          this.root = this._stampTemplate(this._template);
-          this.$ = this.root.$;
-        }
-        super.ready();
-      }
-
-      /**
-       * Implements `PropertyEffects`'s `_readyClients` call. Attaches
-       * element dom by calling `_attachDom` with the dom stamped from the
-       * element's template via `_stampTemplate`. Note that this allows
-       * client dom to be attached to the element prior to any observers
-       * running.
-       *
-       * @override
-       */
-      _readyClients() {
-        if (this._template) {
-          this.root = this._attachDom(/** @type {StampedTemplate} */(this.root));
-        }
-        // The super._readyClients here sets the clients initialized flag.
-        // We must wait to do this until after client dom is created/attached
-        // so that this flag can be checked to prevent notifications fired
-        // during this process from being handled before clients are ready.
-        super._readyClients();
-      }
-
-
-      /**
-       * Attaches an element's stamped dom to itself. By default,
-       * this method creates a `shadowRoot` and adds the dom to it.
-       * However, this method may be overridden to allow an element
-       * to put its dom in another location.
-       *
-       * @throws {Error}
-       * @suppress {missingReturn}
-       * @param {StampedTemplate} dom to attach to the element.
-       * @return {ShadowRoot} node to which the dom has been attached.
-       */
-      _attachDom(dom) {
-        if (this.attachShadow) {
-          if (dom) {
-            if (!this.shadowRoot) {
-              this.attachShadow({mode: 'open'});
+      }, {
+        key: '_attachDom',
+        value: function _attachDom(dom) {
+          if (this.attachShadow) {
+            if (dom) {
+              if (!this.shadowRoot) {
+                this.attachShadow({ mode: 'open' });
+              }
+              this.shadowRoot.appendChild(dom);
+              return this.shadowRoot;
             }
-            this.shadowRoot.appendChild(dom);
-            return this.shadowRoot;
-          }
-          return null;
-        } else {
-          throw new Error('ShadowDOM not available. ' +
+            return null;
+          } else {
+            throw new Error('ShadowDOM not available. ' +
             // TODO(sorvell): move to compile-time conditional when supported
-          'Polymer.Element can create dom as children instead of in ' +
-          'ShadowDOM by setting `this.root = this;\` before \`ready\`.');
-        }
-      }
-
-      /**
-       * Provides a default implementation of the standard Custom Elements
-       * `attributeChangedCallback`.
-       *
-       * By default, attributes declared in `properties` metadata are
-       * deserialized using their `type` information to properties of the
-       * same name.  "Dash-cased" attributes are deserialized to "camelCase"
-       * properties.
-       *
-       * @param {string} name Name of attribute.
-       * @param {?string} old Old value of attribute.
-       * @param {?string} value Current value of attribute.
-       * @override
-       */
-      attributeChangedCallback(name, old, value) {
-        if (old !== value) {
-          let property = caseMap.dashToCamelCase(name);
-          let type = propertiesForClass(this.constructor)[property].type;
-          if (!this._hasReadOnlyEffect(property)) {
-            this._attributeToProperty(name, value, type);
+            'Polymer.Element can create dom as children instead of in ' + 'ShadowDOM by setting `this.root = this;\` before \`ready\`.');
           }
         }
-      }
 
-      /**
-       * When using the ShadyCSS scoping and custom property shim, causes all
-       * shimmed styles in this element (and its subtree) to be updated
-       * based on current custom property values.
-       *
-       * The optional parameter overrides inline custom property styles with an
-       * object of properties where the keys are CSS properties, and the values
-       * are strings.
-       *
-       * Example: `this.updateStyles({'--color': 'blue'})`
-       *
-       * These properties are retained unless a value of `null` is set.
-       *
-       * @param {Object=} properties Bag of custom property key/values to
-       *   apply to this element.
-       * @suppress {invalidCasts}
-       */
-      updateStyles(properties) {
-        if (window.ShadyCSS) {
-          window.ShadyCSS.styleSubtree(/** @type {!HTMLElement} */(this), properties);
+        /**
+         * Provides a default implementation of the standard Custom Elements
+         * `attributeChangedCallback`.
+         *
+         * By default, attributes declared in `properties` metadata are
+         * deserialized using their `type` information to properties of the
+         * same name.  "Dash-cased" attributes are deserialized to "camelCase"
+         * properties.
+         *
+         * @param {string} name Name of attribute.
+         * @param {?string} old Old value of attribute.
+         * @param {?string} value Current value of attribute.
+         * @override
+         */
+
+      }, {
+        key: 'attributeChangedCallback',
+        value: function attributeChangedCallback(name, old, value) {
+          if (old !== value) {
+            var property = caseMap.dashToCamelCase(name);
+            var type = propertiesForClass(this.constructor)[property].type;
+            if (!this._hasReadOnlyEffect(property)) {
+              this._attributeToProperty(name, value, type);
+            }
+          }
         }
-      }
 
-      /**
-       * Rewrites a given URL relative to a base URL. The base URL defaults to
-       * the original location of the document containing the `dom-module` for
-       * this element. This method will return the same URL before and after
-       * bundling.
-       *
-       * @param {string} url URL to resolve.
-       * @param {string=} base Optional base URL to resolve against, defaults
-       * to the element's `importPath`
-       * @return {string} Rewritten URL relative to base
-       */
-      resolveUrl(url, base) {
-        if (!base && this.importPath) {
-          base = Polymer.ResolveUrl.resolveUrl(this.importPath);
+        /**
+         * When using the ShadyCSS scoping and custom property shim, causes all
+         * shimmed styles in this element (and its subtree) to be updated
+         * based on current custom property values.
+         *
+         * The optional parameter overrides inline custom property styles with an
+         * object of properties where the keys are CSS properties, and the values
+         * are strings.
+         *
+         * Example: `this.updateStyles({'--color': 'blue'})`
+         *
+         * These properties are retained unless a value of `null` is set.
+         *
+         * @param {Object=} properties Bag of custom property key/values to
+         *   apply to this element.
+         * @suppress {invalidCasts}
+         */
+
+      }, {
+        key: 'updateStyles',
+        value: function updateStyles(properties) {
+          if (window.ShadyCSS) {
+            window.ShadyCSS.styleSubtree( /** @type {!HTMLElement} */this, properties);
+          }
         }
-        return Polymer.ResolveUrl.resolveUrl(url, base);
-      }
 
-      /**
-       * Overrides `PropertyAccessors` to add map of dynamic functions on
-       * template info, for consumption by `PropertyEffects` template binding
-       * code. This map determines which method templates should have accessors
-       * created for them.
-       *
-       * @override
-       * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
-       */
-      static _parseTemplateContent(template, templateInfo, nodeInfo) {
-        templateInfo.dynamicFns = templateInfo.dynamicFns || propertiesForClass(this);
-        return super._parseTemplateContent(template, templateInfo, nodeInfo);
-      }
+        /**
+         * Rewrites a given URL relative to a base URL. The base URL defaults to
+         * the original location of the document containing the `dom-module` for
+         * this element. This method will return the same URL before and after
+         * bundling.
+         *
+         * @param {string} url URL to resolve.
+         * @param {string=} base Optional base URL to resolve against, defaults
+         * to the element's `importPath`
+         * @return {string} Rewritten URL relative to base
+         */
 
-    }
+      }, {
+        key: 'resolveUrl',
+        value: function resolveUrl(url, base) {
+          if (!base && this.importPath) {
+            base = Polymer.ResolveUrl.resolveUrl(this.importPath);
+          }
+          return Polymer.ResolveUrl.resolveUrl(url, base);
+        }
+
+        /**
+         * Overrides `PropertyAccessors` to add map of dynamic functions on
+         * template info, for consumption by `PropertyEffects` template binding
+         * code. This map determines which method templates should have accessors
+         * created for them.
+         *
+         * @override
+         * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
+         */
+
+      }], [{
+        key: '_processStyleText',
+        value: function _processStyleText(is, template, baseURI) {
+          return Polymer.StyleGather.cssFromModuleImports(is) + Polymer.StyleGather.cssFromTemplate(template, baseURI);
+        }
+
+        /**
+        * Configures an element `proto` to function with a given `template`.
+        * The element name `is` and extends `ext` must be specified for ShadyCSS
+        * style scoping.
+        *
+        * @param {string} is Tag name (or type extension name) for this element
+        * @param {string=} ext For type extensions, the tag name that was extended
+        * @protected
+        */
+
+      }, {
+        key: '_finalizeTemplate',
+        value: function _finalizeTemplate(is, ext) {
+          /** @const {HTMLTemplateElement} */
+          var template = this.prototype._template;
+          if (template && !template.__polymerFinalized) {
+            template.__polymerFinalized = true;
+            var importPath = this.importPath;
+            var baseURI = importPath ? Polymer.ResolveUrl.resolveUrl(importPath) : '';
+            // support `include="module-name"`
+            var cssText = this._processStyleText(is, template, baseURI);
+            if (cssText) {
+              var style = document.createElement('style');
+              style.textContent = cssText;
+              template.content.insertBefore(style, template.content.firstChild);
+            }
+            if (window.ShadyCSS) {
+              window.ShadyCSS.prepareTemplate(template, is, ext);
+            }
+            this.prototype._bindTemplate(template);
+          }
+        }
+      }, {
+        key: '_parseTemplateContent',
+        value: function _parseTemplateContent(template, templateInfo, nodeInfo) {
+          templateInfo.dynamicFns = templateInfo.dynamicFns || propertiesForClass(this);
+          return babelHelpers.get(PolymerElement.__proto__ || Object.getPrototypeOf(PolymerElement), '_parseTemplateContent', this).call(this, template, templateInfo, nodeInfo);
+        }
+      }]);
+      return PolymerElement;
+    }(polymerElementBase);
 
     return PolymerElement;
   });
@@ -815,7 +855,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @this {this}
      * @private
      */
-    _regLog: function(prototype) {
+    _regLog: function _regLog(prototype) {
       console.log('[' + prototype.is + ']: registered');
     },
     /**
@@ -824,7 +864,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @this {this}
      * @protected
      */
-    register: function(prototype) {
+    register: function register(prototype) {
       this.registrations.push(prototype);
       Polymer.log && this._regLog(prototype);
     },
@@ -833,7 +873,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @public
      * @this {this}
      */
-    dumpRegistrations: function() {
+    dumpRegistrations: function dumpRegistrations() {
       this.registrations.forEach(this._regLog);
     }
   };
@@ -854,11 +894,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @param {Object=} props Bag of custom property key/values to
    *   apply to the document.
    */
-  Polymer.updateStyles = function(props) {
+  Polymer.updateStyles = function (props) {
     if (window.ShadyCSS) {
       window.ShadyCSS.styleDocument(props);
     }
   };
-
-})();
-</script>
+})();</script>

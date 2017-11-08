@@ -6,9 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-behaviors/paper-inky-focus-behavior.html">
 <link rel="import" href="../paper-styles/default-theme.html">
@@ -70,7 +68,7 @@ Custom property | Description | Default
 -->
 
 <dom-module id="paper-icon-button">
-  <template strip-whitespace>
+  <template strip-whitespace="">
     <style>
       :host {
         display: inline-block;
@@ -129,53 +127,50 @@ Custom property | Description | Default
   </template>
 
   <script>
-    Polymer({
-      is: 'paper-icon-button',
+Polymer({
+  is: 'paper-icon-button',
 
-      hostAttributes: {
-        role: 'button',
-        tabindex: '0'
-      },
+  hostAttributes: {
+    role: 'button',
+    tabindex: '0'
+  },
 
-      behaviors: [
-        Polymer.PaperInkyFocusBehavior
-      ],
+  behaviors: [Polymer.PaperInkyFocusBehavior],
 
-      properties: {
-        /**
-         * The URL of an image for the icon. If the src property is specified,
-         * the icon property should not be.
-         */
-        src: {
-          type: String
-        },
+  properties: {
+    /**
+     * The URL of an image for the icon. If the src property is specified,
+     * the icon property should not be.
+     */
+    src: {
+      type: String
+    },
 
-        /**
-         * Specifies the icon name or index in the set of icons available in
-         * the icon's icon set. If the icon property is specified,
-         * the src property should not be.
-         */
-        icon: {
-          type: String
-        },
+    /**
+     * Specifies the icon name or index in the set of icons available in
+     * the icon's icon set. If the icon property is specified,
+     * the src property should not be.
+     */
+    icon: {
+      type: String
+    },
 
-        /**
-         * Specifies the alternate text for the button, for accessibility.
-         */
-        alt: {
-          type: String,
-          observer: "_altChanged"
-        }
-      },
+    /**
+     * Specifies the alternate text for the button, for accessibility.
+     */
+    alt: {
+      type: String,
+      observer: "_altChanged"
+    }
+  },
 
-      _altChanged: function(newValue, oldValue) {
-        var label = this.getAttribute('aria-label');
+  _altChanged: function _altChanged(newValue, oldValue) {
+    var label = this.getAttribute('aria-label');
 
-        // Don't stomp over a user-set aria-label.
-        if (!label || oldValue == label) {
-          this.setAttribute('aria-label', newValue);
-        }
-      }
-    });
-  </script>
+    // Don't stomp over a user-set aria-label.
+    if (!label || oldValue == label) {
+      this.setAttribute('aria-label', newValue);
+    }
+  }
+});</script>
 </dom-module>

@@ -6,14 +6,12 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../utils/boot.html">
+--><link rel="import" href="../utils/boot.html">
 <link rel="import" href="../utils/resolve-url.html">
 
 <script>
 /** @suppress {deprecated} */
-(function() {
+(function () {
   'use strict';
 
   /**
@@ -21,12 +19,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @namespace
    * @memberof Polymer
    */
-  const settings = Polymer.Settings || {};
-  settings.useShadow = !(window.ShadyDOM);
-  settings.useNativeCSSProperties =
-    Boolean(!window.ShadyCSS || window.ShadyCSS.nativeCss);
-  settings.useNativeCustomElements =
-    !(window.customElements.polyfillWrapFlushCallback);
+
+  var settings = Polymer.Settings || {};
+  settings.useShadow = !window.ShadyDOM;
+  settings.useNativeCSSProperties = Boolean(!window.ShadyCSS || window.ShadyCSS.nativeCss);
+  settings.useNativeCustomElements = !window.customElements.polyfillWrapFlushCallback;
 
   /**
    * Sets the global, legacy settings.
@@ -46,8 +43,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *
    * @memberof Polymer
    */
-  let rootPath = Polymer.rootPath ||
-    Polymer.ResolveUrl.pathFromUrl(document.baseURI || window.location.href);
+  var rootPath = Polymer.rootPath || Polymer.ResolveUrl.pathFromUrl(document.baseURI || window.location.href);
 
   Polymer.rootPath = rootPath;
 
@@ -58,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @memberof Polymer
    * @param {string} path The new root path
    */
-  Polymer.setRootPath = function(path) {
+  Polymer.setRootPath = function (path) {
     Polymer.rootPath = path;
   };
 
@@ -79,7 +75,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @type {(function(*,string,string,Node):*)|undefined}
    * @memberof Polymer
    */
-  let sanitizeDOMValue = Polymer.sanitizeDOMValue;
+  var sanitizeDOMValue = Polymer.sanitizeDOMValue;
 
   // This is needed for tooling
   Polymer.sanitizeDOMValue = sanitizeDOMValue;
@@ -90,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @memberof Polymer
    * @param {(function(*,string,string,Node):*)|undefined} newSanitizeDOMValue the global sanitizeDOMValue callback
    */
-  Polymer.setSanitizeDOMValue = function(newSanitizeDOMValue) {
+  Polymer.setSanitizeDOMValue = function (newSanitizeDOMValue) {
     Polymer.sanitizeDOMValue = newSanitizeDOMValue;
   };
 
@@ -102,7 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *
    * @memberof Polymer
    */
-  let passiveTouchGestures = false;
+  var passiveTouchGestures = false;
 
   Polymer.passiveTouchGestures = passiveTouchGestures;
 
@@ -112,8 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @memberof Polymer
    * @param {boolean} usePassive enable or disable passive touch gestures globally
    */
-  Polymer.setPassiveTouchGestures = function(usePassive) {
+  Polymer.setPassiveTouchGestures = function (usePassive) {
     Polymer.passiveTouchGestures = usePassive;
   };
-})();
-</script>
+})();</script>

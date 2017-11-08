@@ -6,26 +6,25 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<link rel="import" href="boot.html">
+--><link rel="import" href="boot.html">
 
 <script>
-(function() {
+(function () {
 
   'use strict';
 
-  let scheduled = false;
-  let beforeRenderQueue = [];
-  let afterRenderQueue = [];
+  var scheduled = false;
+  var beforeRenderQueue = [];
+  var afterRenderQueue = [];
 
   function schedule() {
     scheduled = true;
     // before next render
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       scheduled = false;
       flushQueue(beforeRenderQueue);
       // after the render
-      setTimeout(function() {
+      setTimeout(function () {
         runQueue(afterRenderQueue);
       });
     });
@@ -38,19 +37,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   function runQueue(queue) {
-    for (let i=0, l=queue.length; i < l; i++) {
+    for (var i = 0, l = queue.length; i < l; i++) {
       callMethod(queue.shift());
     }
   }
 
   function callMethod(info) {
-    const context = info[0];
-    const callback = info[1];
-    const args = info[2];
+    var context = info[0];
+    var callback = info[1];
+    var args = info[2];
     try {
       callback.apply(context, args);
-    } catch(e) {
-      setTimeout(() => {
+    } catch (e) {
+      setTimeout(function () {
         throw e;
       });
     }
@@ -88,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param {function()} callback Callback function
      * @param {Array} args An array of arguments to call the callback function with
      */
-    beforeNextRender: function(context, callback, args) {
+    beforeNextRender: function beforeNextRender(context, callback, args) {
       if (!scheduled) {
         schedule();
       }
@@ -109,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param {function()} callback Callback function
      * @param {Array} args An array of arguments to call the callback function with
      */
-    afterNextRender: function(context, callback, args) {
+    afterNextRender: function afterNextRender(context, callback, args) {
       if (!scheduled) {
         schedule();
       }
@@ -125,6 +124,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     flush: flush
 
   };
-
-})();
-</script>
+})();</script>

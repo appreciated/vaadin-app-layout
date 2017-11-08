@@ -6,22 +6,19 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<link rel="import" href="../utils/boot.html">
+--><link rel="import" href="../utils/boot.html">
 <link rel="import" href="../utils/settings.html">
 <link rel="import" href="../utils/flattened-nodes-observer.html">
 <link rel="import" href="../utils/flush.html">
 <script>
-(function() {
+(function () {
   'use strict';
 
-  const p = Element.prototype;
+  var p = Element.prototype;
   /**
    * @const {function(this:Element, string): boolean}
    */
-  const normalizedMatchesSelector = p.matches || p.matchesSelector ||
-    p.mozMatchesSelector || p.msMatchesSelector ||
-    p.oMatchesSelector || p.webkitMatchesSelector;
+  var normalizedMatchesSelector = p.matches || p.matchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector || p.webkitMatchesSelector;
 
   /**
    * Cross-platform `element.matches` shim.
@@ -32,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @param {string} selector Selector to match
    * @return {boolean} True if node matched selector
    */
-  const matchesSelector = function(node, selector) {
+  var matchesSelector = function matchesSelector(node, selector) {
     return normalizedMatchesSelector.call(node, selector);
   };
 
@@ -40,12 +37,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * Node API wrapper class returned from `Polymer.dom.(target)` when
    * `target` is a `Node`.
    */
-  class DomApi {
+
+  var DomApi = function () {
 
     /**
      * @param {Node} node Node for which to create a Polymer.dom helper object.
      */
-    constructor(node) {
+    function DomApi(node) {
+      babelHelpers.classCallCheck(this, DomApi);
+
       this.node = node;
     }
 
@@ -57,202 +57,237 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      *   of this element changes
      * @return {Polymer.FlattenedNodesObserver} Observer instance
      */
-    observeNodes(callback) {
-      return new Polymer.FlattenedNodesObserver(this.node, callback);
-    }
 
-    /**
-     * Disconnects an observer previously created via `observeNodes`
-     *
-     * @param {Polymer.FlattenedNodesObserver} observerHandle Observer instance
-     *   to disconnect.
-     */
-    unobserveNodes(observerHandle) {
-      observerHandle.disconnect();
-    }
 
-    /**
-     * Provided as a backwards-compatible API only.  This method does nothing.
-     */
-    notifyObserver() {}
-
-    /**
-     * Returns true if the provided node is contained with this element's
-     * light-DOM children or shadow root, including any nested shadow roots
-     * of children therein.
-     *
-     * @param {Node} node Node to test
-     * @return {boolean} Returns true if the given `node` is contained within
-     *   this element's light or shadow DOM.
-     */
-    deepContains(node) {
-      if (this.node.contains(node)) {
-        return true;
+    babelHelpers.createClass(DomApi, [{
+      key: 'observeNodes',
+      value: function observeNodes(callback) {
+        return new Polymer.FlattenedNodesObserver(this.node, callback);
       }
-      let n = node;
-      let doc = node.ownerDocument;
-      // walk from node to `this` or `document`
-      while (n && n !== doc && n !== this.node) {
-        // use logical parentnode, or native ShadowRoot host
-        n = n.parentNode || n.host;
+
+      /**
+       * Disconnects an observer previously created via `observeNodes`
+       *
+       * @param {Polymer.FlattenedNodesObserver} observerHandle Observer instance
+       *   to disconnect.
+       */
+
+    }, {
+      key: 'unobserveNodes',
+      value: function unobserveNodes(observerHandle) {
+        observerHandle.disconnect();
       }
-      return n === this.node;
-    }
 
-    /**
-     * Returns the root node of this node.  Equivalent to `getRoodNode()`.
-     *
-     * @return {Node} Top most element in the dom tree in which the node
-     * exists. If the node is connected to a document this is either a
-     * shadowRoot or the document; otherwise, it may be the node
-     * itself or a node or document fragment containing it.
-     */
-    getOwnerRoot() {
-      return this.node.getRootNode();
-    }
+      /**
+       * Provided as a backwards-compatible API only.  This method does nothing.
+       */
 
-    /**
-     * For slot elements, returns the nodes assigned to the slot; otherwise
-     * an empty array. It is equivalent to `<slot>.addignedNodes({flatten:true})`.
-     *
-     * @return {Array<Node>} Array of assigned nodes
-     */
-    getDistributedNodes() {
-      return (this.node.localName === 'slot') ?
-        this.node.assignedNodes({flatten: true}) :
-        [];
-    }
+    }, {
+      key: 'notifyObserver',
+      value: function notifyObserver() {}
 
-    /**
-     * Returns an array of all slots this element was distributed to.
-     *
-     * @return {Array<HTMLSlotElement>} Description
-     */
-    getDestinationInsertionPoints() {
-      let ip$ = [];
-      let n = this.node.assignedSlot;
-      while (n) {
-        ip$.push(n);
-        n = n.assignedSlot;
-      }
-      return ip$;
-    }
+      /**
+       * Returns true if the provided node is contained with this element's
+       * light-DOM children or shadow root, including any nested shadow roots
+       * of children therein.
+       *
+       * @param {Node} node Node to test
+       * @return {boolean} Returns true if the given `node` is contained within
+       *   this element's light or shadow DOM.
+       */
 
-    /**
-     * Calls `importNode` on the `ownerDocument` for this node.
-     *
-     * @param {Node} node Node to import
-     * @param {boolean} deep True if the node should be cloned deeply during
-     *   import
-     * @return {Node} Clone of given node imported to this owner document
-     */
-    importNode(node, deep) {
-      let doc = this.node instanceof Document ? this.node :
-        this.node.ownerDocument;
-      return doc.importNode(node, deep);
-    }
-
-    /**
-     * @return {Array} Returns a flattened list of all child nodes and nodes assigned
-     * to child slots.
-     */
-    getEffectiveChildNodes() {
-      return Polymer.FlattenedNodesObserver.getFlattenedNodes(this.node);
-    }
-
-    /**
-     * Returns a filtered list of flattened child elements for this element based
-     * on the given selector.
-     *
-     * @param {string} selector Selector to filter nodes against
-     * @return {Array<HTMLElement>} List of flattened child elements
-     */
-    queryDistributedElements(selector) {
-      let c$ = this.getEffectiveChildNodes();
-      let list = [];
-      for (let i=0, l=c$.length, c; (i<l) && (c=c$[i]); i++) {
-        if ((c.nodeType === Node.ELEMENT_NODE) &&
-            matchesSelector(c, selector)) {
-          list.push(c);
+    }, {
+      key: 'deepContains',
+      value: function deepContains(node) {
+        if (this.node.contains(node)) {
+          return true;
         }
+        var n = node;
+        var doc = node.ownerDocument;
+        // walk from node to `this` or `document`
+        while (n && n !== doc && n !== this.node) {
+          // use logical parentnode, or native ShadowRoot host
+          n = n.parentNode || n.host;
+        }
+        return n === this.node;
       }
-      return list;
-    }
 
-    /**
-     * For shadow roots, returns the currently focused element within this
-     * shadow root.
-     *
-     * @return {Node|undefined} Currently focused element
-     */
-    get activeElement() {
-      let node = this.node;
-      return node._activeElement !== undefined ? node._activeElement : node.activeElement;
-    }
-  }
+      /**
+       * Returns the root node of this node.  Equivalent to `getRoodNode()`.
+       *
+       * @return {Node} Top most element in the dom tree in which the node
+       * exists. If the node is connected to a document this is either a
+       * shadowRoot or the document; otherwise, it may be the node
+       * itself or a node or document fragment containing it.
+       */
+
+    }, {
+      key: 'getOwnerRoot',
+      value: function getOwnerRoot() {
+        return this.node.getRootNode();
+      }
+
+      /**
+       * For slot elements, returns the nodes assigned to the slot; otherwise
+       * an empty array. It is equivalent to `<slot>.addignedNodes({flatten:true})`.
+       *
+       * @return {Array<Node>} Array of assigned nodes
+       */
+
+    }, {
+      key: 'getDistributedNodes',
+      value: function getDistributedNodes() {
+        return this.node.localName === 'slot' ? this.node.assignedNodes({ flatten: true }) : [];
+      }
+
+      /**
+       * Returns an array of all slots this element was distributed to.
+       *
+       * @return {Array<HTMLSlotElement>} Description
+       */
+
+    }, {
+      key: 'getDestinationInsertionPoints',
+      value: function getDestinationInsertionPoints() {
+        var ip$ = [];
+        var n = this.node.assignedSlot;
+        while (n) {
+          ip$.push(n);
+          n = n.assignedSlot;
+        }
+        return ip$;
+      }
+
+      /**
+       * Calls `importNode` on the `ownerDocument` for this node.
+       *
+       * @param {Node} node Node to import
+       * @param {boolean} deep True if the node should be cloned deeply during
+       *   import
+       * @return {Node} Clone of given node imported to this owner document
+       */
+
+    }, {
+      key: 'importNode',
+      value: function importNode(node, deep) {
+        var doc = this.node instanceof Document ? this.node : this.node.ownerDocument;
+        return doc.importNode(node, deep);
+      }
+
+      /**
+       * @return {Array} Returns a flattened list of all child nodes and nodes assigned
+       * to child slots.
+       */
+
+    }, {
+      key: 'getEffectiveChildNodes',
+      value: function getEffectiveChildNodes() {
+        return Polymer.FlattenedNodesObserver.getFlattenedNodes(this.node);
+      }
+
+      /**
+       * Returns a filtered list of flattened child elements for this element based
+       * on the given selector.
+       *
+       * @param {string} selector Selector to filter nodes against
+       * @return {Array<HTMLElement>} List of flattened child elements
+       */
+
+    }, {
+      key: 'queryDistributedElements',
+      value: function queryDistributedElements(selector) {
+        var c$ = this.getEffectiveChildNodes();
+        var list = [];
+        for (var i = 0, l = c$.length, c; i < l && (c = c$[i]); i++) {
+          if (c.nodeType === Node.ELEMENT_NODE && matchesSelector(c, selector)) {
+            list.push(c);
+          }
+        }
+        return list;
+      }
+
+      /**
+       * For shadow roots, returns the currently focused element within this
+       * shadow root.
+       *
+       * @return {Node|undefined} Currently focused element
+       */
+
+    }, {
+      key: 'activeElement',
+      get: function get() {
+        var node = this.node;
+        return node._activeElement !== undefined ? node._activeElement : node.activeElement;
+      }
+    }]);
+    return DomApi;
+  }();
 
   function forwardMethods(proto, methods) {
-    for (let i=0; i < methods.length; i++) {
-      let method = methods[i];
-      proto[method] = /** @this {DomApi} */ function() {
+    var _loop = function _loop(i) {
+      var method = methods[i];
+      proto[method] = /** @this {DomApi} */function () {
         return this.node[method].apply(this.node, arguments);
       };
+    };
+
+    for (var i = 0; i < methods.length; i++) {
+      _loop(i);
     }
   }
 
   function forwardReadOnlyProperties(proto, properties) {
-    for (let i=0; i < properties.length; i++) {
-      let name = properties[i];
+    var _loop2 = function _loop2(i) {
+      var name = properties[i];
       Object.defineProperty(proto, name, {
-        get: function() {
-          const domApi = /** @type {DomApi} */(this);
+        get: function get() {
+          var domApi = /** @type {DomApi} */this;
           return domApi.node[name];
         },
         configurable: true
       });
+    };
+
+    for (var i = 0; i < properties.length; i++) {
+      _loop2(i);
     }
   }
 
   function forwardProperties(proto, properties) {
-    for (let i=0; i < properties.length; i++) {
-      let name = properties[i];
+    var _loop3 = function _loop3(i) {
+      var name = properties[i];
       Object.defineProperty(proto, name, {
-        get: function() {
-          const domApi = /** @type {DomApi} */(this);
+        get: function get() {
+          var domApi = /** @type {DomApi} */this;
           return domApi.node[name];
         },
-        set: function(value) {
-          /** @type {DomApi} */ (this).node[name] = value;
+        set: function set(value) {
+          /** @type {DomApi} */this.node[name] = value;
         },
         configurable: true
       });
+    };
+
+    for (var i = 0; i < properties.length; i++) {
+      _loop3(i);
     }
   }
 
-  forwardMethods(DomApi.prototype, [
-    'cloneNode', 'appendChild', 'insertBefore', 'removeChild',
-    'replaceChild', 'setAttribute', 'removeAttribute',
-    'querySelector', 'querySelectorAll'
-  ]);
+  forwardMethods(DomApi.prototype, ['cloneNode', 'appendChild', 'insertBefore', 'removeChild', 'replaceChild', 'setAttribute', 'removeAttribute', 'querySelector', 'querySelectorAll']);
 
-  forwardReadOnlyProperties(DomApi.prototype, [
-    'parentNode', 'firstChild', 'lastChild',
-    'nextSibling', 'previousSibling', 'firstElementChild',
-    'lastElementChild', 'nextElementSibling', 'previousElementSibling',
-    'childNodes', 'children', 'classList'
-  ]);
+  forwardReadOnlyProperties(DomApi.prototype, ['parentNode', 'firstChild', 'lastChild', 'nextSibling', 'previousSibling', 'firstElementChild', 'lastElementChild', 'nextElementSibling', 'previousElementSibling', 'childNodes', 'children', 'classList']);
 
-  forwardProperties(DomApi.prototype, [
-    'textContent', 'innerHTML'
-  ]);
-
+  forwardProperties(DomApi.prototype, ['textContent', 'innerHTML']);
 
   /**
    * Event API wrapper class returned from `Polymer.dom.(target)` when
    * `target` is an `Event`.
    */
-  class EventApi {
-    constructor(event) {
+
+  var EventApi = function () {
+    function EventApi(event) {
+      babelHelpers.classCallCheck(this, EventApi);
+
       this.event = event;
     }
 
@@ -261,26 +296,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      *
      * @return {Node} The node this event was dispatched to
      */
-    get rootTarget() {
-      return this.event.composedPath()[0];
-    }
 
-    /**
-     * Returns the local (re-targeted) target for this event.
-     *
-     * @return {Node} The local (re-targeted) target for this event.
-     */
-    get localTarget() {
-      return this.event.target;
-    }
 
-    /**
-     * Returns the `composedPath` for this event.
-     */
-    get path() {
-      return this.event.composedPath();
-    }
-  }
+    babelHelpers.createClass(EventApi, [{
+      key: 'rootTarget',
+      get: function get() {
+        return this.event.composedPath()[0];
+      }
+
+      /**
+       * Returns the local (re-targeted) target for this event.
+       *
+       * @return {Node} The local (re-targeted) target for this event.
+       */
+
+    }, {
+      key: 'localTarget',
+      get: function get() {
+        return this.event.target;
+      }
+
+      /**
+       * Returns the `composedPath` for this event.
+       */
+
+    }, {
+      key: 'path',
+      get: function get() {
+        return this.event.composedPath();
+      }
+    }]);
+    return EventApi;
+  }();
 
   Polymer.DomApi = DomApi;
 
@@ -300,10 +347,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @param {!Node|Event} obj Node or event to operate on
    * @return {DomApi|EventApi} Wrapper providing either node API or event API
    */
-  Polymer.dom = function(obj) {
+  Polymer.dom = function (obj) {
     obj = obj || document;
     if (!obj.__domApi) {
-      let helper;
+      var helper = void 0;
       if (obj instanceof Event) {
         helper = new EventApi(obj);
       } else {
@@ -336,5 +383,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @param {Polymer.Debouncer} debouncer Debouncer to enqueue
    */
   Polymer.dom.addDebouncer = Polymer.enqueueDebouncer;
-})();
-</script>
+})();</script>

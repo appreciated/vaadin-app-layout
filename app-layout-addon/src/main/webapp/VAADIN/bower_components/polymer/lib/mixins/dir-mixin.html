@@ -6,106 +6,110 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<link rel="import" href="property-accessors.html">
+--><link rel="import" href="property-accessors.html">
 
 <script>
-  (function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    const HOST_DIR = /:host\(:dir\((ltr|rtl)\)\)/g;
-    const HOST_DIR_REPLACMENT = ':host([dir="$1"])';
+  var HOST_DIR = /:host\(:dir\((ltr|rtl)\)\)/g;
+  var HOST_DIR_REPLACMENT = ':host([dir="$1"])';
 
-    const EL_DIR = /([\s\w#\.\[\]\*]*):dir\((ltr|rtl)\)/g;
-    const EL_DIR_REPLACMENT = ':host([dir="$2"]) $1';
+  var EL_DIR = /([\s\w#\.\[\]\*]*):dir\((ltr|rtl)\)/g;
+  var EL_DIR_REPLACMENT = ':host([dir="$2"]) $1';
 
-    /**
-     * @type {!Array<!Polymer_DirMixin>}
-     */
-    const DIR_INSTANCES = [];
+  /**
+   * @type {!Array<!Polymer_DirMixin>}
+   */
+  var DIR_INSTANCES = [];
 
-    /** @type {MutationObserver} */
-    let observer = null;
+  /** @type {MutationObserver} */
+  var observer = null;
 
-    let DOCUMENT_DIR = '';
+  var DOCUMENT_DIR = '';
 
-    function getRTL() {
-      DOCUMENT_DIR = document.documentElement.getAttribute('dir');
+  function getRTL() {
+    DOCUMENT_DIR = document.documentElement.getAttribute('dir');
+  }
+
+  /**
+   * @param {!Polymer_DirMixin} instance Instance to set RTL status on
+   */
+  function setRTL(instance) {
+    if (!instance.__autoDirOptOut) {
+      var el = /** @type {!HTMLElement} */instance;
+      el.setAttribute('dir', DOCUMENT_DIR);
     }
+  }
 
-    /**
-     * @param {!Polymer_DirMixin} instance Instance to set RTL status on
-     */
-    function setRTL(instance) {
-      if (!instance.__autoDirOptOut) {
-        const el = /** @type {!HTMLElement} */(instance);
-        el.setAttribute('dir', DOCUMENT_DIR);
-      }
+  function updateDirection() {
+    getRTL();
+    DOCUMENT_DIR = document.documentElement.getAttribute('dir');
+    for (var i = 0; i < DIR_INSTANCES.length; i++) {
+      setRTL(DIR_INSTANCES[i]);
     }
+  }
 
-    function updateDirection() {
+  function takeRecords() {
+    if (observer && observer.takeRecords().length) {
+      updateDirection();
+    }
+  }
+
+  /**
+   * Element class mixin that allows elements to use the `:dir` CSS Selector to have
+   * text direction specific styling.
+   *
+   * With this mixin, any stylesheet provided in the template will transform `:dir` into
+   * `:host([dir])` and sync direction with the page via the element's `dir` attribute.
+   *
+   * Elements can opt out of the global page text direction by setting the `dir` attribute
+   * directly in `ready()` or in HTML.
+   *
+   * Caveats:
+   * - Applications must set `<html dir="ltr">` or `<html dir="rtl">` to sync direction
+   * - Automatic left-to-right or right-to-left styling is sync'd with the `<html>` element only.
+   * - Changing `dir` at runtime is supported.
+   * - Opting out of the global direction styling is permanent
+   *
+   * @mixinFunction
+   * @polymer
+   * @appliesMixin Polymer.PropertyAccessors
+   * @memberof Polymer
+   */
+  Polymer.DirMixin = Polymer.dedupingMixin(function (base) {
+
+    if (!observer) {
       getRTL();
-      DOCUMENT_DIR = document.documentElement.getAttribute('dir');
-      for (let i = 0; i < DIR_INSTANCES.length; i++) {
-        setRTL(DIR_INSTANCES[i]);
-      }
-    }
-
-    function takeRecords() {
-      if (observer && observer.takeRecords().length) {
-        updateDirection();
-      }
+      observer = new MutationObserver(updateDirection);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
     }
 
     /**
-     * Element class mixin that allows elements to use the `:dir` CSS Selector to have
-     * text direction specific styling.
-     *
-     * With this mixin, any stylesheet provided in the template will transform `:dir` into
-     * `:host([dir])` and sync direction with the page via the element's `dir` attribute.
-     *
-     * Elements can opt out of the global page text direction by setting the `dir` attribute
-     * directly in `ready()` or in HTML.
-     *
-     * Caveats:
-     * - Applications must set `<html dir="ltr">` or `<html dir="rtl">` to sync direction
-     * - Automatic left-to-right or right-to-left styling is sync'd with the `<html>` element only.
-     * - Changing `dir` at runtime is supported.
-     * - Opting out of the global direction styling is permanent
-     *
-     * @mixinFunction
-     * @polymer
-     * @appliesMixin Polymer.PropertyAccessors
-     * @memberof Polymer
+     * @constructor
+     * @extends {base}
+     * @implements {Polymer_PropertyAccessors}
      */
-    Polymer.DirMixin = Polymer.dedupingMixin((base) => {
+    var elementBase = Polymer.PropertyAccessors(base);
 
-      if (!observer) {
-        getRTL();
-        observer = new MutationObserver(updateDirection);
-        observer.observe(document.documentElement, {attributes: true, attributeFilter: ['dir']});
-      }
+    /**
+     * @polymer
+     * @mixinClass
+     * @implements {Polymer_DirMixin}
+     */
 
-      /**
-       * @constructor
-       * @extends {base}
-       * @implements {Polymer_PropertyAccessors}
-       */
-      const elementBase = Polymer.PropertyAccessors(base);
+    var Dir = function (_elementBase) {
+      babelHelpers.inherits(Dir, _elementBase);
+      babelHelpers.createClass(Dir, null, [{
+        key: '_processStyleText',
 
-      /**
-       * @polymer
-       * @mixinClass
-       * @implements {Polymer_DirMixin}
-       */
-      class Dir extends elementBase {
 
         /**
          * @override
          * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
          */
-        static _processStyleText(is, template, baseURI) {
-          let cssText = super._processStyleText(is, template, baseURI);
+        value: function _processStyleText(is, template, baseURI) {
+          var cssText = babelHelpers.get(Dir.__proto__ || Object.getPrototypeOf(Dir), '_processStyleText', this).call(this, is, template, baseURI);
           cssText = this._replaceDirInCssText(cssText);
           return cssText;
         }
@@ -116,8 +120,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          * @param {string} text CSS text to replace DIR
          * @return {string} Modified CSS
          */
-        static _replaceDirInCssText(text) {
-          let replacedText = text;
+
+      }, {
+        key: '_replaceDirInCssText',
+        value: function _replaceDirInCssText(text) {
+          var replacedText = text;
           replacedText = replacedText.replace(HOST_DIR, HOST_DIR_REPLACMENT);
           replacedText = replacedText.replace(EL_DIR, EL_DIR_REPLACMENT);
           if (text !== replacedText) {
@@ -125,25 +132,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
           return replacedText;
         }
+      }]);
 
-        constructor() {
-          super();
-          /** @type {boolean} */
-          this.__autoDirOptOut = false;
-        }
+      function Dir() {
+        babelHelpers.classCallCheck(this, Dir);
 
-        /**
-         * @suppress {invalidCasts} Closure doesn't understand that `this` is an HTMLElement
-         */
-        ready() {
-          super.ready();
-          this.__autoDirOptOut = /** @type {!HTMLElement} */(this).hasAttribute('dir');
+        /** @type {boolean} */
+        var _this = babelHelpers.possibleConstructorReturn(this, (Dir.__proto__ || Object.getPrototypeOf(Dir)).call(this));
+
+        _this.__autoDirOptOut = false;
+        return _this;
+      }
+
+      /**
+       * @suppress {invalidCasts} Closure doesn't understand that `this` is an HTMLElement
+       */
+
+
+      babelHelpers.createClass(Dir, [{
+        key: 'ready',
+        value: function ready() {
+          babelHelpers.get(Dir.prototype.__proto__ || Object.getPrototypeOf(Dir.prototype), 'ready', this).call(this);
+          this.__autoDirOptOut = /** @type {!HTMLElement} */this.hasAttribute('dir');
         }
 
         /** @suppress {missingProperties} If it exists on elementBase, it can be super'd */
-        connectedCallback() {
+
+      }, {
+        key: 'connectedCallback',
+        value: function connectedCallback() {
           if (elementBase.prototype.connectedCallback) {
-            super.connectedCallback();
+            babelHelpers.get(Dir.prototype.__proto__ || Object.getPrototypeOf(Dir.prototype), 'connectedCallback', this).call(this);
           }
           if (this.constructor.__activateDir) {
             takeRecords();
@@ -153,22 +172,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         /** @suppress {missingProperties} If it exists on elementBase, it can be super'd */
-        disconnectedCallback() {
+
+      }, {
+        key: 'disconnectedCallback',
+        value: function disconnectedCallback() {
           if (elementBase.prototype.disconnectedCallback) {
-            super.disconnectedCallback();
+            babelHelpers.get(Dir.prototype.__proto__ || Object.getPrototypeOf(Dir.prototype), 'disconnectedCallback', this).call(this);
           }
           if (this.constructor.__activateDir) {
-            const idx = DIR_INSTANCES.indexOf(this);
+            var idx = DIR_INSTANCES.indexOf(this);
             if (idx > -1) {
               DIR_INSTANCES.splice(idx, 1);
             }
           }
         }
-      }
-
-      Dir.__activateDir = false;
-
+      }]);
       return Dir;
-    });
-  })();
-</script>
+    }(elementBase);
+
+    Dir.__activateDir = false;
+
+    return Dir;
+  });
+})();</script>

@@ -9,6 +9,7 @@ import java.io.IOException;
  * Created by Johannes on 01.05.2017.
  */
 @JavaScript("vaadin://addons/app-layout/babel-helpers.js")
+@JavaScript("vaadin://bower_components/webcomponentsjs/custom-elements-es5-adapter.js")
 @JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents-lite.js")
 
 @HtmlImport("vaadin://bower_components/iron-icons/iron-icons.html")

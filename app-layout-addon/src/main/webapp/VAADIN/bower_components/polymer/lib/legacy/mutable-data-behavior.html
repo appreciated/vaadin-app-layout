@@ -6,17 +6,15 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../mixins/mutable-data.html">
+--><link rel="import" href="../mixins/mutable-data.html">
 
 <script>
-(function() {
+(function () {
   'use strict';
 
-  let mutablePropertyChange;
+  var mutablePropertyChange = void 0;
   /** @suppress {missingProperties} */
-  (() => {
+  (function () {
     mutablePropertyChange = Polymer.MutableData._mutablePropertyChange;
   })();
 
@@ -74,7 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @return {boolean} Whether the property should be considered a change
      * @protected
      */
-    _shouldPropertyChange(property, value, old) {
+    _shouldPropertyChange: function _shouldPropertyChange(property, value, old) {
       return mutablePropertyChange(this, property, value, old, true);
     }
   };
@@ -145,11 +143,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @this {this}
      * @protected
      */
-    _shouldPropertyChange(property, value, old) {
+    _shouldPropertyChange: function _shouldPropertyChange(property, value, old) {
       return mutablePropertyChange(this, property, value, old, this.mutableData);
     }
   };
-
-})();
-
-</script>
+})();</script>

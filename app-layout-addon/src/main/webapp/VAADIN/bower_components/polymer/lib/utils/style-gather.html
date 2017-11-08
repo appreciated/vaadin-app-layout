@@ -6,17 +6,16 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<link rel="import" href="resolve-url.html">
+--><link rel="import" href="resolve-url.html">
 <script>
-(function() {
+(function () {
   'use strict';
 
-  const MODULE_STYLE_LINK_SELECTOR = 'link[rel=import][type~=css]';
-  const INCLUDE_ATTR = 'include';
+  var MODULE_STYLE_LINK_SELECTOR = 'link[rel=import][type~=css]';
+  var INCLUDE_ATTR = 'include';
 
   function importModule(moduleId) {
-    const /** Polymer.DomModule */ PolymerDomModule = customElements.get('dom-module');
+    var /** Polymer.DomModule */PolymerDomModule = customElements.get('dom-module');
     if (!PolymerDomModule) {
       return null;
     }
@@ -24,7 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   /** @typedef {{assetpath: string}} */
-  let templateWithAssetPath; // eslint-disable-line no-unused-vars
+  var templateWithAssetPath = void 0; // eslint-disable-line no-unused-vars
 
   /**
    * Module with utilities for collection CSS text from `<templates>`, external
@@ -34,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @memberof Polymer
    * @summary Module with utilities for collection CSS text from various sources.
    */
-  const StyleGather = {
+  var StyleGather = {
 
     /**
      * Returns CSS text of styles in a space-separated list of `dom-module`s.
@@ -45,14 +44,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @return {string} Concatenated CSS content from specified `dom-module`s
      * @this {StyleGather}
      */
-    cssFromModules(moduleIds) {
-      let modules = moduleIds.trim().split(/\s+/);
-      let cssText = '';
-      for (let i=0; i < modules.length; i++) {
+    cssFromModules: function cssFromModules(moduleIds) {
+      var modules = moduleIds.trim().split(/\s+/);
+      var cssText = '';
+      for (var i = 0; i < modules.length; i++) {
         cssText += this.cssFromModule(modules[i]);
       }
       return cssText;
     },
+
 
     /**
      * Returns CSS text of styles in a given `dom-module`.  CSS in a `dom-module`
@@ -67,15 +67,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @return {string} Concatenated CSS content from specified `dom-module`
      * @this {StyleGather}
      */
-    cssFromModule(moduleId) {
-      let m = importModule(moduleId);
+    cssFromModule: function cssFromModule(moduleId) {
+      var m = importModule(moduleId);
       if (m && m._cssText === undefined) {
         // module imports: <link rel="import" type="css">
-        let cssText = this._cssFromModuleImports(m);
+        var cssText = this._cssFromModuleImports(m);
         // include css from the first template in the module
-        let t = m.querySelector('template');
+        var t = m.querySelector('template');
         if (t) {
-          cssText += this.cssFromTemplate(t, /** @type {templateWithAssetPath} */(m).assetpath);
+          cssText += this.cssFromTemplate(t, /** @type {templateWithAssetPath} */m.assetpath);
         }
         m._cssText = cssText || null;
       }
@@ -84,6 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       return m && m._cssText || '';
     },
+
 
     /**
      * Returns CSS text of `<styles>` within a given template.
@@ -96,24 +97,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @return {string} Concatenated CSS content from specified template
      * @this {StyleGather}
      */
-    cssFromTemplate(template, baseURI) {
-      let cssText = '';
+    cssFromTemplate: function cssFromTemplate(template, baseURI) {
+      var cssText = '';
       // if element is a template, get content from its .content
-      let e$ = template.content.querySelectorAll('style');
-      for (let i=0; i < e$.length; i++) {
-        let e = e$[i];
+      var e$ = template.content.querySelectorAll('style');
+      for (var i = 0; i < e$.length; i++) {
+        var e = e$[i];
         // support style sharing by allowing styles to "include"
         // other dom-modules that contain styling
-        let include = e.getAttribute(INCLUDE_ATTR);
+        var include = e.getAttribute(INCLUDE_ATTR);
         if (include) {
           cssText += this.cssFromModules(include);
         }
         e.parentNode.removeChild(e);
-        cssText += baseURI ?
-          Polymer.ResolveUrl.resolveCss(e.textContent, baseURI) : e.textContent;
+        cssText += baseURI ? Polymer.ResolveUrl.resolveCss(e.textContent, baseURI) : e.textContent;
       }
       return cssText;
     },
+
 
     /**
      * Returns CSS text from stylesheets loaded via `<link rel="import" type="css">`
@@ -124,30 +125,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @return {string} Concatenated CSS content from links in specified `dom-module`
      * @this {StyleGather}
      */
-    cssFromModuleImports(moduleId) {
-      let m = importModule(moduleId);
+    cssFromModuleImports: function cssFromModuleImports(moduleId) {
+      var m = importModule(moduleId);
       return m ? this._cssFromModuleImports(m) : '';
     },
+
     /**
      * @memberof Polymer.StyleGather
      * @this {StyleGather}
      * @param {!HTMLElement} module dom-module element that could contain `<link rel="import" type="css">` styles
      * @return {string} Concatenated CSS content from links in the dom-module
      */
-    _cssFromModuleImports(module) {
-      let cssText = '';
-      let p$ = module.querySelectorAll(MODULE_STYLE_LINK_SELECTOR);
-      for (let i=0; i < p$.length; i++) {
-        let p = p$[i];
+    _cssFromModuleImports: function _cssFromModuleImports(module) {
+      var cssText = '';
+      var p$ = module.querySelectorAll(MODULE_STYLE_LINK_SELECTOR);
+      for (var i = 0; i < p$.length; i++) {
+        var p = p$[i];
         if (p.import) {
-          let importDoc = p.import;
+          var importDoc = p.import;
           // NOTE: polyfill affordance.
           // under the HTMLImports polyfill, there will be no 'body',
           // but the import pseudo-doc can be used directly.
-          let container = importDoc.body ? importDoc.body : importDoc;
-          cssText +=
-            Polymer.ResolveUrl.resolveCss(container.textContent,
-              importDoc.baseURI);
+          var container = importDoc.body ? importDoc.body : importDoc;
+          cssText += Polymer.ResolveUrl.resolveCss(container.textContent, importDoc.baseURI);
         }
       }
       return cssText;
@@ -155,5 +155,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 
   Polymer.StyleGather = StyleGather;
-})();
-</script>
+})();</script>

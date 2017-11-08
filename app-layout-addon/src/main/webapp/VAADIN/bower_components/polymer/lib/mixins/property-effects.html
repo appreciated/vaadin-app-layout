@@ -6,10 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-
-<link rel="import" href="../utils/boot.html">
+--><link rel="import" href="../utils/boot.html">
 <link rel="import" href="../utils/mixin.html">
 <link rel="import" href="../utils/path.html">
 <!-- for notify, reflect -->
@@ -20,22 +17,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 <script>
-(function() {
+(function () {
 
   'use strict';
 
   /** @const {Object} */
-  const CaseMap = Polymer.CaseMap;
+
+  var CaseMap = Polymer.CaseMap;
 
   // Monotonically increasing unique ID used for de-duping effects triggered
   // from multiple properties in the same turn
-  let dedupeId = 0;
+  var dedupeId = 0;
 
   /**
    * Property effect types; effects are stored on the prototype using these keys
    * @enum {string}
    */
-  const TYPES = {
+  var TYPES = {
     COMPUTE: '__computeEffects',
     REFLECT: '__reflectEffects',
     NOTIFY: '__notifyEffects',
@@ -51,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * wildcard: (boolean | undefined)
    * }}
    */
-  let DataTrigger; //eslint-disable-line no-unused-vars
+  var DataTrigger = void 0; //eslint-disable-line no-unused-vars
 
   /**
    * @typedef {{
@@ -60,9 +58,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * fn: (!Function | undefined)
    * }}
    */
-  let DataEffect; //eslint-disable-line no-unused-vars
+  var DataEffect = void 0; //eslint-disable-line no-unused-vars
 
-  let PropertyEffectsType; //eslint-disable-line no-unused-vars
+  var PropertyEffectsType = void 0; //eslint-disable-line no-unused-vars
 
   /**
    * Ensures that the model has an own-property map of effects for the given type.
@@ -87,15 +85,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function ensureOwnEffectMap(model, type) {
-    let effects = model[type];
+    var effects = model[type];
     if (!effects) {
       effects = model[type] = {};
     } else if (!model.hasOwnProperty(type)) {
       effects = model[type] = Object.create(model[type]);
-      for (let p in effects) {
-        let protoFx = effects[p];
-        let instFx = effects[p] = Array(protoFx.length);
-        for (let i=0; i<protoFx.length; i++) {
+      for (var p in effects) {
+        var protoFx = effects[p];
+        var instFx = effects[p] = Array(protoFx.length);
+        for (var i = 0; i < protoFx.length; i++) {
           instFx[i] = protoFx[i];
         }
       }
@@ -120,9 +118,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function runEffects(inst, effects, props, oldProps, hasPaths, extraArgs) {
     if (effects) {
-      let ran = false;
-      let id = dedupeId++;
-      for (let prop in props) {
+      var ran = false;
+      var id = dedupeId++;
+      for (var prop in props) {
         if (runEffectsForProperty(inst, effects, id, prop, props, oldProps, hasPaths, extraArgs)) {
           ran = true;
         }
@@ -147,13 +145,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runEffectsForProperty(inst, effects, dedupeId, prop, props, oldProps, hasPaths, extraArgs) {
-    let ran = false;
-    let rootProperty = hasPaths ? Polymer.Path.root(prop) : prop;
-    let fxs = effects[rootProperty];
+    var ran = false;
+    var rootProperty = hasPaths ? Polymer.Path.root(prop) : prop;
+    var fxs = effects[rootProperty];
     if (fxs) {
-      for (let i=0, l=fxs.length, fx; (i<l) && (fx=fxs[i]); i++) {
-        if ((!fx.info || fx.info.lastRun !== dedupeId) &&
-            (!hasPaths || pathMatchesTrigger(prop, fx.trigger))) {
+      for (var i = 0, l = fxs.length, fx; i < l && (fx = fxs[i]); i++) {
+        if ((!fx.info || fx.info.lastRun !== dedupeId) && (!hasPaths || pathMatchesTrigger(prop, fx.trigger))) {
           if (fx.info) {
             fx.info.lastRun = dedupeId;
           }
@@ -185,10 +182,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function pathMatchesTrigger(path, trigger) {
     if (trigger) {
-      let triggerPath = trigger.name;
-      return (triggerPath == path) ||
-        (trigger.structured && Polymer.Path.isAncestor(triggerPath, path)) ||
-        (trigger.wildcard && Polymer.Path.isDescendant(triggerPath, path));
+      var triggerPath = trigger.name;
+      return triggerPath == path || trigger.structured && Polymer.Path.isAncestor(triggerPath, path) || trigger.wildcard && Polymer.Path.isDescendant(triggerPath, path);
     } else {
       return true;
     }
@@ -208,8 +203,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runObserverEffect(inst, property, props, oldProps, info) {
-    let fn = inst[info.methodName];
-    let changedProp = info.property;
+    var fn = inst[info.methodName];
+    var changedProp = info.property;
     if (fn) {
       fn.call(inst, inst.__data[changedProp], oldProps[changedProp]);
     } else if (!info.dynamicFn) {
@@ -236,11 +231,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function runNotifyEffects(inst, notifyProps, props, oldProps, hasPaths) {
     // Notify
-    let fxs = inst[TYPES.NOTIFY];
-    let notified;
-    let id = dedupeId++;
+    var fxs = inst[TYPES.NOTIFY];
+    var notified = void 0;
+    var id = dedupeId++;
     // Try normal notify effects; if none, fall back to try path notification
-    for (let prop in notifyProps) {
+    for (var prop in notifyProps) {
       if (notifyProps[prop]) {
         if (fxs && runEffectsForProperty(inst, fxs, id, prop, props, oldProps, hasPaths)) {
           notified = true;
@@ -252,7 +247,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // Flush host if we actually notified and host was batching
     // And the host has already initialized clients; this prevents
     // an issue with a host observing data changes before clients are ready.
-    let host;
+    var host = void 0;
     if (notified && (host = inst.__dataHost) && host._invalidateProperties) {
       host._invalidateProperties();
     }
@@ -269,9 +264,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function notifyPath(inst, path, props) {
-    let rootProperty = Polymer.Path.root(path);
+    var rootProperty = Polymer.Path.root(path);
     if (rootProperty !== path) {
-      let eventName = Polymer.CaseMap.camelToDashCase(rootProperty) + '-changed';
+      var eventName = Polymer.CaseMap.camelToDashCase(rootProperty) + '-changed';
       dispatchNotifyEvent(inst, eventName, props[path], path);
       return true;
     }
@@ -291,14 +286,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @suppress {invalidCasts}
    */
   function dispatchNotifyEvent(inst, eventName, value, path) {
-    let detail = {
+    var detail = {
       value: value,
       queueProperty: true
     };
     if (path) {
       detail.path = path;
     }
-    /** @type {!HTMLElement} */(inst).dispatchEvent(new CustomEvent(eventName, { detail }));
+    /** @type {!HTMLElement} */inst.dispatchEvent(new CustomEvent(eventName, { detail: detail }));
   }
 
   /**
@@ -316,11 +311,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runNotifyEffect(inst, property, props, oldProps, info, hasPaths) {
-    let rootProperty = hasPaths ? Polymer.Path.root(property) : property;
-    let path = rootProperty != property ? property : null;
-    let value = path ? Polymer.Path.get(inst, path) : inst.__data[property];
+    var rootProperty = hasPaths ? Polymer.Path.root(property) : property;
+    var path = rootProperty != property ? property : null;
+    var value = path ? Polymer.Path.get(inst, path) : inst.__data[property];
     if (path && value === undefined) {
-      value = props[property];  // specifically for .splices
+      value = props[property]; // specifically for .splices
     }
     dispatchNotifyEvent(inst, info.eventName, value, path);
   }
@@ -342,9 +337,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function handleNotification(event, inst, fromProp, toPath, negate) {
-    let value;
-    let detail = /** @type {Object} */(event.detail);
-    let fromPath = detail && detail.path;
+    var value = void 0;
+    var detail = /** @type {Object} */event.detail;
+    var fromPath = detail && detail.path;
     if (fromPath) {
       toPath = Polymer.Path.translate(fromProp, toPath, fromPath);
       value = detail && detail.value;
@@ -353,8 +348,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     value = negate ? !value : value;
     if (!inst[TYPES.READ_ONLY] || !inst[TYPES.READ_ONLY][toPath]) {
-      if (inst._setPendingPropertyOrPath(toPath, value, true, Boolean(fromPath))
-        && (!detail || !detail.queueProperty)) {
+      if (inst._setPendingPropertyOrPath(toPath, value, true, Boolean(fromPath)) && (!detail || !detail.queueProperty)) {
         inst._invalidateProperties();
       }
     }
@@ -373,9 +367,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runReflectEffect(inst, property, props, oldProps, info) {
-    let value = inst.__data[property];
+    var value = inst.__data[property];
     if (Polymer.sanitizeDOMValue) {
-      value = Polymer.sanitizeDOMValue(value, info.attrName, 'attribute', /** @type {Node} */(inst));
+      value = Polymer.sanitizeDOMValue(value, info.attrName, 'attribute', /** @type {Node} */inst);
     }
     inst._propertyToAttribute(property, info.attrName, value);
   }
@@ -397,9 +391,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runComputedEffects(inst, changedProps, oldProps, hasPaths) {
-    let computeEffects = inst[TYPES.COMPUTE];
+    var computeEffects = inst[TYPES.COMPUTE];
     if (computeEffects) {
-      let inputProps = changedProps;
+      var inputProps = changedProps;
       while (runEffects(inst, computeEffects, inputProps, oldProps, hasPaths)) {
         Object.assign(oldProps, inst.__dataOld);
         Object.assign(changedProps, inst.__dataPending);
@@ -422,8 +416,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runComputedEffect(inst, property, props, oldProps, info) {
-    let result = runMethodEffect(inst, property, props, oldProps, info);
-    let computedProp = info.methodInfo;
+    var result = runMethodEffect(inst, property, props, oldProps, info);
+    var computedProp = info.methodInfo;
     if (inst.__dataHasAccessor && inst.__dataHasAccessor[computedProp]) {
       inst._setPendingProperty(computedProp, result, true);
     } else {
@@ -441,11 +435,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function computeLinkedPaths(inst, path, value) {
-    let links = inst.__dataLinkedPaths;
+    var links = inst.__dataLinkedPaths;
     if (links) {
-      let link;
-      for (let a in links) {
-        let b = links[a];
+      var link = void 0;
+      for (var a in links) {
+        var b = links[a];
         if (Polymer.Path.isDescendant(a, path)) {
           link = Polymer.Path.translate(a, b, path);
           inst._setPendingPropertyOrPath(link, value, true, true);
@@ -478,18 +472,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function addBinding(constructor, templateInfo, nodeInfo, kind, target, parts, literal) {
     // Create binding metadata and add to nodeInfo
     nodeInfo.bindings = nodeInfo.bindings || [];
-    let /** Binding */ binding = { kind, target, parts, literal, isCompound: (parts.length !== 1) };
+    var /** Binding */binding = { kind: kind, target: target, parts: parts, literal: literal, isCompound: parts.length !== 1 };
     nodeInfo.bindings.push(binding);
     // Add listener info to binding metadata
     if (shouldAddListener(binding)) {
-      let {event, negate} = binding.parts[0];
-      binding.listenerEvent = event || (CaseMap.camelToDashCase(target) + '-changed');
+      var _binding$parts$ = binding.parts[0],
+          event = _binding$parts$.event,
+          negate = _binding$parts$.negate;
+
+      binding.listenerEvent = event || CaseMap.camelToDashCase(target) + '-changed';
       binding.listenerNegate = negate;
     }
     // Add "propagate" property effects to templateInfo
-    let index = templateInfo.nodeInfoList.length;
-    for (let i=0; i<binding.parts.length; i++) {
-      let part = binding.parts[i];
+    var index = templateInfo.nodeInfoList.length;
+    for (var i = 0; i < binding.parts.length; i++) {
+      var part = binding.parts[i];
       part.compoundIndex = i;
       addEffectForBindingPart(constructor, templateInfo, binding, part, index);
     }
@@ -509,20 +506,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function addEffectForBindingPart(constructor, templateInfo, binding, part, index) {
     if (!part.literal) {
       if (binding.kind === 'attribute' && binding.target[0] === '-') {
-        console.warn('Cannot set attribute ' + binding.target +
-          ' because "-" is not a valid attribute starting character');
+        console.warn('Cannot set attribute ' + binding.target + ' because "-" is not a valid attribute starting character');
       } else {
-        let dependencies = part.dependencies;
-        let info = { index, binding, part, evaluator: constructor };
-        for (let j=0; j<dependencies.length; j++) {
-          let trigger = dependencies[j];
+        var dependencies = part.dependencies;
+        var info = { index: index, binding: binding, part: part, evaluator: constructor };
+        for (var j = 0; j < dependencies.length; j++) {
+          var trigger = dependencies[j];
           if (typeof trigger == 'string') {
             trigger = parseArg(trigger);
             trigger.wildcard = true;
           }
           constructor._addTemplatePropertyEffect(templateInfo, trigger.rootProperty, {
             fn: runBindingEffect,
-            info, trigger
+            info: info, trigger: trigger
           });
         }
       }
@@ -549,23 +545,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function runBindingEffect(inst, path, props, oldProps, info, hasPaths, nodeList) {
-    let node = nodeList[info.index];
-    let binding = info.binding;
-    let part = info.part;
+    var node = nodeList[info.index];
+    var binding = info.binding;
+    var part = info.part;
     // Subpath notification: transform path and set to client
     // e.g.: foo="{{obj.sub}}", path: 'obj.sub.prop', set 'foo.prop'=obj.sub.prop
-    if (hasPaths && part.source && (path.length > part.source.length) &&
-        (binding.kind == 'property') && !binding.isCompound &&
-        node.__dataHasAccessor && node.__dataHasAccessor[binding.target]) {
-      let value = props[path];
+    if (hasPaths && part.source && path.length > part.source.length && binding.kind == 'property' && !binding.isCompound && node.__dataHasAccessor && node.__dataHasAccessor[binding.target]) {
+      var value = props[path];
       path = Polymer.Path.translate(part.source, binding.target, path);
       if (node._setPendingPropertyOrPath(path, value, false, true)) {
         inst._enqueueClient(node);
       }
     } else {
-      let value = info.evaluator._evaluateBinding(inst, part, path, props, oldProps, hasPaths);
+      var _value = info.evaluator._evaluateBinding(inst, part, path, props, oldProps, hasPaths);
       // Propagate value to child
-      applyBindingValue(inst, node, binding, part, value);
+      applyBindingValue(inst, node, binding, part, _value);
     }
   }
 
@@ -587,17 +581,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     if (binding.kind == 'attribute') {
       // Attribute binding
-      inst._valueToNodeAttribute(/** @type {Element} */(node), value, binding.target);
+      inst._valueToNodeAttribute( /** @type {Element} */node, value, binding.target);
     } else {
       // Property binding
-      let prop = binding.target;
+      var prop = binding.target;
       if (node.__dataHasAccessor && node.__dataHasAccessor[prop]) {
         if (!node[TYPES.READ_ONLY] || !node[TYPES.READ_ONLY][prop]) {
           if (node._setPendingProperty(prop, value)) {
             inst._enqueueClient(node);
           }
         }
-      } else  {
+      } else {
         inst._setUnmanagedPropertyToNode(node, prop, value);
       }
     }
@@ -616,15 +610,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function computeBindingValue(node, value, binding, part) {
     if (binding.isCompound) {
-      let storage = node.__dataCompoundStorage[binding.target];
+      var storage = node.__dataCompoundStorage[binding.target];
       storage[part.compoundIndex] = value;
       value = storage.join('');
     }
     if (binding.kind !== 'attribute') {
       // Some browsers serialize `undefined` to `"undefined"`
-      if (binding.target === 'textContent' ||
-          (binding.target === 'value' &&
-            (node.localName === 'input' || node.localName === 'textarea'))) {
+      if (binding.target === 'textContent' || binding.target === 'value' && (node.localName === 'input' || node.localName === 'textarea')) {
         value = value == undefined ? '' : value;
       }
     }
@@ -645,11 +637,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function shouldAddListener(binding) {
-    return Boolean(binding.target) &&
-           binding.kind != 'attribute' &&
-           binding.kind != 'text' &&
-           !binding.isCompound &&
-           binding.parts[0].mode === '{';
+    return Boolean(binding.target) && binding.kind != 'attribute' && binding.kind != 'text' && !binding.isCompound && binding.parts[0].mode === '{';
   }
 
   /**
@@ -662,15 +650,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function setupBindings(inst, templateInfo) {
     // Setup compound storage, dataHost, and notify listeners
-    let {nodeList, nodeInfoList} = templateInfo;
+    var nodeList = templateInfo.nodeList,
+        nodeInfoList = templateInfo.nodeInfoList;
+
     if (nodeInfoList.length) {
-      for (let i=0; i < nodeInfoList.length; i++) {
-        let info = nodeInfoList[i];
-        let node = nodeList[i];
-        let bindings = info.bindings;
+      for (var i = 0; i < nodeInfoList.length; i++) {
+        var info = nodeInfoList[i];
+        var node = nodeList[i];
+        var bindings = info.bindings;
         if (bindings) {
-          for (let i=0; i<bindings.length; i++) {
-            let binding = bindings[i];
+          for (var _i = 0; _i < bindings.length; _i++) {
+            var binding = bindings[_i];
             setupCompoundStorage(node, binding);
             addNotifyListener(node, inst, binding);
           }
@@ -696,15 +686,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function setupCompoundStorage(node, binding) {
     if (binding.isCompound) {
       // Create compound storage map
-      let storage = node.__dataCompoundStorage ||
-        (node.__dataCompoundStorage = {});
-      let parts = binding.parts;
+      var storage = node.__dataCompoundStorage || (node.__dataCompoundStorage = {});
+      var parts = binding.parts;
       // Copy literals from parts into storage for this binding
-      let literals = new Array(parts.length);
-      for (let j=0; j<parts.length; j++) {
+      var literals = new Array(parts.length);
+      for (var j = 0; j < parts.length; j++) {
         literals[j] = parts[j].literal;
       }
-      let target = binding.target;
+      var target = binding.target;
       storage[target] = literals;
       // Configure properties with their literal parts
       if (binding.literal && binding.kind == 'property') {
@@ -723,8 +712,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function addNotifyListener(node, inst, binding) {
     if (binding.listenerEvent) {
-      let part = binding.parts[0];
-      node.addEventListener(binding.listenerEvent, function(e) {
+      var part = binding.parts[0];
+      node.addEventListener(binding.listenerEvent, function (e) {
         handleNotification(e, inst, binding.target, part.source, part.negate);
       });
     }
@@ -749,15 +738,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function createMethodEffect(model, sig, type, effectFn, methodInfo, dynamicFn) {
-    dynamicFn = sig.static || (dynamicFn &&
-      (typeof dynamicFn !== 'object' || dynamicFn[sig.methodName]));
-    let info = {
+    dynamicFn = sig.static || dynamicFn && ((typeof dynamicFn === 'undefined' ? 'undefined' : babelHelpers.typeof(dynamicFn)) !== 'object' || dynamicFn[sig.methodName]);
+    var info = {
       methodName: sig.methodName,
       args: sig.args,
-      methodInfo,
-      dynamicFn
+      methodInfo: methodInfo,
+      dynamicFn: dynamicFn
     };
-    for (let i=0, arg; (i<sig.args.length) && (arg=sig.args[i]); i++) {
+    for (var i = 0, arg; i < sig.args.length && (arg = sig.args[i]); i++) {
       if (!arg.literal) {
         model._addPropertyEffect(arg.rootProperty, type, {
           fn: effectFn, info: info, trigger: arg
@@ -790,35 +778,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   function runMethodEffect(inst, property, props, oldProps, info) {
     // Instances can optionally have a _methodHost which allows redirecting where
     // to find methods. Currently used by `templatize`.
-    let context = inst._methodHost || inst;
-    let fn = context[info.methodName];
+    var context = inst._methodHost || inst;
+    var fn = context[info.methodName];
     if (fn) {
-      let args = marshalArgs(inst.__data, info.args, property, props);
+      var args = marshalArgs(inst.__data, info.args, property, props);
       return fn.apply(context, args);
     } else if (!info.dynamicFn) {
       console.warn('method `' + info.methodName + '` not defined');
     }
   }
 
-  const emptyArray = [];
+  var emptyArray = [];
 
   // Regular expressions used for binding
-  const IDENT  = '(?:' + '[a-zA-Z_$][\\w.:$\\-*]*' + ')';
-  const NUMBER = '(?:' + '[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?' + ')';
-  const SQUOTE_STRING = '(?:' + '\'(?:[^\'\\\\]|\\\\.)*\'' + ')';
-  const DQUOTE_STRING = '(?:' + '"(?:[^"\\\\]|\\\\.)*"' + ')';
-  const STRING = '(?:' + SQUOTE_STRING + '|' + DQUOTE_STRING + ')';
-  const ARGUMENT = '(?:(' + IDENT + '|' + NUMBER + '|' +  STRING + ')\\s*' + ')';
-  const ARGUMENTS = '(?:' + ARGUMENT + '(?:,\\s*' + ARGUMENT + ')*' + ')';
-  const ARGUMENT_LIST = '(?:' + '\\(\\s*' +
-                                '(?:' + ARGUMENTS + '?' + ')' +
-                              '\\)\\s*' + ')';
-  const BINDING = '(' + IDENT + '\\s*' + ARGUMENT_LIST + '?' + ')'; // Group 3
-  const OPEN_BRACKET = '(\\[\\[|{{)' + '\\s*';
-  const CLOSE_BRACKET = '(?:]]|}})';
-  const NEGATE = '(?:(!)\\s*)?'; // Group 2
-  const EXPRESSION = OPEN_BRACKET + NEGATE + BINDING + CLOSE_BRACKET;
-  const bindingRegex = new RegExp(EXPRESSION, "g");
+  var IDENT = '(?:' + '[a-zA-Z_$][\\w.:$\\-*]*' + ')';
+  var NUMBER = '(?:' + '[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?' + ')';
+  var SQUOTE_STRING = '(?:' + '\'(?:[^\'\\\\]|\\\\.)*\'' + ')';
+  var DQUOTE_STRING = '(?:' + '"(?:[^"\\\\]|\\\\.)*"' + ')';
+  var STRING = '(?:' + SQUOTE_STRING + '|' + DQUOTE_STRING + ')';
+  var ARGUMENT = '(?:(' + IDENT + '|' + NUMBER + '|' + STRING + ')\\s*' + ')';
+  var ARGUMENTS = '(?:' + ARGUMENT + '(?:,\\s*' + ARGUMENT + ')*' + ')';
+  var ARGUMENT_LIST = '(?:' + '\\(\\s*' + '(?:' + ARGUMENTS + '?' + ')' + '\\)\\s*' + ')';
+  var BINDING = '(' + IDENT + '\\s*' + ARGUMENT_LIST + '?' + ')'; // Group 3
+  var OPEN_BRACKET = '(\\[\\[|{{)' + '\\s*';
+  var CLOSE_BRACKET = '(?:]]|}})';
+  var NEGATE = '(?:(!)\\s*)?'; // Group 2
+  var EXPRESSION = OPEN_BRACKET + NEGATE + BINDING + CLOSE_BRACKET;
+  var bindingRegex = new RegExp(EXPRESSION, "g");
 
   /**
    * Create a string from binding parts of all the literal parts
@@ -827,9 +813,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @return {string} String made from the literal parts
    */
   function literalFromParts(parts) {
-    let s = '';
-    for (let i=0; i<parts.length; i++) {
-      let literal = parts[i].literal;
+    var s = '';
+    for (var i = 0; i < parts.length; i++) {
+      var literal = parts[i].literal;
       s += literal || '';
     }
     return s;
@@ -847,13 +833,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function parseMethod(expression) {
     // tries to match valid javascript property names
-    let m = expression.match(/([^\s]+?)\(([\s\S]*)\)/);
+    var m = expression.match(/([^\s]+?)\(([\s\S]*)\)/);
     if (m) {
-      let methodName = m[1];
-      let sig = { methodName, static: true, args: emptyArray };
+      var methodName = m[1];
+      var sig = { methodName: methodName, static: true, args: emptyArray };
       if (m[2].trim()) {
         // replace escaped commas with comma entity, split on un-escaped commas
-        let args = m[2].replace(/\\,/g, '&comma;').split(',');
+        var args = m[2].replace(/\\,/g, '&comma;').split(',');
         return parseArgs(args, sig);
       } else {
         return sig;
@@ -873,8 +859,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function parseArgs(argList, sig) {
-    sig.args = argList.map(function(rawArg) {
-      let arg = parseArg(rawArg);
+    sig.args = argList.map(function (rawArg) {
+      var arg = parseArg(rawArg);
       if (!arg.literal) {
         sig.static = false;
       }
@@ -901,29 +887,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    */
   function parseArg(rawArg) {
     // clean up whitespace
-    let arg = rawArg.trim()
-      // replace comma entity with comma
-      .replace(/&comma;/g, ',')
-      // repair extra escape sequences; note only commas strictly need
-      // escaping, but we allow any other char to be escaped since its
-      // likely users will do this
-      .replace(/\\(.)/g, '\$1')
-      ;
+    var arg = rawArg.trim()
+    // replace comma entity with comma
+    .replace(/&comma;/g, ',')
+    // repair extra escape sequences; note only commas strictly need
+    // escaping, but we allow any other char to be escaped since its
+    // likely users will do this
+    .replace(/\\(.)/g, '\$1');
     // basic argument descriptor
-    let a = {
+    var a = {
       name: arg,
       value: '',
       literal: false
     };
     // detect literal value (must be String or Number)
-    let fc = arg[0];
+    var fc = arg[0];
     if (fc === '-') {
       fc = arg[1];
     }
     if (fc >= '0' && fc <= '9') {
       fc = '#';
     }
-    switch(fc) {
+    switch (fc) {
       case "'":
       case '"':
         a.value = arg.slice(1, -1);
@@ -940,7 +925,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // detect structured path (has dots)
       a.structured = Polymer.Path.isPath(arg);
       if (a.structured) {
-        a.wildcard = (arg.slice(-2) == '.*');
+        a.wildcard = arg.slice(-2) == '.*';
         if (a.wildcard) {
           a.name = arg.slice(0, -2);
         }
@@ -964,11 +949,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function marshalArgs(data, args, path, props) {
-    let values = [];
-    for (let i=0, l=args.length; i<l; i++) {
-      let arg = args[i];
-      let name = arg.name;
-      let v;
+    var values = [];
+    for (var i = 0, l = args.length; i < l; i++) {
+      var arg = args[i];
+      var name = arg.name;
+      var v = void 0;
       if (arg.literal) {
         v = arg.value;
       } else {
@@ -985,8 +970,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       if (arg.wildcard) {
         // Only send the actual path changed info if the change that
         // caused the observer to run matched the wildcard
-        let baseChanged = (name.indexOf(path + '.') === 0);
-        let matches = (path.indexOf(name) === 0 && !baseChanged);
+        var baseChanged = name.indexOf(path + '.') === 0;
+        var matches = path.indexOf(name) === 0 && !baseChanged;
         values[i] = {
           path: matches ? path : name,
           value: matches ? props[path] : v,
@@ -1012,12 +997,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @param {Array} splices Array of splice records
    * @private
    */
-  function notifySplices(inst, array, path, splices) {
-    let splicesPath = path + '.splices';
+  function _notifySplices(inst, array, path, splices) {
+    var splicesPath = path + '.splices';
     inst.notifyPath(splicesPath, { indexSplices: splices });
     inst.notifyPath(path + '.length', array.length);
     // Null here to allow potentially large splice records to be GC'ed.
-    inst.__data[splicesPath] = {indexSplices: null};
+    inst.__data[splicesPath] = { indexSplices: null };
   }
 
   /**
@@ -1035,7 +1020,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @private
    */
   function notifySplice(inst, array, path, index, addedCount, removed) {
-    notifySplices(inst, array, path, [{
+    _notifySplices(inst, array, path, [{
       index: index,
       addedCount: addedCount,
       removed: removed,
@@ -1091,7 +1076,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @summary Element class mixin that provides meta-programming for Polymer's
    * template binding and data observation system.
    */
-  Polymer.PropertyEffects = Polymer.dedupingMixin(superClass => {
+  Polymer.PropertyEffects = Polymer.dedupingMixin(function (superClass) {
 
     /**
      * @constructor
@@ -1100,7 +1085,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @implements {Polymer_TemplateStamp}
      * @unrestricted
      */
-    const propertyEffectsBase = Polymer.TemplateStamp(Polymer.PropertyAccessors(superClass));
+    var propertyEffectsBase = Polymer.TemplateStamp(Polymer.PropertyAccessors(superClass));
 
     /**
      * @polymer
@@ -1109,1525 +1094,1718 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @extends {propertyEffectsBase}
      * @unrestricted
      */
-    class PropertyEffects extends propertyEffectsBase {
 
-      constructor() {
-        super();
+    var PropertyEffects = function (_propertyEffectsBase) {
+      babelHelpers.inherits(PropertyEffects, _propertyEffectsBase);
+
+      function PropertyEffects() {
+        babelHelpers.classCallCheck(this, PropertyEffects);
+
         /** @type {boolean} */
-        this.__dataClientsReady;
+        var _this = babelHelpers.possibleConstructorReturn(this, (PropertyEffects.__proto__ || Object.getPrototypeOf(PropertyEffects)).call(this));
+
+        _this.__dataClientsReady;
         /** @type {Array} */
-        this.__dataPendingClients;
+        _this.__dataPendingClients;
         /** @type {Object} */
-        this.__dataToNotify;
+        _this.__dataToNotify;
         /** @type {Object} */
-        this.__dataLinkedPaths;
+        _this.__dataLinkedPaths;
         /** @type {boolean} */
-        this.__dataHasPaths;
+        _this.__dataHasPaths;
         /** @type {Object} */
-        this.__dataCompoundStorage;
+        _this.__dataCompoundStorage;
         /** @type {Polymer_PropertyEffects} */
-        this.__dataHost;
+        _this.__dataHost;
         /** @type {!Object} */
-        this.__dataTemp;
+        _this.__dataTemp;
         /** @type {boolean} */
-        this.__dataClientsInitialized;
+        _this.__dataClientsInitialized;
         /** @type {!Object} */
-        this.__data;
+        _this.__data;
         /** @type {!Object} */
-        this.__dataPending;
+        _this.__dataPending;
         /** @type {!Object} */
-        this.__dataOld;
+        _this.__dataOld;
         /** @type {Object} */
-        this.__computeEffects;
+        _this.__computeEffects;
         /** @type {Object} */
-        this.__reflectEffects;
+        _this.__reflectEffects;
         /** @type {Object} */
-        this.__notifyEffects;
+        _this.__notifyEffects;
         /** @type {Object} */
-        this.__propagateEffects;
+        _this.__propagateEffects;
         /** @type {Object} */
-        this.__observeEffects;
+        _this.__observeEffects;
         /** @type {Object} */
-        this.__readOnly;
+        _this.__readOnly;
         /** @type {number} */
-        this.__dataCounter;
+        _this.__dataCounter;
         /** @type {!TemplateInfo} */
-        this.__templateInfo;
+        _this.__templateInfo;
+        return _this;
       }
 
-      get PROPERTY_EFFECT_TYPES() {
-        return TYPES;
-      }
-
-      _initializeProperties() {
-        super._initializeProperties();
-        hostStack.registerHost(this);
-        this.__dataClientsReady = false;
-        this.__dataPendingClients = null;
-        this.__dataToNotify = null;
-        this.__dataLinkedPaths = null;
-        this.__dataHasPaths = false;
-        // May be set on instance prior to upgrade
-        this.__dataCompoundStorage = this.__dataCompoundStorage || null;
-        this.__dataHost = this.__dataHost || null;
-        this.__dataTemp = {};
-        this.__dataClientsInitialized = false;
-      }
-
-      /**
-       * Overrides `Polymer.PropertyAccessors` implementation to provide a
-       * more efficient implementation of initializing properties from
-       * the prototype on the instance.
-       *
-       * @override
-       * @param {Object} props Properties to initialize on the prototype
-       */
-      _initializeProtoProperties(props) {
-        this.__data = Object.create(props);
-        this.__dataPending = Object.create(props);
-        this.__dataOld = {};
-      }
-
-      /**
-       * Overrides `Polymer.PropertyAccessors` implementation to avoid setting
-       * `_setProperty`'s `shouldNotify: true`.
-       *
-       * @override
-       * @param {Object} props Properties to initialize on the instance
-       */
-      _initializeInstanceProperties(props) {
-        let readOnly = this[TYPES.READ_ONLY];
-        for (let prop in props) {
-          if (!readOnly || !readOnly[prop]) {
-            this.__dataPending = this.__dataPending || {};
-            this.__dataOld = this.__dataOld || {};
-            this.__data[prop] = this.__dataPending[prop] = props[prop];
-          }
-        }
-      }
-
-      // Prototype setup ----------------------------------------
-
-      /**
-       * Equivalent to static `addPropertyEffect` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Property that should trigger the effect
-       * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
-       * @param {Object=} effect Effect metadata object
-       * @protected
-       */
-      _addPropertyEffect(property, type, effect) {
-        this._createPropertyAccessor(property, type == TYPES.READ_ONLY);
-        // effects are accumulated into arrays per property based on type
-        let effects = ensureOwnEffectMap(this, type)[property];
-        if (!effects) {
-          effects = this[type][property] = [];
-        }
-        effects.push(effect);
-      }
-
-      /**
-       * Removes the given property effect.
-       *
-       * @param {string} property Property the effect was associated with
-       * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
-       * @param {Object=} effect Effect metadata object to remove
-       */
-      _removePropertyEffect(property, type, effect) {
-        let effects = ensureOwnEffectMap(this, type)[property];
-        let idx = effects.indexOf(effect);
-        if (idx >= 0) {
-          effects.splice(idx, 1);
-        }
-      }
-
-      /**
-       * Returns whether the current prototype/instance has a property effect
-       * of a certain type.
-       *
-       * @param {string} property Property name
-       * @param {string=} type Effect type, from this.PROPERTY_EFFECT_TYPES
-       * @return {boolean} True if the prototype/instance has an effect of this type
-       * @protected
-       */
-      _hasPropertyEffect(property, type) {
-        let effects = this[type];
-        return Boolean(effects && effects[property]);
-      }
-
-      /**
-       * Returns whether the current prototype/instance has a "read only"
-       * accessor for the given property.
-       *
-       * @param {string} property Property name
-       * @return {boolean} True if the prototype/instance has an effect of this type
-       * @protected
-       */
-      _hasReadOnlyEffect(property) {
-        return this._hasPropertyEffect(property, TYPES.READ_ONLY);
-      }
-
-      /**
-       * Returns whether the current prototype/instance has a "notify"
-       * property effect for the given property.
-       *
-       * @param {string} property Property name
-       * @return {boolean} True if the prototype/instance has an effect of this type
-       * @protected
-       */
-      _hasNotifyEffect(property) {
-        return this._hasPropertyEffect(property, TYPES.NOTIFY);
-      }
-
-      /**
-       * Returns whether the current prototype/instance has a "reflect to attribute"
-       * property effect for the given property.
-       *
-       * @param {string} property Property name
-       * @return {boolean} True if the prototype/instance has an effect of this type
-       * @protected
-       */
-      _hasReflectEffect(property) {
-        return this._hasPropertyEffect(property, TYPES.REFLECT);
-      }
-
-      /**
-       * Returns whether the current prototype/instance has a "computed"
-       * property effect for the given property.
-       *
-       * @param {string} property Property name
-       * @return {boolean} True if the prototype/instance has an effect of this type
-       * @protected
-       */
-      _hasComputedEffect(property) {
-        return this._hasPropertyEffect(property, TYPES.COMPUTE);
-      }
-
-      // Runtime ----------------------------------------
-
-      /**
-       * Sets a pending property or path.  If the root property of the path in
-       * question had no accessor, the path is set, otherwise it is enqueued
-       * via `_setPendingProperty`.
-       *
-       * This function isolates relatively expensive functionality necessary
-       * for the public API (`set`, `setProperties`, `notifyPath`, and property
-       * change listeners via {{...}} bindings), such that it is only done
-       * when paths enter the system, and not at every propagation step.  It
-       * also sets a `__dataHasPaths` flag on the instance which is used to
-       * fast-path slower path-matching code in the property effects host paths.
-       *
-       * `path` can be a path string or array of path parts as accepted by the
-       * public API.
-       *
-       * @param {string | !Array<number|string>} path Path to set
-       * @param {*} value Value to set
-       * @param {boolean=} shouldNotify Set to true if this change should
-       *  cause a property notification event dispatch
-       * @param {boolean=} isPathNotification If the path being set is a path
-       *   notification of an already changed value, as opposed to a request
-       *   to set and notify the change.  In the latter `false` case, a dirty
-       *   check is performed and then the value is set to the path before
-       *   enqueuing the pending property change.
-       * @return {boolean} Returns true if the property/path was enqueued in
-       *   the pending changes bag.
-       * @protected
-       */
-      _setPendingPropertyOrPath(path, value, shouldNotify, isPathNotification) {
-        if (isPathNotification ||
-            Polymer.Path.root(Array.isArray(path) ? path[0] : path) !== path) {
-          // Dirty check changes being set to a path against the actual object,
-          // since this is the entry point for paths into the system; from here
-          // the only dirty checks are against the `__dataTemp` cache to prevent
-          // duplicate work in the same turn only. Note, if this was a notification
-          // of a change already set to a path (isPathNotification: true),
-          // we always let the change through and skip the `set` since it was
-          // already dirty checked at the point of entry and the underlying
-          // object has already been updated
-          if (!isPathNotification) {
-            let old = Polymer.Path.get(this, path);
-            path = /** @type {string} */ (Polymer.Path.set(this, path, value));
-            // Use property-accessor's simpler dirty check
-            if (!path || !super._shouldPropertyChange(path, value, old)) {
-              return false;
-            }
-          }
-          this.__dataHasPaths = true;
-          if (this._setPendingProperty(/**@type{string}*/(path), value, shouldNotify)) {
-            computeLinkedPaths(this, path, value);
-            return true;
-          }
-        } else {
-          if (this.__dataHasAccessor && this.__dataHasAccessor[path]) {
-            return this._setPendingProperty(/**@type{string}*/(path), value, shouldNotify);
-          } else {
-            this[path] = value;
-          }
-        }
-        return false;
-      }
-
-      /**
-       * Applies a value to a non-Polymer element/node's property.
-       *
-       * The implementation makes a best-effort at binding interop:
-       * Some native element properties have side-effects when
-       * re-setting the same value (e.g. setting `<input>.value` resets the
-       * cursor position), so we do a dirty-check before setting the value.
-       * However, for better interop with non-Polymer custom elements that
-       * accept objects, we explicitly re-set object changes coming from the
-       * Polymer world (which may include deep object changes without the
-       * top reference changing), erring on the side of providing more
-       * information.
-       *
-       * Users may override this method to provide alternate approaches.
-       *
-       * @param {Node} node The node to set a property on
-       * @param {string} prop The property to set
-       * @param {*} value The value to set
-       * @protected
-       */
-      _setUnmanagedPropertyToNode(node, prop, value) {
-        // It is a judgment call that resetting primitives is
-        // "bad" and resettings objects is also "good"; alternatively we could
-        // implement a whitelist of tag & property values that should never
-        // be reset (e.g. <input>.value && <select>.value)
-        if (value !== node[prop] || typeof value == 'object') {
-          node[prop] = value;
-        }
-      }
-
-      /**
-       * Overrides the `PropertyAccessors` implementation to introduce special
-       * dirty check logic depending on the property & value being set:
-       *
-       * 1. Any value set to a path (e.g. 'obj.prop': 42 or 'obj.prop': {...})
-       *    Stored in `__dataTemp`, dirty checked against `__dataTemp`
-       * 2. Object set to simple property (e.g. 'prop': {...})
-       *    Stored in `__dataTemp` and `__data`, dirty checked against
-       *    `__dataTemp` by default implementation of `_shouldPropertyChange`
-       * 3. Primitive value set to simple property (e.g. 'prop': 42)
-       *    Stored in `__data`, dirty checked against `__data`
-       *
-       * The dirty-check is important to prevent cycles due to two-way
-       * notification, but paths and objects are only dirty checked against any
-       * previous value set during this turn via a "temporary cache" that is
-       * cleared when the last `_propertiesChanged` exits. This is so:
-       * a. any cached array paths (e.g. 'array.3.prop') may be invalidated
-       *    due to array mutations like shift/unshift/splice; this is fine
-       *    since path changes are dirty-checked at user entry points like `set`
-       * b. dirty-checking for objects only lasts one turn to allow the user
-       *    to mutate the object in-place and re-set it with the same identity
-       *    and have all sub-properties re-propagated in a subsequent turn.
-       *
-       * The temp cache is not necessarily sufficient to prevent invalid array
-       * paths, since a splice can happen during the same turn (with pathological
-       * user code); we could introduce a "fixup" for temporarily cached array
-       * paths if needed: https://github.com/Polymer/polymer/issues/4227
-       *
-       * @param {string} property Name of the property
-       * @param {*} value Value to set
-       * @param {boolean=} shouldNotify True if property should fire notification
-       *   event (applies only for `notify: true` properties)
-       * @return {boolean} Returns true if the property changed
-       * @override
-       */
-      _setPendingProperty(property, value, shouldNotify) {
-        let isPath = this.__dataHasPaths && Polymer.Path.isPath(property);
-        let prevProps = isPath ? this.__dataTemp : this.__data;
-        if (this._shouldPropertyChange(property, value, prevProps[property])) {
-          if (!this.__dataPending) {
-            this.__dataPending = {};
-            this.__dataOld = {};
-          }
-          // Ensure old is captured from the last turn
-          if (!(property in this.__dataOld)) {
-            this.__dataOld[property] = this.__data[property];
-          }
-          // Paths are stored in temporary cache (cleared at end of turn),
-          // which is used for dirty-checking, all others stored in __data
-          if (isPath) {
-            this.__dataTemp[property] = value;
-          } else {
-            this.__data[property] = value;
-          }
-          // All changes go into pending property bag, passed to _propertiesChanged
-          this.__dataPending[property] = value;
-          // Track properties that should notify separately
-          if (isPath || (this[TYPES.NOTIFY] && this[TYPES.NOTIFY][property])) {
-            this.__dataToNotify = this.__dataToNotify || {};
-            this.__dataToNotify[property] = shouldNotify;
-          }
-          return true;
-        }
-        return false;
-      }
-
-      /**
-       * Overrides base implementation to ensure all accessors set `shouldNotify`
-       * to true, for per-property notification tracking.
-       *
-       * @override
-       */
-      _setProperty(property, value) {
-        if (this._setPendingProperty(property, value, true)) {
-          this._invalidateProperties();
-        }
-      }
-
-      /**
-       * Overrides `PropertyAccessor`'s default async queuing of
-       * `_propertiesChanged`: if `__dataReady` is false (has not yet been
-       * manually flushed), the function no-ops; otherwise flushes
-       * `_propertiesChanged` synchronously.
-       *
-       * @override
-       */
-      _invalidateProperties() {
-        if (this.__dataReady) {
-          this._flushProperties();
-        }
-      }
-
-      /**
-       * Enqueues the given client on a list of pending clients, whose
-       * pending property changes can later be flushed via a call to
-       * `_flushClients`.
-       *
-       * @param {Object} client PropertyEffects client to enqueue
-       * @protected
-       */
-      _enqueueClient(client) {
-        this.__dataPendingClients = this.__dataPendingClients || [];
-        if (client !== this) {
-          this.__dataPendingClients.push(client);
-        }
-      }
-
-      /**
-       * Flushes any clients previously enqueued via `_enqueueClient`, causing
-       * their `_flushProperties` method to run.
-       *
-       * @protected
-       */
-      _flushClients() {
-        if (!this.__dataClientsReady) {
-          this.__dataClientsReady = true;
-          this._readyClients();
-          // Override point where accessors are turned on; importantly,
-          // this is after clients have fully readied, providing a guarantee
-          // that any property effects occur only after all clients are ready.
-          this.__dataReady = true;
-        } else {
-          this.__enableOrFlushClients();
-        }
-      }
-
-      // NOTE: We ensure clients either enable or flush as appropriate. This
-      // handles two corner cases:
-      // (1) clients flush properly when connected/enabled before the host
-      // enables; e.g.
-      //   (a) Templatize stamps with no properties and does not flush and
-      //   (b) the instance is inserted into dom and
-      //   (c) then the instance flushes.
-      // (2) clients enable properly when not connected/enabled when the host
-      // flushes; e.g.
-      //   (a) a template is runtime stamped and not yet connected/enabled
-      //   (b) a host sets a property, causing stamped dom to flush
-      //   (c) the stamped dom enables.
-      __enableOrFlushClients() {
-        let clients = this.__dataPendingClients;
-        if (clients) {
+      babelHelpers.createClass(PropertyEffects, [{
+        key: '_initializeProperties',
+        value: function _initializeProperties() {
+          babelHelpers.get(PropertyEffects.prototype.__proto__ || Object.getPrototypeOf(PropertyEffects.prototype), '_initializeProperties', this).call(this);
+          hostStack.registerHost(this);
+          this.__dataClientsReady = false;
           this.__dataPendingClients = null;
-          for (let i=0; i < clients.length; i++) {
-            let client = clients[i];
-            if (!client.__dataEnabled) {
-              client._enableProperties();
-            } else if (client.__dataPending) {
-              client._flushProperties();
-            }
-          }
-        }
-      }
-
-      /**
-       * Perform any initial setup on client dom. Called before the first
-       * `_flushProperties` call on client dom and before any element
-       * observers are called.
-       *
-       * @protected
-       */
-      _readyClients() {
-        this.__enableOrFlushClients();
-      }
-
-      /**
-       * Sets a bag of property changes to this instance, and
-       * synchronously processes all effects of the properties as a batch.
-       *
-       * Property names must be simple properties, not paths.  Batched
-       * path propagation is not supported.
-       *
-       * @param {Object} props Bag of one or more key-value pairs whose key is
-       *   a property and value is the new value to set for that property.
-       * @param {boolean=} setReadOnly When true, any private values set in
-       *   `props` will be set. By default, `setProperties` will not set
-       *   `readOnly: true` root properties.
-       * @public
-       */
-      setProperties(props, setReadOnly) {
-        for (let path in props) {
-          if (setReadOnly || !this[TYPES.READ_ONLY] || !this[TYPES.READ_ONLY][path]) {
-            //TODO(kschaaf): explicitly disallow paths in setProperty?
-            // wildcard observers currently only pass the first changed path
-            // in the `info` object, and you could do some odd things batching
-            // paths, e.g. {'foo.bar': {...}, 'foo': null}
-            this._setPendingPropertyOrPath(path, props[path], true);
-          }
-        }
-        this._invalidateProperties();
-      }
-
-      /**
-       * Overrides `PropertyAccessors` so that property accessor
-       * side effects are not enabled until after client dom is fully ready.
-       * Also calls `_flushClients` callback to ensure client dom is enabled
-       * that was not enabled as a result of flushing properties.
-       *
-       * @override
-       */
-      ready() {
-        // It is important that `super.ready()` is not called here as it
-        // immediately turns on accessors. Instead, we wait until `readyClients`
-        // to enable accessors to provide a guarantee that clients are ready
-        // before processing any accessors side effects.
-        this._flushProperties();
-        // If no data was pending, `_flushProperties` will not `flushClients`
-        // so ensure this is done.
-        if (!this.__dataClientsReady) {
-          this._flushClients();
-        }
-        // Before ready, client notifications do not trigger _flushProperties.
-        // Therefore a flush is necessary here if data has been set.
-        if (this.__dataPending) {
-          this._flushProperties();
-        }
-      }
-
-      /**
-       * Implements `PropertyAccessors`'s properties changed callback.
-       *
-       * Runs each class of effects for the batch of changed properties in
-       * a specific order (compute, propagate, reflect, observe, notify).
-       *
-       * @override
-       */
-      _propertiesChanged(currentProps, changedProps, oldProps) {
-        // ----------------------------
-        // let c = Object.getOwnPropertyNames(changedProps || {});
-        // window.debug && console.group(this.localName + '#' + this.id + ': ' + c);
-        // if (window.debug) { debugger; }
-        // ----------------------------
-        let hasPaths = this.__dataHasPaths;
-        this.__dataHasPaths = false;
-        // Compute properties
-        runComputedEffects(this, changedProps, oldProps, hasPaths);
-        // Clear notify properties prior to possible reentry (propagate, observe),
-        // but after computing effects have a chance to add to them
-        let notifyProps = this.__dataToNotify;
-        this.__dataToNotify = null;
-        // Propagate properties to clients
-        this._propagatePropertyChanges(changedProps, oldProps, hasPaths);
-        // Flush clients
-        this._flushClients();
-        // Reflect properties
-        runEffects(this, this[TYPES.REFLECT], changedProps, oldProps, hasPaths);
-        // Observe properties
-        runEffects(this, this[TYPES.OBSERVE], changedProps, oldProps, hasPaths);
-        // Notify properties to host
-        if (notifyProps) {
-          runNotifyEffects(this, notifyProps, changedProps, oldProps, hasPaths);
-        }
-        // Clear temporary cache at end of turn
-        if (this.__dataCounter == 1) {
+          this.__dataToNotify = null;
+          this.__dataLinkedPaths = null;
+          this.__dataHasPaths = false;
+          // May be set on instance prior to upgrade
+          this.__dataCompoundStorage = this.__dataCompoundStorage || null;
+          this.__dataHost = this.__dataHost || null;
           this.__dataTemp = {};
+          this.__dataClientsInitialized = false;
         }
-        // ----------------------------
-        // window.debug && console.groupEnd(this.localName + '#' + this.id + ': ' + c);
-        // ----------------------------
-      }
 
-      /**
-       * Called to propagate any property changes to stamped template nodes
-       * managed by this element.
-       *
-       * @param {Object} changedProps Bag of changed properties
-       * @param {Object} oldProps Bag of previous values for changed properties
-       * @param {boolean} hasPaths True with `props` contains one or more paths
-       * @protected
-       */
-      _propagatePropertyChanges(changedProps, oldProps, hasPaths) {
-        if (this[TYPES.PROPAGATE]) {
-          runEffects(this, this[TYPES.PROPAGATE], changedProps, oldProps, hasPaths);
+        /**
+         * Overrides `Polymer.PropertyAccessors` implementation to provide a
+         * more efficient implementation of initializing properties from
+         * the prototype on the instance.
+         *
+         * @override
+         * @param {Object} props Properties to initialize on the prototype
+         */
+
+      }, {
+        key: '_initializeProtoProperties',
+        value: function _initializeProtoProperties(props) {
+          this.__data = Object.create(props);
+          this.__dataPending = Object.create(props);
+          this.__dataOld = {};
         }
-        let templateInfo = this.__templateInfo;
-        while (templateInfo) {
-          runEffects(this, templateInfo.propertyEffects, changedProps, oldProps,
-            hasPaths, templateInfo.nodeList);
-          templateInfo = templateInfo.nextTemplateInfo;
-        }
-      }
 
-      /**
-       * Aliases one data path as another, such that path notifications from one
-       * are routed to the other.
-       *
-       * @param {string | !Array<string|number>} to Target path to link.
-       * @param {string | !Array<string|number>} from Source path to link.
-       * @public
-       */
-      linkPaths(to, from) {
-        to = Polymer.Path.normalize(to);
-        from = Polymer.Path.normalize(from);
-        this.__dataLinkedPaths = this.__dataLinkedPaths || {};
-        this.__dataLinkedPaths[to] = from;
-      }
+        /**
+         * Overrides `Polymer.PropertyAccessors` implementation to avoid setting
+         * `_setProperty`'s `shouldNotify: true`.
+         *
+         * @override
+         * @param {Object} props Properties to initialize on the instance
+         */
 
-      /**
-       * Removes a data path alias previously established with `_linkPaths`.
-       *
-       * Note, the path to unlink should be the target (`to`) used when
-       * linking the paths.
-       *
-       * @param {string | !Array<string|number>} path Target path to unlink.
-       * @public
-       */
-      unlinkPaths(path) {
-        path = Polymer.Path.normalize(path);
-        if (this.__dataLinkedPaths) {
-          delete this.__dataLinkedPaths[path];
-        }
-      }
-
-      /**
-       * Notify that an array has changed.
-       *
-       * Example:
-       *
-       *     this.items = [ {name: 'Jim'}, {name: 'Todd'}, {name: 'Bill'} ];
-       *     ...
-       *     this.items.splice(1, 1, {name: 'Sam'});
-       *     this.items.push({name: 'Bob'});
-       *     this.notifySplices('items', [
-       *       { index: 1, removed: [{name: 'Todd'}], addedCount: 1, object: this.items, type: 'splice' },
-       *       { index: 3, removed: [], addedCount: 1, object: this.items, type: 'splice'}
-       *     ]);
-       *
-       * @param {string} path Path that should be notified.
-       * @param {Array} splices Array of splice records indicating ordered
-       *   changes that occurred to the array. Each record should have the
-       *   following fields:
-       *    * index: index at which the change occurred
-       *    * removed: array of items that were removed from this index
-       *    * addedCount: number of new items added at this index
-       *    * object: a reference to the array in question
-       *    * type: the string literal 'splice'
-       *
-       *   Note that splice records _must_ be normalized such that they are
-       *   reported in index order (raw results from `Object.observe` are not
-       *   ordered and must be normalized/merged before notifying).
-       * @public
-      */
-      notifySplices(path, splices) {
-        let info = {path: ''};
-        let array = /** @type {Array} */(Polymer.Path.get(this, path, info));
-        notifySplices(this, array, info.path, splices);
-      }
-
-      /**
-       * Convenience method for reading a value from a path.
-       *
-       * Note, if any part in the path is undefined, this method returns
-       * `undefined` (this method does not throw when dereferencing undefined
-       * paths).
-       *
-       * @param {(string|!Array<(string|number)>)} path Path to the value
-       *   to read.  The path may be specified as a string (e.g. `foo.bar.baz`)
-       *   or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that
-       *   bracketed expressions are not supported; string-based path parts
-       *   *must* be separated by dots.  Note that when dereferencing array
-       *   indices, the index may be used as a dotted part directly
-       *   (e.g. `users.12.name` or `['users', 12, 'name']`).
-       * @param {Object=} root Root object from which the path is evaluated.
-       * @return {*} Value at the path, or `undefined` if any part of the path
-       *   is undefined.
-       * @public
-       */
-      get(path, root) {
-        return Polymer.Path.get(root || this, path);
-      }
-
-      /**
-       * Convenience method for setting a value to a path and notifying any
-       * elements bound to the same path.
-       *
-       * Note, if any part in the path except for the last is undefined,
-       * this method does nothing (this method does not throw when
-       * dereferencing undefined paths).
-       *
-       * @param {(string|!Array<(string|number)>)} path Path to the value
-       *   to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)
-       *   or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that
-       *   bracketed expressions are not supported; string-based path parts
-       *   *must* be separated by dots.  Note that when dereferencing array
-       *   indices, the index may be used as a dotted part directly
-       *   (e.g. `'users.12.name'` or `['users', 12, 'name']`).
-       * @param {*} value Value to set at the specified path.
-       * @param {Object=} root Root object from which the path is evaluated.
-       *   When specified, no notification will occur.
-       * @public
-      */
-      set(path, value, root) {
-        if (root) {
-          Polymer.Path.set(root, path, value);
-        } else {
-          if (!this[TYPES.READ_ONLY] || !this[TYPES.READ_ONLY][/** @type {string} */(path)]) {
-            if (this._setPendingPropertyOrPath(path, value, true)) {
-              this._invalidateProperties();
+      }, {
+        key: '_initializeInstanceProperties',
+        value: function _initializeInstanceProperties(props) {
+          var readOnly = this[TYPES.READ_ONLY];
+          for (var prop in props) {
+            if (!readOnly || !readOnly[prop]) {
+              this.__dataPending = this.__dataPending || {};
+              this.__dataOld = this.__dataOld || {};
+              this.__data[prop] = this.__dataPending[prop] = props[prop];
             }
           }
         }
-      }
 
-      /**
-       * Adds items onto the end of the array at the path specified.
-       *
-       * The arguments after `path` and return value match that of
-       * `Array.prototype.push`.
-       *
-       * This method notifies other paths to the same array that a
-       * splice occurred to the array.
-       *
-       * @param {string | !Array<string|number>} path Path to array.
-       * @param {...*} items Items to push onto array
-       * @return {number} New length of the array.
-       * @public
-       */
-      push(path, ...items) {
-        let info = {path: ''};
-        let array = /** @type {Array}*/(Polymer.Path.get(this, path, info));
-        let len = array.length;
-        let ret = array.push(...items);
-        if (items.length) {
-          notifySplice(this, array, info.path, len, items.length, []);
-        }
-        return ret;
-      }
+        // Prototype setup ----------------------------------------
 
-      /**
-       * Removes an item from the end of array at the path specified.
-       *
-       * The arguments after `path` and return value match that of
-       * `Array.prototype.pop`.
-       *
-       * This method notifies other paths to the same array that a
-       * splice occurred to the array.
-       *
-       * @param {string | !Array<string|number>} path Path to array.
-       * @return {*} Item that was removed.
-       * @public
-       */
-      pop(path) {
-        let info = {path: ''};
-        let array = /** @type {Array} */(Polymer.Path.get(this, path, info));
-        let hadLength = Boolean(array.length);
-        let ret = array.pop();
-        if (hadLength) {
-          notifySplice(this, array, info.path, array.length, 0, [ret]);
-        }
-        return ret;
-      }
+        /**
+         * Equivalent to static `addPropertyEffect` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Property that should trigger the effect
+         * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
+         * @param {Object=} effect Effect metadata object
+         * @protected
+         */
 
-      /**
-       * Starting from the start index specified, removes 0 or more items
-       * from the array and inserts 0 or more new items in their place.
-       *
-       * The arguments after `path` and return value match that of
-       * `Array.prototype.splice`.
-       *
-       * This method notifies other paths to the same array that a
-       * splice occurred to the array.
-       *
-       * @param {string | !Array<string|number>} path Path to array.
-       * @param {number} start Index from which to start removing/inserting.
-       * @param {number} deleteCount Number of items to remove.
-       * @param {...*} items Items to insert into array.
-       * @return {Array} Array of removed items.
-       * @public
-       */
-      splice(path, start, deleteCount, ...items) {
-        let info = {path : ''};
-        let array = /** @type {Array} */(Polymer.Path.get(this, path, info));
-        // Normalize fancy native splice handling of crazy start values
-        if (start < 0) {
-          start = array.length - Math.floor(-start);
-        } else {
-          start = Math.floor(start);
-        }
-        if (!start) {
-          start = 0;
-        }
-        let ret = array.splice(start, deleteCount, ...items);
-        if (items.length || ret.length) {
-          notifySplice(this, array, info.path, start, items.length, ret);
-        }
-        return ret;
-      }
-
-      /**
-       * Removes an item from the beginning of array at the path specified.
-       *
-       * The arguments after `path` and return value match that of
-       * `Array.prototype.pop`.
-       *
-       * This method notifies other paths to the same array that a
-       * splice occurred to the array.
-       *
-       * @param {string | !Array<string|number>} path Path to array.
-       * @return {*} Item that was removed.
-       * @public
-       */
-      shift(path) {
-        let info = {path: ''};
-        let array = /** @type {Array} */(Polymer.Path.get(this, path, info));
-        let hadLength = Boolean(array.length);
-        let ret = array.shift();
-        if (hadLength) {
-          notifySplice(this, array, info.path, 0, 0, [ret]);
-        }
-        return ret;
-      }
-
-      /**
-       * Adds items onto the beginning of the array at the path specified.
-       *
-       * The arguments after `path` and return value match that of
-       * `Array.prototype.push`.
-       *
-       * This method notifies other paths to the same array that a
-       * splice occurred to the array.
-       *
-       * @param {string | !Array<string|number>} path Path to array.
-       * @param {...*} items Items to insert info array
-       * @return {number} New length of the array.
-       * @public
-       */
-      unshift(path, ...items) {
-        let info = {path: ''};
-        let array = /** @type {Array} */(Polymer.Path.get(this, path, info));
-        let ret = array.unshift(...items);
-        if (items.length) {
-          notifySplice(this, array, info.path, 0, items.length, []);
-        }
-        return ret;
-      }
-
-      /**
-       * Notify that a path has changed.
-       *
-       * Example:
-       *
-       *     this.item.user.name = 'Bob';
-       *     this.notifyPath('item.user.name');
-       *
-       * @param {string} path Path that should be notified.
-       * @param {*=} value Value at the path (optional).
-       * @public
-      */
-      notifyPath(path, value) {
-        /** @type {string} */
-        let propPath;
-        if (arguments.length == 1) {
-          // Get value if not supplied
-          let info = {path: ''};
-          value = Polymer.Path.get(this, path, info);
-          propPath = info.path;
-        } else if (Array.isArray(path)) {
-          // Normalize path if needed
-          propPath = Polymer.Path.normalize(path);
-        } else {
-          propPath = /** @type{string} */(path);
-        }
-        if (this._setPendingPropertyOrPath(propPath, value, true, true)) {
-          this._invalidateProperties();
-        }
-      }
-
-      /**
-       * Equivalent to static `createReadOnlyProperty` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Property name
-       * @param {boolean=} protectedSetter Creates a custom protected setter
-       *   when `true`.
-       * @protected
-       */
-      _createReadOnlyProperty(property, protectedSetter) {
-        this._addPropertyEffect(property, TYPES.READ_ONLY);
-        if (protectedSetter) {
-          this['_set' + upper(property)] = /** @this {PropertyEffects} */function(value) {
-            this._setProperty(property, value);
-          };
-        }
-      }
-
-      /**
-       * Equivalent to static `createPropertyObserver` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Property name
-       * @param {string} methodName Name of observer method to call
-       * @param {boolean=} dynamicFn Whether the method name should be included as
-       *   a dependency to the effect.
-       * @protected
-       */
-      _createPropertyObserver(property, methodName, dynamicFn) {
-        let info = { property, methodName, dynamicFn: Boolean(dynamicFn) };
-        this._addPropertyEffect(property, TYPES.OBSERVE, {
-          fn: runObserverEffect, info, trigger: {name: property}
-        });
-        if (dynamicFn) {
-          this._addPropertyEffect(methodName, TYPES.OBSERVE, {
-            fn: runObserverEffect, info, trigger: {name: methodName}
-          });
-        }
-      }
-
-      /**
-       * Equivalent to static `createMethodObserver` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} expression Method expression
-       * @param {boolean|Object=} dynamicFn Boolean or object map indicating
-       *   whether method names should be included as a dependency to the effect.
-       * @protected
-       */
-      _createMethodObserver(expression, dynamicFn) {
-        let sig = parseMethod(expression);
-        if (!sig) {
-          throw new Error("Malformed observer expression '" + expression + "'");
-        }
-        createMethodEffect(this, sig, TYPES.OBSERVE, runMethodEffect, null, dynamicFn);
-      }
-
-      /**
-       * Equivalent to static `createNotifyingProperty` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Property name
-       * @protected
-       */
-      _createNotifyingProperty(property) {
-        this._addPropertyEffect(property, TYPES.NOTIFY, {
-          fn: runNotifyEffect,
-          info: {
-            eventName: CaseMap.camelToDashCase(property) + '-changed',
-            property: property
+      }, {
+        key: '_addPropertyEffect',
+        value: function _addPropertyEffect(property, type, effect) {
+          this._createPropertyAccessor(property, type == TYPES.READ_ONLY);
+          // effects are accumulated into arrays per property based on type
+          var effects = ensureOwnEffectMap(this, type)[property];
+          if (!effects) {
+            effects = this[type][property] = [];
           }
-        });
-      }
-
-      /**
-       * Equivalent to static `createReflectedProperty` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Property name
-       * @protected
-       */
-      _createReflectedProperty(property) {
-        let attr = CaseMap.camelToDashCase(property);
-        if (attr[0] === '-') {
-          console.warn('Property ' + property + ' cannot be reflected to attribute ' +
-            attr + ' because "-" is not a valid starting attribute name. Use a lowercase first letter for the property instead.');
-        } else {
-          this._addPropertyEffect(property, TYPES.REFLECT, {
-            fn: runReflectEffect,
-            info: {
-              attrName: attr
-            }
-          });
+          effects.push(effect);
         }
-      }
 
-      /**
-       * Equivalent to static `createComputedProperty` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * @param {string} property Name of computed property to set
-       * @param {string} expression Method expression
-       * @param {boolean|Object=} dynamicFn Boolean or object map indicating
-       *   whether method names should be included as a dependency to the effect.
-       * @protected
-       */
-      _createComputedProperty(property, expression, dynamicFn) {
-        let sig = parseMethod(expression);
-        if (!sig) {
-          throw new Error("Malformed computed expression '" + expression + "'");
-        }
-        createMethodEffect(this, sig, TYPES.COMPUTE, runComputedEffect, property, dynamicFn);
-      }
+        /**
+         * Removes the given property effect.
+         *
+         * @param {string} property Property the effect was associated with
+         * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
+         * @param {Object=} effect Effect metadata object to remove
+         */
 
-      // -- static class methods ------------
-
-      /**
-       * Ensures an accessor exists for the specified property, and adds
-       * to a list of "property effects" that will run when the accessor for
-       * the specified property is set.  Effects are grouped by "type", which
-       * roughly corresponds to a phase in effect processing.  The effect
-       * metadata should be in the following form:
-       *
-       *     {
-       *       fn: effectFunction, // Reference to function to call to perform effect
-       *       info: { ... }       // Effect metadata passed to function
-       *       trigger: {          // Optional triggering metadata; if not provided
-       *         name: string      // the property is treated as a wildcard
-       *         structured: boolean
-       *         wildcard: boolean
-       *       }
-       *     }
-       *
-       * Effects are called from `_propertiesChanged` in the following order by
-       * type:
-       *
-       * 1. COMPUTE
-       * 2. PROPAGATE
-       * 3. REFLECT
-       * 4. OBSERVE
-       * 5. NOTIFY
-       *
-       * Effect functions are called with the following signature:
-       *
-       *     effectFunction(inst, path, props, oldProps, info, hasPaths)
-       *
-       * @param {string} property Property that should trigger the effect
-       * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
-       * @param {Object=} effect Effect metadata object
-       * @protected
-       */
-      static addPropertyEffect(property, type, effect) {
-        this.prototype._addPropertyEffect(property, type, effect);
-      }
-
-      /**
-       * Creates a single-property observer for the given property.
-       *
-       * @param {string} property Property name
-       * @param {string} methodName Name of observer method to call
-       * @param {boolean=} dynamicFn Whether the method name should be included as
-       *   a dependency to the effect.
-       * @protected
-       */
-      static createPropertyObserver(property, methodName, dynamicFn) {
-        this.prototype._createPropertyObserver(property, methodName, dynamicFn);
-      }
-
-      /**
-       * Creates a multi-property "method observer" based on the provided
-       * expression, which should be a string in the form of a normal JavaScript
-       * function signature: `'methodName(arg1, [..., argn])'`.  Each argument
-       * should correspond to a property or path in the context of this
-       * prototype (or instance), or may be a literal string or number.
-       *
-       * @param {string} expression Method expression
-       * @param {boolean|Object=} dynamicFn Boolean or object map indicating
-       *   whether method names should be included as a dependency to the effect.
-       * @protected
-       */
-      static createMethodObserver(expression, dynamicFn) {
-        this.prototype._createMethodObserver(expression, dynamicFn);
-      }
-
-      /**
-       * Causes the setter for the given property to dispatch `<property>-changed`
-       * events to notify of changes to the property.
-       *
-       * @param {string} property Property name
-       * @protected
-       */
-      static createNotifyingProperty(property) {
-        this.prototype._createNotifyingProperty(property);
-      }
-
-      /**
-       * Creates a read-only accessor for the given property.
-       *
-       * To set the property, use the protected `_setProperty` API.
-       * To create a custom protected setter (e.g. `_setMyProp()` for
-       * property `myProp`), pass `true` for `protectedSetter`.
-       *
-       * Note, if the property will have other property effects, this method
-       * should be called first, before adding other effects.
-       *
-       * @param {string} property Property name
-       * @param {boolean=} protectedSetter Creates a custom protected setter
-       *   when `true`.
-       * @protected
-       */
-      static createReadOnlyProperty(property, protectedSetter) {
-        this.prototype._createReadOnlyProperty(property, protectedSetter);
-      }
-
-      /**
-       * Causes the setter for the given property to reflect the property value
-       * to a (dash-cased) attribute of the same name.
-       *
-       * @param {string} property Property name
-       * @protected
-       */
-      static createReflectedProperty(property) {
-        this.prototype._createReflectedProperty(property);
-      }
-
-      /**
-       * Creates a computed property whose value is set to the result of the
-       * method described by the given `expression` each time one or more
-       * arguments to the method changes.  The expression should be a string
-       * in the form of a normal JavaScript function signature:
-       * `'methodName(arg1, [..., argn])'`
-       *
-       * @param {string} property Name of computed property to set
-       * @param {string} expression Method expression
-       * @param {boolean|Object=} dynamicFn Boolean or object map indicating whether
-       *   method names should be included as a dependency to the effect.
-       * @protected
-       */
-      static createComputedProperty(property, expression, dynamicFn) {
-        this.prototype._createComputedProperty(property, expression, dynamicFn);
-      }
-
-      /**
-       * Parses the provided template to ensure binding effects are created
-       * for them, and then ensures property accessors are created for any
-       * dependent properties in the template.  Binding effects for bound
-       * templates are stored in a linked list on the instance so that
-       * templates can be efficiently stamped and unstamped.
-       *
-       * @param {HTMLTemplateElement} template Template containing binding
-       *   bindings
-       * @return {Object} Template metadata object
-       * @protected
-       */
-      static bindTemplate(template) {
-        return this.prototype._bindTemplate(template);
-      }
-
-      // -- binding ----------------------------------------------
-
-      /**
-       * Equivalent to static `bindTemplate` API but can be called on
-       * an instance to add effects at runtime.  See that method for
-       * full API docs.
-       *
-       * This method may be called on the prototype (for prototypical template
-       * binding, to avoid creating accessors every instance) once per prototype,
-       * and will be called with `runtimeBinding: true` by `_stampTemplate` to
-       * create and link an instance of the template metadata associated with a
-       * particular stamping.
-       *
-       * @param {HTMLTemplateElement} template Template containing binding
-       *   bindings
-       * @param {boolean=} instanceBinding When false (default), performs
-       *   "prototypical" binding of the template and overwrites any previously
-       *   bound template for the class. When true (as passed from
-       *   `_stampTemplate`), the template info is instanced and linked into
-       *   the list of bound templates.
-       * @return {!TemplateInfo} Template metadata object; for `runtimeBinding`,
-       *   this is an instance of the prototypical template info
-       * @protected
-       */
-      _bindTemplate(template, instanceBinding) {
-        let templateInfo = this.constructor._parseTemplate(template);
-        let wasPreBound = this.__templateInfo == templateInfo;
-        // Optimization: since this is called twice for proto-bound templates,
-        // don't attempt to recreate accessors if this template was pre-bound
-        if (!wasPreBound) {
-          for (let prop in templateInfo.propertyEffects) {
-            this._createPropertyAccessor(prop);
+      }, {
+        key: '_removePropertyEffect',
+        value: function _removePropertyEffect(property, type, effect) {
+          var effects = ensureOwnEffectMap(this, type)[property];
+          var idx = effects.indexOf(effect);
+          if (idx >= 0) {
+            effects.splice(idx, 1);
           }
         }
-        if (instanceBinding) {
-          // For instance-time binding, create instance of template metadata
-          // and link into list of templates if necessary
-          templateInfo = /** @type {!TemplateInfo} */(Object.create(templateInfo));
-          templateInfo.wasPreBound = wasPreBound;
-          if (!wasPreBound && this.__templateInfo) {
-            let last = this.__templateInfoLast || this.__templateInfo;
-            this.__templateInfoLast = last.nextTemplateInfo = templateInfo;
-            templateInfo.previousTemplateInfo = last;
-            return templateInfo;
-          }
-        }
-        return this.__templateInfo = templateInfo;
-      }
 
-      /**
-       * Adds a property effect to the given template metadata, which is run
-       * at the "propagate" stage of `_propertiesChanged` when the template
-       * has been bound to the element via `_bindTemplate`.
-       *
-       * The `effect` object should match the format in `_addPropertyEffect`.
-       *
-       * @param {Object} templateInfo Template metadata to add effect to
-       * @param {string} prop Property that should trigger the effect
-       * @param {Object=} effect Effect metadata object
-       * @protected
-       */
-      static _addTemplatePropertyEffect(templateInfo, prop, effect) {
-        let hostProps = templateInfo.hostProps = templateInfo.hostProps || {};
-        hostProps[prop] = true;
-        let effects = templateInfo.propertyEffects = templateInfo.propertyEffects || {};
-        let propEffects = effects[prop] = effects[prop] || [];
-        propEffects.push(effect);
-      }
+        /**
+         * Returns whether the current prototype/instance has a property effect
+         * of a certain type.
+         *
+         * @param {string} property Property name
+         * @param {string=} type Effect type, from this.PROPERTY_EFFECT_TYPES
+         * @return {boolean} True if the prototype/instance has an effect of this type
+         * @protected
+         */
 
-      /**
-       * Stamps the provided template and performs instance-time setup for
-       * Polymer template features, including data bindings, declarative event
-       * listeners, and the `this.$` map of `id`'s to nodes.  A document fragment
-       * is returned containing the stamped DOM, ready for insertion into the
-       * DOM.
-       *
-       * This method may be called more than once; however note that due to
-       * `shadycss` polyfill limitations, only styles from templates prepared
-       * using `ShadyCSS.prepareTemplate` will be correctly polyfilled (scoped
-       * to the shadow root and support CSS custom properties), and note that
-       * `ShadyCSS.prepareTemplate` may only be called once per element. As such,
-       * any styles required by in runtime-stamped templates must be included
-       * in the main element template.
-       *
-       * @param {!HTMLTemplateElement} template Template to stamp
-       * @return {!StampedTemplate} Cloned template content
-       * @override
-       * @protected
-       */
-      _stampTemplate(template) {
-        // Ensures that created dom is `_enqueueClient`'d to this element so
-        // that it can be flushed on next call to `_flushProperties`
-        hostStack.beginHosting(this);
-        let dom = super._stampTemplate(template);
-        hostStack.endHosting(this);
-        let templateInfo = /** @type {!TemplateInfo} */(this._bindTemplate(template, true));
-        // Add template-instance-specific data to instanced templateInfo
-        templateInfo.nodeList = dom.nodeList;
-        // Capture child nodes to allow unstamping of non-prototypical templates
-        if (!templateInfo.wasPreBound) {
-          let nodes = templateInfo.childNodes = [];
-          for (let n=dom.firstChild; n; n=n.nextSibling) {
-            nodes.push(n);
-          }
+      }, {
+        key: '_hasPropertyEffect',
+        value: function _hasPropertyEffect(property, type) {
+          var effects = this[type];
+          return Boolean(effects && effects[property]);
         }
-        dom.templateInfo = templateInfo;
-        // Setup compound storage, 2-way listeners, and dataHost for bindings
-        setupBindings(this, templateInfo);
-        // Flush properties into template nodes if already booted
-        if (this.__dataReady) {
-          runEffects(this, templateInfo.propertyEffects, this.__data, null,
-            false, templateInfo.nodeList);
-        }
-        return dom;
-      }
 
-      /**
-       * Removes and unbinds the nodes previously contained in the provided
-       * DocumentFragment returned from `_stampTemplate`.
-       *
-       * @param {!StampedTemplate} dom DocumentFragment previously returned
-       *   from `_stampTemplate` associated with the nodes to be removed
-       * @protected
-       */
-      _removeBoundDom(dom) {
-        // Unlink template info
-        let templateInfo = dom.templateInfo;
-        if (templateInfo.previousTemplateInfo) {
-          templateInfo.previousTemplateInfo.nextTemplateInfo =
-            templateInfo.nextTemplateInfo;
-        }
-        if (templateInfo.nextTemplateInfo) {
-          templateInfo.nextTemplateInfo.previousTemplateInfo =
-            templateInfo.previousTemplateInfo;
-        }
-        if (this.__templateInfoLast == templateInfo) {
-          this.__templateInfoLast = templateInfo.previousTemplateInfo;
-        }
-        templateInfo.previousTemplateInfo = templateInfo.nextTemplateInfo = null;
-        // Remove stamped nodes
-        let nodes = templateInfo.childNodes;
-        for (let i=0; i<nodes.length; i++) {
-          let node = nodes[i];
-          node.parentNode.removeChild(node);
-        }
-      }
+        /**
+         * Returns whether the current prototype/instance has a "read only"
+         * accessor for the given property.
+         *
+         * @param {string} property Property name
+         * @return {boolean} True if the prototype/instance has an effect of this type
+         * @protected
+         */
 
-      /**
-       * Overrides default `TemplateStamp` implementation to add support for
-       * parsing bindings from `TextNode`'s' `textContent`.  A `bindings`
-       * array is added to `nodeInfo` and populated with binding metadata
-       * with information capturing the binding target, and a `parts` array
-       * with one or more metadata objects capturing the source(s) of the
-       * binding.
-       *
-       * @override
-       * @param {Node} node Node to parse
-       * @param {TemplateInfo} templateInfo Template metadata for current template
-       * @param {NodeInfo} nodeInfo Node metadata for current template node
-       * @return {boolean} `true` if the visited node added node-specific
-       *   metadata to `nodeInfo`
-       * @protected
-       * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
-       */
-      static _parseTemplateNode(node, templateInfo, nodeInfo) {
-        let noted = super._parseTemplateNode(node, templateInfo, nodeInfo);
-        if (node.nodeType === Node.TEXT_NODE) {
-          let parts = this._parseBindings(node.textContent, templateInfo);
-          if (parts) {
-            // Initialize the textContent with any literal parts
-            // NOTE: default to a space here so the textNode remains; some browsers
-            // (IE) omit an empty textNode following cloneNode/importNode.
-            node.textContent = literalFromParts(parts) || ' ';
-            addBinding(this, templateInfo, nodeInfo, 'text', 'textContent', parts);
-            noted = true;
-          }
+      }, {
+        key: '_hasReadOnlyEffect',
+        value: function _hasReadOnlyEffect(property) {
+          return this._hasPropertyEffect(property, TYPES.READ_ONLY);
         }
-        return noted;
-      }
 
-      /**
-       * Overrides default `TemplateStamp` implementation to add support for
-       * parsing bindings from attributes.  A `bindings`
-       * array is added to `nodeInfo` and populated with binding metadata
-       * with information capturing the binding target, and a `parts` array
-       * with one or more metadata objects capturing the source(s) of the
-       * binding.
-       *
-       * @override
-       * @param {Element} node Node to parse
-       * @param {TemplateInfo} templateInfo Template metadata for current template
-       * @param {NodeInfo} nodeInfo Node metadata for current template node
-       * @param {string} name Attribute name
-       * @param {string} value Attribute value
-       * @return {boolean} `true` if the visited node added node-specific
-       *   metadata to `nodeInfo`
-       * @protected
-       * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
-       */
-      static _parseTemplateNodeAttribute(node, templateInfo, nodeInfo, name, value) {
-        let parts = this._parseBindings(value, templateInfo);
-        if (parts) {
-          // Attribute or property
-          let origName = name;
-          let kind = 'property';
-          if (name[name.length-1] == '$') {
-            name = name.slice(0, -1);
-            kind = 'attribute';
-          }
-          // Initialize attribute bindings with any literal parts
-          let literal = literalFromParts(parts);
-          if (literal && kind == 'attribute') {
-            node.setAttribute(name, literal);
-          }
-          // Clear attribute before removing, since IE won't allow removing
-          // `value` attribute if it previously had a value (can't
-          // unconditionally set '' before removing since attributes with `$`
-          // can't be set using setAttribute)
-          if (node.localName === 'input' && origName === 'value') {
-            node.setAttribute(origName, '');
-          }
-          // Remove annotation
-          node.removeAttribute(origName);
-          // Case hackery: attributes are lower-case, but bind targets
-          // (properties) are case sensitive. Gambit is to map dash-case to
-          // camel-case: `foo-bar` becomes `fooBar`.
-          // Attribute bindings are excepted.
-          if (kind === 'property') {
-            name = Polymer.CaseMap.dashToCamelCase(name);
-          }
-          addBinding(this, templateInfo, nodeInfo, kind, name, parts, literal);
-          return true;
-        } else {
-          return super._parseTemplateNodeAttribute(node, templateInfo, nodeInfo, name, value);
+        /**
+         * Returns whether the current prototype/instance has a "notify"
+         * property effect for the given property.
+         *
+         * @param {string} property Property name
+         * @return {boolean} True if the prototype/instance has an effect of this type
+         * @protected
+         */
+
+      }, {
+        key: '_hasNotifyEffect',
+        value: function _hasNotifyEffect(property) {
+          return this._hasPropertyEffect(property, TYPES.NOTIFY);
         }
-      }
 
-      /**
-       * Overrides default `TemplateStamp` implementation to add support for
-       * binding the properties that a nested template depends on to the template
-       * as `_host_<property>`.
-       *
-       * @override
-       * @param {Node} node Node to parse
-       * @param {TemplateInfo} templateInfo Template metadata for current template
-       * @param {NodeInfo} nodeInfo Node metadata for current template node
-       * @return {boolean} `true` if the visited node added node-specific
-       *   metadata to `nodeInfo`
-       * @protected
-       * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
-       */
-      static _parseTemplateNestedTemplate(node, templateInfo, nodeInfo) {
-        let noted = super._parseTemplateNestedTemplate(node, templateInfo, nodeInfo);
-        // Merge host props into outer template and add bindings
-        let hostProps = nodeInfo.templateInfo.hostProps;
-        let mode = '{';
-        for (let source in hostProps) {
-          let parts = [{ mode, source, dependencies: [source] }];
-          addBinding(this, templateInfo, nodeInfo, 'property', '_host_' + source, parts);
+        /**
+         * Returns whether the current prototype/instance has a "reflect to attribute"
+         * property effect for the given property.
+         *
+         * @param {string} property Property name
+         * @return {boolean} True if the prototype/instance has an effect of this type
+         * @protected
+         */
+
+      }, {
+        key: '_hasReflectEffect',
+        value: function _hasReflectEffect(property) {
+          return this._hasPropertyEffect(property, TYPES.REFLECT);
         }
-        return noted;
-      }
 
-      /**
-       * Called to parse text in a template (either attribute values or
-       * textContent) into binding metadata.
-       *
-       * Any overrides of this method should return an array of binding part
-       * metadata  representing one or more bindings found in the provided text
-       * and any "literal" text in between.  Any non-literal parts will be passed
-       * to `_evaluateBinding` when any dependencies change.  The only required
-       * fields of each "part" in the returned array are as follows:
-       *
-       * - `dependencies` - Array containing trigger metadata for each property
-       *   that should trigger the binding to update
-       * - `literal` - String containing text if the part represents a literal;
-       *   in this case no `dependencies` are needed
-       *
-       * Additional metadata for use by `_evaluateBinding` may be provided in
-       * each part object as needed.
-       *
-       * The default implementation handles the following types of bindings
-       * (one or more may be intermixed with literal strings):
-       * - Property binding: `[[prop]]`
-       * - Path binding: `[[object.prop]]`
-       * - Negated property or path bindings: `[[!prop]]` or `[[!object.prop]]`
-       * - Two-way property or path bindings (supports negation):
-       *   `{{prop}}`, `{{object.prop}}`, `{{!prop}}` or `{{!object.prop}}`
-       * - Inline computed method (supports negation):
-       *   `[[compute(a, 'literal', b)]]`, `[[!compute(a, 'literal', b)]]`
-       *
-       * @param {string} text Text to parse from attribute or textContent
-       * @param {Object} templateInfo Current template metadata
-       * @return {Array<!BindingPart>} Array of binding part metadata
-       * @protected
-       */
-      static _parseBindings(text, templateInfo) {
-        let parts = [];
-        let lastIndex = 0;
-        let m;
-        // Example: "literal1{{prop}}literal2[[!compute(foo,bar)]]final"
-        // Regex matches:
-        //        Iteration 1:  Iteration 2:
-        // m[1]: '{{'          '[['
-        // m[2]: ''            '!'
-        // m[3]: 'prop'        'compute(foo,bar)'
-        while ((m = bindingRegex.exec(text)) !== null) {
-          // Add literal part
-          if (m.index > lastIndex) {
-            parts.push({literal: text.slice(lastIndex, m.index)});
-          }
-          // Add binding part
-          let mode = m[1][0];
-          let negate = Boolean(m[2]);
-          let source = m[3].trim();
-          let customEvent = false, notifyEvent = '', colon = -1;
-          if (mode == '{' && (colon = source.indexOf('::')) > 0) {
-            notifyEvent = source.substring(colon + 2);
-            source = source.substring(0, colon);
-            customEvent = true;
-          }
-          let signature = parseMethod(source);
-          let dependencies = [];
-          if (signature) {
-            // Inline computed function
-            let {args, methodName} = signature;
-            for (let i=0; i<args.length; i++) {
-              let arg = args[i];
-              if (!arg.literal) {
-                dependencies.push(arg);
+        /**
+         * Returns whether the current prototype/instance has a "computed"
+         * property effect for the given property.
+         *
+         * @param {string} property Property name
+         * @return {boolean} True if the prototype/instance has an effect of this type
+         * @protected
+         */
+
+      }, {
+        key: '_hasComputedEffect',
+        value: function _hasComputedEffect(property) {
+          return this._hasPropertyEffect(property, TYPES.COMPUTE);
+        }
+
+        // Runtime ----------------------------------------
+
+        /**
+         * Sets a pending property or path.  If the root property of the path in
+         * question had no accessor, the path is set, otherwise it is enqueued
+         * via `_setPendingProperty`.
+         *
+         * This function isolates relatively expensive functionality necessary
+         * for the public API (`set`, `setProperties`, `notifyPath`, and property
+         * change listeners via {{...}} bindings), such that it is only done
+         * when paths enter the system, and not at every propagation step.  It
+         * also sets a `__dataHasPaths` flag on the instance which is used to
+         * fast-path slower path-matching code in the property effects host paths.
+         *
+         * `path` can be a path string or array of path parts as accepted by the
+         * public API.
+         *
+         * @param {string | !Array<number|string>} path Path to set
+         * @param {*} value Value to set
+         * @param {boolean=} shouldNotify Set to true if this change should
+         *  cause a property notification event dispatch
+         * @param {boolean=} isPathNotification If the path being set is a path
+         *   notification of an already changed value, as opposed to a request
+         *   to set and notify the change.  In the latter `false` case, a dirty
+         *   check is performed and then the value is set to the path before
+         *   enqueuing the pending property change.
+         * @return {boolean} Returns true if the property/path was enqueued in
+         *   the pending changes bag.
+         * @protected
+         */
+
+      }, {
+        key: '_setPendingPropertyOrPath',
+        value: function _setPendingPropertyOrPath(path, value, shouldNotify, isPathNotification) {
+          if (isPathNotification || Polymer.Path.root(Array.isArray(path) ? path[0] : path) !== path) {
+            // Dirty check changes being set to a path against the actual object,
+            // since this is the entry point for paths into the system; from here
+            // the only dirty checks are against the `__dataTemp` cache to prevent
+            // duplicate work in the same turn only. Note, if this was a notification
+            // of a change already set to a path (isPathNotification: true),
+            // we always let the change through and skip the `set` since it was
+            // already dirty checked at the point of entry and the underlying
+            // object has already been updated
+            if (!isPathNotification) {
+              var old = Polymer.Path.get(this, path);
+              path = /** @type {string} */Polymer.Path.set(this, path, value);
+              // Use property-accessor's simpler dirty check
+              if (!path || !babelHelpers.get(PropertyEffects.prototype.__proto__ || Object.getPrototypeOf(PropertyEffects.prototype), '_shouldPropertyChange', this).call(this, path, value, old)) {
+                return false;
               }
             }
-            let dynamicFns = templateInfo.dynamicFns;
-            if (dynamicFns && dynamicFns[methodName] || signature.static) {
-              dependencies.push(methodName);
-              signature.dynamicFn = true;
+            this.__dataHasPaths = true;
+            if (this._setPendingProperty( /**@type{string}*/path, value, shouldNotify)) {
+              computeLinkedPaths(this, path, value);
+              return true;
             }
           } else {
-            // Property or path
-            dependencies.push(source);
+            if (this.__dataHasAccessor && this.__dataHasAccessor[path]) {
+              return this._setPendingProperty( /**@type{string}*/path, value, shouldNotify);
+            } else {
+              this[path] = value;
+            }
           }
-          parts.push({
-            source, mode, negate, customEvent, signature, dependencies,
-            event: notifyEvent
-          });
-          lastIndex = bindingRegex.lastIndex;
+          return false;
         }
-        // Add a final literal part
-        if (lastIndex && lastIndex < text.length) {
-          let literal = text.substring(lastIndex);
-          if (literal) {
-            parts.push({
-              literal: literal
+
+        /**
+         * Applies a value to a non-Polymer element/node's property.
+         *
+         * The implementation makes a best-effort at binding interop:
+         * Some native element properties have side-effects when
+         * re-setting the same value (e.g. setting `<input>.value` resets the
+         * cursor position), so we do a dirty-check before setting the value.
+         * However, for better interop with non-Polymer custom elements that
+         * accept objects, we explicitly re-set object changes coming from the
+         * Polymer world (which may include deep object changes without the
+         * top reference changing), erring on the side of providing more
+         * information.
+         *
+         * Users may override this method to provide alternate approaches.
+         *
+         * @param {Node} node The node to set a property on
+         * @param {string} prop The property to set
+         * @param {*} value The value to set
+         * @protected
+         */
+
+      }, {
+        key: '_setUnmanagedPropertyToNode',
+        value: function _setUnmanagedPropertyToNode(node, prop, value) {
+          // It is a judgment call that resetting primitives is
+          // "bad" and resettings objects is also "good"; alternatively we could
+          // implement a whitelist of tag & property values that should never
+          // be reset (e.g. <input>.value && <select>.value)
+          if (value !== node[prop] || (typeof value === 'undefined' ? 'undefined' : babelHelpers.typeof(value)) == 'object') {
+            node[prop] = value;
+          }
+        }
+
+        /**
+         * Overrides the `PropertyAccessors` implementation to introduce special
+         * dirty check logic depending on the property & value being set:
+         *
+         * 1. Any value set to a path (e.g. 'obj.prop': 42 or 'obj.prop': {...})
+         *    Stored in `__dataTemp`, dirty checked against `__dataTemp`
+         * 2. Object set to simple property (e.g. 'prop': {...})
+         *    Stored in `__dataTemp` and `__data`, dirty checked against
+         *    `__dataTemp` by default implementation of `_shouldPropertyChange`
+         * 3. Primitive value set to simple property (e.g. 'prop': 42)
+         *    Stored in `__data`, dirty checked against `__data`
+         *
+         * The dirty-check is important to prevent cycles due to two-way
+         * notification, but paths and objects are only dirty checked against any
+         * previous value set during this turn via a "temporary cache" that is
+         * cleared when the last `_propertiesChanged` exits. This is so:
+         * a. any cached array paths (e.g. 'array.3.prop') may be invalidated
+         *    due to array mutations like shift/unshift/splice; this is fine
+         *    since path changes are dirty-checked at user entry points like `set`
+         * b. dirty-checking for objects only lasts one turn to allow the user
+         *    to mutate the object in-place and re-set it with the same identity
+         *    and have all sub-properties re-propagated in a subsequent turn.
+         *
+         * The temp cache is not necessarily sufficient to prevent invalid array
+         * paths, since a splice can happen during the same turn (with pathological
+         * user code); we could introduce a "fixup" for temporarily cached array
+         * paths if needed: https://github.com/Polymer/polymer/issues/4227
+         *
+         * @param {string} property Name of the property
+         * @param {*} value Value to set
+         * @param {boolean=} shouldNotify True if property should fire notification
+         *   event (applies only for `notify: true` properties)
+         * @return {boolean} Returns true if the property changed
+         * @override
+         */
+
+      }, {
+        key: '_setPendingProperty',
+        value: function _setPendingProperty(property, value, shouldNotify) {
+          var isPath = this.__dataHasPaths && Polymer.Path.isPath(property);
+          var prevProps = isPath ? this.__dataTemp : this.__data;
+          if (this._shouldPropertyChange(property, value, prevProps[property])) {
+            if (!this.__dataPending) {
+              this.__dataPending = {};
+              this.__dataOld = {};
+            }
+            // Ensure old is captured from the last turn
+            if (!(property in this.__dataOld)) {
+              this.__dataOld[property] = this.__data[property];
+            }
+            // Paths are stored in temporary cache (cleared at end of turn),
+            // which is used for dirty-checking, all others stored in __data
+            if (isPath) {
+              this.__dataTemp[property] = value;
+            } else {
+              this.__data[property] = value;
+            }
+            // All changes go into pending property bag, passed to _propertiesChanged
+            this.__dataPending[property] = value;
+            // Track properties that should notify separately
+            if (isPath || this[TYPES.NOTIFY] && this[TYPES.NOTIFY][property]) {
+              this.__dataToNotify = this.__dataToNotify || {};
+              this.__dataToNotify[property] = shouldNotify;
+            }
+            return true;
+          }
+          return false;
+        }
+
+        /**
+         * Overrides base implementation to ensure all accessors set `shouldNotify`
+         * to true, for per-property notification tracking.
+         *
+         * @override
+         */
+
+      }, {
+        key: '_setProperty',
+        value: function _setProperty(property, value) {
+          if (this._setPendingProperty(property, value, true)) {
+            this._invalidateProperties();
+          }
+        }
+
+        /**
+         * Overrides `PropertyAccessor`'s default async queuing of
+         * `_propertiesChanged`: if `__dataReady` is false (has not yet been
+         * manually flushed), the function no-ops; otherwise flushes
+         * `_propertiesChanged` synchronously.
+         *
+         * @override
+         */
+
+      }, {
+        key: '_invalidateProperties',
+        value: function _invalidateProperties() {
+          if (this.__dataReady) {
+            this._flushProperties();
+          }
+        }
+
+        /**
+         * Enqueues the given client on a list of pending clients, whose
+         * pending property changes can later be flushed via a call to
+         * `_flushClients`.
+         *
+         * @param {Object} client PropertyEffects client to enqueue
+         * @protected
+         */
+
+      }, {
+        key: '_enqueueClient',
+        value: function _enqueueClient(client) {
+          this.__dataPendingClients = this.__dataPendingClients || [];
+          if (client !== this) {
+            this.__dataPendingClients.push(client);
+          }
+        }
+
+        /**
+         * Flushes any clients previously enqueued via `_enqueueClient`, causing
+         * their `_flushProperties` method to run.
+         *
+         * @protected
+         */
+
+      }, {
+        key: '_flushClients',
+        value: function _flushClients() {
+          if (!this.__dataClientsReady) {
+            this.__dataClientsReady = true;
+            this._readyClients();
+            // Override point where accessors are turned on; importantly,
+            // this is after clients have fully readied, providing a guarantee
+            // that any property effects occur only after all clients are ready.
+            this.__dataReady = true;
+          } else {
+            this.__enableOrFlushClients();
+          }
+        }
+
+        // NOTE: We ensure clients either enable or flush as appropriate. This
+        // handles two corner cases:
+        // (1) clients flush properly when connected/enabled before the host
+        // enables; e.g.
+        //   (a) Templatize stamps with no properties and does not flush and
+        //   (b) the instance is inserted into dom and
+        //   (c) then the instance flushes.
+        // (2) clients enable properly when not connected/enabled when the host
+        // flushes; e.g.
+        //   (a) a template is runtime stamped and not yet connected/enabled
+        //   (b) a host sets a property, causing stamped dom to flush
+        //   (c) the stamped dom enables.
+
+      }, {
+        key: '__enableOrFlushClients',
+        value: function __enableOrFlushClients() {
+          var clients = this.__dataPendingClients;
+          if (clients) {
+            this.__dataPendingClients = null;
+            for (var i = 0; i < clients.length; i++) {
+              var client = clients[i];
+              if (!client.__dataEnabled) {
+                client._enableProperties();
+              } else if (client.__dataPending) {
+                client._flushProperties();
+              }
+            }
+          }
+        }
+
+        /**
+         * Perform any initial setup on client dom. Called before the first
+         * `_flushProperties` call on client dom and before any element
+         * observers are called.
+         *
+         * @protected
+         */
+
+      }, {
+        key: '_readyClients',
+        value: function _readyClients() {
+          this.__enableOrFlushClients();
+        }
+
+        /**
+         * Sets a bag of property changes to this instance, and
+         * synchronously processes all effects of the properties as a batch.
+         *
+         * Property names must be simple properties, not paths.  Batched
+         * path propagation is not supported.
+         *
+         * @param {Object} props Bag of one or more key-value pairs whose key is
+         *   a property and value is the new value to set for that property.
+         * @param {boolean=} setReadOnly When true, any private values set in
+         *   `props` will be set. By default, `setProperties` will not set
+         *   `readOnly: true` root properties.
+         * @public
+         */
+
+      }, {
+        key: 'setProperties',
+        value: function setProperties(props, setReadOnly) {
+          for (var path in props) {
+            if (setReadOnly || !this[TYPES.READ_ONLY] || !this[TYPES.READ_ONLY][path]) {
+              //TODO(kschaaf): explicitly disallow paths in setProperty?
+              // wildcard observers currently only pass the first changed path
+              // in the `info` object, and you could do some odd things batching
+              // paths, e.g. {'foo.bar': {...}, 'foo': null}
+              this._setPendingPropertyOrPath(path, props[path], true);
+            }
+          }
+          this._invalidateProperties();
+        }
+
+        /**
+         * Overrides `PropertyAccessors` so that property accessor
+         * side effects are not enabled until after client dom is fully ready.
+         * Also calls `_flushClients` callback to ensure client dom is enabled
+         * that was not enabled as a result of flushing properties.
+         *
+         * @override
+         */
+
+      }, {
+        key: 'ready',
+        value: function ready() {
+          // It is important that `super.ready()` is not called here as it
+          // immediately turns on accessors. Instead, we wait until `readyClients`
+          // to enable accessors to provide a guarantee that clients are ready
+          // before processing any accessors side effects.
+          this._flushProperties();
+          // If no data was pending, `_flushProperties` will not `flushClients`
+          // so ensure this is done.
+          if (!this.__dataClientsReady) {
+            this._flushClients();
+          }
+          // Before ready, client notifications do not trigger _flushProperties.
+          // Therefore a flush is necessary here if data has been set.
+          if (this.__dataPending) {
+            this._flushProperties();
+          }
+        }
+
+        /**
+         * Implements `PropertyAccessors`'s properties changed callback.
+         *
+         * Runs each class of effects for the batch of changed properties in
+         * a specific order (compute, propagate, reflect, observe, notify).
+         *
+         * @override
+         */
+
+      }, {
+        key: '_propertiesChanged',
+        value: function _propertiesChanged(currentProps, changedProps, oldProps) {
+          // ----------------------------
+          // let c = Object.getOwnPropertyNames(changedProps || {});
+          // window.debug && console.group(this.localName + '#' + this.id + ': ' + c);
+          // if (window.debug) { debugger; }
+          // ----------------------------
+          var hasPaths = this.__dataHasPaths;
+          this.__dataHasPaths = false;
+          // Compute properties
+          runComputedEffects(this, changedProps, oldProps, hasPaths);
+          // Clear notify properties prior to possible reentry (propagate, observe),
+          // but after computing effects have a chance to add to them
+          var notifyProps = this.__dataToNotify;
+          this.__dataToNotify = null;
+          // Propagate properties to clients
+          this._propagatePropertyChanges(changedProps, oldProps, hasPaths);
+          // Flush clients
+          this._flushClients();
+          // Reflect properties
+          runEffects(this, this[TYPES.REFLECT], changedProps, oldProps, hasPaths);
+          // Observe properties
+          runEffects(this, this[TYPES.OBSERVE], changedProps, oldProps, hasPaths);
+          // Notify properties to host
+          if (notifyProps) {
+            runNotifyEffects(this, notifyProps, changedProps, oldProps, hasPaths);
+          }
+          // Clear temporary cache at end of turn
+          if (this.__dataCounter == 1) {
+            this.__dataTemp = {};
+          }
+          // ----------------------------
+          // window.debug && console.groupEnd(this.localName + '#' + this.id + ': ' + c);
+          // ----------------------------
+        }
+
+        /**
+         * Called to propagate any property changes to stamped template nodes
+         * managed by this element.
+         *
+         * @param {Object} changedProps Bag of changed properties
+         * @param {Object} oldProps Bag of previous values for changed properties
+         * @param {boolean} hasPaths True with `props` contains one or more paths
+         * @protected
+         */
+
+      }, {
+        key: '_propagatePropertyChanges',
+        value: function _propagatePropertyChanges(changedProps, oldProps, hasPaths) {
+          if (this[TYPES.PROPAGATE]) {
+            runEffects(this, this[TYPES.PROPAGATE], changedProps, oldProps, hasPaths);
+          }
+          var templateInfo = this.__templateInfo;
+          while (templateInfo) {
+            runEffects(this, templateInfo.propertyEffects, changedProps, oldProps, hasPaths, templateInfo.nodeList);
+            templateInfo = templateInfo.nextTemplateInfo;
+          }
+        }
+
+        /**
+         * Aliases one data path as another, such that path notifications from one
+         * are routed to the other.
+         *
+         * @param {string | !Array<string|number>} to Target path to link.
+         * @param {string | !Array<string|number>} from Source path to link.
+         * @public
+         */
+
+      }, {
+        key: 'linkPaths',
+        value: function linkPaths(to, from) {
+          to = Polymer.Path.normalize(to);
+          from = Polymer.Path.normalize(from);
+          this.__dataLinkedPaths = this.__dataLinkedPaths || {};
+          this.__dataLinkedPaths[to] = from;
+        }
+
+        /**
+         * Removes a data path alias previously established with `_linkPaths`.
+         *
+         * Note, the path to unlink should be the target (`to`) used when
+         * linking the paths.
+         *
+         * @param {string | !Array<string|number>} path Target path to unlink.
+         * @public
+         */
+
+      }, {
+        key: 'unlinkPaths',
+        value: function unlinkPaths(path) {
+          path = Polymer.Path.normalize(path);
+          if (this.__dataLinkedPaths) {
+            delete this.__dataLinkedPaths[path];
+          }
+        }
+
+        /**
+         * Notify that an array has changed.
+         *
+         * Example:
+         *
+         *     this.items = [ {name: 'Jim'}, {name: 'Todd'}, {name: 'Bill'} ];
+         *     ...
+         *     this.items.splice(1, 1, {name: 'Sam'});
+         *     this.items.push({name: 'Bob'});
+         *     this.notifySplices('items', [
+         *       { index: 1, removed: [{name: 'Todd'}], addedCount: 1, object: this.items, type: 'splice' },
+         *       { index: 3, removed: [], addedCount: 1, object: this.items, type: 'splice'}
+         *     ]);
+         *
+         * @param {string} path Path that should be notified.
+         * @param {Array} splices Array of splice records indicating ordered
+         *   changes that occurred to the array. Each record should have the
+         *   following fields:
+         *    * index: index at which the change occurred
+         *    * removed: array of items that were removed from this index
+         *    * addedCount: number of new items added at this index
+         *    * object: a reference to the array in question
+         *    * type: the string literal 'splice'
+         *
+         *   Note that splice records _must_ be normalized such that they are
+         *   reported in index order (raw results from `Object.observe` are not
+         *   ordered and must be normalized/merged before notifying).
+         * @public
+        */
+
+      }, {
+        key: 'notifySplices',
+        value: function notifySplices(path, splices) {
+          var info = { path: '' };
+          var array = /** @type {Array} */Polymer.Path.get(this, path, info);
+          _notifySplices(this, array, info.path, splices);
+        }
+
+        /**
+         * Convenience method for reading a value from a path.
+         *
+         * Note, if any part in the path is undefined, this method returns
+         * `undefined` (this method does not throw when dereferencing undefined
+         * paths).
+         *
+         * @param {(string|!Array<(string|number)>)} path Path to the value
+         *   to read.  The path may be specified as a string (e.g. `foo.bar.baz`)
+         *   or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that
+         *   bracketed expressions are not supported; string-based path parts
+         *   *must* be separated by dots.  Note that when dereferencing array
+         *   indices, the index may be used as a dotted part directly
+         *   (e.g. `users.12.name` or `['users', 12, 'name']`).
+         * @param {Object=} root Root object from which the path is evaluated.
+         * @return {*} Value at the path, or `undefined` if any part of the path
+         *   is undefined.
+         * @public
+         */
+
+      }, {
+        key: 'get',
+        value: function get(path, root) {
+          return Polymer.Path.get(root || this, path);
+        }
+
+        /**
+         * Convenience method for setting a value to a path and notifying any
+         * elements bound to the same path.
+         *
+         * Note, if any part in the path except for the last is undefined,
+         * this method does nothing (this method does not throw when
+         * dereferencing undefined paths).
+         *
+         * @param {(string|!Array<(string|number)>)} path Path to the value
+         *   to write.  The path may be specified as a string (e.g. `'foo.bar.baz'`)
+         *   or an array of path parts (e.g. `['foo.bar', 'baz']`).  Note that
+         *   bracketed expressions are not supported; string-based path parts
+         *   *must* be separated by dots.  Note that when dereferencing array
+         *   indices, the index may be used as a dotted part directly
+         *   (e.g. `'users.12.name'` or `['users', 12, 'name']`).
+         * @param {*} value Value to set at the specified path.
+         * @param {Object=} root Root object from which the path is evaluated.
+         *   When specified, no notification will occur.
+         * @public
+        */
+
+      }, {
+        key: 'set',
+        value: function set(path, value, root) {
+          if (root) {
+            Polymer.Path.set(root, path, value);
+          } else {
+            if (!this[TYPES.READ_ONLY] || !this[TYPES.READ_ONLY][/** @type {string} */path]) {
+              if (this._setPendingPropertyOrPath(path, value, true)) {
+                this._invalidateProperties();
+              }
+            }
+          }
+        }
+
+        /**
+         * Adds items onto the end of the array at the path specified.
+         *
+         * The arguments after `path` and return value match that of
+         * `Array.prototype.push`.
+         *
+         * This method notifies other paths to the same array that a
+         * splice occurred to the array.
+         *
+         * @param {string | !Array<string|number>} path Path to array.
+         * @param {...*} items Items to push onto array
+         * @return {number} New length of the array.
+         * @public
+         */
+
+      }, {
+        key: 'push',
+        value: function push(path) {
+          var info = { path: '' };
+          var array = /** @type {Array}*/Polymer.Path.get(this, path, info);
+          var len = array.length;
+
+          for (var _len = arguments.length, items = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            items[_key - 1] = arguments[_key];
+          }
+
+          var ret = array.push.apply(array, items);
+          if (items.length) {
+            notifySplice(this, array, info.path, len, items.length, []);
+          }
+          return ret;
+        }
+
+        /**
+         * Removes an item from the end of array at the path specified.
+         *
+         * The arguments after `path` and return value match that of
+         * `Array.prototype.pop`.
+         *
+         * This method notifies other paths to the same array that a
+         * splice occurred to the array.
+         *
+         * @param {string | !Array<string|number>} path Path to array.
+         * @return {*} Item that was removed.
+         * @public
+         */
+
+      }, {
+        key: 'pop',
+        value: function pop(path) {
+          var info = { path: '' };
+          var array = /** @type {Array} */Polymer.Path.get(this, path, info);
+          var hadLength = Boolean(array.length);
+          var ret = array.pop();
+          if (hadLength) {
+            notifySplice(this, array, info.path, array.length, 0, [ret]);
+          }
+          return ret;
+        }
+
+        /**
+         * Starting from the start index specified, removes 0 or more items
+         * from the array and inserts 0 or more new items in their place.
+         *
+         * The arguments after `path` and return value match that of
+         * `Array.prototype.splice`.
+         *
+         * This method notifies other paths to the same array that a
+         * splice occurred to the array.
+         *
+         * @param {string | !Array<string|number>} path Path to array.
+         * @param {number} start Index from which to start removing/inserting.
+         * @param {number} deleteCount Number of items to remove.
+         * @param {...*} items Items to insert into array.
+         * @return {Array} Array of removed items.
+         * @public
+         */
+
+      }, {
+        key: 'splice',
+        value: function splice(path, start, deleteCount) {
+          var info = { path: '' };
+          var array = /** @type {Array} */Polymer.Path.get(this, path, info);
+          // Normalize fancy native splice handling of crazy start values
+          if (start < 0) {
+            start = array.length - Math.floor(-start);
+          } else {
+            start = Math.floor(start);
+          }
+          if (!start) {
+            start = 0;
+          }
+
+          for (var _len2 = arguments.length, items = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+            items[_key2 - 3] = arguments[_key2];
+          }
+
+          var ret = array.splice.apply(array, [start, deleteCount].concat(items));
+          if (items.length || ret.length) {
+            notifySplice(this, array, info.path, start, items.length, ret);
+          }
+          return ret;
+        }
+
+        /**
+         * Removes an item from the beginning of array at the path specified.
+         *
+         * The arguments after `path` and return value match that of
+         * `Array.prototype.pop`.
+         *
+         * This method notifies other paths to the same array that a
+         * splice occurred to the array.
+         *
+         * @param {string | !Array<string|number>} path Path to array.
+         * @return {*} Item that was removed.
+         * @public
+         */
+
+      }, {
+        key: 'shift',
+        value: function shift(path) {
+          var info = { path: '' };
+          var array = /** @type {Array} */Polymer.Path.get(this, path, info);
+          var hadLength = Boolean(array.length);
+          var ret = array.shift();
+          if (hadLength) {
+            notifySplice(this, array, info.path, 0, 0, [ret]);
+          }
+          return ret;
+        }
+
+        /**
+         * Adds items onto the beginning of the array at the path specified.
+         *
+         * The arguments after `path` and return value match that of
+         * `Array.prototype.push`.
+         *
+         * This method notifies other paths to the same array that a
+         * splice occurred to the array.
+         *
+         * @param {string | !Array<string|number>} path Path to array.
+         * @param {...*} items Items to insert info array
+         * @return {number} New length of the array.
+         * @public
+         */
+
+      }, {
+        key: 'unshift',
+        value: function unshift(path) {
+          var info = { path: '' };
+          var array = /** @type {Array} */Polymer.Path.get(this, path, info);
+
+          for (var _len3 = arguments.length, items = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+            items[_key3 - 1] = arguments[_key3];
+          }
+
+          var ret = array.unshift.apply(array, items);
+          if (items.length) {
+            notifySplice(this, array, info.path, 0, items.length, []);
+          }
+          return ret;
+        }
+
+        /**
+         * Notify that a path has changed.
+         *
+         * Example:
+         *
+         *     this.item.user.name = 'Bob';
+         *     this.notifyPath('item.user.name');
+         *
+         * @param {string} path Path that should be notified.
+         * @param {*=} value Value at the path (optional).
+         * @public
+        */
+
+      }, {
+        key: 'notifyPath',
+        value: function notifyPath(path, value) {
+          /** @type {string} */
+          var propPath = void 0;
+          if (arguments.length == 1) {
+            // Get value if not supplied
+            var info = { path: '' };
+            value = Polymer.Path.get(this, path, info);
+            propPath = info.path;
+          } else if (Array.isArray(path)) {
+            // Normalize path if needed
+            propPath = Polymer.Path.normalize(path);
+          } else {
+            propPath = /** @type{string} */path;
+          }
+          if (this._setPendingPropertyOrPath(propPath, value, true, true)) {
+            this._invalidateProperties();
+          }
+        }
+
+        /**
+         * Equivalent to static `createReadOnlyProperty` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Property name
+         * @param {boolean=} protectedSetter Creates a custom protected setter
+         *   when `true`.
+         * @protected
+         */
+
+      }, {
+        key: '_createReadOnlyProperty',
+        value: function _createReadOnlyProperty(property, protectedSetter) {
+          this._addPropertyEffect(property, TYPES.READ_ONLY);
+          if (protectedSetter) {
+            this['_set' + upper(property)] = /** @this {PropertyEffects} */function (value) {
+              this._setProperty(property, value);
+            };
+          }
+        }
+
+        /**
+         * Equivalent to static `createPropertyObserver` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Property name
+         * @param {string} methodName Name of observer method to call
+         * @param {boolean=} dynamicFn Whether the method name should be included as
+         *   a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: '_createPropertyObserver',
+        value: function _createPropertyObserver(property, methodName, dynamicFn) {
+          var info = { property: property, methodName: methodName, dynamicFn: Boolean(dynamicFn) };
+          this._addPropertyEffect(property, TYPES.OBSERVE, {
+            fn: runObserverEffect, info: info, trigger: { name: property }
+          });
+          if (dynamicFn) {
+            this._addPropertyEffect(methodName, TYPES.OBSERVE, {
+              fn: runObserverEffect, info: info, trigger: { name: methodName }
             });
           }
         }
-        if (parts.length) {
-          return parts;
-        } else {
-          return null;
-        }
-      }
 
-      /**
-       * Called to evaluate a previously parsed binding part based on a set of
-       * one or more changed dependencies.
-       *
-       * @param {this} inst Element that should be used as scope for
-       *   binding dependencies
-       * @param {BindingPart} part Binding part metadata
-       * @param {string} path Property/path that triggered this effect
-       * @param {Object} props Bag of current property changes
-       * @param {Object} oldProps Bag of previous values for changed properties
-       * @param {boolean} hasPaths True with `props` contains one or more paths
-       * @return {*} Value the binding part evaluated to
-       * @protected
-       */
-      static _evaluateBinding(inst, part, path, props, oldProps, hasPaths) {
-        let value;
-        if (part.signature) {
-          value = runMethodEffect(inst, path, props, oldProps, part.signature);
-        } else if (path != part.source) {
-          value = Polymer.Path.get(inst, part.source);
-        } else {
-          if (hasPaths && Polymer.Path.isPath(path)) {
-            value = Polymer.Path.get(inst, path);
+        /**
+         * Equivalent to static `createMethodObserver` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} expression Method expression
+         * @param {boolean|Object=} dynamicFn Boolean or object map indicating
+         *   whether method names should be included as a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: '_createMethodObserver',
+        value: function _createMethodObserver(expression, dynamicFn) {
+          var sig = parseMethod(expression);
+          if (!sig) {
+            throw new Error("Malformed observer expression '" + expression + "'");
+          }
+          createMethodEffect(this, sig, TYPES.OBSERVE, runMethodEffect, null, dynamicFn);
+        }
+
+        /**
+         * Equivalent to static `createNotifyingProperty` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Property name
+         * @protected
+         */
+
+      }, {
+        key: '_createNotifyingProperty',
+        value: function _createNotifyingProperty(property) {
+          this._addPropertyEffect(property, TYPES.NOTIFY, {
+            fn: runNotifyEffect,
+            info: {
+              eventName: CaseMap.camelToDashCase(property) + '-changed',
+              property: property
+            }
+          });
+        }
+
+        /**
+         * Equivalent to static `createReflectedProperty` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Property name
+         * @protected
+         */
+
+      }, {
+        key: '_createReflectedProperty',
+        value: function _createReflectedProperty(property) {
+          var attr = CaseMap.camelToDashCase(property);
+          if (attr[0] === '-') {
+            console.warn('Property ' + property + ' cannot be reflected to attribute ' + attr + ' because "-" is not a valid starting attribute name. Use a lowercase first letter for the property instead.');
           } else {
-            value = inst.__data[path];
+            this._addPropertyEffect(property, TYPES.REFLECT, {
+              fn: runReflectEffect,
+              info: {
+                attrName: attr
+              }
+            });
           }
         }
-        if (part.negate) {
-          value = !value;
-        }
-        return value;
-      }
 
-    }
+        /**
+         * Equivalent to static `createComputedProperty` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * @param {string} property Name of computed property to set
+         * @param {string} expression Method expression
+         * @param {boolean|Object=} dynamicFn Boolean or object map indicating
+         *   whether method names should be included as a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: '_createComputedProperty',
+        value: function _createComputedProperty(property, expression, dynamicFn) {
+          var sig = parseMethod(expression);
+          if (!sig) {
+            throw new Error("Malformed computed expression '" + expression + "'");
+          }
+          createMethodEffect(this, sig, TYPES.COMPUTE, runComputedEffect, property, dynamicFn);
+        }
+
+        // -- static class methods ------------
+
+        /**
+         * Ensures an accessor exists for the specified property, and adds
+         * to a list of "property effects" that will run when the accessor for
+         * the specified property is set.  Effects are grouped by "type", which
+         * roughly corresponds to a phase in effect processing.  The effect
+         * metadata should be in the following form:
+         *
+         *     {
+         *       fn: effectFunction, // Reference to function to call to perform effect
+         *       info: { ... }       // Effect metadata passed to function
+         *       trigger: {          // Optional triggering metadata; if not provided
+         *         name: string      // the property is treated as a wildcard
+         *         structured: boolean
+         *         wildcard: boolean
+         *       }
+         *     }
+         *
+         * Effects are called from `_propertiesChanged` in the following order by
+         * type:
+         *
+         * 1. COMPUTE
+         * 2. PROPAGATE
+         * 3. REFLECT
+         * 4. OBSERVE
+         * 5. NOTIFY
+         *
+         * Effect functions are called with the following signature:
+         *
+         *     effectFunction(inst, path, props, oldProps, info, hasPaths)
+         *
+         * @param {string} property Property that should trigger the effect
+         * @param {string} type Effect type, from this.PROPERTY_EFFECT_TYPES
+         * @param {Object=} effect Effect metadata object
+         * @protected
+         */
+
+      }, {
+        key: '_bindTemplate',
+
+
+        // -- binding ----------------------------------------------
+
+        /**
+         * Equivalent to static `bindTemplate` API but can be called on
+         * an instance to add effects at runtime.  See that method for
+         * full API docs.
+         *
+         * This method may be called on the prototype (for prototypical template
+         * binding, to avoid creating accessors every instance) once per prototype,
+         * and will be called with `runtimeBinding: true` by `_stampTemplate` to
+         * create and link an instance of the template metadata associated with a
+         * particular stamping.
+         *
+         * @param {HTMLTemplateElement} template Template containing binding
+         *   bindings
+         * @param {boolean=} instanceBinding When false (default), performs
+         *   "prototypical" binding of the template and overwrites any previously
+         *   bound template for the class. When true (as passed from
+         *   `_stampTemplate`), the template info is instanced and linked into
+         *   the list of bound templates.
+         * @return {!TemplateInfo} Template metadata object; for `runtimeBinding`,
+         *   this is an instance of the prototypical template info
+         * @protected
+         */
+        value: function _bindTemplate(template, instanceBinding) {
+          var templateInfo = this.constructor._parseTemplate(template);
+          var wasPreBound = this.__templateInfo == templateInfo;
+          // Optimization: since this is called twice for proto-bound templates,
+          // don't attempt to recreate accessors if this template was pre-bound
+          if (!wasPreBound) {
+            for (var prop in templateInfo.propertyEffects) {
+              this._createPropertyAccessor(prop);
+            }
+          }
+          if (instanceBinding) {
+            // For instance-time binding, create instance of template metadata
+            // and link into list of templates if necessary
+            templateInfo = /** @type {!TemplateInfo} */Object.create(templateInfo);
+            templateInfo.wasPreBound = wasPreBound;
+            if (!wasPreBound && this.__templateInfo) {
+              var last = this.__templateInfoLast || this.__templateInfo;
+              this.__templateInfoLast = last.nextTemplateInfo = templateInfo;
+              templateInfo.previousTemplateInfo = last;
+              return templateInfo;
+            }
+          }
+          return this.__templateInfo = templateInfo;
+        }
+
+        /**
+         * Adds a property effect to the given template metadata, which is run
+         * at the "propagate" stage of `_propertiesChanged` when the template
+         * has been bound to the element via `_bindTemplate`.
+         *
+         * The `effect` object should match the format in `_addPropertyEffect`.
+         *
+         * @param {Object} templateInfo Template metadata to add effect to
+         * @param {string} prop Property that should trigger the effect
+         * @param {Object=} effect Effect metadata object
+         * @protected
+         */
+
+      }, {
+        key: '_stampTemplate',
+
+
+        /**
+         * Stamps the provided template and performs instance-time setup for
+         * Polymer template features, including data bindings, declarative event
+         * listeners, and the `this.$` map of `id`'s to nodes.  A document fragment
+         * is returned containing the stamped DOM, ready for insertion into the
+         * DOM.
+         *
+         * This method may be called more than once; however note that due to
+         * `shadycss` polyfill limitations, only styles from templates prepared
+         * using `ShadyCSS.prepareTemplate` will be correctly polyfilled (scoped
+         * to the shadow root and support CSS custom properties), and note that
+         * `ShadyCSS.prepareTemplate` may only be called once per element. As such,
+         * any styles required by in runtime-stamped templates must be included
+         * in the main element template.
+         *
+         * @param {!HTMLTemplateElement} template Template to stamp
+         * @return {!StampedTemplate} Cloned template content
+         * @override
+         * @protected
+         */
+        value: function _stampTemplate(template) {
+          // Ensures that created dom is `_enqueueClient`'d to this element so
+          // that it can be flushed on next call to `_flushProperties`
+          hostStack.beginHosting(this);
+          var dom = babelHelpers.get(PropertyEffects.prototype.__proto__ || Object.getPrototypeOf(PropertyEffects.prototype), '_stampTemplate', this).call(this, template);
+          hostStack.endHosting(this);
+          var templateInfo = /** @type {!TemplateInfo} */this._bindTemplate(template, true);
+          // Add template-instance-specific data to instanced templateInfo
+          templateInfo.nodeList = dom.nodeList;
+          // Capture child nodes to allow unstamping of non-prototypical templates
+          if (!templateInfo.wasPreBound) {
+            var nodes = templateInfo.childNodes = [];
+            for (var n = dom.firstChild; n; n = n.nextSibling) {
+              nodes.push(n);
+            }
+          }
+          dom.templateInfo = templateInfo;
+          // Setup compound storage, 2-way listeners, and dataHost for bindings
+          setupBindings(this, templateInfo);
+          // Flush properties into template nodes if already booted
+          if (this.__dataReady) {
+            runEffects(this, templateInfo.propertyEffects, this.__data, null, false, templateInfo.nodeList);
+          }
+          return dom;
+        }
+
+        /**
+         * Removes and unbinds the nodes previously contained in the provided
+         * DocumentFragment returned from `_stampTemplate`.
+         *
+         * @param {!StampedTemplate} dom DocumentFragment previously returned
+         *   from `_stampTemplate` associated with the nodes to be removed
+         * @protected
+         */
+
+      }, {
+        key: '_removeBoundDom',
+        value: function _removeBoundDom(dom) {
+          // Unlink template info
+          var templateInfo = dom.templateInfo;
+          if (templateInfo.previousTemplateInfo) {
+            templateInfo.previousTemplateInfo.nextTemplateInfo = templateInfo.nextTemplateInfo;
+          }
+          if (templateInfo.nextTemplateInfo) {
+            templateInfo.nextTemplateInfo.previousTemplateInfo = templateInfo.previousTemplateInfo;
+          }
+          if (this.__templateInfoLast == templateInfo) {
+            this.__templateInfoLast = templateInfo.previousTemplateInfo;
+          }
+          templateInfo.previousTemplateInfo = templateInfo.nextTemplateInfo = null;
+          // Remove stamped nodes
+          var nodes = templateInfo.childNodes;
+          for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            node.parentNode.removeChild(node);
+          }
+        }
+
+        /**
+         * Overrides default `TemplateStamp` implementation to add support for
+         * parsing bindings from `TextNode`'s' `textContent`.  A `bindings`
+         * array is added to `nodeInfo` and populated with binding metadata
+         * with information capturing the binding target, and a `parts` array
+         * with one or more metadata objects capturing the source(s) of the
+         * binding.
+         *
+         * @override
+         * @param {Node} node Node to parse
+         * @param {TemplateInfo} templateInfo Template metadata for current template
+         * @param {NodeInfo} nodeInfo Node metadata for current template node
+         * @return {boolean} `true` if the visited node added node-specific
+         *   metadata to `nodeInfo`
+         * @protected
+         * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
+         */
+
+      }, {
+        key: 'PROPERTY_EFFECT_TYPES',
+        get: function get() {
+          return TYPES;
+        }
+      }], [{
+        key: 'addPropertyEffect',
+        value: function addPropertyEffect(property, type, effect) {
+          this.prototype._addPropertyEffect(property, type, effect);
+        }
+
+        /**
+         * Creates a single-property observer for the given property.
+         *
+         * @param {string} property Property name
+         * @param {string} methodName Name of observer method to call
+         * @param {boolean=} dynamicFn Whether the method name should be included as
+         *   a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: 'createPropertyObserver',
+        value: function createPropertyObserver(property, methodName, dynamicFn) {
+          this.prototype._createPropertyObserver(property, methodName, dynamicFn);
+        }
+
+        /**
+         * Creates a multi-property "method observer" based on the provided
+         * expression, which should be a string in the form of a normal JavaScript
+         * function signature: `'methodName(arg1, [..., argn])'`.  Each argument
+         * should correspond to a property or path in the context of this
+         * prototype (or instance), or may be a literal string or number.
+         *
+         * @param {string} expression Method expression
+         * @param {boolean|Object=} dynamicFn Boolean or object map indicating
+         *   whether method names should be included as a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: 'createMethodObserver',
+        value: function createMethodObserver(expression, dynamicFn) {
+          this.prototype._createMethodObserver(expression, dynamicFn);
+        }
+
+        /**
+         * Causes the setter for the given property to dispatch `<property>-changed`
+         * events to notify of changes to the property.
+         *
+         * @param {string} property Property name
+         * @protected
+         */
+
+      }, {
+        key: 'createNotifyingProperty',
+        value: function createNotifyingProperty(property) {
+          this.prototype._createNotifyingProperty(property);
+        }
+
+        /**
+         * Creates a read-only accessor for the given property.
+         *
+         * To set the property, use the protected `_setProperty` API.
+         * To create a custom protected setter (e.g. `_setMyProp()` for
+         * property `myProp`), pass `true` for `protectedSetter`.
+         *
+         * Note, if the property will have other property effects, this method
+         * should be called first, before adding other effects.
+         *
+         * @param {string} property Property name
+         * @param {boolean=} protectedSetter Creates a custom protected setter
+         *   when `true`.
+         * @protected
+         */
+
+      }, {
+        key: 'createReadOnlyProperty',
+        value: function createReadOnlyProperty(property, protectedSetter) {
+          this.prototype._createReadOnlyProperty(property, protectedSetter);
+        }
+
+        /**
+         * Causes the setter for the given property to reflect the property value
+         * to a (dash-cased) attribute of the same name.
+         *
+         * @param {string} property Property name
+         * @protected
+         */
+
+      }, {
+        key: 'createReflectedProperty',
+        value: function createReflectedProperty(property) {
+          this.prototype._createReflectedProperty(property);
+        }
+
+        /**
+         * Creates a computed property whose value is set to the result of the
+         * method described by the given `expression` each time one or more
+         * arguments to the method changes.  The expression should be a string
+         * in the form of a normal JavaScript function signature:
+         * `'methodName(arg1, [..., argn])'`
+         *
+         * @param {string} property Name of computed property to set
+         * @param {string} expression Method expression
+         * @param {boolean|Object=} dynamicFn Boolean or object map indicating whether
+         *   method names should be included as a dependency to the effect.
+         * @protected
+         */
+
+      }, {
+        key: 'createComputedProperty',
+        value: function createComputedProperty(property, expression, dynamicFn) {
+          this.prototype._createComputedProperty(property, expression, dynamicFn);
+        }
+
+        /**
+         * Parses the provided template to ensure binding effects are created
+         * for them, and then ensures property accessors are created for any
+         * dependent properties in the template.  Binding effects for bound
+         * templates are stored in a linked list on the instance so that
+         * templates can be efficiently stamped and unstamped.
+         *
+         * @param {HTMLTemplateElement} template Template containing binding
+         *   bindings
+         * @return {Object} Template metadata object
+         * @protected
+         */
+
+      }, {
+        key: 'bindTemplate',
+        value: function bindTemplate(template) {
+          return this.prototype._bindTemplate(template);
+        }
+      }, {
+        key: '_addTemplatePropertyEffect',
+        value: function _addTemplatePropertyEffect(templateInfo, prop, effect) {
+          var hostProps = templateInfo.hostProps = templateInfo.hostProps || {};
+          hostProps[prop] = true;
+          var effects = templateInfo.propertyEffects = templateInfo.propertyEffects || {};
+          var propEffects = effects[prop] = effects[prop] || [];
+          propEffects.push(effect);
+        }
+      }, {
+        key: '_parseTemplateNode',
+        value: function _parseTemplateNode(node, templateInfo, nodeInfo) {
+          var noted = babelHelpers.get(PropertyEffects.__proto__ || Object.getPrototypeOf(PropertyEffects), '_parseTemplateNode', this).call(this, node, templateInfo, nodeInfo);
+          if (node.nodeType === Node.TEXT_NODE) {
+            var parts = this._parseBindings(node.textContent, templateInfo);
+            if (parts) {
+              // Initialize the textContent with any literal parts
+              // NOTE: default to a space here so the textNode remains; some browsers
+              // (IE) omit an empty textNode following cloneNode/importNode.
+              node.textContent = literalFromParts(parts) || ' ';
+              addBinding(this, templateInfo, nodeInfo, 'text', 'textContent', parts);
+              noted = true;
+            }
+          }
+          return noted;
+        }
+
+        /**
+         * Overrides default `TemplateStamp` implementation to add support for
+         * parsing bindings from attributes.  A `bindings`
+         * array is added to `nodeInfo` and populated with binding metadata
+         * with information capturing the binding target, and a `parts` array
+         * with one or more metadata objects capturing the source(s) of the
+         * binding.
+         *
+         * @override
+         * @param {Element} node Node to parse
+         * @param {TemplateInfo} templateInfo Template metadata for current template
+         * @param {NodeInfo} nodeInfo Node metadata for current template node
+         * @param {string} name Attribute name
+         * @param {string} value Attribute value
+         * @return {boolean} `true` if the visited node added node-specific
+         *   metadata to `nodeInfo`
+         * @protected
+         * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
+         */
+
+      }, {
+        key: '_parseTemplateNodeAttribute',
+        value: function _parseTemplateNodeAttribute(node, templateInfo, nodeInfo, name, value) {
+          var parts = this._parseBindings(value, templateInfo);
+          if (parts) {
+            // Attribute or property
+            var origName = name;
+            var kind = 'property';
+            if (name[name.length - 1] == '$') {
+              name = name.slice(0, -1);
+              kind = 'attribute';
+            }
+            // Initialize attribute bindings with any literal parts
+            var literal = literalFromParts(parts);
+            if (literal && kind == 'attribute') {
+              node.setAttribute(name, literal);
+            }
+            // Clear attribute before removing, since IE won't allow removing
+            // `value` attribute if it previously had a value (can't
+            // unconditionally set '' before removing since attributes with `$`
+            // can't be set using setAttribute)
+            if (node.localName === 'input' && origName === 'value') {
+              node.setAttribute(origName, '');
+            }
+            // Remove annotation
+            node.removeAttribute(origName);
+            // Case hackery: attributes are lower-case, but bind targets
+            // (properties) are case sensitive. Gambit is to map dash-case to
+            // camel-case: `foo-bar` becomes `fooBar`.
+            // Attribute bindings are excepted.
+            if (kind === 'property') {
+              name = Polymer.CaseMap.dashToCamelCase(name);
+            }
+            addBinding(this, templateInfo, nodeInfo, kind, name, parts, literal);
+            return true;
+          } else {
+            return babelHelpers.get(PropertyEffects.__proto__ || Object.getPrototypeOf(PropertyEffects), '_parseTemplateNodeAttribute', this).call(this, node, templateInfo, nodeInfo, name, value);
+          }
+        }
+
+        /**
+         * Overrides default `TemplateStamp` implementation to add support for
+         * binding the properties that a nested template depends on to the template
+         * as `_host_<property>`.
+         *
+         * @override
+         * @param {Node} node Node to parse
+         * @param {TemplateInfo} templateInfo Template metadata for current template
+         * @param {NodeInfo} nodeInfo Node metadata for current template node
+         * @return {boolean} `true` if the visited node added node-specific
+         *   metadata to `nodeInfo`
+         * @protected
+         * @suppress {missingProperties} Interfaces in closure do not inherit statics, but classes do
+         */
+
+      }, {
+        key: '_parseTemplateNestedTemplate',
+        value: function _parseTemplateNestedTemplate(node, templateInfo, nodeInfo) {
+          var noted = babelHelpers.get(PropertyEffects.__proto__ || Object.getPrototypeOf(PropertyEffects), '_parseTemplateNestedTemplate', this).call(this, node, templateInfo, nodeInfo);
+          // Merge host props into outer template and add bindings
+          var hostProps = nodeInfo.templateInfo.hostProps;
+          var mode = '{';
+          for (var source in hostProps) {
+            var parts = [{ mode: mode, source: source, dependencies: [source] }];
+            addBinding(this, templateInfo, nodeInfo, 'property', '_host_' + source, parts);
+          }
+          return noted;
+        }
+
+        /**
+         * Called to parse text in a template (either attribute values or
+         * textContent) into binding metadata.
+         *
+         * Any overrides of this method should return an array of binding part
+         * metadata  representing one or more bindings found in the provided text
+         * and any "literal" text in between.  Any non-literal parts will be passed
+         * to `_evaluateBinding` when any dependencies change.  The only required
+         * fields of each "part" in the returned array are as follows:
+         *
+         * - `dependencies` - Array containing trigger metadata for each property
+         *   that should trigger the binding to update
+         * - `literal` - String containing text if the part represents a literal;
+         *   in this case no `dependencies` are needed
+         *
+         * Additional metadata for use by `_evaluateBinding` may be provided in
+         * each part object as needed.
+         *
+         * The default implementation handles the following types of bindings
+         * (one or more may be intermixed with literal strings):
+         * - Property binding: `[[prop]]`
+         * - Path binding: `[[object.prop]]`
+         * - Negated property or path bindings: `[[!prop]]` or `[[!object.prop]]`
+         * - Two-way property or path bindings (supports negation):
+         *   `{{prop}}`, `{{object.prop}}`, `{{!prop}}` or `{{!object.prop}}`
+         * - Inline computed method (supports negation):
+         *   `[[compute(a, 'literal', b)]]`, `[[!compute(a, 'literal', b)]]`
+         *
+         * @param {string} text Text to parse from attribute or textContent
+         * @param {Object} templateInfo Current template metadata
+         * @return {Array<!BindingPart>} Array of binding part metadata
+         * @protected
+         */
+
+      }, {
+        key: '_parseBindings',
+        value: function _parseBindings(text, templateInfo) {
+          var parts = [];
+          var lastIndex = 0;
+          var m = void 0;
+          // Example: "literal1{{prop}}literal2[[!compute(foo,bar)]]final"
+          // Regex matches:
+          //        Iteration 1:  Iteration 2:
+          // m[1]: '{{'          '[['
+          // m[2]: ''            '!'
+          // m[3]: 'prop'        'compute(foo,bar)'
+          while ((m = bindingRegex.exec(text)) !== null) {
+            // Add literal part
+            if (m.index > lastIndex) {
+              parts.push({ literal: text.slice(lastIndex, m.index) });
+            }
+            // Add binding part
+            var mode = m[1][0];
+            var negate = Boolean(m[2]);
+            var source = m[3].trim();
+            var customEvent = false,
+                notifyEvent = '',
+                colon = -1;
+            if (mode == '{' && (colon = source.indexOf('::')) > 0) {
+              notifyEvent = source.substring(colon + 2);
+              source = source.substring(0, colon);
+              customEvent = true;
+            }
+            var signature = parseMethod(source);
+            var dependencies = [];
+            if (signature) {
+              // Inline computed function
+              var args = signature.args,
+                  methodName = signature.methodName;
+
+              for (var i = 0; i < args.length; i++) {
+                var arg = args[i];
+                if (!arg.literal) {
+                  dependencies.push(arg);
+                }
+              }
+              var dynamicFns = templateInfo.dynamicFns;
+              if (dynamicFns && dynamicFns[methodName] || signature.static) {
+                dependencies.push(methodName);
+                signature.dynamicFn = true;
+              }
+            } else {
+              // Property or path
+              dependencies.push(source);
+            }
+            parts.push({
+              source: source, mode: mode, negate: negate, customEvent: customEvent, signature: signature, dependencies: dependencies,
+              event: notifyEvent
+            });
+            lastIndex = bindingRegex.lastIndex;
+          }
+          // Add a final literal part
+          if (lastIndex && lastIndex < text.length) {
+            var literal = text.substring(lastIndex);
+            if (literal) {
+              parts.push({
+                literal: literal
+              });
+            }
+          }
+          if (parts.length) {
+            return parts;
+          } else {
+            return null;
+          }
+        }
+
+        /**
+         * Called to evaluate a previously parsed binding part based on a set of
+         * one or more changed dependencies.
+         *
+         * @param {this} inst Element that should be used as scope for
+         *   binding dependencies
+         * @param {BindingPart} part Binding part metadata
+         * @param {string} path Property/path that triggered this effect
+         * @param {Object} props Bag of current property changes
+         * @param {Object} oldProps Bag of previous values for changed properties
+         * @param {boolean} hasPaths True with `props` contains one or more paths
+         * @return {*} Value the binding part evaluated to
+         * @protected
+         */
+
+      }, {
+        key: '_evaluateBinding',
+        value: function _evaluateBinding(inst, part, path, props, oldProps, hasPaths) {
+          var value = void 0;
+          if (part.signature) {
+            value = runMethodEffect(inst, path, props, oldProps, part.signature);
+          } else if (path != part.source) {
+            value = Polymer.Path.get(inst, part.source);
+          } else {
+            if (hasPaths && Polymer.Path.isPath(path)) {
+              value = Polymer.Path.get(inst, path);
+            } else {
+              value = inst.__data[path];
+            }
+          }
+          if (part.negate) {
+            value = !value;
+          }
+          return value;
+        }
+      }]);
+      return PropertyEffects;
+    }(propertyEffectsBase);
 
     // make a typing for closure :P
+
+
     PropertyEffectsType = PropertyEffects;
 
     return PropertyEffects;
@@ -2656,7 +2834,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *
    * @private
    */
-  let hostStack = {
+  var hostStack = {
 
     stack: [],
 
@@ -2664,33 +2842,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param {*} inst Instance to add to hostStack
      * @this {hostStack}
      */
-    registerHost(inst) {
+    registerHost: function registerHost(inst) {
       if (this.stack.length) {
-        let host = this.stack[this.stack.length-1];
+        var host = this.stack[this.stack.length - 1];
         host._enqueueClient(inst);
       }
     },
+
 
     /**
      * @param {*} inst Instance to begin hosting
      * @this {hostStack}
      */
-    beginHosting(inst) {
+    beginHosting: function beginHosting(inst) {
       this.stack.push(inst);
     },
+
 
     /**
      * @param {*} inst Instance to end hosting
      * @this {hostStack}
      */
-    endHosting(inst) {
-      let stackLen = this.stack.length;
-      if (stackLen && this.stack[stackLen-1] == inst) {
+    endHosting: function endHosting(inst) {
+      var stackLen = this.stack.length;
+      if (stackLen && this.stack[stackLen - 1] == inst) {
         this.stack.pop();
       }
     }
-
   };
-
-})();
-</script>
+})();</script>

@@ -3,13 +3,10 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.behaviour.left.LeftFallBack;
-import com.github.appreciated.app.layout.behaviour.top.TopFallBack;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
-import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -28,15 +25,7 @@ public class AppLayoutBuilder {
     }
 
     public static AppLayoutBuilder get(Behaviour behaviour) {
-        if (Page.getCurrent() != null && Page.getCurrent().getWebBrowser().isIE()) {
-            if (behaviour.isTop()) {
-                return new AppLayoutBuilder(new TopFallBack(behaviour));
-            } else {
-                return new AppLayoutBuilder(new LeftFallBack(behaviour));
-            }
-        } else {
-            return new AppLayoutBuilder(behaviour.getInstance());
-        }
+        return new AppLayoutBuilder(behaviour.getInstance());
     }
 
     public static AppLayoutBuilder get(AppLayout layout) {

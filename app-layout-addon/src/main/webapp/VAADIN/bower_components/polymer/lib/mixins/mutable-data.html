@@ -6,26 +6,25 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../utils/mixin.html">
+--><link rel="import" href="../utils/mixin.html">
 
 <script>
-(function() {
+(function () {
   'use strict';
 
   // Common implementation for mixin & behavior
+
   function mutablePropertyChange(inst, property, value, old, mutableData) {
-    let isObject;
+    var isObject = void 0;
     if (mutableData) {
-      isObject = (typeof value === 'object' && value !== null);
+      isObject = (typeof value === 'undefined' ? 'undefined' : babelHelpers.typeof(value)) === 'object' && value !== null;
       // Pull `old` for Objects from temp cache, but treat `null` as a primitive
       if (isObject) {
         old = inst.__dataTemp[property];
       }
     }
     // Strict equality check, but return false for NaN===NaN
-    let shouldChange = (old !== value && (old === old || value === value));
+    var shouldChange = old !== value && (old === old || value === value);
     // Objects are stored in temporary cache (cleared at end of
     // turn), which is used for dirty-checking
     if (isObject && shouldChange) {
@@ -71,43 +70,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @summary Element class mixin to skip strict dirty-checking for objects
    *   and arrays
    */
-  Polymer.MutableData = Polymer.dedupingMixin(superClass => {
+  Polymer.MutableData = Polymer.dedupingMixin(function (superClass) {
 
     /**
      * @polymer
      * @mixinClass
      * @implements {Polymer_MutableData}
      */
-    class MutableData extends superClass {
-      /**
-       * Overrides `Polymer.PropertyEffects` to provide option for skipping
-       * strict equality checking for Objects and Arrays.
-       *
-       * This method pulls the value to dirty check against from the `__dataTemp`
-       * cache (rather than the normal `__data` cache) for Objects.  Since the temp
-       * cache is cleared at the end of a turn, this implementation allows
-       * side-effects of deep object changes to be processed by re-setting the
-       * same object (using the temp cache as an in-turn backstop to prevent
-       * cycles due to 2-way notification).
-       *
-       * @param {string} property Property name
-       * @param {*} value New property value
-       * @param {*} old Previous property value
-       * @return {boolean} Whether the property should be considered a change
-       * @protected
-       */
-      _shouldPropertyChange(property, value, old) {
-        return mutablePropertyChange(this, property, value, old, true);
+    var MutableData = function (_superClass) {
+      babelHelpers.inherits(MutableData, _superClass);
+
+      function MutableData() {
+        babelHelpers.classCallCheck(this, MutableData);
+        return babelHelpers.possibleConstructorReturn(this, (MutableData.__proto__ || Object.getPrototypeOf(MutableData)).apply(this, arguments));
       }
 
-    }
+      babelHelpers.createClass(MutableData, [{
+        key: '_shouldPropertyChange',
+
+        /**
+         * Overrides `Polymer.PropertyEffects` to provide option for skipping
+         * strict equality checking for Objects and Arrays.
+         *
+         * This method pulls the value to dirty check against from the `__dataTemp`
+         * cache (rather than the normal `__data` cache) for Objects.  Since the temp
+         * cache is cleared at the end of a turn, this implementation allows
+         * side-effects of deep object changes to be processed by re-setting the
+         * same object (using the temp cache as an in-turn backstop to prevent
+         * cycles due to 2-way notification).
+         *
+         * @param {string} property Property name
+         * @param {*} value New property value
+         * @param {*} old Previous property value
+         * @return {boolean} Whether the property should be considered a change
+         * @protected
+         */
+        value: function _shouldPropertyChange(property, value, old) {
+          return mutablePropertyChange(this, property, value, old, true);
+        }
+      }]);
+      return MutableData;
+    }(superClass);
     /** @type {boolean} */
+
+
     MutableData.prototype.mutableData = false;
 
     return MutableData;
-
   });
-
 
   /**
    * Element class mixin to add the optional ability to skip strict
@@ -147,55 +157,65 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * @summary Element class mixin to optionally skip strict dirty-checking
    *   for objects and arrays
    */
-  Polymer.OptionalMutableData = Polymer.dedupingMixin(superClass => {
+  Polymer.OptionalMutableData = Polymer.dedupingMixin(function (superClass) {
 
     /**
      * @mixinClass
      * @polymer
      * @implements {Polymer_OptionalMutableData}
      */
-    class OptionalMutableData extends superClass {
+    var OptionalMutableData = function (_superClass2) {
+      babelHelpers.inherits(OptionalMutableData, _superClass2);
 
-      static get properties() {
-        return {
-          /**
-           * Instance-level flag for configuring the dirty-checking strategy
-           * for this element.  When true, Objects and Arrays will skip dirty
-           * checking, otherwise strict equality checking will be used.
-           */
-          mutableData: Boolean
-        };
+      function OptionalMutableData() {
+        babelHelpers.classCallCheck(this, OptionalMutableData);
+        return babelHelpers.possibleConstructorReturn(this, (OptionalMutableData.__proto__ || Object.getPrototypeOf(OptionalMutableData)).apply(this, arguments));
       }
 
-      /**
-       * Overrides `Polymer.PropertyEffects` to provide option for skipping
-       * strict equality checking for Objects and Arrays.
-       *
-       * When `this.mutableData` is true on this instance, this method
-       * pulls the value to dirty check against from the `__dataTemp` cache
-       * (rather than the normal `__data` cache) for Objects.  Since the temp
-       * cache is cleared at the end of a turn, this implementation allows
-       * side-effects of deep object changes to be processed by re-setting the
-       * same object (using the temp cache as an in-turn backstop to prevent
-       * cycles due to 2-way notification).
-       *
-       * @param {string} property Property name
-       * @param {*} value New property value
-       * @param {*} old Previous property value
-       * @return {boolean} Whether the property should be considered a change
-       * @protected
-       */
-      _shouldPropertyChange(property, value, old) {
-        return mutablePropertyChange(this, property, value, old, this.mutableData);
-      }
-    }
+      babelHelpers.createClass(OptionalMutableData, [{
+        key: '_shouldPropertyChange',
+
+
+        /**
+         * Overrides `Polymer.PropertyEffects` to provide option for skipping
+         * strict equality checking for Objects and Arrays.
+         *
+         * When `this.mutableData` is true on this instance, this method
+         * pulls the value to dirty check against from the `__dataTemp` cache
+         * (rather than the normal `__data` cache) for Objects.  Since the temp
+         * cache is cleared at the end of a turn, this implementation allows
+         * side-effects of deep object changes to be processed by re-setting the
+         * same object (using the temp cache as an in-turn backstop to prevent
+         * cycles due to 2-way notification).
+         *
+         * @param {string} property Property name
+         * @param {*} value New property value
+         * @param {*} old Previous property value
+         * @return {boolean} Whether the property should be considered a change
+         * @protected
+         */
+        value: function _shouldPropertyChange(property, value, old) {
+          return mutablePropertyChange(this, property, value, old, this.mutableData);
+        }
+      }], [{
+        key: 'properties',
+        get: function get() {
+          return {
+            /**
+             * Instance-level flag for configuring the dirty-checking strategy
+             * for this element.  When true, Objects and Arrays will skip dirty
+             * checking, otherwise strict equality checking will be used.
+             */
+            mutableData: Boolean
+          };
+        }
+      }]);
+      return OptionalMutableData;
+    }(superClass);
 
     return OptionalMutableData;
-
   });
 
   // Export for use by legacy behavior
   Polymer.MutableData._mutablePropertyChange = mutablePropertyChange;
-
-})();
-</script>
+})();</script>
