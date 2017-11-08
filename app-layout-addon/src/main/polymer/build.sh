@@ -1,0 +1,2 @@
+polymer install
+polymer build
