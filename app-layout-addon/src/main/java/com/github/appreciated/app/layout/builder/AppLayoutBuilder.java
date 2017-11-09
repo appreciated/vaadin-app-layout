@@ -67,6 +67,11 @@ public class AppLayoutBuilder {
         return this;
     }
 
+    /**
+     * Will have not effect on CDI managed Views
+     * @param element
+     * @return
+     */
     public AppLayoutBuilder withDefaultNavigationView(View element) {
         config.setDefaultNavigationElement(new NavigatorNavigationElement("", null, element));
         return this;
@@ -158,18 +163,42 @@ public class AppLayoutBuilder {
         return add(caption, path, icon, null, element, position);
     }
 
+    /**
+     * Use to add CDI managed Views
+     * @param className
+     * @return
+     */
     public AppLayoutBuilder add(Class<? extends View> className) {
         return add(className, null, Position.DEFAULT);
     }
 
+    /**
+     * Use to add CDI managed Views
+     * @param className
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(Class<? extends View> className, Position position) {
         return add(className, null, position);
     }
 
+    /**
+     * Use to add CDI managed Views
+     * @param className
+     * @param icon
+     * @return
+     */
     public AppLayoutBuilder add(Class<? extends View> className, Resource icon) {
         return add(className, icon, Position.DEFAULT);
     }
 
+    /**
+     * Use to add CDI Views
+     * @param className
+     * @param icon
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(Class<? extends View> className, Resource icon, Position position) {
         return add(new NavigatorNavigationElement(className, icon), position);
     }
@@ -180,7 +209,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
+        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, false, element), position);
         return this;
     }
 

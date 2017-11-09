@@ -25,62 +25,57 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
 
-
     public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
-        this(caption, caption, icon, null, className);
+        this(caption, caption, icon, null, false, className);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
-        this(caption, caption, icon, null, view);
+        this(caption, caption, icon, null, false, view);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        this(caption, caption, icon, badgeHolder, className);
+        this(caption, caption, icon, badgeHolder, false, className);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        this(caption, caption, icon, badgeHolder, view);
-    }
-
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        this.caption = caption;
-        this.icon = icon;
-        this.path = path;
-        this.badgeHolder = badgeHolder;
-        this.className = className;
-        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
-    }
-
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        this.caption = caption;
-        this.path = path;
-        this.badgeHolder = badgeHolder;
-        this.icon = icon;
-        this.view = view;
-        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
+        this(caption, caption, icon, badgeHolder, false, view);
     }
 
     public NavigatorNavigationElement(Class<? extends View> className, Resource icon) {
-        this.className = className;
+        this(null, null, icon, null, true, className);
+    }
+
+    public NavigatorNavigationElement(Class<? extends View> className, Resource icon, DefaultBadgeHolder badgeHolder) {
+        this(null, null, icon, badgeHolder, true, className);
+    }
+
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, boolean isCDI, Class<? extends View> className) {
+        this.caption = caption;
         this.icon = icon;
-        isManaged = true;
+        this.path = path;
+        this.badgeHolder = badgeHolder;
+        this.className = className;
+        isManaged = isCDI;
+        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
+    }
+
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, boolean isCDI, View view) {
+        this.caption = caption;
+        this.icon = icon;
+        this.path = path;
+        this.badgeHolder = badgeHolder;
+        this.view = view;
+        isManaged = isCDI;
+        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
     }
 
     public void addViewToNavigator(Navigator navigator) {
-        if (!isManaged) {
+        if (!isManaged) { // Since it is managed somewhere else
             if (view != null) {
                 navigator.addView(getViewName(), view);
             } else if (className != null) {
                 navigator.addView(getViewName(), className);
             }
-        }
-    }
-
-    public void setAsDefaultView(Navigator navigator) {
-        if (view != null) {
-            navigator.addView("", view);
-        } else if (className != null) {
-            navigator.addView("", className);
         }
     }
 
