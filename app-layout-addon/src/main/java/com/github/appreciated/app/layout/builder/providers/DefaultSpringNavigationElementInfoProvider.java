@@ -27,6 +27,12 @@ public class DefaultSpringNavigationElementInfoProvider implements AppLayoutConf
                 viewName);
     }
 
+    /**
+     * This is a workaround since we don't want Spring as a dependency but also don't want code every user needs to copy
+     *
+     * @param aClass
+     * @return
+     */
     private String getSpringViewName(Class<? extends View> aClass) {
         Annotation a = Arrays.stream(aClass.getAnnotations())
                 .filter(annotation -> annotation.annotationType().getName().equals("com.vaadin.spring.annotation.SpringView"))
