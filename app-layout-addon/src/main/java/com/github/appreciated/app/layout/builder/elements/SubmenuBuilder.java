@@ -60,10 +60,10 @@ public class SubmenuBuilder {
     }
 
     public SubmenuBuilder add(Class<? extends View> className) {
-        return add(className, null);
+        return add((Resource) null, className);
     }
 
-    public SubmenuBuilder add(Class<? extends View> className, Resource icon) {
+    public SubmenuBuilder add(Resource icon, Class<? extends View> className) {
         return add(new NavigatorNavigationElement(icon, className));
     }
 

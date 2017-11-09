@@ -86,21 +86,22 @@ public class AppLayoutConfiguration {
         AppLayoutSessionHelper.setActiveVariant(variant);
 
         setTitle(title);
-        if (true) {
-            navigator = navigatorProducer.apply(instance.getContentHolder());
-            navigator.addViewChangeListener(viewChangeEvent -> {
-                AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-                findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
-                return true;
-            });
-            if (navigatorConsumer != null) {
-                navigatorConsumer.accept(navigator);
-            }
-            if (defaultNavigationElement == null) {
-                defaultNavigationElement = navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-            }
+
+        navigator = navigatorProducer.apply(instance.getContentHolder());
+        navigator.addViewChangeListener(viewChangeEvent -> {
+            AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
+            findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
+            return true;
+        });
+        if (navigatorConsumer != null) {
+            navigatorConsumer.accept(navigator);
+        }
+        if (defaultNavigationElement == null) {
+            defaultNavigationElement = navigationElements.stream()
+                    .filter(element -> element instanceof NavigatorNavigationElement)
+                    .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
+        }
+        if (!CDI) {
             defaultNavigationElement.addViewToNavigator(navigator);
         }
         addComponents(headerElements, instance::addNavigationHeaderElement);
