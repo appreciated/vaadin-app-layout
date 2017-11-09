@@ -111,7 +111,7 @@
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
-            <version>RELEASE</version>
+            <version>4.0.1.Final</version>
         </dependency>
     </dependencies>
 
