@@ -85,6 +85,26 @@ public class SubmenuBuilder {
         return this;
     }
 
+    public SubmenuBuilder add(String caption, String path, Resource icon, Class<? extends View> element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, path, icon, null, element));
+        return this;
+    }
+
+    public SubmenuBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element));
+        return this;
+    }
+
+    public SubmenuBuilder add(String caption, String path, Resource icon, View element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, path, icon, null, element));
+        return this;
+    }
+
+    public SubmenuBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+        this.submenuElements.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element));
+        return this;
+    }
+
     public SubmenuBuilder addClickable(Resource icon, Button.ClickListener listener) {
         return addClickable(null, icon, listener);
     }
