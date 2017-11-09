@@ -121,7 +121,7 @@ public class AppLayoutConfiguration {
     private Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
         if (viewName.equals("")) {
             return navigatorElements.stream()
-                    .filter(element -> element.getViewClassName().equals(defaultNavigationElement.getViewClassName()) || element.getViewName().equals(""))
+                    .filter(element -> (defaultNavigationElement != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())) || element.getViewName().equals(""))
                     .findFirst();
         }
         return navigatorElements.stream()
@@ -142,7 +142,8 @@ public class AppLayoutConfiguration {
             NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
             nelement.setCDI(CDI);
             nelement.setNavigationElementInfoProvider(navigationElementInfoProvider);
-            if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
+            if ((CDI == false && nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) ||
+                    (CDI == true && nelement.getViewName().equals(""))) {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
             }
             navigatorElements.add(nelement);
