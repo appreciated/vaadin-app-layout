@@ -68,7 +68,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * Will have not effect on if cdi is enabled
+     * This Will have not effect on if cdi is enabled
      *
      * @param element
      * @return
@@ -177,6 +177,14 @@ public class AppLayoutBuilder {
 
     public AppLayoutBuilder add(Resource icon, Class<? extends View> className, Position position) {
         return add(new NavigatorNavigationElement(icon, className), position);
+    }
+
+    public AppLayoutBuilder add(String caption, String path, Resource icon, Class<? extends View> className) {
+        return add(caption, path, icon, null, className, Position.DEFAULT);
+    }
+
+    public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        return add(caption, path, icon, badgeHolder, className, Position.DEFAULT);
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {

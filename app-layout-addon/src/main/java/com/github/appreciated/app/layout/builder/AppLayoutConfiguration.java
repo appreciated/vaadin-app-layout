@@ -103,6 +103,8 @@ public class AppLayoutConfiguration {
         }
         if (!CDI) {
             defaultNavigationElement.addViewToNavigator(navigator);
+        } else if (CDI && defaultNavigationElement != null) {
+            System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
         }
         addComponents(headerElements, instance::addNavigationHeaderElement);
         addComponents(navigationElements, instance::addNavigationElement);

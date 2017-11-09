@@ -87,7 +87,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public String getViewName() {
         if (isCDI) {
-            return info.getViewName();
+            if (info != null) {
+                return info.getViewName();
+            } else {
+                return path;
+            }
         } else if (viewNameInterceptor == null) {
             return path;
         } else {
@@ -148,7 +152,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
         if (isCDI) {
-            if (navigationElementInfoProvider == null) {
+            if (caption == null && icon == null && className == null) {
                 throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
             } else {
                 this.navigationElementInfoProvider = navigationElementInfoProvider;
