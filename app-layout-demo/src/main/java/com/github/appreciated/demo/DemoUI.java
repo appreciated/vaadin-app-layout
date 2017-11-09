@@ -75,11 +75,11 @@ public class DemoUI extends UI {
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
+
                 .withNavigatorConsumer(navigator -> {/* Do someting with it */})
                 .add(new MenuHeader("Version 0.9.14", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
-                .add(
-                        SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                                 .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                                 .add("Contact", VaadinIcons.CONNECT, View3.class)
                                 .add("More", VaadinIcons.COG, View4.class)
