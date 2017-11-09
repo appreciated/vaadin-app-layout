@@ -96,12 +96,12 @@ public class AppLayoutConfiguration {
         if (navigatorConsumer != null) {
             navigatorConsumer.accept(navigator);
         }
-        if (defaultNavigationElement == null) {
-            defaultNavigationElement = navigationElements.stream()
-                    .filter(element -> element instanceof NavigatorNavigationElement)
-                    .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-        }
         if (!CDI) {
+            if (defaultNavigationElement == null) {
+                defaultNavigationElement = navigationElements.stream()
+                        .filter(element -> element instanceof NavigatorNavigationElement)
+                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
+            }
             defaultNavigationElement.addViewToNavigator(navigator);
         } else if (CDI && defaultNavigationElement != null) {
             System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
