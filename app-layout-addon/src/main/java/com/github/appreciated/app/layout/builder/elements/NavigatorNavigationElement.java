@@ -13,7 +13,7 @@ import com.vaadin.server.Resource;
 
 
 public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> {
-    private boolean isManaged = false;
+    private boolean isCDI = false;
     private String caption;
     private View view;
     private Resource icon;
@@ -25,52 +25,50 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
 
-    public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
-        this(caption, caption, icon, null, false, className);
-    }
-
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
-        this(caption, caption, icon, null, false, view);
-    }
-
-    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        this(caption, caption, icon, badgeHolder, false, className);
+        this(caption, caption, icon, null, view);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        this(caption, caption, icon, badgeHolder, false, view);
+        this(caption, caption, icon, badgeHolder, view);
     }
 
-    public NavigatorNavigationElement(Class<? extends View> className, Resource icon) {
-        this(null, null, icon, null, true, className);
-    }
-
-    public NavigatorNavigationElement(Class<? extends View> className, Resource icon, DefaultBadgeHolder badgeHolder) {
-        this(null, null, icon, badgeHolder, true, className);
-    }
-
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, boolean isCDI, Class<? extends View> className) {
-        this.caption = caption;
-        this.icon = icon;
-        this.path = path;
-        this.badgeHolder = badgeHolder;
-        this.className = className;
-        isManaged = isCDI;
-        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
-    }
-
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, boolean isCDI, View view) {
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
         this.caption = caption;
         this.icon = icon;
         this.path = path;
         this.badgeHolder = badgeHolder;
         this.view = view;
-        isManaged = isCDI;
+        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
+    }
+
+    public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
+        this(caption, caption, icon, null, className);
+    }
+
+    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        this(caption, caption, icon, badgeHolder, className);
+    }
+
+    public NavigatorNavigationElement(Resource icon, Class<? extends View> className) {
+        this(null, null, icon, null, className);
+    }
+
+    public NavigatorNavigationElement(Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        this(null, null, icon, badgeHolder, className);
+    }
+
+    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+        this.caption = caption;
+        this.icon = icon;
+        this.path = path;
+        this.badgeHolder = badgeHolder;
+        this.className = className;
         provider = new DefaultLeftNavigationBadgeElementComponentProvider();
     }
 
     public void addViewToNavigator(Navigator navigator) {
-        if (!isManaged) { // Since it is managed somewhere else
+        if (!isCDI) { // Since it is managed somewhere else
             if (view != null) {
                 navigator.addView(getViewName(), view);
             } else if (className != null) {
@@ -88,7 +86,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public String getViewName() {
-        if (isManaged) {
+        if (isCDI) {
             return info.getViewName();
         } else if (viewNameInterceptor == null) {
             return path;
@@ -149,7 +147,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
-        if (isManaged) {
+        if (isCDI) {
             if (navigationElementInfoProvider == null) {
                 throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
             } else {
@@ -167,5 +165,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
                 this.icon = info.getIcon();
             }
         }
+    }
+
+    public boolean isCDI() {
+        return isCDI;
+    }
+
+    public void setCDI(boolean CDI) {
+        if (view != null) {
+            throw new IllegalStateException("View must !not! be set! add your cdi views via ClassName or disable cdi support");
+        }
+        isCDI = CDI;
     }
 }

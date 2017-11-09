@@ -34,174 +34,68 @@ public class SubmenuBuilder {
         return new SubmenuBuilder(title, icon);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @return
-     */
     public SubmenuBuilder add(String caption) {
         return this.add(caption, (Resource) null);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon) {
         return add(caption, icon, null, (View) null);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @param badgeHolder
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder) {
         return add(caption, icon, badgeHolder, (View) null);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, View element) {
         return add(caption, null, (DefaultBadgeHolder) null, element);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon, View element) {
         return add(caption, icon, null, element);
-
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @param badgeHolder
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
         this.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return this;
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param className
-     * @return
-     */
     public SubmenuBuilder add(Class<? extends View> className) {
         return add(className, null);
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param className
-     * @return
-     */
     public SubmenuBuilder add(Class<? extends View> className, Resource icon) {
-        return add(new NavigatorNavigationElement(className, icon));
+        return add(new NavigatorNavigationElement(icon, className));
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param caption
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, Class<? extends View> element) {
         return this.add(caption, null, element);
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon, Class<? extends View> element) {
         this.add(new NavigatorNavigationElement(caption, icon, element));
         return this;
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param icon
-     * @param badgeHolder
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
         this.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return this;
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param path
-     * @param icon
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, String path, Resource icon, Class<? extends View> element) {
         return this.add(caption, path, icon, null, element);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param path
-     * @param icon
-     * @param badgeHolder
-     * @param element
-     * @return
-     */
-
     public SubmenuBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
-        this.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, false, element));
+        this.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element));
         return this;
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param path
-     * @param icon
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, String path, Resource icon, View element) {
         return this.add(caption, path, icon, null, element);
     }
 
-    /**
-     * Not recommended to add CDI managed Views
-     * @param caption
-     * @param path
-     * @param icon
-     * @param badgeHolder
-     * @param element
-     * @return
-     */
     public SubmenuBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
-        this.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, false, element));
+        this.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element));
         return this;
     }
 

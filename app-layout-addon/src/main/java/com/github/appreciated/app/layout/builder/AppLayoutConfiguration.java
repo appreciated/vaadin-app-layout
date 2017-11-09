@@ -50,6 +50,7 @@ public class AppLayoutConfiguration {
 
     private Provider<String, String> viewNameInterceptor = null;
     private Provider<String, String> captionInterceptor;
+    private boolean CDI;
 
     public AppLayoutConfiguration(AppLayout instance) {
         this.instance = instance;
@@ -136,6 +137,7 @@ public class AppLayoutConfiguration {
     private void setComponentProviders(AbstractNavigationElement element) {
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
+            nelement.setCDI(CDI);
             nelement.setNavigationElementInfoProvider(navigationElementInfoProvider);
             if (nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
@@ -247,6 +249,10 @@ public class AppLayoutConfiguration {
 
     public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
+    }
+
+    public void setCDI(boolean CDI) {
+        this.CDI = CDI;
     }
 
     @FunctionalInterface

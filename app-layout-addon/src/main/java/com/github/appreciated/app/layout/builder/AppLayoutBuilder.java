@@ -68,7 +68,8 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * Will have not effect on CDI managed Views
+     * Will have not effect on if cdi is enabled
+     *
      * @param element
      * @return
      */
@@ -97,12 +98,11 @@ public class AppLayoutBuilder {
         return this;
     }
 
-    /**
-     * If you use this you will need to do the "navigator part" manually, this will simply add a component to the menu
-     *
-     * @param element
-     * @return
-     */
+    public AppLayoutBuilder withCDI(boolean cdi) {
+        config.setCDI(cdi);
+        return this;
+    }
+
     public AppLayoutBuilder add(Component element) {
         return add(element, Position.DEFAULT);
     }
@@ -163,44 +163,20 @@ public class AppLayoutBuilder {
         return add(caption, path, icon, null, element, position);
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param className
-     * @return
-     */
     public AppLayoutBuilder add(Class<? extends View> className) {
-        return add(className, null, Position.DEFAULT);
+        return add(null, className, Position.DEFAULT);
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param className
-     * @param position
-     * @return
-     */
     public AppLayoutBuilder add(Class<? extends View> className, Position position) {
-        return add(className, null, position);
+        return add(null, className, position);
     }
 
-    /**
-     * Use to add CDI managed Views
-     * @param className
-     * @param icon
-     * @return
-     */
-    public AppLayoutBuilder add(Class<? extends View> className, Resource icon) {
-        return add(className, icon, Position.DEFAULT);
+    public AppLayoutBuilder add(Resource icon, Class<? extends View> className) {
+        return add(icon, className, Position.DEFAULT);
     }
 
-    /**
-     * Use to add CDI Views
-     * @param className
-     * @param icon
-     * @param position
-     * @return
-     */
-    public AppLayoutBuilder add(Class<? extends View> className, Resource icon, Position position) {
-        return add(new NavigatorNavigationElement(className, icon), position);
+    public AppLayoutBuilder add(Resource icon, Class<? extends View> className, Position position) {
+        return add(new NavigatorNavigationElement(icon, className), position);
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
@@ -209,7 +185,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, false, element), position);
+        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
 
