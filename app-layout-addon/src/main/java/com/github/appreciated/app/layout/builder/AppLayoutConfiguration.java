@@ -155,6 +155,7 @@ public class AppLayoutConfiguration {
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement selement = (SubmenuNavigationElement) element;
             selement.setCaptionInterceptor(captionInterceptor);
+            setComponentProviders(selement);
             selement.getSubmenuElements().forEach(element1 -> setComponentProviders(element1));
         } else if (element instanceof SectionNavigationElement) {
             SectionNavigationElement selement = (SectionNavigationElement) element;
