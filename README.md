@@ -41,13 +41,7 @@ mvn install
 ```
 git clone git@github.com:appreciated/vaadin-app-layout.git
 ```
-#### 2. (certainly [bower](https://bower.io/) needs to be installed to do this)
-
-```
-cd <project-root-dir>/vaadin-app-layout/app-layout-addon/src/main/webapp/VAADIN/
-bower install
-```
-#### 3. 
+#### 2. 
 
 ```
 cd <project-root-dir>/vaadin-app-layout
