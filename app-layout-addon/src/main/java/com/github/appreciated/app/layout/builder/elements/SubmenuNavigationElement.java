@@ -43,7 +43,7 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
 
     @Override
     public void setProvider(AppLayout provider) {
-        setProvider(provider.getDrawerSubmenuElementProvider());
+        setProvider(provider, AppLayout.Position.DRAWER);
     }
 
     @Override
@@ -51,6 +51,9 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerSubmenuElementProvider());
+                for (AbstractNavigationElement element : submenuElements) {
+                    element.setProvider(provider, position);
+                }
                 break;
             case TOP:
                 setProvider(provider.getTopSubmenuElementProvider());
