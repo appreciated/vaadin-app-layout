@@ -180,8 +180,10 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void setCDI(boolean CDI) {
-        if (view != null) {
-            throw new IllegalStateException("View must !not! be set! add your cdi views via ClassName or disable cdi support");
+        if (CDI) {
+            if (view != null) {
+                throw new IllegalStateException("View must !not! be set! add your cdi views via ClassName or disable cdi support");
+            }
         }
         isCDI = CDI;
     }
