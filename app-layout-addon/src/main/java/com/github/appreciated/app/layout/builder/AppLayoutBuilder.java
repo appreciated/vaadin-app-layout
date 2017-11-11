@@ -136,7 +136,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, Class<? extends View> element) {
-        return add(caption, icon, element, Position.DEFAULT);
+        return add(caption, icon, null, element);
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
@@ -144,7 +144,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder add(String caption, Resource icon, View element) {
-        return add(caption, icon, element, Position.DEFAULT);
+        return add(caption, icon, null, element, Position.DEFAULT);
     }
 
     public AppLayoutBuilder add(String caption, Class<? extends View> element) {
@@ -199,6 +199,16 @@ public class AppLayoutBuilder {
 
     public AppLayoutBuilder add(String caption, Resource icon, View element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, icon, element), position);
+        return this;
+    }
+
+    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, Position position) {
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
+        return this;
+    }
+
+    public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View element, Position position) {
+        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
 
