@@ -24,7 +24,7 @@
     transition: opacity 0.3s, transform 0.3s !important;
     pointer-events: none;
   }
-  .app-layout-expanding-menu-container-open .app-layout-expanding-menu-container-button:after {
+  .app-layout-expanding-menu-container-open > div > .app-layout-expanding-menu-container-button:after {
     transform: rotate(90deg);
   }
   .app-layout-submenu-container {
