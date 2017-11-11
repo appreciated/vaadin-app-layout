@@ -202,6 +202,11 @@ public class AppLayoutBuilder {
         return this;
     }
 
+    public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), Position.DEFAULT);
+        return this;
+    }
+
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
         return this;
