@@ -18,8 +18,8 @@ $al-drawer-width: 256px !default;
 $al-drawer-small-width: 64px !default;
 $al-drawer-hybrid-small-responsive-width: 1024px !default;
 
-$al-menu-button-active-background-color: rgba(valo-font-color($al-drawer-background-color), 0.1) !default; // currently only used by material
-$al-menu-button-active-font-color: $v-focus-color; // currently only used by material
+$al-menu-button-active-background-color: rgba(valo-font-color($al-drawer-background-color), 0.1) !default; // only used by material design
+$al-menu-button-active-font-color: $v-focus-color; // only used by material design
 $al-menu-button-badge-background-color: $v-focus-color;
 $al-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0);
 $al-menu-button-badge-border-radius: 5px;
@@ -113,7 +113,7 @@ $al-menu-submenu-max-height: 999px !default;
     overflow: hidden;
   }
 
-  // fixed for v-grid
+  // fixes https://github.com/appreciated/vaadin-app-layout/issues/58 for v-grid
   .v-grid {
     .v-grid-scroller-horizontal {
       width: calc(100% - 17px) !important; // - 17px for the vertical scroller
