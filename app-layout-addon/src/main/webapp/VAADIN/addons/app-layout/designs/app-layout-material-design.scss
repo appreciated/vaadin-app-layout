@@ -2,8 +2,8 @@
   .app-layout-material-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
-      background: $app-menu-button-badge-background-color;
-      color: $app-menu-button-badge-font-color;
+      background: $al-menu-button-badge-background-color;
+      color: $al-menu-button-badge-font-color;
       font-size: 13px;
       height: 20px;
       line-height: 20px;
@@ -20,8 +20,8 @@
       pointer-events: none;
     }
     .app-bar-badge {
-      background: $app-menu-button-badge-background-color;
-      color: valo-font-color($app-menu-button-badge-background-color);
+      background: $al-menu-button-badge-background-color;
+      color: valo-font-color($al-menu-button-badge-background-color);
       font-size: 13px;
       min-width: 18px;
       min-height: 18px;
@@ -45,21 +45,21 @@
       padding-right: 50px;
     }
 
-    @if $disable-active-style == false {
+    @if $al-menu-disable-active-style == false {
       .app-layout-menu-element-active .app-layout-menu-button {
-        background: $app-menu-button-active-background-color !important;
-        color: $app-menu-button-active-font-color !important;
+        background: $al-menu-button-active-background-color !important;
+        color: $al-menu-button-active-font-color !important;
       }
       .app-layout-menu-button:after {
         box-shadow: none !important;
         border-left: none;
       }
       &.app-layout-behaviour-top .app-layout-menu-element-active, &.app-layout-behaviour-top-large .app-layout-menu-element-active {
-        border-bottom: 2px solid $app-bar-font-color;
+        border-bottom: 2px solid $al-bar-font-color;
       }
       &.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, &.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
         background: rgba(70, 70, 70, 0) !important;
-        color: $app-bar-font-color !important;
+        color: $al-bar-font-color !important;
       }
     }
     .app-layout-round-image {
