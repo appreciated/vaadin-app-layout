@@ -9,7 +9,7 @@
   }
 }
 
-@media only screen and (min-width: 641px) and (max-width: $al-drawer-hybrid-small-responsive-width) {
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
   .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar {
     --app-drawer-width: $al-drawer-small-width !important;
     app-drawer[persistent].app-drawer-1{

@@ -16,7 +16,6 @@ $al-drawer-font-color: valo-font-color($al-drawer-background-color) !default;
 $al-drawer-persistent-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15) !default;
 $al-drawer-width: 256px !default;
 $al-drawer-small-width: 64px !default;
-$al-drawer-hybrid-small-responsive-width: 1024px !default;
 
 $al-menu-button-active-background-color: rgba(valo-font-color($al-drawer-background-color), 0.1) !default; // only used by material design
 $al-menu-button-active-font-color: $v-focus-color; // only used by material design
