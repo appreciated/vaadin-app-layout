@@ -93,13 +93,13 @@ $al-menu-submenu-max-height: 999px !default;
     transition: margin 0.2s ease, padding 0.2s ease;
   }
   app-drawer[opened][persistent] + .app-bar-application-content, app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
-    @include application-content(64px, 256px);
+    @include application-content($al-bar-height, $al-drawer-width);
   }
   app-header-layout.small app-drawer[opened] + .app-bar-application-content, app-header-layout.small app-drawer[opened] + #contentContainer .app-bar-application-content {
-    @include application-content(64px, 64px);
+    @include application-content($al-bar-height, $al-drawer-small-width);
   }
   .app-bar-application-content {
-    @include application-content(64px, 0px);
+    @include application-content($al-bar-height, 0px);
   }
   .app-layout-menu-bar-element {
     padding-left: 16px;

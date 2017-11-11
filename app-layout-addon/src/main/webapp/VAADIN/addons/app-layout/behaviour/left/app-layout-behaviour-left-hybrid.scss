@@ -16,12 +16,12 @@
       transition: color 0.3s, height 0.2s, width 0.3s;
     }
     .small {
-      --app-drawer-width: 64px;
+      --app-drawer-width: $al-drawer-small-width;
       app-drawer[persistent].app-drawer-1{
-        width: 64px !important;
+        width: $al-drawer-small-width !important;
       }
       .app-bar-application-content {
-        left: 64px !important;
+        left: $al-drawer-small-width !important;
       }
       .app-layout-menu-button-badge {
         background: $al-menu-button-badge-background-color;
@@ -38,8 +38,8 @@
         padding-left: 0px;
         padding-right: 0px;
         .app-layout-round-image {
-          width: 64px !important;
-          height: 64px !important;
+          width: $al-drawer-small-width !important;
+          height: $al-drawer-small-width !important;
           padding: 7px;
         }
         .app-layout-menu-header-title {

@@ -9,7 +9,7 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-overlay {
     .app-bar-application-content {
-      @include media-application-content (64px, 256px);
+      @include media-application-content ($al-bar-height, $al-drawer-width);
     }
   }
 }

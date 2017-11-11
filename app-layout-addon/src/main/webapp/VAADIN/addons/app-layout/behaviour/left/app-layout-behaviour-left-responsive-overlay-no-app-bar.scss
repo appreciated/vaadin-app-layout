@@ -1,7 +1,7 @@
 @media only screen and (max-width: 640px) {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     .app-bar-application-content {
-      @include media-application-content(64px, 0px);
+      @include media-application-content($al-bar-height, 0px);
     }
   }
 }
@@ -9,7 +9,7 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     .app-bar-application-content {
-      @include media-application-content (0px, 256px);
+      @include media-application-content (0px, $al-drawer-width);
     }
   }
 }

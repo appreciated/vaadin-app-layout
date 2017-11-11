@@ -4,19 +4,19 @@
       display: none !important;
     }
     .app-bar-application-content {
-      @include media-application-content (0px, 256px);
+      @include media-application-content (0px, $al-drawer-width);
     }
   }
 }
 
 @media only screen and (min-width: 641px) and (max-width: $al-drawer-hybrid-small-responsive-width) {
   .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar {
-    --app-drawer-width: 64px !important;
+    --app-drawer-width: $al-drawer-small-width !important;
     app-drawer[persistent].app-drawer-1{
-      width: 64px !important;
+      width: $al-drawer-small-width !important;
     }
     .app-bar-application-content {
-      left: 64px !important;
+      left: $al-drawer-small-width !important;
     }
     .app-layout-menu-button-badge {
       background: $al-menu-button-badge-background-color;
@@ -33,8 +33,8 @@
       padding-left: 0px !important;
       padding-right: 0px !important;
       .app-layout-round-image {
-        width: 64px !important;
-        height: 64px !important;
+        width: $al-drawer-small-width !important;
+        height: $al-drawer-small-width !important;
         padding: 7px;
       }
       .app-layout-menu-header-title {
@@ -58,7 +58,7 @@
       opacity: 0 !important;
     }
     .app-bar-application-content {
-      @include media-application-content (0px, 64px);
+      @include media-application-content (0px, $al-drawer-small-width);
     }
   }
 }
