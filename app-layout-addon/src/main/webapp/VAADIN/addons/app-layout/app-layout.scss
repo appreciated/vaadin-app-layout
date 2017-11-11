@@ -1,3 +1,4 @@
+// Fix for https://github.com/appreciated/vaadin-app-layout/issues/40
 @if not variable-exists(v-background-color) {
   $v-background-color: #fafafa !default;
 }
