@@ -143,7 +143,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void setViewNameInterceptor(Provider<String, String> viewNameInterceptor) {
-        this.viewNameInterceptor = viewNameInterceptor;
+        if (isCDI) {
+            throw new IllegalStateException("It is not possible to use the ViewNameInterceptor in combination with CDI");
+        } else {
+            this.viewNameInterceptor = viewNameInterceptor;
+        }
     }
 
     public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
