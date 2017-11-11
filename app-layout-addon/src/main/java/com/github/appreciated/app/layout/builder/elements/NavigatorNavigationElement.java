@@ -182,7 +182,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     public void setCDI(boolean CDI) {
         if (CDI) {
             if (view != null) {
-                throw new IllegalStateException("View must !not! be set! add your cdi views via ClassName or disable cdi support");
+                throw new IllegalStateException("View must not be set if using CDI! Add your CDI views as Class or disable CDI");
             }
         }
         isCDI = CDI;
