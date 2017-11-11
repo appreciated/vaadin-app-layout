@@ -86,16 +86,23 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public String getViewName() {
-        if (isCDI) {
-            if (info != null) {
-                return info.getViewName();
-            } else {
-                return path;
+        if (!isCDI) {
+            if (viewNameInterceptor != null) {
+                if (path != null) {
+                    return viewNameInterceptor.get(path);
+                } else if (info != null) {
+                    return viewNameInterceptor.get(info.getViewName());
+                } else {
+                    return viewNameInterceptor.get(caption);
+                }
             }
-        } else if (viewNameInterceptor == null) {
+        }
+        if (path != null) {
             return path;
+        } else if (info != null) {
+            return info.getViewName();
         } else {
-            return viewNameInterceptor.get(caption);
+            return caption;
         }
     }
 
@@ -143,7 +150,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void setViewNameInterceptor(Provider<String, String> viewNameInterceptor) {
-        if (isCDI) {
+        if (isCDI && viewNameInterceptor != null) {
             throw new IllegalStateException("It is not possible to use the ViewNameInterceptor in combination with CDI");
         } else {
             this.viewNameInterceptor = viewNameInterceptor;
@@ -155,13 +162,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
-        if (isCDI) {
-            if (caption == null && icon == null && className == null) {
-                throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
-            } else {
-                this.navigationElementInfoProvider = navigationElementInfoProvider;
-                refreshInfo();
-            }
+        if (caption == null && icon == null && className == null && navigationElementInfoProvider == null) {
+            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
+        } else {
+            this.navigationElementInfoProvider = navigationElementInfoProvider;
+            refreshInfo();
         }
     }
 
