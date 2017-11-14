@@ -5,11 +5,9 @@ A collection of ready to use templates for the polymer component [app-layout](ht
 <br>
 ![Markup](https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true "App-Layout Markup")
 
-## Vaadin Directory
+## [Vaadin Directory](https://vaadin.com/directory#!addon/app-layout-add-on)
 
-For download and reviews, go to https://vaadin.com/directory#!addon/app-layout-add-on
-
-## [Demo](https://app-layout-wrapper.herokuapp.com/ )
+## [Demo](https://app-layout-wrapper.herokuapp.com/)
 
 ## Installation
 
