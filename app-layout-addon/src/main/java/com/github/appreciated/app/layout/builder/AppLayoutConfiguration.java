@@ -110,7 +110,7 @@ public class AppLayoutConfiguration {
         addComponents(navigationElements, instance::addNavigationElement);
         addComponents(footerElements, instance::addNavigationFooterElement);
         appBarElements.forEach(instance::addAppBarElement);
-        setDesign(design);
+        instance.setDesign(design);
         if (appBarIconComponent != null) {
             instance.addAppBarIcon(appBarIconComponent);
         }
