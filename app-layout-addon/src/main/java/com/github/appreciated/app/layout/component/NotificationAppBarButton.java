@@ -20,10 +20,30 @@ public class NotificationAppBarButton extends AppBarBadgeButton {
         this(holder, info -> new MaterialNotificationWindow(info));
     }
 
+    public NotificationAppBarButton(NotificationHolder holder, boolean closeOnClick) {
+        this(holder, closeOnClick, info -> new MaterialNotificationWindow(info));
+    }
+
     public NotificationAppBarButton(NotificationHolder holder, Provider<NotificationWindow, NotificationHolder> windowProvider) {
+        this(holder, false, windowProvider);
+    }
+
+    public NotificationAppBarButton(NotificationHolder holder, boolean closeOnClick, Provider<NotificationWindow, NotificationHolder> windowProvider) {
         super(BELL, holder);
         provider = windowProvider;
         getButton().addClickListener((Button.ClickListener) this::buttonClick);
+        if (closeOnClick) {
+            holder.addStatusListener(new NotificationHolder.NotificationListener() {
+                @Override
+                public void onNotificationChanges(NotificationHolder newStatus) {
+                }
+
+                @Override
+                public void onUnreadCountChange(NotificationHolder holder) {
+                    getUI().access(window::close);
+                }
+            });
+        }
     }
 
     @Override
