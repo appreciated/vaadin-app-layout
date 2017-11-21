@@ -58,7 +58,7 @@ public class AppLayoutBuilder {
     }
 
     public AppLayoutBuilder withDesign(AppBarDesign design) {
-        instance.setDesign(design);
+        config.setDesign(design);
         return this;
     }
 
