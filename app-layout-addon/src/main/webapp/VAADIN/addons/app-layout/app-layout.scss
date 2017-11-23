@@ -11,6 +11,9 @@ $al-bar-z-index: 10 !default;
 
 $al-drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
 $al-drawer-background-color: lighten($v-background-color, 5%) !default;
+
+$al-drawer-submenu-indention: 0px !default;
+$al-drawer-submenu-small-indention: 0px !default;
 $al-drawer-submenu-background-color: rgba(valo-font-color($al-drawer-background-color), 0.05) !default;
 $al-drawer-font-color: valo-font-color($al-drawer-background-color) !default;
 $al-drawer-persistent-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15) !default;

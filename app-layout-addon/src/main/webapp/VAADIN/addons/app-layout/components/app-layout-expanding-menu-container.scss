@@ -29,6 +29,7 @@
   }
   .app-layout-submenu-container {
     background: $al-drawer-submenu-background-color;
+    padding-left: $al-drawer-submenu-indention;
   }
   .app-layout-top-menu.v-menubar * {
     color: $al-bar-font-color !important;

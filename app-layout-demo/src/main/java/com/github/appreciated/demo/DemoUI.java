@@ -71,7 +71,7 @@ public class DemoUI extends UI {
         holder.removeAllComponents();
         AppLayout drawer = AppLayoutBuilder.get(variant)
                 .withTitle("App Layout")
-                .addToAppBar(new NotificationAppBarButton(notifications))
+                .addToAppBar(new NotificationAppBarButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)

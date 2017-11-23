@@ -72,6 +72,9 @@
     .app-bar-application-content {
       @include media-application-content (0px, $al-drawer-small-width);
     }
+    .app-layout-submenu-container {
+      padding-left: $al-drawer-submenu-small-indention !important;
+    }
   }
 }
 

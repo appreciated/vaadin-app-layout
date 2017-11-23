@@ -141,5 +141,8 @@
       left: 0px;
       pointer-events: none;
     }
+    .app-layout-submenu-container {
+      padding-left: $al-drawer-submenu-small-indention;
+    }
   }
 }
