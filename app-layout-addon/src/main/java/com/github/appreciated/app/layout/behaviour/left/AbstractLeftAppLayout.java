@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
@@ -21,8 +22,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 import java.util.List;
 
-
-public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout {
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 
@@ -67,7 +67,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementWrapper);
+        appBar.addComponents(titleWrapper, appBarElementWrapper, new AppLayoutResizeListener(this));
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
@@ -280,5 +280,10 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     @Override
     public void addToTopHeader(Component component) {
         throw new UnsupportedOperationException("The Left Layout does not support this operation");
+    }
+
+    @Override
+    public void onAppLayoutResized() {
+        getUI().access(() -> getUI().markAsDirty());
     }
 }

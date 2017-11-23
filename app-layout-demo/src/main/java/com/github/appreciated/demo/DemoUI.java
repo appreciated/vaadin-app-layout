@@ -18,6 +18,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -31,7 +32,7 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")
-@Push
+@Push(transport = Transport.WEBSOCKET_XHR)
 public class DemoUI extends UI {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
@@ -46,6 +47,7 @@ public class DemoUI extends UI {
         setContent(holder);
         holder.setSizeFull();
         notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+
     }
 
     @Override
@@ -79,10 +81,10 @@ public class DemoUI extends UI {
                 .add(new MenuHeader("Version 0.9.17", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
-                                .add("Contact", VaadinIcons.CONNECT, View3.class)
-                                .add("More", VaadinIcons.COG, View4.class)
-                                .build())
+                        .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
+                        .add("Contact", VaadinIcons.CONNECT, View3.class)
+                        .add("More", VaadinIcons.COG, View4.class)
+                        .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
                 .addClickable("Set Behaviour", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
@@ -93,13 +95,6 @@ public class DemoUI extends UI {
 
     private void openModeSelector(Behaviour variant) {
         UI.getCurrent().addWindow(new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)));
-    }
-
-    public static class View1 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
