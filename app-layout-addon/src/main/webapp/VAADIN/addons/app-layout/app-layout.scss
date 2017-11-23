@@ -115,25 +115,6 @@ $al-menu-submenu-max-height: 999px !default;
     overflow: hidden;
   }
 
-  // fixes https://github.com/appreciated/vaadin-app-layout/issues/58 for v-grid
-  /*
-  .v-grid {
-    .v-grid-scroller-horizontal {
-      width: calc(100% - 17px) !important; // - 17px for the vertical scroller
-      display: inherit !important;
-    }
-    .v-grid-scroller-vertical {
-      display: inherit !important;
-    }
-    .v-grid-tablewrapper {
-      width: calc(100% - 17px) !important; // - 17px for the vertical scroller
-    }
-    .v-grid-header-deco {
-      display: inherit !important;
-    }
-  }
-  */
-
   @include app-layout-default-design;
   @include app-layout-material-design;
   @include app-layout-custom-design;
