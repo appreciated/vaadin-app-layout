@@ -25,6 +25,18 @@ window.com_github_appreciated_app_layout_behaviour_listener_AppLayoutResizeListe
             }
         }
     });
+
+    if (HTMLImports.ready) {
+        setTimeout(function () {
+            self.onAppLayoutResized();
+        }, 800);
+    } else {
+        HTMLImports.whenReady(function () {
+            setTimeout(function () {
+                self.onAppLayoutResized();
+            }, 800);
+        });
+    }
     document.querySelector('paper-icon-button').addEventListener('click', function () {
         setTimeout(function () {
             self.onAppLayoutResized();

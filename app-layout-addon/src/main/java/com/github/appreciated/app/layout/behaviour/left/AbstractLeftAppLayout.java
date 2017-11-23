@@ -52,7 +52,6 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-
         menuHolder.setSizeFull();
         menuHolder.grow(menuElementHolder);
         menuHolder.setOverflowAuto(true);

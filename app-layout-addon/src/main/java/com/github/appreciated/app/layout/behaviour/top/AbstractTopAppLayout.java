@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
@@ -26,7 +27,7 @@ import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.DRA
 import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.TOP;
 
 
-public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayout {
+public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayout, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 
@@ -71,7 +72,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementWrapper);
+        appBar.addComponents(titleWrapper, appBarElementWrapper, new AppLayoutResizeListener(this));
         appBar.grow(titleWrapper);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
@@ -277,5 +278,10 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     public void addToDrawerHeader(Component component) {
         menuHeaderHolder.setVisible(true);
         menuHeaderHolder.addComponent(component);
+    }
+
+    @Override
+    public void onAppLayoutResized() {
+        getUI().access(() -> markAsDirty());
     }
 }
