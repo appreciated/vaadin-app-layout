@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.1.6</vaadin.version>
-        <vaadin.plugin.version>8.1.6</vaadin.plugin.version>
+        <vaadin.version>8.1.7</vaadin.version>
+        <vaadin.plugin.version>8.1.7</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
     </properties>
