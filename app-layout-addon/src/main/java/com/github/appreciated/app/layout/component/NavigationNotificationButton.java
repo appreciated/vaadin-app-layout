@@ -14,7 +14,10 @@ import com.vaadin.ui.UI;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
-
+/**
+ * A component which opens a window containing the notifications on click closely to this component. Also showing an
+ * indicator how many new notifications are available
+ */
 public class NavigationNotificationButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
 
     private final NavigationButton button;

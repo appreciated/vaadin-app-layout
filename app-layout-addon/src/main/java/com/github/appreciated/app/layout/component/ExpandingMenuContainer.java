@@ -7,6 +7,9 @@ import com.vaadin.ui.VerticalLayout;
 
 import static com.github.appreciated.app.layout.Styles.*;
 
+/**
+ * The component which is used for submenu elements. On click it toggles a css class which causes it to grow / shrink
+ */
 public class ExpandingMenuContainer extends VerticalLayout {
 
     private final VerticalLayout submenuWrapper;

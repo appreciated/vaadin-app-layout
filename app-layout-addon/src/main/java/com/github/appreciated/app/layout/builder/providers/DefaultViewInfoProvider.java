@@ -9,7 +9,7 @@ import com.vaadin.navigator.View;
 
 import java.util.Optional;
 
-public class DefaultViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProvider {
+public class DefaultViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
     private AnnotationValueProvider provider;
 

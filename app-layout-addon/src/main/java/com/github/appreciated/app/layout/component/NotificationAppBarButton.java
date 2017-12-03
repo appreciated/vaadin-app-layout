@@ -9,6 +9,10 @@ import com.vaadin.ui.UI;
 
 import static com.vaadin.icons.VaadinIcons.BELL;
 
+/**
+ * A component which opens a window containing the notifications on click closely to this component. Also showing an
+ * indicator how many new notifications are available
+ */
 public class NotificationAppBarButton extends AppBarBadgeButton {
 
     private UI ui;

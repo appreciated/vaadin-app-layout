@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenu
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 
 public class AppLayoutConfiguration {
@@ -29,7 +31,11 @@ public class AppLayoutConfiguration {
     Behaviour variant = Behaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
-    private NavigatorConsumer navigatorConsumer;
+    private Consumer<Navigator> navigatorConsumer;
+    private Supplier<ViewProvider> viewProviderSupplier;
+    private Supplier<ViewProvider> errorProvider;
+    private Supplier<View> errorViewProvider;
+
     private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private AppBarDesign design = AppBarDesign.DEFAULT;
     private Navigator navigator;
@@ -39,7 +45,7 @@ public class AppLayoutConfiguration {
     private DefaultLeftClickableNavigationElementProvider customElementProvider;
     private ComponentProvider<Component, SectionNavigationElement> sectionProvider;
     private ComponentProvider<Component, SubmenuNavigationElement> submenuProvider;
-    private NavigationElementInfoProvider navigationElementInfoProvider = null;
+    private NavigationElementInfoProducer navigationElementInfoProvider = null;
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
@@ -93,6 +99,15 @@ public class AppLayoutConfiguration {
             findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
             return true;
         });
+        if (viewProviderSupplier != null) {
+            navigator.addProvider(viewProviderSupplier.get());
+        }
+        if (errorProvider != null) {
+            navigator.setErrorProvider(errorProvider.get());
+        }
+        if (errorViewProvider != null) {
+            navigator.setErrorView(errorViewProvider.get());
+        }
         if (navigatorConsumer != null) {
             navigatorConsumer.accept(navigator);
         }
@@ -215,8 +230,20 @@ public class AppLayoutConfiguration {
         return appBarElements;
     }
 
-    public void setNavigatorConsumer(NavigatorConsumer navigatorConsumer) {
+    public void setNavigatorConsumer(Consumer<Navigator> navigatorConsumer) {
         this.navigatorConsumer = navigatorConsumer;
+    }
+
+    public void setViewProviderSupplier(Supplier<ViewProvider> viewProviderSupplier) {
+        this.viewProviderSupplier = viewProviderSupplier;
+    }
+
+    public void setErrorProvider(Supplier<ViewProvider> errorProvider) {
+        this.errorProvider = errorProvider;
+    }
+
+    public void setErrorView(Supplier<View> errorView) {
+        this.errorViewProvider = errorView;
     }
 
     public void setNavigatorProducer(NavigatorProducer navigatorProducer) {
@@ -239,7 +266,7 @@ public class AppLayoutConfiguration {
         this.submenuProvider = submenuProvider;
     }
 
-    public void setNavigationElementInfoProvider(NavigationElementInfoProvider navigationElementInfoProvider) {
+    public void setNavigationElementInfoProvider(NavigationElementInfoProducer navigationElementInfoProvider) {
         this.navigationElementInfoProvider = navigationElementInfoProvider;
     }
 
@@ -260,15 +287,11 @@ public class AppLayoutConfiguration {
     }
 
     @FunctionalInterface
-    public interface NavigatorConsumer extends Consumer<Navigator> {
-    }
-
-    @FunctionalInterface
     public interface NavigatorProducer extends Function<Panel, Navigator> {
     }
 
     @FunctionalInterface
-    public interface NavigationElementInfoProvider extends Function<Class<? extends View>, NavigationElementInfo> {
+    public interface NavigationElementInfoProducer extends Function<Class<? extends View>, NavigationElementInfo> {
     }
 
     @FunctionalInterface

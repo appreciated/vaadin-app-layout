@@ -6,12 +6,16 @@ import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewProvider;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class AppLayoutBuilder {
@@ -56,7 +60,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If there is the need to supply a custom Navigator use this method
+     * Sets the Navigator which is later on used by the App Layout.
      *
      * @param navigator
      * @return
@@ -67,18 +71,28 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you want to provide a custom way how the icon and the caption a menu entries generally use in combination with add(Class<\? extends View> className)
+     * Sets the Navigator which is later on used by the App Layout.
+     *
+     * @param navigator
+     * @return
+     */
+
+    /**
+     * Sets the NavigationElementInfoProvider for the AppLayout.
+     * The NavigationElementInfoProvider contains a algerythm to determine the icon and the caption for a View which then later on is used
+     * to generate the menu entries. This allows to outsource the the information into annotations generally
+     * Use in combination with add(Class<\? extends View> className)
      *
      * @param provider The Provider which contains the procedure how the icon and the caption are to be determined
      * @return
      */
-    public AppLayoutBuilder withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider provider) {
+    public AppLayoutBuilder withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
         config.setNavigationElementInfoProvider(provider);
         return this;
     }
 
     /**
-     * If you need to change the view names specific schema before passing them to the Navigator use this method, does
+     * Sets the view names specific schema before passing them to the Navigator use this method, does
      * not work when used in combination with cdi
      *
      * @param interceptor The interceptor which contains the procedure how the new view name is to be determined
@@ -91,7 +105,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you need to change the caption for the menu entries after a specific schema before initializing their views use this method
+     * Sets the caption for the menu entries after a specific schema before initializing their views use this method
      *
      * @param interceptor The interceptor which contains the procedure how the new caption is to be determined
      * @return
@@ -114,12 +128,45 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you need to apply some changes to navigator instance which was used by the menu use this method
+     * Sets the ViewProvider of the navigator instance.
+     *
+     * @param supplier The ViewProvider for the navigator instance
+     * @return
+     */
+    public AppLayoutBuilder withViewProvider(Supplier<ViewProvider> supplier) {
+        config.setViewProviderSupplier(supplier);
+        return this;
+    }
+
+    /**
+     * Sets the Error ViewProvider of the navigator instance.
+     *
+     * @param supplier The consumer for the navigator instance
+     * @return
+     */
+    public AppLayoutBuilder withErrorProvider(Supplier<ViewProvider> supplier) {
+        config.setErrorProvider(supplier);
+        return this;
+    }
+
+    /**
+     * Sets the error View of the navigator instance
+     *
+     * @param supplier The consumer for the navigator instance
+     * @return
+     */
+    public AppLayoutBuilder withErrorView(Supplier<View> supplier) {
+        config.setErrorView(supplier);
+        return this;
+    }
+
+    /**
+     * If you need to apply some changes to navigator instance which was used by the menu.
      *
      * @param consumer The consumer for the navigator instance
      * @return
      */
-    public AppLayoutBuilder withNavigatorConsumer(AppLayoutConfiguration.NavigatorConsumer consumer) {
+    public AppLayoutBuilder withNavigatorConsumer(Consumer<Navigator> consumer) {
         config.setNavigatorConsumer(consumer);
         return this;
     }
@@ -138,7 +185,7 @@ public class AppLayoutBuilder {
 
     /**
      * This method is a shorthand to set the default navigation view for the navigator
-     * It will have not effect on if cdi is enabled
+     * Note: This will have no effect on if cdi is enabled
      *
      * @param element
      * @return
@@ -149,7 +196,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you want to supply your own views for the navigation elements in the drawer use this method
+     * Sets the Component provider that is being used to generate navigation elements in the drawer.
      *
      * @param provider
      * @return
@@ -160,7 +207,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you want to supply your own views for the sections in the drawer use this method
+     * Sets the Component provider that is being used to generate section elements in the drawer.
      *
      * @param provider
      * @return
@@ -171,7 +218,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you want to supply your own views for submenu navigation elements in the drawer use this method
+     * Sets the Component provider that is being used to generate submenu navigation elements in the drawer.
      *
      * @param provider
      * @return
@@ -182,7 +229,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * If you want to use any kind of CDI like Spring for Vaadin, Guice or Vaadin CDI use this method.
+     * When using any kind of CDI like Spring for Vaadin, Guice or Vaadin CDI this method needs to be called with the parameters true.
      *
      * @param cdi
      * @return
@@ -449,40 +496,113 @@ public class AppLayoutBuilder {
         return this;
     }
 
+
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
+     * @param caption
+     * @param path
+     * @param icon
+     * @param badgeHolder
+     * @param element
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
 
+
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
+     * @param caption
+     * @param icon
+     * @param element
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(String caption, Resource icon, View element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, icon, element), position);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param caption
+     * @param icon
+     * @param badgeHolder
+     * @param element
+     * @return
+     */
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), Position.DEFAULT);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param caption
+     * @param icon
+     * @param badgeHolder
+     * @param element
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param caption
+     * @param path
+     * @param icon
+     * @param badgeHolder
+     * @param element
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View element, Position position) {
         addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param element
+     * @return
+     */
     public AppLayoutBuilder add(AbstractNavigationElement element) {
         return add(element, Position.DEFAULT);
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param element
+     * @param position
+     * @return
+     */
     public AppLayoutBuilder add(AbstractNavigationElement element, Position position) {
         config.add(element, position);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * @param element
+     * @return
+     */
     public AppLayoutBuilder addToAppBar(Component element) {
         config.getAppBarElements().add(element);
         return this;

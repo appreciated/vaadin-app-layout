@@ -15,7 +15,7 @@ public class SubmenuBuilder {
     private final String title;
     private final Resource resource;
     private List<AbstractNavigationElement> submenuElements = new ArrayList<>();
-    private AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider;
+    private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
 
     private SubmenuBuilder(String title, Resource resource) {
         this.title = title;
@@ -122,7 +122,7 @@ public class SubmenuBuilder {
         return this;
     }
 
-    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
+    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider) {
         this.navigationElementInfoProvider = navigationElementInfoProvider;
     }
 

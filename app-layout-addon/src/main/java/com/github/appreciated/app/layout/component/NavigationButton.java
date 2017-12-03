@@ -8,7 +8,9 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS;
 
-
+/**
+ * The default component to be used to display menu entries
+ */
 public class NavigationButton extends Button {
     public NavigationButton(String name, Resource icon) {
         super(name);

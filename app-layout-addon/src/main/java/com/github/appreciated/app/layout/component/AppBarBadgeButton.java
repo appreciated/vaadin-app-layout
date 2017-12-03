@@ -8,7 +8,9 @@ import com.vaadin.ui.Label;
 
 import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
 
-
+/**
+ * A component which opens which shows an indicator how many new notifications are available in the connected Notification holder.
+ */
 public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
 
     private final AppBarButton button;

@@ -3,6 +3,9 @@ package com.github.appreciated.app.layout.component;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
+/**
+ * An extension of the CssLayout Component which brings additionally flexbox features to Vaadin via css
+ */
 public class AbstractFlexBoxLayout extends CssLayout {
 
     public AbstractFlexBoxLayout(String primaryStyle) {

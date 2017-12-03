@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class DefaultSpringNavigationElementInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProvider {
+public class DefaultSpringNavigationElementInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
     @Override
     public NavigationElementInfo apply(Class<? extends View> aClass) {

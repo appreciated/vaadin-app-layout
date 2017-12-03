@@ -21,7 +21,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private String path;
     private DefaultBadgeHolder badgeHolder;
     private Provider<String, String> viewNameInterceptor;
-    private AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider;
+    private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
 
@@ -161,7 +161,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.captionInterceptor = captionInterceptor;
     }
 
-    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProvider navigationElementInfoProvider) {
+    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider) {
         if (caption == null && icon == null && className == null && navigationElementInfoProvider == null) {
             throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
         } else {

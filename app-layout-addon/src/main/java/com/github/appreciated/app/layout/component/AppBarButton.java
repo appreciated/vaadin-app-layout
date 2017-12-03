@@ -4,6 +4,9 @@ import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.ValoTheme;
 
+/**
+ * A borderless button component which is supposed to only contain an icon and also to be added to the AppBar
+ */
 public class AppBarButton extends Button {
     public AppBarButton(Resource icon) {
         super(icon);

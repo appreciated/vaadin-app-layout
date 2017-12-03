@@ -5,6 +5,9 @@ import com.vaadin.ui.Image;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_ROUND_IMAGE;
 
+/**
+ * A component containing an image which is tweaked by css to be round without overflow with a certain height.
+ */
 public class RoundImage extends Image {
     public RoundImage(Resource icon) {
         this(icon, "75px", "75px");

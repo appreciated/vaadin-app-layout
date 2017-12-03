@@ -10,7 +10,9 @@ import com.vaadin.ui.Label;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
 
-
+/**
+ *
+ */
 public class NavigationBadgeButton extends HorizontalFlexBoxLayout implements NavigationElementComponent {
 
     private final NavigationButton button;
