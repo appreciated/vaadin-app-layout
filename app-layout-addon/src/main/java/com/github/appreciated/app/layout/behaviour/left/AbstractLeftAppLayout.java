@@ -79,7 +79,6 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
-
     public abstract String getStyleName();
 
     @Override
@@ -93,7 +92,6 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
             list.forEach(element -> element.refreshInfo());
         }
     }
-
 
     public void addAppBarElement(Component component) {
         appBarElementContainer.addComponent(component);

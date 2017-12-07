@@ -15,7 +15,10 @@
     .app-layout-menu-button-badge {
       transition: color 0.3s, height 0.2s, width 0.3s;
     }
-    .small {
+    &.small {
+      app-drawer[persistent] + .app-bar-application-content, app-drawer[persistent] + #contentContainer .app-bar-application-content {
+        @include application-content($al-bar-height, $al-drawer-small-width);
+      }
       --app-drawer-width: $al-drawer-small-width;
       app-drawer[persistent].app-drawer-1{
         width: $al-drawer-small-width !important;

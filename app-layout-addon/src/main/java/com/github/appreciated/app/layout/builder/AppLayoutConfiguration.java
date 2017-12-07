@@ -3,7 +3,10 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.github.appreciated.app.layout.builder.elements.*;
+import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
@@ -147,33 +150,31 @@ public class AppLayoutConfiguration {
 
     private void addComponents(List<AbstractNavigationElement> elements, ComponentConsumer consumer) {
         elements.forEach(element -> {
-            setComponentProviders(element);
+            prepareNavigationElement(element);
             consumer.accept(element);
         });
     }
 
-    private void setComponentProviders(AbstractNavigationElement element) {
+    private void prepareNavigationElement(AbstractNavigationElement element) {
         if (element instanceof NavigatorNavigationElement) {
-            NavigatorNavigationElement nelement = (NavigatorNavigationElement) element;
-            nelement.setCDI(CDI);
-            nelement.setNavigationElementInfoProvider(navigationElementInfoProvider);
-            if ((CDI == false && nelement.getViewClassName() == defaultNavigationElement.getViewClassName()) ||
-                    (CDI == true && nelement.getViewName().equals(""))) {
-                AppLayoutSessionHelper.updateActiveElementSessionData(nelement);
+            NavigatorNavigationElement nElement = (NavigatorNavigationElement) element;
+            nElement.setCDI(CDI);
+            nElement.setNavigationElementInfoProvider(navigationElementInfoProvider);
+            if ((CDI == false && nElement.getViewClassName() == defaultNavigationElement.getViewClassName()) ||
+                    (CDI == true && nElement.getViewName().equals(""))) {
+                AppLayoutSessionHelper.updateActiveElementSessionData(nElement);
             }
-            navigatorElements.add(nelement);
-            nelement.setViewNameInterceptor(viewNameInterceptor);
-            nelement.setCaptionInterceptor(captionInterceptor);
-            nelement.addViewToNavigator(navigator);
-        } else if (element instanceof ClickableNavigationElement) {
-            ClickableNavigationElement cnelement = (ClickableNavigationElement) element;
+            nElement.setViewNameInterceptor(viewNameInterceptor);
+            nElement.setCaptionInterceptor(captionInterceptor);
+            nElement.addViewToNavigator(navigator);
+            navigatorElements.add(nElement);
         } else if (element instanceof SubmenuNavigationElement) {
-            SubmenuNavigationElement selement = (SubmenuNavigationElement) element;
-            selement.setCaptionInterceptor(captionInterceptor);
-            selement.getSubmenuElements().forEach(element1 -> setComponentProviders(element1));
+            SubmenuNavigationElement sElement = (SubmenuNavigationElement) element;
+            sElement.setCaptionInterceptor(captionInterceptor);
+            sElement.getSubmenuElements().forEach(element1 -> prepareNavigationElement(element1));
         } else if (element instanceof SectionNavigationElement) {
-            SectionNavigationElement selement = (SectionNavigationElement) element;
-            selement.setCaptionInterceptor(captionInterceptor);
+            SectionNavigationElement sElement = (SectionNavigationElement) element;
+            sElement.setCaptionInterceptor(captionInterceptor);
         }
     }
 

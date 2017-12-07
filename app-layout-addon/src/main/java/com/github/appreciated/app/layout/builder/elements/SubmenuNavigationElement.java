@@ -48,28 +48,13 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
 
     @Override
     public void setProvider(AppLayout provider, AppLayout.Position position) {
-        switch (position) {
-            case DRAWER:
-                setProvider(provider.getDrawerSubmenuElementProvider());
-                for (AbstractNavigationElement element : submenuElements) {
-                    element.setProvider(provider, position);
-                }
-                break;
-            case TOP:
-                setProvider(provider.getTopSubmenuElementProvider());
-                break;
-        }
+        setProvider(provider.getDrawerSubmenuElementProvider());
+        submenuElements.forEach(element -> element.setProvider(provider, position));
     }
 
     public boolean requiresNavigator() {
-        for (AbstractNavigationElement submenuElement : submenuElements) {
-            if (submenuElement instanceof NavigatorNavigationElement) {
-                return true;
-            } else if (submenuElement instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) submenuElement).requiresNavigator()) {
-                return true;
-            }
-        }
-        return false;
+        return submenuElements.stream().anyMatch(element -> element instanceof NavigatorNavigationElement ||
+                (element instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) element).requiresNavigator()));
     }
 
     public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {

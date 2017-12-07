@@ -31,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../demo/sample-content.html">
 
 </head>
-<body unresolved>
+<body>
 <app-header-layout id="layout-wrapper">
     <app-header fixed effects="waterfall" slot="header">
         <app-toolbar style="height: var(--app-bar-height);">
@@ -52,9 +52,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var drawer = document.getElementById('drawer');
     document.querySelector('paper-icon-button').addEventListener('click', function () {
         if (drawer.persistent) {
-            layoutWrapper.classList.toggle("small");
+            layoutWrapper.parentNode.classList.toggle("small");
         } else {
-            layoutWrapper.classList.remove("small");
+            layoutWrapper.parentNode.classList.remove("small");
             drawerLayout.drawer.toggle();
         }
     });

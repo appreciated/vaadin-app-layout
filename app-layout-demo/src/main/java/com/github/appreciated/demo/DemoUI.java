@@ -47,7 +47,6 @@ public class DemoUI extends UI {
         setContent(holder);
         holder.setSizeFull();
         notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
-
     }
 
     @Override
@@ -131,6 +130,20 @@ public class DemoUI extends UI {
     }
 
     public static class View6 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
+    }
+
+    public static class View7 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
+    }
+
+    public static class View8 extends AbstractView {
         @Override
         String getViewName() {
             return getClass().getName();
