@@ -3,6 +3,9 @@ package com.github.appreciated.app.layout.builder.entities;
 
 import java.util.ArrayList;
 
+/**
+ * This Class is the controller of a Component that can display a simple badge containing numbers
+ */
 public class DefaultBadgeHolder {
 
     private int count;

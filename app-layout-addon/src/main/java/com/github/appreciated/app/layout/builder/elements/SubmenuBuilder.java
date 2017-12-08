@@ -113,7 +113,7 @@ public class SubmenuBuilder {
     }
 
     public SubmenuBuilder add(Component element) {
-        this.submenuElements.add(new CustomNavigationElement(element));
+        this.submenuElements.add(new ComponentNavigationElement(element));
         return this;
     }
 

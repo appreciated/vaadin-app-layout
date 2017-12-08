@@ -11,7 +11,10 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
-
+/**
+ * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
+ * MenuElements of this Type  will lead to the Navigator being called.
+ */
 public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> {
     private boolean isCDI = false;
     private String caption;

@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+
+/**
+ * Data structure to contain a notification
+ */
+
 public class DefaultNotification implements Notification {
     String title;
     String description;

@@ -5,11 +5,10 @@ import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.vaadin.ui.Component;
 
 /**
- * AbstractNavigationElement is a wrapper class for a first unspecific Component.
- * The Component is supposed to be provided by a functional provider.
+ * AbstractNavigationElement is a abstract wrapper class for a Component which will be provided by a ComponentProvider.
  *
- * @param <V>
- * @param <T>
+ * @param <V> The specific Component which can be produced by this wrapper
+ * @param <T> The Element itself to only allow Providers to be used that are compatible with the specific AbstractNavigationElement
  */
 public abstract class AbstractNavigationElement<V extends Component, T> {
 

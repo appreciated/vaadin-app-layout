@@ -7,6 +7,9 @@ import com.vaadin.ui.Component;
 
 import java.util.List;
 
+/**
+ * A wrapper class for a MenuElement that is meant to display a Submenus. This NavigationElement can contain tree like structures.
+ */
 public class SubmenuNavigationElement extends AbstractNavigationElement<Component, SubmenuNavigationElement> {
 
     private final String title;

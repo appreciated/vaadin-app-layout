@@ -2,6 +2,11 @@ package com.github.appreciated.app.layout.builder.entities;
 
 import com.vaadin.server.Resource;
 
+/**
+ * Data structure that contains all the needed information of a NavigatorNavigationElement. This class is beaing used by
+ * by the NavigationElementInfoProvider.
+ */
+
 public class NavigationElementInfo {
     String caption;
     Resource icon;

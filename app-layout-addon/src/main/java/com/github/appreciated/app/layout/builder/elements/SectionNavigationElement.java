@@ -4,6 +4,9 @@ import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.Provider;
 import com.vaadin.ui.Component;
 
+/**
+ * A wrapper class for a MenuElement that is simply meant to display a Section.
+ */
 public class SectionNavigationElement extends AbstractNavigationElement<Component, SectionNavigationElement> {
 
     private String name;

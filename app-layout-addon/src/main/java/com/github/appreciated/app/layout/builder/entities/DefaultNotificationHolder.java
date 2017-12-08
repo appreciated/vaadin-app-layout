@@ -5,6 +5,10 @@ import com.github.appreciated.app.layout.builder.providers.DefaultNotificationCo
 
 import java.util.Collection;
 
+/**
+ * This Class is the controller of a Component that can display a notification numbers
+ */
+
 public class DefaultNotificationHolder extends NotificationHolder<DefaultNotification> {
 
     public DefaultNotificationHolder() {

@@ -5,6 +5,9 @@ import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 
+/**
+ * A wrapper class for a MenuElement that is clickable but not backed by the Navigator.
+ */
 public class ClickableNavigationElement extends AbstractNavigationElement<Component, ClickableNavigationElement> {
     private final String name;
     private Resource icon;

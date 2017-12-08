@@ -9,6 +9,11 @@ import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
 
+
+/**
+ * This Class is a abstract controller of a Component that can display a Notifications
+ */
+
 public class NotificationHolder<T extends NotificationHolder.Notification> {
 
     private PairComponentProvider<NotificationHolder, T> componentProvider;

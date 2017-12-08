@@ -257,7 +257,7 @@ public class AppLayoutBuilder {
      * @return
      */
     public AppLayoutBuilder add(Component element, Position position) {
-        addToPosition(new CustomNavigationElement(element), position);
+        addToPosition(new ComponentNavigationElement(element), position);
         return this;
     }
 
@@ -295,7 +295,7 @@ public class AppLayoutBuilder {
      * @return
      */
     public AppLayoutBuilder add(Component... elements) {
-        config.getNavigationElements().addAll(Arrays.stream(elements).map(component -> new CustomNavigationElement(component)).collect(Collectors.toList()));
+        config.getNavigationElements().addAll(Arrays.stream(elements).map(component -> new ComponentNavigationElement(component)).collect(Collectors.toList()));
         return this;
     }
 
