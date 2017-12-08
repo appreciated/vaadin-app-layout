@@ -88,6 +88,7 @@ public class DemoUI extends UI {
                 .add("Elements", VaadinIcons.LIST, View6.class)
                 .addClickable("Set Behaviour", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
                 .build();
+        drawer.addStyleName("left");
         holder.addComponent(drawer);
         getNavigator().navigateTo("");
     }
@@ -181,6 +182,7 @@ public class DemoUI extends UI {
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,
                     Behaviour.LEFT_HYBRID,
+                    Behaviour.LEFT_HYBRID_SMALL,
                     Behaviour.LEFT_RESPONSIVE_HYBRID,
                     Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
                     Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
