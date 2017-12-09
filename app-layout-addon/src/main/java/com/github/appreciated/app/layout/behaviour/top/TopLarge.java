@@ -33,6 +33,7 @@ public class TopLarge extends AbstractTopAppLayout {
         appHeaderHolder.setAlignCenter();
         appElementHolder.setAlignCenter();
         appFooterHolder.setAlignCenter();
+        appbarMenuHolder.grow(appElementHolder);
     }
 
     @Override
