@@ -51,7 +51,11 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
 
     @Override
     public void setProvider(AppLayout provider, AppLayout.Position position) {
-        setProvider(provider.getDrawerSubmenuElementProvider());
+        if (position == AppLayout.Position.TOP) {
+            setProvider(provider.getTopSubmenuElementProvider());
+        } else {
+            setProvider(provider.getDrawerSubmenuElementProvider());
+        }
         submenuElements.forEach(element -> element.setProvider(provider, position));
     }
 

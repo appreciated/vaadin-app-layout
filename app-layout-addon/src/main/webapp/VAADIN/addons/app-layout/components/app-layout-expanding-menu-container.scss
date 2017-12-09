@@ -2,7 +2,7 @@
   .app-layout-expanding-menu-container {
     transition: max-height 0.4s;
     overflow: hidden;
-    max-height: 48px;
+    max-height: $al-menu-button-height;
   }
   .app-layout-expanding-menu-container-open {
     max-height: $al-menu-submenu-max-height;
@@ -14,9 +14,9 @@
     position: absolute;
     content: "\E967";
     font-family: "Vaadin-Icons";
-    line-height: 48px;
+    line-height: $al-menu-button-height;
     text-align: center;
-    width: 48px;
+    width: $al-menu-button-height;
     right: 0px;
     top: 0px;
     bottom: 0px;

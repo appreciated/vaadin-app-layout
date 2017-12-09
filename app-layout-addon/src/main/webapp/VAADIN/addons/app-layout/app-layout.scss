@@ -3,6 +3,18 @@
   $v-background-color: #fafafa !default;
 }
 
+@if not variable-exists(v-font-size) {
+  $v-font-size: 16px !default;
+}
+
+@if not variable-exists(v-unit-size) {
+  $v-unit-size: round(2.3 * $v-font-size) !default;
+}
+
+@if not variable-exists(v-border-radius) {
+  $v-border-radius: 4px !default;
+}
+
 $al-bar-height: 64px !default;
 $al-bar-background-color: #4285f4 !default;
 $al-bar-font-color: valo-font-color($al-bar-background-color) !default;
@@ -21,10 +33,17 @@ $al-drawer-width: 256px !default;
 $al-drawer-small-width: 64px !default;
 
 $al-menu-button-active-background-color: rgba(valo-font-color($al-drawer-background-color), 0.1) !default; // only used by material design
-$al-menu-button-active-font-color: $v-focus-color; // only used by material design
-$al-menu-button-badge-background-color: $v-focus-color;
-$al-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0);
-$al-menu-button-badge-border-radius: 5px;
+$al-menu-button-active-font-color: $v-focus-color !default; // only used by material design
+$al-menu-button-badge-background-color: $v-focus-color !default;
+$al-menu-button-badge-font-color: valo-font-color($v-focus-color, 1.0) !default;
+$al-menu-button-badge-border-radius: 5px !default;
+
+$al-menu-button-horizontal-padding: round($v-unit-size/2.4) + round($v-border-radius/3) !default;
+$al-menu-button-height: 48px !default;
+$al-menu-button-spacing: round($v-unit-size/3) !default;
+
+$al-menu-section-padding: round($v-unit-size) !default;
+
 $al-menu-disable-active-style: false !default;
 $al-menu-submenu-max-height: 999px !default;
 
@@ -84,8 +103,19 @@ $al-menu-submenu-max-height: 999px !default;
       display: none;
     }
   }
-  .app-layout {
-
+  .app-layout-menu-element {
+    height: $al-menu-button-height !important;
+  }
+  .drawer-content {
+    .v-spacing {
+      height: $al-menu-button-spacing !important;
+    }
+    .v-margin-bottom {
+      padding-bottom: $al-menu-section-padding !important;
+    }
+    .v-margin-top {
+      padding-top: $al-menu-section-padding !important;
+    }
   }
   .app-bar-application-content {
     position: fixed;
@@ -104,8 +134,8 @@ $al-menu-submenu-max-height: 999px !default;
     @include application-content($al-bar-height, 0px);
   }
   .app-layout-menu-bar-element {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: $al-menu-button-horizontal-padding;
+    padding-right: $al-menu-button-horizontal-padding;
   }
   .v-absolutelayout-wrapper-app-layout-menu-button-badge {
     pointer-events: none;

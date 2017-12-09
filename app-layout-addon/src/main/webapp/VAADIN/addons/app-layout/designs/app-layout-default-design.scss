@@ -36,6 +36,8 @@
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
       transition: border 0.5s;
+      padding: 0px $al-menu-button-horizontal-padding;
+      height: $al-menu-button-height !important;
     }
     .app-layout-menu-badge-button {
       padding-right: 55px;

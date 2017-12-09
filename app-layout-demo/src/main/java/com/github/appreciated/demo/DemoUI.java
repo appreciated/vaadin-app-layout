@@ -78,6 +78,7 @@ public class DemoUI extends UI {
                 .withDesign(AppBarDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> {/* Do someting with it */})
                 .add(new MenuHeader("Version 0.9.18", new ThemeResource("logo.png")), HEADER)
+                .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
@@ -86,7 +87,7 @@ public class DemoUI extends UI {
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .addClickable("Set Behaviour", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
+                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
                 .build();
         drawer.addStyleName("left");
         holder.addComponent(drawer);

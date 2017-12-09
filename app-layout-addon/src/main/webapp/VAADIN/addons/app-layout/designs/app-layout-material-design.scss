@@ -7,7 +7,7 @@
       font-size: 13px;
       height: 20px;
       line-height: 20px;
-      margin: 15px 15px;
+      margin: (($al-menu-button-height - 20px) / 2) 15px;
       margin-left: -50px;
       text-align: center;
       border-radius: 10px;
@@ -40,11 +40,12 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
+      padding: 0px $al-menu-button-horizontal-padding;
+      height: $al-menu-button-height !important;
     }
     .app-layout-menu-badge-button {
       padding-right: 50px;
     }
-
     @if $al-menu-disable-active-style == false {
       .app-layout-menu-element-active .app-layout-menu-button {
         background: $al-menu-button-active-background-color !important;

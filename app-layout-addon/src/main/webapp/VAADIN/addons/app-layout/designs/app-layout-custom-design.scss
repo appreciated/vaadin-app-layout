@@ -29,6 +29,8 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
+      padding: 0px $al-menu-button-horizontal-padding;
+      height: $al-menu-button-height !important;
     }
     @if $al-menu-disable-active-style == false {
       .app-layout-menu-button-active {
