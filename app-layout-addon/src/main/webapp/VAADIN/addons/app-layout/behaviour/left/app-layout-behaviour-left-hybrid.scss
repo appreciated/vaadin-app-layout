@@ -23,7 +23,7 @@
       app-drawer[persistent].app-drawer-1{
         width: $al-drawer-small-width !important;
       }
-      .app-bar-application-content {
+      app-drawer[persistent] .app-bar-application-content {
         left: $al-drawer-small-width !important;
       }
       .app-layout-menu-button-badge {
