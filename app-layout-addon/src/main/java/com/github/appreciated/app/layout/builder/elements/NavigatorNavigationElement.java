@@ -147,7 +147,6 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         }
     }
 
-
     public DefaultBadgeHolder getBadgeHolder() {
         return badgeHolder;
     }

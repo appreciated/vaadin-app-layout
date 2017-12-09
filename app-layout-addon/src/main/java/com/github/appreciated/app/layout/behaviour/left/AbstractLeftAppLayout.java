@@ -89,7 +89,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     @Override
     public void refreshNavigationElementInfo() {
         if (list != null) {
-            list.forEach(element -> element.refreshInfo());
+            list.forEach(NavigatorNavigationElement::refreshInfo);
         }
     }
 
@@ -245,7 +245,6 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         component.setProvider(this);
         addToDrawerHeader(component.getComponent());
     }
-
 
     @Override
     public void addToDrawer(Component component) {

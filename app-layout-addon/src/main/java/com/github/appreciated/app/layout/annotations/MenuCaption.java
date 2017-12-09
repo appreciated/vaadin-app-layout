@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.annotations;
 
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

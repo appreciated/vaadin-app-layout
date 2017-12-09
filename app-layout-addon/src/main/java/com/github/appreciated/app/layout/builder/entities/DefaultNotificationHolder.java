@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-
 import com.github.appreciated.app.layout.builder.providers.DefaultNotificationComponentProvider;
 
 import java.util.Collection;

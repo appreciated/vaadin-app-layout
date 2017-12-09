@@ -10,8 +10,6 @@ import com.vaadin.ui.*;
 import java.util.List;
 
 public interface AppLayout extends Component {
-    String getStyleName();
-
     static void toggleDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
     }
@@ -19,6 +17,16 @@ public interface AppLayout extends Component {
     static void openDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').open();");
     }
+
+    static void closeDrawerIfNotPersistent() {
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
+    }
+
+    static void closeDrawer() {
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
+    }
+
+    String getStyleName();
 
     void addToDrawerHeader(Component component);
 
@@ -64,14 +72,6 @@ public interface AppLayout extends Component {
 
     void addAppBarIcon(Component appBarIconComponent);
 
-    static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
-    }
-
-    static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
-    }
-
     void setNavigatorNavigationElements(List<NavigatorNavigationElement> list);
 
     void refreshNavigationElementInfo();
@@ -107,7 +107,6 @@ public interface AppLayout extends Component {
     ComponentProvider<Component, ClickableNavigationElement> getTopClickableElementProvider();
 
     void setTopClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
-
 
     public enum Position {
         TOP, DRAWER

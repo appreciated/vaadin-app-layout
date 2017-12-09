@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-
 import java.util.ArrayList;
 
 /**
@@ -43,7 +42,6 @@ public class DefaultBadgeHolder {
     public void addListener(BadgeListener listener) {
         listeners.add(listener);
     }
-
 
     public interface BadgeListener {
         void onChange(DefaultBadgeHolder newStatus);

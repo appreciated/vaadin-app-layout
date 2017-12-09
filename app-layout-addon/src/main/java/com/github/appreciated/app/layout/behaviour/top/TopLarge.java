@@ -35,7 +35,6 @@ public class TopLarge extends AbstractTopAppLayout {
         appFooterHolder.setAlignCenter();
     }
 
-
     @Override
     public void addToTopHeader(Component component) {
         appHeaderHolder.addComponent(component);

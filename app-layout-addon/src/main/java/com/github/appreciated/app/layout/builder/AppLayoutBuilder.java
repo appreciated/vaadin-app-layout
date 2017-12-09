@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.builder;
 
-
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
@@ -496,7 +495,6 @@ public class AppLayoutBuilder {
         return this;
     }
 
-
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
@@ -513,7 +511,6 @@ public class AppLayoutBuilder {
         addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
         return this;
     }
-
 
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
@@ -533,6 +530,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param caption
      * @param icon
      * @param badgeHolder
@@ -547,6 +545,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param caption
      * @param icon
      * @param badgeHolder
@@ -562,6 +561,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param caption
      * @param path
      * @param icon
@@ -578,6 +578,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param element
      * @return
      */
@@ -588,6 +589,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param element
      * @param position
      * @return
@@ -600,6 +602,7 @@ public class AppLayoutBuilder {
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
      * @param element
      * @return
      */
@@ -622,13 +625,13 @@ public class AppLayoutBuilder {
         config.addToPosition(element, position);
     }
 
-    public enum Position {
-        HEADER, DEFAULT, FOOTER
-    }
-
     public AppLayout build() {
         config.build();
         return instance;
+    }
+
+    public enum Position {
+        HEADER, DEFAULT, FOOTER
     }
 
 }

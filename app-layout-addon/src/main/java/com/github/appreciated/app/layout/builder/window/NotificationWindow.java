@@ -12,16 +12,14 @@ import javax.xml.ws.Holder;
 import java.util.Collections;
 import java.util.List;
 
-
 public class NotificationWindow<T> extends Window {
 
     int height = 357;
-
-    private VerticalLayout notificationsView;
     boolean hasBlurListener = false;
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
     Holder<Boolean> alignBottom = new Holder<>(false);
+    private VerticalLayout notificationsView;
     private NotificationHolder holder;
 
     public NotificationWindow(NotificationHolder holder) {

@@ -21,12 +21,12 @@ public abstract class AbstractNavigationElement<V extends Component, T> {
         return provider;
     }
 
+    public abstract void setProvider(AppLayout provider);
+
     public void setProvider(ComponentProvider<V, T> provider) {
         this.component = null;
         this.provider = provider;
     }
-
-    public abstract void setProvider(AppLayout provider);
 
     public abstract void setProvider(AppLayout provider, AppLayout.Position position);
 

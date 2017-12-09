@@ -9,7 +9,6 @@ import com.vaadin.ui.UI;
 
 public abstract class AbstractNavigationElementComponentProvider implements ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> {
 
-
     public void setNavigationClickListener(NavigatorNavigationElement element) {
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
         button.getButton().addClickListener(clickEvent -> {

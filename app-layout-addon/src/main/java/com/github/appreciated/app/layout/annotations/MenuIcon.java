@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.annotations;
 
-
 import com.vaadin.icons.VaadinIcons;
 
 import java.lang.annotation.Retention;

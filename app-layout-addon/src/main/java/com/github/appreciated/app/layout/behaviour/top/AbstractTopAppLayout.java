@@ -26,7 +26,6 @@ import java.util.List;
 import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.DRAWER;
 import static com.github.appreciated.app.layout.behaviour.AppLayout.Position.TOP;
 
-
 public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayout, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
@@ -97,7 +96,6 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     }
 
     public abstract String getStyleName();
-
 
     public void addAppBarElement(Component component) {
         appBarElementContainer.addComponent(component);

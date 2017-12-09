@@ -15,10 +15,9 @@ import static com.vaadin.icons.VaadinIcons.BELL;
  */
 public class NotificationAppBarButton extends AppBarBadgeButton {
 
+    Provider<NotificationWindow, NotificationHolder> provider;
     private UI ui;
     private NotificationWindow window;
-
-    Provider<NotificationWindow, NotificationHolder> provider;
 
     public NotificationAppBarButton(NotificationHolder holder) {
         this(holder, info -> new MaterialNotificationWindow(info));
