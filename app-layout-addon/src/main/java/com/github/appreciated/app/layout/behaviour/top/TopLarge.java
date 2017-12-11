@@ -8,7 +8,7 @@ import com.vaadin.ui.Component;
 import java.io.IOException;
 
 /**
- * Created by Johannes on 01.05.2017.
+ * Created by appreciated on 01.05.2017.
  */
 @JavaScript("vaadin://addons/app-layout/babel-helpers.js")
 @JavaScript("vaadin://bower_components/webcomponentsjs/custom-elements-es5-adapter.js")

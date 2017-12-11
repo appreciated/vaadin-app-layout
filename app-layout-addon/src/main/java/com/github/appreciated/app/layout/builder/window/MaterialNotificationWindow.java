@@ -7,6 +7,9 @@ import com.vaadin.ui.VerticalLayout;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class MaterialNotificationWindow extends NotificationWindow {
 
     private VerticalLayout notificationsView;

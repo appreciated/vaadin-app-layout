@@ -1,6 +1,5 @@
 package com.github.appreciated.demo;
 
-
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
@@ -9,8 +8,8 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.MenuHeader;
-import com.github.appreciated.app.layout.component.NotificationAppBarButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
@@ -72,12 +71,12 @@ public class DemoUI extends UI {
         holder.removeAllComponents();
         AppLayout drawer = AppLayoutBuilder.get(variant)
                 .withTitle("App Layout")
-                .addToAppBar(new NotificationAppBarButton(notifications, true))
+                .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 0.9.18", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.19", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)

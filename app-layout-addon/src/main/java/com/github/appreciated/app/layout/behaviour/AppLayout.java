@@ -9,6 +9,10 @@ import com.vaadin.ui.*;
 
 import java.util.List;
 
+/**
+ * The interface every AppLayout Variant is required to be implemented to allow the AppLayoutBuilder to build it.
+ */
+
 public interface AppLayout extends Component {
     static void toggleDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");

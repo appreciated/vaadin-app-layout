@@ -28,6 +28,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * Since the class AppLayoutBuilder was grew so large I decided to outsource the logic to configure an AppLayout instance into this class.
+ */
 public class AppLayoutConfiguration {
 
     Behaviour variant = Behaviour.LEFT;
@@ -52,7 +55,6 @@ public class AppLayoutConfiguration {
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
     private Component appBarIconComponent;
-    private boolean requiresNavigator = false;
 
     private AppLayout instance;
 
@@ -178,11 +180,6 @@ public class AppLayoutConfiguration {
     }
 
     public void add(AbstractNavigationElement element, AppLayoutBuilder.Position position) {
-        if (element instanceof NavigatorNavigationElement) {
-            requiresNavigator = true;
-        } else if (element instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) element).requiresNavigator()) {
-            requiresNavigator = ((SubmenuNavigationElement) element).requiresNavigator();
-        }
         addToPosition(element, position);
     }
 

@@ -59,7 +59,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * Sets the Navigator which is later on used by the App Layout.
+     * Sets the Navigator which later on is being used by the AppLayout.
      *
      * @param navigator
      * @return
@@ -68,13 +68,6 @@ public class AppLayoutBuilder {
         config.setNavigatorProducer(navigator);
         return this;
     }
-
-    /**
-     * Sets the Navigator which is later on used by the App Layout.
-     *
-     * @param navigator
-     * @return
-     */
 
     /**
      * Sets the NavigationElementInfoProvider for the AppLayout.
@@ -600,8 +593,7 @@ public class AppLayoutBuilder {
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
-     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     * Appends a Component to the 'app bar' (top bar)
      *
      * @param element
      * @return
@@ -611,20 +603,44 @@ public class AppLayoutBuilder {
         return this;
     }
 
+    /**
+     * Appends one or multiple Component(s) to the 'app bar' (top bar)
+     *
+     * @param element
+     * @return
+     */
     public AppLayoutBuilder addToAppBar(Component... element) {
         config.getAppBarElements().addAll(Arrays.asList(element));
         return this;
     }
 
+    /**
+     * Sets the Component which is shown directly behind the title label in the 'app bar' (top bar)
+     *
+     * @param resourceButton
+     * @return
+     */
     public AppLayoutBuilder withAppBarIconComponent(Component resourceButton) {
         config.setAppBarIconComponent(resourceButton);
         return this;
     }
 
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element to a specific position
+     *
+     * @param element
+     * @param position
+     * @return
+     */
     private void addToPosition(AbstractNavigationElement element, Position position) {
         config.addToPosition(element, position);
     }
 
+    /**
+     * Build the layout and returns an instance of an AppLayout which also is a Component
+     *
+     * @return
+     */
     public AppLayout build() {
         config.build();
         return instance;

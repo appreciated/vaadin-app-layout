@@ -11,6 +11,8 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
+import java.util.Optional;
+
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
  * MenuElements of this Type  will lead to the Navigator being called.
@@ -27,6 +29,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
+    private Optional<SubmenuNavigationElement> parent = Optional.empty();
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
         this(caption, caption, icon, null, view);
@@ -71,7 +74,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void addViewToNavigator(Navigator navigator) {
-        if (!isCDI) { // Since it is managed somewhere else
+        if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
             if (view != null) {
                 navigator.addView(getViewName(), view);
             } else if (className != null) {

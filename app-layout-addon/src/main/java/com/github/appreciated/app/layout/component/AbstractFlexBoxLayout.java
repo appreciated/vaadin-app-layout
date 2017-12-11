@@ -4,7 +4,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 
 /**
- * An extension of the CssLayout Component which brings additionally flexbox features to Vaadin via css
+ * An extension of the CssLayout Component which brings additionally 'flexbox' features
  */
 public class AbstractFlexBoxLayout extends CssLayout {
 

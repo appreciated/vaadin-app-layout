@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import static com.github.appreciated.app.layout.Styles.*;
 
 /**
- * A simple container component which only contains a Image and two Labels if the connected parameters is not set the
+ * A simple container component which may contain an image and two labels
  * concerned component won't be added to its parent
  */
 public class MenuHeader extends VerticalLayout {
