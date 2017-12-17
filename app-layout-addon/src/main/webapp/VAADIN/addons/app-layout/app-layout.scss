@@ -144,6 +144,9 @@ $al-menu-submenu-max-height: 999px !default;
   app-drawer:not([persistent]):not([opened]) .drawer-content * {
     overflow: hidden;
   }
+  .app-drawer-1 {
+    width: $al-drawer-width;
+  }
 
   @include app-layout-default-design;
   @include app-layout-material-design;

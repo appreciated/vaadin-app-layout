@@ -1,7 +1,7 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-small {
     --app-drawer-width: $al-drawer-small-width !important;
-    app-drawer[persistent].app-drawer-1{
+    app-drawer[persistent].app-drawer-1 {
       width: $al-drawer-small-width !important;
     }
     .app-bar-application-content {
