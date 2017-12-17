@@ -61,6 +61,8 @@ public class AppLayoutConfiguration {
     private Provider<String, String> viewNameInterceptor = null;
     private Provider<String, String> captionInterceptor;
     private boolean CDI;
+    private boolean scrollToTopOnNavigate = true;
+    private boolean closeSubmenusOnNavigate = true;
 
     public AppLayoutConfiguration(AppLayout instance) {
         this.instance = instance;
@@ -102,11 +104,16 @@ public class AppLayoutConfiguration {
             AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
             findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> {
                 AppLayoutSessionHelper.setActiveNavigationElement(element);
-                navigationElements.stream()
-                        .filter(nelement -> nelement instanceof SubmenuNavigationElement)
-                        .filter(nelement -> nelement != element)
-                        .map(nElement -> (SubmenuNavigationElement) nElement)
-                        .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
+                if (closeSubmenusOnNavigate) {
+                    navigationElements.stream()
+                            .filter(nelement -> nelement instanceof SubmenuNavigationElement)
+                            .filter(nelement -> nelement != element)
+                            .map(nElement -> (SubmenuNavigationElement) nElement)
+                            .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
+                }
+                if (scrollToTopOnNavigate) {
+                    instance.getContentHolder().setScrollTop(0);
+                }
             });
             return true;
         });
@@ -288,6 +295,14 @@ public class AppLayoutConfiguration {
 
     public void setCDI(boolean CDI) {
         this.CDI = CDI;
+    }
+
+    public void setScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {
+        this.scrollToTopOnNavigate = scrollToTopOnNavigate;
+    }
+
+    public void setCloseSubmenusOnNavigate(boolean closeSubmenusOnNavigate) {
+        this.closeSubmenusOnNavigate = closeSubmenusOnNavigate;
     }
 
     @FunctionalInterface
