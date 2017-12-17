@@ -23,11 +23,11 @@ public interface AppLayout extends Component {
     }
 
     static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').closeEventually();}");
     }
 
     static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').closeEventually();");
     }
 
     String getStyleName();
@@ -96,13 +96,13 @@ public interface AppLayout extends Component {
 
     void setTopSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider);
 
-    ComponentProvider<Component, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
+    ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
 
-    void setDrawerSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider);
+    void setDrawerSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
 
-    ComponentProvider<Component, SubmenuNavigationElement> getTopSubmenuElementProvider();
+    ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider();
 
-    void setTopSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider);
+    void setTopSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
 
     ComponentProvider<Component, ClickableNavigationElement> getDrawerClickableElementProvider();
 

@@ -47,12 +47,12 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private List<NavigatorNavigationElement> list;
 
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
-    private ComponentProvider<Component, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementProvider();
+    private ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementProvider();
     private ComponentProvider<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentProvider();
     private ComponentProvider<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementProvider();
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentProvider();
     private ComponentProvider<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentProvider();
-    private ComponentProvider<Component, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementProvider();
+    private ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementProvider();
     private ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementProvider();
 
     public AbstractTopAppLayout(String filename) throws IOException {
@@ -175,22 +175,22 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     }
 
     @Override
-    public ComponentProvider<Component, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
+    public ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
         return drawerSubmenuElementProvider;
     }
 
     @Override
-    public void setDrawerSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider) {
+    public void setDrawerSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         drawerSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<Component, SubmenuNavigationElement> getTopSubmenuElementProvider() {
+    public ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider() {
         return topSubmenuElementProvider;
     }
 
     @Override
-    public void setTopSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider) {
+    public void setTopSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         topSubmenuElementProvider = provider;
     }
 

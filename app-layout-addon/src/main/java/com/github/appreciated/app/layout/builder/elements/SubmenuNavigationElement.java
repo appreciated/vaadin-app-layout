@@ -11,7 +11,7 @@ import java.util.List;
  * A class that contains only the data that is needed to create a Component that is meant to display a Submenus.
  * This NavigationElement can contain tree like structures.
  */
-public class SubmenuNavigationElement extends AbstractNavigationElement<Component, SubmenuNavigationElement> {
+public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
 
     private final String title;
     private final Resource icon;
@@ -67,5 +67,30 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<Componen
 
     public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
+    }
+
+    public void closeEventually(NavigatorNavigationElement element) {
+        if (!hasChild(element)) {
+            getComponent().close();
+        }
+    }
+
+    public boolean hasChild(NavigatorNavigationElement child) {
+        boolean hasChild = submenuElements.stream()
+                .map(element -> element == child)
+                .reduce((b1, b2) -> b1 || b2)
+                .orElse(false);
+        if (hasChild == false)
+            hasChild = submenuElements.stream()
+                    .filter(element -> element instanceof SubmenuNavigationElement)
+                    .map(element -> (SubmenuNavigationElement) element)
+                    .map(element -> element.hasChild(child)).reduce((b1, b2) -> b1 || b2)
+                    .orElse(false);
+        return hasChild;
+    }
+
+    public interface SubmenuComponent extends Component {
+        default void close() {
+        }
     }
 }

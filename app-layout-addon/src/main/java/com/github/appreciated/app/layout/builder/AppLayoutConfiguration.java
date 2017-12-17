@@ -49,7 +49,7 @@ public class AppLayoutConfiguration {
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
     private DefaultLeftClickableNavigationElementProvider customElementProvider;
     private ComponentProvider<Component, SectionNavigationElement> sectionProvider;
-    private ComponentProvider<Component, SubmenuNavigationElement> submenuProvider;
+    private ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider;
     private NavigationElementInfoProducer navigationElementInfoProvider = null;
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
@@ -100,7 +100,14 @@ public class AppLayoutConfiguration {
         navigator = navigatorProducer.apply(instance.getContentHolder());
         navigator.addViewChangeListener(viewChangeEvent -> {
             AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-            findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> AppLayoutSessionHelper.setActiveNavigationElement(element));
+            findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> {
+                AppLayoutSessionHelper.setActiveNavigationElement(element);
+                navigationElements.stream()
+                        .filter(nelement -> nelement instanceof SubmenuNavigationElement)
+                        .filter(nelement -> nelement != element)
+                        .map(nElement -> (SubmenuNavigationElement) nElement)
+                        .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
+            });
             return true;
         });
         if (viewProviderSupplier != null) {
@@ -259,7 +266,7 @@ public class AppLayoutConfiguration {
         this.sectionProvider = sectionProvider;
     }
 
-    public void setSubmenuProvider(ComponentProvider<Component, SubmenuNavigationElement> submenuProvider) {
+    public void setSubmenuProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider) {
         this.submenuProvider = submenuProvider;
     }
 

@@ -5,15 +5,14 @@ import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElem
 import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class DefaultTopSubmenuNavigationElementProvider implements ComponentProvider<Component, SubmenuNavigationElement> {
+public class DefaultTopSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
     @Override
-    public Component get(SubmenuNavigationElement element) {
-        MenuBar barmenu = new MenuBar();
+    public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
+        SubMenuBar barmenu = new SubMenuBar();
         barmenu.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
         barmenu.addStyleName(ValoTheme.MENUBAR_SMALL);
         barmenu.addStyleName("app-layout-top-menu");
@@ -57,4 +56,6 @@ public class DefaultTopSubmenuNavigationElementProvider implements ComponentProv
         }
     }
 
+    public class SubMenuBar extends MenuBar implements SubmenuNavigationElement.SubmenuComponent {
+    }
 }

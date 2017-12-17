@@ -215,7 +215,7 @@ public class AppLayoutBuilder {
      * @param provider
      * @return
      */
-    public AppLayoutBuilder withSubmenuElementProvider(ComponentProvider<Component, SubmenuNavigationElement> provider) {
+    public AppLayoutBuilder withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         config.setSubmenuProvider(provider);
         return this;
     }

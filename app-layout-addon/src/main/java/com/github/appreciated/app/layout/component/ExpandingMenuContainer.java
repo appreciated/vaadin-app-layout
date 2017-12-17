@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component;
 
+import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
@@ -10,7 +11,7 @@ import static com.github.appreciated.app.layout.Styles.*;
 /**
  * The component which is used for submenu elements. On click it toggles a css class which causes it to grow / shrink
  */
-public class ExpandingMenuContainer extends VerticalLayout {
+public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNavigationElement.SubmenuComponent {
 
     private final VerticalLayout submenuWrapper;
 
@@ -43,5 +44,12 @@ public class ExpandingMenuContainer extends VerticalLayout {
     @Override
     public void addComponent(Component c) {
         submenuWrapper.addComponent(c);
+    }
+
+    @Override
+    public void close() {
+        if (getStyleName().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
+            removeStyleName(EXPANDING_MENU_CONTAINER_OPEN);
+        }
     }
 }
