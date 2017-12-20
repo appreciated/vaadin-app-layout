@@ -15,7 +15,7 @@ Add the following lines to you POM
 ```
 <dependency>
    <groupId>com.github.appreciated</groupId>
-   <artifactId>vaadin-app-layout</artifactId>
+   <artifactId>app-layout-addon</artifactId>
    <version>LATEST</version>
 </dependency>
 
