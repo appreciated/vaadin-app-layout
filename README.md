@@ -104,6 +104,11 @@ The Java Project vaadin-app-layout is written by Appreciated
 
 The used Polymer Components are [distributed under the BSD License](https://github.com/Polymer/polymer/blob/master/LICENSE.txt)
 
+
+# Donations
+
+[You like this Project and want to support me?](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RH84HC939XQHS)
+
 ## Features
 
 ...
