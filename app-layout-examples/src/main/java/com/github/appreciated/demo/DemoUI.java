@@ -57,6 +57,13 @@ public class DemoUI extends UI {
     public static class Servlet extends VaadinServlet {
     }
 
+    public class View1 extends AbstractView {
+        @Override
+        String getViewName() {
+            return getClass().getName();
+        }
+    }
+
     public static class View2 extends AbstractView {
         @Override
         String getViewName() {
