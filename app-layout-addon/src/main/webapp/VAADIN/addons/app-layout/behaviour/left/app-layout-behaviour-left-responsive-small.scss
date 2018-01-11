@@ -55,6 +55,9 @@
     .app-bar-application-content {
       @include media-application-content ($al-bar-height, $al-drawer-small-width);
     }
+    .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+      width: $al-drawer-small-width !important;
+    }
   }
 }
 

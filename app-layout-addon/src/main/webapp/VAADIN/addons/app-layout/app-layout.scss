@@ -156,11 +156,11 @@ $al-menu-submenu-max-height: 999px !default;
     left: $al-drawer-small-width;
   }
 
-  .app-drawer-layout-1 app-drawer[opened]  .drawer-content, .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+  .app-drawer-layout-1 app-drawer[opened] .drawer-content {
     width: $al-drawer-width;
   }
 
-  .app-drawer-layout-1.small app-drawer[opened] .drawer-content, .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
+  .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
     width: $al-drawer-small-width;
   }
 

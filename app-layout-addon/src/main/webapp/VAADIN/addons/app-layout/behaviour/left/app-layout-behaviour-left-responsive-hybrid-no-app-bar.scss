@@ -75,6 +75,9 @@
     .app-layout-submenu-container {
       padding-left: $al-drawer-submenu-small-indention !important;
     }
+    .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+      width: $al-drawer-small-width !important;
+    }
   }
 }
 

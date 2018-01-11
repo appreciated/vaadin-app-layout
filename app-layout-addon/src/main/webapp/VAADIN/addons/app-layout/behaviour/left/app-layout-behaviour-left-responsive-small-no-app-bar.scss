@@ -57,6 +57,9 @@
       margin-bottom: 0px !important;
       padding-bottom: 0px !important;
     }
+    .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+      width: $al-drawer-small-width !important;
+    }
   }
 }
 
