@@ -9,12 +9,14 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
-import com.vaadin.annotations.*;
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
+import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.Viewport;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +26,6 @@ import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Positio
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")
-@Push(transport = Transport.WEBSOCKET_XHR)
 public class DemoUI extends UI {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();

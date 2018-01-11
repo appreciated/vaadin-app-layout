@@ -120,8 +120,6 @@ public class AppLayoutConfiguration {
             } else {
 
             }
-            System.out.println(viewChangeEvent.getNewView());
-
             return true;
         });
         if (viewProviderSupplier != null) {
