@@ -15,7 +15,7 @@ Add the following lines to you POM
 ```
 <dependency>
    <groupId>com.github.appreciated</groupId>
-   <artifactId>vaadin-app-layout</artifactId>
+   <artifactId>app-layout-addon</artifactId>
    <version>LATEST</version>
 </dependency>
 
@@ -103,6 +103,11 @@ Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.t
 The Java Project vaadin-app-layout is written by Appreciated 
 
 The used Polymer Components are [distributed under the BSD License](https://github.com/Polymer/polymer/blob/master/LICENSE.txt)
+
+
+# Donations
+
+[You like this Project and want to support me?](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RH84HC939XQHS)
 
 ## Features
 
