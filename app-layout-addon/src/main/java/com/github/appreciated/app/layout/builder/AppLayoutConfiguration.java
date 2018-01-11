@@ -102,19 +102,26 @@ public class AppLayoutConfiguration {
         navigator = navigatorProducer.apply(instance.getContentHolder());
         navigator.addViewChangeListener(viewChangeEvent -> {
             AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-            findNextNavigationElement(viewChangeEvent.getViewName()).ifPresent(element -> {
-                AppLayoutSessionHelper.setActiveNavigationElement(element);
-                if (closeSubmenusOnNavigate) {
-                    navigationElements.stream()
-                            .filter(nelement -> nelement instanceof SubmenuNavigationElement)
-                            .filter(nelement -> nelement != element)
-                            .map(nElement -> (SubmenuNavigationElement) nElement)
-                            .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
-                }
-                if (scrollToTopOnNavigate) {
-                    instance.getContentHolder().setScrollTop(0);
-                }
-            });
+            Optional<NavigatorNavigationElement> result = findNextNavigationElement(viewChangeEvent.getViewName());
+            if (result.isPresent()) {
+                result.ifPresent(element -> {
+                    AppLayoutSessionHelper.setActiveNavigationElement(element);
+                    if (closeSubmenusOnNavigate) {
+                        navigationElements.stream()
+                                .filter(nelement -> nelement instanceof SubmenuNavigationElement)
+                                .filter(nelement -> nelement != element)
+                                .map(nElement -> (SubmenuNavigationElement) nElement)
+                                .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
+                    }
+                    if (scrollToTopOnNavigate) {
+                        instance.getContentHolder().setScrollTop(0);
+                    }
+                });
+            } else {
+
+            }
+            System.out.println(viewChangeEvent.getNewView());
+
             return true;
         });
         if (viewProviderSupplier != null) {
