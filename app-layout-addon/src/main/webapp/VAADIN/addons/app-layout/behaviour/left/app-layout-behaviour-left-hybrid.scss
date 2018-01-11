@@ -68,6 +68,12 @@
       .app-layout-submenu-container {
         padding-left: $al-drawer-submenu-small-indention;
       }
+      .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: $al-drawer-small-width !important;
+      }
+      .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+        left: $al-drawer-small-width !important;
+      }
     }
     .app-bar-content {
       left: $al-bar-height;
