@@ -11,13 +11,11 @@ import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.View;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.ui.Transport;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -55,66 +53,6 @@ public class DemoUI extends UI {
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
     public static class Servlet extends VaadinServlet {
-    }
-
-    public class View1 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View2 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View3 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View4 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View5 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View6 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    static abstract class AbstractView extends HorizontalLayout implements View {
-        public AbstractView() {
-            HorizontalLayout layout = new HorizontalLayout();
-            layout.setSizeFull();
-            Label label = new Label("< " + getViewName() + " >");
-            label.addStyleNames(ValoTheme.LABEL_H2, ValoTheme.LABEL_NO_MARGIN);
-            layout.addComponent(label);
-            layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
-            Panel panel = new Panel(layout);
-            panel.setSizeFull();
-            addComponent(panel);
-            setMargin(true);
-            setSizeFull();
-        }
-
-        abstract String getViewName();
     }
 
 }
