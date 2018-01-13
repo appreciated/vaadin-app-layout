@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.navigator.PushStateNavigation;
 import com.vaadin.navigator.View;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
@@ -28,6 +29,7 @@ import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Positio
 import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
 import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.*;
 
+@PushStateNavigation
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")

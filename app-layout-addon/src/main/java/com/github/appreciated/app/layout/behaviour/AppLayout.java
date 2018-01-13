@@ -23,11 +23,11 @@ public interface AppLayout extends Component {
     }
 
     static void closeDrawerIfNotPersistent() {
-        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').closeEventually();}");
+        Page.getCurrent().getJavaScript().execute("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
     }
 
     static void closeDrawer() {
-        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').closeEventually();");
+        Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').close();");
     }
 
     String getStyleName();

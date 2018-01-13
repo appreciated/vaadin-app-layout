@@ -105,7 +105,7 @@ public class NotificationWindow<T> extends Window {
                 } else {
                     setPositionX(clickEvent.getClientX() - 150);
                 }
-                setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 67);
+                setPositionY(clickEvent.getClientY() - clickEvent.getRelativeY() + 64);
             } else {
                 if (UI.getCurrent().getPage().getBrowserWindowHeight() < clickEvent.getClientY() + height) {
                     setPositionY(UI.getCurrent().getPage().getBrowserWindowHeight() - height);
