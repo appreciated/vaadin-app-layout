@@ -63,6 +63,7 @@ public class AppLayoutConfiguration {
     private boolean CDI;
     private boolean scrollToTopOnNavigate = true;
     private boolean closeSubmenusOnNavigate = true;
+    private boolean useNavigator;
 
     public AppLayoutConfiguration(AppLayout instance) {
         this.instance = instance;
@@ -118,7 +119,6 @@ public class AppLayoutConfiguration {
                     }
                 });
             } else {
-
             }
             return true;
         });
@@ -300,6 +300,10 @@ public class AppLayoutConfiguration {
 
     public void setCDI(boolean CDI) {
         this.CDI = CDI;
+    }
+
+    public void setUseNavigator(boolean useNavigator) {
+        this.useNavigator = useNavigator;
     }
 
     public void setScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {

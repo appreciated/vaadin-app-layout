@@ -72,6 +72,10 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
     public void closeEventually(NavigatorNavigationElement element) {
         if (!hasChild(element)) {
             getComponent().close();
+            submenuElements.stream()
+                    .filter(submenuElement -> submenuElement instanceof SubmenuNavigationElement)
+                    .map(submenuElement -> (SubmenuNavigationElement) submenuElement)
+                    .forEach(submenuNavigationElement -> submenuNavigationElement.getComponent().close());
         }
     }
 
