@@ -1,7 +1,10 @@
-package com.github.appreciated.app.layout.builder;
+package com.github.appreciated.app.layout.builder.impl;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.ComponentProvider;
+import com.github.appreciated.app.layout.builder.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
@@ -13,6 +16,7 @@ import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavig
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
+import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -44,6 +48,7 @@ public class AppLayoutConfiguration {
     private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private AppBarDesign design = AppBarDesign.DEFAULT;
     private Navigator navigator;
+    private ComponentNavigator componentNavigator;
     private String title;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
@@ -63,7 +68,7 @@ public class AppLayoutConfiguration {
     private boolean CDI;
     private boolean scrollToTopOnNavigate = true;
     private boolean closeSubmenusOnNavigate = true;
-    private boolean useNavigator;
+    private boolean navigatorEnabled;
 
     public AppLayoutConfiguration(AppLayout instance) {
         this.instance = instance;
@@ -100,49 +105,48 @@ public class AppLayoutConfiguration {
 
         setTitle(title);
 
-        navigator = navigatorProducer.apply(instance.getContentHolder());
-        navigator.addViewChangeListener(viewChangeEvent -> {
-            AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-            Optional<NavigatorNavigationElement> result = findNextNavigationElement(viewChangeEvent.getViewName());
-            if (result.isPresent()) {
-                result.ifPresent(element -> {
-                    AppLayoutSessionHelper.setActiveNavigationElement(element);
-                    if (closeSubmenusOnNavigate) {
-                        navigationElements.stream()
-                                .filter(nelement -> nelement instanceof SubmenuNavigationElement)
-                                .filter(nelement -> nelement != element)
-                                .map(nElement -> (SubmenuNavigationElement) nElement)
-                                .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
-                    }
-                    if (scrollToTopOnNavigate) {
-                        instance.getContentHolder().setScrollTop(0);
-                    }
-                });
-            } else {
+        if (navigatorEnabled) {
+            navigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
+            if (viewProviderSupplier != null) {
+                navigator.addProvider(viewProviderSupplier.get());
             }
-            return true;
-        });
-        if (viewProviderSupplier != null) {
-            navigator.addProvider(viewProviderSupplier.get());
-        }
-        if (errorProvider != null) {
-            navigator.setErrorProvider(errorProvider.get());
-        }
-        if (errorViewProvider != null) {
-            navigator.setErrorView(errorViewProvider.get());
-        }
-        if (navigatorConsumer != null) {
-            navigatorConsumer.accept(navigator);
-        }
-        if (!CDI) {
+            if (errorProvider != null) {
+                navigator.setErrorProvider(errorProvider.get());
+            }
+            if (errorViewProvider != null) {
+                navigator.setErrorView(errorViewProvider.get());
+            }
+            if (navigatorConsumer != null) {
+                navigatorConsumer.accept(navigator);
+            }
+            if (!CDI) {
+                if (defaultNavigationElement == null) {
+                    defaultNavigationElement = navigationElements.stream()
+                            .filter(element -> element instanceof NavigatorNavigationElement)
+                            .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
+                }
+                defaultNavigationElement.addViewToNavigator(navigator);
+            } else if (CDI && defaultNavigationElement != null) {
+                System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
+            }
+        } else {
+            componentNavigator = new ComponentNavigator(instance.getContentHolder());
+            componentNavigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
+            if (viewProviderSupplier != null) {
+                componentNavigator.addProvider(viewProviderSupplier.get());
+            }
+            if (errorProvider != null) {
+                componentNavigator.setErrorProvider(errorProvider.get());
+            }
+            if (errorViewProvider != null) {
+                componentNavigator.setErrorView(errorViewProvider.get());
+            }
             if (defaultNavigationElement == null) {
                 defaultNavigationElement = navigationElements.stream()
                         .filter(element -> element instanceof NavigatorNavigationElement)
                         .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
             }
-            defaultNavigationElement.addViewToNavigator(navigator);
-        } else if (CDI && defaultNavigationElement != null) {
-            System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
+            defaultNavigationElement.addViewToComponentNavigator(componentNavigator);
         }
         addComponents(headerElements, instance::addNavigationHeaderElement);
         addComponents(navigationElements, instance::addNavigationElement);
@@ -153,6 +157,9 @@ public class AppLayoutConfiguration {
             instance.addAppBarIcon(appBarIconComponent);
         }
         instance.setNavigatorNavigationElements(navigatorElements);
+        if (!navigatorEnabled) {
+            componentNavigator.navigateTo(defaultNavigationElement.getViewName());
+        }
         return instance;
     }
 
@@ -186,7 +193,11 @@ public class AppLayoutConfiguration {
             }
             nElement.setViewNameInterceptor(viewNameInterceptor);
             nElement.setCaptionInterceptor(captionInterceptor);
-            nElement.addViewToNavigator(navigator);
+            if (navigatorEnabled) {
+                nElement.addViewToNavigator(navigator);
+            } else {
+                nElement.addViewToComponentNavigator(componentNavigator);
+            }
             navigatorElements.add(nElement);
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement sElement = (SubmenuNavigationElement) element;
@@ -198,11 +209,11 @@ public class AppLayoutConfiguration {
         }
     }
 
-    public void add(AbstractNavigationElement element, AppLayoutBuilder.Position position) {
+    public void add(AbstractNavigationElement element, Position position) {
         addToPosition(element, position);
     }
 
-    public void addToPosition(AbstractNavigationElement element, AppLayoutBuilder.Position position) {
+    public void addToPosition(AbstractNavigationElement element, Position position) {
         switch (position) {
             case HEADER:
                 headerElements.add(element);
@@ -302,8 +313,12 @@ public class AppLayoutConfiguration {
         this.CDI = CDI;
     }
 
-    public void setUseNavigator(boolean useNavigator) {
-        this.useNavigator = useNavigator;
+    public void setNavigatorEnabled(boolean navigatorEnabled) {
+        this.navigatorEnabled = navigatorEnabled;
+    }
+
+    public ComponentNavigator getComponentNavigator() {
+        return componentNavigator;
     }
 
     public void setScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {
@@ -312,6 +327,27 @@ public class AppLayoutConfiguration {
 
     public void setCloseSubmenusOnNavigate(boolean closeSubmenusOnNavigate) {
         this.closeSubmenusOnNavigate = closeSubmenusOnNavigate;
+    }
+
+    private boolean beforeViewChange(String viewName) {
+        AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
+        Optional<NavigatorNavigationElement> result = findNextNavigationElement(viewName);
+        if (result.isPresent()) {
+            result.ifPresent(element -> {
+                AppLayoutSessionHelper.setActiveNavigationElement(element);
+                if (closeSubmenusOnNavigate) {
+                    navigationElements.stream()
+                            .filter(nelement -> nelement instanceof SubmenuNavigationElement)
+                            .filter(nelement -> nelement != element)
+                            .map(nElement -> (SubmenuNavigationElement) nElement)
+                            .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
+                }
+                if (scrollToTopOnNavigate) {
+                    instance.getContentHolder().setScrollTop(0);
+                }
+            });
+        }
+        return true;
     }
 
     @FunctionalInterface
@@ -324,6 +360,10 @@ public class AppLayoutConfiguration {
 
     @FunctionalInterface
     interface ComponentConsumer extends Consumer<AbstractNavigationElement> {
+    }
+
+    public enum Position {
+        HEADER, DEFAULT, FOOTER
     }
 
 }

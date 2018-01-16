@@ -1,12 +1,13 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.impl.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
+import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -30,6 +31,8 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
     private Optional<SubmenuNavigationElement> parent = Optional.empty();
+    private Navigator navigator;
+    private ComponentNavigator componentNavigator;
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
         this(caption, caption, icon, null, view);
@@ -74,12 +77,24 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void addViewToNavigator(Navigator navigator) {
+
+        this.navigator = navigator;
         if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
             if (view != null) {
                 navigator.addView(getViewName(), view);
             } else if (className != null) {
                 navigator.addView(getViewName(), className);
             }
+        }
+    }
+
+    public void addViewToComponentNavigator(ComponentNavigator navigator) {
+
+        this.componentNavigator = navigator;
+        if (view != null) {
+            navigator.addView(getViewName(), view);
+        } else if (className != null) {
+            navigator.addView(getViewName(), className);
         }
     }
 
@@ -196,5 +211,13 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
             }
         }
         isCDI = CDI;
+    }
+
+    public void onClick() {
+        if (navigator != null) {
+            navigator.navigateTo(getViewName());
+        } else if (componentNavigator != null) {
+            componentNavigator.navigateTo(getViewName());
+        }
     }
 }
