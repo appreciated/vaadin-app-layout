@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.window;
+package com.github.appreciated.app.layout.component.window;
 
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;

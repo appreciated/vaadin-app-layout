@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.builder.providers.left;
 
-import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
 import com.github.appreciated.app.layout.component.ExpandingMenuContainer;
 
 public class DefaultLeftSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {

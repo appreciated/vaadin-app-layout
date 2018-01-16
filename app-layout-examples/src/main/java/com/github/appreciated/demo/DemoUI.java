@@ -1,14 +1,13 @@
 package com.github.appreciated.demo;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.builder.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
+import com.github.appreciated.app.layout.builder.elements.ClassSubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.MenuHeader;
-import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
+import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -21,7 +20,7 @@ import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
 
-import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
 
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
@@ -32,16 +31,17 @@ public class DemoUI extends UI {
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
     public void init(VaadinRequest request) {
-        setContent(AppLayoutBuilder.get(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        setContent(AppLayout.getNoNavigatorBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+                //.withNavigatorProvider(components -> null)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
-                .withViewNameInterceptor(new DefaultViewNameInterceptor())
+                //.withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
-                .withNavigatorConsumer(navigator -> {/* Do something with it */})
+                //.withNavigatorConsumer(navigator -> {/* Do something with it */})
                 .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
-                .add("Home", VaadinIcons.HOME, badge, new View1())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                .add("Home", VaadinIcons.HOME, badge, View1.class)
+                .add(ClassSubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                         .add("Contact", VaadinIcons.CONNECT, View3.class)
                         .add("More", VaadinIcons.COG, View4.class)

@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import com.github.appreciated.app.layout.builder.ComponentProvider;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * The interface every AppLayout Variant is required to be implemented to allow the AppLayoutBuilder to build it.
  */
 
-public interface AppLayout extends Component {
+public interface AppLayoutComponent extends Component {
     static void toggleDrawer() {
         Page.getCurrent().getJavaScript().execute("document.querySelector('app-drawer').toggle();");
     }

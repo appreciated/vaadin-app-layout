@@ -1,9 +1,9 @@
-package com.github.appreciated.app.layout.builder.window;
+package com.github.appreciated.app.layout.component.window;
 
 import com.github.appreciated.app.layout.Styles;
 import com.github.appreciated.app.layout.builder.entities.Holder;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.github.appreciated.app.layout.component.NavigationButton;
+import com.github.appreciated.app.layout.component.button.NavigationButton;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;

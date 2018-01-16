@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.builder.providers.left;
 
-import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
-import com.github.appreciated.app.layout.component.NavigationButton;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.component.button.NavigationButton;
 import com.vaadin.ui.Component;
 
 public class DefaultLeftClickableNavigationElementProvider implements ComponentProvider<Component, ClickableNavigationElement> {

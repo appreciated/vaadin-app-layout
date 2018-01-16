@@ -1,7 +1,8 @@
-package com.github.appreciated.app.layout.component;
+package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
-import com.github.appreciated.app.layout.component.HorizontalFlexBoxLayout;
+import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.Component;

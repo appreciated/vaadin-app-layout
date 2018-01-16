@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.builder.providers;
 
 import com.github.appreciated.app.layout.Styles;
-import com.github.appreciated.app.layout.builder.PairComponentProvider;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.builder.interfaces.PairComponentProvider;
 import com.github.appreciated.app.layout.component.RoundImage;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Component;

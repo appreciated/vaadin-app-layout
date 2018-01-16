@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.builder.providers.top;
 
-import com.github.appreciated.app.layout.builder.ComponentProvider;
 import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;

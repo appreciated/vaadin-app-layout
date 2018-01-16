@@ -1,6 +1,6 @@
-package com.github.appreciated.app.layout.builder.impl;
+package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
@@ -8,13 +8,13 @@ import com.vaadin.navigator.ViewProvider;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAppLayoutBuilder> {
-    protected CDIAppLayoutBuilder(CDIAppLayoutBuilder builder) {
-        super(builder);
+public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<NavigatorAppLayoutBuilder> {
+    protected NavigatorAppLayoutBuilder(AppLayoutComponent component) {
+        super(component);
     }
 
-    public static CDIAppLayoutBuilder get(AppLayout layout) {
-        return null;
+    public static NavigatorAppLayoutBuilder get(AppLayoutComponent layout) {
+        return new NavigatorAppLayoutBuilder(layout);
     }
 
     /**
@@ -23,7 +23,7 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param navigator
      * @return
      */
-    public CDIAppLayoutBuilder withNavigatorProducer(AppLayoutConfiguration.NavigatorProducer navigator) {
+    public NavigatorAppLayoutBuilder withNavigatorProducer(AppLayoutConfiguration.NavigatorProducer navigator) {
         this.config.setNavigatorProducer(navigator);
         return this;
     }
@@ -34,7 +34,7 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param supplier The ViewProvider for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withViewProvider(Supplier<ViewProvider> supplier) {
+    public NavigatorAppLayoutBuilder withViewProvider(Supplier<ViewProvider> supplier) {
         config.setViewProviderSupplier(supplier);
         return this;
     }
@@ -45,7 +45,7 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withErrorProvider(Supplier<ViewProvider> supplier) {
+    public NavigatorAppLayoutBuilder withErrorProvider(Supplier<ViewProvider> supplier) {
         config.setErrorProvider(supplier);
         return this;
     }
@@ -56,7 +56,7 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withErrorView(Supplier<View> supplier) {
+    public NavigatorAppLayoutBuilder withErrorView(Supplier<View> supplier) {
         config.setErrorView(supplier);
         return this;
     }
@@ -67,9 +67,10 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param consumer The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withNavigatorConsumer(Consumer<Navigator> consumer) {
+    public NavigatorAppLayoutBuilder withNavigatorConsumer(Consumer<Navigator> consumer) {
         config.setNavigatorConsumer(consumer);
         return this;
     }
 
 }
+

@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.Provider;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
-import com.github.appreciated.app.layout.builder.impl.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
@@ -149,12 +149,12 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     @Override
-    public void setProvider(AppLayout provider) {
+    public void setProvider(AppLayoutComponent provider) {
         setProvider(provider.getDrawerNavigationElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayout provider, AppLayout.Position position) {
+    public void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerNavigationElementProvider());

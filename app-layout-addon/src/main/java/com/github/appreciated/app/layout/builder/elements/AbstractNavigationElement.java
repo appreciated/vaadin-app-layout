@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.ComponentProvider;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
 import com.vaadin.ui.Component;
 
 /**
@@ -21,14 +21,14 @@ public abstract class AbstractNavigationElement<V extends Component, T> {
         return provider;
     }
 
-    public abstract void setProvider(AppLayout provider);
+    public abstract void setProvider(AppLayoutComponent provider);
 
     public void setProvider(ComponentProvider<V, T> provider) {
         this.component = null;
         this.provider = provider;
     }
 
-    public abstract void setProvider(AppLayout provider, AppLayout.Position position);
+    public abstract void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position);
 
     public V getComponent() {
         if (provider == null) {

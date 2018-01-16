@@ -1,16 +1,16 @@
-package com.github.appreciated.app.layout.builder.impl;
+package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 
 public class CDIAppLayoutBuilderWrapper {
-    private final AppLayout layout;
+    private final AppLayoutComponent layout;
 
     public CDIAppLayoutBuilderWrapper(Behaviour behaviour) {
         this.layout = behaviour.getInstance();
     }
 
-    public CDIAppLayoutBuilderWrapper(AppLayout layout) {
+    public CDIAppLayoutBuilderWrapper(AppLayoutComponent layout) {
         this.layout = layout;
     }
 

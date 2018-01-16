@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
-import com.github.appreciated.app.layout.builder.ComponentProvider;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
@@ -14,7 +14,7 @@ import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickab
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
-import com.github.appreciated.app.layout.component.VerticalFlexBoxLayout;
+import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -22,7 +22,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayout, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 

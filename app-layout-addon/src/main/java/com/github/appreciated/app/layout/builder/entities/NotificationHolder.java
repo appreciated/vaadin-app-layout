@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-import com.github.appreciated.app.layout.builder.PairComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.PairComponentProvider;
 import com.vaadin.ui.Component;
 
 import java.time.LocalDateTime;

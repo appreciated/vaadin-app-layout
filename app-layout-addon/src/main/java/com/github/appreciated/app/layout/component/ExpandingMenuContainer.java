@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
+import com.github.appreciated.app.layout.component.button.NavigationButton;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;

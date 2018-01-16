@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.builder.providers.top;
 
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.providers.AbstractNavigationElementComponentProvider;
-import com.github.appreciated.app.layout.component.NavigationBadgeButton;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class DefaultTopNavigationBadgeElementComponentProvider extends AbstractNavigationElementComponentProvider {

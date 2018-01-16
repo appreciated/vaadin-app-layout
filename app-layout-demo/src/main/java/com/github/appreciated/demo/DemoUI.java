@@ -1,15 +1,15 @@
 package com.github.appreciated.demo;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.builder.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.MenuHeader;
+import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
@@ -25,8 +25,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 import java.util.function.Consumer;
 
-import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.FOOTER;
-import static com.github.appreciated.app.layout.builder.AppLayoutBuilder.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.FOOTER;
+import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
 import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.*;
 
 @PushStateNavigation
@@ -71,20 +71,33 @@ public class DemoUI extends UI {
 
     private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
-        AppLayout drawer = AppLayoutBuilder.get(variant)
+        AppLayoutComponent drawer = AppLayout.getBuilder(variant)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 0.9.19", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                        .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
-                        .add("Contact", VaadinIcons.CONNECT, View3.class)
-                        .add("More", VaadinIcons.COG, View4.class)
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                                .add("Charts3", VaadinIcons.SPLINE_CHART, View2.class)
+                                .add("Contact3", VaadinIcons.CONNECT, View3.class)
+                                .add("More3", VaadinIcons.COG, View4.class)
+                                .build())
+                        .add("Contact1", VaadinIcons.CONNECT, View3.class)
+                        .add("More1", VaadinIcons.COG, View4.class)
+                        .build())
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                                .add("Charts4", VaadinIcons.SPLINE_CHART, View2.class)
+                                .add("Contact4", VaadinIcons.CONNECT, View3.class)
+                                .add("More4", VaadinIcons.COG, View4.class)
+                                .build())
+                        .add("Contact2", VaadinIcons.CONNECT, View3.class)
+                        .add("More2", VaadinIcons.COG, View4.class)
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
@@ -92,7 +105,9 @@ public class DemoUI extends UI {
                 .build();
         drawer.addStyleName("left");
         holder.addComponent(drawer);
-        getNavigator().navigateTo("");
+        if (getNavigator() != null) {
+            getNavigator().navigateTo("");
+        }
     }
 
     private void openModeSelector(Behaviour variant) {

@@ -1,14 +1,11 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.impl.CDIAppLayoutBuilderWrapper;
-import com.github.appreciated.app.layout.builder.impl.NavigatorAppLayoutBuilder;
-import com.github.appreciated.app.layout.builder.impl.NoNavigatorAppLayoutBuilder;
 
-public class AppLayoutBuilder {
+public class AppLayout {
 
-    public static CDIAppLayoutBuilderWrapper getCDIBuilder(AppLayout layout) {
+    public static CDIAppLayoutBuilderWrapper getCDIBuilder(AppLayoutComponent layout) {
         return new CDIAppLayoutBuilderWrapper(layout);
     }
 
@@ -16,7 +13,7 @@ public class AppLayoutBuilder {
         return new CDIAppLayoutBuilderWrapper(behaviour);
     }
 
-    public static NavigatorAppLayoutBuilder getBuilder(AppLayout layout) {
+    public static NavigatorAppLayoutBuilder getBuilder(AppLayoutComponent layout) {
         return NavigatorAppLayoutBuilder.get(layout);
     }
 
@@ -24,7 +21,7 @@ public class AppLayoutBuilder {
         return NavigatorAppLayoutBuilder.get(behaviour.getInstance());
     }
 
-    public static NoNavigatorAppLayoutBuilder getNoNavigatorBuilder(AppLayout layout) {
+    public static NoNavigatorAppLayoutBuilder getNoNavigatorBuilder(AppLayoutComponent layout) {
         return NoNavigatorAppLayoutBuilder.get(layout);
     }
 

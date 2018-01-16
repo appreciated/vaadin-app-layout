@@ -1,16 +1,16 @@
-package com.github.appreciated.app.layout.builder.impl;
+package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.ComponentProvider;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.Provider;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
 import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
 import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
@@ -61,7 +61,7 @@ public class AppLayoutConfiguration {
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
     private Component appBarIconComponent;
 
-    private AppLayout instance;
+    private AppLayoutComponent instance;
 
     private Provider<String, String> viewNameInterceptor = null;
     private Provider<String, String> captionInterceptor;
@@ -70,11 +70,11 @@ public class AppLayoutConfiguration {
     private boolean closeSubmenusOnNavigate = true;
     private boolean navigatorEnabled;
 
-    public AppLayoutConfiguration(AppLayout instance) {
+    public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
     }
 
-    public AppLayout build() {
+    public AppLayoutComponent build() {
 
         if (navigationElementProvider == null) {
             if (variant.isTop())
@@ -106,6 +106,7 @@ public class AppLayoutConfiguration {
         setTitle(title);
 
         if (navigatorEnabled) {
+            navigator = navigatorProducer.apply(instance.getContentHolder());
             navigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
             if (viewProviderSupplier != null) {
                 navigator.addProvider(viewProviderSupplier.get());

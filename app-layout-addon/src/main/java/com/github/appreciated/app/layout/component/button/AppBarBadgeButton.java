@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.component;
+package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.server.Resource;

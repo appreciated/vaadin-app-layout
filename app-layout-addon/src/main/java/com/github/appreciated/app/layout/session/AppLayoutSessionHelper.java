@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.session;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.component.NavigationBadgeButton;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 import com.vaadin.ui.UI;
 
 import java.util.Optional;

@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.builder.providers;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.builder.ComponentProvider;
-import com.github.appreciated.app.layout.builder.NavigationElementComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.component.NavigationBadgeButton;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 
 public abstract class AbstractNavigationElementComponentProvider implements ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> {
 
@@ -12,7 +12,7 @@ public abstract class AbstractNavigationElementComponentProvider implements Comp
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
         button.getButton().addClickListener(clickEvent -> {
             element.onClick();
-            AppLayout.closeDrawerIfNotPersistent();
+            AppLayoutComponent.closeDrawerIfNotPersistent();
         });
     }
 }

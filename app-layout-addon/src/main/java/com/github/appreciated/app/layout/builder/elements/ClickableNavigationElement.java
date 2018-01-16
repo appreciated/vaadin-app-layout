@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -33,12 +33,12 @@ public class ClickableNavigationElement extends AbstractNavigationElement<Compon
     }
 
     @Override
-    public void setProvider(AppLayout provider) {
+    public void setProvider(AppLayoutComponent provider) {
         setProvider(provider.getDrawerClickableElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayout provider, AppLayout.Position position) {
+    public void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerClickableElementProvider());
