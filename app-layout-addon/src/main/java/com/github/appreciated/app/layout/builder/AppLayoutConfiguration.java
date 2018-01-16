@@ -102,9 +102,7 @@ public class AppLayoutConfiguration {
         }
 
         AppLayoutSessionHelper.setActiveVariant(variant);
-
-        setTitle(title);
-
+        instance.setTitle(title);
         if (navigatorEnabled) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
             navigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
