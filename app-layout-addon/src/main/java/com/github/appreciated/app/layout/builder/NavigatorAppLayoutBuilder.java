@@ -14,7 +14,9 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
     }
 
     public static NavigatorAppLayoutBuilder get(AppLayoutComponent layout) {
-        return new NavigatorAppLayoutBuilder(layout);
+        NavigatorAppLayoutBuilder builder = new NavigatorAppLayoutBuilder(layout);
+        builder.config.setNavigatorEnabled(true);
+        return builder;
     }
 
     /**
@@ -23,7 +25,7 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
      * @param navigator
      * @return
      */
-    public NavigatorAppLayoutBuilder withNavigatorProducer(AppLayoutConfiguration.NavigatorProducer navigator) {
+    public NavigatorAppLayoutBuilder withNavigator(AppLayoutConfiguration.NavigatorProducer navigator) {
         this.config.setNavigatorProducer(navigator);
         return this;
     }

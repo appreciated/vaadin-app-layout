@@ -14,7 +14,10 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
     }
 
     public static CDIAppLayoutBuilder get(AppLayoutComponent layout) {
-        return new CDIAppLayoutBuilder(layout);
+        CDIAppLayoutBuilder builder = new CDIAppLayoutBuilder(layout);
+        builder.config.setCDI(true);
+        builder.config.setNavigatorEnabled(true);
+        return builder;
     }
 
     /**
@@ -23,7 +26,7 @@ public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAp
      * @param navigator
      * @return
      */
-    public CDIAppLayoutBuilder withNavigatorProducer(AppLayoutConfiguration.NavigatorProducer navigator) {
+    public CDIAppLayoutBuilder withNavigator(AppLayoutConfiguration.NavigatorProducer navigator) {
         this.config.setNavigatorProducer(navigator);
         return this;
     }

@@ -8,6 +8,8 @@ public class NoNavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<No
     }
 
     public static NoNavigatorAppLayoutBuilder get(AppLayoutComponent layout) {
-        return new NoNavigatorAppLayoutBuilder(layout);
+        NoNavigatorAppLayoutBuilder builder = new NoNavigatorAppLayoutBuilder(layout);
+        builder.config.setNavigatorEnabled(false);
+        return builder;
     }
 }

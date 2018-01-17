@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
-    <artifactId>app-layout-example-cdi</artifactId>
+    <artifactId>app-layout-example-spring-cdi</artifactId>
     <packaging>war</packaging>
     <version>0.9.20</version>
-    <name>App Layout Add-on CDI Example</name>
+    <name>App Layout Add-on Spring CDI Example</name>
 
     <prerequisites>
         <maven>3</maven>

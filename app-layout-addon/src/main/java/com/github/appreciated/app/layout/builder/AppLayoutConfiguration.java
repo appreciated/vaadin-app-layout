@@ -65,10 +65,10 @@ public class AppLayoutConfiguration {
 
     private Provider<String, String> viewNameInterceptor = null;
     private Provider<String, String> captionInterceptor;
-    private boolean CDI;
+    private boolean CDI = false;
     private boolean scrollToTopOnNavigate = true;
     private boolean closeSubmenusOnNavigate = true;
-    private boolean navigatorEnabled;
+    private boolean navigatorEnabled = true;
 
     public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
@@ -105,6 +105,10 @@ public class AppLayoutConfiguration {
         instance.setTitle(title);
         if (navigatorEnabled) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
+            if (navigator == null) {
+                throw new RuntimeException("The set navigatorProducer returned 'null' as a Navigator");
+            }
+
             navigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
             if (viewProviderSupplier != null) {
                 navigator.addProvider(viewProviderSupplier.get());

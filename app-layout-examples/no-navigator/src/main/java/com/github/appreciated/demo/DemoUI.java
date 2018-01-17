@@ -32,13 +32,10 @@ public class DemoUI extends UI {
 
     public void init(VaadinRequest request) {
         setContent(AppLayout.getNoNavigatorBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
-                //.withNavigatorProvider(components -> null)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
-                //.withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
-                //.withNavigatorConsumer(navigator -> {/* Do something with it */})
                 .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(ClassSubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)

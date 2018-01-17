@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase> {
 
-    public AppLayoutConfiguration config;
+    protected AppLayoutConfiguration config;
 
     protected AbstractAppLayoutBuilderBase(AppLayoutComponent component) {
         config = new AppLayoutConfiguration(component);
