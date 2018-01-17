@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.navigator;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewProvider;
 import com.vaadin.shared.Registration;
 import com.vaadin.ui.Panel;
 
@@ -12,26 +11,19 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A very basic implementation of the Navigator functionality to allow users using this addon without the navigator
+ */
 public class ComponentNavigator {
 
-    private ViewProvider errorProvider;
     private View errorView;
     private List<ViewChangeListener> listeners = new ArrayList<>();
     private HashMap<String, View> views = new HashMap<>();
     private String currentViewName = null;
     private Panel contentHolder;
-    private ViewProvider viewProvider;
 
     public ComponentNavigator(Panel contentHolder) {
         this.contentHolder = contentHolder;
-    }
-
-    public void addProvider(ViewProvider viewProvider) {
-        this.viewProvider = viewProvider;
-    }
-
-    public void setErrorProvider(ViewProvider errorProvider) {
-        this.errorProvider = errorProvider;
     }
 
     public void setErrorView(View errorView) {
@@ -63,18 +55,24 @@ public class ComponentNavigator {
 
     public void navigateTo(String viewName) {
         if (currentViewName == null || !currentViewName.equals(viewName)) {
-            contentHolder.setContent(views.get(viewName).getViewComponent());
-            this.listeners.forEach(viewChangeListener -> viewChangeListener.beforeViewChange(new ViewChangeListener.ViewChangeEvent(this, views.getOrDefault(currentViewName, null), views.get(viewName), viewName, null)));
-            currentViewName = viewName;
+            if (views.containsKey(viewName)) {
+                contentHolder.setContent(views.get(viewName).getViewComponent());
+                this.listeners.forEach(viewChangeListener -> viewChangeListener.beforeViewChange(new ViewChangeListener.ViewChangeEvent(this, views.getOrDefault(currentViewName, null), views.get(viewName), viewName, null)));
+                currentViewName = viewName;
+            } else {
+                currentViewName = null;
+                if (errorView != null) {
+                    contentHolder.setContent(errorView.getViewComponent());
+                } else {
+                    throw new RuntimeException("You tried to navigate to a viewName that wasn't added");
+                }
+            }
         }
     }
 
     @FunctionalInterface
     public interface ViewChangeListener extends Serializable {
         boolean beforeViewChange(ViewChangeListener.ViewChangeEvent var1);
-
-        default void afterViewChange(ViewChangeListener.ViewChangeEvent event) {
-        }
 
         class ViewChangeEvent extends EventObject {
             private final View oldView;

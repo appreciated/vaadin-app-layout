@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
@@ -33,6 +34,19 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      */
     public T withDefaultNavigationView(Class<? extends View> element) {
         config.setDefaultNavigationElement(new NavigatorNavigationElement("", null, element));
+        return (T) this;
+    }
+
+    /**
+     * Sets the view names specific schema before passing them to the Navigator use this method, does
+     * not work when used in combination with cdi
+     *
+     * @param interceptor The interceptor which contains the procedure how the new view name is to be determined
+     * @return
+     */
+
+    public T withViewNameInterceptor(Provider<String, String> interceptor) {
+        config.setViewNameInterceptor(interceptor);
         return (T) this;
     }
 

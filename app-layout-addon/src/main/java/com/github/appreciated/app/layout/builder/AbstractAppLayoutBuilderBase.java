@@ -47,19 +47,6 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Sets the view names specific schema before passing them to the Navigator use this method, does
-     * not work when used in combination with cdi
-     *
-     * @param interceptor The interceptor which contains the procedure how the new view name is to be determined
-     * @return
-     */
-
-    public T withViewNameInterceptor(Provider<String, String> interceptor) {
-        config.setViewNameInterceptor(interceptor);
-        return (T) this;
-    }
-
-    /**
      * Sets the caption for the menu entries after a specific schema before initializing their views use this method
      *
      * @param interceptor The interceptor which contains the procedure how the new caption is to be determined

@@ -131,12 +131,6 @@ public class AppLayoutConfiguration {
         } else {
             componentNavigator = new ComponentNavigator(instance.getContentHolder());
             componentNavigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
-            if (viewProviderSupplier != null) {
-                componentNavigator.addProvider(viewProviderSupplier.get());
-            }
-            if (errorProvider != null) {
-                componentNavigator.setErrorProvider(errorProvider.get());
-            }
             if (errorViewProvider != null) {
                 componentNavigator.setErrorView(errorViewProvider.get());
             }

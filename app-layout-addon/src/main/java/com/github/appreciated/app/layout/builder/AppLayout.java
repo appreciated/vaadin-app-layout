@@ -2,22 +2,23 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.steps.CDIBuilderNavigatorPreamble;
 
 public class AppLayout {
 
-    public static CDIAppLayoutBuilderWrapper getCDIBuilder(AppLayoutComponent layout) {
-        return new CDIAppLayoutBuilderWrapper(layout);
+    public static CDIBuilderNavigatorPreamble getCDIBuilder(AppLayoutComponent layout) {
+        return new CDIBuilderNavigatorPreamble(CDIAppLayoutBuilder.get(layout));
     }
 
-    public static CDIAppLayoutBuilderWrapper getCDIBuilder(Behaviour behaviour) {
-        return new CDIAppLayoutBuilderWrapper(behaviour);
+    public static CDIBuilderNavigatorPreamble getCDIBuilder(Behaviour behaviour) {
+        return new CDIBuilderNavigatorPreamble(CDIAppLayoutBuilder.get(behaviour.getInstance()));
     }
 
-    public static NavigatorAppLayoutBuilder getBuilder(AppLayoutComponent layout) {
+    public static NavigatorAppLayoutBuilder getDefaultBuilder(AppLayoutComponent layout) {
         return NavigatorAppLayoutBuilder.get(layout);
     }
 
-    public static NavigatorAppLayoutBuilder getBuilder(Behaviour behaviour) {
+    public static NavigatorAppLayoutBuilder getDefaultBuilder(Behaviour behaviour) {
         return NavigatorAppLayoutBuilder.get(behaviour.getInstance());
     }
 

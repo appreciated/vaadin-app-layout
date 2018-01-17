@@ -71,13 +71,13 @@ public class DemoUI extends UI {
 
     private void setDrawerVariant(Behaviour variant) {
         holder.removeAllComponents();
-        AppLayoutComponent drawer = AppLayout.getBuilder(variant)
+        AppLayoutComponent drawer = AppLayout.getDefaultBuilder(variant)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
-                .withNavigatorConsumer(navigator -> {/* Do someting with it */})
+                //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
                 .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
