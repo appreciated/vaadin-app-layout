@@ -66,6 +66,9 @@
     .app-drawer-layout-1 app-drawer[opened] .drawer-content {
       width: $al-drawer-small-width !important;
     }
+    .app-layout-menu-badge-button {
+      padding: 0px 16px;
+    }
   }
 }
 
