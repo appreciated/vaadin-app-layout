@@ -17,9 +17,9 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
 
     private PairComponentProvider<NotificationHolder, T> componentProvider;
 
-    private ArrayList<NotificationListener> listeners = new ArrayList<>();
     private ArrayList<T> notifications = new ArrayList<>();
-    private NotificationClickListener<T> listener;
+    private ArrayList<NotificationListener> onChangeListeners = new ArrayList<>();
+    private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
 
     public NotificationHolder() {
     }
@@ -50,16 +50,21 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
 
     public void addNotification(T notification) {
         notifications.add(notification);
-        listeners.forEach(listener -> listener.onNotificationChanges(this));
+        notifyListeners();
     }
 
     public void removeNotification(T notification) {
         notifications.remove(notification);
-        listeners.forEach(listener -> listener.onNotificationChanges(this));
+        notifyListeners();
+    }
+
+    public void clearNotifications() {
+        notifications.clear();
+        notifyListeners();
     }
 
     public void addStatusListener(NotificationListener listener) {
-        listeners.add(listener);
+        onChangeListeners.add(listener);
     }
 
     public Component getComponent(T message) {
@@ -74,14 +79,20 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public void onNotificationClicked(T info) {
-        listeners.forEach(listener -> listener.onUnreadCountChange(this));
-        if (listener != null) {
-            listener.onNotificationClicked(info);
-        }
+        notifyClickListeners(info);
+        notifyListeners();
     }
 
-    public void setNotificationClickedListener(NotificationClickListener<T> listener) {
-        this.listener = listener;
+    private void notifyListeners() {
+        onChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
+    }
+
+    private void notifyClickListeners(T info) {
+        clickListeners.forEach(listener -> listener.onNotificationClicked(info));
+    }
+
+    public void addNotificationClickedListener(NotificationClickListener<T> listener) {
+        this.clickListeners.add(listener);
     }
 
     public int getUnreadNotifications() {

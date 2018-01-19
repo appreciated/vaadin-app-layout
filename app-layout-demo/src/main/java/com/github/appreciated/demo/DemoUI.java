@@ -27,6 +27,7 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.FOOTER;
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.MEDIUM;
 
 @PushStateNavigation
 @Viewport("initial-scale=1, maximum-scale=1")
@@ -38,6 +39,7 @@ public class DemoUI extends UI {
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
     private VerticalLayout holder;
+    private Thread currentThread;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -46,19 +48,37 @@ public class DemoUI extends UI {
         setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
         setContent(holder);
         holder.setSizeFull();
-        notifications.setNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
     @Override
     public void attach() {
         super.attach();
-        /*
-        addNotification(LOW);
-        addNotification(LOW);
-        addNotification(MEDIUM);
-        addNotification(MEDIUM);
-        addNotification(HIGH);
-        addNotification(HIGH);*/
+        reloadNotifications();
+    }
+
+    private void reloadNotifications() {
+        if (currentThread != null && !currentThread.isInterrupted()) {
+            currentThread.interrupt();
+        }
+        badge.clearCount();
+        notifications.clearNotifications();
+        currentThread = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                addNotification(MEDIUM);
+            }
+        });
+        currentThread.start();
     }
 
     private void addNotification(DefaultNotification.Priority priority) {
@@ -108,6 +128,7 @@ public class DemoUI extends UI {
         if (getNavigator() != null) {
             getNavigator().navigateTo("");
         }
+        reloadNotifications();
     }
 
     private void openModeSelector(Behaviour variant) {

@@ -39,6 +39,10 @@ public class DefaultBadgeHolder {
         listeners.forEach(listener -> listener.onChange(this));
     }
 
+    public void clearCount() {
+        setCount(0);
+    }
+
     public void addListener(BadgeListener listener) {
         listeners.add(listener);
     }

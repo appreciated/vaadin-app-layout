@@ -43,7 +43,9 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
 
                 @Override
                 public void onUnreadCountChange(NotificationHolder holder) {
-                    ui.access(window::close);
+                    if (window != null) {
+                        window.close();
+                    }
                 }
             });
         }
