@@ -1,5 +1,6 @@
-package com.github.appreciated.app.layout.builder.elements;
+package com.github.appreciated.app.layout.builder.elements.builders;
 
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -7,10 +8,40 @@ import com.vaadin.server.Resource;
 /**
  * A Builder to build SubmenuNavigationElements
  */
-public class SubmenuBuilder extends ClassSubmenuBuilder {
+public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
 
     private SubmenuBuilder(String title, Resource resource) {
         super(title, resource);
+    }
+
+    /**
+     * returns a SubmenuBuilder with a predefined expanding element that only has a title
+     *
+     * @param title
+     * @return
+     */
+    public static SubmenuBuilder get(String title) {
+        return new SubmenuBuilder(title, null);
+    }
+
+    /**
+     * returns a SubmenuBuilder with a predefined expanding element that only has an icon
+     *
+     * @param icon
+     * @return
+     */
+    public static SubmenuBuilder get(Resource icon) {
+        return new SubmenuBuilder(null, icon);
+    }
+
+    /**
+     * returns a SubmenuBuilder with a predefined expanding element that has an icon and a title
+     *
+     * @param icon
+     * @return
+     */
+    public static SubmenuBuilder get(String title, Resource icon) {
+        return new SubmenuBuilder(title, icon);
     }
 
     /**

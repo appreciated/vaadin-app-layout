@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
-import com.github.appreciated.app.layout.builder.elements.SubmenuBuilder;
+import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;

@@ -8,7 +8,7 @@ import com.vaadin.navigator.ViewProvider;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CDIAppLayoutBuilder extends AbstractViewClassAppLayoutBuilder<CDIAppLayoutBuilder> {
+public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayoutBuilder> {
     protected CDIAppLayoutBuilder(AppLayoutComponent component) {
         super(component);
     }
