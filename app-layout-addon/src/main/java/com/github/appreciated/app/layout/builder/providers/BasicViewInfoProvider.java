@@ -6,29 +6,42 @@ import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.vaadin.navigator.View;
-
-import java.util.Optional;
+import com.vaadin.server.Resource;
 
 public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
-    private AnnotationValueProvider provider;
+    private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(MenuCaption.class).value();
+    private AnnotationValueProvider<Resource> iconProvider = info -> info.getAnnotation(MenuIcon.class).value();
+    private AnnotationValueProvider<String> viewNameProvider;
 
-    BasicViewInfoProvider(AnnotationValueProvider provider) {
-        this.provider = provider;
+    public BasicViewInfoProvider(AnnotationValueProvider<String> viewNameProvider) {
+        this.viewNameProvider = viewNameProvider;
+    }
+
+    public BasicViewInfoProvider() {
+    }
+
+    public void withCaptionProvider(AnnotationValueProvider<String> captionProvider) {
+        this.captionProvider = captionProvider;
+    }
+
+    public void withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
+        this.iconProvider = iconProvider;
+    }
+
+    public void withViewNameProvider(AnnotationValueProvider<String> viewNameProvider) {
+        this.viewNameProvider = viewNameProvider;
     }
 
     @Override
-    public NavigationElementInfo apply(Class<? extends View> aClass) {
+    public NavigationElementInfo apply(Class<? extends View> info) {
         return new NavigationElementInfo(
-                Optional.ofNullable(aClass.getAnnotation(MenuCaption.class))
-                        .map(menuElement -> menuElement.value())
-                        .orElse(provider.get(aClass)),
-                Optional.ofNullable(aClass.getAnnotation(MenuIcon.class))
-                        .map(menuElement -> menuElement.value())
-                        .orElse(null),
-                provider.get(aClass));
+                captionProvider.get(info),
+                iconProvider.get(info),
+                viewNameProvider.get(info)
+        );
     }
 
-    public interface AnnotationValueProvider extends Provider<String, Class<? extends View>> {
+    public interface AnnotationValueProvider<T> extends Provider<T, Class<? extends View>> {
     }
 }
