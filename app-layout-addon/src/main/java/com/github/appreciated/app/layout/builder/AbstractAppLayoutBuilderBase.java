@@ -33,7 +33,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Set the component is supposed to display a title instead of the default one
+     * Replaces the title component with another component
      *
      * @param component
      * @return
