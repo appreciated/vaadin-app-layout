@@ -128,15 +128,10 @@ public class AppLayoutConfiguration {
             if (navigatorConsumer != null) {
                 navigatorConsumer.accept(navigator);
             }
-            if (!CDI) {
-                if (defaultNavigationElement == null) {
-                    defaultNavigationElement = navigationElements.stream()
-                            .filter(element -> element instanceof NavigatorNavigationElement)
-                            .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-                }
-                defaultNavigationElement.addViewToNavigator(navigator);
-            } else if (CDI && defaultNavigationElement != null) {
-                System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
+            if (!CDI && defaultNavigationElement == null) {
+                defaultNavigationElement = navigationElements.stream()
+                        .filter(element -> element instanceof NavigatorNavigationElement)
+                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
             }
         } else {
             componentNavigator = new ComponentNavigator(instance.getContentHolder());
@@ -165,6 +160,12 @@ public class AppLayoutConfiguration {
         instance.setNavigatorNavigationElements(navigatorElements);
         if (!navigatorEnabled) {
             componentNavigator.navigateTo(defaultNavigationElement.getViewName());
+        } else {
+            if (!CDI && defaultNavigationElement != null) {
+                defaultNavigationElement.addViewToNavigator(navigator);
+            } else if (CDI && defaultNavigationElement != null) {
+                System.err.println("WARNING - AppLayout - You are using CDI but try to set the DefaultNavigationElement this will have no effect");
+            }
         }
         return instance;
     }
