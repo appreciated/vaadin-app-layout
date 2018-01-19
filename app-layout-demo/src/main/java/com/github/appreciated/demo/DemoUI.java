@@ -86,7 +86,6 @@ public class DemoUI extends UI {
             badge.increase();
             notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
         });
-        badge.increase();
     }
 
     private void setDrawerVariant(Behaviour variant) {
