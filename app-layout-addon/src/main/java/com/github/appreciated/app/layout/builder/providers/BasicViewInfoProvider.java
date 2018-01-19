@@ -21,16 +21,19 @@ public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationE
     public BasicViewInfoProvider() {
     }
 
-    public void withCaptionProvider(AnnotationValueProvider<String> captionProvider) {
+    public BasicViewInfoProvider withCaptionProvider(AnnotationValueProvider<String> captionProvider) {
         this.captionProvider = captionProvider;
+        return this;
     }
 
-    public void withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
+    public BasicViewInfoProvider withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
         this.iconProvider = iconProvider;
+        return this;
     }
 
-    public void withViewNameProvider(AnnotationValueProvider<String> viewNameProvider) {
+    public BasicViewInfoProvider withViewNameProvider(AnnotationValueProvider<String> viewNameProvider) {
         this.viewNameProvider = viewNameProvider;
+        return this;
     }
 
     @Override
