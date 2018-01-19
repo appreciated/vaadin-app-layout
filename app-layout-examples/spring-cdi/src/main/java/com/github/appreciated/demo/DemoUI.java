@@ -53,7 +53,7 @@ public class DemoUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDesign(AppBarDesign.MATERIAL)
                 .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
-                .add(View1.class, badge)
+                .add(badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add(View2.class)
                         .add(View3.class)
