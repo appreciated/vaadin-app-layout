@@ -1,5 +1,6 @@
 package com.github.appreciated.demo;
 
+import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayout;
 import com.github.appreciated.app.layout.builder.design.AppBarDesign;
@@ -31,11 +32,11 @@ import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.P
 @Title("App Layout Demo")
 public class DemoUI extends UI {
 
-    DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-    DefaultBadgeHolder badge = new DefaultBadgeHolder();
-
     public void init(VaadinRequest request) {
-        setContent(AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        DefaultNotificationHolder notifications = new DefaultNotificationHolder();
+        DefaultBadgeHolder badge = new DefaultBadgeHolder();
+
+        AppLayoutComponent layout = AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withNavigator(container -> new Navigator(this, container))
                 .withTitle("App Layout Basic Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
@@ -52,7 +53,8 @@ public class DemoUI extends UI {
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .build());
+                .build();
+        setContent(layout);
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
