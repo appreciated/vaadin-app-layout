@@ -27,7 +27,6 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.FOOTER;
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
-import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.*;
 
 @PushStateNavigation
 @Viewport("initial-scale=1, maximum-scale=1")
@@ -53,12 +52,13 @@ public class DemoUI extends UI {
     @Override
     public void attach() {
         super.attach();
+        /*
         addNotification(LOW);
         addNotification(LOW);
         addNotification(MEDIUM);
         addNotification(MEDIUM);
         addNotification(HIGH);
-        addNotification(HIGH);
+        addNotification(HIGH);*/
     }
 
     private void addNotification(DefaultNotification.Priority priority) {
