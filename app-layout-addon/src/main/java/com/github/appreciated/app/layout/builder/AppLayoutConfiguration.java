@@ -69,6 +69,7 @@ public class AppLayoutConfiguration {
     private boolean scrollToTopOnNavigate = true;
     private boolean closeSubmenusOnNavigate = true;
     private boolean navigatorEnabled = true;
+    private Component titleComponent;
 
     public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
@@ -102,7 +103,11 @@ public class AppLayoutConfiguration {
         }
 
         AppLayoutSessionHelper.setActiveVariant(variant);
-        instance.setTitle(title);
+        if (titleComponent == null) {
+            instance.setTitle(title);
+        } else {
+            instance.setTitleComponent(titleComponent);
+        }
         if (navigatorEnabled) {
             navigator = navigatorProducer.apply(instance.getContentHolder());
             if (navigator == null) {
@@ -345,6 +350,10 @@ public class AppLayoutConfiguration {
             });
         }
         return true;
+    }
+
+    public void setTitleComponent(Component titleComponent) {
+        this.titleComponent = titleComponent;
     }
 
     @FunctionalInterface

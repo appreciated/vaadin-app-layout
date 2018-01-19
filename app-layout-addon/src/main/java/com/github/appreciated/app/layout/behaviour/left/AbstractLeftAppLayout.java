@@ -35,7 +35,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private final Label title = new Label("");
+    private Component title = new Label("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
     private List<NavigatorNavigationElement> list;
     private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
@@ -110,12 +110,25 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         return appBarElementWrapper;
     }
 
-    public Label getTitle() {
+    public Component getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title.setValue(title);
+        if (this.title instanceof Label) {
+            ((Label) this.title).setValue(title);
+        }
+    }
+
+    @Override
+    public Component getTitleComponent() {
+        return title;
+    }
+
+    public void setTitleComponent(Component compoent) {
+        titleWrapper.replaceComponent(this.title, compoent);
+        this.title = compoent;
+        titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
     }
 
     @Override

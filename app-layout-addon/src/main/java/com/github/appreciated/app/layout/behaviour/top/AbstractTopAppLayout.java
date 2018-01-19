@@ -42,7 +42,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private final HorizontalFlexBoxLayout appBar = new HorizontalFlexBoxLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private final Label title = new Label("");
+    private Component title = new Label("");
     private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
@@ -117,12 +117,24 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         return appBarElementWrapper;
     }
 
-    public Label getTitle() {
+    public Component getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title.setValue(title);
+        if (this.title instanceof Label) {
+            ((Label) this.title).setValue(title);
+        }
+    }
+
+    @Override
+    public Component getTitleComponent() {
+        return title;
+    }
+
+    public void setTitleComponent(Component component) {
+        titleWrapper.replaceComponent(this.title, component);
+        this.title = component;
     }
 
     @Override

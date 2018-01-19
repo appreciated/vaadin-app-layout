@@ -33,6 +33,17 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
+     * Set the component is supposed to display a title instead of the default one
+     *
+     * @param component
+     * @return
+     */
+    public T withTitle(Component component) {
+        config.setTitleComponent(component);
+        return (T) this;
+    }
+
+    /**
      * Sets the NavigationElementInfoProvider for the AppLayout.
      * The NavigationElementInfoProvider contains a algerythm to determine the icon and the caption for a View which then later on is used
      * to generate the menu entries. This allows to outsource the the information into annotations generally

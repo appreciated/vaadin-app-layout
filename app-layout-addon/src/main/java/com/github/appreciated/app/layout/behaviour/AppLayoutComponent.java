@@ -58,9 +58,11 @@ public interface AppLayoutComponent extends Component {
 
     HorizontalLayout getAppBarElementWrapper();
 
-    Label getTitle();
+    Component getTitleComponent();
 
     void setTitle(String title);
+
+    void setTitleComponent(Component titleComponent);
 
     Layout getTitleWrapper();
 
