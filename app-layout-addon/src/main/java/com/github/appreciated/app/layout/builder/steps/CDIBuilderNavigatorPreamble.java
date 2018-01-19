@@ -18,8 +18,8 @@ public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppL
      * @param producer
      * @return
      */
-    public CDIBuilderErrorViewPreamble withNavigator(AppLayoutConfiguration.NavigatorProducer producer) {
-        return new CDIBuilderErrorViewPreamble(getBuilder().withNavigator(producer));
+    public CDIBuilderViewNameProviderPreamble withNavigator(AppLayoutConfiguration.NavigatorProducer producer) {
+        return new CDIBuilderViewNameProviderPreamble(getBuilder().withNavigator(producer));
     }
 
     /**
@@ -28,7 +28,7 @@ public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppL
      * @param supplier
      * @return
      */
-    public CDIBuilderErrorViewPreamble withViewProvider(Supplier<ViewProvider> supplier) {
-        return new CDIBuilderErrorViewPreamble(getBuilder().withViewProvider(supplier));
+    public CDIBuilderViewNameProviderPreamble withViewProvider(Supplier<ViewProvider> supplier) {
+        return new CDIBuilderViewNameProviderPreamble(getBuilder().withViewProvider(supplier));
     }
 }
