@@ -83,7 +83,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(Class<? extends View> className, DefaultBadgeHolder badgeHolder) {
+    public T add(DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
         return add(null, null, badgeHolder, className, AppLayoutConfiguration.Position.DEFAULT);
     }
 

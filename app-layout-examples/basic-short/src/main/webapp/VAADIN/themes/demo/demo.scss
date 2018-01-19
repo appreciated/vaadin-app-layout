@@ -1,0 +1,13 @@
+//$al-bar-height: 80px;
+//$al-bar-background-color: rgb(255, 0, 0);
+//$al-bar-font-color: rgb(0, 255, 0);
+$al-drawer-width: 300px;
+$al-drawer-small-width: 80px;
+//$al-drawer-submenu-indention: 10px;
+//$al-drawer-submenu-background-color: transparent;
+
+@import "../valo/valo.scss";
+
+@mixin demo {
+  @include valo;
+}
