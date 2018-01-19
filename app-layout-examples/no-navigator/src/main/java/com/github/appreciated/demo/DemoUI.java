@@ -8,6 +8,7 @@ import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
+import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -29,6 +30,7 @@ public class DemoUI extends UI {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
+    private ComponentNavigator navigator;
 
     public void init(VaadinRequest request) {
         setContent(AppLayout.getNoNavigatorBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
@@ -36,6 +38,7 @@ public class DemoUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
+                .withNavigatorConsumer(navigator -> this.navigator = navigator)
                 .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(ClassSubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
@@ -46,6 +49,17 @@ public class DemoUI extends UI {
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
                 .build());
+    }
+
+    /**
+     * Now you can access the component Navigator by DemoUI.getCurrent().getComponentNavigator() and use it to navigate
+     * to different views manually. Note that the ComponentNavigator is a replacement of the Vaadin Navigator and works
+     * differently.
+     *
+     * @return
+     */
+    public ComponentNavigator getComponentNavigator() {
+        return navigator;
     }
 
     @WebServlet(value = "/*", asyncSupported = true)

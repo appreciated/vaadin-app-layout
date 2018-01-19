@@ -70,6 +70,7 @@ public class AppLayoutConfiguration {
     private boolean closeSubmenusOnNavigate = true;
     private boolean navigatorEnabled = true;
     private Component titleComponent;
+    private Consumer<ComponentNavigator> componentNavigatorConsumer;
 
     public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
@@ -142,6 +143,9 @@ public class AppLayoutConfiguration {
             componentNavigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
             if (errorViewProvider != null) {
                 componentNavigator.setErrorView(errorViewProvider.get());
+            }
+            if (componentNavigatorConsumer != null) {
+                componentNavigatorConsumer.accept(componentNavigator);
             }
             if (defaultNavigationElement == null) {
                 defaultNavigationElement = navigationElements.stream()
@@ -354,6 +358,10 @@ public class AppLayoutConfiguration {
 
     public void setTitleComponent(Component titleComponent) {
         this.titleComponent = titleComponent;
+    }
+
+    public void setComponentNavigatorConsumer(Consumer<ComponentNavigator> consumer) {
+        componentNavigatorConsumer = consumer;
     }
 
     @FunctionalInterface
