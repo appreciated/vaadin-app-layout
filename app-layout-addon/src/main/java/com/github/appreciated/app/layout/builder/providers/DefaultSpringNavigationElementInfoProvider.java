@@ -14,7 +14,8 @@ public class DefaultSpringNavigationElementInfoProvider extends BasicViewInfoPro
     }
 
     /**
-     * This is a workaround since we don't want Spring as a dependency but also don't want code every user needs to copy
+     * This is a workaround to avoid code duplication and also don't want Spring as a dependency in the app-layout,
+     * since there are users which are not using spring.
      *
      * @param aClass
      * @return

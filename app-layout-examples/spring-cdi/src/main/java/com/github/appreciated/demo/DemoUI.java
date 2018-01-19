@@ -41,11 +41,10 @@ public class DemoUI extends UI {
     public void init(VaadinRequest request) {
         setContent(AppLayout.getCDIBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withViewProvider(() -> viewProvider)
-                .withErrorView(() -> new View1())
                 //
                 // You will need to provide your own NavigationElementInfoProvider when using a different CDI than Vaadin Spring.
                 // The same applies if you want to use other Icons for the MenuButtons than Vaadin Icons. Just checkout the default
-                // Implementation and provide your own. If you have a good idea how to solve this better  just give a pull
+                // Implementation and provide your own. If you have a good idea how to solve this better just make a pull
                 // Request on Github
                 .withNavigationElementInfoProvider(new DefaultSpringNavigationElementInfoProvider())
                 //
