@@ -51,12 +51,6 @@ public class DemoUI extends UI {
         notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
-    @Override
-    public void attach() {
-        super.attach();
-        reloadNotifications();
-    }
-
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
             currentThread.interrupt();
@@ -65,17 +59,13 @@ public class DemoUI extends UI {
         notifications.clearNotifications();
         currentThread = new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
+                for (int i = 0; i < 10; i++) {
+                    Thread.sleep(1000);
+                    addNotification(MEDIUM);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
-            for (int i = 0; i < 10; i++) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                addNotification(MEDIUM);
             }
         });
         currentThread.start();
