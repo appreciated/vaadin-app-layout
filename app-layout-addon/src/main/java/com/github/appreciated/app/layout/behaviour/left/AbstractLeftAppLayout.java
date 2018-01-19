@@ -66,7 +66,7 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementWrapper, new AppLayoutResizeListener(this));
+        appBar.addComponents(titleWrapper, new AppLayoutResizeListener(this), appBarElementWrapper);
         appBar.setExpandRatio(appBarElementWrapper, 1);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);

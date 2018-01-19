@@ -74,7 +74,7 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         addComponent(contentPanel, "content");
         addComponent(menuHolder, "menu-elements");
         addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, appBarElementWrapper, new AppLayoutResizeListener(this));
+        appBar.addComponents(titleWrapper, new AppLayoutResizeListener(this), appBarElementWrapper);
         appBar.grow(titleWrapper);
         appBar.setWidth(100, Unit.PERCENTAGE);
         appBar.setHeight(100, Unit.PERCENTAGE);
