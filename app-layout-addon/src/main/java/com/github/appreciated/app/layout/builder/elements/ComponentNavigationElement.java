@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.Position;
 import com.vaadin.ui.Component;
 
 /**
@@ -25,7 +26,7 @@ public class ComponentNavigationElement extends AbstractNavigationElement<Compon
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position) {
+    public void setProvider(AppLayoutComponent provider, Position position) {
 
     }
 }

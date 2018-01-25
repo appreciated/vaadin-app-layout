@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
@@ -47,12 +48,12 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
 
     @Override
     public void setProvider(AppLayoutComponent provider) {
-        setProvider(provider, AppLayoutComponent.Position.DRAWER);
+        setProvider(provider, Position.DRAWER);
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position) {
-        if (position == AppLayoutComponent.Position.TOP) {
+    public void setProvider(AppLayoutComponent provider, Position position) {
+        if (position == Position.TOP) {
             setProvider(provider.getTopSubmenuElementProvider());
         } else {
             setProvider(provider.getDrawerSubmenuElementProvider());

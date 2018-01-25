@@ -114,7 +114,5 @@ public interface AppLayoutComponent extends Component {
 
     void setTopClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
 
-    public enum Position {
-        TOP, DRAWER
-    }
+
 }
