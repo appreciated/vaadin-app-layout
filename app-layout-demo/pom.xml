@@ -1,185 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.appreciated</groupId>
-    <artifactId>app-layout-demo</artifactId>
-    <packaging>war</packaging>
-    <version>0.9.20cp1</version>
-    <name>App Layout Add-on Demo</name>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.appreciated</groupId>
+  <artifactId>app-layout-demo</artifactId>
+  <packaging>war</packaging>
+  <version>0.9.20cp1</version>
+  <name>App Layout Add-on Demo</name>
 
-    <prerequisites>
-        <maven>3</maven>
-    </prerequisites>
+  <distributionManagement>
+    <repository>
+      <id>archiva.internal</id>
+      <name>archiva.internal</name>
+      <url>https://archiva.dev.cargo-partner.com/repository/internal</url>
+    </repository>
+  </distributionManagement>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.2.1</vaadin.version>
-        <vaadin.plugin.version>8.2.1</vaadin.plugin.version>
-        <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
-        <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
-    </properties>
+  <prerequisites>
+    <maven>3</maven>
+  </prerequisites>
 
-    <organization>
-        <name>appreciated</name>
-        <url>https://github.com/appreciated</url>
-    </organization>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <vaadin.version>8.2.1</vaadin.version>
+    <vaadin.plugin.version>8.2.1</vaadin.plugin.version>
+    <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
+    <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
+  </properties>
 
-    <scm>
-        <url>git://github.com/appreciated/vaadin-app-layout.git</url>
-        <connection>scm:git:git://github.com/appreciated/vaadin-app-layout.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:/appreciated/vaadin-app-layout.git</developerConnection>
-        <tag>App Layout Add-on for Vaadin</tag>
-    </scm>
+  <organization>
+    <name>appreciated</name>
+    <url>https://github.com/appreciated</url>
+  </organization>
 
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/appreciated/vaadin-app-layout/issues</url>
-    </issueManagement>
+  <scm>
+    <url>git://github.com/appreciated/vaadin-app-layout.git</url>
+    <connection>scm:git:git://github.com/appreciated/vaadin-app-layout.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:/appreciated/vaadin-app-layout.git</developerConnection>
+    <tag>App Layout Add-on for Vaadin</tag>
+  </scm>
 
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/appreciated/vaadin-app-layout/issues</url>
+  </issueManagement>
 
-    <repositories>
-        <repository>
-            <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
-        </repository>
-    </repositories>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+  <repositories>
+    <repository>
+      <id>vaadin-addons</id>
+      <url>http://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+  </repositories>
 
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.github.appreciated</groupId>
-            <artifactId>app-layout-addon</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-push</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiler</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <version>${vaadin.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${vaadin.plugin.version}</version>
-                <executions>
-                    <!-- You are free to mark this as permanently ignored in Eclipse -->
-                    <execution>
-                        <configuration>
-                            <!-- if you don't specify any modules, the plugin will find them -->
-                        </configuration>
-                        <goals>
-                            <goal>resources</goal>
-                            <goal>update-widgetset</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- The Jetty plugin allows us to easily test the development build by -->
-            <!-- running jetty:run on the command line. -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.plugin.version}</version>
-                <configuration>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
-                </configuration>
-            </plugin>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.appreciated</groupId>
+      <artifactId>app-layout-addon</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-push</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-client-compiler</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-themes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
-        </plugins>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-maven-plugin</artifactId>
+        <version>${vaadin.plugin.version}</version>
+        <executions>
+          <!-- You are free to mark this as permanently ignored in Eclipse -->
+          <execution>
+            <configuration>
+              <!-- if you don't specify any modules, the plugin will find them -->
+            </configuration>
+            <goals>
+              <goal>resources</goal>
+              <goal>update-widgetset</goal>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- The Jetty plugin allows us to easily test the development build by -->
+      <!-- running jetty:run on the command line. -->
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.plugin.version}</version>
+        <configuration>
+          <scanIntervalSeconds>2</scanIntervalSeconds>
+        </configuration>
+      </plugin>
 
-    </build>
+    </plugins>
 
-    <profiles>
-        <profile>
-            <!-- Vaadin pre-release repositories -->
-            <id>vaadin-prerelease</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </repository>
-                <repository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </pluginRepository>
-                <pluginRepository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
+  </build>
+
+  <profiles>
+    <profile>
+      <!-- Vaadin pre-release repositories -->
+      <id>vaadin-prerelease</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>vaadin-prereleases</id>
+          <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+        <repository>
+          <id>vaadin-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>vaadin-prereleases</id>
+          <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>vaadin-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
 
 </project>
