@@ -37,7 +37,7 @@ public class AppLayoutTest {
   private View view;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     PowerMockito.mockStatic(UI.class);
     MockitoAnnotations.initMocks(this);
     Mockito.when(UI.getCurrent()).thenReturn(ui);
@@ -56,8 +56,6 @@ public class AppLayoutTest {
         .withNavigator(components -> navigator)
         .withNavigationElementInfoProvider(new DefaultNavigationElementInfoProvider())
         .build());
-
-    SerializationUtils.serialize(new NavigatorNavigationElement("", null, view));
   }
 
 }
