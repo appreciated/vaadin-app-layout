@@ -21,11 +21,17 @@ import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
+import com.vaadin.server.SerializableConsumer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
+import io.vavr.Function0;
+import io.vavr.Function1;
+import io.vavr.Function2;
 import io.vavr.control.Option;
+import sun.security.pkcs11.wrapper.Functions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -35,7 +41,7 @@ import java.util.function.Supplier;
 /**
  * Since the class AppLayoutBuilder was grew so large I decided to outsource the logic to configure an AppLayout instance into this class.
  */
-public class AppLayoutConfiguration {
+public class AppLayoutConfiguration implements Serializable {
 
     Behaviour variant = Behaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
@@ -364,15 +370,15 @@ public class AppLayoutConfiguration {
     }
 
     @FunctionalInterface
-    public interface NavigatorProducer extends Function<Panel, Navigator> {
+    public interface NavigatorProducer extends Function1<Panel, Navigator> {
     }
 
     @FunctionalInterface
-    public interface NavigationElementInfoProducer extends Function<Class<? extends View>, NavigationElementInfo> {
+    public interface NavigationElementInfoProducer extends Function1<Class<? extends View>, NavigationElementInfo> {
     }
 
     @FunctionalInterface
-    interface ComponentConsumer extends Consumer<AbstractNavigationElement> {
+    interface ComponentConsumer extends SerializableConsumer<AbstractNavigationElement> {
     }
 
     public enum Position {

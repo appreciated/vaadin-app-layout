@@ -48,7 +48,7 @@ public class DefaultBadgeHolder implements Serializable {
         listeners.add(listener);
     }
 
-    public interface BadgeListener {
+    public interface BadgeListener extends Serializable {
         void onChange(DefaultBadgeHolder newStatus);
     }
 

@@ -30,7 +30,12 @@ public class NavigationBadgeButton extends HorizontalFlexBoxLayout implements Na
         }
         badge = new Label();
         if (status != null) {
-            status.addListener((newStatus) -> setStatus(newStatus));
+            status.addListener(new DefaultBadgeHolder.BadgeListener() {
+              @Override
+              public void onChange(DefaultBadgeHolder newStatus) {
+                setStatus(newStatus);
+              }
+            });
         }
         setStatus(status);
         badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
