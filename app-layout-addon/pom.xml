@@ -5,7 +5,7 @@
   <groupId>com.github.appreciated</groupId>
   <artifactId>app-layout-addon</artifactId>
   <packaging>jar</packaging>
-  <version>0.9.20</version>
+  <version>0.9.20cp1</version>
   <name>App Layout Add-on</name>
 
   <prerequisites>
@@ -32,13 +32,6 @@
     <name>appreciated</name>
     <url>https://github.com/appreciated</url>
   </organization>
-
-  <scm>
-    <url>git://github.com/appreciated/vaadin-app-layout.git</url>
-    <connection>scm:git:git://github.com/appreciated/vaadin-app-layout</connection>
-    <developerConnection>scm:git:ssh://git@github.com:/appreciated/vaadin-app-layout.git</developerConnection>
-    <tag>App Layout Add-on for Vaadin</tag>
-  </scm>
 
   <issueManagement>
     <system>GitHub</system>
