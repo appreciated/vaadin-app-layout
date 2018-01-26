@@ -4,9 +4,8 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
-
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import com.vaadin.server.SerializableConsumer;
+import io.vavr.Function0;
 
 public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayoutBuilder> {
     protected CDIAppLayoutBuilder(AppLayoutComponent component) {
@@ -37,7 +36,7 @@ public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayou
      * @param supplier The ViewProvider for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withViewProvider(Supplier<ViewProvider> supplier) {
+    public CDIAppLayoutBuilder withViewProvider(Function0<ViewProvider> supplier) {
         config.setViewProviderSupplier(supplier);
         return this;
     }
@@ -48,7 +47,7 @@ public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayou
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withErrorProvider(Supplier<ViewProvider> supplier) {
+    public CDIAppLayoutBuilder withErrorProvider(Function0<ViewProvider> supplier) {
         config.setErrorProvider(supplier);
         return this;
     }
@@ -59,7 +58,7 @@ public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayou
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withErrorView(Supplier<View> supplier) {
+    public CDIAppLayoutBuilder withErrorView(Function0<View> supplier) {
         config.setErrorView(supplier);
         return this;
     }
@@ -70,7 +69,7 @@ public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayou
      * @param consumer The consumer for the navigator instance
      * @return
      */
-    public CDIAppLayoutBuilder withNavigatorConsumer(Consumer<Navigator> consumer) {
+    public CDIAppLayoutBuilder withNavigatorConsumer(SerializableConsumer<Navigator> consumer) {
         config.setNavigatorConsumer(consumer);
         return this;
     }

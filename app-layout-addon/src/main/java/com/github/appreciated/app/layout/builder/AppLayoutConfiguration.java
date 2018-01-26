@@ -27,16 +27,11 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import io.vavr.Function0;
 import io.vavr.Function1;
-import io.vavr.Function2;
 import io.vavr.control.Option;
-import sun.security.pkcs11.wrapper.Functions;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * Since the class AppLayoutBuilder was grew so large I decided to outsource the logic to configure an AppLayout instance into this class.
@@ -46,10 +41,10 @@ public class AppLayoutConfiguration implements Serializable {
     Behaviour variant = Behaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
-    private Consumer<Navigator> navigatorConsumer;
-    private Supplier<ViewProvider> viewProviderSupplier;
-    private Supplier<ViewProvider> errorProvider;
-    private Supplier<View> errorViewProvider;
+    private SerializableConsumer<Navigator> navigatorConsumer;
+    private Function0<ViewProvider> viewProviderSupplier;
+    private Function0<ViewProvider> errorProvider;
+    private Function0<View> errorViewProvider;
 
     private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private AppBarDesign design = AppBarDesign.DEFAULT;
@@ -76,7 +71,7 @@ public class AppLayoutConfiguration implements Serializable {
     private boolean closeSubmenusOnNavigate = true;
     private boolean navigatorEnabled = true;
     private Component titleComponent;
-    private Consumer<ComponentNavigator> componentNavigatorConsumer;
+    private SerializableConsumer<ComponentNavigator> componentNavigatorConsumer;
 
     public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
@@ -270,19 +265,19 @@ public class AppLayoutConfiguration implements Serializable {
         return appBarElements;
     }
 
-    public void setNavigatorConsumer(Consumer<Navigator> navigatorConsumer) {
+    public void setNavigatorConsumer(SerializableConsumer<Navigator> navigatorConsumer) {
         this.navigatorConsumer = navigatorConsumer;
     }
 
-    public void setViewProviderSupplier(Supplier<ViewProvider> viewProviderSupplier) {
+    public void setViewProviderSupplier(Function0<ViewProvider> viewProviderSupplier) {
         this.viewProviderSupplier = viewProviderSupplier;
     }
 
-    public void setErrorProvider(Supplier<ViewProvider> errorProvider) {
+    public void setErrorProvider(Function0<ViewProvider> errorProvider) {
         this.errorProvider = errorProvider;
     }
 
-    public void setErrorView(Supplier<View> errorView) {
+    public void setErrorView(Function0<View> errorView) {
         this.errorViewProvider = errorView;
     }
 
@@ -365,7 +360,7 @@ public class AppLayoutConfiguration implements Serializable {
         this.titleComponent = titleComponent;
     }
 
-    public void setComponentNavigatorConsumer(Consumer<ComponentNavigator> consumer) {
+    public void setComponentNavigatorConsumer(SerializableConsumer<ComponentNavigator> consumer) {
         componentNavigatorConsumer = consumer;
     }
 

@@ -3,8 +3,8 @@ package com.github.appreciated.app.layout.builder.steps;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.CDIAppLayoutBuilder;
 import com.vaadin.navigator.ViewProvider;
+import io.vavr.Function0;
 
-import java.util.function.Supplier;
 
 public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppLayoutBuilder> {
 
@@ -28,7 +28,7 @@ public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppL
      * @param supplier
      * @return
      */
-    public CDIBuilderViewNameProviderPreamble withViewProvider(Supplier<ViewProvider> supplier) {
+    public CDIBuilderViewNameProviderPreamble withViewProvider(Function0<ViewProvider> supplier) {
         return new CDIBuilderViewNameProviderPreamble(getBuilder().withViewProvider(supplier));
     }
 }

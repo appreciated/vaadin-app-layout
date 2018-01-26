@@ -2,8 +2,7 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
-
-import java.util.function.Consumer;
+import com.vaadin.server.SerializableConsumer;
 
 public class NoNavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<NoNavigatorAppLayoutBuilder> {
     protected NoNavigatorAppLayoutBuilder(AppLayoutComponent component) {
@@ -16,7 +15,7 @@ public class NoNavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<No
         return builder;
     }
 
-    public NoNavigatorAppLayoutBuilder withNavigatorConsumer(Consumer<ComponentNavigator> consumer) {
+    public NoNavigatorAppLayoutBuilder withNavigatorConsumer(SerializableConsumer<ComponentNavigator> consumer) {
         config.setComponentNavigatorConsumer(consumer);
         return this;
     }
