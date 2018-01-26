@@ -4,9 +4,8 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
-
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import com.vaadin.server.SerializableConsumer;
+import io.vavr.Function0;
 
 public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<NavigatorAppLayoutBuilder> {
     protected NavigatorAppLayoutBuilder(AppLayoutComponent component) {
@@ -36,7 +35,7 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
      * @param supplier The ViewProvider for the navigator instance
      * @return
      */
-    public NavigatorAppLayoutBuilder withViewProvider(Supplier<ViewProvider> supplier) {
+    public NavigatorAppLayoutBuilder withViewProvider(Function0<ViewProvider> supplier) {
         config.setViewProviderSupplier(supplier);
         return this;
     }
@@ -47,7 +46,7 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public NavigatorAppLayoutBuilder withErrorProvider(Supplier<ViewProvider> supplier) {
+    public NavigatorAppLayoutBuilder withErrorProvider(Function0<ViewProvider> supplier) {
         config.setErrorProvider(supplier);
         return this;
     }
@@ -58,7 +57,7 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
      * @param supplier The consumer for the navigator instance
      * @return
      */
-    public NavigatorAppLayoutBuilder withErrorView(Supplier<View> supplier) {
+    public NavigatorAppLayoutBuilder withErrorView(Function0<View> supplier) {
         config.setErrorView(supplier);
         return this;
     }
@@ -69,7 +68,7 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
      * @param consumer The consumer for the navigator instance
      * @return
      */
-    public NavigatorAppLayoutBuilder withNavigatorConsumer(Consumer<Navigator> consumer) {
+    public NavigatorAppLayoutBuilder withNavigatorConsumer(SerializableConsumer<Navigator> consumer) {
         config.setNavigatorConsumer(consumer);
         return this;
     }
