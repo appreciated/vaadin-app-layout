@@ -6,7 +6,9 @@ import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 
-public class DefaultTopSectionElementComponentProvider implements ComponentProvider<Component, SectionNavigationElement> {
+import java.io.Serializable;
+
+public class DefaultTopSectionElementComponentProvider implements Serializable, ComponentProvider<Component, SectionNavigationElement> {
     @Override
     public Component get(SectionNavigationElement element) {
         Label label = new Label(element.getName());

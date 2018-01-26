@@ -8,7 +8,9 @@ import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
-public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer {
+import java.io.Serializable;
+
+public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer, Serializable {
 
     private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(MenuCaption.class).value();
     private AnnotationValueProvider<Resource> iconProvider = info -> info.getAnnotation(MenuIcon.class).value();

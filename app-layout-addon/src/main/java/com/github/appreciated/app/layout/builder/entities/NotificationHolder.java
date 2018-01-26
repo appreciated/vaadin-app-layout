@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.builder.entities;
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentProvider;
 import com.vaadin.ui.Component;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import static com.github.appreciated.app.layout.Styles.APP_BAR_NOTIFICATION;
  * This Class is a abstract controller of a Component that can display a Notifications
  */
 
-public class NotificationHolder<T extends NotificationHolder.Notification> {
+public class NotificationHolder<T extends NotificationHolder.Notification> implements Serializable {
 
     private PairComponentProvider<NotificationHolder, T> componentProvider;
 
@@ -99,7 +100,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         return (int) notifications.stream().filter(notification -> notification.isUnnread()).count();
     }
 
-    public interface Notification extends Comparator<Notification> {
+    public interface Notification extends Comparator<Notification>, Serializable {
         boolean isUnnread();
 
         DefaultNotification.Priority getPriority();

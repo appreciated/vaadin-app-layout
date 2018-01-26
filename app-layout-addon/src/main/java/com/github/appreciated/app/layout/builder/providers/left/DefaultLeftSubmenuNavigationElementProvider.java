@@ -4,7 +4,9 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationEleme
 import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
 import com.github.appreciated.app.layout.component.ExpandingMenuContainer;
 
-public class DefaultLeftSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+import java.io.Serializable;
+
+public class DefaultLeftSubmenuNavigationElementProvider implements Serializable, ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
     @Override
     public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
         ExpandingMenuContainer container = new ExpandingMenuContainer(element.getTitle(), element.getIcon());

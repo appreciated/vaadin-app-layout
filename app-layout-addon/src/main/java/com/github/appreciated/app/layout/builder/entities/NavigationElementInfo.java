@@ -2,12 +2,14 @@ package com.github.appreciated.app.layout.builder.entities;
 
 import com.vaadin.server.Resource;
 
+import java.io.Serializable;
+
 /**
  * Data structure that contains all the needed information of a NavigatorNavigationElement. This class is beaing used by
  * by the NavigationElementInfoProvider.
  */
 
-public class NavigationElementInfo {
+public class NavigationElementInfo implements Serializable {
     String caption;
     Resource icon;
     String viewName;

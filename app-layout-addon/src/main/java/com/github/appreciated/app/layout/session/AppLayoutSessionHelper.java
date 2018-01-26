@@ -4,8 +4,7 @@ import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 import com.vaadin.ui.UI;
-
-import java.util.Optional;
+import io.vavr.control.Option;
 
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT_ACTIVE;
 
@@ -18,15 +17,15 @@ public class AppLayoutSessionHelper {
     }
 
     public static void removeStyleFromCurrentlyActiveNavigationElement() {
-        getActiveNavigationElement().ifPresent(element1 -> UI.getCurrent().access(() -> element1.getComponent().removeStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE)));
+        getActiveNavigationElement().peek(element1 -> UI.getCurrent().access(() -> element1.getComponent().removeStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE)));
     }
 
-    public static Optional<NavigatorNavigationElement> getActiveNavigationElement() {
+    public static Option<NavigatorNavigationElement> getActiveNavigationElement() {
         Object object = UI.getCurrent().getSession().getAttribute(UI_SESSION_KEY);
         if (object instanceof NavigatorNavigationElement) {
-            return Optional.of((NavigatorNavigationElement) object);
+            return Option.of((NavigatorNavigationElement) object);
         } else {
-            return Optional.empty();
+            return Option.none();
         }
     }
 

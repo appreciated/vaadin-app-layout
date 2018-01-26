@@ -11,7 +11,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class DefaultNotificationComponentProvider implements PairComponentProvider<NotificationHolder, DefaultNotification> {
+import java.io.Serializable;
+
+public class DefaultNotificationComponentProvider implements PairComponentProvider<NotificationHolder, DefaultNotification>, Serializable {
     @Override
     public Component getComponent(NotificationHolder holder, DefaultNotification info) {
         VerticalLayout wrapper = new VerticalLayout();

@@ -4,13 +4,15 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
 import com.vaadin.ui.Component;
 
+import java.io.Serializable;
+
 /**
  * AbstractNavigationElement is a abstract wrapper class for a Component which will be provided by a ComponentProvider.
  *
  * @param <V> The specific Component which can be produced by this wrapper
  * @param <T> The Element itself to only allow Providers to be used that are compatible with the specific AbstractNavigationElement
  */
-public abstract class AbstractNavigationElement<V extends Component, T> {
+public abstract class AbstractNavigationElement<V extends Component, T> implements Serializable {
 
     ComponentProvider<V, T> provider;
     private V component;

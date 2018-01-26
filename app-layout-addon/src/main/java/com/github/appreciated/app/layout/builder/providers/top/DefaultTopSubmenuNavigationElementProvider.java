@@ -9,7 +9,9 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class DefaultTopSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+import java.io.Serializable;
+
+public class DefaultTopSubmenuNavigationElementProvider implements Serializable, ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
     @Override
     public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
         SubMenuBar barmenu = new SubMenuBar();

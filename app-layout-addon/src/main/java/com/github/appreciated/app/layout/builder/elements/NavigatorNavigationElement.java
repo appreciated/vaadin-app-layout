@@ -11,8 +11,8 @@ import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
+import io.vavr.control.Option;
 
-import java.util.Optional;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
@@ -30,7 +30,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
     private NavigationElementInfo info;
     private Provider<String, String> captionInterceptor;
-    private Optional<SubmenuNavigationElement> parent = Optional.empty();
+    private Option<SubmenuNavigationElement> parent = Option.none();
     private Navigator navigator;
     private ComponentNavigator componentNavigator;
 

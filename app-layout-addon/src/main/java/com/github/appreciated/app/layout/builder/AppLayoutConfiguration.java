@@ -24,10 +24,10 @@ import com.vaadin.navigator.ViewProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
+import io.vavr.control.Option;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -170,16 +170,16 @@ public class AppLayoutConfiguration {
         return instance;
     }
 
-    private Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
+    private Option<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
         if (viewName.equals("")) {
-            return navigatorElements.stream()
+            return Option.ofOptional(navigatorElements.stream()
                     .filter(element -> (defaultNavigationElement != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())) || element.getViewName().equals(""))
-                    .findFirst();
+                    .findFirst());
         }
-        return navigatorElements.stream()
+        return Option.ofOptional(navigatorElements.stream()
                 .filter(element -> element instanceof NavigatorNavigationElement)
                 .filter(element -> element.getViewName().equals(viewName))
-                .findFirst();
+                .findFirst());
     }
 
     private void addComponents(List<AbstractNavigationElement> elements, ComponentConsumer consumer) {
@@ -338,9 +338,8 @@ public class AppLayoutConfiguration {
 
     private boolean beforeViewChange(String viewName) {
         AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-        Optional<NavigatorNavigationElement> result = findNextNavigationElement(viewName);
-        if (result.isPresent()) {
-            result.ifPresent(element -> {
+        Option<NavigatorNavigationElement> result = findNextNavigationElement(viewName);
+        result.peek(element -> {
                 AppLayoutSessionHelper.setActiveNavigationElement(element);
                 if (closeSubmenusOnNavigate) {
                     navigationElements.stream()
@@ -353,7 +352,6 @@ public class AppLayoutConfiguration {
                     instance.getContentHolder().setScrollTop(0);
                 }
             });
-        }
         return true;
     }
 
