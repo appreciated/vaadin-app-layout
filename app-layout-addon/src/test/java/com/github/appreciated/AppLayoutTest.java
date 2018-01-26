@@ -33,9 +33,6 @@ public class AppLayoutTest {
   @Mock
   private Navigator navigator;
 
-  @Mock
-  private View view;
-
   @Before
   public void setUp() {
     PowerMockito.mockStatic(UI.class);
