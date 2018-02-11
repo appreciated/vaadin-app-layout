@@ -5,3 +5,9 @@
 /app-layout-addon/src/main/polymer/bower_components/
 /app-layout-addon/src/main/polymer/build/
 /.designer/
+/app-layout-addon/build-tools/node/
+/app-layout-addon/build-tools/node_modules/
+/app-layout-addon/src/main/webapp/VAADIN/frontend/bower_components/
+/app-layout-addon/src/main/webapp/VAADIN/frontend/build/
+/app-layout-addon/src/main/webapp/VAADIN/frontend/es5/
+/app-layout-addon/src/main/webapp/VAADIN/frontend/es6/

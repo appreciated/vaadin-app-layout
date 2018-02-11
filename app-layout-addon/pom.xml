@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-addon</artifactId>
     <packaging>jar</packaging>
-    <version>0.9.20</version>
+    <version>0.9.21</version>
     <name>App Layout Add-on</name>
 
     <prerequisites>
@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.2.1</vaadin.version>
-        <vaadin.plugin.version>8.2.1</vaadin.plugin.version>
+        <vaadin.version>8.3.0</vaadin.version>
+        <vaadin.plugin.version>8.3.0</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <!-- ZIP Manifest fields -->
         <Implementation-Version>${project.version}</Implementation-Version>
@@ -26,6 +26,16 @@
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
         <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
+        <!-- Plugins -->
+        <frontend.maven.plugin.version>1.6</frontend.maven.plugin.version>
+        <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
+        <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
+
+        <!-- Frontend -->
+        <node.version>v9.5.0</node.version>
+        <yarn.version>v1.3.2</yarn.version>
+        <buildtools.directory>build-tools</buildtools.directory>
+        <frontend.directory>src/main/webapp/VAADIN/frontend</frontend.directory>
     </properties>
 
     <organization>
@@ -57,6 +67,10 @@
         <repository>
             <id>vaadin-addons</id>
             <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+        <repository>
+            <id>webjars</id>
+            <url>https://dl.bintray.com/webjars/maven</url>
         </repository>
     </repositories>
 
@@ -101,6 +115,48 @@
             <artifactId>vaadin-themes</artifactId>
         </dependency>
 
+        <!-- polymer -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>webcomponents-helper</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.webcomponents</groupId>
+            <artifactId>shadycss</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.webcomponents</groupId>
+            <artifactId>webcomponentsjs</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
+            <artifactId>polymer</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>app-layout</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>iron-icons</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-icon-button</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+
+
+
+
+
         <!-- This can be replaced with TestNG or some other test framework supported by the surefire plugin -->
         <dependency>
             <groupId>junit</groupId>
@@ -116,7 +172,36 @@
     </dependencies>
 
     <build>
+
+        <!-- The `pluginManagement` section allows listing plugin versions and other global
+             configuration in one place. -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>${frontend.maven.plugin.version}</version>
+                    <configuration>
+                        <nodeVersion>${node.version}</nodeVersion>
+                        <yarnVersion>${yarn.version}</yarnVersion>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -234,6 +319,7 @@
                     <exclude>rebel.xml</exclude>
                 </excludes>
             </resource>
+
             <resource>
                 <directory>src/main/webapp</directory>
             </resource>
@@ -245,6 +331,138 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>lint</id>
+            <activation>
+                <property>
+                    <name>runLint</name>
+                </property>
+            </activation>
+            <properties>
+                <yarn.install.goal>run install</yarn.install.goal>
+                <yarn.build.goal>run build</yarn.build.goal>
+                <gulp.move.goal>run move</gulp.move.goal>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- Configures the cleanup process for JS dependencies and build -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${frontend.directory}/build</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${frontend.directory}/es5</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${frontend.directory}/es6</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${frontend.directory}/bower_components</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+
+                    <!-- copy the JAR-embedded frontend dependencies into the location where they can be picked up by the frontend build -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-component-html</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${frontend.directory}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}/META-INF/resources/frontend</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Configures the frontend plugin to compile the web components source -->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-node-and-yarn</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>run-polymer-install</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>${yarn.install.goal}</arguments>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>run-polymer-build</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>${yarn.build.goal}</arguments>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>yarn-run-move</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run move</arguments>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>yarn-run-clean-build</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run clean-build</arguments>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>yarn run lint</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run lint</arguments>
+                                    <workingDirectory>${buildtools.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <!-- Vaadin pre-release repositories -->
             <id>vaadin-prerelease</id>
