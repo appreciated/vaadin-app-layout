@@ -11,3 +11,10 @@
 /app-layout-addon/src/main/webapp/VAADIN/frontend/build/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es5/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es6/
+/app-layout-demo/build-tools/node/
+/app-layout-demo/build-tools/node_modules/
+/app-layout-demo/src/main/webapp/VAADIN/frontend/bower_components/
+/app-layout-demo/src/main/webapp/VAADIN/frontend/build/
+/app-layout-demo/src/main/webapp/VAADIN/frontend/es5/
+/app-layout-demo/src/main/webapp/VAADIN/frontend/es6/
+/app-layout-addon/target/

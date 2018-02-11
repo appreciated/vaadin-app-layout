@@ -1,0 +1,214 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/typography.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/color.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/style.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/sizing.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/spacing.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/icons.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-button.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-text-field.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-checkbox.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-date-picker.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-form-layout.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-form-item.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-combo-box.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="../../../bower_components/vaadin-valo-theme/vaadin-tabs.html">
+
+<!-- Theme for the status selector, we need to theme the text-field instead of the combo-box -->
+<dom-module id="bakery-text-field-styles" theme-for="vaadin-text-field">
+  <template>
+    <style>
+      :host([theme~="status"][status="new"]) [part~="input-field"],
+      :host([theme~="status"][status="confirmed"]) [part~="input-field"] {
+        color: var(--valo-primary-color);
+        background: var(--valo-primary-color-10pct);
+      }
+
+      :host([theme~="status"][status="ready"]) [part~="input-field"],
+      :host([theme~="status"][status="delivered"]) [part~="input-field"] {
+        color: var(--valo-success-color);
+        background: var(--valo-success-color-10pct);
+      }
+
+      :host([theme~="status"][status="problem"]) [part~="input-field"],
+      :host([theme~="status"][status="cancelled"]) [part~="input-field"] {
+        color: var(--valo-error-color);
+        background: var(--valo-error-color-10pct);
+      }
+
+      :host([theme~="center"]) [part="value"] {
+        text-align: center;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<!-- Theme for the vaadin-grid -->
+<dom-module id="bakery-grid-styles" theme-for="vaadin-grid">
+  <template>
+    <style include="vaadin-grid-default-theme">
+      [part~="row"]:last-child [part~="header-cell"],
+      [part~="header-cell"]:not(:empty):not([details-cell]) {
+        padding-top: var(--valo-space-l);
+        padding-bottom: var(--valo-space-m);
+
+        font-size: var(--valo-font-size-s);
+        border-bottom: 1px solid var(--valo-shade-5pct);
+      }
+
+      [part~="body-cell"] {
+        border-bottom: 1px solid var(--valo-shade-5pct);
+      }
+
+      [part~="reorder-ghost"] {
+        top: 0;
+        left: 0;
+      }
+
+      /* a special grid theme for the bakery storefront view */
+      :host([theme~="storefront-grid"]) {
+        background: transparent;
+      }
+
+      :host([theme~="storefront-grid"]) [part~="cell"]:not(:empty):not([details-cell]) {
+        padding: 0;
+      }
+
+      :host([theme~="storefront-grid"]) [part~="row"][selected] [part~="cell"] {
+        background: transparent;
+      }
+
+      :host([theme~="storefront-grid"]) [part~="body-cell"] {
+        border-bottom: none;
+        background: transparent;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      *,
+      *::before,
+      *::after,
+      ::slotted(*) {
+        box-sizing: border-box;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      h2,
+      h3 {
+        margin-top: var(--valo-space-m);
+        margin-bottom: var(--valo-space-s);
+      }
+
+      h2 {
+        font-size: var(--valo-font-size-xxl);
+      }
+
+      h3 {
+        font-size: var(--valo-font-size-xl);
+      }
+
+      iron-icon {
+        width: var(--valo-size-xxxs);
+        height: var(--iron-icon-height, 24px);
+        padding: 0;
+      }
+
+      .overflow-auto {
+        overflow: auto;
+      }
+
+      .card {
+        background: var(--valo-base-color);
+        background-image: linear-gradient(var(--valo-tint-5pct), var(--valo-tint-5pct));
+        border-radius: var(--valo-border-radius);
+        box-shadow: 0 3px 5px #ddd;
+      }
+
+      .scrollable {
+        padding: var(--valo-space-m);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .footer {
+        display: flex;
+        flex-wrap: wrap;
+        transition: box-shadow .2s;
+        justify-content: space-between;
+        padding: var(--valo-space-s);
+        align-items: baseline;
+      }
+
+      :host([scroll-shadow]) .footer {
+        box-shadow: 0 -1px 5px var(--valo-shade-20pct);
+      }
+
+      .count {
+        display: inline-block;
+        background: var(--valo-shade-10pct);
+        border-radius: var(--valo-border-radius);
+        font-size: var(--valo-font-size-s);
+        padding: 0 var(--valo-space-s);
+        text-align: center;
+      }
+
+      .money {
+        text-align: right;
+      }
+
+      .total {
+        flex: 1;
+        order: -1;
+        box-sizing: border-box;
+        padding: 0 var(--valo-space-s);
+        min-width: 100%;
+        font-size: var(--valo-font-size-l);
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      @media (min-width: 600px) {
+        .total {
+          min-width: 0;
+          order: 0;
+          padding: 0 var(--valo-space-l);
+        }
+      }
+
+      @media (max-width: 600px) {
+        bakery-search {
+          order: 1;
+        }
+      }
+
+      vaadin-grid {
+         max-width: calc(964px + var(--valo-space-m));
+         width: 100%;
+         margin: auto;
+         flex: 1;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex1 {
+        flex: 1;
+      }
+
+      .bold {
+        font-weight: 600;
+      }
+    </style>
+  </template>
+</dom-module>
