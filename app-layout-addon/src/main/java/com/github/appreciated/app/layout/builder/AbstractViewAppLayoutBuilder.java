@@ -158,11 +158,11 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param viewName
      * @param icon
      * @param badgeHolder
-     * @param element
+     * @param view
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), AppLayoutConfiguration.Position.DEFAULT);
+    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), AppLayoutConfiguration.Position.DEFAULT);
         return (T) this;
     }
 
@@ -174,13 +174,14 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param viewName
      * @param icon
      * @param badgeHolder
-     * @param element
+     * @param view
      * @param position
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), position);
+    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view, AppLayoutConfiguration.Position position) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), position);
         return (T) this;
     }
+
 
 }
