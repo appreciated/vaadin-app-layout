@@ -38,9 +38,18 @@ public class DemoUI extends UI {
     @Autowired
     SpringViewProvider viewProvider;
 
+    //@Autowired
+    //SpringNavigator navigator;
+
     public void init(VaadinRequest request) {
         setContent(AppLayout.getCDIBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+                // You can either set the SpringViewProvider
                 .withViewProvider(() -> viewProvider)
+                // or the SpringNavigator here
+                //.withNavigator(components -> {
+                //    navigator.init(this, components);
+                //    return navigator;
+                //})
                 //
                 // You will need to provide your own NavigationElementInfoProvider when using a different CDI than Vaadin Spring.
                 // The same applies if you want to use other Icons for the MenuButtons than Vaadin Icons. Just checkout the default
