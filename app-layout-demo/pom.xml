@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-demo</artifactId>
     <packaging>war</packaging>
-    <version>0.9.20</version>
+    <version>0.9.21</version>
     <name>App Layout Add-on Demo</name>
 
     <prerequisites>
@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.2.1</vaadin.version>
-        <vaadin.plugin.version>8.2.1</vaadin.plugin.version>
+        <vaadin.version>8.3.1</vaadin.version>
+        <vaadin.plugin.version>8.3.1</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
     </properties>

@@ -39,7 +39,7 @@ public class DemoUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications))
                 .withNavigationElementInfoProvider(new DefaultNavigationElementInfoProvider())
                 .withDesign(AppBarDesign.MATERIAL)
-                .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add(View2.class)

@@ -39,7 +39,7 @@ public class DemoUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppBarDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> this.navigator = navigator)
-                .add(new MenuHeader("Version 0.9.20", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
