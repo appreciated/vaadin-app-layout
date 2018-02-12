@@ -37,9 +37,11 @@ window.com_github_appreciated_app_layout_behaviour_listener_AppLayoutResizeListe
             }, 1000);
         });
     }
-    document.querySelector('paper-icon-button').addEventListener('click', function () {
-        setTimeout(function () {
-            self.onAppLayoutResized();
-        }, 200);
-    });
+    if (document.querySelector('paper-icon-button')) {
+        document.querySelector('paper-icon-button').addEventListener('click', function () {
+            setTimeout(function () {
+                self.onAppLayoutResized();
+            }, 200);
+        });
+    }
 };
