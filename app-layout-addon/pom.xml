@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.3.0</vaadin.version>
-        <vaadin.plugin.version>8.3.0</vaadin.plugin.version>
+        <vaadin.version>8.3.1</vaadin.version>
+        <vaadin.plugin.version>8.3.1</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <!-- ZIP Manifest fields -->
         <Implementation-Version>${project.version}</Implementation-Version>
@@ -201,7 +201,6 @@
 
 
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -319,7 +318,6 @@
                     <exclude>rebel.xml</exclude>
                 </excludes>
             </resource>
-
             <resource>
                 <directory>src/main/webapp</directory>
             </resource>
