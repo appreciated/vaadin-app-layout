@@ -1,9 +1,13 @@
 {
-  "name": "bakery-app-starter-flow-spring",
-  "description": "Frontend dependencies for the Bakery App Starter for Flow and Spring",
+  "name": "vaadin-app-layout-build",
+  "description": "app-layout integration for vaadin",
+  "homepage": "https://github.com/appreciated/vaadin-app-layout",
   "version": "1.0.0",
-  "author": "Vaadin Ltd",
-  "license": "SEE LICENSE IN http://vaadin.com/license/cvtl-1",
+  "authors": [
+    "appreciated <goebeljohannes@gmx.net>",
+    "deyaeddin <deya@gmx.com"
+  ],
+  "license": "Apache 2.0",
   "devDependencies": {
     "node-gyp": "3.6.2",
     "bower": "1.8.2",

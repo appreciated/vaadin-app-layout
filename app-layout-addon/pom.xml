@@ -332,7 +332,7 @@
 
     <profiles>
         <profile>
-            <id>lint</id>
+            <id>web-components</id>
             <activation>
                 <property>
                     <name>runLint</name>
