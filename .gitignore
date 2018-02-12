@@ -5,3 +5,9 @@
 /app-layout-addon/src/main/polymer/bower_components/
 /app-layout-addon/src/main/polymer/build/
 /.designer/
+/app-layout-examples/annotation-based/basic/target/
+/app-layout-examples/annotation-based/spring-cdi/target/
+/app-layout-examples/annotation-based/without-navigator/target/
+/app-layout-examples/plain/basic/target/
+/app-layout-examples/plain/spring-cdi/target/
+/app-layout-examples/plain/without-navigator/target/
