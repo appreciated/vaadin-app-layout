@@ -32,7 +32,7 @@
         <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
 
         <!-- Frontend -->
-        <node.version>v9.5.0</node.version>
+        <node.version>v8.9.4</node.version>
         <yarn.version>v1.3.2</yarn.version>
         <buildtools.directory>build-tools</buildtools.directory>
         <frontend.directory>src/main/webapp/VAADIN/frontend</frontend.directory>

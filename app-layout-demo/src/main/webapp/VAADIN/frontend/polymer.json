@@ -1,9 +1,5 @@
 {
-  "entrypoint": "src/app.html",
-  "shell": "src/app.html",
   "sources": [
-    "src/**/*",
-    "images/**/*",
     "bower.json"
   ],
   "extraDependencies": [

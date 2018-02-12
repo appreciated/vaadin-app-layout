@@ -3,25 +3,34 @@ package com.github.appreciated.demo;
 import com.github.appreciated.demo.vaadin.elements.*;
 import com.vaadin.annotations.HtmlImport;
 import com.vaadin.navigator.View;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.elements.AbstractElementComponent;
 
 public class ElementsView extends VerticalLayout implements View {
 
 
     public ElementsView(){
         VerticalLayout layout = new VerticalLayout();
+
+        ComboBoxComponent comboBox = new ComboBoxComponent("Select an option",
+                "Option 1", "Option 2", "Option 3");
+
+        comboBox.setValue("Option 2");
+        comboBox.addValueChangeListener(
+                Notification::show);
+        addComponent(layout, comboBox , "Comobox");
+
         addDemo(layout, new Html5InputDemo(), "HTML5 inputs");
         // Does not work in Firefox
-       // addDemo(layout,new GoogleMapDemo(), "Web components");
+        addDemo(layout,new GoogleMapDemo(), "Web components");
         addDemo(layout, new ExistingElementsDemo(), "Existing elements");
         addDemo(layout, new PaperElementsDemo(), "Paper compoments");
-        layout.addComponent(new ComboBoxComponent("Test", "opsion1", "Opstion 2"));
 
         layout.setMargin(true);
-        // layout.setSpacing(true);
-        addComponent(layout);
+        Panel outer = new Panel(layout);
+        outer.setSizeFull();
+        addComponent(outer);
         setSizeFull();
     }
 
@@ -29,10 +38,20 @@ public class ElementsView extends VerticalLayout implements View {
                          String caption) {
         Label label = new Label(caption);
         label.addStyleName(ValoTheme.LABEL_H1);
-        label.addStyleName(ValoTheme.LABEL_NO_MARGIN);
+        //label.addStyleName(ValoTheme.LABEL_NO_MARGIN);
         layout.addComponent(label);
 
         layout.addComponent(demo);
+    }
+    private void addComponent(VerticalLayout layout, AbstractElementComponent component,
+                              String caption) {
+
+        Label label = new Label(caption);
+        label.addStyleName(ValoTheme.LABEL_H1);
+        //label.addStyleName(ValoTheme.LABEL_NO_MARGIN);
+        layout.addComponent(label);
+
+        layout.addComponent(component);
     }
 
 }

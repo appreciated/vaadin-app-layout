@@ -14,7 +14,7 @@ gulp.task('lint:js', function() {
     '../src/main/webapp/VAADIN/frontend/src/**/*.js',
     '../src/main/webapp/VAADIN/frontend/test/**/*.js'
   ])
-    .pipe(eslint())
+    .pipe(eslint({fix: true }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError('fail'));
 });
@@ -29,7 +29,7 @@ gulp.task('lint:html', function() {
       sel: 'script, code-example code',
       strip: true
     }))
-    .pipe(eslint())
+    .pipe(eslint({fix: true }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError('fail'));
 });

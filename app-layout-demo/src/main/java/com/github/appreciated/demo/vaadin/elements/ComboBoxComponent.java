@@ -7,7 +7,7 @@ import org.vaadin.elements.AbstractElementComponent;
 import org.vaadin.elements.ElementIntegration;
 import org.vaadin.elements.Root;
 
-@HtmlImport("frontend://bower_components/vaadin-valo-theme/vaadin-combo-box.html")
+@HtmlImport("vaadin://frontend/bower_components/vaadin-valo-theme/vaadin-combo-box.html")
 @HtmlImport("vaadin://frontend/bower_components/vaadin-combo-box/vaadin-combo-box.html")
 public class ComboBoxComponent extends AbstractElementComponent {
 
