@@ -3,49 +3,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
-    <artifactId>app-layout-example-basic-short</artifactId>
+    <artifactId>app-layout-spring-cdi-annotation-example</artifactId>
     <packaging>war</packaging>
-    <version>0.9.20</version>
-    <name>App Layout Add-on Basic Example</name>
+    <version>0.9.21</version>
+    <name>App Layout Add-on Spring CDI Example</name>
 
     <prerequisites>
         <maven>3</maven>
     </prerequisites>
 
     <properties>
+        <vaadin.version>8.3.1</vaadin.version>
+        <vaadin.plugin.version>8.3.1</vaadin.plugin.version>
+        <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.3.0</vaadin.version>
-        <vaadin.plugin.version>8.3.0</vaadin.plugin.version>
-        <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
+        <!-- If there are no local customisations, this can also be "fetch" or "cdn" -->
         <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
     </properties>
 
-    <organization>
-        <name>appreciated</name>
-        <url>https://github.com/appreciated</url>
-    </organization>
-
-    <scm>
-        <url>git://github.com/appreciated/vaadin-app-layout.git</url>
-        <connection>scm:git:git://github.com/appreciated/vaadin-app-layout.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:/appreciated/vaadin-app-layout.git</developerConnection>
-        <tag>App Layout Add-on for Vaadin</tag>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/appreciated/vaadin-app-layout/issues</url>
-    </issueManagement>
-
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <repositories>
         <repository>
@@ -68,9 +51,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.appreciated</groupId>
-            <artifactId>app-layout-addon</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -78,66 +77,79 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiler</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client</artifactId>
-            <scope>provided</scope>
+            <artifactId>vaadin-client-compiled</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-themes</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>app-layout-addon</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.plugin.version}</version>
                 <executions>
-                    <!-- You are free to mark this as permanently ignored in Eclipse -->
                     <execution>
-                        <configuration>
-                            <!-- if you don't specify any modules, the plugin will find them -->
-                        </configuration>
                         <goals>
-                            <goal>resources</goal>
+                            <goal>update-theme</goal>
                             <goal>update-widgetset</goal>
                             <goal>compile</goal>
+                            <!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
+                            <goal>compile-theme</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-            <!-- The Jetty plugin allows us to easily test the development build by -->
-            <!-- running jetty:run on the command line. -->
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.plugin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <!-- Clean up also any pre-compiled themes -->
                 <configuration>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/webapp/VAADIN/themes</directory>
+                            <includes>
+                                <include>**/styles.css</include>
+                                <include>**/styles.scss.cache</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
-
         </plugins>
-
     </build>
 
     <profiles>
@@ -147,6 +159,7 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+
             <repositories>
                 <repository>
                     <id>vaadin-prereleases</id>

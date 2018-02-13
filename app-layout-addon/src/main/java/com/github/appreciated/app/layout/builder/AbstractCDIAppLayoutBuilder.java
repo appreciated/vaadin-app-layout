@@ -136,21 +136,4 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
         return (T) this;
     }
 
-    /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
-     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
-     *
-     * @param caption
-     * @param path
-     * @param icon
-     * @param badgeHolder
-     * @param element
-     * @param position
-     * @return
-     */
-    public T add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element), position);
-        return (T) this;
-    }
-
 }

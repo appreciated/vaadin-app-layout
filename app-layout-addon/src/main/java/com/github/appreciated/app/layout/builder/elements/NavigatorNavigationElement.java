@@ -35,11 +35,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private ComponentNavigator componentNavigator;
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
-        this(caption, caption, icon, null, view);
+        this(caption, null, icon, null, view);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        this(caption, caption, icon, badgeHolder, view);
+        this(caption, null, icon, badgeHolder, view);
     }
 
     public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
@@ -52,11 +52,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
-        this(caption, caption, icon, null, className);
+        this(caption, null, icon, null, className);
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        this(caption, caption, icon, badgeHolder, className);
+        this(caption, null, icon, badgeHolder, className);
     }
 
     public NavigatorNavigationElement(Resource icon, Class<? extends View> className) {
