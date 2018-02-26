@@ -17,8 +17,7 @@ import java.lang.annotation.RetentionPolicy;
  * This annotation is meant to be used in combination with {@link AppLayoutBuilder#add()} AppLayoutBuilder::add(Class<\? extends View>
  * className) and AppLayoutBuilder withNavigationElementInfoProvider(...)
  */
-@Retention( RetentionPolicy.RUNTIME )
-public @interface MenuCaption
-{
-	String value();
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MenuCaption {
+    String value();
 }
