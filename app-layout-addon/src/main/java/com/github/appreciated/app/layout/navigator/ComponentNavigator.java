@@ -12,6 +12,19 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * FIXME: JavaDoc is missleading. First use @link for references.
+ * 
+ * When you say "... basic implementation of the Navigator.." would me lead (as Vaadin user) to think this is an implementation
+ * (subclass) of Vaadin Navigator. But it isn't.
+ * 
+ * Proposal:
+ * 
+ * ComponentNavigator is an alternative to Vaadin Navigator.
+ * <p>
+ * It provides basic navigator behavior if the build in {@link Navigator} provided by Vaadin cannot be used.
+ * 
+ * 
+ * 
  * A very basic implementation of the Navigator functionality to allow users using this addon without the navigator
  */
 public class ComponentNavigator {
@@ -57,7 +70,8 @@ public class ComponentNavigator {
         if (currentViewName == null || !currentViewName.equals(viewName)) {
             if (views.containsKey(viewName)) {
                 contentHolder.setContent(views.get(viewName).getViewComponent());
-                this.listeners.forEach(viewChangeListener -> viewChangeListener.beforeViewChange(new ViewChangeListener.ViewChangeEvent(this, views.getOrDefault(currentViewName, null), views.get(viewName), viewName, null)));
+                this.listeners.forEach(viewChangeListener -> viewChangeListener
+                        .beforeViewChange(new ViewChangeListener.ViewChangeEvent(this, views.getOrDefault(currentViewName, null), views.get(viewName), viewName, null)));
                 currentViewName = viewName;
             } else {
                 currentViewName = null;

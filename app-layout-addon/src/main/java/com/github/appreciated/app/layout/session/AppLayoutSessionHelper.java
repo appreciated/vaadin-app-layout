@@ -10,8 +10,12 @@ import java.util.Optional;
 import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT_ACTIVE;
 
 public class AppLayoutSessionHelper {
-    public static String UI_SESSION_KEY = "app-layout-menu-button-active";
-    public static String UI_SESSION_KEY_VARIANT = "app-layout-variant-active";
+    
+    /**
+     * FIXME I changed this member to final. Since this seems to be a constant an a constant must always be static final
+     */
+    public static final String UI_SESSION_KEY = "app-layout-menu-button-active";
+    public static final String UI_SESSION_KEY_VARIANT = "app-layout-variant-active";
 
     public static void updateActiveElementSessionData(NavigatorNavigationElement element) {
         setActiveNavigationElement(element);

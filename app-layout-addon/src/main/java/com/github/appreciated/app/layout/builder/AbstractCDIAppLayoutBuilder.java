@@ -26,7 +26,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position which also has a badge
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position which also has a badge 
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption

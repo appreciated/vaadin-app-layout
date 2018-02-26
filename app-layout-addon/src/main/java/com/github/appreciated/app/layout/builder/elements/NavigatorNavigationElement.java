@@ -1,6 +1,9 @@
 package com.github.appreciated.app.layout.builder.elements;
 
+import java.util.Optional;
+
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
@@ -11,8 +14,6 @@ import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
-
-import java.util.Optional;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
@@ -154,7 +155,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, AppLayoutComponent.Position position) {
+    public void setProvider(AppLayoutComponent provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerNavigationElementProvider());

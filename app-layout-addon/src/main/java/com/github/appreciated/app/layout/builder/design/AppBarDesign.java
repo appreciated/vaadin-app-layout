@@ -3,19 +3,32 @@ package com.github.appreciated.app.layout.builder.design;
 import com.github.appreciated.app.layout.Styles;
 
 /**
- * This enum contains the designs available Default and Material. Custom was added to take the need for users to
- * overwrite many styling but instead provide their own
+ * This enum contains all available designs. If {@link #DEFAULT} or {@link #MATERIAL} is not sufficient you can use {@link #CUSTOM} to
+ * overwrite or provide your own styles.
  */
 public enum AppBarDesign {
-    DEFAULT(Styles.APP_BAR_DESIGN_DEFAULT), MATERIAL(Styles.APP_BAR_DESIGN_MATERIAL), CUSTOM(Styles.APP_BAR_DESIGN_CUSTOM);
+    /**
+     * FIXME add JavaDoc
+     */
+    DEFAULT(Styles.APP_BAR_DESIGN_DEFAULT),
 
-    private String stylename;
+    /**
+     * FIXME add JavaDoc
+     */
+    MATERIAL(Styles.APP_BAR_DESIGN_MATERIAL),
 
-    AppBarDesign(String s) {
-        stylename = s;
+    /**
+     * FIXME add JavaDoc even with a codesample how a custom style can be used
+     */
+    CUSTOM(Styles.APP_BAR_DESIGN_CUSTOM);
+
+    private String styleName;
+
+    private AppBarDesign(String styleName) {
+        this.styleName = styleName;
     }
 
     public String getStylename() {
-        return stylename;
+        return styleName;
     }
 }
