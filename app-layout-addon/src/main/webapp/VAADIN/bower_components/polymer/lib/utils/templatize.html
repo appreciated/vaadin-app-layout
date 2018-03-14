@@ -90,7 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         children.push(n);
         n.__templatizeInstance = _this;
       }
-      if (_this.__templatizeOwner.__hideTemplateChildren__) {
+        if (_this.__templatizeOwner && _this.__templatizeOwner.__hideTemplateChildren__) {
         _this._showHideChildren(true);
       }
       // Flush props only when props are passed if instance props exist
@@ -106,6 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * sets any properties stored in `__hostProps`.
      * @private
      * @param {Object} props Object of property name-value pairs to set.
+     * @return {void}
      */
 
 
@@ -113,16 +114,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       key: '_configureProperties',
       value: function _configureProperties(props) {
         var options = this.__templatizeOptions;
-        if (props) {
-          for (var iprop in options.instanceProps) {
-            if (iprop in props) {
+          if (options.forwardHostProp) {
+              for (var hprop in this.__hostProps) {
+                  this._setPendingProperty(hprop, this.__dataHost['_host_' + hprop]);
+              }
+        }
+          // Any instance props passed in the constructor will overwrite host props;
+          // normally this would be a user error but we don't specifically filter them
+          for (var iprop in props) {
               this._setPendingProperty(iprop, props[iprop]);
-            }
           }
-        }
-        for (var hprop in this.__hostProps) {
-          this._setPendingProperty(hprop, this.__dataHost['_host_' + hprop]);
-        }
       }
       /**
        * Forwards a host property to this instance.  This method should be
@@ -133,6 +134,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        *
        * @param {string} prop Property or path name
        * @param {*} value Value of the property to forward
+       * @return {void}
        */
 
     }, {
@@ -142,8 +144,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.__dataHost._enqueueClient(this);
         }
       }
+
       /**
-       * @override
+       * Override point for adding custom or simulated event handling.
+       *
+       * @param {!Node} node Node to add event listener to
+       * @param {string} eventName Name of event
+       * @param {function(!Event):void} handler Listener function to add
+       * @return {void}
        */
 
     }, {
@@ -173,6 +181,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * "shown."
        * @param {boolean} hide Set to true to hide the children;
        * set to false to show them.
+       * @return {void}
        * @protected
        */
 
@@ -191,13 +200,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               } else {
                 n.textContent = n.__polymerTextContent__;
               }
+                // remove and replace slot
+            } else if (n.localName === 'slot') {
+                if (hide) {
+                    n.__polymerReplaced__ = document.createComment('hidden-slot');
+                    n.parentNode.replaceChild(n.__polymerReplaced__, n);
+                } else {
+                    var replace = n.__polymerReplaced__;
+                    if (replace) {
+                        replace.parentNode.replaceChild(n, replace);
+                    }
+                }
             } else if (n.style) {
-              if (hide) {
-                n.__polymerDisplay__ = n.style.display;
-                n.style.display = 'none';
-              } else {
-                n.style.display = n.__polymerDisplay__;
-              }
+                if (hide) {
+                    n.__polymerDisplay__ = n.style.display;
+                    n.style.display = 'none';
+                } else {
+                    n.style.display = n.__polymerDisplay__;
+                }
             }
           }
           n.__hideTemplateChildren__ = hide;
@@ -211,7 +231,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * textContent bindings while children are "hidden" and cache in
        * private storage for later retrieval.
        *
-       * @override
+       * @param {!Node} node The node to set a property on
+       * @param {string} prop The property to set
+       * @param {*} value The value to set
+       * @return {void}
+       * @protected
        */
 
     }, {
@@ -228,9 +252,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * is either another templatize instance that had option `parentModel: true`,
        * or else the host element.
        *
-       * @return {Polymer_PropertyEffects} The parent model of this instance
+       * @return {!Polymer_PropertyEffects} The parent model of this instance
        */
 
+    }, {
+        key: 'dispatchEvent',
+
+
+        /**
+         * Stub of HTMLElement's `dispatchEvent`, so that effects that may
+         * dispatch events safely no-op.
+         *
+         * @param {Event} event Event to dispatch
+         */
+        value: function dispatchEvent(event) {// eslint-disable-line no-unused-vars
+        }
     }, {
       key: 'parentModel',
       get: function get() {
@@ -291,6 +327,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /**
      * @constructor
      * @extends {base}
+     * @private
      */
     var klass = function (_base2) {
       babelHelpers.inherits(klass, _base2);
@@ -415,11 +452,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *     // Customize property forwarding and event model decoration
    *     let TemplateClass = Polymer.Templatize.templatize(template, this, {
    *       parentModel: true,
-   *       instanceProps: {...},
    *       forwardHostProp(property, value) {...},
+   *       instanceProps: {...},
    *       notifyInstanceProp(instance, property, value) {...},
    *     });
-   *
    *
    * @namespace
    * @memberof Polymer
@@ -432,7 +468,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /**
      * Returns an anonymous `Polymer.PropertyEffects` class bound to the
      * `<template>` provided.  Instancing the class will result in the
-     * template being stamped into document fragment stored as the instance's
+     * template being stamped into a document fragment stored as the instance's
      * `root` property, after which it can be appended to the DOM.
      *
      * Templates may utilize all Polymer data-binding features as well as
@@ -472,6 +508,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      *   from `instance.parentModel` in cases where template instance nesting
      *   causes an inner model to shadow an outer model.
      *
+     * When `options.forwardHostProp` is declared as an option, any properties
+     * referenced in the template will be automatically forwarded from the host of
+     * the `<template>` to instances, with the exception of any properties listed in
+     * the `options.instanceProps` object.  `instanceProps` are assumed to be
+     * managed by the owner of the instances, either passed into the constructor
+     * or set after the fact.  Note, any properties passed into the constructor will
+     * always be set to the instance (regardless of whether they would normally
+     * be forwarded from the host).
+     *
      * Note that the class returned from `templatize` is generated only once
      * for a given `<template>` using `options` from the first call for that
      * template, and the cached class is returned for all subsequent calls to
@@ -483,7 +528,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      *
      * @memberof Polymer.Templatize
      * @param {!HTMLTemplateElement} template Template to templatize
-     * @param {!Polymer_PropertyEffects} owner Owner of the template instances;
+     * @param {Polymer_PropertyEffects=} owner Owner of the template instances;
      *   any optional callbacks will be bound to this owner.
      * @param {Object=} options Options dictionary (see summary for details)
      * @return {function(new:TemplateInstanceBase)} Generated class bound to the template
@@ -496,7 +541,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         throw new Error('A <template> can only be templatized once');
       }
       template.__templatizeOwner = owner;
-      var templateInfo = owner.constructor._parseTemplate(template);
+        var ctor = owner ? owner.constructor : TemplateInstanceBase;
+        var templateInfo = ctor._parseTemplate(template);
       // Get memoized base class for the prototypical template, which
       // includes property effects for binding template & forwarding
       var baseClass = templateInfo.templatizeInstanceClass;
@@ -507,16 +553,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // Host property forwarding must be installed onto template instance
       addPropagateEffects(template, templateInfo, options);
       // Subclass base class and add reference for this specific template
-      var klass = function (_baseClass) {
-        babelHelpers.inherits(TemplateInstance, _baseClass);
+        /** @private */
+        var klass = function (_baseClass) {
+            babelHelpers.inherits(TemplateInstance, _baseClass);
 
-        function TemplateInstance() {
-          babelHelpers.classCallCheck(this, TemplateInstance);
-          return babelHelpers.possibleConstructorReturn(this, (TemplateInstance.__proto__ || Object.getPrototypeOf(TemplateInstance)).apply(this, arguments));
-        }
+            function TemplateInstance() {
+                babelHelpers.classCallCheck(this, TemplateInstance);
+                return babelHelpers.possibleConstructorReturn(this, (TemplateInstance.__proto__ || Object.getPrototypeOf(TemplateInstance)).apply(this, arguments));
+            }
 
-        return TemplateInstance;
-      }(baseClass);
+            return TemplateInstance;
+        }(baseClass);
       klass.prototype._methodHost = findMethodHost(template);
       klass.prototype.__dataHost = template;
       klass.prototype.__templatizeOwner = owner;
@@ -543,7 +590,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @memberof Polymer.Templatize
      * @param {HTMLTemplateElement} template The model will be returned for
      *   elements stamped from this template
-     * @param {Node} node Node for which to return a template model.
+     * @param {Node=} node Node for which to return a template model.
      * @return {TemplateInstanceBase} Template instance representing the
      *   binding scope for the element
      */

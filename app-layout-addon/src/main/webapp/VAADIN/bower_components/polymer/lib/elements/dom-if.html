@@ -132,6 +132,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
         Polymer.enqueueDebouncer(this.__renderDebouncer);
       }
+
+        /**
+         * @return {void}
+         */
+
     }, {
       key: 'disconnectedCallback',
       value: function disconnectedCallback() {
@@ -140,6 +145,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.__teardownInstance();
         }
       }
+
+        /**
+         * @return {void}
+         */
+
     }, {
       key: 'connectedCallback',
       value: function connectedCallback() {
@@ -156,6 +166,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * that multiple changes trigger only a single render. The render method
        * should be called if, for example, template rendering is required to
        * validate application state.
+       * @return {void}
        */
 
     }, {
@@ -281,6 +292,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.__invalidProps = null;
         }
       }
+
+        /**
+         * Shows or hides the template instance top level child elements. For
+         * text nodes, `textContent` is removed while "hidden" and replaced when
+         * "shown."
+         * @return {void}
+         * @protected
+         */
+
     }, {
       key: '_showHideChildren',
       value: function _showHideChildren() {

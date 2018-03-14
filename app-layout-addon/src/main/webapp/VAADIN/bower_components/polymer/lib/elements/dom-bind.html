@@ -67,20 +67,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       return _this;
     }
 
-    // assumes only one observed attribute
+      /** @return {void} */
 
 
     babelHelpers.createClass(DomBind, [{
       key: 'attributeChangedCallback',
       value: function attributeChangedCallback() {
+          // assumes only one observed attribute
         this.mutableData = true;
       }
+
+        /** @return {void} */
+
     }, {
       key: 'connectedCallback',
       value: function connectedCallback() {
         this.style.display = 'none';
         this.render();
       }
+
+        /** @return {void} */
+
     }, {
       key: 'disconnectedCallback',
       value: function disconnectedCallback() {
@@ -104,6 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       /**
        * Forces the element to render its content. This is typically only
        * necessary to call if HTMLImports with the async attribute are used.
+       * @return {void}
        */
 
     }, {

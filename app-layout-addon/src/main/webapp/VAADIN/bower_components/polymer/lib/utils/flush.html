@@ -17,7 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * Adds a `Polymer.Debouncer` to a list of globally flushable tasks.
    *
    * @memberof Polymer
-   * @param {Polymer.Debouncer} debouncer Debouncer to enqueue
+   * @param {!Polymer.Debouncer} debouncer Debouncer to enqueue
+   * @return {void}
    */
   Polymer.enqueueDebouncer = function (debouncer) {
     debouncerQueue.push(debouncer);
@@ -43,6 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * - ShadyDOM distribution
    *
    * @memberof Polymer
+   * @return {void}
    */
   Polymer.flush = function () {
     var shadyDOM = void 0,

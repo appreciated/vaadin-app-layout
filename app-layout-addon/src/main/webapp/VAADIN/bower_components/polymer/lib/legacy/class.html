@@ -32,9 +32,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * to ensure that any legacy behaviors can rely on legacy Polymer API on
    * the underlying element.
    *
-   * @param {!(Object|Array)} behaviors Behavior object or array of behaviors.
-   * @param {!HTMLElement|function(new:HTMLElement)} klass Element class.
-   * @return {function(new:HTMLElement)} Returns a new Element class extended by the
+   * @template T
+   * @param {!Object|!Array<!Object>} behaviors Behavior object or array of behaviors.
+   * @param {function(new:T)} klass Element class.
+   * @return {function(new:T)} Returns a new Element class extended by the
    * passed in `behaviors` and also by `Polymer.LegacyElementMixin`.
    * @memberof Polymer
    * @suppress {invalidCasts, checkTypes}
@@ -148,12 +149,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       babelHelpers.createClass(PolymerGenerated, [{
         key: 'created',
-        value: function created() {
-          babelHelpers.get(PolymerGenerated.prototype.__proto__ || Object.getPrototypeOf(PolymerGenerated.prototype), 'created', this).call(this);
-          if (info.created) {
-            info.created.call(this);
+
+
+          /**
+           * @return {void}
+           */
+          value: function created() {
+              babelHelpers.get(PolymerGenerated.prototype.__proto__ || Object.getPrototypeOf(PolymerGenerated.prototype), 'created', this).call(this);
+              if (info.created) {
+                  info.created.call(this);
+              }
           }
-        }
+
+          /**
+           * @return {void}
+           */
+
       }, {
         key: '_registered',
         value: function _registered() {
@@ -172,6 +183,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             info.registered.call(Object.getPrototypeOf(this));
           }
         }
+
+          /**
+           * @return {void}
+           */
+
       }, {
         key: '_applyListeners',
         value: function _applyListeners() {
@@ -186,6 +202,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // note: exception to "super then me" rule;
         // do work before calling super so that super attributes
         // only apply if not already set.
+          /**
+           * @return {void}
+           */
 
       }, {
         key: '_ensureAttributes',
@@ -197,6 +216,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
           babelHelpers.get(PolymerGenerated.prototype.__proto__ || Object.getPrototypeOf(PolymerGenerated.prototype), '_ensureAttributes', this).call(this);
         }
+
+          /**
+           * @return {void}
+           */
+
       }, {
         key: 'ready',
         value: function ready() {
@@ -205,6 +229,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             info.ready.call(this);
           }
         }
+
+          /**
+           * @return {void}
+           */
+
       }, {
         key: 'attached',
         value: function attached() {
@@ -213,6 +242,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             info.attached.call(this);
           }
         }
+
+          /**
+           * @return {void}
+           */
+
       }, {
         key: 'detached',
         value: function detached() {
@@ -221,6 +255,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             info.detached.call(this);
           }
         }
+
+          /**
+           * Implements native Custom Elements `attributeChangedCallback` to
+           * set an attribute value to a property via `_attributeToProperty`.
+           *
+           * @param {string} name Name of attribute that changed
+           * @param {?string} old Old attribute value
+           * @param {?string} value New attribute value
+           * @return {void}
+           */
+
       }, {
         key: 'attributeChanged',
         value: function attributeChanged(name, old, value) {

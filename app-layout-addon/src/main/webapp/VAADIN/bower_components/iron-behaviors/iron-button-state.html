@@ -90,11 +90,14 @@ Polymer.IronButtonStateImpl = {
 
   observers: ['_focusChanged(focused)', '_activeChanged(active, ariaActiveAttribute)'],
 
-  keyBindings: {
-    'enter:keydown': '_asyncClick',
-    'space:keydown': '_spaceKeyDownHandler',
-    'space:keyup': '_spaceKeyUpHandler'
-  },
+    /**
+     * @type {!Object}
+     */
+    keyBindings: {
+        'enter:keydown': '_asyncClick',
+        'space:keydown': '_spaceKeyDownHandler',
+        'space:keyup': '_spaceKeyUpHandler'
+    },
 
   _mouseEventRe: /^mouse/,
 

@@ -61,10 +61,13 @@ Polymer.IronControlState = {
 
   observers: ['_changedControlState(focused, disabled)'],
 
-  ready: function ready() {
-    this.addEventListener('focus', this._boundFocusBlurHandler, true);
-    this.addEventListener('blur', this._boundFocusBlurHandler, true);
-  },
+    /**
+     * @return {void}
+     */
+    ready: function ready() {
+        this.addEventListener('focus', this._boundFocusBlurHandler, true);
+        this.addEventListener('blur', this._boundFocusBlurHandler, true);
+    },
 
   _focusBlurHandler: function _focusBlurHandler(event) {
     // In Polymer 2.0, the library takes care of retargeting events.
