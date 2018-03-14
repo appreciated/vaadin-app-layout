@@ -13,7 +13,7 @@ import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
  */
 public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
 
-    private final AppBarButton button;
+    private final IconButton button;
     private final Label badge;
     private NotificationHolder notificationHolder;
 
@@ -22,7 +22,7 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
         this.notificationHolder = notificationHolder;
         setWidth("64px");
         setHeight("64px");
-        button = new AppBarButton(icon);
+        button = new IconButton(icon);
         button.setSizeFull();
         badge = new Label();
         notificationHolder.addStatusListener(this);
@@ -42,7 +42,7 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
         refreshNotifications(notificationHolder);
     }
 
-    public AppBarButton getButton() {
+    public IconButton getButton() {
         return button;
     }
 

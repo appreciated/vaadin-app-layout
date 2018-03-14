@@ -37,6 +37,8 @@ import java.util.function.Supplier;
  */
 public class AppLayoutConfiguration {
 
+	// FIXME The first three members are used in this class only. So make them private.
+	// Even if these members should be used outside this class. expose them via getters => See OO principle "Encapsulation"
     Behaviour variant = Behaviour.LEFT;
     List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     List<Component> appBarElements = new ArrayList<>();
@@ -65,6 +67,8 @@ public class AppLayoutConfiguration {
 
     private Provider<String, String> viewNameInterceptor = null;
     private Provider<String, String> captionInterceptor;
+    
+    //FIXME use java naming conventions. rename it to isCDI. Booleans have a prefiv "is" same for the methods.
     private boolean CDI = false;
     private boolean scrollToTopOnNavigate = true;
     private boolean closeSubmenusOnNavigate = true;
@@ -76,8 +80,13 @@ public class AppLayoutConfiguration {
         this.instance = instance;
     }
 
+    /**
+     * FIXME this configuration should only hold configuration => Single responsibility principle
+     * This terminating build method is part of the builder and not of the configuration.
+     */
     public AppLayoutComponent build() {
 
+    	// this method has a lot of magic. add some inline comments describing why are you doing what.
         if (navigationElementProvider == null) {
             if (variant.isTop())
                 navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
@@ -365,6 +374,11 @@ public class AppLayoutConfiguration {
         componentNavigatorConsumer = consumer;
     }
 
+	/*
+	 * FIXME I think a NavigatorProducer is not required. 
+	 * You could pass the real Navigator instead. The client must create it anyway and
+	 * could pass the created navigator to the AppLayout without wrapping it in an NavigatorProducer.
+	 */
     @FunctionalInterface
     public interface NavigatorProducer extends Function<Panel, Navigator> {
     }
@@ -377,6 +391,14 @@ public class AppLayoutConfiguration {
     interface ComponentConsumer extends Consumer<AbstractNavigationElement> {
     }
 
+    /**
+     * FIXME this is a second Position enum which can be used by client. Therefore it should not be an inner enum.
+     * Try to seperate this Position enum from the other Position enum (TOP, DRAWER). 
+     * 
+     * Maybe this could be named MenuPosition? 
+     * Or is it more a kind of section there the buttons and components are placed. So a better name would be "Section" eventually?
+     *
+     */
     public enum Position {
         HEADER, DEFAULT, FOOTER
     }

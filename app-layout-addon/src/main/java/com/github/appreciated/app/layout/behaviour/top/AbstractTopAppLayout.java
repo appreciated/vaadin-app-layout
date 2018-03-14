@@ -23,8 +23,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.io.IOException;
 import java.util.List;
 
-import static com.github.appreciated.app.layout.behaviour.AppLayoutComponent.Position.DRAWER;
-import static com.github.appreciated.app.layout.behaviour.AppLayoutComponent.Position.TOP;
+import static com.github.appreciated.app.layout.behaviour.Position.DRAWER;
+import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 /**
  *
