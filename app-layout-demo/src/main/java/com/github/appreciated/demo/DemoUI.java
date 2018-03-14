@@ -33,7 +33,7 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")
-@Push(transport = Transport.WEBSOCKET_XHR)
+@Push(transport = Transport.LONG_POLLING)
 public class DemoUI extends UI {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();

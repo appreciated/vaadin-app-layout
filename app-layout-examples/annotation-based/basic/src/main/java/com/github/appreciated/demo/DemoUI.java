@@ -9,15 +9,13 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.builder.providers.DefaultNavigationElementInfoProvider;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
-import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.Title;
-import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.annotations.Viewport;
+import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.PushStateNavigation;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
 
 @PushStateNavigation // proper url paths
+@Push(transport = Transport.WEBSOCKET)
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")
