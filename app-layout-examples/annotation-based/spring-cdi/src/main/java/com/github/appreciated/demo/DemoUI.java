@@ -15,6 +15,7 @@ import com.vaadin.navigator.PushStateNavigation;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.UI;
@@ -24,7 +25,7 @@ import javax.servlet.annotation.WebServlet;
 
 import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
 
-@Push
+@Push(transport = Transport.LONG_POLLING)
 @PushStateNavigation
 @SpringUI
 @Viewport("width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
