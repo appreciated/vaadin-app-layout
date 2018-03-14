@@ -2,18 +2,18 @@ package com.github.appreciated.app.layout.behaviour.top;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementProvider;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentProvider;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementProvider;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickableNavigationElementProvider;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentProvider;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentProvider;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementProvider;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentFactory;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentFactory;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickableNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentFactory;
+import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentFactory;
+import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
 import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
 import com.vaadin.shared.ui.MarginInfo;
@@ -46,14 +46,14 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
-    private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentProvider();
-    private ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementProvider();
-    private ComponentProvider<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentProvider();
-    private ComponentProvider<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementProvider();
-    private ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentProvider();
-    private ComponentProvider<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentProvider();
-    private ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementProvider();
-    private ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementProvider();
+    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
+    private ComponentFactory<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
+    private ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
+    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentFactory();
+    private ComponentFactory<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
+    private ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
 
     public AbstractTopAppLayout(String filename) throws IOException {
         super(AbstractTopAppLayout.class.getResourceAsStream(filename));
@@ -105,8 +105,8 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
         appBarElementContainer.setComponentAlignment(component, Alignment.MIDDLE_RIGHT);
     }
 
-    public void setDesign(AppBarDesign design) {
-        this.addStyleName(design.getStylename());
+    public void setDesign(AppLayoutDesign design) {
+        this.addStyleName(design.getStyleName());
     }
 
     public Layout getAppBar() {
@@ -167,82 +167,82 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     }
 
     @Override
-    public ComponentProvider<Component, SectionNavigationElement> getDrawerSectionElementProvider() {
+    public ComponentFactory<Component, SectionNavigationElement> getDrawerSectionElementProvider() {
         return drawerSectionElementProvider;
     }
 
     @Override
-    public void setDrawerSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider) {
+    public void setDrawerSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
         drawerSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<Component, SectionNavigationElement> getTopSectionElementProvider() {
+    public ComponentFactory<Component, SectionNavigationElement> getTopSectionElementProvider() {
         return topSectionElementProvider;
     }
 
     @Override
-    public void setTopSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider) {
+    public void setTopSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
         topSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
         return drawerSubmenuElementProvider;
     }
 
     @Override
-    public void setDrawerSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         drawerSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider() {
         return topSubmenuElementProvider;
     }
 
     @Override
-    public void setTopSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         topSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider() {
+    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider() {
         return drawerNavigationElementProvider;
     }
 
     @Override
-    public void setDrawerNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider) {
+    public void setDrawerNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
         drawerNavigationElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider() {
+    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider() {
         return topNavigationElementProvider;
     }
 
     @Override
-    public void setTopNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider) {
+    public void setTopNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
         topNavigationElementProvider = provider;
     }
 
     @Override
-    public ComponentProvider<Component, ClickableNavigationElement> getTopClickableElementProvider() {
+    public ComponentFactory<Component, ClickableNavigationElement> getTopClickableElementProvider() {
         return topClickableElementProvider;
     }
 
     @Override
-    public void setTopClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> topClickableElementProvider) {
+    public void setTopClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider) {
         this.topClickableElementProvider = topClickableElementProvider;
     }
 
     @Override
-    public ComponentProvider<Component, ClickableNavigationElement> getDrawerClickableElementProvider() {
+    public ComponentFactory<Component, ClickableNavigationElement> getDrawerClickableElementProvider() {
         return drawerClickableElementProvider;
     }
 
     @Override
-    public void setDrawerClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> drawerClickableElementProvider) {
+    public void setDrawerClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider) {
         this.drawerClickableElementProvider = drawerClickableElementProvider;
     }
 

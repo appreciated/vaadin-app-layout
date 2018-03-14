@@ -1,8 +1,8 @@
 package com.github.appreciated.demo;
 
+import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayout;
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.CDISubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.annotation.WebServlet;
 
-import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.Section.HEADER;
 
 @Push(transport = Transport.LONG_POLLING)
 @PushStateNavigation
@@ -60,7 +60,7 @@ public class DemoUI extends UI {
                 //
                 .withTitle("App Layout Spring CDI Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
-                .withDesign(AppBarDesign.MATERIAL)
+                .withDesign(AppLayoutDesign.MATERIAL)
                 .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)

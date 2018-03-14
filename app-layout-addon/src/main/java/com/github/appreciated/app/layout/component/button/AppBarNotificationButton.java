@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.component.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.window.NotificationWindow;
 import com.vaadin.ui.Button;
@@ -15,7 +15,7 @@ import static com.vaadin.icons.VaadinIcons.BELL;
  */
 public class AppBarNotificationButton extends AppBarBadgeButton {
 
-    Provider<NotificationWindow, NotificationHolder> provider;
+    Factory<NotificationWindow, NotificationHolder> factory;
     private UI ui;
     private NotificationWindow window;
 
@@ -27,13 +27,13 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
         this(holder, closeOnClick, info -> new MaterialNotificationWindow(info));
     }
 
-    public AppBarNotificationButton(NotificationHolder holder, Provider<NotificationWindow, NotificationHolder> windowProvider) {
-        this(holder, false, windowProvider);
+    public AppBarNotificationButton(NotificationHolder holder, Factory<NotificationWindow, NotificationHolder> windowFactory) {
+        this(holder, false, windowFactory);
     }
 
-    public AppBarNotificationButton(NotificationHolder holder, boolean closeOnClick, Provider<NotificationWindow, NotificationHolder> windowProvider) {
+    public AppBarNotificationButton(NotificationHolder holder, boolean closeOnClick, Factory<NotificationWindow, NotificationHolder> windowFactory) {
         super(BELL, holder);
-        provider = windowProvider;
+        factory = windowFactory;
         getButton().addClickListener((Button.ClickListener) this::buttonClick);
         if (closeOnClick) {
             holder.addStatusListener(new NotificationHolder.NotificationListener() {
@@ -60,7 +60,7 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
     private void buttonClick(Button.ClickEvent clickEvent) {
         if (window == null) {
             ui.access(() -> {
-                window = provider.get(getNotificationHolder());
+                window = factory.get(getNotificationHolder());
                 window.show(clickEvent);
                 window.addCloseListener(closeEvent -> window = null);
             });

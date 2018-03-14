@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.window;
 
-import com.github.appreciated.app.layout.Styles;
+import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.Holder;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.component.button.NavigationButton;

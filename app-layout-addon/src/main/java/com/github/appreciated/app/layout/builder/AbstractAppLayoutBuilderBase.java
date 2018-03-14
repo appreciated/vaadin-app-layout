@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -44,27 +44,14 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Sets the NavigationElementInfoProvider for the AppLayout.
-     * The NavigationElementInfoProvider contains a algerythm to determine the icon and the caption for a View which then later on is used
-     * to generate the menu entries. This allows to outsource the the information into annotations generally
-     * Use in combination with add(Class<\? extends View> className)
-     *
-     * @param provider The Provider which contains the procedure how the icon and the caption are to be determined
-     * @return
-     */
-    public T withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
-        this.config.setNavigationElementInfoProvider(provider);
-        return (T) this;
-    }
-
-    /**
-     * Sets the caption for the menu entries after a specific schema before initializing their views use this method
+     * Sets the an interceptor which will be applied to each {@link AbstractNavigationElement}. The can be f.e. used to replace
+     * the I18N key with a language specific value on each {@link AbstractNavigationElement}.
      *
      * @param interceptor The interceptor which contains the procedure how the new caption is to be determined
      * @return
      */
 
-    public T withCaptionInterceptor(Provider<String, String> interceptor) {
+    public T withCaptionInterceptor(Factory<String, String> interceptor) {
         config.setCaptionInterceptor(interceptor);
         return (T) this;
     }
@@ -75,7 +62,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param design
      * @return
      */
-    public T withDesign(AppBarDesign design) {
+    public T withDesign(AppLayoutDesign design) {
         config.setDesign(design);
         return (T) this;
     }
@@ -86,7 +73,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param provider
      * @return
      */
-    public T withNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider) {
+    public T withNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
         config.setNavigationElementProvider(provider);
         return (T) this;
     }
@@ -97,7 +84,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param provider
      * @return
      */
-    public T withSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider) {
+    public T withSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
         config.setSectionProvider(provider);
         return (T) this;
     }
@@ -108,7 +95,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param provider
      * @return
      */
-    public T withSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public T withSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
         config.setSubmenuProvider(provider);
         return (T) this;
     }
@@ -142,18 +129,18 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @return
      */
     public T add(Component element) {
-        return add(element, AppLayoutConfiguration.Position.DEFAULT);
+        return add(element, Section.DEFAULT);
     }
 
     /**
-     * Appends a component to the menu to a specific position
+     * Appends a component to the menu to a specific section
      *
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(Component element, AppLayoutConfiguration.Position position) {
-        addToPosition(new ComponentNavigationElement(element), position);
+    public T add(Component element, Section section) {
+        addToPosition(new ComponentNavigationElement(element), section);
         return (T) this;
     }
 
@@ -167,20 +154,20 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      */
 
     public T addClickable(String caption, Resource icon, Button.ClickListener listener) {
-        return addClickable(caption, icon, listener, AppLayoutConfiguration.Position.DEFAULT);
+        return addClickable(caption, icon, listener, Section.DEFAULT);
     }
 
     /**
-     * Appends a menu element which has a click element with a click listener at a specific position
+     * Appends a menu element which has a click element with a click listener at a specific section
      *
      * @param caption
      * @param icon
      * @param listener
-     * @param position
+     * @param section
      * @return
      */
-    public T addClickable(String caption, Resource icon, Button.ClickListener listener, AppLayoutConfiguration.Position position) {
-        addToPosition(new ClickableNavigationElement(caption, icon, listener), position);
+    public T addClickable(String caption, Resource icon, Button.ClickListener listener, Section section) {
+        addToPosition(new ClickableNavigationElement(caption, icon, listener), section);
         return (T) this;
     }
 
@@ -225,19 +212,19 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @return
      */
     public T add(AbstractNavigationElement element) {
-        return add(element, AppLayoutConfiguration.Position.DEFAULT);
+        return add(element, Section.DEFAULT);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(AbstractNavigationElement element, AppLayoutConfiguration.Position position) {
-        config.add(element, position);
+    public T add(AbstractNavigationElement element, Section section) {
+        config.add(element, section);
         return (T) this;
     }
 
@@ -275,14 +262,14 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element to a specific position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element to a specific section
      *
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    protected void addToPosition(AbstractNavigationElement element, AppLayoutConfiguration.Position position) {
-        config.addToPosition(element, position);
+    protected void addToPosition(AbstractNavigationElement element, Section section) {
+        config.addToPosition(element, section);
     }
 
     /**

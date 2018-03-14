@@ -1,15 +1,15 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.Styles;
+import com.github.appreciated.app.layout.builder.design.Styles;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.ValoTheme;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS;
+import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS;
 
 /**
- * The default component to be used to display menu entries
+ * The default {@link com.vaadin.ui.Component} to be used to display menu entries
  */
 public class NavigationButton extends Button {
     public NavigationButton(String name, Resource icon) {

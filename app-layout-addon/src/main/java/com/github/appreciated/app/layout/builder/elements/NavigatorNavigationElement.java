@@ -1,15 +1,14 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import java.util.Optional;
-
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
+import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentProvider;
+import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -19,7 +18,7 @@ import com.vaadin.server.Resource;
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
  * MenuElements of this Type  will lead to the Navigator being called.
  */
-public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> {
+public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor {
     private boolean isCDI = false;
     private String caption;
     private View view;
@@ -27,11 +26,10 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     private Class<? extends View> className;
     private String path;
     private DefaultBadgeHolder badgeHolder;
-    private Provider<String, String> viewNameInterceptor;
+    private Factory<String, String> viewNameInterceptor;
     private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
     private NavigationElementInfo info;
-    private Provider<String, String> captionInterceptor;
-    private Optional<SubmenuNavigationElement> parent = Optional.empty();
+    private Factory<String, String> captionInterceptor;
     private Navigator navigator;
     private ComponentNavigator componentNavigator;
 
@@ -49,7 +47,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.path = path;
         this.badgeHolder = badgeHolder;
         this.view = view;
-        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
+        provider = new DefaultLeftNavigationBadgeElementComponentFactory();
     }
 
     public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
@@ -74,7 +72,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         this.path = path;
         this.badgeHolder = badgeHolder;
         this.className = className;
-        provider = new DefaultLeftNavigationBadgeElementComponentProvider();
+        provider = new DefaultLeftNavigationBadgeElementComponentFactory();
     }
 
     public void addViewToNavigator(Navigator navigator) {
@@ -108,7 +106,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public String getViewName() {
-        if (!isCDI) {
+        if (!isCDI) { // since cdi does not allow changing the viewname on runtime the interceptor must not have an effect
             if (viewNameInterceptor != null) {
                 if (path != null) {
                     return viewNameInterceptor.get(path);
@@ -170,7 +168,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         return badgeHolder;
     }
 
-    public void setViewNameInterceptor(Provider<String, String> viewNameInterceptor) {
+    public void setViewNameInterceptor(Factory<String, String> viewNameInterceptor) {
         if (isCDI && viewNameInterceptor != null) {
             throw new IllegalStateException("It is not possible to use the ViewNameInterceptor in combination with CDI");
         } else {
@@ -178,7 +176,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         }
     }
 
-    public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
+    public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
     }
 

@@ -6,7 +6,7 @@ import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
-import static com.github.appreciated.app.layout.Styles.APP_BAR_BADGE;
+import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.

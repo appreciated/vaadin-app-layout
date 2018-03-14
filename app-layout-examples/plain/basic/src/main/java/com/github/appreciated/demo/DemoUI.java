@@ -1,9 +1,9 @@
 package com.github.appreciated.demo;
 
+import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayout;
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
@@ -24,7 +24,7 @@ import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
 
-import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.Section.HEADER;
 
 @PushStateNavigation // proper url paths
 @Viewport("initial-scale=1, maximum-scale=1")
@@ -42,7 +42,7 @@ public class DemoUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
-                .withDesign(AppBarDesign.MATERIAL)
+                .withDesign(AppLayoutDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> {/* Do something with it */})
                 .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)

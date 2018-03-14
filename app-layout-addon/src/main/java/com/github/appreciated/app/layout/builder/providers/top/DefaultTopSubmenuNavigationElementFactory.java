@@ -4,12 +4,12 @@ import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElem
 import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
-import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class DefaultTopSubmenuNavigationElementProvider implements ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+public class DefaultTopSubmenuNavigationElementFactory implements ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
     @Override
     public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
         SubMenuBar barmenu = new SubMenuBar();

@@ -1,9 +1,9 @@
 package com.github.appreciated.demo;
 
+import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayout;
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
@@ -25,8 +25,8 @@ import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 import java.util.function.Consumer;
 
-import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.FOOTER;
-import static com.github.appreciated.app.layout.builder.AppLayoutConfiguration.Position.HEADER;
+import static com.github.appreciated.app.layout.builder.Section.FOOTER;
+import static com.github.appreciated.app.layout.builder.Section.HEADER;
 import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.MEDIUM;
 
 @PushStateNavigation
@@ -85,7 +85,7 @@ public class DemoUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
-                .withDesign(AppBarDesign.MATERIAL)
+                .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
                 .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)

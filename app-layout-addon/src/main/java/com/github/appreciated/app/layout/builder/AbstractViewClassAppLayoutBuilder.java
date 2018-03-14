@@ -15,21 +15,22 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
 
     protected AbstractViewClassAppLayoutBuilder(AppLayoutComponent component) {
         super(component);
+        config.setCDI(false);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
      * @param viewName
      * @param icon
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, Class<? extends View> element, AppLayoutConfiguration.Position position) {
-        return add(caption, viewName, icon, null, element, position);
+    public T add(String caption, String viewName, Resource icon, Class<? extends View> element, Section section) {
+        return add(caption, viewName, icon, null, element, section);
     }
 
     /**
@@ -40,7 +41,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @return
      */
     public T add(String caption, String viewName, Resource icon, Class<? extends View> className) {
-        return add(caption, viewName, icon, null, className, AppLayoutConfiguration.Position.DEFAULT);
+        return add(caption, viewName, icon, null, className, Section.DEFAULT);
     }
 
     /**
@@ -51,11 +52,11 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @return
      */
     public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        return add(caption, viewName, icon, badgeHolder, className, AppLayoutConfiguration.Position.DEFAULT);
+        return add(caption, viewName, icon, badgeHolder, className, Section.DEFAULT);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
@@ -63,11 +64,11 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param icon
      * @param badgeHolder
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), position);
+    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), section);
         return (T) this;
     }
 

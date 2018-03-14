@@ -1,9 +1,10 @@
-package com.github.appreciated.app.layout;
+package com.github.appreciated.app.layout.builder.design;
 
 /**
  * FIXME add JavaDoc, even for each constant.
  * PS: This is a constant class. So be sure nobody can create an instance of it by private Constructor.
  *
+ * The following constants are the css classes that are used to style the elements for the specific designs @see
  */
 public class Styles
 {
@@ -15,8 +16,10 @@ public class Styles
 		 */
 	}
 
+    public static final String APP_LAYOUT = "app-layout";
 	public static final String APP_LAYOUT_MENU_BUTTON = "app-layout-menu-button";
 	public static final String APP_LAYOUT_MENU_BUTTON_BADGE = "app-layout-menu-button-badge";
+    public static final String APP_LAYOUT_MENU_BADGE_BUTTON = "app-layout-menu-badge-button";
 	public static final String APP_LAYOUT_MENU_BUTTON_NO_BORDER_READIUS = "no-border-radius";
 	public static final String APP_LAYOUT_MENU_ELEMENT_ACTIVE = "app-layout-menu-element-active";
 	public static final String APP_LAYOUT_MENU_ELEMENT = "app-layout-menu-element";

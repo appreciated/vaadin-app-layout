@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
@@ -45,7 +45,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
 
-    public T withViewNameInterceptor(Provider<String, String> interceptor) {
+    public T withViewNameInterceptor(Factory<String, String> interceptor) {
         config.setViewNameInterceptor(interceptor);
         return (T) this;
     }
@@ -60,7 +60,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
     public T add(String caption, Resource icon, View element) {
-        return add(caption, icon, null, element, AppLayoutConfiguration.Position.DEFAULT);
+        return add(caption, icon, null, element, Section.DEFAULT);
     }
 
     /**
@@ -76,17 +76,17 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
      * @param icon
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, Resource icon, View element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, icon, element), position);
+    public T add(String caption, Resource icon, View element, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, icon, element), section);
         return (T) this;
     }
 
@@ -101,23 +101,23 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
     public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
-        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), AppLayoutConfiguration.Position.DEFAULT);
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), Section.DEFAULT);
         return (T) this;
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
      * @param icon
      * @param badgeHolder
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
+    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), section);
         return (T) this;
     }
 
@@ -131,7 +131,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
     public T add(String caption, String viewName, View element) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, null, null, element), AppLayoutConfiguration.Position.DEFAULT);
+        addToPosition(new NavigatorNavigationElement(caption, viewName, null, null, element), Section.DEFAULT);
         return (T) this;
     }
 
@@ -146,7 +146,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
     public T add(String caption, String viewName, Resource icon, View element) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, null, element), AppLayoutConfiguration.Position.DEFAULT);
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, null, element), Section.DEFAULT);
         return (T) this;
     }
 
@@ -162,12 +162,12 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @return
      */
     public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), AppLayoutConfiguration.Position.DEFAULT);
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), Section.DEFAULT);
         return (T) this;
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
@@ -175,11 +175,11 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param icon
      * @param badgeHolder
      * @param view
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), position);
+    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), section);
         return (T) this;
     }
 

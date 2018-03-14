@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.component;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Image;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_ROUND_IMAGE;
+import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_ROUND_IMAGE;
 
 /**
  * A component containing an image which is tweaked by css to be round without overflow with a certain height.

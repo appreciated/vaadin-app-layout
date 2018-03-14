@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-import com.github.appreciated.app.layout.Styles;
+import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
 import com.vaadin.server.Resource;
 import org.ocpsoft.prettytime.PrettyTime;

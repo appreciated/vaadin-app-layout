@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.annotations.MenuCaption;
 import com.github.appreciated.app.layout.annotations.MenuIcon;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
@@ -45,6 +45,6 @@ public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationE
         );
     }
 
-    public interface AnnotationValueProvider<T> extends Provider<T, Class<? extends View>> {
+    public interface AnnotationValueProvider<T> extends Factory<T, Class<? extends View>> {
     }
 }

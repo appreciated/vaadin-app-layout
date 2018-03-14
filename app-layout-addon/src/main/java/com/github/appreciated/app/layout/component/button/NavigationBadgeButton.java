@@ -8,8 +8,7 @@ import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT;
+import static com.github.appreciated.app.layout.builder.design.Styles.*;
 
 /**
  *
@@ -26,7 +25,7 @@ public class NavigationBadgeButton extends HorizontalFlexBoxLayout implements Na
         button = new NavigationButton(name, icon);
         button.setSizeFull();
         if (status != null) {
-            button.addStyleName("app-layout-menu-badge-button");
+            button.addStyleName(APP_LAYOUT_MENU_BADGE_BUTTON);
         }
         badge = new Label();
         if (status != null) {

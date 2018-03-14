@@ -2,7 +2,8 @@ package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Position;
-import com.github.appreciated.app.layout.builder.interfaces.Provider;
+import com.github.appreciated.app.layout.builder.interfaces.Factory;
+import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
@@ -12,12 +13,12 @@ import java.util.List;
  * A class that contains only the data that is needed to create a Component that is meant to display a Submenus.
  * This NavigationElement can contain tree like structures.
  */
-public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> implements HasCaptionInterceptor {
 
     private final String title;
     private final Resource icon;
     private List<AbstractNavigationElement> submenuElements;
-    private Provider<String, String> captionInterceptor;
+    private Factory<String, String> captionInterceptor;
 
     public SubmenuNavigationElement(String title, Resource icon, List<AbstractNavigationElement> submenuElements) {
         this.title = title;
@@ -66,7 +67,7 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
                 (element instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) element).requiresNavigator()));
     }
 
-    public void setCaptionInterceptor(Provider<String, String> captionInterceptor) {
+    public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
     }
 

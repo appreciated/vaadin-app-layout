@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import com.github.appreciated.app.layout.builder.design.AppBarDesign;
+import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.interfaces.ComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
@@ -52,7 +52,7 @@ public interface AppLayoutComponent extends Component {
 
     void addAppBarElement(Component component);
 
-    void setDesign(AppBarDesign design);
+    void setDesign(AppLayoutDesign design);
 
     Layout getAppBar();
 
@@ -82,37 +82,37 @@ public interface AppLayoutComponent extends Component {
 
     void refreshNavigationElementInfo();
 
-    ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider();
+    ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider();
 
-    void setDrawerNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider);
+    void setDrawerNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider);
 
-    ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider();
+    ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider();
 
-    void setTopNavigationElementProvider(ComponentProvider<NavigationElementComponent, NavigatorNavigationElement> provider);
+    void setTopNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider);
 
-    ComponentProvider<Component, SectionNavigationElement> getDrawerSectionElementProvider();
+    ComponentFactory<Component, SectionNavigationElement> getDrawerSectionElementProvider();
 
-    void setDrawerSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider);
+    void setDrawerSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider);
 
-    ComponentProvider<Component, SectionNavigationElement> getTopSectionElementProvider();
+    ComponentFactory<Component, SectionNavigationElement> getTopSectionElementProvider();
 
-    void setTopSectionElementProvider(ComponentProvider<Component, SectionNavigationElement> provider);
+    void setTopSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider);
 
-    ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
+    ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
 
-    void setDrawerSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
+    void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
 
-    ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider();
+    ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider();
 
-    void setTopSubmenuElementProvider(ComponentProvider<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
+    void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider);
 
-    ComponentProvider<Component, ClickableNavigationElement> getDrawerClickableElementProvider();
+    ComponentFactory<Component, ClickableNavigationElement> getDrawerClickableElementProvider();
 
-    void setDrawerClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
+    void setDrawerClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> provider);
 
-    ComponentProvider<Component, ClickableNavigationElement> getTopClickableElementProvider();
+    ComponentFactory<Component, ClickableNavigationElement> getTopClickableElementProvider();
 
-    void setTopClickableElementProvider(ComponentProvider<Component, ClickableNavigationElement> provider);
+    void setTopClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> provider);
 
 
 }

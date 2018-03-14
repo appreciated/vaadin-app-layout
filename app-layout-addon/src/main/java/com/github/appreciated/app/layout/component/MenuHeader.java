@@ -7,7 +7,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import static com.github.appreciated.app.layout.Styles.*;
+import static com.github.appreciated.app.layout.builder.design.Styles.*;
 
 /**
  * A simple container component which may contain an image and two labels concerned component won't be added to its parent

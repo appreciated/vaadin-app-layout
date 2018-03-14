@@ -13,7 +13,7 @@ public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppL
     }
 
     /**
-     * Force the user with this API to set the NavigatorProducer since without it the AppLayout won't work
+     * Force the user with this API to set the NavigatorProducer since without it the AppLayout (with CDI) won't work
      *
      * @param producer
      * @return
@@ -23,7 +23,7 @@ public class CDIBuilderNavigatorPreamble extends AbstractBuilderPreamble<CDIAppL
     }
 
     /**
-     * Force the user with this API to set the ViewProvider Supplier since without it the AppLayout won't work
+     * Force the user with this API to set the ViewProvider Supplier since without it the AppLayout (with CDI) won't work
      *
      * @param supplier
      * @return

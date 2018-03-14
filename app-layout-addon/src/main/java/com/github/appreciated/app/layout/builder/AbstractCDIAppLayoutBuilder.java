@@ -10,6 +10,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
 
     protected AbstractCDIAppLayoutBuilder(AppLayoutComponent component) {
         super(component);
+        config.setCDI(true);
     }
 
     /**
@@ -36,7 +37,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @return
      */
     public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
-        return add(caption, icon, badgeHolder, element, AppLayoutConfiguration.Position.DEFAULT);
+        return add(caption, icon, badgeHolder, element, Section.DEFAULT);
     }
 
     /**
@@ -52,17 +53,17 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
      * @param icon
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, Resource icon, Class<? extends View> element, AppLayoutConfiguration.Position position) {
-        return add(caption, icon, null, element, position);
+    public T add(String caption, Resource icon, Class<? extends View> element, Section section) {
+        return add(caption, icon, null, element, section);
     }
 
     /**
@@ -73,7 +74,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @return
      */
     public T add(Class<? extends View> className) {
-        return add(null, className, AppLayoutConfiguration.Position.DEFAULT);
+        return add(null, className, Section.DEFAULT);
     }
 
     /**
@@ -84,18 +85,18 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @return
      */
     public T add(DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
-        return add(null, null, badgeHolder, className, AppLayoutConfiguration.Position.DEFAULT);
+        return add(null, null, badgeHolder, className, Section.DEFAULT);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param className
      * @return
      */
-    public T add(Class<? extends View> className, AppLayoutConfiguration.Position position) {
-        return add(null, className, position);
+    public T add(Class<? extends View> className, Section section) {
+        return add(null, className, section);
     }
 
     /**
@@ -106,33 +107,48 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @return
      */
     public T add(Resource icon, Class<? extends View> className) {
-        return add(icon, className, AppLayoutConfiguration.Position.DEFAULT);
+        return add(icon, className, Section.DEFAULT);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param className
      * @return
      */
-    public T add(Resource icon, Class<? extends View> className, AppLayoutConfiguration.Position position) {
-        return add(new NavigatorNavigationElement(icon, className), position);
+    public T add(Resource icon, Class<? extends View> className, Section section) {
+        return add(new NavigatorNavigationElement(icon, className), section);
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
      * @param icon
      * @param badgeHolder
      * @param element
-     * @param position
+     * @param section
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, AppLayoutConfiguration.Position position) {
-        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), position);
+    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), section);
+        return (T) this;
+    }
+
+    /**
+     * Sets the NavigationElementInfoProvider for the AppLayout.
+     * The NavigationElementInfoProvider contains a algorithm to determine the icon and the caption for each View which
+     * then later on is used to generate the menu entries. This allows to outsource the the information into annotations
+     * generally.
+     * Use in combination with {@link #add(Class)}
+     *
+     * @param provider The Factory which contains the procedure how the icon and the caption are to be determined
+     * @return
+     */
+    public T withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
+        this.config.setNavigationElementInfoProvider(provider);
         return (T) this;
     }
 

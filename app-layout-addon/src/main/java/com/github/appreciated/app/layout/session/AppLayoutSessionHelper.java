@@ -7,7 +7,7 @@ import com.vaadin.ui.UI;
 
 import java.util.Optional;
 
-import static com.github.appreciated.app.layout.Styles.APP_LAYOUT_MENU_ELEMENT_ACTIVE;
+import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_MENU_ELEMENT_ACTIVE;
 
 public class AppLayoutSessionHelper {
     

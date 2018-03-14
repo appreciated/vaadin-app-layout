@@ -1,12 +1,10 @@
 package com.github.appreciated.app.layout.builder.design;
 
-import com.github.appreciated.app.layout.Styles;
-
 /**
  * This enum contains all available designs. If {@link #DEFAULT} or {@link #MATERIAL} is not sufficient you can use {@link #CUSTOM} to
  * overwrite or provide your own styles.
  */
-public enum AppBarDesign {
+public enum AppLayoutDesign {
     /**
      * FIXME add JavaDoc
      */
@@ -24,11 +22,11 @@ public enum AppBarDesign {
 
     private String styleName;
 
-    private AppBarDesign(String styleName) {
+    AppLayoutDesign(String styleName) {
         this.styleName = styleName;
     }
 
-    public String getStylename() {
+    public String getStyleName() {
         return styleName;
     }
 }
