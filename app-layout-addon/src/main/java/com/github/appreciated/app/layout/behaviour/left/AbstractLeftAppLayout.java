@@ -25,7 +25,7 @@ import java.util.List;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
 /**
- * The AbstractLeftAppLayout is the supposed to be the base of any Left Behaviour.
+ * The {@link AbstractLeftAppLayout} is the supposed to be the base of any {@link AppLayoutComponent} with a "Left Behaviour".
  */
 
 public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {

@@ -26,10 +26,11 @@ import java.util.List;
 import static com.github.appreciated.app.layout.behaviour.Position.DRAWER;
 import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
+
 /**
- * The AbstractLeftAppLayout is the supposed to be the base of any "Top" Behaviour.
- *
+ * The {@link AbstractTopAppLayout} is the supposed to be the base of any {@link AppLayoutComponent} with a "Top Behaviour".
  */
+
 public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
