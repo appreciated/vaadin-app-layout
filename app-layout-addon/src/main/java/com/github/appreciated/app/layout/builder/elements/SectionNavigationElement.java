@@ -7,7 +7,7 @@ import com.github.appreciated.app.layout.builder.interfaces.HasCaptionIntercepto
 import com.vaadin.ui.Component;
 
 /**
- * A wrapper class for a MenuElement that is simply meant to display a Section.
+ * A wrapper class for a menu element that is a {@link SectionNavigationElement}.
  */
 public class SectionNavigationElement extends AbstractNavigationElement<Component, SectionNavigationElement> implements HasCaptionInterceptor {
 

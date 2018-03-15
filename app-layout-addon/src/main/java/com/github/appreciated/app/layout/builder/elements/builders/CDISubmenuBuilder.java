@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Builder to build SubmenuNavigationElements
+ * A Builder to build {@link SubmenuNavigationElement} this buider is meant to be used in combination with the {@link com.github.appreciated.app.layout.builder.CDIAppLayoutBuilder}
  */
 public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
 

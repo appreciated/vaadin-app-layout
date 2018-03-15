@@ -10,7 +10,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
- * Data structure to contain a notification
+ * Data structure that contains the information for a {@link Notification}
  */
 
 public class DefaultNotification implements Notification {

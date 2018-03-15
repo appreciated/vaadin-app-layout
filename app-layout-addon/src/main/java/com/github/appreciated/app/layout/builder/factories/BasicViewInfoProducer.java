@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.providers;
+package com.github.appreciated.app.layout.builder.factories;
 
 import com.github.appreciated.app.layout.annotations.MenuCaption;
 import com.github.appreciated.app.layout.annotations.MenuIcon;
@@ -8,30 +8,30 @@ import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
-public class BasicViewInfoProvider implements AppLayoutConfiguration.NavigationElementInfoProducer {
+public class BasicViewInfoProducer implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
     private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(MenuCaption.class).value();
     private AnnotationValueProvider<Resource> iconProvider = info -> info.getAnnotation(MenuIcon.class).value();
     private AnnotationValueProvider<String> viewNameProvider;
 
-    public BasicViewInfoProvider(AnnotationValueProvider<String> viewNameProvider) {
+    public BasicViewInfoProducer(AnnotationValueProvider<String> viewNameProvider) {
         this.viewNameProvider = viewNameProvider;
     }
 
-    public BasicViewInfoProvider() {
+    public BasicViewInfoProducer() {
     }
 
-    public BasicViewInfoProvider withCaptionProvider(AnnotationValueProvider<String> captionProvider) {
+    public BasicViewInfoProducer withCaptionProvider(AnnotationValueProvider<String> captionProvider) {
         this.captionProvider = captionProvider;
         return this;
     }
 
-    public BasicViewInfoProvider withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
+    public BasicViewInfoProducer withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
         this.iconProvider = iconProvider;
         return this;
     }
 
-    public BasicViewInfoProvider withViewNameProvider(AnnotationValueProvider<String> viewNameProvider) {
+    public BasicViewInfoProducer withViewNameProvider(AnnotationValueProvider<String> viewNameProvider) {
         this.viewNameProvider = viewNameProvider;
         return this;
     }

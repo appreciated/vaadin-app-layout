@@ -6,17 +6,17 @@ package com.github.appreciated.app.layout.builder.design;
  */
 public enum AppLayoutDesign {
     /**
-     * FIXME add JavaDoc
+     * The default Design of the AppLayout
      */
     DEFAULT(Styles.APP_BAR_DESIGN_DEFAULT),
 
     /**
-     * FIXME add JavaDoc
+     * The material Design of the AppLayout which is meant to be used when a more material design is desired
      */
     MATERIAL(Styles.APP_BAR_DESIGN_MATERIAL),
 
     /**
-     * FIXME add JavaDoc even with a codesample how a custom style can be used
+     * A "Design" of the AppLayout which is meant to be used to have the full control of the css basically nothing is preset.
      */
     CUSTOM(Styles.APP_BAR_DESIGN_CUSTOM);
 

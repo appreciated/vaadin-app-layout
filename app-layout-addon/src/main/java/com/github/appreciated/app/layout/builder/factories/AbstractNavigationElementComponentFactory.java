@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.providers;
+package com.github.appreciated.app.layout.builder.factories;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;

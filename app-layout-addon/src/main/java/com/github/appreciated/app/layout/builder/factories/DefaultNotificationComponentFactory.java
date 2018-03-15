@@ -1,9 +1,9 @@
-package com.github.appreciated.app.layout.builder.providers;
+package com.github.appreciated.app.layout.builder.factories;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.github.appreciated.app.layout.builder.interfaces.PairComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.component.RoundImage;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Component;
@@ -11,7 +11,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class DefaultNotificationComponentProvider implements PairComponentProvider<NotificationHolder, DefaultNotification> {
+public class DefaultNotificationComponentFactory implements PairComponentFactory<NotificationHolder, DefaultNotification> {
     @Override
     public Component getComponent(NotificationHolder holder, DefaultNotification info) {
         VerticalLayout wrapper = new VerticalLayout();

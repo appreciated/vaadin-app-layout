@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.builder.entities;
 
 /**
- * Simple Data class to hold an instance of a unspecific class
+ * Simple Data class to hold an instance of the type {@link T}
  *
  * @param <T>
  */

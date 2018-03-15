@@ -1,12 +1,15 @@
 package com.github.appreciated.app.layout.builder.elements.builders;
 
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
+
 /**
- * A Builder to build SubmenuNavigationElements
+ * A Builder to build {@link SubmenuNavigationElement} this buider is meant to be used in combination with the {@link com.github.appreciated.app.layout.builder.NavigatorAppLayoutBuilder}
+ * and the {@link com.github.appreciated.app.layout.builder.NoNavigatorAppLayoutBuilder}
  */
 public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
 

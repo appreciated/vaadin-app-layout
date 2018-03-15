@@ -4,7 +4,7 @@ package com.github.appreciated.app.layout.builder.design;
  * FIXME add JavaDoc, even for each constant.
  * PS: This is a constant class. So be sure nobody can create an instance of it by private Constructor.
  *
- * The following constants are the css classes that are used to style the elements for the specific designs @see
+ * The following constants are the css classes that are used to style the elements for the specific {@link AppLayoutDesign}
  */
 public class Styles
 {

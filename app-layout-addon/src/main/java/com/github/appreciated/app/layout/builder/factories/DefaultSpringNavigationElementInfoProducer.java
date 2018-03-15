@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.providers;
+package com.github.appreciated.app.layout.builder.factories;
 
 import com.vaadin.navigator.View;
 
@@ -7,9 +7,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-public class DefaultSpringNavigationElementInfoProvider extends BasicViewInfoProvider {
+public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoProducer {
 
-    public DefaultSpringNavigationElementInfoProvider() {
+    public DefaultSpringNavigationElementInfoProducer() {
         withViewNameProvider(info -> getSpringViewName(info));
     }
 

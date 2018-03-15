@@ -1,17 +1,17 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-import com.github.appreciated.app.layout.builder.providers.DefaultNotificationComponentProvider;
+import com.github.appreciated.app.layout.builder.factories.DefaultNotificationComponentFactory;
 
 import java.util.Collection;
 
 /**
- * This Class is the controller of a Component that can display a notification numbers
+ * This class is the default implementation of {@link NotificationHolder}
  */
 
 public class DefaultNotificationHolder extends NotificationHolder<DefaultNotification> {
 
     public DefaultNotificationHolder() {
-        setComponentProvider(new DefaultNotificationComponentProvider());
+        setComponentProvider(new DefaultNotificationComponentFactory());
     }
 
     public DefaultNotificationHolder(DefaultNotification... notifications) {

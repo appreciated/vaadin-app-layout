@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.providers.top;
+package com.github.appreciated.app.layout.builder.factories.top;
 
 import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;

@@ -10,7 +10,7 @@ import com.vaadin.ui.*;
 import java.util.List;
 
 /**
- * The interface every AppLayout Variant is required to be implemented to allow the AppLayoutBuilder to build it.
+ * The interface every AppLayout Variant is required to be implemented to allow any {@link com.github.appreciated.app.layout.builder.AbstractAppLayoutBuilderBase} to build it.
  */
 
 public interface AppLayoutComponent extends Component {

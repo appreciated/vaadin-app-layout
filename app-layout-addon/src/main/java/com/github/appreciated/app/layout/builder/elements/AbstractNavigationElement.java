@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Every instance of {@link AbstractNavigationElement} is a wrapper class for a ComponentFactory.
  *
  * @param <V> The specific Component which can be produced by this wrapper
- * @param <T> The Element itself to only allow Providers to be used that are compatible with the specific AbstractNavigationElement
+ * @param <T> The Element itself to only allow Providers to be used that are compatible with the specific {@link AbstractNavigationElement}
  */
 public abstract class AbstractNavigationElement<V extends Component, T> implements Serializable {
 

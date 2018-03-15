@@ -10,8 +10,8 @@ import com.vaadin.ui.Component;
 import java.util.List;
 
 /**
- * A class that contains only the data that is needed to create a Component that is meant to display a Submenus.
- * This NavigationElement can contain tree like structures.
+ * A class that contains only the data that is needed to create an instance of a {@link SubmenuComponent}.
+ * This navigation element can contain tree like structures.
  */
 public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> implements HasCaptionInterceptor {
 

@@ -3,7 +3,8 @@ package com.github.appreciated.app.layout.builder.entities;
 import java.util.ArrayList;
 
 /**
- * This Class is the controller of a Component that can display a simple badge containing numbers
+ * This Class is the controller of a Component that can display a simple badge containing numbers also it allows the user
+ * to update the view by updating this controller
  */
 public class DefaultBadgeHolder {
 

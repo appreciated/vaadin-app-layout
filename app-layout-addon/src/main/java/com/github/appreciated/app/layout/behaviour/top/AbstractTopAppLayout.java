@@ -4,16 +4,16 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
+import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
+import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
+import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.factories.top.DefaultTopClickableNavigationElementFactory;
+import com.github.appreciated.app.layout.builder.factories.top.DefaultTopNavigationBadgeElementComponentFactory;
+import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSectionElementComponentFactory;
+import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftClickableNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftNavigationBadgeElementComponentFactory;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSectionElementComponentFactory;
-import com.github.appreciated.app.layout.builder.providers.left.DefaultLeftSubmenuNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopClickableNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopNavigationBadgeElementComponentFactory;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSectionElementComponentFactory;
-import com.github.appreciated.app.layout.builder.providers.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
 import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
 import com.vaadin.shared.ui.MarginInfo;
@@ -27,6 +27,7 @@ import static com.github.appreciated.app.layout.behaviour.Position.DRAWER;
 import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 /**
+ * The AbstractLeftAppLayout is the supposed to be the base of any "Top" Behaviour.
  *
  */
 public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {

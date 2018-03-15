@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.entities;
 
-import com.github.appreciated.app.layout.builder.interfaces.PairComponentProvider;
+import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.vaadin.ui.Component;
 
 import java.time.LocalDateTime;
@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_NOTIFICATION;
 
 /**
- * This Class is a abstract controller of a Component that can display a Notifications
+ * This Class is a controller for multiple {@link com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification} instances
+ *
  */
 
 public class NotificationHolder<T extends NotificationHolder.Notification> {
 
-    private PairComponentProvider<NotificationHolder, T> componentProvider;
+    private PairComponentFactory<NotificationHolder, T> componentProvider;
 
     private ArrayList<T> notifications = new ArrayList<>();
     private ArrayList<NotificationListener> onChangeListeners = new ArrayList<>();
@@ -32,7 +33,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         this.notifications.addAll(notifications);
     }
 
-    public void setComponentProvider(PairComponentProvider<NotificationHolder, T> componentProvider) {
+    public void setComponentProvider(PairComponentFactory<NotificationHolder, T> componentProvider) {
         this.componentProvider = componentProvider;
     }
 

@@ -5,7 +5,7 @@ import com.github.appreciated.app.layout.behaviour.Position;
 import com.vaadin.ui.Component;
 
 /**
- * A wrapper class for a MenuElement that is simply a Component.
+ * A wrapper class for a menu element that is a {@link Component}.
  */
 public class ComponentNavigationElement extends AbstractNavigationElement<Component, ComponentNavigationElement> {
     private Component element;

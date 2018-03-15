@@ -7,8 +7,9 @@ import com.vaadin.ui.JavaScriptFunction;
 import java.io.Serializable;
 
 /**
- * This Java Script Component was added to notify the serverside that the width of the content view was changed this was
- * necessary due to issues with the Vaadin Grid
+ * This Java Script Component was added to notify the server-side that the width of the content view was changed this was
+ * necessary due to issues with the Vaadin Grid.Which caused it to not resize when the app-layout resized due to
+ * responsive behaviour.
  */
 @JavaScript({"vaadin://addons/app-layout/app-layout-resize-listener.js"})
 public class AppLayoutResizeListener extends AbstractJavaScriptComponent {
