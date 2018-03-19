@@ -109,7 +109,7 @@ public class DemoUI extends UI {
                         .add("More2", VaadinIcons.COG, View4.class)
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
-                .add("Elements", VaadinIcons.LIST, View6.class)
+                .add("Elements", VaadinIcons.LIST, ElementsView.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
                 .build();
         drawer.addStyleName("left");

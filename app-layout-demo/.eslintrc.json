@@ -1,0 +1,21 @@
+{
+  "extends": "vaadin",
+  "rules": {
+    "linebreak-style": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": [
+    "html"
+  ],
+  "globals": {
+    "Polymer": false,
+    "Vaadin": false,
+    "moment": false,
+    "DateUtilsMixin": false,
+    "ScrollShadowMixin": false
+  }
+}
