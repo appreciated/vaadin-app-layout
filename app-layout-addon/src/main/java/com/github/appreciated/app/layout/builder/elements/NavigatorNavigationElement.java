@@ -15,22 +15,68 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
 /**
- * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on
- * MenuElements of this Type  will lead to the Navigator being called.
+ * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
+ * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.ui.Component} will lead to a call of
+ * {@link Navigator#navigateTo(String)} which usually causes a change of the View .
  */
 public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor {
     private boolean isCDI = false;
+
+    /**
+     * The caption of this menu element
+     */
     private String caption;
+    /**
+     * The respective view behind this menu element (either {@link NavigatorNavigationElement#view} or {@link NavigatorNavigationElement#className} will be initialized)
+     */
     private View view;
+    /**
+     * The view behind this menu element
+     */
     private Resource icon;
+    /**
+     * The respective view behind this menu element (either {@link NavigatorNavigationElement#view} or {@link NavigatorNavigationElement#className} will be initialized)
+     */
     private Class<? extends View> className;
+    /**
+     * The (url-)path under which this view will available
+     */
     private String path;
+    /**
+     * A badge holder which holds the controls view state of the {@link NavigationElementComponent}
+     * Note: May be null
+     */
     private DefaultBadgeHolder badgeHolder;
+
+    /**
+     * The view name interceptor that allows replace the view name before initializing the navigator cannot be used when using cdi
+     * This can come in handy in some situations where the view name does not conform a proper URL-encoding
+     * Note: May be null
+     */
     private Factory<String, String> viewNameInterceptor;
+    /**
+     * The {@link com.github.appreciated.app.layout.builder.AppLayoutConfiguration.NavigationElementInfoProducer} instance
+     * which will eventuall later on be used to provide the caption, view name and icon for this menu element for the View / view class.
+     * Note: May be null
+     */
     private AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider;
     private NavigationElementInfo info;
+
+    /**
+     * The view name interceptor that allows replace the caption of each menu element that has one before initializing.
+     * This can f.e. be used to replace I18N string with their localized string value
+     * Note: May be null
+     */
     private Factory<String, String> captionInterceptor;
+
+    /**
+     * The {@link Navigator} instance to which the view will be added
+     */
     private Navigator navigator;
+
+    /**
+     * The {@link ComponentNavigator} instance to which the view will be added.
+     */
     private ComponentNavigator componentNavigator;
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
