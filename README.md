@@ -7,7 +7,7 @@ A collection of ready to use templates for the polymer component [app-layout](ht
 
 ## [Vaadin Directory](https://vaadin.com/directory#!addon/app-layout-add-on)
 
-## [Demo](https://app-layout-wrapper.herokuapp.com/)
+## [Demo](https://app-layout-demo.herokuapp.com/)
 
 ## Installation
 
