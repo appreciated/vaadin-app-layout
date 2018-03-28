@@ -43,7 +43,7 @@ git clone git@github.com:appreciated/vaadin-app-layout.git
 
 ```
 cd <project-root-dir>/vaadin-app-layout
-mvn clean install
+mvn clean install -P web-components
 cd <project-root-dir>/vaadin-app-layout/app-layout-demo
 mvn jetty:run
 ```

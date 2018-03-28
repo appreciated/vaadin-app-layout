@@ -7,7 +7,7 @@
     "appreciated <goebeljohannes@gmx.net>",
     "deyaeddin <deya@gmx.com"
   ],
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "devDependencies": {
     "node-gyp": "3.6.2",
     "bower": "1.8.2",

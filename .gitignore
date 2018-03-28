@@ -24,3 +24,5 @@
 /app-layout-examples/plain/basic/target/
 /app-layout-examples/plain/spring-cdi/target/
 /app-layout-examples/plain/without-navigator/target/
+/app-layout-addon/src/main/webapp/VAADIN/frontend/package-lock.json
+/app-layout-addon/build-tools/yarn.lock
