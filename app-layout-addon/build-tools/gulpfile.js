@@ -68,6 +68,7 @@ var filesToCleanUp = [
     '../src/main/webapp/VAADIN/frontend/es6/bower.json',
     '../src/main/webapp/VAADIN/frontend/es5/index.html',
     '../src/main/webapp/VAADIN/frontend/es6/index.html',
+    '../src/main/webapp/VAADIN/frontend/bower_components',
     '../src/main/webapp/VAADIN/frontend/build'
 ];
 

@@ -36,6 +36,7 @@
         <yarn.version>v1.3.2</yarn.version>
         <buildtools.directory>build-tools</buildtools.directory>
         <frontend.directory>src/main/webapp/VAADIN/frontend</frontend.directory>
+        <maven.source.excludeResources>true</maven.source.excludeResources>
     </properties>
 
     <organization>
