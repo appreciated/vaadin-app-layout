@@ -37,7 +37,7 @@ public class DemoUI extends UI {
         setContent(AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withTitle("App Layout InfoProvider Example")
                 .addToAppBar(new AppBarNotificationButton(notifications))
-                .withNavigationElementInfoProvider(new DefaultNavigationElementInfoProducer())
+                .withNavigationElementInfoProducer(new DefaultNavigationElementInfoProducer())
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)

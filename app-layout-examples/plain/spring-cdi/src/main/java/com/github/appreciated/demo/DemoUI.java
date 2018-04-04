@@ -56,7 +56,7 @@ public class DemoUI extends UI {
                 // The same applies if you want to use other Icons for the MenuButtons than Vaadin Icons. Just checkout the default
                 // Implementation and provide your own. If you have a good idea how to solve this better just make a pull
                 // Request on Github
-                .withNavigationElementInfoProvider(new DefaultSpringNavigationElementInfoProducer())
+                .withNavigationElementInfoProducer(new DefaultSpringNavigationElementInfoProducer())
                 //
                 .withTitle("App Layout Basic Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))

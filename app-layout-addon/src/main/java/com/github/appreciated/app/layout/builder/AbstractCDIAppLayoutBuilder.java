@@ -147,7 +147,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param provider The Factory which contains the procedure how the icon and the caption are to be determined
      * @return
      */
-    public T withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
+    public T withNavigationElementInfoProducer(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
         this.config.setNavigationElementInfoProvider(provider);
         return (T) this;
     }

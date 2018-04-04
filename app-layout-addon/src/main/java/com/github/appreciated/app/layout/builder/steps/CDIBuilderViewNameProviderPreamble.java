@@ -15,8 +15,8 @@ public class CDIBuilderViewNameProviderPreamble extends AbstractBuilderPreamble<
      * @param provider
      * @return
      */
-    public CDIAppLayoutBuilder withNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
-        return getBuilder().withNavigationElementInfoProvider(provider);
+    public CDIAppLayoutBuilder withNavigationElementInfoProducer(AppLayoutConfiguration.NavigationElementInfoProducer provider) {
+        return getBuilder().withNavigationElementInfoProducer(provider);
     }
 
 }

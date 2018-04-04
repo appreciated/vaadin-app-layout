@@ -228,7 +228,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider) {
         if (caption == null && icon == null && className == null && navigationElementInfoProvider == null) {
-            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
+            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProducer for the Injected Views");
         } else {
             this.navigationElementInfoProvider = navigationElementInfoProvider;
             refreshInfo();
