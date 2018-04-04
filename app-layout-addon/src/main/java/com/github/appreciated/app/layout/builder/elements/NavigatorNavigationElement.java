@@ -9,6 +9,7 @@ import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavig
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.exception.ViewNameMissingException;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -122,19 +123,25 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     public void addViewToNavigator(Navigator navigator) {
-
-        this.navigator = navigator;
-        if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
-            if (view != null) {
-                navigator.addView(getViewName(), view);
-            } else if (className != null) {
-                navigator.addView(getViewName(), className);
+        try {
+            this.navigator = navigator;
+            if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
+                if (getViewName() != null) {
+                    if (view != null) {
+                        navigator.addView(getViewName(), view);
+                    } else if (className != null) {
+                        navigator.addView(getViewName(), className);
+                    }
+                } else {
+                    throw new ViewNameMissingException(getViewClassName());
+                }
             }
+        } catch (ViewNameMissingException e) {
+            e.printStackTrace();
         }
     }
 
     public void addViewToComponentNavigator(ComponentNavigator navigator) {
-
         this.componentNavigator = navigator;
         if (view != null) {
             navigator.addView(getViewName(), view);

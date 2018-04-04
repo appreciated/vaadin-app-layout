@@ -6,6 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoProducer {
 
@@ -20,7 +21,7 @@ public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoPro
      * @param aClass
      * @return
      */
-    private String getSpringViewName(Class<? extends View> aClass) {
+    private Optional<String> getSpringViewName(Class<? extends View> aClass) {
         Annotation a = Arrays.stream(aClass.getAnnotations())
                 .filter(annotation -> annotation.annotationType().getName().equals("com.vaadin.spring.annotation.SpringView"))
                 .findFirst()
@@ -36,6 +37,6 @@ public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoPro
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        return result;
+        return Optional.ofNullable(result);
     }
 }
