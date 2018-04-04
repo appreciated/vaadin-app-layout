@@ -6,7 +6,7 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.CDISubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.builder.providers.DefaultSpringNavigationElementInfoProvider;
+import com.github.appreciated.app.layout.builder.factories.DefaultSpringNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.vaadin.annotations.*;
@@ -56,7 +56,7 @@ public class DemoUI extends UI {
                 // The same applies if you want to use other Icons for the MenuButtons than Vaadin Icons. Just checkout the default
                 // Implementation and provide your own. If you have a good idea how to solve this better just make a pull
                 // Request on Github
-                .withNavigationElementInfoProvider(new DefaultSpringNavigationElementInfoProvider())
+                .withNavigationElementInfoProvider(new DefaultSpringNavigationElementInfoProducer())
                 //
                 .withTitle("App Layout Spring CDI Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
