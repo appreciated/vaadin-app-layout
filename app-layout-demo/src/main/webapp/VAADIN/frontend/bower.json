@@ -8,7 +8,7 @@
   ],
   "description": "app-layout integration for vaadin",
   "main": "",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "dependencies": {
     "google-youtube": "GoogleWebComponents/google-youtube#^2.0.0",
     "google-map": "GoogleWebComponents/google-map#^2.0.3",
