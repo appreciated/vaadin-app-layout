@@ -33,9 +33,6 @@ import static com.github.appreciated.app.layout.builder.Section.HEADER;
 @Title("App Layout Demo")
 public class DemoUI extends UI {
 
-    DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-    DefaultBadgeHolder badge = new DefaultBadgeHolder();
-
     @Autowired
     SpringViewProvider viewProvider;
 
