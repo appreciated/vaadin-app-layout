@@ -8,19 +8,21 @@ import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementClickListener;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.exception.ViewNameMissingException;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
+import com.vaadin.ui.Button;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
  * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.ui.Component} will lead to a call of
  * {@link Navigator#navigateTo(String)} which usually causes a change of the View .
  */
-public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor {
+public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor, Button.ClickListener {
     private boolean isCDI = false;
 
     /**
@@ -79,6 +81,11 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
      * The {@link ComponentNavigator} instance to which the view will be added.
      */
     private ComponentNavigator componentNavigator;
+
+    /**
+     *
+     */
+    NavigationElementClickListener clickListener;
 
     public NavigatorNavigationElement(String caption, Resource icon, View view) {
         this(caption, null, icon, null, view);
@@ -265,11 +272,19 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         isCDI = CDI;
     }
 
-    public void onClick() {
+    @Override
+    public void buttonClick(Button.ClickEvent clickEvent) {
         if (navigator != null) {
             navigator.navigateTo(getViewName());
         } else if (componentNavigator != null) {
             componentNavigator.navigateTo(getViewName());
         }
+        if (clickListener != null) {
+            clickListener.onClick(this, clickEvent);
+        }
+    }
+
+    public void setClickListner(NavigationElementClickListener listener) {
+        this.clickListener = listener;
     }
 }

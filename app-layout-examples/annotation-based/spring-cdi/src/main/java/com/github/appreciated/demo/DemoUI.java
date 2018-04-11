@@ -61,7 +61,7 @@ public class DemoUI extends UI {
                 .withTitle("App Layout Spring CDI Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeader("Version 0.9.22", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.23", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add(View2.class)

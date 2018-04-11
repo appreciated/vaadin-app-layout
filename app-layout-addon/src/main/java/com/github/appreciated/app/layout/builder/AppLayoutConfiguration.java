@@ -13,10 +13,7 @@ import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavig
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.github.appreciated.app.layout.builder.interfaces.Factory;
-import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.*;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.navigator.Navigator;
@@ -79,6 +76,7 @@ public class AppLayoutConfiguration {
     private boolean isNavigatorEnabled = true;
     private Component titleComponent;
     private Consumer<ComponentNavigator> componentNavigatorConsumer;
+    private NavigationElementClickListener navigationElementClickListener;
 
     public AppLayoutConfiguration(AppLayoutComponent instance) {
         this.instance = instance;
@@ -221,6 +219,7 @@ public class AppLayoutConfiguration {
                 nElement.addViewToComponentNavigator(componentNavigator);
             }
             navigatorElements.add(nElement);
+            nElement.setClickListner(navigationElementClickListener);
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement sElement = (SubmenuNavigationElement) element;
             sElement.getSubmenuElements().forEach(element1 -> prepareNavigationElement(element1));
@@ -374,6 +373,10 @@ public class AppLayoutConfiguration {
 
     public void setComponentNavigatorConsumer(Consumer<ComponentNavigator> consumer) {
         componentNavigatorConsumer = consumer;
+    }
+
+    public void setNavigationElementClickListener(NavigationElementClickListener listener) {
+        this.navigationElementClickListener = listener;
     }
 
     /**

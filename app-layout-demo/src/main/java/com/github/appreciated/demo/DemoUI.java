@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
+import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
@@ -87,7 +88,7 @@ public class DemoUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 0.9.22", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 0.9.23", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
@@ -108,6 +109,12 @@ public class DemoUI extends UI {
                         .add("Contact2", VaadinIcons.CONNECT, View3.class)
                         .add("More2", VaadinIcons.COG, View4.class)
                         .build())
+                .withNavigationElementClickListener((element, event) -> {
+                    if (element instanceof NavigatorNavigationElement) {
+                        NavigatorNavigationElement nElement = (NavigatorNavigationElement) element;
+                        System.out.println("Element clicked " + nElement.getViewName());
+                    }
+                })
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, ElementsView.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)

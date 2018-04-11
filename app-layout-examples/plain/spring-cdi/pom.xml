@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-plain-spring-cdi-example</artifactId>
     <packaging>war</packaging>
-    <version>0.9.22</version>
+    <version>0.9.23</version>
     <name>App Layout Add-on Spring CDI Example</name>
 
     <prerequisites>

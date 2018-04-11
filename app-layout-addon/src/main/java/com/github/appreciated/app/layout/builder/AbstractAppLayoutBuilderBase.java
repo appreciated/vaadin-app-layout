@@ -5,6 +5,7 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementClickListener;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
@@ -64,6 +65,17 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      */
     public T withDesign(AppLayoutDesign design) {
         config.setDesign(design);
+        return (T) this;
+    }
+
+    /**
+     * Sets the Listener provider that is being used to listener clicks on navigation elements.
+     *
+     * @param listener
+     * @return
+     */
+    public T withNavigationElementClickListener(NavigationElementClickListener listener) {
+        config.setNavigationElementClickListener(listener);
         return (T) this;
     }
 
