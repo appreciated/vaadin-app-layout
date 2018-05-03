@@ -252,7 +252,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     public void refreshInfo() {
         if (navigationElementInfoProvider != null) {
             info = navigationElementInfoProvider.apply(className);
-            caption = info.getCaption();
+            caption = caption == null ? info.getCaption() : caption;
             if (info.getIcon() != null) {
                 this.icon = info.getIcon();
             }
