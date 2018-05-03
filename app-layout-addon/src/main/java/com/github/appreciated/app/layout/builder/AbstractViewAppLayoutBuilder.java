@@ -7,10 +7,11 @@ import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
-public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder> extends AbstractViewClassAppLayoutBuilder<T> {
+public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder> extends AbstractCDIAppLayoutBuilder<T> {
 
     protected AbstractViewAppLayoutBuilder(AppLayoutComponent component) {
         super(component);
+        config.setCDI(false);
     }
 
     /**
