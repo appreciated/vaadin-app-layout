@@ -15,10 +15,12 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenu
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 

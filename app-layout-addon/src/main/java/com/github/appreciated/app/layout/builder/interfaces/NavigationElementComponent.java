@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
 
 /**
  * An interface that is used by many {@link Component} at {@link com.github.appreciated.app.layout.component}.
  * It is meant for the Components that are able to hold a caption an a icon
  */
-public interface NavigationElementComponent extends Component {
-    void setNavigationIcon(Resource resource);
+public interface NavigationElementComponent extends HasElement {
+    void setNavigationIcon(String resource);
 
     void setNavigationCaption(String string);
 }

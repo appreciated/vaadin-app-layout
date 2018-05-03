@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.builder.elements;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.Component;
 
 import java.io.Serializable;
 

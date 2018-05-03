@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -84,7 +85,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param provider
      * @return
      */
-    public T withSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
+    public T withSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         config.setSectionProvider(provider);
         return (T) this;
     }

@@ -2,17 +2,17 @@ package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Position;
+import com.vaadin.flow.component.Component;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
 
 /**
  * A wrapper class for {@link ClickableNavigationElement}.
  */
 public class ClickableNavigationElement extends AbstractNavigationElement<Component, ClickableNavigationElement> {
     private final String name;
-    private Resource icon;
-    private Button.ClickListener listener;
+    private String icon;
+    private ClickListener listener;
 
     public ClickableNavigationElement(String name, Resource icon, Button.ClickListener listener) {
         this.name = name;

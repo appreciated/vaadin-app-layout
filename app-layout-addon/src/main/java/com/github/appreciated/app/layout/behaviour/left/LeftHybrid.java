@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.JavaScript;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JavaScript;
 
 import java.io.IOException;
 
