@@ -208,6 +208,9 @@ public class AppLayoutConfiguration {
             NavigatorNavigationElement nElement = (NavigatorNavigationElement) element;
             nElement.setCDI(isCDI);
             nElement.setNavigationElementInfoProvider(navigationElementInfoProvider);
+            if (navigationElementInfoProvider == null) {
+                throw new IllegalStateException("The NavigationElementInfoProvider must not be null.");
+            }
             if ((isCDI == false && nElement.getViewClassName() == defaultNavigationElement.getViewClassName()) ||
                     (isCDI == true && nElement.getViewName().equals(""))) {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nElement);
