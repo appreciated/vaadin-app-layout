@@ -24,7 +24,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 @HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
 
 @Tag("top-large")
-@HtmlImport("/com/github/appreciated/app/layout/behaviour/top/top-large.html")
+@HtmlImport("src/com/github/appreciated/app/layout/behaviour/top/top-large.html")
 public class TopLarge extends AbstractTopAppLayoutBase {
 
     private final HorizontalLayout appHeaderHolder = new HorizontalLayout();

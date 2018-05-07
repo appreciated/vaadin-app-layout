@@ -23,6 +23,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -180,16 +181,20 @@ public class AppLayoutConfiguration {
     }
 
     public void addToPosition(AbstractNavigationElement element, Section section) {
-        switch (section) {
-            case HEADER:
-                headerElements.add(element);
-                break;
-            case DEFAULT:
-                navigationElements.add(element);
-                break;
-            case FOOTER:
-                footerElements.add(element);
-                break;
+        try {
+            switch (section) {
+                case HEADER:
+                    headerElements.add(element);
+                    break;
+                case DEFAULT:
+                    navigationElements.add(element);
+                    break;
+                case FOOTER:
+                    footerElements.add(element);
+                    break;
+            }
+        } catch (Exception e) {
+            System.err.println("Section Can't be null in Element:"+element.getComponent().getElement()+"\n ->"+ Arrays.toString(e.getStackTrace()));
         }
     }
 

@@ -25,7 +25,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 
 @Tag("top")
-@HtmlImport("/com/github/appreciated/app/layout/behaviour/top/top.html")
+@HtmlImport("src/com/github/appreciated/app/layout/behaviour/top/top.html")
 public class Top extends AbstractTopAppLayoutBase {
 
     private final HorizontalLayout appHeaderHolder = new HorizontalLayout();

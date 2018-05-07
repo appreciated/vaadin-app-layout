@@ -13,13 +13,18 @@ import com.github.appreciated.app.layout.component.button.AppBarNotificationButt
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcons;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.server.InitialPageSettings;
+import com.vaadin.flow.server.PageConfigurator;
 
 import java.util.function.Consumer;
 
@@ -30,20 +35,26 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
 /**
  * The main view contains a button and a template element.
  */
-@HtmlImport("styles/shared-styles.html")
+
+@HtmlImport("frontend://styles/shared-styles.html")
+@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Route("")
 public class MainView extends VerticalLayout {
+
+
+
+    public MainView() {
+        setMargin(false);
+         setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
+        setSizeFull();
+        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+    }
+
+
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
     private Thread currentThread;
-
-    public MainView() {
-        setMargin(false);
-        setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
-        setSizeFull();
-        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
-    }
 
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {

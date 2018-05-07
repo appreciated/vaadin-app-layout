@@ -76,11 +76,25 @@
         <!-- The following dependency is generated using webjars.org. If 
              it does not resolve, go to https://www.webjars.org and deploy it as "Bower GitHub"
              -->
+        <!-- web-components elements -->
+
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>app-layout</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>iron-icons</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-icon-button</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <!--End of web-components elements -->
+
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>

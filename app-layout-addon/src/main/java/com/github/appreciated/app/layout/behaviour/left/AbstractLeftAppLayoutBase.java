@@ -56,6 +56,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
     private ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
 
     public AbstractLeftAppLayoutBase() {
+        super();
         //contentPanel.setSizeFull();
         //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         //menuHolder.setSizeFull();
