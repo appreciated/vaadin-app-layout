@@ -23,14 +23,14 @@ public enum Behaviour {
     TOP(Top.class, true, true, false, false),
     TOP_LARGE(TopLarge.class, true, true, false, false);
 
-    private Class<? extends AppLayoutComponent> className;
+    private Class<? extends AppLayoutElement> className;
 
     private boolean hasAppBar;
     private boolean overlay;
     private boolean small;
     private boolean top;
 
-    Behaviour(Class<? extends AppLayoutComponent> className, boolean top, boolean hasAppBar, boolean overlay, boolean small) {
+    Behaviour(Class<? extends AppLayoutElement> className, boolean top, boolean hasAppBar, boolean overlay, boolean small) {
         this.className = className;
         this.top = top;
         this.hasAppBar = hasAppBar;
@@ -38,7 +38,7 @@ public enum Behaviour {
         this.small = small;
     }
 
-    public AppLayoutComponent getInstance() {
+    public AppLayoutElement getInstance() {
         try {
             return className.newInstance();
         } catch (InstantiationException e) {

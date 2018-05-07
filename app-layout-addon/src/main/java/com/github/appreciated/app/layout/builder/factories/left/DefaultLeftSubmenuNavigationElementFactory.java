@@ -4,9 +4,9 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationEleme
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.component.ExpandingMenuContainer;
 
-public class DefaultLeftSubmenuNavigationElementFactory implements ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+public class DefaultLeftSubmenuNavigationElementFactory implements ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> {
     @Override
-    public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
+    public SubmenuNavigationElement.SubmenuElement get(SubmenuNavigationElement element) {
         ExpandingMenuContainer container = new ExpandingMenuContainer(element.getTitle(), element.getIcon());
         element.getSubmenuElements().forEach(element1 -> container.addComponent(element1.getComponent()));
         return container;

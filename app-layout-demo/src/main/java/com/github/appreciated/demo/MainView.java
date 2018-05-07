@@ -1,7 +1,7 @@
 package com.github.appreciated.demo;
 
 import com.github.appreciated.app.layout.AppLayout;
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
@@ -11,43 +11,37 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
-import com.vaadin.annotations.*;
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.PushStateNavigation;
-import com.vaadin.navigator.View;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.ui.Transport;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.VaadinIcons;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.router.Route;
 
-import javax.servlet.annotation.WebServlet;
 import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.Section.FOOTER;
 import static com.github.appreciated.app.layout.builder.Section.HEADER;
 import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.MEDIUM;
 
-@PushStateNavigation
-@Viewport("initial-scale=1, maximum-scale=1")
-@Theme("demo")
-@Title("App Layout Demo")
-@Push(transport = Transport.LONG_POLLING)
-public class DemoUI extends UI {
+/**
+ * The main view contains a button and a template element.
+ */
+@HtmlImport("styles/shared-styles.html")
+@Route("")
+public class MainView extends VerticalLayout {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
-    private VerticalLayout holder;
     private Thread currentThread;
 
-    @Override
-    protected void init(VaadinRequest request) {
-        holder = new VerticalLayout();
-        holder.setMargin(false);
+    public MainView() {
+        setMargin(false);
         setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
-        setContent(holder);
-        holder.setSizeFull();
+        setSizeFull();
         notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
@@ -72,62 +66,53 @@ public class DemoUI extends UI {
     }
 
     private void addNotification(DefaultNotification.Priority priority) {
-        DemoUI.this.access(() -> {
+        getUI().ifPresent(ui -> {
             badge.increase();
             notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
         });
     }
 
     private void setDrawerVariant(Behaviour variant) {
-        holder.removeAllComponents();
-        AppLayoutComponent drawer = AppLayout.getDefaultBuilder(variant)
+        removeAll();
+        AppLayoutElement drawer = AppLayout.getDefaultBuilder(variant)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
-                .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 0.9.21", new ThemeResource("logo.png")), HEADER)
-                .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
-                .add("Home", VaadinIcons.HOME, badge, new View1())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .add("Charts3", VaadinIcons.SPLINE_CHART, View2.class)
-                                .add("Contact3", VaadinIcons.CONNECT, View3.class)
-                                .add("More3", VaadinIcons.COG, View4.class)
+                .add(new MenuHeader("Version 2.0.0", "logo.png"), HEADER)
+                .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                .add("Home", VaadinIcons.HOME.create(), badge, new View1())
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                .add("Charts3", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                .add("Contact3", VaadinIcons.CONNECT.create(), View3.class)
+                                .add("More3", VaadinIcons.COG.create(), View4.class)
                                 .build())
-                        .add("Contact1", VaadinIcons.CONNECT, View3.class)
-                        .add("More1", VaadinIcons.COG, View4.class)
+                        .add("Contact1", VaadinIcons.CONNECT.create(), View3.class)
+                        .add("More1", VaadinIcons.COG.create(), View4.class)
                         .build())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                                .add("Charts4", VaadinIcons.SPLINE_CHART, View2.class)
-                                .add("Contact4", VaadinIcons.CONNECT, View3.class)
-                                .add("More4", VaadinIcons.COG, View4.class)
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
+                                .add("More4", VaadinIcons.COG.create(), View4.class)
                                 .build())
-                        .add("Contact2", VaadinIcons.CONNECT, View3.class)
-                        .add("More2", VaadinIcons.COG, View4.class)
+                        .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
+                        .add("More2", VaadinIcons.COG.create(), View4.class)
                         .build())
-                .add("Menu", VaadinIcons.MENU, View5.class)
-                .add("Elements", VaadinIcons.LIST, ElementsView.class)
-                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
+                .add("Menu", VaadinIcons.MENU.create(), View5.class)
+                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER)
                 .build();
-        drawer.addStyleName("left");
-        holder.addComponent(drawer);
-        if (getNavigator() != null) {
-            getNavigator().navigateTo("");
-        }
+        //drawer.addStyleName("left");
+        add(drawer);
         reloadNotifications();
     }
 
     private void openModeSelector(Behaviour variant) {
-        UI.getCurrent().addWindow(new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)));
+        new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)).open();
     }
 
-    @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
-    public static class Servlet extends VaadinServlet {
-    }
 
     public static class View2 extends AbstractView {
         @Override
@@ -164,47 +149,28 @@ public class DemoUI extends UI {
         }
     }
 
-    public static class View7 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View8 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    static abstract class AbstractView extends HorizontalLayout implements View {
+    static abstract class AbstractView extends HorizontalLayout {
         public AbstractView() {
             HorizontalLayout layout = new HorizontalLayout();
             layout.setSizeFull();
             Label label = new Label("< " + getViewName() + " >");
-            label.addStyleNames(ValoTheme.LABEL_H2, ValoTheme.LABEL_NO_MARGIN);
-            layout.addComponent(label);
-            layout.setComponentAlignment(label, Alignment.MIDDLE_CENTER);
-            Panel panel = new Panel(layout);
-            panel.setSizeFull();
-            addComponent(panel);
+            layout.add(label);
+            layout.setAlignItems(Alignment.CENTER);
+            add(layout);
             setMargin(true);
             setSizeFull();
+            getElement().getStyle().set("overflow", "auto");
         }
 
         abstract String getViewName();
     }
 
-    class BehaviourSelector extends Window {
+    class BehaviourSelector extends Dialog {
         public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
-            setModal(true);
-            setClosable(true);
-            setCaption("Select Behaviour");
+
             VerticalLayout layout = new VerticalLayout();
-            setContent(layout);
+            add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
-            group.addStyleName(ValoTheme.OPTIONGROUP_LARGE);
             group.setItems(Behaviour.LEFT,
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,
@@ -219,13 +185,14 @@ public class DemoUI extends UI {
                     Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
                     Behaviour.TOP,
                     Behaviour.TOP_LARGE);
-            group.setSelectedItem(current);
-            layout.addComponent(group);
-            group.addSelectionListener(singleSelectionEvent -> {
-                consumer.accept(singleSelectionEvent.getSelectedItem().orElse(Behaviour.LEFT_RESPONSIVE));
+            group.setItems(current);
+            layout.add(group);
+            group.addValueChangeListener(singleSelectionEvent -> {
+                consumer.accept(singleSelectionEvent.getValue());
                 close();
             });
         }
     }
+
 
 }

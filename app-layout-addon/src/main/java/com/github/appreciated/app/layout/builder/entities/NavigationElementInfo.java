@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.builder.entities;
 
 import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.icon.Icon;
 
 /**
  * Data structure that contains all the needed information of a {@link com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement}. This class is being used by
@@ -10,10 +10,10 @@ import com.vaadin.server.Resource;
 
 public class NavigationElementInfo {
     String caption;
-    Resource icon;
+    Icon icon;
     String viewName;
 
-    public NavigationElementInfo(String caption, Resource icon, String viewName) {
+    public NavigationElementInfo(String caption, Icon icon, String viewName) {
         this.caption = caption;
         this.icon = icon;
         this.viewName = viewName;
@@ -32,11 +32,11 @@ public class NavigationElementInfo {
         this.caption = caption;
     }
 
-    public Resource getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 
-    public void setIcon(Resource icon) {
+    public void setIcon(Icon icon) {
         this.icon = icon;
     }
 

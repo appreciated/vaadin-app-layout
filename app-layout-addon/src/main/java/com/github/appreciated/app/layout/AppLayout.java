@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.CDIAppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.NavigatorAppLayoutBuilder;
@@ -10,7 +10,7 @@ import com.github.appreciated.app.layout.builder.steps.CDIBuilderNavigatorPreamb
 public class AppLayout {
 
     /**
-     * This is confusing. Client code should call AppLayout.getCDIBuilder(...) to build a new instance of AppLayoutComponent but must
+     * This is confusing. Client code should call AppLayout.getCDIBuilder(...) to build a new instance of AppLayoutElement but must
      * pass an existing component in this method? Where does this instance come from? If an instance can be created outside, the Builder
      * makes no sense.
      *
@@ -32,12 +32,12 @@ public class AppLayout {
      */
 
     /**
-     * Returns a builder that allows you to fill you own custom AppLayoutComponent instance
+     * Returns a builder that allows you to fill you own custom AppLayoutElement instance
      *
      * @param layout the custom component you want to be configured by the Builder
      * @return a {@link CDIBuilderNavigatorPreamble} this is required since there are a few methods that are required to be called when using a {@link CDIAppLayoutBuilder}
      */
-    public static CDIBuilderNavigatorPreamble getCDIBuilder(AppLayoutComponent layout) {
+    public static CDIBuilderNavigatorPreamble getCDIBuilder(AppLayoutElement layout) {
         return new CDIBuilderNavigatorPreamble(CDIAppLayoutBuilder.get(layout));
     }
 
@@ -52,40 +52,40 @@ public class AppLayout {
     }
 
     /**
-     * This builder should be used when using the {@link com.vaadin.navigator.Navigator} but not SpringCDI and when also providing your own {@link AppLayoutComponent} instance
+     * This builder should be used when using the {@link com.vaadin.navigator.Navigator} but not SpringCDI and when also providing your own {@link AppLayoutElement} instance
      *
      * @param layout the custom component you want to be configured by the Builder
-     * @return a {@link NavigatorAppLayoutBuilder} instance to build your {@link AppLayoutComponent}
+     * @return a {@link NavigatorAppLayoutBuilder} instance to build your {@link AppLayoutElement}
      */
-    public static NavigatorAppLayoutBuilder getDefaultBuilder(AppLayoutComponent layout) {
+    public static NavigatorAppLayoutBuilder getDefaultBuilder(AppLayoutElement layout) {
         return NavigatorAppLayoutBuilder.get(layout);
     }
 
     /**
-     * This builder should be used when using the {@link com.vaadin.navigator.Navigator} but not SpringCDI and when also providing your own {@link AppLayoutComponent} instance
+     * This builder should be used when using the {@link com.vaadin.navigator.Navigator} but not SpringCDI and when also providing your own {@link AppLayoutElement} instance
      *
      * @param behaviour the {@link Behaviour} you want to use
-     * @return a {@link NavigatorAppLayoutBuilder} instance to build your {@link AppLayoutComponent}
+     * @return a {@link NavigatorAppLayoutBuilder} instance to build your {@link AppLayoutElement}
      */
     public static NavigatorAppLayoutBuilder getDefaultBuilder(Behaviour behaviour) {
         return NavigatorAppLayoutBuilder.get(behaviour.getInstance());
     }
 
     /**
-     * This builder should be used when using not {@link com.vaadin.navigator.Navigator} and also not SpringCDI and when also providing your own {@link AppLayoutComponent} instance
+     * This builder should be used when using not {@link com.vaadin.navigator.Navigator} and also not SpringCDI and when also providing your own {@link AppLayoutElement} instance
      *
      * @param layout the custom component you want to be configured by the Builder
-     * @return a {@link NoNavigatorAppLayoutBuilder} instance to build your {@link AppLayoutComponent}
+     * @return a {@link NoNavigatorAppLayoutBuilder} instance to build your {@link AppLayoutElement}
      */
-    public static NoNavigatorAppLayoutBuilder getNoNavigatorBuilder(AppLayoutComponent layout) {
+    public static NoNavigatorAppLayoutBuilder getNoNavigatorBuilder(AppLayoutElement layout) {
         return NoNavigatorAppLayoutBuilder.get(layout);
     }
 
     /**
-     * This builder should be used when using not {@link com.vaadin.navigator.Navigator} and also not SpringCDI and when also providing your own {@link AppLayoutComponent} instance
+     * This builder should be used when using not {@link com.vaadin.navigator.Navigator} and also not SpringCDI and when also providing your own {@link AppLayoutElement} instance
      *
      * @param behaviour the {@link Behaviour} you want to use
-     * @return a {@link NoNavigatorAppLayoutBuilder} instance to build your {@link AppLayoutComponent}
+     * @return a {@link NoNavigatorAppLayoutBuilder} instance to build your {@link AppLayoutElement}
      */
     public static NoNavigatorAppLayoutBuilder getNoNavigatorBuilder(Behaviour behaviour) {
         return NoNavigatorAppLayoutBuilder.get(behaviour.getInstance());

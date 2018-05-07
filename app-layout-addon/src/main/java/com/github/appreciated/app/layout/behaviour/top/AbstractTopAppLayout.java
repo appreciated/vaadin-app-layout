@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
@@ -17,7 +17,6 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCom
 import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
 import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.IOException;
@@ -28,10 +27,10 @@ import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 
 /**
- * The {@link AbstractTopAppLayout} is the supposed to be the base of any {@link AppLayoutComponent} with a "Top Behaviour".
+ * The {@link AbstractTopAppLayout} is the supposed to be the base of any {@link AppLayoutElement} with a "Top Behaviour".
  */
 
-public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayoutElement, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 

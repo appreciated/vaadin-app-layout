@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.factories;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
@@ -12,7 +12,7 @@ public abstract class AbstractNavigationElementComponentFactory implements Compo
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
         button.getButton().addClickListener(clickEvent -> {
             element.onClick();
-            AppLayoutComponent.closeDrawerIfNotPersistent();
+            AppLayoutElement.closeDrawerIfNotPersistent();
         });
     }
 }

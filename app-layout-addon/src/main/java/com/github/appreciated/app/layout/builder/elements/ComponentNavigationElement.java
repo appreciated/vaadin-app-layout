@@ -1,16 +1,16 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Position;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.HasElement;
 
 /**
- * A wrapper class for a menu element that is a {@link Component}.
+ * A wrapper class for a menu element that is a {@link HasElement}.
  */
-public class ComponentNavigationElement extends AbstractNavigationElement<Component, ComponentNavigationElement> {
-    private Component element;
+public class ComponentNavigationElement extends AbstractNavigationElement<HasElement, ComponentNavigationElement> {
+    private HasElement element;
 
-    public ComponentNavigationElement(Component element) {
+    public ComponentNavigationElement(HasElement element) {
         this.element = element;
         setProvider(info -> element);
     }
@@ -21,12 +21,12 @@ public class ComponentNavigationElement extends AbstractNavigationElement<Compon
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElement provider) {
 
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElement provider, Position position) {
 
     }
 }

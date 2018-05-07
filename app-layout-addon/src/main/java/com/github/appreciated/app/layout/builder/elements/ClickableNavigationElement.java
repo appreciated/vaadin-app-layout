@@ -1,20 +1,22 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Position;
-import com.vaadin.flow.component.Component;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Button;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
 
 /**
  * A wrapper class for {@link ClickableNavigationElement}.
  */
-public class ClickableNavigationElement extends AbstractNavigationElement<Component, ClickableNavigationElement> {
+public class ClickableNavigationElement extends AbstractNavigationElement<HasElement, ClickableNavigationElement> {
     private final String name;
-    private String icon;
-    private ClickListener listener;
+    private Icon icon;
+    private ComponentEventListener<ClickEvent<Button>> listener;
 
-    public ClickableNavigationElement(String name, Resource icon, Button.ClickListener listener) {
+    public ClickableNavigationElement(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
         this.name = name;
         this.icon = icon;
         this.listener = listener;
@@ -24,7 +26,7 @@ public class ClickableNavigationElement extends AbstractNavigationElement<Compon
         return name;
     }
 
-    public Resource getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 
@@ -34,12 +36,12 @@ public class ClickableNavigationElement extends AbstractNavigationElement<Compon
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElement provider) {
         setProvider(provider.getDrawerClickableElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElement provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerClickableElementProvider());
@@ -50,7 +52,7 @@ public class ClickableNavigationElement extends AbstractNavigationElement<Compon
         }
     }
 
-    public Button.ClickListener getListener() {
+    public ComponentEventListener<ClickEvent<Button>> getListener() {
         return listener;
     }
 }

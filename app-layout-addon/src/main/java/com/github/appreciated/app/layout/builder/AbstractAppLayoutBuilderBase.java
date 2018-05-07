@@ -1,15 +1,17 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
 
     protected AppLayoutConfiguration config;
 
-    protected AbstractAppLayoutBuilderBase(AppLayoutComponent component) {
+    protected AbstractAppLayoutBuilderBase(AppLayoutElement component) {
         config = new AppLayoutConfiguration(component);
     }
 
@@ -96,7 +98,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param provider
      * @return
      */
-    public T withSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public T withSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         config.setSubmenuProvider(provider);
         return (T) this;
     }
@@ -154,7 +156,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @return
      */
 
-    public T addClickable(String caption, Resource icon, Button.ClickListener listener) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
         return addClickable(caption, icon, listener, Section.DEFAULT);
     }
 
@@ -167,7 +169,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param section
      * @return
      */
-    public T addClickable(String caption, Resource icon, Button.ClickListener listener, Section section) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener, Section section) {
         addToPosition(new ClickableNavigationElement(caption, icon, listener), section);
         return (T) this;
     }
@@ -201,7 +203,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param listener
      * @return
      */
-    public T addClickable(String caption, Button.ClickListener listener) {
+    public T addClickable(String caption, ComponentEventListener<ClickEvent<Button>> listener) {
         return addClickable(caption, null, listener);
     }
 
@@ -235,7 +237,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param element
      * @return
      */
-    public T addToAppBar(Component element) {
+    public T addToAppBar(HasElement element) {
         config.getAppBarElements().add(element);
         return (T) this;
     }
@@ -246,7 +248,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param element
      * @return
      */
-    public T addToAppBar(Component... element) {
+    public T addToAppBar(HasElement... element) {
         config.getAppBarElements().addAll(Arrays.asList(element));
         return (T) this;
     }
@@ -257,7 +259,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param resourceButton
      * @return
      */
-    public T withAppBarIconComponent(Component resourceButton) {
+    public T withAppBarIconComponent(HasElement resourceButton) {
         config.setAppBarIconComponent(resourceButton);
         return (T) this;
     }
@@ -278,7 +280,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      *
      * @return
      */
-    public AppLayoutComponent build() {
+    public AppLayoutElement build() {
         return config.build();
     }
 

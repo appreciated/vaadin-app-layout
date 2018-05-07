@@ -4,10 +4,10 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.component.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.window.NotificationWindow;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.UI;
-
-import static com.vaadin.icons.VaadinIcons.BELL;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 
 /**
  * A component which opens a window containing the notifications on click closely to this component. Also showing an
@@ -32,9 +32,9 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
     }
 
     public AppBarNotificationButton(NotificationHolder holder, boolean closeOnClick, Factory<NotificationWindow, NotificationHolder> windowFactory) {
-        super(BELL, holder);
+        super("test", holder);
         factory = windowFactory;
-        getButton().addClickListener((Button.ClickListener) this::buttonClick);
+        getButton().addClickListener(buttonClickEvent -> buttonClick(buttonClickEvent));
         if (closeOnClick) {
             holder.addStatusListener(new NotificationHolder.NotificationListener() {
                 @Override
@@ -52,17 +52,17 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
     }
 
     @Override
-    public void attach() {
-        super.attach();
-        ui = getUI();
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        ui = UI.getCurrent();
     }
 
-    private void buttonClick(Button.ClickEvent clickEvent) {
+    private void buttonClick(ClickEvent<Button> clickEvent) {
         if (window == null) {
             ui.access(() -> {
                 window = factory.get(getNotificationHolder());
                 window.show(clickEvent);
-                window.addCloseListener(closeEvent -> window = null);
+                window.addDialogCloseActionListener(closeEvent -> window = null);
             });
         } else {
             window.show(clickEvent);

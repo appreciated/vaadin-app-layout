@@ -1,14 +1,13 @@
 package com.github.appreciated.demo;
 
-import com.vaadin.navigator.View;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-public class View1 extends VerticalLayout implements View {
+public class View1 extends VerticalLayout {
 
     private ArrayList<Person> people = new ArrayList<>();
 
@@ -19,13 +18,13 @@ public class View1 extends VerticalLayout implements View {
         }
         Grid<Person> grid = getGrid(30);
         grid.setSizeFull();
-        addComponent(grid);
+        add(grid);
         setSizeFull();
     }
 
-    private com.vaadin.ui.Grid<Person> getGrid(int size) {
-        com.vaadin.ui.Grid<Person> grid = new com.vaadin.ui.Grid<>();
-        grid.clearSortOrder();
+    private Grid<Person> getGrid(int size) {
+        Grid<Person> grid = new Grid<>();
+       /* grid.clearSortOrder();
         grid.setItems(people.subList(0, size));
         grid.addColumn(Person::getName).setCaption("Name 1");
         grid.addColumn(Person::getName).setCaption("Name 2");
@@ -38,7 +37,7 @@ public class View1 extends VerticalLayout implements View {
         grid.addColumn(Person::getBirthYear).setCaption("Year of birth 5");
         grid.addColumn(Person::getBirthYear).setCaption("Year of birth 6");
         grid.addColumn(Person::getID).setCaption("ID");
-        grid.addColumn(Person::getName).setCaption("Name 5");
+        grid.addColumn(Person::getName).setCaption("Name 5");*/
         return grid;
     }
 

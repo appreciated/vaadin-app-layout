@@ -2,10 +2,11 @@ package com.github.appreciated.app.layout.builder.elements.builders;
 
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,12 @@ import java.util.List;
 public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
 
     final String title;
-    final Resource resource;
+    final Icon icon;
     List<AbstractNavigationElement> submenuElements = new ArrayList<>();
 
-    protected CDISubmenuBuilder(String title, Resource resource) {
+    protected CDISubmenuBuilder(String title, Icon icon) {
         this.title = title;
-        this.resource = resource;
+        this.icon = icon;
     }
 
     /**
@@ -40,7 +41,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param icon
      * @return
      */
-    public static CDISubmenuBuilder get(Resource icon) {
+    public static CDISubmenuBuilder get(Icon icon) {
         return new CDISubmenuBuilder(null, icon);
     }
 
@@ -50,7 +51,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param icon
      * @return
      */
-    public static CDISubmenuBuilder get(String title, Resource icon) {
+    public static CDISubmenuBuilder get(String title, Icon icon) {
         return new CDISubmenuBuilder(title, icon);
     }
 
@@ -60,8 +61,8 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param className This class name of the view
      * @return
      */
-    public T add(Class<? extends View> className) {
-        return add((Resource) null, className);
+    public T add(Class<? extends HasElement> className) {
+        return add((Icon) null, className);
     }
 
     /**
@@ -70,7 +71,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param className This class name of the view
      * @return
      */
-    public T add(Resource icon, Class<? extends View> className) {
+    public T add(Icon icon, Class<? extends HasElement> className) {
         return add(new NavigatorNavigationElement(icon, className));
     }
 
@@ -81,7 +82,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Class<? extends View> element) {
+    public T add(String caption, Class<? extends HasElement> element) {
         return this.add(caption, null, element);
     }
 
@@ -92,7 +93,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Resource icon, Class<? extends View> element) {
+    public T add(String caption, Icon icon, Class<? extends HasElement> element) {
         this.add(new NavigatorNavigationElement(caption, icon, element));
         return (T) this;
     }
@@ -104,25 +105,25 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element) {
         this.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return (T) this;
     }
 
-    public T addClickable(Resource icon, Button.ClickListener listener) {
+    public T addClickable(Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
         return addClickable(null, icon, listener);
     }
 
-    public T addClickable(String caption, Button.ClickListener listener) {
+    public T addClickable(String caption, ComponentEventListener<ClickEvent<Button>> listener) {
         return addClickable(caption, null, listener);
     }
 
-    public T addClickable(String caption, Resource icon, Button.ClickListener listener) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
         this.submenuElements.add(new ClickableNavigationElement(caption, icon, listener));
         return (T) this;
     }
 
-    public T add(Component element) {
+    public T add(HasElement element) {
         this.submenuElements.add(new ComponentNavigationElement(element));
         return (T) this;
     }
@@ -133,6 +134,6 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
     }
 
     public SubmenuNavigationElement build() {
-        return new SubmenuNavigationElement(title, resource, submenuElements);
+        return new SubmenuNavigationElement(title, icon, submenuElements);
     }
 }

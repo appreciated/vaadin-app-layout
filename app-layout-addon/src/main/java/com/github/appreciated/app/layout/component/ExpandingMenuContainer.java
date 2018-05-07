@@ -2,55 +2,55 @@ package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.component.button.NavigationButton;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.*;
 
 /**
  * The component which is used for submenu elements. On click it toggles a css class which causes it to grow / shrink
  */
-public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNavigationElement.SubmenuComponent {
+public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNavigationElement.SubmenuElement {
 
     private final VerticalLayout submenuWrapper;
 
-    public ExpandingMenuContainer(String sectionName, Resource icon) {
-        addStyleName(EXPANDING_MENU_CONTAINER_PRIMARY_STYLE);
+    public ExpandingMenuContainer(String sectionName, String icon) {
+        getElement().getClassList().add(EXPANDING_MENU_CONTAINER_PRIMARY_STYLE);
         setMargin(false);
-        NavigationButton expandMenuButton = new NavigationButton(sectionName, icon);
+        NavigationButton expandMenuButton = new NavigationButton(sectionName, new Image(icon, null));
         expandMenuButton.addClickListener(clickEvent -> {
-            if (getStyleName().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
-                removeStyleName(EXPANDING_MENU_CONTAINER_OPEN);
+            if (getElement().getClassList().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
+                getElement().getClassList().remove(EXPANDING_MENU_CONTAINER_OPEN);
             } else {
-                addStyleName(EXPANDING_MENU_CONTAINER_OPEN);
+                getElement().getClassList().add(EXPANDING_MENU_CONTAINER_OPEN);
             }
         });
         HorizontalLayout buttonWrapper = new HorizontalLayout(expandMenuButton);
-        buttonWrapper.addStyleName(EXPANDING_MENU_CONTAINER_BUTTON);
+        buttonWrapper.getElement().getClassList().add(EXPANDING_MENU_CONTAINER_BUTTON);
         buttonWrapper.setSpacing(false);
-        buttonWrapper.setWidth(100, Unit.PERCENTAGE);
-        super.addComponent(buttonWrapper);
+        super.add(buttonWrapper);
+        buttonWrapper.setWidth("100%");
 
         submenuWrapper = new VerticalLayout();
-        submenuWrapper.addStyleName(EXPANDING_MENU_SUBMENU_CONTAINER);
+        submenuWrapper.getElement().getClassList().add(EXPANDING_MENU_SUBMENU_CONTAINER);
         submenuWrapper.setMargin(false);
-        submenuWrapper.setWidth(100, Unit.PERCENTAGE);
+        submenuWrapper.setWidth("100%");
 
-        super.addComponent(buttonWrapper);
-        super.addComponent(submenuWrapper);
+        super.add(buttonWrapper);
+        super.add(submenuWrapper);
     }
 
     @Override
-    public void addComponent(Component c) {
-        submenuWrapper.addComponent(c);
+    public void add(Component... components) {
+        submenuWrapper.add(components);
     }
 
     @Override
     public void close() {
-        if (getStyleName().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
-            removeStyleName(EXPANDING_MENU_CONTAINER_OPEN);
+        if (getElement().getClassList().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
+            getElement().getClassList().remove(EXPANDING_MENU_CONTAINER_OPEN);
         }
     }
 }

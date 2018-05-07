@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
@@ -32,12 +32,12 @@ public class SectionNavigationElement extends AbstractNavigationElement<Componen
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElement provider) {
         setProvider(provider.getDrawerSectionElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElement provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerSectionElementProvider());

@@ -3,8 +3,8 @@ package com.github.appreciated.app.layout.builder.elements.builders;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 
 /**
@@ -13,8 +13,8 @@ import com.vaadin.server.Resource;
  */
 public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
 
-    private SubmenuBuilder(String title, Resource resource) {
-        super(title, resource);
+    private SubmenuBuilder(String title, Icon icon) {
+        super(title, icon);
     }
 
     /**
@@ -33,7 +33,7 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param icon
      * @return
      */
-    public static SubmenuBuilder get(Resource icon) {
+    public static SubmenuBuilder get(Icon icon) {
         return new SubmenuBuilder(null, icon);
     }
 
@@ -43,7 +43,7 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param icon
      * @return
      */
-    public static SubmenuBuilder get(String title, Resource icon) {
+    public static SubmenuBuilder get(String title, Icon icon) {
         return new SubmenuBuilder(title, icon);
     }
 
@@ -54,8 +54,8 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param badgeHolder
      * @return
      */
-    public SubmenuBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder) {
-        return add(caption, icon, badgeHolder, (View) null);
+    public SubmenuBuilder add(String caption, Icon icon, DefaultBadgeHolder badgeHolder) {
+        return add(caption, icon, badgeHolder, (HasElement) null);
     }
 
     /**
@@ -65,7 +65,7 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param element
      * @return
      */
-    public SubmenuBuilder add(String caption, View element) {
+    public SubmenuBuilder add(String caption, HasElement element) {
         return add(caption, null, (DefaultBadgeHolder) null, element);
     }
 
@@ -76,7 +76,7 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param element
      * @return
      */
-    public SubmenuBuilder add(String caption, Resource icon, View element) {
+    public SubmenuBuilder add(String caption, Icon icon, HasElement element) {
         return add(caption, icon, null, element);
     }
 
@@ -87,16 +87,16 @@ public class SubmenuBuilder extends ViewClassSubmenuBuilder<SubmenuBuilder> {
      * @param element
      * @return
      */
-    public SubmenuBuilder add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+    public SubmenuBuilder add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element) {
         this.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return this;
     }
 
-    public SubmenuBuilder add(String caption, String path, Resource icon, View element) {
+    public SubmenuBuilder add(String caption, String path, Icon icon, HasElement element) {
         return this.add(caption, path, icon, null, element);
     }
 
-    public SubmenuBuilder add(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+    public SubmenuBuilder add(String caption, String path, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element) {
         this.add(new NavigatorNavigationElement(caption, path, icon, badgeHolder, element));
         return this;
     }

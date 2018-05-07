@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
@@ -27,10 +27,10 @@ import java.util.List;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
 /**
- * The {@link AbstractLeftAppLayout} is the supposed to be the base of any {@link AppLayoutComponent} with a "Left Behaviour".
+ * The {@link AbstractLeftAppLayout} is the supposed to be the base of any {@link AppLayoutElement} with a "Left Behaviour".
  */
 
-public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayoutComponent, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayoutElement, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 

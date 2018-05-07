@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
@@ -19,56 +19,44 @@ import com.github.appreciated.app.layout.builder.interfaces.HasCaptionIntercepto
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
-import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewProvider;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.UI;
+import com.vaadin.flow.component.HasElement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * Since the class AppLayoutBuilder was grew so large I decided to outsource the logic to configure an AppLayout instance into this class.
  * <p>
  * For every "Factory" you find in the class some information:
- * The following factories allow the user to exchange any {@link Component} that will be added to the
- * {@link AppLayoutComponent} instance for any {@link Behaviour} or custom implementation
+ * The following factories allow the user to exchange any {@link HasElement} that will be added to the
+ * {@link AppLayoutElement} instance for any {@link Behaviour} or custom implementation
  * To do this you will have to replace the
  */
 public class AppLayoutConfiguration {
 
     private Behaviour variant = Behaviour.LEFT;
     private List<AbstractNavigationElement> navigationElements = new ArrayList<>();
-    private List<Component> appBarElements = new ArrayList<>();
-    private Consumer<Navigator> navigatorConsumer;
-    private Supplier<ViewProvider> viewProviderSupplier;
-    private Supplier<ViewProvider> errorProvider;
-    private Supplier<View> errorViewProvider;
+    private List<HasElement> appBarElements = new ArrayList<>();
 
-    private NavigatorProducer navigatorProducer = components -> new Navigator(UI.getCurrent(), components);
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
-    private Navigator navigator;
     private ComponentNavigator componentNavigator;
     private String title;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
     private DefaultLeftClickableNavigationElementFactory customElementProvider;
-    private ComponentFactory<Component, SectionNavigationElement> sectionProvider;
-    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider;
+    private ComponentFactory<HasElement, SectionNavigationElement> sectionProvider;
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> submenuProvider;
 
     private NavigationElementInfoProducer navigationElementInfoProvider = null;
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
-    private Component appBarIconComponent;
+    private HasElement appBarIconComponent;
 
-    private AppLayoutComponent instance;
+    private AppLayoutElement instance;
 
     private Factory<String, String> viewNameInterceptor = null;
     private Factory<String, String> captionInterceptor;
@@ -77,10 +65,10 @@ public class AppLayoutConfiguration {
     private boolean isScrollToTopOnNavigate = true;
     private boolean isCloseSubmenusOnNavigate = true;
     private boolean isNavigatorEnabled = true;
-    private Component titleComponent;
+    private HasElement titleComponent;
     private Consumer<ComponentNavigator> componentNavigatorConsumer;
 
-    public AppLayoutConfiguration(AppLayoutComponent instance) {
+    public AppLayoutConfiguration(AppLayoutElement instance) {
         this.instance = instance;
     }
 
@@ -88,7 +76,7 @@ public class AppLayoutConfiguration {
      * FIXME this configuration should only hold configuration => Single responsibility principle
      * This terminating build method is part of the builder and not of the configuration.
      */
-    public AppLayoutComponent build() {
+    public AppLayoutElement build() {
 
         // this method has a lot of magic. add some inline comments describing why are you doing what.
         if (navigationElementProvider == null) {
@@ -120,48 +108,15 @@ public class AppLayoutConfiguration {
         if (titleComponent == null) {
             instance.setTitle(title);
         } else {
-            instance.setTitleComponent(titleComponent);
+            instance.setTitleElement(titleComponent);
         }
-        if (isNavigatorEnabled) {
-            navigator = navigatorProducer.apply(instance.getContentHolder());
-            if (navigator == null) {
-                throw new RuntimeException("The set navigatorProducer returned 'null' as a Navigator");
-            }
 
-            navigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
-            if (viewProviderSupplier != null) {
-                navigator.addProvider(viewProviderSupplier.get());
-            }
-            if (errorProvider != null) {
-                navigator.setErrorProvider(errorProvider.get());
-            }
-            if (errorViewProvider != null) {
-                navigator.setErrorView(errorViewProvider.get());
-            }
-            if (navigatorConsumer != null) {
-                navigatorConsumer.accept(navigator);
-            }
-            if (!isCDI && defaultNavigationElement == null) {
-                defaultNavigationElement = navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-            }
-        } else {
-            componentNavigator = new ComponentNavigator(instance.getContentHolder());
-            componentNavigator.addViewChangeListener(event -> beforeViewChange(event.getViewName()));
-            if (errorViewProvider != null) {
-                componentNavigator.setErrorView(errorViewProvider.get());
-            }
-            if (componentNavigatorConsumer != null) {
-                componentNavigatorConsumer.accept(componentNavigator);
-            }
-            if (defaultNavigationElement == null) {
-                defaultNavigationElement = navigationElements.stream()
-                        .filter(element -> element instanceof NavigatorNavigationElement)
-                        .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
-            }
-            defaultNavigationElement.addViewToComponentNavigator(componentNavigator);
+        if (!isCDI && defaultNavigationElement == null) {
+            defaultNavigationElement = navigationElements.stream()
+                    .filter(element -> element instanceof NavigatorNavigationElement)
+                    .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
         }
+
         addComponents(headerElements, instance::addNavigationHeaderElement);
         addComponents(navigationElements, instance::addNavigationElement);
         addComponents(footerElements, instance::addNavigationFooterElement);
@@ -175,7 +130,7 @@ public class AppLayoutConfiguration {
             componentNavigator.navigateTo(defaultNavigationElement.getViewName());
         } else {
             if (!isCDI && defaultNavigationElement != null) {
-                defaultNavigationElement.addViewToNavigator(navigator);
+                defaultNavigationElement.addViewToNavigator();
             } else if (isCDI && defaultNavigationElement != null) {
                 System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
             }
@@ -216,7 +171,7 @@ public class AppLayoutConfiguration {
             }
             nElement.setViewNameInterceptor(viewNameInterceptor);
             if (isNavigatorEnabled) {
-                nElement.addViewToNavigator(navigator);
+                nElement.addViewToNavigator();
             } else {
                 nElement.addViewToComponentNavigator(componentNavigator);
             }
@@ -259,40 +214,12 @@ public class AppLayoutConfiguration {
         this.design = design;
     }
 
-    public Navigator getNavigator() {
-        return navigator;
-    }
-
-    public void setNavigator(Navigator navigator) {
-        this.navigator = navigator;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public List<Component> getAppBarElements() {
+    public List<HasElement> getAppBarElements() {
         return appBarElements;
-    }
-
-    public void setNavigatorConsumer(Consumer<Navigator> navigatorConsumer) {
-        this.navigatorConsumer = navigatorConsumer;
-    }
-
-    public void setViewProviderSupplier(Supplier<ViewProvider> viewProviderSupplier) {
-        this.viewProviderSupplier = viewProviderSupplier;
-    }
-
-    public void setErrorProvider(Supplier<ViewProvider> errorProvider) {
-        this.errorProvider = errorProvider;
-    }
-
-    public void setErrorView(Supplier<View> errorView) {
-        this.errorViewProvider = errorView;
-    }
-
-    public void setNavigatorProducer(NavigatorProducer navigatorProducer) {
-        this.navigatorProducer = navigatorProducer;
     }
 
     public void setDefaultNavigationElement(NavigatorNavigationElement defaultNavigationElement) {
@@ -303,11 +230,11 @@ public class AppLayoutConfiguration {
         this.navigationElementProvider = navigationElementProvider;
     }
 
-    public void setSectionProvider(ComponentFactory<Component, SectionNavigationElement> sectionProvider) {
+    public void setSectionProvider(ComponentFactory<HasElement, SectionNavigationElement> sectionProvider) {
         this.sectionProvider = sectionProvider;
     }
 
-    public void setSubmenuProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider) {
+    public void setSubmenuProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> submenuProvider) {
         this.submenuProvider = submenuProvider;
     }
 
@@ -315,7 +242,7 @@ public class AppLayoutConfiguration {
         this.navigationElementInfoProvider = navigationElementInfoProvider;
     }
 
-    public void setAppBarIconComponent(Component appBarIconComponent) {
+    public void setAppBarIconComponent(HasElement appBarIconComponent) {
         this.appBarIconComponent = appBarIconComponent;
     }
 
@@ -361,14 +288,14 @@ public class AppLayoutConfiguration {
                             .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
                 }
                 if (isScrollToTopOnNavigate) {
-                    instance.getContentHolder().setScrollTop(0);
+                    // instance.getContentHolder().setScrollTop(0);
                 }
             });
         }
         return true;
     }
 
-    public void setTitleComponent(Component titleComponent) {
+    public void setTitleComponent(HasElement titleComponent) {
         this.titleComponent = titleComponent;
     }
 
@@ -376,18 +303,8 @@ public class AppLayoutConfiguration {
         componentNavigatorConsumer = consumer;
     }
 
-    /**
-     * Unfortunately this class is necessary. The reason for this is that the {@link Navigator} does not allow to create an
-     * instance of itself without passing the component where it should present the views
-     */
-
-
     @FunctionalInterface
-    public interface NavigatorProducer extends Function<Panel, Navigator> {
-    }
-
-    @FunctionalInterface
-    public interface NavigationElementInfoProducer extends Function<Class<? extends View>, NavigationElementInfo> {
+    public interface NavigationElementInfoProducer extends Function<Class<? extends HasElement>, NavigationElementInfo> {
     }
 
 

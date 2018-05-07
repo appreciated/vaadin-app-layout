@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 /**
  * Contains all  Class<View> related functions that are not usable with CDI
@@ -13,10 +13,40 @@ import com.vaadin.server.Resource;
  */
 public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLayoutBuilder> extends AbstractCDIAppLayoutBuilder<T> {
 
-    protected AbstractViewClassAppLayoutBuilder(AppLayoutComponent component) {
+    protected AbstractViewClassAppLayoutBuilder(AppLayoutElement component) {
         super(component);
         config.setCDI(false);
     }
+
+
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific section
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
+     * @param caption
+     * @param icon
+     * @param element
+     * @return
+     */
+    public T add(String caption, Icon icon, Class<? extends HasElement> element) {
+        return add(caption, null, icon, null, element, null);
+    }
+
+
+    /**
+     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific section
+     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
+     *
+     * @param caption
+     * @param icon
+     * @param element
+     * @param section
+     * @return
+     */
+    public T add(String caption, Icon icon, Class<? extends HasElement> element, Section section) {
+        return add(caption, null, icon, null, element, section);
+    }
+
 
     /**
      * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at a specific section
@@ -29,7 +59,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, Class<? extends View> element, Section section) {
+    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> element, Section section) {
         return add(caption, viewName, icon, null, element, section);
     }
 
@@ -40,7 +70,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param className
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, Class<? extends View> className) {
+    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> className) {
         return add(caption, viewName, icon, null, className, Section.DEFAULT);
     }
 
@@ -51,7 +81,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param className
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
         return add(caption, viewName, icon, badgeHolder, className, Section.DEFAULT);
     }
 
@@ -67,7 +97,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Section section) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), section);
         return (T) this;
     }

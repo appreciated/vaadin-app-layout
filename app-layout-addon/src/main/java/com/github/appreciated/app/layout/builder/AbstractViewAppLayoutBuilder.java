@@ -1,40 +1,16 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder> extends AbstractViewClassAppLayoutBuilder<T> {
 
-    protected AbstractViewAppLayoutBuilder(AppLayoutComponent component) {
+    protected AbstractViewAppLayoutBuilder(AppLayoutElement component) {
         super(component);
-    }
-
-    /**
-     * This method is a shorthand to set the default navigation view for the navigator
-     * It will have not effect on if cdi is enabled
-     *
-     * @param element
-     * @return
-     */
-    public T withDefaultNavigationView(View element) {
-        config.setDefaultNavigationElement(new NavigatorNavigationElement("", null, element));
-        return (T) this;
-    }
-
-    /**
-     * This method is a shorthand to set the default navigation view for the navigator
-     * It will have not effect on if cdi is enabled
-     *
-     * @param element
-     * @return
-     */
-    public T withDefaultNavigationView(Class<? extends View> element) {
-        config.setDefaultNavigationElement(new NavigatorNavigationElement("", null, element));
-        return (T) this;
     }
 
     /**
@@ -59,7 +35,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, Resource icon, View element) {
+    public T add(String caption, Icon icon, HasElement element) {
         return add(caption, icon, null, element, Section.DEFAULT);
     }
 
@@ -71,8 +47,8 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, View element) {
-        return add(caption, (Resource) null, element);
+    public T add(String caption, HasElement element) {
+        return add(caption, null, element);
     }
 
     /**
@@ -85,13 +61,13 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param section
      * @return
      */
-    public T add(String caption, Resource icon, View element, Section section) {
+    public T add(String caption, Icon icon, HasElement element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, icon, element), section);
         return (T) this;
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
+     * Appends a menu element which is bound to a HasElement which then can be navigated to by clicking on the element at the DEFAULT position
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
@@ -100,13 +76,13 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), Section.DEFAULT);
         return (T) this;
     }
 
     /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT section
+     * Appends a menu element which is bound to a HasElement which then can be navigated to by clicking on the element at the DEFAULT section
      * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
      *
      * @param caption
@@ -116,7 +92,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param section
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View element, Section section) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), section);
         return (T) this;
     }
@@ -127,25 +103,11 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      *
      * @param caption
      * @param viewName
-     * @param element
-     * @return
-     */
-    public T add(String caption, String viewName, View element) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, null, null, element), Section.DEFAULT);
-        return (T) this;
-    }
-
-    /**
-     * Appends a menu element which is bound to a view which then can be navigated to by clicking on the element at the DEFAULT position
-     * Note: The caption, icon and navigation path will also be determined via the NavigationElementInfoProvider
-     *
-     * @param caption
-     * @param viewName
      * @param icon
      * @param element
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, View element) {
+    public T add(String caption, String viewName, Icon icon, HasElement element) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, null, element), Section.DEFAULT);
         return (T) this;
     }
@@ -158,11 +120,11 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param viewName
      * @param icon
      * @param badgeHolder
-     * @param view
+     * @param hasElement
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), Section.DEFAULT);
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, HasElement hasElement) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, hasElement), Section.DEFAULT);
         return (T) this;
     }
 
@@ -174,12 +136,12 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param viewName
      * @param icon
      * @param badgeHolder
-     * @param view
+     * @param hasElement
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, View view, Section section) {
-        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, view), section);
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, HasElement hasElement, Section section) {
+        addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, hasElement), section);
         return (T) this;
     }
 

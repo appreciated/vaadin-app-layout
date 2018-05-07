@@ -1,23 +1,25 @@
 package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
  */
-public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
+public class AppBarBadgeButton extends HorizontalLayout implements NotificationHolder.NotificationListener {
 
     private final IconButton button;
     private final Label badge;
     private NotificationHolder notificationHolder;
 
-    public AppBarBadgeButton(Resource icon, NotificationHolder notificationHolder) {
+    public AppBarBadgeButton(String icon, NotificationHolder notificationHolder) {
         super();
         this.notificationHolder = notificationHolder;
         setWidth("64px");
@@ -26,19 +28,19 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
         button.setSizeFull();
         badge = new Label();
         notificationHolder.addStatusListener(this);
-        badge.addStyleName(APP_BAR_BADGE);
-        addComponent(button);
-        addComponent(badge, "right: 0px;");
+        badge.getElement().getClassList().add(APP_BAR_BADGE);
+        add(button);
+        add(badge);
     }
 
-    public AppBarBadgeButton(Resource icon, NotificationHolder notificationHolder, Button.ClickListener listener) {
+    public AppBarBadgeButton(String icon, NotificationHolder notificationHolder, ComponentEventListener<ClickEvent<Button>> listener) {
         this(icon, notificationHolder);
         button.addClickListener(listener);
     }
 
     @Override
-    public void attach() {
-        super.attach();
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
         refreshNotifications(notificationHolder);
     }
 
@@ -56,9 +58,9 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
             if (unreadNotifications > 0) {
                 badge.setVisible(true);
                 if (unreadNotifications < 10) {
-                    badge.setValue(String.valueOf(unreadNotifications));
+                    badge.setText(String.valueOf(unreadNotifications));
                 } else {
-                    badge.setValue("9+");
+                    badge.setText("9+");
                 }
             } else {
                 badge.setVisible(false);

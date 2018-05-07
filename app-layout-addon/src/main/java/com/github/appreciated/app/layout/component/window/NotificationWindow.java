@@ -3,18 +3,19 @@ package com.github.appreciated.app.layout.component.window;
 import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.Holder;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.github.appreciated.app.layout.component.button.NavigationButton;
-import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
-import com.vaadin.server.Sizeable;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.Collections;
 import java.util.List;
 
-public class NotificationWindow<T> extends Window {
+public class NotificationWindow<T> extends Dialog {
 
-    int height = 357;
+    String height = "357px";
     boolean hasBlurListener = false;
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
@@ -25,59 +26,57 @@ public class NotificationWindow<T> extends Window {
     public NotificationWindow(NotificationHolder holder) {
         super();
         this.holder = holder;
-        setWidth(300, Sizeable.Unit.PIXELS);
-        setHeight(height, Unit.PIXELS);
-        setClosable(false);
-        setResizable(false);
-        setDraggable(false);
+        setWidth("300px");
+        setHeight(height);
     }
 
     private VerticalLayout getCurrentView(NotificationHolder holder) {
         VerticalLayout wrapper = new VerticalLayout();
         wrapper.setMargin(false);
-        wrapper.addStyleName(Styles.APP_BAR_NOTIFICATION_WINDOW);
+        wrapper.getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_WINDOW);
         wrapper.setSizeFull();
         VerticalLayout panelWrapper = new VerticalLayout();
-        panelWrapper.setHeight(100, Unit.PERCENTAGE);
+        panelWrapper.setHeight("100%");
         panelWrapper.setMargin(false);
         panelWrapper.setSpacing(false);
 
         VerticalLayout notificationsWrapper = new VerticalLayout();
         notificationsWrapper.setSpacing(false);
         notificationsWrapper.setMargin(true);
+        new Button("", buttonClickEvent -> {
+        });
 
         List<Component> components = holder.getNotifications(showAll.value);
         Collections.reverse(components);
-        notificationsView = new VerticalLayout(components.toArray(new Component[]{}));
-        notificationsView.addStyleName(Styles.APP_BAR_NOTIFICATION_LIST);
+        notificationsView = new VerticalLayout((Component[]) components.toArray());
+        notificationsView.getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
         notificationsView.setMargin(false);
 
-        Panel panel = new Panel(notificationsWrapper);
-        panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        panelWrapper.addComponent(panel);
-        wrapper.addComponent(panelWrapper);
+        VerticalLayout panel = new VerticalLayout(notificationsWrapper);
+        panelWrapper.add(panel);
+        wrapper.add(panelWrapper);
         wrapper.setSpacing(false);
-        wrapper.setExpandRatio(panelWrapper, 1.0f);
+
         if (alignBottom.value) {
-            panelWrapper.setComponentAlignment(panel, Alignment.BOTTOM_LEFT);
+            panelWrapper.setAlignItems(FlexComponent.Alignment.END);
         }
         if (showAll.value) {
             panel.setSizeFull();
         }
         if (!showAll.value && holder.getNotificationSize() > 4) {
             Button showAllButton = new Button("Show all");
-            showAllButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-            showAllButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-            showAllButton.setWidth(100, Unit.PERCENTAGE);
-            showAllButton.setHeight(28, Unit.PIXELS);
+            //showAllButton.getElement().getClassList().add(ValoTheme.BUTTON_BORDERLESS);
+            // showAllButton.getElement().getClassList().add(ValoTheme.BUTTON_PRIMARY);
+            showAllButton.setWidth("100%");
+            showAllButton.setHeight("28px");
             showAllButton.addClickListener(clickEvent -> {
                 showAll.value = true;
                 showAllButton.setVisible(false);
-                setContent(getCurrentView(holder));
+                add(getCurrentView(holder));
             });
-            wrapper.addComponent(showAllButton);
+            wrapper.add(showAllButton);
         }
-        notificationsWrapper.addComponent(notificationsView);
+        notificationsWrapper.add(notificationsView);
         return wrapper;
     }
 
@@ -93,11 +92,12 @@ public class NotificationWindow<T> extends Window {
         return notificationsView;
     }
 
-    public void show(Button.ClickEvent clickEvent) {
+    public void show(ClickEvent<Button> clickEvent) {
         show(clickEvent, true);
     }
 
-    public void show(Button.ClickEvent clickEvent, boolean addBelow) {
+    public void show(ClickEvent<Button> clickEvent, boolean addBelow) {
+        /*
         if (!isAttached()) {
             if (addBelow) {
                 if (UI.getCurrent().getPage().getBrowserWindowWidth() < clickEvent.getClientX() + 150) {
@@ -123,20 +123,20 @@ public class NotificationWindow<T> extends Window {
                     setPositionX(256);
                 }
             }
-            setContent(getCurrentView(holder));
-            UI.getCurrent().addWindow(this);
-            focus();
+            removeAll();
+            add(getCurrentView(holder));
+            open();
             if (!hasBlurListener && blurListenerEnabled) {
                 hasBlurListener = true;
-                getUI().addClickListener(event -> UI.getCurrent().removeWindow(this));
+                //getUI().ifPresent(ui -> ui.add.removeWindow(this));
             }
         } else {
-            UI.getCurrent().removeWindow(this);
-        }
+            //UI.getCurrent().removeWindow(this);
+        }*/
     }
 
     public void addNewNotification(NotificationHolder component) {
-        setContent(getCurrentView(component));
+        add(getCurrentView(component));
     }
 
     public void setBlurListenerEnabled(boolean blurListener) {

@@ -1,26 +1,26 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
 
 /**
- * A class that contains only the data that is needed to create an instance of a {@link SubmenuComponent}.
+ * A class that contains only the data that is needed to create an instance of a {@link SubmenuElement}.
  * This navigation element can contain tree like structures.
  */
-public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> implements HasCaptionInterceptor {
+public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> implements HasCaptionInterceptor {
 
     private final String title;
-    private final Resource icon;
+    private final Icon icon;
     private List<AbstractNavigationElement> submenuElements;
     private Factory<String, String> captionInterceptor;
 
-    public SubmenuNavigationElement(String title, Resource icon, List<AbstractNavigationElement> submenuElements) {
+    public SubmenuNavigationElement(String title, Icon icon, List<AbstractNavigationElement> submenuElements) {
         this.title = title;
         this.icon = icon;
         this.submenuElements = submenuElements;
@@ -35,7 +35,7 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
         return this;
     }
 
-    public Resource getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 
@@ -48,12 +48,12 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElement provider) {
         setProvider(provider, Position.DRAWER);
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElement provider, Position position) {
         if (position == Position.TOP) {
             setProvider(provider.getTopSubmenuElementProvider());
         } else {
@@ -95,7 +95,7 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
         return hasChild;
     }
 
-    public interface SubmenuComponent extends Component {
+    public interface SubmenuElement extends HasElement {
         default void close() {
         }
     }

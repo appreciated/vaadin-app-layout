@@ -2,16 +2,15 @@ package com.github.appreciated.app.layout.builder.factories.left;
 
 import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.server.Sizeable;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Label;
 
-public class DefaultLeftSectionElementComponentFactory implements ComponentFactory<Component, SectionNavigationElement> {
+public class DefaultLeftSectionElementComponentFactory implements ComponentFactory<HasElement, SectionNavigationElement> {
     @Override
-    public Component get(SectionNavigationElement element) {
+    public HasElement get(SectionNavigationElement element) {
         Label label = new Label(element.getName());
-        label.addStyleName("app-layout-menu-section");
-        label.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        //label.addStyleName("app-layout-menu-section");
+        label.setWidth("100%");
         return label;
     }
 }

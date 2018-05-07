@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.button.Button;
 
 /**
  * A borderless icon-only {@link Button}.
@@ -19,12 +19,11 @@ public class IconButton extends Button {
      * @param icon
      *            The icon to be used for the button
      */
-    public IconButton(Resource icon) {
+    public IconButton(String icon) {
         super(icon);
-
-        setWidth(64, Unit.PIXELS);
-        setHeight(64, Unit.PIXELS);
-        addStyleNames(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
+        setWidth("64px");
+        setHeight("64px");
+        //getElement().getClassList().addAll(ValoTheme.BUTTON_BORDERLESS, ValoTheme.BUTTON_ICON_ONLY);
     }
 
     /**
@@ -33,9 +32,9 @@ public class IconButton extends Button {
      * @param icon
      *            The icon to be used for the button
      * @param listener
-     *            The {@link ClickListener} which will be added to the button
+     *            The {@link ComponentEventListener} which will be added to the button
      */
-    public IconButton(Resource icon, ClickListener listener) {
+    public IconButton(String icon, ComponentEventListener<ClickEvent<Button>> listener) {
         this(icon);
         addClickListener(listener);
     }
