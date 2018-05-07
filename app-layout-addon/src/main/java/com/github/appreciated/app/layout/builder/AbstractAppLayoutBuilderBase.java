@@ -260,7 +260,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param resourceButton
      * @return
      */
-    public T withAppBarIconComponent(HasElement resourceButton) {
+    public T withAppBarIconComponent(Component resourceButton) {
         config.setAppBarIconComponent(resourceButton);
         return (T) this;
     }

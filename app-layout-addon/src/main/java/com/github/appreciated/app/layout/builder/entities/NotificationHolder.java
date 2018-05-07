@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.builder.entities;
 
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.Component;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -70,7 +70,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
 
     public Component getComponent(T message) {
         Component component = componentProvider.getComponent(this, message);
-        component.addStyleName(APP_BAR_NOTIFICATION);
+        component.getElement().getClassList().add(APP_BAR_NOTIFICATION);
         return component;
     }
 

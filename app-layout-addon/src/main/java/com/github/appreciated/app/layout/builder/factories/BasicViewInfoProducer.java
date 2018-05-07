@@ -5,13 +5,13 @@ import com.github.appreciated.app.layout.annotations.MenuIcon;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 public class BasicViewInfoProducer implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
     private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(MenuCaption.class).value();
-    private AnnotationValueProvider<Resource> iconProvider = info -> info.getAnnotation(MenuIcon.class).value();
+    private AnnotationValueProvider<Icon> iconProvider = info -> info.getAnnotation(MenuIcon.class).value().create();
     private AnnotationValueProvider<String> viewNameProvider;
 
     public BasicViewInfoProducer(AnnotationValueProvider<String> viewNameProvider) {
@@ -26,7 +26,7 @@ public class BasicViewInfoProducer implements AppLayoutConfiguration.NavigationE
         return this;
     }
 
-    public BasicViewInfoProducer withIconProvider(AnnotationValueProvider<Resource> iconProvider) {
+    public BasicViewInfoProducer withIconProvider(AnnotationValueProvider<Icon> iconProvider) {
         this.iconProvider = iconProvider;
         return this;
     }
@@ -37,7 +37,7 @@ public class BasicViewInfoProducer implements AppLayoutConfiguration.NavigationE
     }
 
     @Override
-    public NavigationElementInfo apply(Class<? extends View> info) {
+    public NavigationElementInfo apply(Class<? extends HasElement> info) {
         return new NavigationElementInfo(
                 captionProvider.get(info),
                 iconProvider.get(info),
@@ -45,6 +45,6 @@ public class BasicViewInfoProducer implements AppLayoutConfiguration.NavigationE
         );
     }
 
-    public interface AnnotationValueProvider<T> extends Factory<T, Class<? extends View>> {
+    public interface AnnotationValueProvider<T> extends Factory<T, Class<? extends HasElement>> {
     }
 }

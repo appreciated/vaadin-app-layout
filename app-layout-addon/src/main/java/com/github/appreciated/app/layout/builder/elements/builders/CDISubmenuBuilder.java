@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.builder.elements.builders;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
@@ -124,7 +125,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
     }
 
     public T add(HasElement element) {
-        this.submenuElements.add(new ComponentNavigationElement(element));
+        this.submenuElements.add(new ComponentNavigationElement((Component) element));
         return (T) this;
     }
 

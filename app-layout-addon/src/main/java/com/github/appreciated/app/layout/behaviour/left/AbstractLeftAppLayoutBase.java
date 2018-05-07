@@ -27,7 +27,7 @@ import java.util.List;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
 /**
- * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
+ * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElement} with a "Left Behaviour".
  */
 
 public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement implements AppLayoutElementBase {
@@ -181,7 +181,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
     @Override
     public void addNavigationElement(AbstractNavigationElement component) {
         component.setProvider(this);
-        addToDrawer(component.getComponent());
+        addToDrawer((Component) component.getComponent());
     }
 
     @Override
@@ -267,13 +267,13 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
     @Override
     public void addNavigationFooterElement(AbstractNavigationElement component) {
         component.setProvider(this);
-        addToDrawerFooter(component.getComponent());
+        addToDrawerFooter((Component) component.getComponent());
     }
 
     @Override
     public void addNavigationHeaderElement(AbstractNavigationElement component) {
         component.setProvider(this);
-        addToDrawerHeader(component.getComponent());
+        addToDrawerHeader((Component) component.getComponent());
     }
 
     @Override

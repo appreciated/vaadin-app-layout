@@ -7,6 +7,6 @@ import com.vaadin.flow.router.Route;
 public class DemoView extends Div {
 
     public DemoView() {
-        add(new AppLayout());
+
     }
 }

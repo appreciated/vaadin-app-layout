@@ -3,8 +3,8 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> extends AbstractAppLayoutBuilderBase<T> {
 
@@ -22,7 +22,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param element
      * @return
      */
-    public T add(String caption, Resource icon, Class<? extends View> element) {
+    public T add(String caption, Icon icon, Class<? extends HasElement> element) {
         return add(caption, icon, null, element);
     }
 
@@ -36,7 +36,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param element
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element) {
         return add(caption, icon, badgeHolder, element, Section.DEFAULT);
     }
 
@@ -48,7 +48,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param element
      * @return
      */
-    public T add(String caption, Class<? extends View> element) {
+    public T add(String caption, Class<? extends HasElement> element) {
         return add(caption, null, element);
     }
 
@@ -62,7 +62,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param section
      * @return
      */
-    public T add(String caption, Resource icon, Class<? extends View> element, Section section) {
+    public T add(String caption, Icon icon, Class<? extends HasElement> element, Section section) {
         return add(caption, icon, null, element, section);
     }
 
@@ -73,7 +73,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(Class<? extends View> className) {
+    public T add(Class<? extends HasElement> className) {
         return add(null, className, Section.DEFAULT);
     }
 
@@ -84,7 +84,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+    public T add(DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
         return add(null, null, badgeHolder, className, Section.DEFAULT);
     }
 
@@ -95,7 +95,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(Class<? extends View> className, Section section) {
+    public T add(Class<? extends HasElement> className, Section section) {
         return add(null, className, section);
     }
 
@@ -106,7 +106,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(Resource icon, Class<? extends View> className) {
+    public T add(Icon icon, Class<? extends HasElement> className) {
         return add(icon, className, Section.DEFAULT);
     }
 
@@ -117,7 +117,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param className
      * @return
      */
-    public T add(Resource icon, Class<? extends View> className, Section section) {
+    public T add(Icon icon, Class<? extends HasElement> className, Section section) {
         return add(new NavigatorNavigationElement(icon, className), section);
     }
 
@@ -132,7 +132,7 @@ public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> 
      * @param section
      * @return
      */
-    public T add(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element, Section section) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), section);
         return (T) this;
     }

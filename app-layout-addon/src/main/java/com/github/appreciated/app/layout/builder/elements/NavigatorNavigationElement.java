@@ -9,7 +9,6 @@ import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavig
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
@@ -69,11 +68,6 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
      */
     private Factory<String, String> captionInterceptor;
 
-    /**
-     * The {@link ComponentNavigator} instance to which the view will be added.
-     */
-    private ComponentNavigator componentNavigator;
-
     public NavigatorNavigationElement(String caption, Icon icon, HasElement view) {
         this(caption, null, icon, null, view);
     }
@@ -126,10 +120,6 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
                 navigator.addView(getViewName(), className);
             }
         }*/
-    }
-
-    public void addViewToComponentNavigator(ComponentNavigator navigator) {
-        this.componentNavigator = navigator;
     }
 
     public String getCaption() {

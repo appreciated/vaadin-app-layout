@@ -18,7 +18,6 @@ import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.component.AppLayoutElement;
-import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -44,7 +43,6 @@ public class AppLayoutConfiguration {
     private List<HasElement> appBarElements = new ArrayList<>();
 
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
-    private ComponentNavigator componentNavigator;
     private String title;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
@@ -68,7 +66,6 @@ public class AppLayoutConfiguration {
     private boolean isCloseSubmenusOnNavigate = true;
     private boolean isNavigatorEnabled = true;
     private HasElement titleComponent;
-    private Consumer<ComponentNavigator> componentNavigatorConsumer;
 
     public AppLayoutConfiguration(AppLayoutElementBase instance) {
         this.instance = instance;
@@ -128,15 +125,13 @@ public class AppLayoutConfiguration {
             instance.addAppBarIcon(appBarIconComponent);
         }
         instance.setNavigatorNavigationElements(navigatorElements);
-        if (!isNavigatorEnabled) {
-            componentNavigator.navigateTo(defaultNavigationElement.getViewName());
-        } else {
-            if (!isCDI && defaultNavigationElement != null) {
-                defaultNavigationElement.addViewToNavigator();
-            } else if (isCDI && defaultNavigationElement != null) {
-                System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
-            }
+
+        if (!isCDI && defaultNavigationElement != null) {
+            defaultNavigationElement.addViewToNavigator();
+        } else if (isCDI && defaultNavigationElement != null) {
+            System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
         }
+
         return (AppLayoutElement) instance;
     }
 
@@ -172,11 +167,7 @@ public class AppLayoutConfiguration {
                 AppLayoutSessionHelper.updateActiveElementSessionData(nElement);
             }
             nElement.setViewNameInterceptor(viewNameInterceptor);
-            if (isNavigatorEnabled) {
-                nElement.addViewToNavigator();
-            } else {
-                nElement.addViewToComponentNavigator(componentNavigator);
-            }
+            nElement.addViewToNavigator();
             navigatorElements.add(nElement);
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement sElement = (SubmenuNavigationElement) element;
@@ -264,10 +255,6 @@ public class AppLayoutConfiguration {
         this.isNavigatorEnabled = navigatorEnabled;
     }
 
-    public ComponentNavigator getComponentNavigator() {
-        return componentNavigator;
-    }
-
     public void setScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {
         this.isScrollToTopOnNavigate = scrollToTopOnNavigate;
     }
@@ -299,10 +286,6 @@ public class AppLayoutConfiguration {
 
     public void setTitleComponent(HasElement titleComponent) {
         this.titleComponent = titleComponent;
-    }
-
-    public void setComponentNavigatorConsumer(Consumer<ComponentNavigator> consumer) {
-        componentNavigatorConsumer = consumer;
     }
 
     @FunctionalInterface

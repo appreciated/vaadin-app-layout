@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.component;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.component.button.NavigationButton;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -16,10 +16,10 @@ public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNav
 
     private final VerticalLayout submenuWrapper;
 
-    public ExpandingMenuContainer(String sectionName, String icon) {
+    public ExpandingMenuContainer(String sectionName, Icon icon) {
         getElement().getClassList().add(EXPANDING_MENU_CONTAINER_PRIMARY_STYLE);
         setMargin(false);
-        NavigationButton expandMenuButton = new NavigationButton(sectionName, new Image(icon, null));
+        NavigationButton expandMenuButton = new NavigationButton(sectionName, icon);
         expandMenuButton.addClickListener(clickEvent -> {
             if (getElement().getClassList().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
                 getElement().getClassList().remove(EXPANDING_MENU_CONTAINER_OPEN);

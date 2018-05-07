@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.builder.factories;
 
-import com.github.appreciated.app.layout.annotations.RouterViewName;
+import com.vaadin.flow.router.Route;
 
 public class DefaultNavigationElementInfoProducer extends BasicViewInfoProducer {
 
     public DefaultNavigationElementInfoProducer() {
-        super(info -> info.getAnnotation(RouterViewName.class).value());
+        super(info -> info.getAnnotation(Route.class).value());
     }
 }

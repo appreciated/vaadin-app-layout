@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.builder.entities;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
-import com.vaadin.server.Resource;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
@@ -16,17 +15,17 @@ import java.util.Date;
 public class DefaultNotification implements Notification {
     String title;
     String description;
-    Resource image;
+    String image;
     private Priority priority;
     private boolean dismissible;
     private boolean unread;
     private LocalDateTime time;
 
     public DefaultNotification(String title, String description) {
-        this(title, description, (Resource) null);
+        this(title, description, (String) null);
     }
 
-    public DefaultNotification(String title, String description, Resource image) {
+    public DefaultNotification(String title, String description, String image) {
         this(title, description, image, Priority.MEDIUM, true);
     }
 
@@ -42,7 +41,7 @@ public class DefaultNotification implements Notification {
         this(title, description, null, priority, dismissible);
     }
 
-    public DefaultNotification(String title, String description, Resource image, Priority priority, boolean dismissible) {
+    public DefaultNotification(String title, String description, String image, Priority priority, boolean dismissible) {
         this.title = title;
         this.description = description;
         this.image = image;
@@ -68,11 +67,11 @@ public class DefaultNotification implements Notification {
         this.description = description;
     }
 
-    public Resource getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Resource image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

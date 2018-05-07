@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
@@ -14,12 +13,15 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
-import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.themes.ValoTheme;
+import com.github.appreciated.app.layout.component.AppLayoutElement;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.github.appreciated.app.layout.behaviour.Position.DRAWER;
@@ -27,64 +29,60 @@ import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 
 /**
- * The {@link AbstractTopAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Top Behaviour".
+ * The {@link AbstractTopAppLayoutBase} is supposed to be the base of any {@link AppLayoutElement} with a "Top Behaviour".
  */
 
-public abstract class AbstractTopAppLayoutBase extends CustomLayout implements AppLayoutElementBase, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractTopAppLayoutBase extends AppLayoutElement implements AppLayoutElementBase {
 
-    private final Panel contentPanel = new Panel();
+    private final VerticalLayout contentPanel = new VerticalLayout();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final VerticalLayout menuFooterHolder = new VerticalLayout();
 
-    private final VerticalFlexBoxLayout menuHolder = new VerticalFlexBoxLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
+    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
-    private final HorizontalFlexBoxLayout appBar = new HorizontalFlexBoxLayout();
+    private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private Component title = new Label("");
-    private final HorizontalFlexBoxLayout titleWrapper = new HorizontalFlexBoxLayout(new HorizontalLayout(title));
+    private final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
-    private ComponentFactory<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
-    private ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
+    private ComponentFactory<HasElement, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
+    private ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentFactory();
-    private ComponentFactory<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
-    private ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
+    private ComponentFactory<HasElement, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
+    private ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
 
-    public AbstractTopAppLayoutBase(String filename) throws IOException {
-        super(AbstractTopAppLayoutBase.class.getResourceAsStream(filename));
-        setSizeFull();
+    public AbstractTopAppLayoutBase() {
         contentPanel.setSizeFull();
-        contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-
         menuHolder.setSizeFull();
-        menuHolder.grow(menuElementHolder);
-        menuHolder.setOverflowAuto(true);
+        menuHolder.setFlexGrow(1.0, menuElementHolder);
+        menuHolder.getElement().setAttribute("overflow", "auto");
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(new MarginInfo(true, false));
-        menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
-        menuElementHolder.setWidth(100, Unit.PERCENTAGE);
-        addStyleNames("app-layout-behaviour-" + getStyleName(), "app-layout");
-        addComponent(contentPanel, "content");
-        addComponent(menuHolder, "menu-elements");
-        addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, new AppLayoutResizeListener(this), appBarElementWrapper);
-        appBar.grow(titleWrapper);
-        appBar.setWidth(100, Unit.PERCENTAGE);
-        appBar.setHeight(100, Unit.PERCENTAGE);
+        menuElementHolder.setMargin(true);
+        menuFooterHolder.setMargin(true);
+        menuElementHolder.setWidth("100%");
+        getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
+        /**add(contentPanel, "content");
+         addComponent(menuHolder, "menu-elements");
+         addComponent(appBar, "app-bar-elements");*/
+        appBar.add(titleWrapper, appBarElementWrapper);
+        appBar.setFlexGrow(1.0, titleWrapper);
+        appBar.setWidth("100%");
+        appBar.setHeight("100%");
         appBarElementWrapper.setSpacing(false);
-        appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
-        appBarElementContainer.setHeight(100, Unit.PERCENTAGE);
-        appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
-        titleWrapper.setHeight(100, Unit.PERCENTAGE);
-        titleWrapper.setAlignCenter();
+        appBarElementWrapper.add(appBarElementContainer);
+        appBarElementContainer.setHeight("100%");
+        appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
+        titleWrapper.setHeight("100%");
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override
@@ -102,15 +100,15 @@ public abstract class AbstractTopAppLayoutBase extends CustomLayout implements A
     public abstract String getStyleName();
 
     public void addAppBarElement(Component component) {
-        appBarElementContainer.addComponent(component);
-        appBarElementContainer.setComponentAlignment(component, Alignment.MIDDLE_RIGHT);
+        appBarElementContainer.add(component);
+        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     public void setDesign(AppLayoutDesign design) {
-        this.addStyleName(design.getStyleName());
+        this.getElement().getClassList().add(design.getStyleName());
     }
 
-    public Layout getAppBar() {
+    public HorizontalLayout getAppBar() {
         return appBar;
     }
 
@@ -124,8 +122,18 @@ public abstract class AbstractTopAppLayoutBase extends CustomLayout implements A
 
     public void setTitle(String title) {
         if (this.title instanceof Label) {
-            ((Label) this.title).setValue(title);
+            ((Label) this.title).setText(title);
         }
+    }
+
+    @Override
+    public void addAppBarElement(HasElement component) {
+
+    }
+
+    @Override
+    public void setTitleElement(HasElement titleComponent) {
+
     }
 
     @Override
@@ -134,16 +142,16 @@ public abstract class AbstractTopAppLayoutBase extends CustomLayout implements A
     }
 
     public void setTitleComponent(Component component) {
-        titleWrapper.replaceComponent(this.title, component);
+        titleWrapper.replace(this.title, component);
         this.title = component;
     }
 
-    @Override
-    public Panel getContentHolder() {
+
+    public VerticalLayout getContentHolder() {
         return contentPanel;
     }
 
-    public Layout getTitleWrapper() {
+    public HorizontalLayout getTitleWrapper() {
         return titleWrapper;
     }
 
@@ -159,51 +167,51 @@ public abstract class AbstractTopAppLayoutBase extends CustomLayout implements A
         return menuHeaderHolder;
     }
 
-    public Layout getMenuHolder() {
+    public VerticalLayout getMenuHolder() {
         return menuHolder;
     }
 
     public void addAppBarIcon(Component appBarIconComponent) {
-        titleWrapper.addComponentAsFirst(appBarIconComponent);
+        titleWrapper.add(appBarIconComponent);
     }
 
     @Override
-    public ComponentFactory<Component, SectionNavigationElement> getDrawerSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getDrawerSectionElementProvider() {
         return drawerSectionElementProvider;
     }
 
     @Override
-    public void setDrawerSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
+    public void setDrawerSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         drawerSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<Component, SectionNavigationElement> getTopSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getTopSectionElementProvider() {
         return topSectionElementProvider;
     }
 
     @Override
-    public void setTopSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
+    public void setTopSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         topSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
         return drawerSubmenuElementProvider;
     }
 
     @Override
-    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         drawerSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getTopSubmenuElementProvider() {
         return topSubmenuElementProvider;
     }
 
     @Override
-    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         topSubmenuElementProvider = provider;
     }
 
@@ -228,74 +236,69 @@ public abstract class AbstractTopAppLayoutBase extends CustomLayout implements A
     }
 
     @Override
-    public ComponentFactory<Component, ClickableNavigationElement> getTopClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getTopClickableElementProvider() {
         return topClickableElementProvider;
     }
 
     @Override
-    public void setTopClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider) {
+    public void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider) {
         this.topClickableElementProvider = topClickableElementProvider;
     }
 
     @Override
-    public ComponentFactory<Component, ClickableNavigationElement> getDrawerClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getDrawerClickableElementProvider() {
         return drawerClickableElementProvider;
     }
 
     @Override
-    public void setDrawerClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider) {
+    public void setDrawerClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
         this.drawerClickableElementProvider = drawerClickableElementProvider;
     }
 
     @Override
     public void addNavigationElement(AbstractNavigationElement element) {
         element.setProvider(this, DRAWER);
-        addToDrawer(element.getComponent());
+        addToDrawer((Component) element.getComponent());
         if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
             element.setProvider(this, TOP);
-            addToTop(element.getComponent());
+            addToTop((Component) element.getComponent());
         }
     }
 
     @Override
     public void addNavigationFooterElement(AbstractNavigationElement element) {
         element.setProvider(this, DRAWER);
-        addToDrawerFooter(element.getComponent());
+        addToDrawerFooter((Component) element.getComponent());
         if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
             element.setProvider(this, TOP);
-            addToTopFooter(element.getComponent());
+            addToTopFooter((Component) element.getComponent());
         }
     }
 
     @Override
     public void addNavigationHeaderElement(AbstractNavigationElement element) {
         element.setProvider(this, TOP);
-        addToDrawerHeader(element.getComponent());
+        addToDrawerHeader((Component) element.getComponent());
         if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
             element.setProvider(this, TOP);
-            addToTopHeader(element.getComponent());
+            addToTopHeader((Component) element.getComponent());
         }
     }
 
     @Override
     public void addToDrawer(Component component) {
-        menuElementHolder.addComponent(component);
+        menuElementHolder.add(component);
     }
 
     @Override
     public void addToDrawerFooter(Component component) {
         menuFooterHolder.setVisible(true);
-        menuFooterHolder.addComponent(component);
+        menuFooterHolder.add(component);
     }
 
     @Override
     public void addToDrawerHeader(Component component) {
         menuHeaderHolder.setVisible(true);
-        menuHeaderHolder.addComponent(component);
-    }
-
-    @Override
-    public void onAppLayoutResized() {
-        getUI().access(() -> markAsDirty());
+        menuHeaderHolder.add(component);
     }
 }

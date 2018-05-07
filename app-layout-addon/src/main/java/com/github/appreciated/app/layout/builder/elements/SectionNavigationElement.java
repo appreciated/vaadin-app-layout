@@ -4,12 +4,13 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.HasElement;
+
 
 /**
  * A wrapper class for a menu element that is a {@link SectionNavigationElement}.
  */
-public class SectionNavigationElement extends AbstractNavigationElement<Component, SectionNavigationElement> implements HasCaptionInterceptor {
+public class SectionNavigationElement extends AbstractNavigationElement<HasElement, SectionNavigationElement> implements HasCaptionInterceptor {
 
     private String name;
     private Factory<String, String> captionInterceptor;

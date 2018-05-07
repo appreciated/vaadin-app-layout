@@ -5,11 +5,15 @@ import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.component.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.window.NotificationWindow;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.UI;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+
+import java.util.Optional;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_MENU_BUTTON_BADGE;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_MENU_ELEMENT;
@@ -18,25 +22,25 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT
  * A component which opens a window containing the notifications on click closely to this component. Also showing an
  * indicator how many new notifications are available
  */
-public class NavigationNotificationButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
+public class NavigationNotificationButton extends HorizontalLayout implements NotificationHolder.NotificationListener {
 
     private final NavigationButton button;
     private final Label badge;
     Factory<NotificationWindow, NotificationHolder> factory;
     private DefaultNotificationHolder notificationHolder;
-    private UI ui;
+    private Optional<UI> ui = Optional.empty();
     private NotificationWindow window;
 
-    public NavigationNotificationButton(String name, Resource icon, DefaultNotificationHolder notificationHolder) {
+    public NavigationNotificationButton(String name, Icon icon, DefaultNotificationHolder notificationHolder) {
         this(name, icon, notificationHolder, info -> new MaterialNotificationWindow(info));
     }
 
-    public NavigationNotificationButton(String name, Resource icon, DefaultNotificationHolder notificationHolder, Factory<NotificationWindow, NotificationHolder> factory) {
+    public NavigationNotificationButton(String name, Icon icon, DefaultNotificationHolder notificationHolder, Factory<NotificationWindow, NotificationHolder> factory) {
         this.notificationHolder = notificationHolder;
         this.factory = factory;
-        addStyleName(APP_LAYOUT_MENU_ELEMENT);
-        setHeight(48, Unit.PIXELS);
-        setWidth(100, Unit.PERCENTAGE);
+        getElement().getClassList().add(APP_LAYOUT_MENU_ELEMENT);
+        setHeight("48px");
+        setWidth("100%");
         button = new NavigationButton(name, icon);
         button.setSizeFull();
         button.addClickListener(clickEvent -> buttonClick(clickEvent));
@@ -45,9 +49,9 @@ public class NavigationNotificationButton extends AbsoluteLayout implements Noti
             notificationHolder.addStatusListener(this);
         }
         setStatus(notificationHolder);
-        badge.addStyleName(APP_LAYOUT_MENU_BUTTON_BADGE);
-        addComponent(button);
-        addComponent(badge, "right: 0px;");
+        badge.getElement().getClassList().add(APP_LAYOUT_MENU_BUTTON_BADGE);
+        add(button);
+        add(badge);
     }
 
     public NavigationButton getButton() {
@@ -60,9 +64,9 @@ public class NavigationNotificationButton extends AbsoluteLayout implements Noti
             if (unreadNotifications > 0) {
                 badge.setVisible(true);
                 if (unreadNotifications < 10) {
-                    badge.setValue(String.valueOf(unreadNotifications));
+                    badge.setText(String.valueOf(unreadNotifications));
                 } else {
-                    badge.setValue("9+");
+                    badge.setText("9+");
                 }
             } else {
                 badge.setVisible(false);
@@ -73,17 +77,17 @@ public class NavigationNotificationButton extends AbsoluteLayout implements Noti
     }
 
     @Override
-    public void attach() {
-        super.attach();
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
         ui = getUI();
     }
 
-    private void buttonClick(Button.ClickEvent clickEvent) {
+    private void buttonClick(ClickEvent<Button> clickEvent) {
         if (window == null) {
-            ui.access(() -> {
+            ui.ifPresent(ui1 -> {
                 window = factory.get(notificationHolder);
                 window.show(clickEvent, false);
-                window.addCloseListener(closeEvent -> window = null);
+                window.addDialogCloseActionListener(closeEvent -> window = null);
             });
         } else {
             window.show(clickEvent);

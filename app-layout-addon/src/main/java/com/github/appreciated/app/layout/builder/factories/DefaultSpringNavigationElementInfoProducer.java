@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.factories;
 
-import com.vaadin.navigator.View;
+import com.vaadin.flow.component.HasElement;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -20,7 +20,7 @@ public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoPro
      * @param aClass
      * @return
      */
-    private String getSpringViewName(Class<? extends View> aClass) {
+    private String getSpringViewName(Class<? extends HasElement> aClass) {
         Annotation a = Arrays.stream(aClass.getAnnotations())
                 .filter(annotation -> annotation.annotationType().getName().equals("com.vaadin.spring.annotation.SpringView"))
                 .findFirst()
