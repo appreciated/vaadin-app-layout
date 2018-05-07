@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
@@ -9,7 +9,7 @@ import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder> extends AbstractViewClassAppLayoutBuilder<T> {
 
-    protected AbstractViewAppLayoutBuilder(AppLayoutElement component) {
+    protected AbstractViewAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
     }
 

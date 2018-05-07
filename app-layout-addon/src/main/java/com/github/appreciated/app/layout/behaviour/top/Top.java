@@ -22,7 +22,7 @@ import java.io.IOException;
 @HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
 
-public class Top extends AbstractTopAppLayout {
+public class Top extends AbstractTopAppLayoutBase {
 
     private final HorizontalFlexBoxLayout appHeaderHolder = new HorizontalFlexBoxLayout();
     private final HorizontalFlexBoxLayout appElementHolder = new HorizontalFlexBoxLayout();

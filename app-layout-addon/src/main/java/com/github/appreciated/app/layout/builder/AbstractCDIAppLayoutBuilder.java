@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.navigator.View;
@@ -8,7 +8,7 @@ import com.vaadin.server.Resource;
 
 public class AbstractCDIAppLayoutBuilder<T extends AbstractCDIAppLayoutBuilder> extends AbstractAppLayoutBuilderBase<T> {
 
-    protected AbstractCDIAppLayoutBuilder(AppLayoutElement component) {
+    protected AbstractCDIAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
         config.setCDI(true);
     }

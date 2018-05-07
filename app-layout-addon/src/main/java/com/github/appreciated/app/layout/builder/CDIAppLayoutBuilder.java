@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
@@ -9,11 +9,11 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayoutBuilder> {
-    protected CDIAppLayoutBuilder(AppLayoutElement component) {
+    protected CDIAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
     }
 
-    public static CDIAppLayoutBuilder get(AppLayoutElement layout) {
+    public static CDIAppLayoutBuilder get(AppLayoutElementBase layout) {
         CDIAppLayoutBuilder builder = new CDIAppLayoutBuilder(layout);
         builder.config.setCDI(true);
         builder.config.setNavigatorEnabled(true);

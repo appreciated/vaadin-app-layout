@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
@@ -17,8 +17,10 @@ import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.github.appreciated.app.layout.navigator.ComponentNavigator;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import java.util.function.Function;
  * <p>
  * For every "Factory" you find in the class some information:
  * The following factories allow the user to exchange any {@link HasElement} that will be added to the
- * {@link AppLayoutElement} instance for any {@link Behaviour} or custom implementation
+ * {@link AppLayoutElementBase} instance for any {@link Behaviour} or custom implementation
  * To do this you will have to replace the
  */
 public class AppLayoutConfiguration {
@@ -54,9 +56,9 @@ public class AppLayoutConfiguration {
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
-    private HasElement appBarIconComponent;
+    private Component appBarIconComponent;
 
-    private AppLayoutElement instance;
+    private AppLayoutElementBase instance;
 
     private Factory<String, String> viewNameInterceptor = null;
     private Factory<String, String> captionInterceptor;
@@ -68,7 +70,7 @@ public class AppLayoutConfiguration {
     private HasElement titleComponent;
     private Consumer<ComponentNavigator> componentNavigatorConsumer;
 
-    public AppLayoutConfiguration(AppLayoutElement instance) {
+    public AppLayoutConfiguration(AppLayoutElementBase instance) {
         this.instance = instance;
     }
 
@@ -135,7 +137,7 @@ public class AppLayoutConfiguration {
                 System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
             }
         }
-        return instance;
+        return (AppLayoutElement) instance;
     }
 
     private Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
@@ -242,7 +244,7 @@ public class AppLayoutConfiguration {
         this.navigationElementInfoProvider = navigationElementInfoProvider;
     }
 
-    public void setAppBarIconComponent(HasElement appBarIconComponent) {
+    public void setAppBarIconComponent(Component appBarIconComponent) {
         this.appBarIconComponent = appBarIconComponent;
     }
 

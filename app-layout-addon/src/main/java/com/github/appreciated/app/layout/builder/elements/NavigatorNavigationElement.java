@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
@@ -183,12 +183,12 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     @Override
-    public void setProvider(AppLayoutElement provider) {
+    public void setProvider(AppLayoutElementBase provider) {
         setProvider(provider.getDrawerNavigationElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayoutElement provider, Position position) {
+    public void setProvider(AppLayoutElementBase provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerNavigationElementProvider());

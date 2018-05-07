@@ -1,9 +1,8 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.JavaScript;
-
-import java.io.IOException;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JavaScript;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -24,11 +23,9 @@ import java.io.IOException;
 @HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
 @HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
 
-public class LeftResponsiveHybrid extends AbstractLeftAppLayout {
-
-    public LeftResponsiveHybrid() throws IOException {
-        super("left-responsive-hybrid.html");
-    }
+@Tag("left-responsive-hybrid")
+@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-hybrid.html")
+public class LeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
 
     @Override
     public String getStyleName() {

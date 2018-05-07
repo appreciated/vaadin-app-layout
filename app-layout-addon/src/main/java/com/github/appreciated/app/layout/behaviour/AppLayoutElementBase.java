@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasOrderedComponents;
 import com.vaadin.flow.component.UI;
@@ -16,7 +17,7 @@ import java.util.List;
  * The interface every AppLayout Variant is required to be implemented to allow any {@link com.github.appreciated.app.layout.builder.AbstractAppLayoutBuilderBase} to build it.
  */
 
-public interface AppLayoutElement {
+public interface AppLayoutElementBase {
     static void toggleDrawer() {
         UI.getCurrent().getPage().executeJavaScript("document.querySelector('app-drawer').toggle();");
     }
@@ -35,17 +36,17 @@ public interface AppLayoutElement {
 
     String getStyleName();
 
-    void addToDrawerHeader(HasElement component);
+    void addToDrawerHeader(Component component);
 
-    void addToDrawer(HasElement component);
+    void addToDrawer(Component component);
 
-    void addToDrawerFooter(HasElement component);
+    void addToDrawerFooter(Component component);
 
-    void addToTopHeader(HasElement component);
+    void addToTopHeader(Component component);
 
-    void addToTop(HasElement component);
+    void addToTop(Component component);
 
-    void addToTopFooter(HasElement component);
+    void addToTopFooter(Component component);
 
     void addNavigationHeaderElement(AbstractNavigationElement component);
 
@@ -79,7 +80,7 @@ public interface AppLayoutElement {
 
     HasOrderedComponents getMenuHolder();
 
-    void addAppBarIcon(HasElement appBarIconComponent);
+    void addAppBarIcon(Component appBarIconComponent);
 
     void setNavigatorNavigationElements(List<NavigatorNavigationElement> list);
 

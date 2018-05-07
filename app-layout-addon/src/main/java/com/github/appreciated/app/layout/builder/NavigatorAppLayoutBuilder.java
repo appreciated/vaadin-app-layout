@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewProvider;
@@ -9,11 +9,11 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<NavigatorAppLayoutBuilder> {
-    protected NavigatorAppLayoutBuilder(AppLayoutElement component) {
+    protected NavigatorAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
     }
 
-    public static NavigatorAppLayoutBuilder get(AppLayoutElement layout) {
+    public static NavigatorAppLayoutBuilder get(AppLayoutElementBase layout) {
         NavigatorAppLayoutBuilder builder = new NavigatorAppLayoutBuilder(layout);
         builder.config.setNavigatorEnabled(true);
         return builder;

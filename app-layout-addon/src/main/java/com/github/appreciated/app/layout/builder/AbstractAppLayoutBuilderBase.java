@@ -1,11 +1,12 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -20,7 +21,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
 
     protected AppLayoutConfiguration config;
 
-    protected AbstractAppLayoutBuilderBase(AppLayoutElement component) {
+    protected AbstractAppLayoutBuilderBase(AppLayoutElementBase component) {
         config = new AppLayoutConfiguration(component);
     }
 

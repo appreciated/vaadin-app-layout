@@ -13,24 +13,24 @@ public enum Behaviour {
     LEFT_HYBRID(LeftHybrid.class, false, true, false, false),
     LEFT_HYBRID_SMALL(LeftHybridSmall.class, false, true, false, true),
     LEFT_RESPONSIVE_HYBRID(LeftResponsiveHybrid.class, false, true, false, false),
-    LEFT_RESPONSIVE_HYBRID_NO_APP_BAR(LeftResponsiveHybridNoAppBar.class, false, false, false, false),
-    LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR(LeftResponsiveHybridOverlayNoAppBar.class, false, false, false, false),
+    LEFT_RESPONSIVE_HYBRID_NO_APP_BAR(LeftResponsiveHybridNoAppBarBase.class, false, false, false, false),
+    LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR(LeftResponsiveHybridOverlayNoAppBarBase.class, false, false, false, false),
     LEFT_OVERLAY(LeftOverlay.class, false, true, true, false),
     LEFT_RESPONSIVE_OVERLAY(LeftResponsiveOverlay.class, false, true, true, false),
-    LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR(LeftResponsiveOverlayNoAppBar.class, false, false, true, false),
+    LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR(LeftResponsiveOverlayNoAppBarBase.class, false, false, true, false),
     LEFT_RESPONSIVE_SMALL(LeftResponsiveSmall.class, false, true, false, true),
-    LEFT_RESPONSIVE_SMALL_NO_APP_BAR(LeftResponsiveSmallNoAppBar.class, false, false, false, true),
+    LEFT_RESPONSIVE_SMALL_NO_APP_BAR(LeftResponsiveSmallNoAppBarBase.class, false, false, false, true),
     TOP(Top.class, true, true, false, false),
     TOP_LARGE(TopLarge.class, true, true, false, false);
 
-    private Class<? extends AppLayoutElement> className;
+    private Class<? extends AppLayoutElementBase> className;
 
     private boolean hasAppBar;
     private boolean overlay;
     private boolean small;
     private boolean top;
 
-    Behaviour(Class<? extends AppLayoutElement> className, boolean top, boolean hasAppBar, boolean overlay, boolean small) {
+    Behaviour(Class<? extends AppLayoutElementBase> className, boolean top, boolean hasAppBar, boolean overlay, boolean small) {
         this.className = className;
         this.top = top;
         this.hasAppBar = hasAppBar;
@@ -38,7 +38,7 @@ public enum Behaviour {
         this.small = small;
     }
 
-    public AppLayoutElement getInstance() {
+    public AppLayoutElementBase getInstance() {
         try {
             return className.newInstance();
         } catch (InstantiationException e) {

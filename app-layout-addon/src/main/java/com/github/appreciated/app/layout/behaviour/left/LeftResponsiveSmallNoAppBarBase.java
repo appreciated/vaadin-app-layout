@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.JavaScript;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JavaScript;
 
-import java.io.IOException;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -24,14 +24,12 @@ import java.io.IOException;
 @HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
 @HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
 
-public class LeftResponsiveOverlayNoAppBar extends AbstractLeftAppLayout {
-
-    public LeftResponsiveOverlayNoAppBar() throws IOException {
-        super("left-responsive-overlay.html");
-    }
+@Tag("left-responsive-small-no-app-bar")
+@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-small-no-app-bar.html")
+public class LeftResponsiveSmallNoAppBarBase extends AbstractLeftAppLayoutBase {
 
     @Override
     public String getStyleName() {
-        return "left-responsive-overlay-no-app-bar";
+        return "left-responsive-small-no-app-bar";
     }
 }

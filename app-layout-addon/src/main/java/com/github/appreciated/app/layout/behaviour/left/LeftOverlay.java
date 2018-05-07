@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.JavaScript;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JavaScript;
 
-import java.io.IOException;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -20,14 +20,13 @@ import java.io.IOException;
 @HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
 @HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
 
-public class LeftOverlay extends AbstractLeftAppLayout {
 
-    public LeftOverlay() throws IOException {
-        super("left-overlay.html");
-    }
+@Tag("left-overlay")
+@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-overlay.html")
+public class LeftOverlay extends AbstractLeftAppLayoutBase {
 
     @Override
     public String getStyleName() {
-        return "left-overlay";
+        return "";
     }
 }

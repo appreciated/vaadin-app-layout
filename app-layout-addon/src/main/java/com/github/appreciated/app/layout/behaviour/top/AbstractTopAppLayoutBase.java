@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
@@ -27,10 +27,10 @@ import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 
 /**
- * The {@link AbstractTopAppLayout} is the supposed to be the base of any {@link AppLayoutElement} with a "Top Behaviour".
+ * The {@link AbstractTopAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Top Behaviour".
  */
 
-public abstract class AbstractTopAppLayout extends CustomLayout implements AppLayoutElement, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractTopAppLayoutBase extends CustomLayout implements AppLayoutElementBase, AppLayoutResizeListener.AppLayoutResizedListener {
 
     private final Panel contentPanel = new Panel();
 
@@ -56,8 +56,8 @@ public abstract class AbstractTopAppLayout extends CustomLayout implements AppLa
     private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
     private ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
 
-    public AbstractTopAppLayout(String filename) throws IOException {
-        super(AbstractTopAppLayout.class.getResourceAsStream(filename));
+    public AbstractTopAppLayoutBase(String filename) throws IOException {
+        super(AbstractTopAppLayoutBase.class.getResourceAsStream(filename));
         setSizeFull();
         contentPanel.setSizeFull();
         contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.vaadin.flow.component.HasElement;
@@ -13,7 +13,7 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLayoutBuilder> extends AbstractCDIAppLayoutBuilder<T> {
 
-    protected AbstractViewClassAppLayoutBuilder(AppLayoutElement component) {
+    protected AbstractViewClassAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
         config.setCDI(false);
     }

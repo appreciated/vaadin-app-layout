@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
-import com.github.appreciated.app.layout.behaviour.listener.AppLayoutResizeListener;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
@@ -14,31 +13,32 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.component.layout.VerticalFlexBoxLayout;
+import com.github.appreciated.app.layout.component.AppLayoutElement;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.themes.ValoTheme;
 
-import java.awt.*;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
 /**
- * The {@link AbstractLeftAppLayout} is the supposed to be the base of any {@link AppLayoutElement} with a "Left Behaviour".
+ * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
 
-public abstract class AbstractLeftAppLayout extends CustomLayout implements AppLayoutElement, AppLayoutResizeListener.AppLayoutResizedListener {
+public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement implements AppLayoutElementBase {
 
-    private final Panel contentPanel = new Panel();
+    private final HorizontalLayout contentPanel = new HorizontalLayout();
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final VerticalLayout menuFooterHolder = new VerticalLayout();
 
-    private final VerticalFlexBoxLayout menuHolder = new VerticalFlexBoxLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
+    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -47,44 +47,41 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
     private List<NavigatorNavigationElement> list;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
-    private ComponentFactory<Component, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
-    private ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
+    private ComponentFactory<HasElement, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
+    private ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentFactory();
-    private ComponentFactory<Component, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
-    private ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
+    private ComponentFactory<HasElement, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
+    private ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
 
-    public AbstractLeftAppLayout(String filename) throws IOException {
-        super(AbstractLeftAppLayout.class.getResourceAsStream(filename));
-        setSizeFull();
-        contentPanel.setSizeFull();
-        contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuHolder.setSizeFull();
-        menuHolder.grow(menuElementHolder);
-        menuHolder.setOverflowAuto(true);
+    public AbstractLeftAppLayoutBase() {
+        //contentPanel.setSizeFull();
+        //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        //menuHolder.setSizeFull();
+        menuHolder.setFlexGrow(1, menuElementHolder);
+        menuHolder.getElement().setAttribute("overflow", "auto");
 
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(new MarginInfo(true, false));
-        menuFooterHolder.setMargin(new MarginInfo(false, false, true, false));
-        menuElementHolder.setWidth(100, Unit.PERCENTAGE);
-        addStyleNames("app-layout-behaviour-" + getStyleName(), APP_LAYOUT);
-        addComponent(contentPanel, "content");
-        addComponent(menuHolder, "menu-elements");
-        addComponent(appBar, "app-bar-elements");
-        appBar.addComponents(titleWrapper, new AppLayoutResizeListener(this), appBarElementWrapper);
-        appBar.setExpandRatio(appBarElementWrapper, 1);
-        appBar.setWidth(100, Unit.PERCENTAGE);
-        appBar.setHeight(100, Unit.PERCENTAGE);
+        menuElementHolder.setMargin(true);
+        menuFooterHolder.setMargin(true);
+        menuElementHolder.setWidth("100%");
+        getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
+        /*add(contentPanel, "content");
+        add(menuHolder, "menu-elements");
+        add(appBar, "app-bar-elements");*/
+        appBar.add(titleWrapper, appBarElementWrapper);
+        appBar.setWidth("100%");
+        appBar.setHeight("100%");
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
-        appBarElementWrapper.addComponentAsFirst(appBarElementContainer);
-        appBarElementContainer.setHeight(100, Unit.PERCENTAGE);
-        appBarElementWrapper.setComponentAlignment(appBarElementContainer, Alignment.TOP_RIGHT);
-        titleWrapper.setHeight(100, Unit.PERCENTAGE);
-        titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
+        appBarElementWrapper.add(appBarElementContainer);
+        appBarElementContainer.setHeight("100%");
+        appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
+        titleWrapper.setHeight("100%");
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     public abstract String getStyleName();
@@ -102,12 +99,12 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     }
 
     public void addAppBarElement(Component component) {
-        appBarElementContainer.addComponent(component);
-        appBarElementContainer.setComponentAlignment(component, Alignment.MIDDLE_RIGHT);
+        appBarElementContainer.add(component);
+        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     public void setDesign(AppLayoutDesign design) {
-        this.addStyleName(design.getStyleName());
+        this.getElement().getClassList().add(design.getStyleName());
     }
 
     public HorizontalLayout getAppBar() {
@@ -122,9 +119,22 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         return title;
     }
 
+    @Override
+    public void addAppBarElement(HasElement component) {
+
+    }
+
+    @Override
     public void setTitle(String title) {
         if (this.title instanceof Label) {
-            ((Label) this.title).setValue(title);
+            ((Label) this.title).setText(title);
+        }
+    }
+
+    @Override
+    public void setTitleElement(HasElement titleComponent) {
+        if (this.title instanceof Label) {
+            ((Label) this.title).setText("test1234");
         }
     }
 
@@ -134,13 +144,12 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     }
 
     public void setTitleComponent(Component compoent) {
-        titleWrapper.replaceComponent(this.title, compoent);
+        titleWrapper.replace(this.title, compoent);
         this.title = compoent;
-        titleWrapper.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
-    @Override
-    public Panel getContentHolder() {
+    public HorizontalLayout getContentHolder() {
         return contentPanel;
     }
 
@@ -160,13 +169,13 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
         return menuHeaderHolder;
     }
 
-    public Layout getMenuHolder() {
+    public VerticalLayout getMenuHolder() {
         return menuHolder;
     }
 
     public void addAppBarIcon(Component appBarIconComponent) {
-        titleWrapper.addComponentAsFirst(appBarIconComponent);
-        titleWrapper.setComponentAlignment(appBarIconComponent, Alignment.MIDDLE_LEFT);
+        titleWrapper.add(appBarIconComponent);
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override
@@ -176,42 +185,42 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     }
 
     @Override
-    public ComponentFactory<Component, SectionNavigationElement> getDrawerSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getDrawerSectionElementProvider() {
         return drawerSectionElementProvider;
     }
 
     @Override
-    public void setDrawerSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
+    public void setDrawerSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         drawerSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<Component, SectionNavigationElement> getTopSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getTopSectionElementProvider() {
         return topSectionElementProvider;
     }
 
     @Override
-    public void setTopSectionElementProvider(ComponentFactory<Component, SectionNavigationElement> provider) {
+    public void setTopSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         topSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
         return drawerSubmenuElementProvider;
     }
 
     @Override
-    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         drawerSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> getTopSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getTopSubmenuElementProvider() {
         return topSubmenuElementProvider;
     }
 
     @Override
-    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> provider) {
+    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         topSubmenuElementProvider = provider;
     }
 
@@ -236,22 +245,22 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     }
 
     @Override
-    public ComponentFactory<Component, ClickableNavigationElement> getTopClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getTopClickableElementProvider() {
         return topClickableElementProvider;
     }
 
     @Override
-    public void setTopClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> topClickableElementProvider) {
+    public void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider) {
         this.topClickableElementProvider = topClickableElementProvider;
     }
 
     @Override
-    public ComponentFactory<Component, ClickableNavigationElement> getDrawerClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getDrawerClickableElementProvider() {
         return drawerClickableElementProvider;
     }
 
     @Override
-    public void setDrawerClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> drawerClickableElementProvider) {
+    public void setDrawerClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
         this.drawerClickableElementProvider = drawerClickableElementProvider;
     }
 
@@ -269,19 +278,19 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
 
     @Override
     public void addToDrawer(Component component) {
-        menuElementHolder.addComponent(component);
+        menuElementHolder.add(component);
     }
 
     @Override
     public void addToDrawerFooter(Component component) {
         menuFooterHolder.setVisible(true);
-        menuFooterHolder.addComponent(component);
+        menuFooterHolder.add(component);
     }
 
     @Override
     public void addToDrawerHeader(Component component) {
         menuHeaderHolder.setVisible(true);
-        menuHeaderHolder.addComponent(component);
+        menuHeaderHolder.add(component);
     }
 
     @Override
@@ -297,10 +306,5 @@ public abstract class AbstractLeftAppLayout extends CustomLayout implements AppL
     @Override
     public void addToTopHeader(Component component) {
         throw new UnsupportedOperationException("The Left Layout does not support this operation");
-    }
-
-    @Override
-    public void onAppLayoutResized() {
-        getUI().access(() -> getUI().markAsDirty());
     }
 }

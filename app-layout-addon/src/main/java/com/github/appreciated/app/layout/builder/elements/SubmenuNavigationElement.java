@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElement;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
@@ -48,12 +48,12 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
     }
 
     @Override
-    public void setProvider(AppLayoutElement provider) {
+    public void setProvider(AppLayoutElementBase provider) {
         setProvider(provider, Position.DRAWER);
     }
 
     @Override
-    public void setProvider(AppLayoutElement provider, Position position) {
+    public void setProvider(AppLayoutElementBase provider, Position position) {
         if (position == Position.TOP) {
             setProvider(provider.getTopSubmenuElementProvider());
         } else {
