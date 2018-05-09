@@ -7,13 +7,12 @@ import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilde
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcons;
 import com.vaadin.flow.component.notification.Notification;
@@ -22,9 +21,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.server.InitialPageSettings;
-import com.vaadin.flow.server.PageConfigurator;
 
 import java.util.function.Consumer;
 
@@ -41,16 +37,13 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
 @Route("")
 public class MainView extends VerticalLayout {
 
-
-
     public MainView() {
         setMargin(false);
-         setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
+        setPadding(false);
+        setDrawerVariant(Behaviour.LEFT);
         setSizeFull();
         notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
-
-
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
@@ -85,7 +78,7 @@ public class MainView extends VerticalLayout {
 
     private void setDrawerVariant(Behaviour variant) {
         removeAll();
-        AppLayoutElement drawer = AppLayout.getDefaultBuilder(variant)
+        Component drawer = AppLayout.getDefaultBuilder(variant)
                 .withTitle("App Layout")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())

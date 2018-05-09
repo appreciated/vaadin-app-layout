@@ -17,7 +17,6 @@ import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -76,7 +75,7 @@ public class AppLayoutConfiguration {
      * FIXME this configuration should only hold configuration => Single responsibility principle
      * This terminating build method is part of the builder and not of the configuration.
      */
-    public AppLayoutElement build() {
+    public Component build() {
 
         // this method has a lot of magic. add some inline comments describing why are you doing what.
         if (navigationElementProvider == null) {
@@ -133,7 +132,7 @@ public class AppLayoutConfiguration {
             System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
         }
 
-        return (AppLayoutElement) instance;
+        return (Component) instance;
     }
 
     private Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {

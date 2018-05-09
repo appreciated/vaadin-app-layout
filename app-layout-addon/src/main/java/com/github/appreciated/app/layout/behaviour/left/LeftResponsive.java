@@ -1,13 +1,9 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.dependency.JavaScript;
-import com.vaadin.flow.server.DependencyFilter;
-import com.vaadin.flow.shared.ui.Dependency;
-import com.vaadin.flow.shared.ui.LoadMode;
-
-import java.util.List;
+import com.vaadin.flow.component.html.Div;
 
 
 /**
@@ -27,6 +23,26 @@ import java.util.List;
 @Tag("left-responsive")
 @HtmlImport("frontend://com/github/appreciated/app/layout/behaviour/left/left-responsive.html")
 public class LeftResponsive extends AbstractLeftAppLayoutBase {
+
+    @Override
+    public Component[] getContent() {
+        return null;
+    }
+
+    @Override
+    public Div getContentDiv() {
+        return null;
+    }
+
+    @Override
+    public Div getMenuElementsDiv() {
+        return null;
+    }
+
+    @Override
+    public Div getAppBarElementsDiv() {
+        return null;
+    }
 
     @Override
     public String getStyleName() {

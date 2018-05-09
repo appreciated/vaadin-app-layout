@@ -13,9 +13,9 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -29,10 +29,10 @@ import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 
 /**
- * The {@link AbstractTopAppLayoutBase} is supposed to be the base of any {@link AppLayoutElement} with a "Top Behaviour".
+ * The {@link AbstractTopAppLayoutBase} is supposed to be the base of any {@link AppLayoutElementBase} with a "Top Behaviour".
  */
 
-public abstract class AbstractTopAppLayoutBase extends AppLayoutElement implements AppLayoutElementBase {
+public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutElementBase {
 
     private final VerticalLayout contentPanel = new VerticalLayout();
 
@@ -116,7 +116,7 @@ public abstract class AbstractTopAppLayoutBase extends AppLayoutElement implemen
         return appBarElementWrapper;
     }
 
-    public Component getTitle() {
+    public Component getTitleLabel() {
         return title;
     }
 

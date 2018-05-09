@@ -29,7 +29,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @return
      */
     public T add(String caption, Icon icon, Class<? extends HasElement> element) {
-        return add(caption, null, icon, null, element, null);
+        return add(caption, null, icon, null, element, Section.DEFAULT);
     }
 
 

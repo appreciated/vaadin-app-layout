@@ -13,9 +13,9 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.component.AppLayoutElement;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -27,10 +27,10 @@ import java.util.List;
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
 /**
- * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElement} with a "Left Behaviour".
+ * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
 
-public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement implements AppLayoutElementBase {
+public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayoutElementBase {
 
     private final HorizontalLayout contentPanel = new HorizontalLayout();
 
@@ -57,9 +57,12 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
 
     public AbstractLeftAppLayoutBase() {
         super();
-        //contentPanel.setSizeFull();
+        setSizeFull();
+        contentPanel.setSizeFull();
         //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        //menuHolder.setSizeFull();
+        menuHolder.setSizeFull();
+
+        add(getContent());
         menuHolder.setFlexGrow(1, menuElementHolder);
         menuHolder.getElement().setAttribute("overflow", "auto");
 
@@ -70,9 +73,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
         menuFooterHolder.setMargin(true);
         menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
-        /*add(contentPanel, "content");
-        add(menuHolder, "menu-elements");
-        add(appBar, "app-bar-elements");*/
+        getContentDiv().add(contentPanel);
+        getMenuElementsDiv().add(menuHolder);
+        getAppBarElementsDiv().add(appBar);
         appBar.add(titleWrapper, appBarElementWrapper);
         appBar.setWidth("100%");
         appBar.setHeight("100%");
@@ -84,6 +87,14 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
+
+    public abstract Component[] getContent();
+
+    public abstract Div getContentDiv();
+
+    public abstract Div getMenuElementsDiv();
+
+    public abstract Div getAppBarElementsDiv();
 
     public abstract String getStyleName();
 
@@ -116,7 +127,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayoutElement impleme
         return appBarElementWrapper;
     }
 
-    public Component getTitle() {
+    public Component getTitleLabel() {
         return title;
     }
 

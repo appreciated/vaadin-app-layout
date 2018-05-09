@@ -1,28 +1,73 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.dependency.JavaScript;
+import com.github.appreciated.app.layout.elements.AppDrawer;
+import com.github.appreciated.app.layout.elements.AppToolbar;
+import com.github.appreciated.app.layout.elements.PaperIconButton;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 
 /**
  * Created by appreciated on 01.05.2017.
  * Edited By deyaeddin on 07.02.2018
  */
 
-@JavaScript("vaadin://addons/app-layout/babel-helpers.js")
-@JavaScript("vaadin://addons/app-layout/app-layout-es5-listener.js")
-@JavaScript("frontend://bower_components/webcomponentsjs/webcomponents-lite.js")
-
-@HtmlImport("frontend://bower_components/polymer/polymer.html")
-@HtmlImport("frontend://bower_components/iron-icons/iron-icons.html")
-@HtmlImport("frontend://bower_components/paper-icon-button/paper-icon-button.html")
-@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
-@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
-@HtmlImport("frontend://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
-
-@Tag("left")
-@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left.html")
 public class Left extends AbstractLeftAppLayoutBase {
+
+    AppToolbar toolbar;
+    PaperIconButton toggle;
+    Div contentDiv;
+    Div appBarElementsDiv;
+    Div menuElementsDiv;
+    AppDrawer drawer;
+
+    /**
+     * <app-toolbar style="height: var(--app-bar-height);">
+     * <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
+     * <div id="app-bar-elements" class="app-bar-content"></div>
+     * </app-toolbar>
+     * <div class="app-bar-application-content" size="100"></div>
+     * <app-drawer id="drawer" slot="drawer" swipe-open>
+     * <div class="drawer-content"></div>
+     * </app-drawer>
+     *
+     * @return
+     */
+
+    @Override
+    public Component[] getContent() {
+        toolbar = new AppToolbar();
+        toggle = new PaperIconButton();
+        contentDiv = new Div();
+        appBarElementsDiv = new Div();
+        menuElementsDiv = new Div();
+        drawer = new AppDrawer();
+
+        appBarElementsDiv.getElement().setAttribute("style", "height: var(--app-bar-height);");
+        toolbar.getElement().appendChild(toggle.getElement());
+        toolbar.getElement().appendChild(appBarElementsDiv.getElement());
+        toggle.getElement().setAttribute("icon", "menu");
+        toggle.setId("toggle");
+        appBarElementsDiv.getElement().getClassList().add("app-bar-content");
+        contentDiv.getElement().getClassList().add("app-bar-application-content");
+        menuElementsDiv.getElement().getClassList().add("drawer-content");
+
+        return new Component[]{toolbar, contentDiv, drawer};
+    }
+
+    @Override
+    public Div getContentDiv() {
+        return contentDiv;
+    }
+
+    @Override
+    public Div getMenuElementsDiv() {
+        return menuElementsDiv;
+    }
+
+    @Override
+    public Div getAppBarElementsDiv() {
+        return appBarElementsDiv;
+    }
 
     @Override
     public String getStyleName() {
