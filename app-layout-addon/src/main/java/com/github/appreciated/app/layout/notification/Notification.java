@@ -23,7 +23,9 @@ public interface Notification extends Comparable<Notification> {
     
     public Resource getImage();
     
-    public LocalDateTime getTime();
+    public LocalDateTime getCreationTime();
+    
+    public void setCreationTime(LocalDateTime creationTime);
     
     public String getTimeAgo();
     

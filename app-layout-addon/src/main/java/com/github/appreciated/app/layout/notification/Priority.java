@@ -1,15 +1,30 @@
 package com.github.appreciated.app.layout.notification;
 
-public enum Priority {
-    HIGH(2), MEDIUM(1), LOW(0);
+import com.github.appreciated.app.layout.builder.design.Styles;
 
-    private Integer priority;
+public enum Priority
+{
+	HIGH( 2, Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH ), 
+	MEDIUM( 1, Styles.APP_BAR_NOTIFICATION_PRIORITY_MEDIUM ), 
+	LOW( 0, Styles.APP_BAR_NOTIFICATION_PRIORITY_LOW );
 
-    Priority(int priority) {
-        this.priority = priority;
-    }
+	private Integer priority;
+	
+	private String style;
 
-    public Integer getValue() {
-        return priority;
-    }
+	Priority( int priority, String style )
+	{
+		this.priority = priority;
+		this.style = style;
+	}
+
+	public Integer getValue()
+	{
+		return priority;
+	}
+	
+	public String getStyle()
+	{
+		return this.style;
+	}
 }
