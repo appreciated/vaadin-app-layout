@@ -2,12 +2,12 @@
   .app-layout-material-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
-      background: $al-menu-button-badge-background-color;
-      color: $al-menu-button-badge-font-color;
+      background: var(--app-layout-menu-button-badge-background-color);
+      color: var(--app-layout-menu-button-badge-font-color);
       font-size: 13px;
       height: 20px;
       line-height: 20px;
-      margin: (($al-menu-button-height - 20px) / 2) 15px;
+      margin: ((var(--app-layout-menu-button-height) - 20px) / 2) 15px;
       margin-left: -50px;
       text-align: center;
       border-radius: 10px;
@@ -20,8 +20,8 @@
       pointer-events: none;
     }
     .app-bar-badge {
-      background: $al-menu-button-badge-background-color;
-      color: valo-font-color($al-menu-button-badge-background-color);
+      background: var(--app-layout-menu-button-badge-background-color);
+      color: var(--app-layout-menu-button-badge-background-color);
       font-size: 13px;
       min-width: 18px;
       min-height: 18px;
@@ -40,27 +40,27 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
-      padding: 0px $al-menu-button-horizontal-padding;
-      height: $al-menu-button-height !important;
+      padding: 0px var(--app-layout-menu-button-horizontal-padding);
+      height: var(--app-layout-menu-button-height) !important;
     }
     .app-layout-menu-badge-button {
       padding-right: 50px;
     }
     @if $al-menu-disable-active-style == false {
       .app-layout-menu-element-active .app-layout-menu-button {
-        background: $al-menu-button-active-background-color !important;
-        color: $al-menu-button-active-font-color !important;
+        background: var(--app-layout-menu-button-active-background-color) !important;
+        color: var(--app-layout-menu-button-active-font-color) !important;
       }
       .app-layout-menu-button:after {
         box-shadow: none !important;
         border-left: none;
       }
       &.app-layout-behaviour-top .app-layout-menu-element-active, &.app-layout-behaviour-top-large .app-layout-menu-element-active {
-        border-bottom: 2px solid $al-bar-font-color;
+        border-bottom: 2px solid var(--app-layout-bar-font-color);
       }
       &.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, &.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
         background: rgba(70, 70, 70, 0) !important;
-        color: $al-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
     }
     .app-layout-round-image {

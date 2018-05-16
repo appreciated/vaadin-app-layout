@@ -58,22 +58,22 @@
       &.app-layout-notification-priority-high {
         background: $v-focus-color !important;
         &:not(.app-layout-notification-read) {
-          border-left: 3px solid valo-font-color($v-focus-color, 1.0);
+          border-left: 3px solid color-contrast($v-focus-color, 1.0);
         }
         &.app-layout-notification-read {
           border-left: 3px solid transparent;
         }
         .app-layout-notification-subtitle {
-          color: valo-font-color($v-focus-color, 0.8);
+          color: color-contrast($v-focus-color, 0.8);
         }
         .app-layout-notification-title {
           font-weight: 500;
-          color: valo-font-color($v-focus-color, 1.0);
+          color: color-contrast($v-focus-color, 1.0);
         }
         .app-layout-notification-time {
-          color: valo-font-color($v-focus-color, 0.7);
+          color: color-contrast($v-focus-color, 0.7);
           &::before {
-            color: valo-font-color($v-focus-color, 1.0);
+            color: color-contrast($v-focus-color, 1.0);
           }
         }
       }
@@ -86,25 +86,25 @@
           border-left: 3px solid transparent;
         }
         .app-layout-notification-subtitle {
-          color: valo-font-color(rgb(255, 255, 255), 0.8);
+          color: color-contrast(rgb(255, 255, 255));
         }
         .app-layout-notification-time {
-          color: valo-font-color(rgb(255, 255, 255), 0.7);
+          color: color-contrast(rgb(255, 255, 255));
         }
       }
       &.app-layout-notification-priority-low {
         background: rgb(245, 245, 245) !important;
         &:not(.app-layout-notification-read) {
-          border-left: 3px solid valo-font-color(rgb(245, 245, 245), 0.2);
+          border-left: 3px solid color-contrast(rgb(245, 245, 245));
         }
         &.app-layout-notification-read {
           border-left: 3px solid transparent;
         }
         .app-layout-notification-subtitle {
-          color: valo-font-color(rgb(245, 245, 245), 0.8);
+          color: color-contrast(rgb(245, 245, 245));
         }
         .app-layout-notification-time {
-          color: valo-font-color(rgb(245, 245, 245), 0.7);
+          color: color-contrast(rgb(245, 245, 245));
         }
       }
     }

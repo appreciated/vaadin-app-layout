@@ -19,9 +19,9 @@
 @mixin app-layout-behaviour-top {
   .app-layout-behaviour-top {
     --app-drawer-width: $al-drawer-width;
-    --app-bar-height: $al-bar-height;
+    --app-bar-height: var(--app-layout-bar-height);
     .app-bar-content {
-      left: $al-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;
@@ -60,11 +60,11 @@
       z-index: $al-bar-z-index;
     }
     .drawer-content {
-      margin-top: $al-bar-height;
+      margin-top: var(--app-layout-bar-height);
       box-sizing: border-box;
       height: 100%;
-      margin-bottom: -$al-bar-height;
-      padding-bottom: $al-bar-height;
+      margin-bottom: - var(--app-layout-bar-height);
+      padding-bottom: var(--app-layout-bar-height);
       overflow: visible;
       box-shadow: $al-drawer-shadow;
       background: $al-drawer-background-color;

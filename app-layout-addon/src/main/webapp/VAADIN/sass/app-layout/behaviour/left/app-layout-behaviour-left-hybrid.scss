@@ -1,7 +1,7 @@
 @mixin app-layout-behaviour-left-hybrid {
   .app-layout-behaviour-left-hybrid {
-    --app-drawer-width: $al-drawer-width;
-    --app-bar-height: $al-bar-height;
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
     .app-layout-menu-button span.v-button-caption, .app-layout-expanding-menu-container-button:after {
       opacity: 1;
       transition: opacity 0.3s;
@@ -17,17 +17,17 @@
     }
     &.small {
       app-drawer[persistent] + .app-bar-application-content, app-drawer[persistent] + #contentContainer .app-bar-application-content {
-        @include application-content($al-bar-height, $al-drawer-small-width);
+        @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-small-width));
       }
-      --app-drawer-width: $al-drawer-small-width;
+      --app-drawer-width: var(--app-layout-drawer-small-width);
       app-drawer[persistent].app-drawer-1 {
-        width: $al-drawer-small-width !important;
+        width: var(--app-layout-drawer-small-width) !important;
       }
       app-drawer[persistent] .app-bar-application-content {
-        left: $al-drawer-small-width !important;
+        left: var(--app-layout-drawer-small-width) !important;
       }
       .app-layout-menu-button-badge {
-        background: $al-menu-button-badge-background-color;
+        background: var(--app-layout-menu-button-badge-background-color);
         color: transparent;
         height: 5px;
         width: 5px;
@@ -41,8 +41,8 @@
         padding-left: 0px;
         padding-right: 0px;
         .app-layout-round-image {
-          width: $al-drawer-small-width !important;
-          height: $al-drawer-small-width !important;
+          width: var(--app-layout-drawer-small-width) !important;
+          height: var(--app-layout-drawer-small-width) !important;
           padding: 7px;
         }
         .app-layout-menu-header-title {
@@ -66,13 +66,13 @@
         opacity: 0;
       }
       .app-layout-submenu-container {
-        padding-left: $al-drawer-submenu-small-indention;
+        padding-left: var(--app-layout-drawer-submenu-small-indention);
       }
       .app-drawer-layout-1 app-drawer[opened] .drawer-content {
-        width: $al-drawer-small-width !important;
+        width: var(--app-layout-drawer-small-width) !important;
       }
       .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
-        left: $al-drawer-small-width !important;
+        left: var(--app-layout-drawer-small-width) !important;
       }
       .app-layout-menu-badge-button {
         padding: 0px 16px;
@@ -82,20 +82,20 @@
       }
     }
     .app-bar-content {
-      left: $al-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;
       bottom: 0px;
     }
     app-header app-toolbar {
-      background-color: $al-bar-background-color;
-      color: $al-bar-font-color;
-      box-shadow: $al-bar-shadow;
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
+      box-shadow: var(--app-layout-bar-shadow);
       position: relative;
-      z-index: $al-bar-z-index + 1;
+      z-index: var(--app-layout-bar-z-index) + 1;
       .v-button {
-        color: $al-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
       padding: 0px;
     }
@@ -107,7 +107,7 @@
       --app-drawer-layout-content-transition: margin 0.2s;
     }
     app-drawer[opened] {
-      z-index: $al-bar-z-index;
+      z-index: var(--app-layout-bar-z-index);
     }
     app-drawer {
       --app-drawer-content-container: {
@@ -117,22 +117,22 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     .drawer-content {
-      margin-top: $al-bar-height;
+      margin-top: var(--app-layout-bar-height);
       box-sizing: border-box;
       height: 100%;
-      margin-bottom: -$al-bar-height;
-      padding-bottom: $al-bar-height;
+      margin-bottom: - var(--app-layout-bar-height);
+      padding-bottom: var(--app-layout-bar-height);
       overflow: visible;
-      box-shadow: $al-drawer-shadow;
-      background: $al-drawer-background-color;
-      color: $al-drawer-font-color !important;
+      box-shadow: var(--app-layout-drawer-shadow);
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: none;
     }
     app-drawer[persistent] .drawer-content:after {
       position: absolute;
-      box-shadow: $al-drawer-persistent-shadow;
+      box-shadow: var(--app-layout-drawer-persistent-shadow);
       content: "";
       top: 0px;
       bottom: 0px;

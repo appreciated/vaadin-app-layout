@@ -1,14 +1,7 @@
 *.iml
 .idea
 *.css
-/app-layout-demo/src/main/webapp/VAADIN/themes/demo/styles.scss.cache
-/app-layout-addon/src/main/polymer/bower_components/
-/app-layout-addon/src/main/polymer/build/
 /.designer/
-/app-layout-addon/build-tools/node/
-/app-layout-addon/build-tools/node_modules/
-/app-layout-addon/src/main/webapp/VAADIN/frontend/bower_components/
-/app-layout-addon/src/main/webapp/VAADIN/frontend/build/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es5/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es6/
 /app-layout-demo/build-tools/node/
@@ -24,7 +17,5 @@
 /app-layout-examples/plain/basic/target/
 /app-layout-examples/plain/spring-cdi/target/
 /app-layout-examples/plain/without-navigator/target/
-/app-layout-addon/src/main/webapp/VAADIN/frontend/package-lock.json
-/app-layout-addon/build-tools/yarn.lock
 !/app-layout-addon/src/main/webapp/VAADIN/frontend/src/app-layout/app-layout.css
-/app-layout-addon/src/main/webapp/VAADIN/sass/app-layout/sass_cache/
+/app-layout-addon/src/main/webapp/VAADIN/sass/app-layout/app-layout/sass_cache/

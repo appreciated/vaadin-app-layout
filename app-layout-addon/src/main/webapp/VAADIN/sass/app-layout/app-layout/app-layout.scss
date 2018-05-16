@@ -55,6 +55,45 @@ $al-menu-section-padding: round($al-unit-size) !default;
 $al-menu-disable-active-style: false !default;
 $al-menu-submenu-max-height: 999px !default;
 
+:root {
+  --app-layout-background-color: #{$al-background-color};
+  --app-layout-font-size: #{$al-font-size};
+  --app-layout-unit-size: #{$al-unit-size};
+  --app-layout-border-radius: #{$al-border-radius};
+  --app-layout-focus-color: #{$al-focus-color};
+
+  --app-layout-bar-height: #{$al-bar-height};
+  --app-layout-bar-background-color: #{$al-bar-background-color};
+  --app-layout-bar-font-color: #{$al-bar-font-color};
+  --app-layout-bar-shadow: #{$al-bar-shadow};
+  --app-layout-bar-z-index: #{$al-bar-z-index};
+
+  --app-layout-drawer-shadow: #{$al-drawer-shadow};
+  --app-layout-drawer-background-color: #{$al-drawer-background-color};
+
+  --app-layout-drawer-submenu-indention: #{$al-drawer-submenu-indention};
+  --app-layout-drawer-submenu-small-indention: #{$al-drawer-submenu-small-indention};
+  --app-layout-drawer-submenu-background-color: #{$al-drawer-submenu-background-color};
+  --app-layout-drawer-font-color: #{$al-drawer-font-color};
+  --app-layout-drawer-persistent-shadow: #{$al-drawer-persistent-shadow};
+  --app-layout-drawer-width: #{$al-drawer-width};
+  --app-layout-drawer-small-width: #{$al-drawer-small-width};
+
+  --app-layout-menu-button-active-background-color: #{$al-menu-button-active-background-color}; // only used by material design
+  --app-layout-menu-button-active-font-color: #{$al-menu-button-active-font-color}; // only used by material design
+  --app-layout-menu-button-badge-background-color: #{$al-menu-button-badge-background-color};
+  --app-layout-menu-button-badge-font-color: #{$al-menu-button-badge-font-color};
+  --app-layout-menu-button-badge-border-radius: #{$al-menu-button-badge-border-radius};
+
+  --app-layout-menu-button-horizontal-padding: #{$al-menu-button-horizontal-padding};
+  --app-layout-menu-button-height: #{$al-menu-button-height};
+  --app-layout-menu-button-spacing: #{$al-menu-button-spacing};
+
+  --app-layout-menu-section-padding: #{$al-menu-section-padding};
+
+  --app-layout-menu-submenu-max-height: #{$al-menu-submenu-max-height};
+}
+
 @mixin application-content($margin-top, $margin-left) {
   margin-bottom: -$margin-top;
   padding-bottom: $margin-top;
@@ -98,11 +137,11 @@ $al-menu-submenu-max-height: 999px !default;
 @import "../behaviour/top/app-layout-behaviour-top-large";
 
 @mixin app-layout {
-  $calc-app-bar-height: $al-bar-height - 20px;
+  $calc-app-bar-height: var(--app-layout-bar-height) - 20px;
   @if ($calc-app-bar-height > 0px) {
     paper-icon-button {
-      width: $al-bar-height - 20px; // margin * 2
-      height: $al-bar-height - 20px; // margin * 2
+      width: var(--app-layout-bar-height) - 20px; // margin * 2
+      height: var(--app-layout-bar-height) - 20px; // margin * 2
       margin: 10px;
       padding: 6px;
     }
@@ -112,17 +151,17 @@ $al-menu-submenu-max-height: 999px !default;
     }
   }
   .app-layout-menu-element {
-    height: $al-menu-button-height !important;
+    height: var(--app-layout-menu-button-height) !important;
   }
   .drawer-content {
     .v-spacing {
-      height: $al-menu-button-spacing !important;
+      height: var(--app-layout-menu-button-spacing) !important;
     }
     .v-margin-bottom {
-      padding-bottom: $al-menu-section-padding !important;
+      padding-bottom: var(--app-layout-menu-section-padding) !important;
     }
     .v-margin-top {
-      padding-top: $al-menu-section-padding !important;
+      padding-top: var(--app-layout-menu-section-padding) !important;
     }
   }
   .app-bar-application-content {
@@ -133,17 +172,17 @@ $al-menu-submenu-max-height: 999px !default;
     transition: margin 0.2s ease, padding 0.2s ease;
   }
   app-drawer[opened][persistent] + .app-bar-application-content, app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
-    @include application-content($al-bar-height, $al-drawer-width);
+    @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-width));
   }
   app-header-layout.small app-drawer[opened] + .app-bar-application-content, app-header-layout.small app-drawer[opened] + #contentContainer .app-bar-application-content {
-    @include application-content($al-bar-height, $al-drawer-small-width);
+    @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-small-width));
   }
   .app-bar-application-content {
-    @include application-content($al-bar-height, 0px);
+    @include application-content(var(--app-layout-bar-height), 0px);
   }
   .app-layout-menu-bar-element {
-    padding-left: $al-menu-button-horizontal-padding;
-    padding-right: $al-menu-button-horizontal-padding;
+    padding-left: var(--app-layout-menu-button-horizontal-padding);
+    padding-right: var(--app-layout-menu-button-horizontal-padding);
   }
   .v-absolutelayout-wrapper-app-layout-menu-button-badge {
     pointer-events: none;
@@ -153,32 +192,32 @@ $al-menu-submenu-max-height: 999px !default;
     overflow: hidden;
   }
   .app-drawer-1 {
-    width: $al-drawer-width;
+    width: var(--app-layout-drawer-width);
   }
 
   .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
-    left: $al-drawer-width;
+    left: var(--app-layout-drawer-width);
   }
 
   .app-drawer-layout-1.small app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1.small app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
-    left: $al-drawer-small-width;
+    left: var(--app-layout-drawer-small-width);
   }
 
   .app-drawer-layout-1 app-drawer[opened] .drawer-content {
-    width: $al-drawer-width;
+    width: var(--app-layout-drawer-width);
   }
 
   .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
-    width: $al-drawer-small-width;
+    width: var(--app-layout-drawer-small-width);
   }
 
   .app-drawer-1 .app-drawer#scrim {
     background: transparent !important;
-    box-shadow: $al-drawer-shadow;
+    box-shadow: var(--app-layout-drawer-shadow);
   }
 
   .app-toolbar-1 {
-    height: $al-bar-height;
+    height: var(--app-layout-bar-height);
   }
 
   @include app-layout-default-design;

@@ -2,8 +2,8 @@
   .app-layout-custom-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
-      background: $al-menu-button-badge-background-color;
-      color: $al-menu-button-badge-font-color;
+      background: var(--app-layout-menu-button-badge-background-color);
+      color: var(--app-layout-menu-button-badge-font-color);
       height: 20px;
       line-height: 20px;
       margin: 15px;
@@ -14,7 +14,7 @@
       pointer-events: none;
     }
     .app-bar-badge {
-      background: $al-menu-button-badge-background-color;
+      background: var(--app-layout-menu-button-badge-background-color);
       color: transparent;
       height: 5px;
       width: 5px;
@@ -29,13 +29,13 @@
       }
       transition: background 0.3s ease, color 0.3s ease;
       border-radius: 0px;
-      padding: 0px $al-menu-button-horizontal-padding;
-      height: $al-menu-button-height !important;
+      padding: 0px var(--app-layout-menu-button-horizontal-padding);
+      height: var(--app-layout-menu-button-height) !important;
     }
     @if $al-menu-disable-active-style == false {
       .app-layout-menu-button-active {
-        background: $al-menu-button-active-background-color !important;
-        color: $al-menu-button-active-font-color !important;
+        background: var(--app-layout-menu-button-active-background-color) !important;
+        color: var(--app-layout-menu-button-active-font-color) !important;
       }
       .app-layout-menu-button:after {
         box-shadow: none !important;

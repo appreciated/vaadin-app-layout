@@ -1,7 +1,7 @@
 @media only screen and (max-width: 640px) {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     .app-bar-application-content {
-      @include media-application-content(--app-layout-bar-height, 0px);
+      @include media-application-content(var(--app-layout-bar-height), 0px);
     }
   }
 }
@@ -9,7 +9,7 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-overlay-no-app-bar {
     .app-bar-application-content {
-      @include media-application-content (0px, --app-layout-drawer-width);
+      @include media-application-content (0px, var(--app-layout-drawer-width));
     }
   }
 }
@@ -20,7 +20,7 @@
     --app-bar-height: --app-layout-bar-height;
 
     .app-bar-content {
-      left: --app-layout-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;
@@ -30,26 +30,26 @@
       display: none;
     }
     app-toolbar {
-      background-color: --app-layout-bar-background-color;
-      color: --app-layout-bar-font-color;
-      box-shadow: --app-layout-bar-shadow;
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
+      box-shadow: var(--app-layout-bar-shadow);
       .v-button {
-        color: $al-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
       padding: 0px;
     }
     .drawer-content {
-      box-shadow: $al-drawer-shadow;
+      box-shadow: var(--app-layout-drawer-shadow);
       height: 100%;
       overflow: visible;
-      background: $al-drawer-background-color;
-      color: $al-drawer-font-color !important;
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
     }
     app-drawer[persistent] .drawer-content {
-      box-shadow: $al-drawer-persistent-shadow;
+      box-shadow: var(--app-layout-drawer-persistent-shadow);
     }
     app-drawer[opened] {
-      z-index: $al-bar-z-index;
+      z-index: var(--app-layout-bar-z-index);
     }
   }
 }

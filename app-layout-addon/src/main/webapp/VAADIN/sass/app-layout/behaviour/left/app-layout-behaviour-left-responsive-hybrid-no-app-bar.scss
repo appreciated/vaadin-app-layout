@@ -12,11 +12,11 @@
 @media only screen and (max-width: 640px) {
   .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
     .drawer-content {
-      margin-top: $al-bar-height;
+      margin-top: var(--app-layout-bar-height);
       box-sizing: border-box;
       height: 100%;
-      margin-bottom: -$al-bar-height;
-      padding-bottom: $al-bar-height;
+      margin-bottom: - var(--app-layout-bar-height);
+      padding-bottom: var(--app-layout-bar-height);
     }
   }
 }
@@ -90,7 +90,7 @@
 @mixin app-layout-behaviour-left-responsive-hybrid-no-app-bar {
   .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
     --app-drawer-width: $al-drawer-width;
-    --app-bar-height: $al-bar-height;
+    --app-bar-height: var(--app-layout-bar-height);
 
     .app-layout-menu-button span.v-button-caption, .app-layout-expanding-menu-container-button:after {
       opacity: 1;
@@ -109,7 +109,7 @@
       display: none;
     }
     .app-bar-content {
-      left: $al-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;

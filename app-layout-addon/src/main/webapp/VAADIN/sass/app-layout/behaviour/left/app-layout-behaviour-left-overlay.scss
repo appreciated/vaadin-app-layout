@@ -3,16 +3,16 @@
     --app-drawer-width: --app-layout-drawer-width;
     --app-bar-height: --app-layout-bar-height;
     .app-bar-content {
-      left: --app-layout-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;
       bottom: 0px;
     }
     app-toolbar {
-      background-color: --app-layout-bar-background-color;
-      color: --app-layout-bar-font-color;
-      box-shadow: $al-bar-shadow;
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
+      box-shadow: var(--app-layout-bar-shadow);
       .v-button {
         color: $al-bar-font-color !important;
       }

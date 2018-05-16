@@ -1,11 +1,11 @@
 @media only screen and (min-width: 641px) {
   .app-layout-behaviour-left-responsive-small {
-    --app-drawer-width: --app-layout-drawer-small-width !important;
+    --app-drawer-width: var(--app-layout-drawer-small-width) !important;
     app-drawer[persistent].app-drawer-1 {
-      width: --app-layout-drawer-small-width !important;
+      width: var(--app-layout-drawer-small-width) !important;
     }
     .app-bar-application-content {
-      left: --app-layout-drawer-small-width !important;
+      left: var(--app-layout-drawer-small-width) !important;
     }
     app-header app-toolbar paper-icon-button#toggle {
       display: none;
@@ -14,7 +14,7 @@
       left: 10px !important;
     }
     .app-layout-menu-button-badge {
-      background: --app-layout-menu-button-badge-background-color;
+      background: var(--app-layout-menu-button-badge-background-color);
       color: transparent !important;
       height: 5px !important;
       width: 5px;
@@ -28,8 +28,8 @@
       padding-left: 0px !important;
       padding-right: 0px !important;
       .app-layout-round-image {
-        width: --app-layout-drawer-small-width !important;
-        height: --app-layout-drawer-small-width !important;
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
         padding: 7px;
       }
       .app-layout-menu-header-title {
@@ -53,10 +53,10 @@
       opacity: 0 !important;
     }
     .app-bar-application-content {
-      @include media-application-content (--app-layout-bar-height, --app-layout-drawer-small-width);
+      @include media-application-content (var(--app-layout-bar-height), var(--app-layout-drawer-small-width));
     }
     .app-drawer-layout-1 app-drawer[opened] .drawer-content {
-      width: --app-layout-drawer-small-width !important;
+      width: var(--app-layout-drawer-small-width) !important;
     }
     .app-layout-menu-badge-button {
       padding: 0px 16px !important;
@@ -72,20 +72,20 @@
     --app-drawer-width: --app-layout-drawer-width;
     --app-bar-height: --app-layout-bar-height;
     .app-bar-content {
-      left: --app-layout-bar-height;
+      left: var(--app-layout-bar-height);
       position: absolute;
       top: 0px;
       right: 0px;
       bottom: 0px;
     }
     app-header app-toolbar {
-      background-color: --app-layout-bar-background-color;
-      color: --app-layout-bar-font-color;
-      box-shadow: --app-layout-bar-shadow;
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
+      box-shadow: var(--app-layout-bar-shadow);
       position: relative;
-      z-index: --app-layout-bar-z-index + 1;
+      z-index: var(--app-layout-bar-z-index) + 1;
       .v-button {
-        color: --app-layout-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
       padding: 0px;
     }
@@ -98,7 +98,7 @@
       --app-drawer-layout-content-transition: margin 0.2s;
     }
     app-drawer[opened] {
-      z-index: --app-layout-bar-z-index;
+      z-index: var(--app-layout-bar-z-index);
     }
     app-drawer {
       --app-drawer-content-container: {
@@ -108,22 +108,22 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     .drawer-content {
-      margin-top: --app-layout-bar-height;
+      margin-top: var(--app-layout-bar-height);
       box-sizing: border-box;
       height: 100vh;
-      margin-bottom: ---app-layout-bar-height;
-      padding-bottom: --app-layout-bar-height;
+      margin-bottom: var(---app-layout-bar-height);
+      padding-bottom: var(--app-layout-bar-height);
       overflow: visible;
-      box-shadow: --app-layout-drawer-shadow;
-      background: --app-layout-drawer-background-color;
-      color: --app-layout-drawer-font-color !important;
+      box-shadow: var(--app-layout-drawer-shadow);
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
     }
     app-drawer[persistent] .drawer-content {
       box-shadow: none;
     }
     app-drawer[persistent] .drawer-content:after {
       position: absolute;
-      box-shadow: --app-layout-drawer-persistent-shadow;
+      box-shadow: var(--app-layout-drawer-persistent-shadow);
       content: "";
       top: 0px;
       bottom: 0px;
@@ -132,7 +132,7 @@
       pointer-events: none;
     }
     .app-layout-submenu-container {
-      padding-left: --app-layout-drawer-submenu-small-indention;
+      padding-left: var(--app-layout-drawer-submenu-small-indention);
     }
   }
 }
