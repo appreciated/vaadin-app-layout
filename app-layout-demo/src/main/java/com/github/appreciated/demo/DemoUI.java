@@ -7,11 +7,12 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
-import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
+import com.github.appreciated.app.layout.notification.DefaultNotification;
+import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.Priority;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.PushStateNavigation;
@@ -28,7 +29,7 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.Section.FOOTER;
 import static com.github.appreciated.app.layout.builder.Section.HEADER;
-import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.MEDIUM;
+import static com.github.appreciated.app.layout.notification.Priority.MEDIUM;
 
 @PushStateNavigation
 @Viewport("initial-scale=1, maximum-scale=1")
@@ -72,7 +73,7 @@ public class DemoUI extends UI {
         currentThread.start();
     }
 
-    private void addNotification(DefaultNotification.Priority priority) {
+    private void addNotification(Priority priority) {
         DemoUI.this.access(() -> {
             badge.increase();
             notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));

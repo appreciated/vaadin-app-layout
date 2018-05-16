@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.builder.entities;
+package com.github.appreciated.app.layout.notification;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
+import com.github.appreciated.app.layout.notification.Notification;
 import com.vaadin.server.Resource;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -12,14 +12,13 @@ import java.util.Date;
 /**
  * Data structure that contains the information for a {@link Notification}
  */
-
 public class DefaultNotification implements Notification {
-    String title;
-    String description;
-    Resource image;
+    private String title;
+    private String description;
+    private Resource image;
     private Priority priority;
-    private boolean dismissible;
-    private boolean unread;
+    private boolean isDismissable;
+    private boolean isRead;
     private LocalDateTime time;
 
     public DefaultNotification(String title, String description) {
@@ -42,14 +41,14 @@ public class DefaultNotification implements Notification {
         this(title, description, null, priority, dismissible);
     }
 
-    public DefaultNotification(String title, String description, Resource image, Priority priority, boolean dismissible) {
+    public DefaultNotification(String title, String description, Resource image, Priority priority, boolean isDismissable) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.priority = priority;
-        this.dismissible = dismissible;
-        time = LocalDateTime.now();
-        unread = true;
+        this.isDismissable = isDismissable;
+        this.time = LocalDateTime.now();
+        this.isRead = false;
     }
 
     public String getTitle() {
@@ -92,8 +91,8 @@ public class DefaultNotification implements Notification {
         return "";
     }
 
-    public boolean isUnnread() {
-        return unread;
+    public boolean isRead() {
+        return isRead;
     }
 
     @Override
@@ -101,34 +100,35 @@ public class DefaultNotification implements Notification {
         return priority;
     }
 
-    public void setUnread(boolean unread) {
-        this.unread = unread;
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     public boolean isDismissible() {
-        return dismissible;
+        return isDismissable;
     }
 
     public void setDismissible(boolean dismissible) {
-        this.dismissible = dismissible;
+        this.isDismissable = dismissible;
     }
 
     public String getTimeAgo() {
         return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
-    public enum Priority {
-        HIGH(2), MEDIUM(1), LOW(0);
-
-        private Integer priority;
-
-        Priority(int priority) {
-            this.priority = priority;
+	@Override
+	public int compareTo( Notification otherNotification )
+	{
+		if(otherNotification == this)
+		{
+			return 0;
+		}
+		
+        if (this.getPriority() != otherNotification.getPriority()) {
+            return this.getPriority().getValue().compareTo(otherNotification.getPriority().getValue());
+        } else {
+            return this.getTime().compareTo(otherNotification.getTime());
         }
-
-        public Integer getValue() {
-            return priority;
-        }
-    }
+	}
 
 }
