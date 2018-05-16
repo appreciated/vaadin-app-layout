@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.entities;
+package com.github.appreciated.app.layout.notification;
 
 import com.github.appreciated.app.layout.builder.factories.DefaultNotificationComponentFactory;
 
@@ -8,17 +8,17 @@ import java.util.Collection;
  * This class is the default implementation of {@link NotificationHolder}
  */
 
-public class DefaultNotificationHolder extends NotificationHolder<DefaultNotification> {
+public class DefaultNotificationHolder extends NotificationHolder<Notification> {
 
     public DefaultNotificationHolder() {
         setComponentProvider(new DefaultNotificationComponentFactory());
     }
 
-    public DefaultNotificationHolder(DefaultNotification... notifications) {
+    public DefaultNotificationHolder(Notification... notifications) {
         super(notifications);
     }
 
-    public DefaultNotificationHolder(Collection<DefaultNotification> notifications) {
+    public DefaultNotificationHolder(Collection<Notification> notifications) {
         super(notifications);
     }
 

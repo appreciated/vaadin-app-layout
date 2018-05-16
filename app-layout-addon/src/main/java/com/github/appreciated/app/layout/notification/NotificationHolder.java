@@ -1,6 +1,7 @@
-package com.github.appreciated.app.layout.builder.entities;
+package com.github.appreciated.app.layout.notification;
 
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
+import com.vaadin.server.Resource;
 import com.vaadin.ui.Component;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_NO
  *
  */
 
-public class NotificationHolder<T extends NotificationHolder.Notification> {
+public class NotificationHolder<T extends Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
@@ -46,7 +47,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
+        return components.stream().sorted((o1, o2) -> o1.compareTo(o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -75,7 +76,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public ArrayList<T> getNotifications() {
-        Collections.sort(notifications, (o1, o2) -> o1.compare(o2, o1));
+        Collections.sort(notifications, (o1, o2) -> o1.compareTo(o2));
         return notifications;
     }
 
@@ -97,23 +98,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public int getUnreadNotifications() {
-        return (int) notifications.stream().filter(notification -> notification.isUnnread()).count();
-    }
-
-    public interface Notification extends Comparator<Notification> {
-        boolean isUnnread();
-
-        DefaultNotification.Priority getPriority();
-
-        LocalDateTime getTime();
-
-        default int compare(Notification o1, Notification o2) {
-            if (o1.getPriority() != o2.getPriority()) {
-                return o1.getPriority().getValue().compareTo(o2.getPriority().getValue());
-            } else {
-                return o1.getTime().compareTo(o2.getTime());
-            }
-        }
+        return (int) notifications.stream().filter(notification -> notification.isRead()).count();
     }
 
     public interface NotificationListener {

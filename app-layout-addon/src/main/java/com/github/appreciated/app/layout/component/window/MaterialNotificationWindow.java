@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.component.window;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 

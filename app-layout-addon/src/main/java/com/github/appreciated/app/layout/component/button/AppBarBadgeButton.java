@@ -1,12 +1,13 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
+
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.

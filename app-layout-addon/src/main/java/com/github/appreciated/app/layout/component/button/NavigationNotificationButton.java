@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.component.window.MaterialNotificationWindow;
 import com.github.appreciated.app.layout.component.window.NotificationWindow;
+import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
