@@ -1,0 +1,33 @@
+@mixin app-layout-behaviour-left-overlay {
+  .app-layout-behaviour-left-overlay {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+    .app-bar-content {
+      left: --app-layout-bar-height;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
+    app-toolbar {
+      background-color: --app-layout-bar-background-color;
+      color: --app-layout-bar-font-color;
+      box-shadow: $al-bar-shadow;
+      .v-button {
+        color: $al-bar-font-color !important;
+      }
+      padding: 0px;
+    }
+    app-drawer[opened] {
+      z-index: $al-bar-z-index;
+    }
+    .drawer-content {
+      box-shadow: $al-drawer-shadow;
+      height: 100%;
+      margin-top: 0px !important;
+      overflow: visible;
+      background: $al-drawer-background-color;
+      color: $al-drawer-font-color !important;
+    }
+  }
+}

@@ -123,7 +123,25 @@
                     </archive>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>nl.geodienstencentrum.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <buildDirectory>${basedir}/src/main/webapp/VAADIN/sass/app-layout/</buildDirectory>
+                    <resources>
+                        <resource>
+                            <source>
+                                <directory>${basedir}/src/main/webapp/VAADIN/sass/app-layout/app-layout</directory>
+                                <includes>
+                                    <include>app-layout.scss</include>
+                                </includes>
+                            </source>
+                            <destination>${basedir}/src/main/webapp/VAADIN/frontend/src/app-layout/</destination>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>

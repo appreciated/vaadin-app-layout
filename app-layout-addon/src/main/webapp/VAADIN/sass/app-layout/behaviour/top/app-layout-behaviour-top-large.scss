@@ -1,0 +1,96 @@
+@media only screen and (min-width: 641px) {
+  .app-layout-behaviour-top-large {
+    --app-bar-height: $al-bar-height * 2 !important;
+    app-toolbar paper-icon-button#toggle {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .app-bar-content {
+      left: 10px !important;
+    }
+    .app-bar-menu-content {
+      left: $al-bar-height;
+      position: absolute;
+      top: $al-bar-height !important;
+      right: 0px;
+      bottom: 0px;
+    }
+    app-drawer {
+      display: none;
+    }
+    .app-bar-menu-content {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .app-bar-application-content {
+      box-sizing: border-box;
+      height: 100vh;
+      margin-bottom: -$al-bar-height * 2 !important;
+      padding-bottom: $al-bar-height * 2 !important;
+    }
+    .app-toolbar-1 {
+      height: $al-bar-height * 2;
+    }
+  }
+}
+
+@mixin app-layout-behaviour-top-large {
+  .app-layout-behaviour-top-large {
+    --app-drawer-width: $al-drawer-width;
+    --app-bar-height: $al-bar-height;
+    .app-bar-content {
+      left: $al-bar-height;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: $al-bar-height;
+      transition: left 0.3s;
+    }
+    .app-bar-menu-content {
+      .app-layout-menu-bar-element {
+        display: none;
+      }
+    }
+
+    app-toolbar paper-icon-button {
+      transition: opacity 0.3s;
+      opacity: 1.0;
+      position: absolute;
+      top: 0px;
+    }
+    .app-bar-menu-content {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    app-toolbar {
+      background-color: $al-bar-background-color;
+      color: $al-bar-font-color;
+      position: relative;
+      z-index: $al-bar-z-index + 1;
+      box-shadow: $al-bar-shadow;
+      .v-button {
+        color: $al-bar-font-color !important;
+      }
+      padding: 0px;
+      transition: height 0.3s ease;
+    }
+    app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    }
+    app-drawer[opened] {
+      z-index: $al-bar-z-index;
+    }
+    .drawer-content {
+      margin-top: $al-bar-height;
+      box-sizing: border-box;
+      height: 100%;
+      margin-bottom: -$al-bar-height;
+      padding-bottom: $al-bar-height;
+      overflow: visible;
+      box-shadow: $al-drawer-shadow;
+      background: $al-drawer-background-color;
+      color: $al-drawer-font-color !important;
+    }
+  }
+}

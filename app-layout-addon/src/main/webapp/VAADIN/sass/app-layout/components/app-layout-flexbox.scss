@@ -1,0 +1,72 @@
+/**
+ * Flexbox for Vaadin
+ */
+
+@mixin app-layout-flexbox {
+  .v-csslayout {
+    &.flex-row {
+      @include display(flex);
+      @include flex-direction(row);
+    }
+    &.flex-column {
+      @include display(flex);
+      @include flex-direction(column);
+    }
+    &.flex-row.overflow-auto {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    &.flex-column.overflow-auto {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    &.flex-row, &.flex-column {
+      :not(.shrink):not(.grow) {
+        @include flex-grow(0);
+        @include flex-shrink(0);
+      }
+      .grow:not(.shrink) {
+        @include flex-grow(1);
+      }
+      .shrink:not(.grow) {
+        @include flex-shrink(1);
+        overflow: auto;
+      }
+      .grow.shrink {
+        @include flex-grow(1);
+        @include flex-shrink(1);
+        overflow: auto;
+      }
+      &.justify-flex-start {
+        justify-content: flex-start;
+      }
+      &.justify-center {
+        justify-content: center;
+      }
+      &.justify-flex-end {
+        justify-content: flex-end;
+      }
+      &.justify-space-between {
+        justify-content: space-between;
+      }
+      &.justify-space-around {
+        justify-content: space-around;
+      }
+      &.align-flex-start {
+        align-items: flex-start;
+      }
+      &.align-flex-end {
+        align-items: flex-end;
+      }
+      &.align-center {
+        align-items: center;
+      }
+      &.align-baseline {
+        align-items: baseline;
+      }
+      &.align-stretch {
+        align-items: stretch;
+      }
+    }
+  }
+}

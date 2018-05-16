@@ -1,0 +1,55 @@
+@mixin app-layout-custom-design {
+  .app-layout-custom-design {
+    .app-layout-menu-button-badge {
+      padding: 0 10px;
+      background: $al-menu-button-badge-background-color;
+      color: $al-menu-button-badge-font-color;
+      height: 20px;
+      line-height: 20px;
+      margin: 15px;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .v-absolutelayout-wrapper-app-bar-badge {
+      pointer-events: none;
+    }
+    .app-bar-badge {
+      background: $al-menu-button-badge-background-color;
+      color: transparent;
+      height: 5px;
+      width: 5px;
+      margin: 11px;
+      border-radius: 100%;
+      padding: 0;
+    }
+    .app-layout-menu-button {
+      text-align: left !important;
+      .v-icon + .v-captiontext, .v-icon + span {
+        margin-left: 16px;
+      }
+      transition: background 0.3s ease, color 0.3s ease;
+      border-radius: 0px;
+      padding: 0px $al-menu-button-horizontal-padding;
+      height: $al-menu-button-height !important;
+    }
+    @if $al-menu-disable-active-style == false {
+      .app-layout-menu-button-active {
+        background: $al-menu-button-active-background-color !important;
+        color: $al-menu-button-active-font-color !important;
+      }
+      .app-layout-menu-button:after {
+        box-shadow: none !important;
+        border-left: none;
+      }
+    }
+    .app-layout-menu-round-button img.v-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      vertical-align: unset !important;
+    }
+    .app-layout-menu-section {
+      padding-left: 14px;
+    }
+  }
+}

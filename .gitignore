@@ -26,3 +26,5 @@
 /app-layout-examples/plain/without-navigator/target/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/package-lock.json
 /app-layout-addon/build-tools/yarn.lock
+!/app-layout-addon/src/main/webapp/VAADIN/frontend/src/app-layout/app-layout.css
+/app-layout-addon/src/main/webapp/VAADIN/sass/app-layout/sass_cache/
