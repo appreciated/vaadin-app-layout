@@ -36,7 +36,7 @@
 
 @mixin app-layout-behaviour-top-large {
   .app-layout-behaviour-top-large {
-    --app-drawer-width: $al-drawer-width;
+    --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
     .app-bar-content {
       left: var(--app-layout-bar-height);
@@ -64,13 +64,13 @@
       transition: opacity 0.3s ease;
     }
     app-toolbar {
-      background-color: $al-bar-background-color;
-      color: $al-bar-font-color;
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
       position: relative;
-      z-index: $al-bar-z-index + 1;
-      box-shadow: $al-bar-shadow;
+      z-index: calc(var(--app-layout-bar-z-index) + 1);
+      box-shadow: var(--app-layout-bar-shadow);
       .v-button {
-        color: $al-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
       padding: 0px;
       transition: height 0.3s ease;
@@ -79,7 +79,7 @@
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
     }
     app-drawer[opened] {
-      z-index: $al-bar-z-index;
+      z-index: var(--app-layout-bar-z-index);
     }
     .drawer-content {
       margin-top: var(--app-layout-bar-height);
@@ -88,9 +88,9 @@
       margin-bottom: - var(--app-layout-bar-height);
       padding-bottom: var(--app-layout-bar-height);
       overflow: visible;
-      box-shadow: $al-drawer-shadow;
-      background: $al-drawer-background-color;
-      color: $al-drawer-font-color !important;
+      box-shadow: var(--app-layout-drawer-shadow);
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
     }
   }
 }

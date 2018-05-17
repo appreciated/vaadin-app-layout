@@ -107,8 +107,8 @@
     .app-layout-behaviour-left-responsive-hybrid .app-bar-application-content {
         margin-bottom: -var(--app-layout-bar-height) !important;
         padding-bottom: var(--app-layout-bar-height) !important;
-        margin-right: -64px !important;
-        padding-right: 64px !important;
+        margin-right: -var(--app-layout-bar-height) !important;
+        padding-right: var(--app-layout-bar-height) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid .app-layout-submenu-container {
@@ -148,19 +148,19 @@
 }
 @media only screen and (min-width: 641px) and (max-width: 1024px) {
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
-        --app-drawer-width: $ al-drawer-small-width !important;
+        --app-drawer-width: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent].app-drawer-1 {
-        width: 64px !important;
+        width: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-application-content {
-        left: 64px !important;
+        left: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button-badge {
-        background: #4285f4;
+        background: var(--app-layout-menu-button-badge-background-color);
         color: transparent !important;
         height: 5px !important;
         width: 5px;
@@ -178,8 +178,8 @@
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-bar-element .app-layout-round-image {
-        width: 64px !important;
-        height: 64px !important;
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
         padding: 7px;
     }
 
@@ -211,16 +211,16 @@
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-application-content {
         margin-bottom: 0px !important;
         padding-bottom: 0px !important;
-        margin-right: -64px !important;
-        padding-right: 64px !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-submenu-container {
-        padding-left: 0px !important;
+        padding-left: var(--app-layout-drawer-submenu-small-indention) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-drawer-layout-1 app-drawer[opened] .drawer-content {
-        width: 64px !important;
+        width: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-badge-button {
@@ -239,8 +239,8 @@
     .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-application-content {
         margin-bottom: 0px !important;
         padding-bottom: 0px !important;
-        margin-right: -256px !important;
-        padding-right: 256px !important;
+        margin-right: -var(--app-layout-drawer-width) !important;
+        padding-right: var(--app-layout-drawer-width) !important;
     }
 }
 @media only screen and (min-width: 641px) and (max-width: 1024px) {
@@ -308,8 +308,8 @@
     .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-application-content {
         margin-bottom: 0px !important;
         padding-bottom: 0px !important;
-        margin-right: -64px !important;
-        padding-right: 64px !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
     }
 
     .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-submenu-container {

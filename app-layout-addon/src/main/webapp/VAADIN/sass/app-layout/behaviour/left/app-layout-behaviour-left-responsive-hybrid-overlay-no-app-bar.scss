@@ -4,7 +4,7 @@
       display: none !important;
     }
     .app-bar-application-content {
-      @include media-application-content (0px, $al-drawer-width);
+      @include media-application-content (0px, var(--app-layout-drawer-width));
     }
   }
 }
@@ -58,7 +58,7 @@
       opacity: 0 !important;
     }
     .app-bar-application-content {
-      @include media-application-content (0px, $al-drawer-small-width);
+      @include media-application-content (0px, var(--app-layout-drawer-small-width));
     }
     .app-layout-submenu-container {
       padding-left: var(--app-layout-drawer-submenu-small-indention) !important;

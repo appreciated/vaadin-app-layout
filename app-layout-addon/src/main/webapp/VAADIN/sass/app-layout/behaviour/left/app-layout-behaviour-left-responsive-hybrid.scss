@@ -58,7 +58,7 @@
       opacity: 0 !important;
     }
     .app-bar-application-content {
-      @include media-application-content (var(--app-layout-bar-height), $al-drawer-small-width);
+      @include media-application-content (var(--app-layout-bar-height), var(--app-layout-bar-height));
     }
     .app-layout-submenu-container {
       padding-left: var(--app-layout-drawer-submenu-small-indention) !important;

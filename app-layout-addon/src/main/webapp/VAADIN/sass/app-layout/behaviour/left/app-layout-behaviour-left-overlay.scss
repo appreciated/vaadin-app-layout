@@ -14,20 +14,20 @@
       color: var(--app-layout-bar-font-color);
       box-shadow: var(--app-layout-bar-shadow);
       .v-button {
-        color: $al-bar-font-color !important;
+        color: var(--app-layout-bar-font-color) !important;
       }
       padding: 0px;
     }
     app-drawer[opened] {
-      z-index: $al-bar-z-index;
+      z-index: var(--app-layout-bar-z-index);
     }
     .drawer-content {
-      box-shadow: $al-drawer-shadow;
+      box-shadow: var(--app-layout-drawer-shadow);
       height: 100%;
       margin-top: 0px !important;
       overflow: visible;
-      background: $al-drawer-background-color;
-      color: $al-drawer-font-color !important;
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
     }
   }
 }
