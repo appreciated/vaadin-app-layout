@@ -17,5 +17,5 @@
 /app-layout-examples/plain/basic/target/
 /app-layout-examples/plain/spring-cdi/target/
 /app-layout-examples/plain/without-navigator/target/
-!/app-layout-addon/src/main/webapp/VAADIN/frontend/src/app-layout/app-layout.css
-/app-layout-addon/src/main/webapp/VAADIN/sass/app-layout/app-layout/sass_cache/
+/app-layout-addon/src/main/resources/sass/app-layout/app-layout/sass_cache/
+!/app-layout-addon/src/main/webapp/addon/com/github/appreciated/app-layout.css
