@@ -11,7 +11,7 @@ import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcons;
@@ -32,7 +32,7 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
  * The main view contains a button and a template element.
  */
 
-@HtmlImport("frontend://styles/shared-styles.html")
+@StyleSheet("context://addon/com/github/appreciated/applayout/applayout.css")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Route("")
 public class MainView extends VerticalLayout {

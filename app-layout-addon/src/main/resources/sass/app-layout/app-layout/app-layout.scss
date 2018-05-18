@@ -1,0 +1,230 @@
+@function brightness($c) {
+  $rlin: (red($c)/255);
+  $glin: (green($c)/255);
+  $blin: (blue($c)/255);
+  @return (0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
+}
+
+@function color-contrast($color, $dark: #000, $light: #fff) {
+  @if $color == null {
+    @return null;
+  } @else {
+    $color-brightness: brightness($color);
+    $light-text-brightness: brightness($light);
+    $dark-text-brightness: brightness($dark);
+
+    @return if(abs($color-brightness - $light-text-brightness) > abs($color-brightness - $dark-text-brightness), $light, $dark);
+  }
+}
+
+$al-background-color: #fafafa !default;
+$al-font-size: 16px !default;
+$al-unit-size: round(2.3 * $al-font-size) !default;
+$al-border-radius: 4px !default;
+$al-focus-color: #4285f4 !default;
+
+$al-bar-height: 64px !default;
+$al-bar-background-color: #4285f4 !default;
+$al-bar-font-color: color-contrast($al-bar-background-color) !default;
+$al-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
+$al-bar-z-index: 10 !default;
+
+$al-drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
+$al-drawer-background-color: lighten($al-background-color, 5%) !default;
+
+$al-drawer-submenu-indention: 0px !default;
+$al-drawer-submenu-small-indention: 0px !default;
+$al-drawer-submenu-background-color: rgba(color-contrast($al-drawer-background-color), 0.05) !default;
+$al-drawer-font-color: color-contrast($al-drawer-background-color) !default;
+$al-drawer-persistent-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15) !default;
+$al-drawer-width: 256px !default;
+$al-drawer-small-width: 64px !default;
+
+$al-menu-button-active-background-color: rgba(color-contrast($al-drawer-background-color), 0.1) !default; // only used by material design
+$al-menu-button-active-font-color: $al-focus-color !default; // only used by material design
+$al-menu-button-badge-background-color: $al-focus-color !default;
+$al-menu-button-badge-font-color: color-contrast($al-focus-color) !default;
+$al-menu-button-badge-border-radius: 5px !default;
+
+$al-menu-button-horizontal-padding: round($al-unit-size/2.4) + round($al-border-radius/3) !default;
+$al-menu-button-height: 48px !default;
+$al-menu-button-spacing: round($al-unit-size/3) !default;
+
+$al-menu-section-padding: round($al-unit-size) !default;
+
+$al-menu-disable-active-style: false !default;
+$al-menu-submenu-max-height: 999px !default;
+
+:root {
+  --app-layout-background-color: #{$al-background-color};
+  --app-layout-font-size: #{$al-font-size};
+  --app-layout-unit-size: #{$al-unit-size};
+  --app-layout-border-radius: #{$al-border-radius};
+  --app-layout-focus-color: #{$al-focus-color};
+  --app-layout-focus-contrast-color: #{color-contrast($al-focus-color)};
+
+  --app-layout-bar-height: #{$al-bar-height};
+  --app-layout-bar-background-color: #{$al-bar-background-color};
+  --app-layout-bar-font-color: #{$al-bar-font-color};
+  --app-layout-bar-shadow: #{$al-bar-shadow};
+  --app-layout-bar-z-index: #{$al-bar-z-index};
+
+  --app-layout-drawer-shadow: #{$al-drawer-shadow};
+  --app-layout-drawer-background-color: #{$al-drawer-background-color};
+
+  --app-layout-drawer-submenu-indention: #{$al-drawer-submenu-indention};
+  --app-layout-drawer-submenu-small-indention: #{$al-drawer-submenu-small-indention};
+  --app-layout-drawer-submenu-background-color: #{$al-drawer-submenu-background-color};
+  --app-layout-drawer-font-color: #{$al-drawer-font-color};
+  --app-layout-drawer-persistent-shadow: #{$al-drawer-persistent-shadow};
+  --app-layout-drawer-width: #{$al-drawer-width};
+  --app-layout-drawer-small-width: #{$al-drawer-small-width};
+
+  --app-layout-menu-button-active-background-color: #{$al-menu-button-active-background-color}; // only used by material design
+  --app-layout-menu-button-active-font-color: #{$al-menu-button-active-font-color}; // only used by material design
+  --app-layout-menu-button-badge-background-color: #{$al-menu-button-badge-background-color};
+  --app-layout-menu-button-badge-font-color: #{$al-menu-button-badge-font-color};
+  --app-layout-menu-button-badge-border-radius: #{$al-menu-button-badge-border-radius};
+
+  --app-layout-menu-button-horizontal-padding: #{$al-menu-button-horizontal-padding};
+  --app-layout-menu-button-height: #{$al-menu-button-height};
+  --app-layout-menu-button-spacing: #{$al-menu-button-spacing};
+
+  --app-layout-menu-section-padding: #{$al-menu-section-padding};
+
+  --app-layout-menu-submenu-max-height: #{$al-menu-submenu-max-height};
+}
+
+@mixin application-content($margin-top, $margin-left) {
+  margin-bottom: -$margin-top;
+  padding-bottom: $margin-top;
+  margin-right: -$margin-left;
+  padding-right: $margin-left;
+}
+
+@mixin media-application-content($margin-top, $margin-left) {
+  margin-bottom: -$margin-top !important;
+  padding-bottom: $margin-top !important;
+  margin-right: -$margin-left !important;
+  padding-right: $margin-left !important;
+}
+
+@mixin media-application-content-top($margin-top) {
+  margin-bottom: -$margin-top !important;
+  padding-bottom: $margin-top !important;
+}
+
+@import "../designs/app-layout-default-design";
+@import "../designs/app-layout-material-design";
+@import "../designs/app-layout-custom-design";
+
+@import "../components/app-layout-notification";
+@import "../components/app-layout-expanding-menu-container";
+
+@import "../behaviour/left/app-layout-behaviour-left";
+@import "../behaviour/left/app-layout-behaviour-left-overlay";
+@import "../behaviour/left/app-layout-behaviour-left-responsive";
+@import "../behaviour/left/app-layout-behaviour-left-hybrid";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-hybrid";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-hybrid-no-app-bar";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-overlay";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-overlay-no-app-bar";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-small";
+@import "../behaviour/left/app-layout-behaviour-left-responsive-small-no-app-bar";
+
+@import "../behaviour/top/app-layout-behaviour-top";
+@import "../behaviour/top/app-layout-behaviour-top-large";
+
+.app-layout {
+  .app-layout-menu-element {
+    height: var(--app-layout-menu-button-height) !important;
+  }
+  .drawer-content {
+    .v-spacing {
+      height: var(--app-layout-menu-button-spacing) !important;
+    }
+    .v-margin-bottom {
+      padding-bottom: var(--app-layout-menu-section-padding) !important;
+    }
+    .v-margin-top {
+      padding-top: var(--app-layout-menu-section-padding) !important;
+    }
+  }
+  .app-bar-application-content {
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    transition: margin 0.2s ease, padding 0.2s ease;
+  }
+  app-drawer[opened][persistent] + .app-bar-application-content, app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-width));
+  }
+  app-header-layout.small app-drawer[opened] + .app-bar-application-content, app-header-layout.small app-drawer[opened] + #contentContainer .app-bar-application-content {
+    @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-small-width));
+  }
+  .app-bar-application-content {
+    @include application-content(var(--app-layout-bar-height), 0px);
+  }
+  .app-layout-menu-bar-element {
+    padding-left: var(--app-layout-menu-button-horizontal-padding);
+    padding-right: var(--app-layout-menu-button-horizontal-padding);
+  }
+  .v-absolutelayout-wrapper-app-layout-menu-button-badge {
+    pointer-events: none;
+  }
+
+  app-drawer:not([persistent]):not([opened]) .drawer-content * {
+    overflow: hidden;
+  }
+  .app-drawer-1 {
+    width: var(--app-layout-drawer-width);
+  }
+
+  .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    left: var(--app-layout-drawer-width);
+  }
+
+  .app-drawer-layout-1.small app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1.small app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    left: var(--app-layout-drawer-small-width);
+  }
+
+  .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+    width: var(--app-layout-drawer-width);
+  }
+
+  .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
+    width: var(--app-layout-drawer-small-width);
+  }
+
+  .app-drawer-1 .app-drawer#scrim {
+    background: transparent !important;
+    box-shadow: var(--app-layout-drawer-shadow);
+  }
+
+  .app-toolbar-1 {
+    height: var(--app-layout-bar-height);
+  }
+
+  @include app-layout-default-design;
+  @include app-layout-material-design;
+  @include app-layout-custom-design;
+  @include app-layout-notification;
+  @include app-layout-expanding-menu-container;
+
+  @include app-layout-behaviour-left;
+  @include app-layout-behaviour-left-hybrid;
+  @include app-layout-behaviour-left-responsive-hybrid;
+  @include app-layout-behaviour-left-responsive-hybrid-no-app-bar;
+  @include app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar;
+  @include app-layout-behaviour-left-overlay;
+  @include app-layout-behaviour-left-responsive;
+  @include app-layout-behaviour-left-responsive-overlay;
+  @include app-layout-behaviour-left-responsive-overlay-no-app-bar;
+  @include app-layout-behaviour-left-responsive-small;
+  @include app-layout-behaviour-left-responsive-small-no-app-bar;
+
+  @include app-layout-behaviour-top;
+  @include app-layout-behaviour-top-large;
+}
