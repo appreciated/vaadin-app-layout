@@ -83,7 +83,7 @@
       color: var(--app-layout-bar-font-color);
       box-shadow: var(--app-layout-bar-shadow);
       position: relative;
-      z-index: var(--app-layout-bar-z-index) + 1;
+      z-index: calc(var(--app-layout-bar-z-index) + 1);
       .v-button {
         color: var(--app-layout-bar-font-color) !important;
       }

@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.behaviour.left;
 import com.github.appreciated.app.layout.elements.AppDrawer;
 import com.github.appreciated.app.layout.elements.AppToolbar;
 import com.github.appreciated.app.layout.elements.PaperIconButton;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -55,6 +56,17 @@ public class Left extends AbstractLeftAppLayoutBase {
         drawer.getElement().setAttribute("swipe-open", true);
         drawer.getElement().appendChild(menuElementsDiv.getElement());
         return new Component[]{toolbar, contentDiv, drawer};
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        getUI().ifPresent(ui -> ui.getPage().executeJavaScript(
+                " var drawer = document.querySelector('app-drawer');\n" +
+                        "        document.querySelector('paper-icon-button').addEventListener('click', function () {\n" +
+                        "            drawer.toggle();\n" +
+                        "        });")
+        );
     }
 
     @Override

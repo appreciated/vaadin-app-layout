@@ -13,7 +13,7 @@
       background-color: var(--app-layout-bar-background-color);
       color: var(--app-layout-bar-font-color);
       position: relative;
-      z-index: var(--app-layout-bar-z-index) + 1;
+      z-index: calc(var(--app-layout-bar-z-index) + 1);
       box-shadow: var(--app-layout-bar-shadow);
       .v-button {
         color: var(--app-layout-bar-font-color) !important;

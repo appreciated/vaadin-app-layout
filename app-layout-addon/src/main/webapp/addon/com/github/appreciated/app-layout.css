@@ -906,12 +906,10 @@
 .app-layout .app-layout-top-menu.v-menubar * {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -919,28 +917,23 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   box-shadow: var(--app-layout-bar-shadow);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left app-drawer {
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -952,48 +945,38 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-hybrid .app-layout-expanding-menu-container-button:after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .app-layout-round-image {
   transition: width 0.3s, height 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button {
   transition: font-size 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button-badge {
   transition: color 0.3s, height 0.2s, width 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small {
   --app-drawer-width: var(--app-layout-drawer-small-width);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] + .app-bar-application-content, .app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] + #contentContainer .app-bar-application-content {
   margin-bottom: -var(--app-layout-bar-height);
   padding-bottom: var(--app-layout-bar-height);
   margin-right: -var(--app-layout-drawer-small-width);
   padding-right: var(--app-layout-drawer-small-width);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent].app-drawer-1 {
   width: var(--app-layout-drawer-small-width) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] .app-bar-application-content {
   left: var(--app-layout-drawer-small-width) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button-badge {
   background: var(--app-layout-menu-button-badge-background-color);
   color: transparent;
@@ -1002,67 +985,52 @@
   border-radius: 100%;
   padding: 0;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button span.v-button-caption {
   opacity: 0;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element {
   padding-left: 0px;
   padding-right: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-round-image {
   width: var(--app-layout-drawer-small-width) !important;
   height: var(--app-layout-drawer-small-width) !important;
   padding: 7px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-menu-header-title {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-menu-header-title {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button {
   font-size: 20px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button .v-icon {
   width: 100%;
   text-align: center;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button .v-button-caption {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-expanding-menu-container-button:after {
   opacity: 0;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-submenu-container {
   padding-left: var(--app-layout-drawer-submenu-small-indention);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened] .drawer-content {
   width: var(--app-layout-drawer-small-width) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
   left: var(--app-layout-drawer-small-width) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-badge-button {
   padding: 0px 16px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button-badge {
   margin-left: -20px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1070,39 +1038,32 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-hybrid .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -1114,11 +1075,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-hybrid app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1129,33 +1088,26 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-expanding-menu-container-button:after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-round-image {
   transition: width 0.3s, height 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button {
   transition: font-size 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button-badge {
   transition: color 0.3s, height 0.2s, width 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] + #contentContainer app-toolbar {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1163,39 +1115,32 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -1207,11 +1152,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1222,33 +1165,26 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-expanding-menu-container-button:after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-round-image {
   transition: width 0.3s, height 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button {
   transition: font-size 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button-badge {
   transition: color 0.3s, height 0.2s, width 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1256,7 +1192,6 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
@@ -1265,30 +1200,24 @@
   z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .drawer-content {
   height: 100%;
   overflow: visible;
@@ -1296,11 +1225,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1311,33 +1238,26 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-expanding-menu-container-button:after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-round-image {
   transition: width 0.3s, height 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button {
   transition: font-size 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button-badge {
   transition: color 0.3s, height 0.2s, width 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1345,7 +1265,6 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
@@ -1354,29 +1273,23 @@
   z-index: var(--app-layout-bar-z-index) -1;
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .drawer-content {
   height: 100%;
   overflow: visible;
@@ -1384,11 +1297,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1399,12 +1310,10 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-overlay {
   --app-drawer-width: --app-layout-drawer-width;
   --app-bar-height: --app-layout-bar-height;
 }
-
 .app-layout.app-layout-behaviour-left-overlay .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1412,22 +1321,18 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-overlay app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-overlay app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-overlay app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-overlay .drawer-content {
   box-shadow: var(--app-layout-drawer-shadow);
   height: 100%;
@@ -1436,12 +1341,10 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive {
   --app-drawer-width: --app-layout-drawer-width;
   --app-bar-height: --app-layout-bar-height;
 }
-
 .app-layout.app-layout-behaviour-left-responsive .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1449,38 +1352,31 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-responsive .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -1492,11 +1388,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1507,16 +1401,13 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay {
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + app-toolbar paper-icon-button, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + #contentContainer app-toolbar paper-icon-button {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer + app-toolbar .app-bar-content, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer + #contentContainer app-toolbar .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1524,25 +1415,21 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + app-toolbar .app-bar-content, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + #contentContainer app-toolbar .app-bar-content {
   left: 16px;
   position: absolute;
   top: 0px;
   right: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay .drawer-content {
   box-shadow: var(--app-layout-drawer-shadow);
   height: 100%;
@@ -1550,11 +1437,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1565,16 +1450,13 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar {
   --app-drawer-width: --app-layout-drawer-width;
   --app-bar-height: --app-layout-bar-height;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1582,22 +1464,18 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar .drawer-content {
   box-shadow: var(--app-layout-drawer-shadow);
   height: 100%;
@@ -1605,20 +1483,16 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] .drawer-content {
   box-shadow: var(--app-layout-drawer-persistent-shadow);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small {
   --app-drawer-width: --app-layout-drawer-width;
   --app-bar-height: --app-layout-bar-height;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1626,39 +1500,32 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -1670,11 +1537,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1685,37 +1550,29 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small .app-layout-submenu-container {
   padding-left: var(--app-layout-drawer-submenu-small-indention);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar {
   --app-drawer-width: --app-layout-drawer-width;
   --app-bar-height: --app-layout-bar-height;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-expanding-menu-container-button:after {
   opacity: 1;
   transition: opacity 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-round-image {
   transition: width 0.3s, height 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button {
   transition: font-size 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button-badge {
   transition: color 0.3s, height 0.2s, width 0.3s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
   display: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -1723,39 +1580,32 @@
   right: 0px;
   bottom: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header app-toolbar {
   background-color: var(--app-layout-bar-background-color);
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) 1;
+  z-index: calc(var(--app-layout-bar-z-index) + 1);
   padding: 0px;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header paper-icon-button {
   --paper-icon-button-ink-color: #fff;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer-layout {
   --app-drawer-layout-content-transition: margin 0.2s;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[opened] {
   z-index: var(--app-layout-bar-z-index);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer {
   --app-drawer-content-container: {
     background-color: #eee;
   } transition: all 0.5s;
   --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .drawer-content {
   margin-top: var(--app-layout-bar-height);
   box-sizing: border-box;
@@ -1767,11 +1617,9 @@
   background: var(--app-layout-drawer-background-color);
   color: var(--app-layout-drawer-font-color) !important;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] .drawer-content {
   box-shadow: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] .drawer-content:after {
   position: absolute;
   box-shadow: var(--app-layout-drawer-persistent-shadow);
@@ -1782,7 +1630,6 @@
   left: 0px;
   pointer-events: none;
 }
-
 .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-submenu-container {
   padding-left: var(--app-layout-drawer-submenu-small-indention);
 }

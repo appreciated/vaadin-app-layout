@@ -1,0 +1,2125 @@
+:root {
+    --app-layout-background-color: #fafafa;
+    --app-layout-font-size: 16px;
+    --app-layout-unit-size: 37px;
+    --app-layout-border-radius: 4px;
+    --app-layout-focus-color: #4285f4;
+    --app-layout-focus-contrast-color: #fff;
+    --app-layout-bar-height: 64px;
+    --app-layout-bar-background-color: #4285f4;
+    --app-layout-bar-font-color: #fff;
+    --app-layout-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    --app-layout-bar-z-index: 10;
+    --app-layout-drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+    --app-layout-drawer-background-color: white;
+    --app-layout-drawer-submenu-indention: 0px;
+    --app-layout-drawer-submenu-small-indention: 0px;
+    --app-layout-drawer-submenu-background-color: rgba(0, 0, 0, 0.05);
+    --app-layout-drawer-font-color: #000;
+    --app-layout-drawer-persistent-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+    --app-layout-drawer-width: 256px;
+    --app-layout-drawer-small-width: 64px;
+    --app-layout-menu-button-active-background-color: rgba(0, 0, 0, 0.1);
+    --app-layout-menu-button-active-font-color: #4285f4;
+    --app-layout-menu-button-badge-background-color: #4285f4;
+    --app-layout-menu-button-badge-font-color: #fff;
+    --app-layout-menu-button-badge-border-radius: 5px;
+    --app-layout-menu-button-horizontal-padding: 16px;
+    --app-layout-menu-button-height: 48px;
+    --app-layout-menu-button-spacing: 12px;
+    --app-layout-menu-section-padding: 37px;
+    --app-layout-menu-submenu-max-height: 999px;
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-hybrid app-header app-toolbar paper-icon-button#toggle, .app-layout-behaviour-left-responsive-hybrid app-header-layout app-toolbar paper-icon-button#toggle {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-bar-content {
+        left: 10px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
+    .app-layout-behaviour-left-responsive-hybrid {
+        --app-drawer-width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid app-drawer[persistent].app-drawer-1 {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-bar-application-content {
+        left: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button-badge {
+        background: var(--app-layout-menu-button-badge-background-color);
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        border-radius: 100% !important;
+        padding: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-bar-element .app-layout-round-image {
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
+        padding: 7px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button {
+        font-size: 20px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button .v-icon {
+        width: 100%;
+        text-align: center;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button .v-button-caption {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-bar-application-content {
+        margin-bottom: -var(--app-layout-bar-height) !important;
+        padding-bottom: var(--app-layout-bar-height) !important;
+        margin-right: -var(--app-layout-bar-height) !important;
+        padding-right: var(--app-layout-bar-height) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-submenu-container {
+        padding-left: var(--app-layout-drawer-submenu-small-indention) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-badge-button {
+        padding: 0px 16px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button-badge {
+        margin-left: -20px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar {
+        display: none !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .drawer-content {
+        margin-top: var(--app-layout-bar-height);
+        box-sizing: border-box;
+        height: 100%;
+        margin-bottom: -var(--app-layout-bar-height);
+        padding-bottom: var(--app-layout-bar-height);
+    }
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
+        --app-drawer-width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent].app-drawer-1 {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-application-content {
+        left: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button-badge {
+        background: var(--app-layout-menu-button-badge-background-color);
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        border-radius: 100% !important;
+        padding: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-bar-element .app-layout-round-image {
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
+        padding: 7px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button {
+        font-size: 20px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button .v-icon {
+        width: 100%;
+        text-align: center;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button .v-button-caption {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-submenu-container {
+        padding-left: var(--app-layout-drawer-submenu-small-indention) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-badge-button {
+        padding: 0px 16px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button-badge {
+        margin-left: -20px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar {
+        display: none !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-right: -var(--app-layout-drawer-width) !important;
+        padding-right: var(--app-layout-drawer-width) !important;
+    }
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar {
+        --app-drawer-width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent].app-drawer-1 {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-application-content {
+        left: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button-badge {
+        background: var(--app-layout-menu-button-badge-background-color);
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        border-radius: 100% !important;
+        padding: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-bar-element .app-layout-round-image {
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
+        padding: 7px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button {
+        font-size: 20px;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button .v-icon {
+        width: 100%;
+        text-align: center;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button .v-button-caption {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-submenu-container {
+        padding-left: var(--app-layout-drawer-submenu-small-indention) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-badge-button {
+        padding: 0px 16px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button-badge {
+        margin-left: -20px !important;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .app-layout-behaviour-left-responsive-overlay .drawer-content {
+        margin-top: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-overlay .app-bar-application-content {
+        margin-bottom: -var(--app-layout-bar-height) !important;
+        padding-bottom: var(--app-layout-bar-height) !important;
+        margin-right: -var(--app-layout-drawer-width) !important;
+        padding-right: var(--app-layout-drawer-width) !important;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .app-layout-behaviour-left-responsive-overlay-no-app-bar .app-bar-application-content {
+        margin-bottom: -var(--app-layout-bar-height) !important;
+        padding-bottom: var(--app-layout-bar-height) !important;
+        margin-right: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-overlay-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-right: -var(--app-layout-drawer-width) !important;
+        padding-right: var(--app-layout-drawer-width) !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-small {
+        --app-drawer-width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small app-drawer[persistent].app-drawer-1 {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-bar-application-content {
+        left: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small app-header app-toolbar paper-icon-button#toggle {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-bar-content {
+        left: 10px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button-badge {
+        background: var(--app-layout-menu-button-badge-background-color);
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        border-radius: 100% !important;
+        padding: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-bar-element .app-layout-round-image {
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
+        padding: 7px;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button {
+        font-size: 20px;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button .v-icon {
+        width: 100%;
+        text-align: center;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button .v-button-caption {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-bar-application-content {
+        margin-bottom: -var(--app-layout-bar-height) !important;
+        padding-bottom: var(--app-layout-bar-height) !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-badge-button {
+        padding: 0px 16px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small .app-layout-menu-button-badge {
+        margin-left: -20px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-left-responsive-small-no-app-bar {
+        --app-drawer-width: --app-layout-drawer-small-width !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent].app-drawer-1 {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-bar-application-content {
+        left: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar app-header app-toolbar {
+        display: none !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-bar-application-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-right: -var(--app-layout-drawer-small-width) !important;
+        padding-right: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button-badge {
+        background: var(--app-layout-menu-button-badge-background-color);
+        color: transparent !important;
+        height: 5px !important;
+        width: 5px;
+        border-radius: 100% !important;
+        padding: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button span.v-button-caption {
+        opacity: 0;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-bar-element {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-bar-element .app-layout-round-image {
+        width: var(--app-layout-drawer-small-width) !important;
+        height: var(--app-layout-drawer-small-width) !important;
+        padding: 7px;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-bar-element .app-layout-menu-header-title {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button {
+        font-size: 20px;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button .v-icon {
+        width: 100%;
+        text-align: center;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button .v-button-caption {
+        display: none;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-expanding-menu-container-button:after {
+        opacity: 0 !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .drawer-content {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+        width: var(--app-layout-drawer-small-width) !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-badge-button {
+        padding: 0px 16px !important;
+    }
+
+    .app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button-badge {
+        margin-left: -20px !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-top app-toolbar paper-icon-button#toggle {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .app-layout-behaviour-top .app-bar-content {
+        left: 10px !important;
+    }
+
+    .app-layout-behaviour-top app-drawer {
+        display: none;
+    }
+
+    .app-layout-behaviour-top .app-layout-bar-menu-holder {
+        display: flex !important;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .app-layout-behaviour-top-large {
+        --app-bar-height: calc(var(--app-layout-bar-height) * 2) !important;
+    }
+
+    .app-layout-behaviour-top-large app-toolbar paper-icon-button#toggle {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .app-layout-behaviour-top-large .app-bar-content {
+        left: 10px !important;
+    }
+
+    .app-layout-behaviour-top-large .app-bar-menu-content {
+        left: var(--app-layout-bar-height);
+        position: absolute;
+        top: var(--app-layout-bar-height) !important;
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .app-layout-behaviour-top-large app-drawer {
+        display: none;
+    }
+
+    .app-layout-behaviour-top-large .app-bar-menu-content {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .app-layout-behaviour-top-large .app-bar-application-content {
+        box-sizing: border-box;
+        height: 100vh;
+        margin-bottom: calc(calc(var(--app-layout-bar-height) * 2) * -1) !important;
+        padding-bottom: calc(var(--app-layout-bar-height) * 2) !important;
+    }
+
+    .app-layout-behaviour-top-large .app-toolbar-1 {
+        height: calc(var(--app-layout-bar-height) * 2);
+    }
+}
+
+.app-layout .app-layout-menu-element {
+    height: var(--app-layout-menu-button-height) !important;
+}
+
+.app-layout .drawer-content .v-spacing {
+    height: var(--app-layout-menu-button-spacing) !important;
+}
+
+.app-layout .drawer-content .v-margin-bottom {
+    padding-bottom: var(--app-layout-menu-section-padding) !important;
+}
+
+.app-layout .drawer-content .v-margin-top {
+    padding-top: var(--app-layout-menu-section-padding) !important;
+}
+
+.app-layout .app-bar-application-content {
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    transition: margin 0.2s ease, padding 0.2s ease;
+}
+
+.app-layout app-drawer[opened][persistent] + .app-bar-application-content, .app-layout app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    margin-right: -var(--app-layout-drawer-width);
+    padding-right: var(--app-layout-drawer-width);
+}
+
+.app-layout app-header-layout.small app-drawer[opened] + .app-bar-application-content, .app-layout app-header-layout.small app-drawer[opened] + #contentContainer .app-bar-application-content {
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    margin-right: -var(--app-layout-drawer-small-width);
+    padding-right: var(--app-layout-drawer-small-width);
+}
+
+.app-layout .app-bar-application-content {
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.app-layout .app-layout-menu-bar-element {
+    padding-left: var(--app-layout-menu-button-horizontal-padding);
+    padding-right: var(--app-layout-menu-button-horizontal-padding);
+}
+
+.app-layout .v-absolutelayout-wrapper-app-layout-menu-button-badge {
+    pointer-events: none;
+}
+
+.app-layout app-drawer:not([persistent]):not([opened]) .drawer-content * {
+    overflow: hidden;
+}
+
+.app-layout .app-drawer-1 {
+    width: var(--app-layout-drawer-width);
+}
+
+.app-layout .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-layout .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    left: var(--app-layout-drawer-width);
+}
+
+.app-layout .app-drawer-layout-1.small app-drawer[opened][persistent] + .app-bar-application-content, .app-layout .app-drawer-layout-1.small app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    left: var(--app-layout-drawer-small-width);
+}
+
+.app-layout .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+    width: var(--app-layout-drawer-width);
+}
+
+.app-layout .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
+    width: var(--app-layout-drawer-small-width);
+}
+
+.app-layout .app-drawer-1 .app-drawer#scrim {
+    background: transparent !important;
+    box-shadow: var(--app-layout-drawer-shadow);
+}
+
+.app-layout .app-toolbar-1 {
+    height: var(--app-layout-bar-height);
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-button-badge {
+    padding: 0 10px;
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: var(--app-layout-menu-button-badge-font-color);
+    font-size: 13px;
+    height: 20px;
+    line-height: 20px;
+    margin: 15px 5px;
+    margin-left: -50px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.app-layout .app-layout-default-design .v-absolutelayout-wrapper-app-bar-badge {
+    pointer-events: none;
+}
+
+.app-layout .app-layout-default-design .app-bar-badge {
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: var(--app-layout-menu-button-badge-background-color);
+    font-size: 11px;
+    min-width: 18px;
+    min-height: 18px;
+    text-align: center;
+    line-height: 18px;
+    margin: 7px;
+    padding-right: 4px;
+    padding-left: 3px;
+    border-radius: 17px;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-button {
+    text-align: left !important;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 0px;
+    transition: border 0.5s;
+    padding: 0px var(--app-layout-menu-button-horizontal-padding);
+    height: var(--app-layout-menu-button-height) !important;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-default-design .app-layout-menu-button .v-icon + span {
+    margin-left: 16px;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-badge-button {
+    padding-right: 55px;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-element {
+    border-left: 5px transparent solid !important;
+    position: relative;
+    transition: border 0.3s;
+    position: relative;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-element:after {
+    position: absolute;
+    margin-left: -5px;
+    content: "";
+    left: 0px;
+    top: 0px !important;
+    bottom: 0px !important;
+    width: 5px;
+    box-shadow: 0px 0px 20px 4px rgba(var(--app-layout-focus-color), 0);
+    transition: box-shadow 0.3s;
+    overflow: visible;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-element-active {
+    color: var(--app-layout-focus-color) !important;
+    border-left: 5px var(--app-layout-focus-color) solid !important;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-element-active:after {
+    box-shadow: 0px 0px 20px 4px rgba(var(--app-layout-focus-color), 0.3);
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-button:after {
+    box-shadow: none !important;
+    border-left: none;
+}
+
+.app-layout .app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout .app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
+    border-bottom: 2px solid var(--app-layout-bar-font-color);
+}
+
+.app-layout .app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout .app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
+    background: rgba(70, 70, 70, 0) !important;
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout .app-layout-default-design .app-layout-round-image {
+    border-radius: 100%;
+}
+
+.app-layout .app-layout-default-design .app-layout-menu-bar-element {
+    padding-left: 21px;
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-button-badge {
+    padding: 0 10px;
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: var(--app-layout-menu-button-badge-font-color);
+    font-size: 13px;
+    height: 20px;
+    line-height: 20px;
+    margin: var(--app-layout-menu-button-height) -20px/2 15px;
+    margin-left: -50px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-button-badge, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-button-badge {
+    margin: 15px 5px;
+    margin-left: -40px;
+}
+
+.app-layout .app-layout-material-design .v-absolutelayout-wrapper-app-bar-badge {
+    pointer-events: none;
+}
+
+.app-layout .app-layout-material-design .app-bar-badge {
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: var(--app-layout-menu-button-badge-background-color);
+    font-size: 13px;
+    min-width: 18px;
+    min-height: 18px;
+    text-align: center;
+    line-height: 18px;
+    margin: 7px;
+    padding-right: 4px;
+    padding-left: 3px;
+    border-radius: 17px;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-button {
+    text-align: left !important;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 0px;
+    padding: 0px var(--app-layout-menu-button-horizontal-padding);
+    height: var(--app-layout-menu-button-height) !important;
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-material-design .app-layout-menu-button .v-icon + span {
+    margin-left: 16px;
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-badge-button {
+    padding-right: 50px;
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-element-active .app-layout-menu-button {
+    background: var(--app-layout-menu-button-active-background-color) !important;
+    color: var(--app-layout-menu-button-active-font-color) !important;
+}
+
+.app-layout .app-layout-material-design .app-layout-menu-button:after {
+    box-shadow: none !important;
+    border-left: none;
+}
+
+.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
+    border-bottom: 2px solid var(--app-layout-bar-font-color);
+}
+
+.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
+    background: rgba(70, 70, 70, 0) !important;
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout .app-layout-material-design .app-layout-round-image {
+    border-radius: 100%;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-button-badge {
+    padding: 0 10px;
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: var(--app-layout-menu-button-badge-font-color);
+    height: 20px;
+    line-height: 20px;
+    margin: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.app-layout .app-layout-custom-design .v-absolutelayout-wrapper-app-bar-badge {
+    pointer-events: none;
+}
+
+.app-layout .app-layout-custom-design .app-bar-badge {
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: transparent;
+    height: 5px;
+    width: 5px;
+    margin: 11px;
+    border-radius: 100%;
+    padding: 0;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-button {
+    text-align: left !important;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 0px;
+    padding: 0px var(--app-layout-menu-button-horizontal-padding);
+    height: var(--app-layout-menu-button-height) !important;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-custom-design .app-layout-menu-button .v-icon + span {
+    margin-left: 16px;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-button-active {
+    background: var(--app-layout-menu-button-active-background-color) !important;
+    color: var(--app-layout-menu-button-active-font-color) !important;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-button:after {
+    box-shadow: none !important;
+    border-left: none;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-round-button img.v-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    vertical-align: unset !important;
+}
+
+.app-layout .app-layout-custom-design .app-layout-menu-section {
+    padding-left: 14px;
+}
+
+.app-layout .app-layout-notification-window .v-margin-left {
+    padding-left: 10px !important;
+}
+
+.app-layout .app-layout-notification-window .v-margin-bottom {
+    padding-bottom: 10px !important;
+}
+
+.app-layout .app-layout-notification-window .v-margin-right {
+    padding-right: 10px !important;
+}
+
+.app-layout .app-layout-notification-window .v-margin-top {
+    padding-top: 10px !important;
+}
+
+.app-layout .v-window .v-window-outerheader:after {
+    border-top: 1px solid transparent;
+}
+
+.app-layout .v-window-contents > .v-scrollable:before {
+    border-top: 1px solid transparent !important;
+}
+
+.app-layout .v-window.translucent {
+    background-color: transparent;
+    box-shadow: none;
+    overflow: visible !important;
+}
+
+.app-layout .v-window.translucent * :not(.app-layout-notification):not(.v-panel-content) {
+    background-color: transparent !important;
+    overflow: visible !important;
+}
+
+.app-layout .v-window.translucent .app-layout-notification {
+    transition: border 0.3s ease;
+    box-shadow: 0px 5px 11px -1px rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+}
+
+.app-layout .v-window.translucent .app-layout-notification .app-layout-notification-time {
+    position: relative;
+    font-size: 12px;
+    line-height: 24px;
+    margin-left: 4px;
+}
+
+.app-layout .v-window.translucent .app-layout-notification .app-layout-notification-time::before {
+    content: "\2022";
+    font-size: 17px;
+    line-height: 24px;
+    left: -11px;
+    color: var(--app-layout-focus-color);
+    position: absolute;
+}
+
+.app-layout .v-window.translucent .app-layout-notification .app-layout-notification-title {
+    font-weight: 500;
+    color: var(--app-layout-focus-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification .app-layout-notification-subtitle {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high {
+    background: var(--app-layout-focus-color) !important;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high:not(.app-layout-notification-read) {
+    border-left: 3px solid var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high.app-layout-notification-read {
+    border-left: 3px solid transparent;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high .app-layout-notification-subtitle {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high .app-layout-notification-title {
+    font-weight: 500;
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high .app-layout-notification-time {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-high .app-layout-notification-time::before {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-medium {
+    background: white !important;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-medium:not(.app-layout-notification-read) {
+    border-left: 3px solid var(--app-layout-focus-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-medium.app-layout-notification-read {
+    border-left: 3px solid transparent;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-medium .app-layout-notification-subtitle {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-medium .app-layout-notification-time {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-low {
+    background: whitesmoke !important;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-low:not(.app-layout-notification-read) {
+    border-left: 3px solid var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-low.app-layout-notification-read {
+    border-left: 3px solid transparent;
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-low .app-layout-notification-subtitle {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .app-layout-notification.app-layout-notification-priority-low .app-layout-notification-time {
+    color: var(--app-layout-focus-contrast-color);
+}
+
+.app-layout .v-window.translucent .v-window-contents {
+    animation: valo-animate-in-fade 0.4s;
+}
+
+.app-layout .app-layout-expanding-menu-container {
+    transition: max-height 0.4s;
+    overflow: hidden;
+    max-height: var(--app-layout-menu-button-height);
+}
+
+.app-layout .app-layout-expanding-menu-container-open {
+    max-height: var(--app-layout-menu-submenu-max-height);
+}
+
+.app-layout .app-layout-expanding-menu-container-button {
+    position: relative;
+}
+
+.app-layout .app-layout-expanding-menu-container-button:after {
+    position: absolute;
+    content: "\E967";
+    font-family: "Vaadin-Icons";
+    line-height: var(--app-layout-menu-button-height);
+    text-align: center;
+    width: var(--app-layout-menu-button-height);
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    transform: rotate(0deg);
+    transition: opacity 0.3s, transform 0.3s !important;
+    pointer-events: none;
+}
+
+.app-layout .app-layout-expanding-menu-container-open > div > .app-layout-expanding-menu-container-button:after {
+    transform: rotate(90deg);
+}
+
+.app-layout .app-layout-submenu-container {
+    background: var(--app-layout-drawer-submenu-background-color);
+    padding-left: var(--app-layout-drawer-submenu-indention);
+}
+
+.app-layout .app-layout-top-menu.v-menubar * {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left app-drawer {
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-hybrid .app-layout-expanding-menu-container-button:after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .app-layout-round-image {
+    transition: width 0.3s, height 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button {
+    transition: font-size 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .app-layout-menu-button-badge {
+    transition: color 0.3s, height 0.2s, width 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small {
+    --app-drawer-width: var(--app-layout-drawer-small-width);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] + .app-bar-application-content, .app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] + #contentContainer .app-bar-application-content {
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    margin-right: -var(--app-layout-drawer-small-width);
+    padding-right: var(--app-layout-drawer-small-width);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent].app-drawer-1 {
+    width: var(--app-layout-drawer-small-width) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small app-drawer[persistent] .app-bar-application-content {
+    left: var(--app-layout-drawer-small-width) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button-badge {
+    background: var(--app-layout-menu-button-badge-background-color);
+    color: transparent;
+    height: 5px;
+    width: 5px;
+    border-radius: 100%;
+    padding: 0;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button span.v-button-caption {
+    opacity: 0;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-round-image {
+    width: var(--app-layout-drawer-small-width) !important;
+    height: var(--app-layout-drawer-small-width) !important;
+    padding: 7px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-menu-header-title {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-bar-element .app-layout-menu-header-title {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button {
+    font-size: 20px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button .v-icon {
+    width: 100%;
+    text-align: center;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button .v-button-caption {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-expanding-menu-container-button:after {
+    opacity: 0;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-submenu-container {
+    padding-left: var(--app-layout-drawer-submenu-small-indention);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened] .drawer-content {
+    width: var(--app-layout-drawer-small-width) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-layout.app-layout-behaviour-left-hybrid.small .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
+    left: var(--app-layout-drawer-small-width) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-badge-button {
+    padding: 0px 16px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid.small .app-layout-menu-button-badge {
+    margin-left: -20px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-hybrid .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-hybrid app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-expanding-menu-container-button:after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-round-image {
+    transition: width 0.3s, height 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button {
+    transition: font-size 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .app-layout-menu-button-badge {
+    transition: color 0.3s, height 0.2s, width 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] + #contentContainer app-toolbar {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-expanding-menu-container-button:after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-round-image {
+    transition: width 0.3s, height 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button {
+    transition: font-size 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-layout-menu-button-badge {
+    transition: color 0.3s, height 0.2s, width 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar .drawer-content {
+    height: 100%;
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-no-app-bar app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-expanding-menu-container-button:after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-round-image {
+    transition: width 0.3s, height 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button {
+    transition: font-size 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-layout-menu-button-badge {
+    transition: color 0.3s, height 0.2s, width 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: var(--app-layout-bar-z-index) -1;
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar .drawer-content {
+    height: 100%;
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-overlay {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+}
+
+.app-layout.app-layout-behaviour-left-overlay .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-overlay app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-overlay app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-overlay app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-overlay .drawer-content {
+    box-shadow: var(--app-layout-drawer-shadow);
+    height: 100%;
+    margin-top: 0px !important;
+    overflow: visible;
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+}
+
+.app-layout.app-layout-behaviour-left-responsive .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-responsive .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + app-toolbar paper-icon-button, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + #contentContainer app-toolbar paper-icon-button {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer + app-toolbar .app-bar-content, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer + #contentContainer app-toolbar .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + app-toolbar .app-bar-content, .app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] + #contentContainer app-toolbar .app-bar-content {
+    left: 16px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay .drawer-content {
+    box-shadow: var(--app-layout-drawer-shadow);
+    height: 100%;
+    overflow: visible;
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar .drawer-content {
+    box-shadow: var(--app-layout-drawer-shadow);
+    height: 100%;
+    overflow: visible;
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[persistent] .drawer-content {
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-overlay-no-app-bar app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100vh;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small .app-layout-submenu-container {
+    padding-left: var(--app-layout-drawer-submenu-small-indention);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar {
+    --app-drawer-width: --app-layout-drawer-width;
+    --app-bar-height: --app-layout-bar-height;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button span.v-button-caption, .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-expanding-menu-container-button:after {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-round-image {
+    transition: width 0.3s, height 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button {
+    transition: font-size 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-menu-button-badge {
+    transition: color 0.3s, height 0.2s, width 0.3s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] + app-toolbar, .app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] + #contentContainer app-toolbar {
+    display: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    box-shadow: var(--app-layout-bar-shadow);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    padding: 0px;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-header paper-icon-button {
+    --paper-icon-button-ink-color: #fff;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer-layout {
+    --app-drawer-layout-content-transition: margin 0.2s;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer {
+    --app-drawer-content-container: {
+        background-color: #eee;
+    } transition: all 0.5s;
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] .drawer-content {
+    box-shadow: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar app-drawer[persistent] .drawer-content:after {
+    position: absolute;
+    box-shadow: var(--app-layout-drawer-persistent-shadow);
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    pointer-events: none;
+}
+
+.app-layout.app-layout-behaviour-left-responsive-small-no-app-bar .app-layout-submenu-container {
+    padding-left: var(--app-layout-drawer-submenu-small-indention);
+}
+
+.app-layout .app-layout-behaviour-top {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout .app-layout-behaviour-top .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    transition: left 0.3s;
+}
+
+.app-layout .app-layout-behaviour-top .app-bar-content .app-layout-menu-bar-element {
+    display: none;
+}
+
+.app-layout .app-layout-behaviour-top .app-layout-bar-menu-holder {
+    padding-left: 10px;
+    display: none;
+}
+
+.app-layout .app-layout-behaviour-top app-toolbar paper-icon-button {
+    transition: opacity 0.3s;
+    opacity: 1.0;
+    position: absolute;
+    top: 0px;
+}
+
+.app-layout .app-layout-behaviour-top app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+    transition: height 0.3s ease;
+}
+
+.app-layout .app-layout-behaviour-top app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout .app-layout-behaviour-top app-drawer {
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout .app-layout-behaviour-top app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout .app-layout-behaviour-top .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+.app-layout .app-layout-behaviour-top-large {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+}
+
+.app-layout .app-layout-behaviour-top-large .app-bar-content {
+    left: var(--app-layout-bar-height);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: var(--app-layout-bar-height);
+    transition: left 0.3s;
+}
+
+.app-layout .app-layout-behaviour-top-large .app-bar-menu-content .app-layout-menu-bar-element {
+    display: none;
+}
+
+.app-layout .app-layout-behaviour-top-large app-toolbar paper-icon-button {
+    transition: opacity 0.3s;
+    opacity: 1.0;
+    position: absolute;
+    top: 0px;
+}
+
+.app-layout .app-layout-behaviour-top-large .app-bar-menu-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.app-layout .app-layout-behaviour-top-large app-toolbar {
+    background-color: var(--app-layout-bar-background-color);
+    color: var(--app-layout-bar-font-color);
+    position: relative;
+    z-index: calc(var(--app-layout-bar-z-index) + 1);
+    box-shadow: var(--app-layout-bar-shadow);
+    padding: 0px;
+    transition: height 0.3s ease;
+}
+
+.app-layout .app-layout-behaviour-top-large app-toolbar .v-button {
+    color: var(--app-layout-bar-font-color) !important;
+}
+
+.app-layout .app-layout-behaviour-top-large app-drawer {
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+}
+
+.app-layout .app-layout-behaviour-top-large app-drawer[opened] {
+    z-index: var(--app-layout-bar-z-index);
+}
+
+.app-layout .app-layout-behaviour-top-large .drawer-content {
+    margin-top: var(--app-layout-bar-height);
+    box-sizing: border-box;
+    height: 100%;
+    margin-bottom: -var(--app-layout-bar-height);
+    padding-bottom: var(--app-layout-bar-height);
+    overflow: visible;
+    box-shadow: var(--app-layout-drawer-shadow);
+    background: var(--app-layout-drawer-background-color);
+    color: var(--app-layout-drawer-font-color) !important;
+}
+
+/*# sourceMappingURL=app-layout.css.map */
