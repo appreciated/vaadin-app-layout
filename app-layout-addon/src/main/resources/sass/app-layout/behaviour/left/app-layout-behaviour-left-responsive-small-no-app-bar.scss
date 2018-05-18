@@ -70,7 +70,7 @@
 }
 
 @mixin app-layout-behaviour-left-responsive-small-no-app-bar {
-  .app-layout-behaviour-left-responsive-small-no-app-bar {
+  &.app-layout-behaviour-left-responsive-small-no-app-bar {
     --app-drawer-width: --app-layout-drawer-width;
     --app-bar-height: --app-layout-bar-height;
 

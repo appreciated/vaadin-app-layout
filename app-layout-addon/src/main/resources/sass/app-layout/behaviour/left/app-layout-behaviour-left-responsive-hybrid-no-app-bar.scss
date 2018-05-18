@@ -88,7 +88,7 @@
 }
 
 @mixin app-layout-behaviour-left-responsive-hybrid-no-app-bar {
-  .app-layout-behaviour-left-responsive-hybrid-no-app-bar {
+  &.app-layout-behaviour-left-responsive-hybrid-no-app-bar {
     --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
 

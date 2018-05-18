@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.JavaScript;
@@ -63,5 +64,15 @@ public class Top extends AbstractTopAppLayoutBase {
     @Override
     public void addToTopFooter(Component component) {
         appFooterHolder.add(component);
+    }
+
+    @Override
+    public HasComponents getMenuElementsHolder() {
+        return null;
+    }
+
+    @Override
+    public HasComponents getAppBarElementsHolder() {
+        return null;
     }
 }

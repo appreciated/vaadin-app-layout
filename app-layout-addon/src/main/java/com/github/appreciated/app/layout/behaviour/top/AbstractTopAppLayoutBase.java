@@ -14,6 +14,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenu
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
@@ -147,7 +148,7 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     }
 
 
-    public VerticalLayout getContentHolder() {
+    public HasComponents getContentHolder() {
         return contentPanel;
     }
 

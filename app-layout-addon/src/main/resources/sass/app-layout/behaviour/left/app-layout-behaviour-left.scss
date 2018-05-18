@@ -1,5 +1,5 @@
 @mixin app-layout-behaviour-left {;
-  .app-layout-behaviour-left {
+  &.app-layout-behaviour-left {
     --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
     .app-bar-content {

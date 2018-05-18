@@ -1,5 +1,5 @@
 @mixin app-layout-behaviour-left-hybrid {
-  .app-layout-behaviour-left-hybrid {
+  &.app-layout-behaviour-left-hybrid {
     --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
     .app-layout-menu-button span.v-button-caption, .app-layout-expanding-menu-container-button:after {

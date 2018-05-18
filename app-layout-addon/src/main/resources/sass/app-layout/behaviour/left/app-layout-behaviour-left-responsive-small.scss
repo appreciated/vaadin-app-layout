@@ -68,7 +68,7 @@
 }
 
 @mixin app-layout-behaviour-left-responsive-small {
-  .app-layout-behaviour-left-responsive-small {
+  &.app-layout-behaviour-left-responsive-small {
     --app-drawer-width: --app-layout-drawer-width;
     --app-bar-height: --app-layout-bar-height;
     .app-bar-content {

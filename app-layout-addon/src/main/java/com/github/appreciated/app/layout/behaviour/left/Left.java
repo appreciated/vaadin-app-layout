@@ -4,7 +4,9 @@ import com.github.appreciated.app.layout.elements.AppDrawer;
 import com.github.appreciated.app.layout.elements.AppToolbar;
 import com.github.appreciated.app.layout.elements.PaperIconButton;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -15,9 +17,9 @@ public class Left extends AbstractLeftAppLayoutBase {
 
     AppToolbar toolbar;
     PaperIconButton toggle;
-    Div contentDiv;
-    Div appBarElementsDiv;
-    Div menuElementsDiv;
+    HorizontalLayout contentDiv;
+    HorizontalLayout appBarElementsDiv;
+    VerticalLayout menuElementsDiv;
     AppDrawer drawer;
 
     /**
@@ -37,9 +39,9 @@ public class Left extends AbstractLeftAppLayoutBase {
     public Component[] getContent() {
         toolbar = new AppToolbar();
         toggle = new PaperIconButton();
-        contentDiv = new Div();
-        appBarElementsDiv = new Div();
-        menuElementsDiv = new Div();
+        contentDiv = new HorizontalLayout();
+        appBarElementsDiv = new HorizontalLayout();
+        menuElementsDiv = new VerticalLayout();
         drawer = new AppDrawer();
 
         toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
@@ -51,22 +53,22 @@ public class Left extends AbstractLeftAppLayoutBase {
         contentDiv.getElement().getClassList().add("app-bar-application-content");
         menuElementsDiv.getElement().getClassList().add("drawer-content");
         drawer.getElement().setAttribute("swipe-open", true);
-
+        drawer.getElement().appendChild(menuElementsDiv.getElement());
         return new Component[]{toolbar, contentDiv, drawer};
     }
 
     @Override
-    public Div getContentDiv() {
+    public HasComponents getContentHolder() {
         return contentDiv;
     }
 
     @Override
-    public Div getMenuElementsDiv() {
+    public HasComponents getMenuElementsHolder() {
         return menuElementsDiv;
     }
 
     @Override
-    public Div getAppBarElementsDiv() {
+    public HasComponents getAppBarElementsHolder() {
         return appBarElementsDiv;
     }
 

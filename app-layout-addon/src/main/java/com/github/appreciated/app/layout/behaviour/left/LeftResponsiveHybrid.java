@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.JavaScript;
-import com.vaadin.flow.component.html.Div;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -35,17 +35,17 @@ public class LeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
     }
 
     @Override
-    public Div getContentDiv() {
+    public HasComponents getContentHolder() {
         return null;
     }
 
     @Override
-    public Div getMenuElementsDiv() {
+    public HasComponents getMenuElementsHolder() {
         return null;
     }
 
     @Override
-    public Div getAppBarElementsDiv() {
+    public HasComponents getAppBarElementsHolder() {
         return null;
     }
 

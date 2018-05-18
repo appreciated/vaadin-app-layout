@@ -32,15 +32,10 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT
 
 public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayoutElementBase {
 
-    private final HorizontalLayout contentPanel = new HorizontalLayout();
-
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
     private final VerticalLayout menuFooterHolder = new VerticalLayout();
 
-    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
-
-    private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private Component title = new Label("");
@@ -58,14 +53,9 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
     public AbstractLeftAppLayoutBase() {
         super();
         setSizeFull();
-        contentPanel.setSizeFull();
         //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        menuHolder.setSizeFull();
-
         add(getContent());
-        menuHolder.setFlexGrow(1, menuElementHolder);
-        menuHolder.getElement().setAttribute("overflow", "auto");
-
+        getMenuElementsHolder().add(menuHeaderHolder, menuElementHolder, menuFooterHolder);
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
@@ -73,28 +63,21 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         menuFooterHolder.setMargin(true);
         menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
-        getContentDiv().add(contentPanel);
-        getMenuElementsDiv().add(menuHolder);
-        getAppBarElementsDiv().add(appBar);
-        appBar.add(titleWrapper, appBarElementWrapper);
-        appBar.setWidth("100%");
-        appBar.setHeight("100%");
+        getAppBarElementsHolder().add(titleWrapper, appBarElementWrapper);
+
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
+
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        getElement().getClassList().add("app-layout");
     }
 
     public abstract Component[] getContent();
 
-    public abstract Div getContentDiv();
-
-    public abstract Div getMenuElementsDiv();
-
-    public abstract Div getAppBarElementsDiv();
 
     public abstract String getStyleName();
 
@@ -117,10 +100,6 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
     public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
-    }
-
-    public HorizontalLayout getAppBar() {
-        return appBar;
     }
 
     public HorizontalLayout getAppBarElementWrapper() {
@@ -161,10 +140,6 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
-    public HorizontalLayout getContentHolder() {
-        return contentPanel;
-    }
-
     public HorizontalLayout getTitleWrapper() {
         return titleWrapper;
     }
@@ -179,10 +154,6 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
     public VerticalLayout getMenuHeaderHolder() {
         return menuHeaderHolder;
-    }
-
-    public VerticalLayout getMenuHolder() {
-        return menuHolder;
     }
 
     public void addAppBarIcon(Component appBarIconComponent) {
