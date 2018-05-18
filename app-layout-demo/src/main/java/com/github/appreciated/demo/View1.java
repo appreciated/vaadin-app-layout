@@ -2,11 +2,13 @@ package com.github.appreciated.demo;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
+@Route(value = "", layout = MainView.class)
 public class View1 extends VerticalLayout {
 
     private ArrayList<Person> people = new ArrayList<>();

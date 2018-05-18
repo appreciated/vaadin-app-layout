@@ -98,6 +98,11 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         }
     }
 
+    @Override
+    public void setAppLayoutContent(HasElement content) {
+
+    }
+
     public abstract String getStyleName();
 
     public void addAppBarElement(Component component) {

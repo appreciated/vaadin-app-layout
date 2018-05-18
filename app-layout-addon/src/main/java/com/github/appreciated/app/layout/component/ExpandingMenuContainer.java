@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.component.button.NavigationButton;
+import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -19,6 +20,9 @@ public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNav
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         getElement().getClassList().add(EXPANDING_MENU_CONTAINER_PRIMARY_STYLE);
         setMargin(false);
+        setPadding(false);
+        setSpacing(false);
+        LayoutHelper.disableFlex(this);
         NavigationButton expandMenuButton = new NavigationButton(sectionName, icon);
         expandMenuButton.addClickListener(clickEvent -> {
             if (getElement().getClassList().contains(EXPANDING_MENU_CONTAINER_OPEN)) {
@@ -30,13 +34,17 @@ public class ExpandingMenuContainer extends VerticalLayout implements SubmenuNav
         HorizontalLayout buttonWrapper = new HorizontalLayout(expandMenuButton);
         buttonWrapper.getElement().getClassList().add(EXPANDING_MENU_CONTAINER_BUTTON);
         buttonWrapper.setSpacing(false);
+        buttonWrapper.setMargin(false);
+        buttonWrapper.setPadding(false);
         super.add(buttonWrapper);
         buttonWrapper.setWidth("100%");
 
         submenuWrapper = new VerticalLayout();
-        submenuWrapper.getElement().getClassList().add(EXPANDING_MENU_SUBMENU_CONTAINER);
         submenuWrapper.setMargin(false);
+        submenuWrapper.setPadding(false);
+        submenuWrapper.getElement().getClassList().add(EXPANDING_MENU_SUBMENU_CONTAINER);
         submenuWrapper.setWidth("100%");
+        LayoutHelper.disableFlex(submenuWrapper);
 
         super.add(buttonWrapper);
         super.add(submenuWrapper);

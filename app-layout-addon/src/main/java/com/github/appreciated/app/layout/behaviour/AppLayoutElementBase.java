@@ -118,4 +118,5 @@ public interface AppLayoutElementBase {
 
     void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
 
+    void setAppLayoutContent(HasElement content);
 }

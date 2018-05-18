@@ -2,6 +2,7 @@ package com.github.appreciated.demo;
 
 import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AbstractAppLayoutBuilderBase;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
@@ -10,17 +11,14 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
-import com.vaadin.flow.component.Component;
+import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcons;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.router.Route;
 
 import java.util.function.Consumer;
 
@@ -34,20 +32,52 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
 
 @StyleSheet("context://addon/com/github/appreciated/app-layout/app-layout.css")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@Route("")
-public class MainView extends VerticalLayout {
-
-    public MainView() {
-        setMargin(false);
-        setPadding(false);
-        setDrawerVariant(Behaviour.LEFT);
-        setSizeFull();
-        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
-    }
-
+public class MainView extends AppLayoutRouterLayout {
+    private Behaviour variant;
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
     private Thread currentThread;
+
+    public MainView() {
+        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+    }
+
+    @Override
+    public AbstractAppLayoutBuilderBase getConfiguration() {
+        if (variant == null) {
+            variant = Behaviour.LEFT;
+            notifications = new DefaultNotificationHolder();
+            badge = new DefaultBadgeHolder();
+        }
+        return AppLayout.getDefaultBuilder(variant)
+                .withTitle("App Layout")
+                .addToAppBar(new AppBarNotificationButton(notifications, true))
+                .withViewNameInterceptor(new DefaultViewNameInterceptor())
+                .withDesign(AppLayoutDesign.MATERIAL)
+                .add(new MenuHeader("Version 2.0.0", "logo.png"), HEADER)
+                .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                .add("Charts", "view2", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                .add("Contact", "view4", VaadinIcons.CONNECT.create(), View3.class)
+                                .add("More", "view5", VaadinIcons.COG.create(), View4.class)
+                                .build())
+                        .add("Contact1", "view5", VaadinIcons.CONNECT.create(), View3.class)
+                        .add("More1", "view6", VaadinIcons.COG.create(), View4.class)
+                        .build())
+                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
+                                .add("More4", VaadinIcons.COG.create(), View4.class)
+                                .build())
+                        .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
+                        .add("More2", VaadinIcons.COG.create(), View4.class)
+                        .build())
+                .add("Menu", VaadinIcons.MENU.create(), View5.class)
+                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+    }
 
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
@@ -77,39 +107,8 @@ public class MainView extends VerticalLayout {
     }
 
     private void setDrawerVariant(Behaviour variant) {
-        removeAll();
-        Component drawer = AppLayout.getDefaultBuilder(variant)
-                .withTitle("App Layout")
-                .addToAppBar(new AppBarNotificationButton(notifications, true))
-                .withViewNameInterceptor(new DefaultViewNameInterceptor())
-                .withDesign(AppLayoutDesign.MATERIAL)
-                //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 2.0.0", "logo.png"), HEADER)
-                .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                .add("Home", VaadinIcons.HOME.create(), badge, new View1())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                .add("Charts3", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                .add("Contact3", VaadinIcons.CONNECT.create(), View3.class)
-                                .add("More3", VaadinIcons.COG.create(), View4.class)
-                                .build())
-                        .add("Contact1", VaadinIcons.CONNECT.create(), View3.class)
-                        .add("More1", VaadinIcons.COG.create(), View4.class)
-                        .build())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
-                                .add("More4", VaadinIcons.COG.create(), View4.class)
-                                .build())
-                        .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
-                        .add("More2", VaadinIcons.COG.create(), View4.class)
-                        .build())
-                .add("Menu", VaadinIcons.MENU.create(), View5.class)
-                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER)
-                .build();
-        //drawer.addStyleName("left");
-        add(drawer);
+        this.variant = variant;
+        reloadConfiguration();
         reloadNotifications();
     }
 
@@ -117,57 +116,6 @@ public class MainView extends VerticalLayout {
         new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)).open();
     }
 
-
-    public static class View2 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View3 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View4 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View5 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    public static class View6 extends AbstractView {
-        @Override
-        String getViewName() {
-            return getClass().getName();
-        }
-    }
-
-    static abstract class AbstractView extends HorizontalLayout {
-        public AbstractView() {
-            HorizontalLayout layout = new HorizontalLayout();
-            layout.setSizeFull();
-            Label label = new Label("< " + getViewName() + " >");
-            layout.add(label);
-            layout.setAlignItems(Alignment.CENTER);
-            add(layout);
-            setMargin(true);
-            setSizeFull();
-            getElement().getStyle().set("overflow", "auto");
-        }
-
-        abstract String getViewName();
-    }
 
     class BehaviourSelector extends Dialog {
         public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
@@ -189,7 +137,7 @@ public class MainView extends VerticalLayout {
                     Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
                     Behaviour.TOP,
                     Behaviour.TOP_LARGE);
-            group.setItems(current);
+            group.setValue(current);
             layout.add(group);
             group.addValueChangeListener(singleSelectionEvent -> {
                 consumer.accept(singleSelectionEvent.getValue());

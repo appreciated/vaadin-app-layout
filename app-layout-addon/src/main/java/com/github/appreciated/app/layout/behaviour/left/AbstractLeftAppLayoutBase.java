@@ -59,8 +59,12 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(true);
-        menuFooterHolder.setMargin(true);
+        menuElementHolder.setMargin(false);
+        menuFooterHolder.setMargin(false);
+        menuHeaderHolder.setPadding(false);
+        menuElementHolder.setPadding(false);
+        menuFooterHolder.setPadding(false);
+
         menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
         getAppBarElementsHolder().add(titleWrapper, appBarElementWrapper);
@@ -73,6 +77,8 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        titleWrapper.setPadding(false);
+        titleWrapper.setMargin(false);
         getElement().getClassList().add("app-layout");
     }
 
@@ -126,6 +132,13 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
     public void setTitleElement(HasElement titleComponent) {
         if (this.title instanceof Label) {
             ((Label) this.title).setText("test1234");
+        }
+    }
+
+    @Override
+    public void setAppLayoutContent(HasElement content) {
+        if (content != null) {
+            getContentHolder().getElement().appendChild(content.getElement());
         }
     }
 

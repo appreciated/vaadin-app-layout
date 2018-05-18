@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.behaviour.left;
 import com.github.appreciated.app.layout.elements.AppDrawer;
 import com.github.appreciated.app.layout.elements.AppToolbar;
 import com.github.appreciated.app.layout.elements.PaperIconButton;
+import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
@@ -41,8 +42,12 @@ public class Left extends AbstractLeftAppLayoutBase {
         toolbar = new AppToolbar();
         toggle = new PaperIconButton();
         contentDiv = new HorizontalLayout();
+        contentDiv.setMargin(false);
         appBarElementsDiv = new HorizontalLayout();
         menuElementsDiv = new VerticalLayout();
+        menuElementsDiv.setPadding(false);
+        menuElementsDiv.setMargin(false);
+        LayoutHelper.makeScrollable(menuElementsDiv);
         drawer = new AppDrawer();
 
         toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
@@ -52,6 +57,7 @@ public class Left extends AbstractLeftAppLayoutBase {
         toggle.setId("toggle");
         appBarElementsDiv.getElement().getClassList().add("app-bar-content");
         contentDiv.getElement().getClassList().add("app-bar-application-content");
+
         menuElementsDiv.getElement().getClassList().add("drawer-content");
         drawer.getElement().setAttribute("swipe-open", true);
         drawer.getElement().appendChild(menuElementsDiv.getElement());
