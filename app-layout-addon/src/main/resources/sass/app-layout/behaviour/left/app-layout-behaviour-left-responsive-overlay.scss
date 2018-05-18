@@ -17,7 +17,7 @@
 @mixin app-layout-behaviour-left-responsive-overlay {
   .app-layout-behaviour-left-responsive-overlay {
     --app-drawer-width: var(--app-layout-drawer-width);
-    --app-bar-height: var(--app-layout-drawer-height);
+    --app-bar-height: var(--app-layout-bar-height);
 
     app-drawer[persistent] + app-toolbar paper-icon-button, app-drawer[persistent] + #contentContainer app-toolbar paper-icon-button {
       display: none;
