@@ -111,7 +111,7 @@
       margin-top: var(--app-layout-bar-height);
       box-sizing: border-box;
       height: 100vh;
-      margin-bottom: var(---app-layout-bar-height);
+      margin-bottom: -var(--app-layout-bar-height);
       padding-bottom: var(--app-layout-bar-height);
       overflow: visible;
       box-shadow: var(--app-layout-drawer-shadow);
