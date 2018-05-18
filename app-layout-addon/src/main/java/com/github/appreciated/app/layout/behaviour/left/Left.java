@@ -42,7 +42,7 @@ public class Left extends AbstractLeftAppLayoutBase {
         menuElementsDiv = new Div();
         drawer = new AppDrawer();
 
-        appBarElementsDiv.getElement().setAttribute("style", "height: var(--app-bar-height);");
+        toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
         toolbar.getElement().appendChild(toggle.getElement());
         toolbar.getElement().appendChild(appBarElementsDiv.getElement());
         toggle.getElement().setAttribute("icon", "menu");
@@ -50,6 +50,7 @@ public class Left extends AbstractLeftAppLayoutBase {
         appBarElementsDiv.getElement().getClassList().add("app-bar-content");
         contentDiv.getElement().getClassList().add("app-bar-application-content");
         menuElementsDiv.getElement().getClassList().add("drawer-content");
+        drawer.getElement().setAttribute("swipe-open", true);
 
         return new Component[]{toolbar, contentDiv, drawer};
     }

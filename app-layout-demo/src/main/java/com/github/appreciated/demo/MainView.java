@@ -32,7 +32,7 @@ import static com.github.appreciated.app.layout.builder.entities.DefaultNotifica
  * The main view contains a button and a template element.
  */
 
-@StyleSheet("context://addon/com/github/appreciated/applayout/applayout.css")
+@StyleSheet("context://addon/com/github/appreciated/app-layout/app-layout.css")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Route("")
 public class MainView extends VerticalLayout {
