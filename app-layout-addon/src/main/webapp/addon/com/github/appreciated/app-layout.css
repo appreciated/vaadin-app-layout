@@ -655,7 +655,7 @@
   font-size: 13px;
   height: 20px;
   line-height: 20px;
-  margin: var(--app-layout-menu-button-height) -20px/2 15px;
+    margin: var(--app-layout-menu-button-height) -20px/2 15px;
   margin-left: -50px;
   text-align: center;
   border-radius: 10px;
@@ -910,6 +910,12 @@
   --app-drawer-width: var(--app-layout-drawer-width);
   --app-bar-height: var(--app-layout-bar-height);
 }
+
+.app-layout.app-layout-behaviour-left paper-icon-button#toggle {
+    width: calc(var(--app-layout-bar-height) - 16px);
+    height: calc(var(--app-layout-bar-height) - 16px);
+    margin: 8px;
+}
 .app-layout.app-layout-behaviour-left .app-bar-content {
   left: var(--app-layout-bar-height);
   position: absolute;
@@ -923,7 +929,7 @@
   position: relative;
   z-index: calc(var(--app-layout-bar-z-index) + 1);
   box-shadow: var(--app-layout-bar-shadow);
-  padding: 0px;
+    padding: 0 0;
 }
 .app-layout.app-layout-behaviour-left app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
@@ -1270,7 +1276,7 @@
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-  z-index: var(--app-layout-bar-z-index) -1;
+    z-index: var(--app-layout-bar-z-index) -1;
   padding: 0px;
 }
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar .v-button {

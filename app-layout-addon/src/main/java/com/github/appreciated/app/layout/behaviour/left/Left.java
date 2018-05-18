@@ -7,6 +7,7 @@ import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -20,7 +21,8 @@ public class Left extends AbstractLeftAppLayoutBase {
     AppToolbar toolbar;
     PaperIconButton toggle;
     HorizontalLayout contentDiv;
-    HorizontalLayout appBarElementsDiv;
+    Div appBarElementsDiv;
+    HorizontalLayout appBarElements;
     VerticalLayout menuElementsDiv;
     AppDrawer drawer;
 
@@ -43,7 +45,8 @@ public class Left extends AbstractLeftAppLayoutBase {
         toggle = new PaperIconButton();
         contentDiv = new HorizontalLayout();
         contentDiv.setMargin(false);
-        appBarElementsDiv = new HorizontalLayout();
+        appBarElements = new HorizontalLayout();
+        appBarElementsDiv = new Div();
         menuElementsDiv = new VerticalLayout();
         menuElementsDiv.setPadding(false);
         menuElementsDiv.setMargin(false);
@@ -52,6 +55,8 @@ public class Left extends AbstractLeftAppLayoutBase {
 
         toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
         toolbar.getElement().appendChild(toggle.getElement());
+
+        appBarElementsDiv.getElement().appendChild(appBarElements.getElement());
         toolbar.getElement().appendChild(appBarElementsDiv.getElement());
         toggle.getElement().setAttribute("icon", "menu");
         toggle.setId("toggle");
@@ -87,7 +92,7 @@ public class Left extends AbstractLeftAppLayoutBase {
 
     @Override
     public HasComponents getAppBarElementsHolder() {
-        return appBarElementsDiv;
+        return appBarElements;
     }
 
     @Override

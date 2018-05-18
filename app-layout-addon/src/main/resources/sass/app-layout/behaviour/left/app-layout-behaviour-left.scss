@@ -1,5 +1,10 @@
 @mixin app-layout-behaviour-left {;
   &.app-layout-behaviour-left {
+    paper-icon-button#toggle {
+      width: calc(var(--app-layout-bar-height) - 16px);
+      height: calc(var(--app-layout-bar-height) - 16px);
+      margin: 8px;
+    }
     --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
     .app-bar-content {
@@ -18,7 +23,7 @@
       .v-button {
         color: var(--app-layout-bar-font-color) !important;
       }
-      padding: 0px;
+      padding: 0 0;
     }
     app-drawer {
       --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
