@@ -13,8 +13,7 @@ public class RoundImage extends Image {
     }
 
     public RoundImage(String icon, String width, String height) {
-//        super((String) null, icon);
-        super();
+        super(icon, "Icon");
         setWidth(width);
         setHeight(height);
         getElement().getClassList().add(APP_LAYOUT_ROUND_IMAGE);
