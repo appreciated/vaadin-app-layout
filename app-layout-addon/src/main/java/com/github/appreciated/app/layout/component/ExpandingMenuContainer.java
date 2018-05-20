@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationEleme
 import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.github.appreciated.app.layout.webcomponents.ironcollapsebutton.IronCollapseButton;
 import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawerIconItem;
+import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawerItem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -17,7 +18,7 @@ import static com.github.appreciated.app.layout.builder.design.Styles.EXPANDING_
 public class ExpandingMenuContainer extends IronCollapseButton implements SubmenuNavigationElement.SubmenuElement {
 
     private final VerticalLayout submenuWrapper;
-    private final Element toggle;
+    private Element toggle;
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super();
@@ -28,9 +29,15 @@ public class ExpandingMenuContainer extends IronCollapseButton implements Submen
         submenuWrapper.getElement().getClassList().add(EXPANDING_MENU_SUBMENU_CONTAINER);
         submenuWrapper.setWidth("100%");
         LayoutHelper.disableFlex(submenuWrapper);
-        toggle = new PaperDrawerIconItem(sectionName, "").getElement();
-        toggle.getStyle().set("height", "48px");
-        setButton(toggle);
+        if (icon != null) {
+            toggle = new PaperDrawerIconItem(sectionName, icon.getElement().getAttribute("icon")).getElement();
+            toggle.getStyle().set("height", "48px");
+            setButton(toggle);
+        } else {
+            toggle = new PaperDrawerItem(sectionName).getElement();
+            toggle.getStyle().set("height", "48px");
+            setButton(toggle);
+        }
         setContent(submenuWrapper.getElement());
     }
 

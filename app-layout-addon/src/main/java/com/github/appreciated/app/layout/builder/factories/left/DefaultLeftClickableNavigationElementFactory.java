@@ -8,7 +8,7 @@ import com.vaadin.flow.component.HasElement;
 public class DefaultLeftClickableNavigationElementFactory implements ComponentFactory<HasElement, ClickableNavigationElement> {
     @Override
     public HasElement get(ClickableNavigationElement element) {
-        PaperDrawerIconItem button = new PaperDrawerIconItem(element.getName(), "");
+        PaperDrawerIconItem button = new PaperDrawerIconItem(element.getName(), element.getIcon().getElement().getAttribute("icon"));
         button.getElement().getStyle().set("width", "100%");
         button.setClickListener(paperDrawerIconItemClickEvent -> element.getListener().onComponentEvent(paperDrawerIconItemClickEvent));
         return button;

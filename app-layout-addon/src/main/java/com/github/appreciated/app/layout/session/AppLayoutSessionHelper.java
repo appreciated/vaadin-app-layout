@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.session;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeIconButton;
 import com.vaadin.flow.component.UI;
 
 import java.util.Optional;
@@ -36,7 +36,7 @@ public class AppLayoutSessionHelper {
 
     public static void setActiveNavigationElement(NavigatorNavigationElement element) {
         removeStyleFromCurrentlyActiveNavigationElement();
-        NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
+        NavigationBadgeIconButton button = (NavigationBadgeIconButton) element.getComponent();
         UI ui = UI.getCurrent();
         ui.access(() -> button.getElement().getClassList().add(APP_LAYOUT_MENU_ELEMENT_ACTIVE));
         ui.getSession().setAttribute(UI_SESSION_KEY, element);

@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Label;
 
 @Tag("paper-drawer-icon-item")
 @HtmlImport("bower_components/paper-drawer/paper-drawer-icon-item.html")
+@HtmlImport("bower_components/vaadin-icons/vaadin-icons.html")
 public class PaperDrawerIconItem extends Component {
 
     private ComponentEventListener<ClickEvent<PaperDrawerIconItem>> listener;
