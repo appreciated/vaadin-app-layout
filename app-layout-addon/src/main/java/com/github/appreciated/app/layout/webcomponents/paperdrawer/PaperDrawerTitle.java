@@ -8,10 +8,16 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 @HtmlImport("bower_components/paper-drawer/paper-drawer-title.html")
 public class PaperDrawerTitle extends Component {
 
-    public PaperDrawerTitle(String image, String title, String subtitle) {
-        setImageSrc(image);
-        setTitle(title);
-        setSubtitle(subtitle);
+    public PaperDrawerTitle(String title, String subtitle, String image) {
+        if (title != null) {
+            setTitle(title);
+        }
+        if (subtitle != null) {
+            setSubtitle(subtitle);
+        }
+        if (image != null) {
+            setImageSrc(image);
+        }
     }
 
     public String getSubtitle() {
