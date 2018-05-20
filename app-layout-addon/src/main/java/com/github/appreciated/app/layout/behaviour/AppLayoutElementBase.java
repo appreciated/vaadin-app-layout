@@ -54,7 +54,7 @@ public interface AppLayoutElementBase {
 
     void addNavigationElement(AbstractNavigationElement component);
 
-    void addAppBarElement(HasElement component);
+    void addAppBarElement(Component component);
 
     void setDesign(AppLayoutDesign design);
 

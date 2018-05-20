@@ -40,7 +40,7 @@ public class AppLayoutConfiguration {
 
     private Behaviour variant = Behaviour.LEFT;
     private List<AbstractNavigationElement> navigationElements = new ArrayList<>();
-    private List<HasElement> appBarElements = new ArrayList<>();
+    private List<Component> appBarElements = new ArrayList<>();
 
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
     private String title;
@@ -215,7 +215,7 @@ public class AppLayoutConfiguration {
         this.title = title;
     }
 
-    public List<HasElement> getAppBarElements() {
+    public List<Component> getAppBarElements() {
         return appBarElements;
     }
 

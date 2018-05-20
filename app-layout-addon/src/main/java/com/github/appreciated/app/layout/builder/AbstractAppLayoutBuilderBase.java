@@ -236,7 +236,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param element
      * @return
      */
-    public T addToAppBar(HasElement element) {
+    public T addToAppBar(Component element) {
         config.getAppBarElements().add(element);
         return (T) this;
     }
@@ -247,7 +247,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param element
      * @return
      */
-    public T addToAppBar(HasElement... element) {
+    public T addToAppBar(Component... element) {
         config.getAppBarElements().addAll(Arrays.asList(element));
         return (T) this;
     }

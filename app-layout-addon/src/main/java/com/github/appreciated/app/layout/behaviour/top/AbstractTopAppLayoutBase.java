@@ -105,6 +105,7 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
 
     public abstract String getStyleName();
 
+    @Override
     public void addAppBarElement(Component component) {
         appBarElementContainer.add(component);
         appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -130,11 +131,6 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         if (this.title instanceof Label) {
             ((Label) this.title).setText(title);
         }
-    }
-
-    @Override
-    public void addAppBarElement(HasElement component) {
-
     }
 
     @Override

@@ -102,11 +102,6 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         }
     }
 
-    public void addAppBarElement(Component component) {
-        appBarElementContainer.add(component);
-        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
-    }
-
     public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
     }
@@ -120,8 +115,9 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
     }
 
     @Override
-    public void addAppBarElement(HasElement component) {
-
+    public void addAppBarElement(Component component) {
+        appBarElementContainer.add(component);
+        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override
