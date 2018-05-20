@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppToolbar;
 import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawer;
@@ -57,7 +56,6 @@ public class Left extends AbstractLeftAppLayoutBase {
         menuElementsDiv.setSizeFull();
         menuElementsDiv.setPadding(false);
         menuElementsDiv.setMargin(false);
-        LayoutHelper.makeScrollable(menuElementsDiv);
         menuElementsDiv.add(paperDrawer);
         drawer = new AppDrawer();
 
