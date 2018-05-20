@@ -9,7 +9,7 @@ public class MenuHeader extends PaperDrawerTitle {
 
     public MenuHeader(String title, String subtitle, String src) {
         super(title, subtitle, src);
-        getElement().getStyle().set("width", "100%");
+        getElement().getStyle().set("width", "100%").set("box-sizing", "border-box");
     }
 
 }

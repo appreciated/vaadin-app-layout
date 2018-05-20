@@ -7,6 +7,7 @@ import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawerIc
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.dom.Element;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.EXPANDING_MENU_SUBMENU_CONTAINER;
 
@@ -16,6 +17,7 @@ import static com.github.appreciated.app.layout.builder.design.Styles.EXPANDING_
 public class ExpandingMenuContainer extends IronCollapseButton implements SubmenuNavigationElement.SubmenuElement {
 
     private final VerticalLayout submenuWrapper;
+    private final Element toggle;
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super();
@@ -26,7 +28,9 @@ public class ExpandingMenuContainer extends IronCollapseButton implements Submen
         submenuWrapper.getElement().getClassList().add(EXPANDING_MENU_SUBMENU_CONTAINER);
         submenuWrapper.setWidth("100%");
         LayoutHelper.disableFlex(submenuWrapper);
-        setButton(new PaperDrawerIconItem(sectionName, "").getElement());
+        toggle = new PaperDrawerIconItem(sectionName, "").getElement();
+        toggle.getStyle().set("height", "48px");
+        setButton(toggle);
         setContent(submenuWrapper.getElement());
     }
 
