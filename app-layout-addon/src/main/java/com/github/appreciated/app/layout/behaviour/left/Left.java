@@ -51,6 +51,7 @@ public class Left extends AbstractLeftAppLayoutBase {
         contentDiv = new HorizontalLayout();
         contentDiv.setMargin(false);
         appBarElements = new HorizontalLayout();
+        appBarElements.setHeight("100%");
         appBarElementsDiv = new Div();
         menuElementsDiv = new VerticalLayout();
         menuElementsDiv.setSizeFull();

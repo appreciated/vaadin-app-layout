@@ -16,7 +16,7 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCom
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -38,7 +38,7 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private Component title = new Label("");
+    private Component title = new Span("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
     private List<NavigatorNavigationElement> list;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
@@ -75,8 +75,11 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
 
+        ((Span) this.title).getStyle().set("white-space", "nowrap");
+
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        titleWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         titleWrapper.setPadding(false);
         titleWrapper.setMargin(false);
         getElement().getClassList().add("app-layout");
@@ -123,15 +126,15 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
     @Override
     public void setTitle(String title) {
-        if (this.title instanceof Label) {
-            ((Label) this.title).setText(title);
+        if (this.title instanceof Span) {
+            ((Span) this.title).setText(title);
         }
     }
 
     @Override
     public void setTitleElement(HasElement titleComponent) {
-        if (this.title instanceof Label) {
-            ((Label) this.title).setText("test1234");
+        if (this.title instanceof Span) {
+            ((Span) this.title).setText("test1234");
         }
     }
 
