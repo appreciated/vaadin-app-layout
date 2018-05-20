@@ -22,8 +22,8 @@ public class PaperDrawerIconItem extends Component {
         setTitle(title);
         setIcon(icon);
         getElement().addEventListener("click", domEvent -> {
-            if (listener != null) {
-                listener.onComponentEvent(new ClickEvent<>(this));
+            if (this.listener != null) {
+                this.listener.onComponentEvent(new ClickEvent<>(this));
             }
         });
     }
