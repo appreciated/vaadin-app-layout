@@ -45,6 +45,7 @@ public class Left extends AbstractLeftAppLayoutBase {
     public Component[] getContent() {
         toolbar = new AppToolbar();
         paperDrawer = new PaperDrawer();
+        paperDrawer.getElement().getStyle().set("width", "100%");
 
         toggle = new PaperIconButton();
         contentDiv = new HorizontalLayout();

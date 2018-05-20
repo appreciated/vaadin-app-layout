@@ -19,6 +19,7 @@ public class ExpandingMenuContainer extends IronCollapseButton implements Submen
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super();
+        getElement().getStyle().set("width", "100%");
         submenuWrapper = new VerticalLayout();
         submenuWrapper.setMargin(false);
         submenuWrapper.setPadding(false);

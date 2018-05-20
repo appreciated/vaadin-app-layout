@@ -11,6 +11,7 @@ public class DefaultLeftSectionElementComponentFactory implements ComponentFacto
         Label label = new Label(element.getName());
         //label.addStyleName("app-layout-menu-section");
         label.setWidth("100%");
+
         return label;
     }
 }

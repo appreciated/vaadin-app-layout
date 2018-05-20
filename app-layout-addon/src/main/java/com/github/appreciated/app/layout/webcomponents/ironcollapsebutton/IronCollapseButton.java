@@ -20,6 +20,7 @@ public class IronCollapseButton extends Component {
 
     public IronCollapseButton() {
         collapseTrigger = new Div();
+        collapseTrigger.setWidth("100%");
         collapseTrigger.getElement().setAttribute("slot", "collapse-trigger");
         collapseContent = new Div();
         collapseContent.getElement().setAttribute("slot", "collapse-content");
