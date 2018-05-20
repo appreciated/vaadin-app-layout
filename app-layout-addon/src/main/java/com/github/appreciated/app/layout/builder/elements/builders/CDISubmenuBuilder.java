@@ -6,7 +6,6 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.ArrayList;
@@ -111,15 +110,15 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
         return (T) this;
     }
 
-    public T addClickable(Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+    public T addClickable(Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
         return addClickable(null, icon, listener);
     }
 
-    public T addClickable(String caption, ComponentEventListener<ClickEvent<Button>> listener) {
+    public T addClickable(String caption, ComponentEventListener<ClickEvent<?>> listener) {
         return addClickable(caption, null, listener);
     }
 
-    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
         this.submenuElements.add(new ClickableNavigationElement(caption, icon, listener));
         return (T) this;
     }

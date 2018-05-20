@@ -72,8 +72,8 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
         /**add(contentPanel, "content");
-         addComponent(menuHolder, "menu-elements");
-         addComponent(appBar, "app-bar-elements");*/
+         addComponent(menuHolder, "menu-webcomponents");
+         addComponent(appBar, "app-bar-webcomponents");*/
         appBar.add(titleWrapper, appBarElementWrapper);
         appBar.setFlexGrow(1.0, titleWrapper);
         appBar.setWidth("100%");

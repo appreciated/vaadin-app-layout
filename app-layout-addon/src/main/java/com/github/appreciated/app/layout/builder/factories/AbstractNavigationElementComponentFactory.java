@@ -10,7 +10,7 @@ public abstract class AbstractNavigationElementComponentFactory implements Compo
 
     public void setNavigationClickListener(NavigatorNavigationElement element) {
         NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
-        button.getButton().addClickListener(clickEvent -> {
+        button.setClickListener(clickEvent -> {
             element.onClick();
             AppLayoutElementBase.closeDrawerIfNotPersistent();
         });

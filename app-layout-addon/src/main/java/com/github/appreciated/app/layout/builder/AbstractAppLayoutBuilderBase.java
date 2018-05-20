@@ -10,7 +10,6 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.Arrays;
@@ -71,7 +70,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Sets the Component provider that is being used to generate navigation elements in the drawer.
+     * Sets the Component provider that is being used to generate navigation webcomponents in the drawer.
      *
      * @param provider
      * @return
@@ -82,7 +81,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Sets the Component provider that is being used to generate section elements in the drawer.
+     * Sets the Component provider that is being used to generate section webcomponents in the drawer.
      *
      * @param provider
      * @return
@@ -93,7 +92,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Sets the Component provider that is being used to generate submenu navigation elements in the drawer.
+     * Sets the Component provider that is being used to generate submenu navigation webcomponents in the drawer.
      *
      * @param provider
      * @return
@@ -156,7 +155,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @return
      */
 
-    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
         return addClickable(caption, icon, listener, Section.DEFAULT);
     }
 
@@ -169,7 +168,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param section
      * @return
      */
-    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener, Section section) {
+    public T addClickable(String caption, Icon icon, ComponentEventListener<ClickEvent<?>> listener, Section section) {
         addToPosition(new ClickableNavigationElement(caption, icon, listener), section);
         return (T) this;
     }
@@ -203,7 +202,7 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
      * @param listener
      * @return
      */
-    public T addClickable(String caption, ComponentEventListener<ClickEvent<Button>> listener) {
+    public T addClickable(String caption, ComponentEventListener<ClickEvent<?>> listener) {
         return addClickable(caption, null, listener);
     }
 

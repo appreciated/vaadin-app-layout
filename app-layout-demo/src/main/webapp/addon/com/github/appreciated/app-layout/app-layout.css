@@ -664,7 +664,8 @@
 .app-layout .app-toolbar-1 {
     height: var(--app-layout-bar-height);
 }
-.app-layout .app-layout-default-design .app-layout-menu-button-badge {
+
+.app-layout.app-layout-default-design .app-layout-menu-button-badge {
     padding: 0 10px;
     background: var(--app-layout-menu-button-badge-background-color);
     color: var(--app-layout-menu-button-badge-font-color);
@@ -676,10 +677,12 @@
     text-align: center;
     border-radius: 10px;
 }
-.app-layout .app-layout-default-design .v-absolutelayout-wrapper-app-bar-badge {
+
+.app-layout.app-layout-default-design .v-absolutelayout-wrapper-app-bar-badge {
     pointer-events: none;
 }
-.app-layout .app-layout-default-design .app-bar-badge {
+
+.app-layout.app-layout-default-design .app-bar-badge {
     background: var(--app-layout-menu-button-badge-background-color);
     color: var(--app-layout-menu-button-badge-background-color);
     font-size: 11px;
@@ -692,7 +695,8 @@
     padding-left: 3px;
     border-radius: 17px;
 }
-.app-layout .app-layout-default-design .app-layout-menu-button {
+
+.app-layout.app-layout-default-design .app-layout-menu-button {
     text-align: left !important;
     transition: background 0.3s ease, color 0.3s ease;
     border-radius: 0px;
@@ -700,19 +704,27 @@
     padding: 0px var(--app-layout-menu-button-horizontal-padding);
     height: var(--app-layout-menu-button-height) !important;
 }
-.app-layout .app-layout-default-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-default-design .app-layout-menu-button .v-icon + span {
+
+.app-layout.app-layout-default-design .app-layout-menu-button .vaadin-button-container {
+    justify-content: start;
+}
+
+.app-layout.app-layout-default-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-default-design .app-layout-menu-button .v-icon + span {
     margin-left: 16px;
 }
-.app-layout .app-layout-default-design .app-layout-menu-badge-button {
+
+.app-layout.app-layout-default-design .app-layout-menu-badge-button {
     padding-right: 55px;
 }
-.app-layout .app-layout-default-design .app-layout-menu-element {
+
+.app-layout.app-layout-default-design .app-layout-menu-element {
     border-left: 5px transparent solid !important;
     position: relative;
     transition: border 0.3s;
     position: relative;
 }
-.app-layout .app-layout-default-design .app-layout-menu-element:after {
+
+.app-layout.app-layout-default-design .app-layout-menu-element:after {
     position: absolute;
     margin-left: -5px;
     content: "";
@@ -724,31 +736,39 @@
     transition: box-shadow 0.3s;
     overflow: visible;
 }
-.app-layout .app-layout-default-design .app-layout-menu-element-active {
+
+.app-layout.app-layout-default-design .app-layout-menu-element-active {
     color: var(--app-layout-focus-color) !important;
     border-left: 5px var(--app-layout-focus-color) solid !important;
 }
-.app-layout .app-layout-default-design .app-layout-menu-element-active:after {
+
+.app-layout.app-layout-default-design .app-layout-menu-element-active:after {
     box-shadow: 0px 0px 20px 4px rgba(var(--app-layout-focus-color), 0.3);
 }
-.app-layout .app-layout-default-design .app-layout-menu-button:after {
+
+.app-layout.app-layout-default-design .app-layout-menu-button:after {
     box-shadow: none !important;
     border-left: none;
 }
-.app-layout .app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout .app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
+
+.app-layout.app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout.app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
     border-bottom: 2px solid var(--app-layout-bar-font-color);
 }
-.app-layout .app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout .app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
+
+.app-layout.app-layout-default-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout.app-layout-default-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
     background: rgba(70, 70, 70, 0) !important;
     color: var(--app-layout-bar-font-color) !important;
 }
-.app-layout .app-layout-default-design .app-layout-round-image {
+
+.app-layout.app-layout-default-design .app-layout-round-image {
     border-radius: 100%;
 }
-.app-layout .app-layout-default-design .app-layout-menu-bar-element {
+
+.app-layout.app-layout-default-design .app-layout-menu-bar-element {
     padding-left: 21px;
 }
-.app-layout .app-layout-material-design .app-layout-menu-button-badge {
+
+.app-layout.app-layout-material-design .app-layout-menu-button-badge {
     padding: 0 10px;
     background: var(--app-layout-menu-button-badge-background-color);
     color: var(--app-layout-menu-button-badge-font-color);
@@ -760,14 +780,17 @@
     text-align: center;
     border-radius: 10px;
 }
-.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-button-badge, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-button-badge {
+
+.app-layout.app-layout-material-design.app-layout-behaviour-top .app-layout-menu-button-badge, .app-layout.app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-button-badge {
     margin: 15px 5px;
     margin-left: -40px;
 }
-.app-layout .app-layout-material-design .v-absolutelayout-wrapper-app-bar-badge {
+
+.app-layout.app-layout-material-design .v-absolutelayout-wrapper-app-bar-badge {
     pointer-events: none;
 }
-.app-layout .app-layout-material-design .app-bar-badge {
+
+.app-layout.app-layout-material-design .app-bar-badge {
     background: var(--app-layout-menu-button-badge-background-color);
     color: var(--app-layout-menu-button-badge-background-color);
     font-size: 13px;
@@ -781,38 +804,51 @@
     border-radius: 17px;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
 }
-.app-layout .app-layout-material-design .app-layout-menu-button {
+
+.app-layout.app-layout-material-design .app-layout-menu-button {
     text-align: left !important;
     transition: background 0.3s ease, color 0.3s ease;
     border-radius: 0px;
     padding: 0px var(--app-layout-menu-button-horizontal-padding);
     height: var(--app-layout-menu-button-height) !important;
 }
-.app-layout .app-layout-material-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-material-design .app-layout-menu-button .v-icon + span {
+
+.app-layout.app-layout-material-design .app-layout-menu-button .vaadin-button-container {
+    justify-content: start;
+}
+
+.app-layout.app-layout-material-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-material-design .app-layout-menu-button .v-icon + span {
     margin-left: 16px;
 }
-.app-layout .app-layout-material-design .app-layout-menu-badge-button {
+
+.app-layout.app-layout-material-design .app-layout-menu-badge-button {
     padding-right: 50px;
 }
-.app-layout .app-layout-material-design .app-layout-menu-element-active .app-layout-menu-button {
+
+.app-layout.app-layout-material-design .app-layout-menu-element-active .app-layout-menu-button {
     background: var(--app-layout-menu-button-active-background-color) !important;
     color: var(--app-layout-menu-button-active-font-color) !important;
 }
-.app-layout .app-layout-material-design .app-layout-menu-button:after {
+
+.app-layout.app-layout-material-design .app-layout-menu-button:after {
     box-shadow: none !important;
     border-left: none;
 }
-.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
+
+.app-layout.app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active, .app-layout.app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active {
     border-bottom: 2px solid var(--app-layout-bar-font-color);
 }
-.app-layout .app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout .app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
+
+.app-layout.app-layout-material-design.app-layout-behaviour-top .app-layout-menu-element-active .app-layout-menu-button, .app-layout.app-layout-material-design.app-layout-behaviour-top-large .app-layout-menu-element-active .app-layout-menu-button {
     background: rgba(70, 70, 70, 0) !important;
     color: var(--app-layout-bar-font-color) !important;
 }
-.app-layout .app-layout-material-design .app-layout-round-image {
+
+.app-layout.app-layout-material-design .app-layout-round-image {
     border-radius: 100%;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-button-badge {
+
+.app-layout.app-layout-custom-design .app-layout-menu-button-badge {
     padding: 0 10px;
     background: var(--app-layout-menu-button-badge-background-color);
     color: var(--app-layout-menu-button-badge-font-color);
@@ -822,10 +858,12 @@
     text-align: center;
     border-radius: 10px;
 }
-.app-layout .app-layout-custom-design .v-absolutelayout-wrapper-app-bar-badge {
+
+.app-layout.app-layout-custom-design .v-absolutelayout-wrapper-app-bar-badge {
     pointer-events: none;
 }
-.app-layout .app-layout-custom-design .app-bar-badge {
+
+.app-layout.app-layout-custom-design .app-bar-badge {
     background: var(--app-layout-menu-button-badge-background-color);
     color: transparent;
     height: 5px;
@@ -834,31 +872,41 @@
     border-radius: 100%;
     padding: 0;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-button {
+
+.app-layout.app-layout-custom-design .app-layout-menu-button {
     text-align: left !important;
     transition: background 0.3s ease, color 0.3s ease;
     border-radius: 0px;
     padding: 0px var(--app-layout-menu-button-horizontal-padding);
     height: var(--app-layout-menu-button-height) !important;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout .app-layout-custom-design .app-layout-menu-button .v-icon + span {
+
+.app-layout.app-layout-custom-design .app-layout-menu-button .vaadin-button-container {
+    justify-content: start;
+}
+
+.app-layout.app-layout-custom-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-custom-design .app-layout-menu-button .v-icon + span {
     margin-left: 16px;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-button-active {
+
+.app-layout.app-layout-custom-design .app-layout-menu-button-active {
     background: var(--app-layout-menu-button-active-background-color) !important;
     color: var(--app-layout-menu-button-active-font-color) !important;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-button:after {
+
+.app-layout.app-layout-custom-design .app-layout-menu-button:after {
     box-shadow: none !important;
     border-left: none;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-round-button img.v-icon {
+
+.app-layout.app-layout-custom-design .app-layout-menu-round-button img.v-icon {
     width: 100%;
     height: 100%;
     border-radius: 100%;
     vertical-align: unset !important;
 }
-.app-layout .app-layout-custom-design .app-layout-menu-section {
+
+.app-layout.app-layout-custom-design .app-layout-menu-section {
     padding-left: 14px;
 }
 .app-layout .app-layout-notification-window .v-margin-left {
@@ -1010,7 +1058,6 @@
     --app-drawer-width: var(--app-layout-drawer-width);
     --app-bar-height: var(--app-layout-bar-height);
 }
-
 .app-layout.app-layout-behaviour-left paper-icon-button#toggle {
     width: calc(var(--app-layout-bar-height) - 16px);
     height: calc(var(--app-layout-bar-height) - 16px);

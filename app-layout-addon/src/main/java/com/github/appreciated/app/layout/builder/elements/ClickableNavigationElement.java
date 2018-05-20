@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.behaviour.Position;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
@@ -14,9 +13,9 @@ import com.vaadin.flow.component.icon.Icon;
 public class ClickableNavigationElement extends AbstractNavigationElement<HasElement, ClickableNavigationElement> {
     private final String name;
     private Icon icon;
-    private ComponentEventListener<ClickEvent<Button>> listener;
+    private ComponentEventListener<ClickEvent<?>> listener;
 
-    public ClickableNavigationElement(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+    public ClickableNavigationElement(String name, Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
         this.name = name;
         this.icon = icon;
         this.listener = listener;
@@ -52,7 +51,7 @@ public class ClickableNavigationElement extends AbstractNavigationElement<HasEle
         }
     }
 
-    public ComponentEventListener<ClickEvent<Button>> getListener() {
+    public ComponentEventListener<ClickEvent<?>> getListener() {
         return listener;
     }
 }

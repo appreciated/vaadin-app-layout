@@ -60,7 +60,7 @@ public interface AppLayoutElementBase {
 
     HasComponents getContentHolder();
 
-    HasComponents getMenuElementsHolder();
+    Component getMenuElementsHolder();
 
     HasComponents getAppBarElementsHolder();
 

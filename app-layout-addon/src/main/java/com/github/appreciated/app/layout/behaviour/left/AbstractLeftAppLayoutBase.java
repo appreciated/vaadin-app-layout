@@ -55,7 +55,7 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         setSizeFull();
         //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         add(getContent());
-        getMenuElementsHolder().add(menuHeaderHolder, menuElementHolder, menuFooterHolder);
+        getMenuElementsHolder().getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);

@@ -1,5 +1,5 @@
 @mixin app-layout-material-design {
-  .app-layout-material-design {
+  &.app-layout-material-design {
     .app-layout-menu-button-badge {
       padding: 0 10px;
       background: var(--app-layout-menu-button-badge-background-color);
@@ -34,6 +34,9 @@
       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
     }
     .app-layout-menu-button {
+      .vaadin-button-container {
+        justify-content: start;
+      }
       text-align: left !important;
       .v-icon + .v-captiontext, .v-icon + span {
         margin-left: 16px;

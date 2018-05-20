@@ -41,7 +41,7 @@ public class LeftResponsiveHybridNoAppBarBase extends AbstractLeftAppLayoutBase 
     }
 
     @Override
-    public HasComponents getMenuElementsHolder() {
+    public Component getMenuElementsHolder() {
         return null;
     }
 

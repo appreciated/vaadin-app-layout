@@ -58,7 +58,7 @@ public class TopLarge extends AbstractTopAppLayoutBase {
     }
 
     @Override
-    public HasComponents getMenuElementsHolder() {
+    public Component getMenuElementsHolder() {
         return null;
     }
 

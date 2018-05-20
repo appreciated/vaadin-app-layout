@@ -67,7 +67,7 @@ public class Top extends AbstractTopAppLayoutBase {
     }
 
     @Override
-    public HasComponents getMenuElementsHolder() {
+    public Component getMenuElementsHolder() {
         return null;
     }
 

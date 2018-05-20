@@ -35,7 +35,7 @@ public class LeftHybrid extends AbstractLeftAppLayoutBase {
     }
 
     @Override
-    public HasComponents getMenuElementsHolder() {
+    public Component getMenuElementsHolder() {
         return null;
     }
 

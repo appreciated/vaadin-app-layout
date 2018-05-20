@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.elements;
+package com.github.appreciated.app.layout.webcomponents.applayout;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;

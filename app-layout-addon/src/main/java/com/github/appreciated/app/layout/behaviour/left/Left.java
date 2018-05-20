@@ -1,9 +1,10 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.elements.AppDrawer;
-import com.github.appreciated.app.layout.elements.AppToolbar;
-import com.github.appreciated.app.layout.elements.PaperIconButton;
 import com.github.appreciated.app.layout.helper.LayoutHelper;
+import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
+import com.github.appreciated.app.layout.webcomponents.applayout.AppToolbar;
+import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawer;
+import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
@@ -25,6 +26,7 @@ public class Left extends AbstractLeftAppLayoutBase {
     HorizontalLayout appBarElements;
     VerticalLayout menuElementsDiv;
     AppDrawer drawer;
+    PaperDrawer paperDrawer;
 
     /**
      * <app-toolbar style="height: var(--app-bar-height);">
@@ -42,15 +44,19 @@ public class Left extends AbstractLeftAppLayoutBase {
     @Override
     public Component[] getContent() {
         toolbar = new AppToolbar();
+        paperDrawer = new PaperDrawer();
+
         toggle = new PaperIconButton();
         contentDiv = new HorizontalLayout();
         contentDiv.setMargin(false);
         appBarElements = new HorizontalLayout();
         appBarElementsDiv = new Div();
         menuElementsDiv = new VerticalLayout();
+        menuElementsDiv.setSizeFull();
         menuElementsDiv.setPadding(false);
         menuElementsDiv.setMargin(false);
         LayoutHelper.makeScrollable(menuElementsDiv);
+        menuElementsDiv.add(paperDrawer);
         drawer = new AppDrawer();
 
         toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
@@ -86,8 +92,8 @@ public class Left extends AbstractLeftAppLayoutBase {
     }
 
     @Override
-    public HasComponents getMenuElementsHolder() {
-        return menuElementsDiv;
+    public Component getMenuElementsHolder() {
+        return paperDrawer;
     }
 
     @Override

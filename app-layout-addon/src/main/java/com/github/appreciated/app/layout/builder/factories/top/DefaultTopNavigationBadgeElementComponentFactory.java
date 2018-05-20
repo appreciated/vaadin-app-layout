@@ -11,7 +11,7 @@ public class DefaultTopNavigationBadgeElementComponentFactory extends AbstractNa
     public NavigationElementComponent get(NavigatorNavigationElement element) {
         NavigationBadgeButton button = new NavigationBadgeButton(element.getCaption(), element.getIcon(), element.getBadgeHolder());
         element.setComponent(button);
-        button.getButton().setText(element.getCaption());
+        button.setNavigationCaption(element.getCaption());
         setNavigationClickListener(element);
         return button;
     }
