@@ -73,7 +73,7 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         appBarElementWrapper.setSizeFull();
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
-        appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
+        appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
         ((Span) this.title).getStyle().set("white-space", "nowrap");
 

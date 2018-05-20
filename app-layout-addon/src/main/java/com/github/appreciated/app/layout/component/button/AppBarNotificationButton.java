@@ -32,9 +32,9 @@ public class AppBarNotificationButton extends AppBarBadgeButton {
     }
 
     public AppBarNotificationButton(NotificationHolder holder, boolean closeOnClick, Factory<NotificationWindow, NotificationHolder> windowFactory) {
-        super("test", holder);
+        super("event", holder);
         factory = windowFactory;
-        getButton().addClickListener(buttonClickEvent -> buttonClick(buttonClickEvent));
+        getButton().setClickListener(buttonClickEvent -> buttonClick(null));
         if (closeOnClick) {
             holder.addStatusListener(new NotificationHolder.NotificationListener() {
                 @Override
