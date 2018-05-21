@@ -22,6 +22,7 @@ public class IronCollapseButton extends Component {
         collapseTrigger = new Div();
         collapseTrigger.setWidth("100%");
         collapseTrigger.getElement().setAttribute("slot", "collapse-trigger");
+        collapseTrigger.getStyle().set("margin-right", "-24px");
         collapseContent = new Div();
         collapseContent.getElement().setAttribute("slot", "collapse-content");
         getElement().appendChild(collapseTrigger.getElement());

@@ -42,8 +42,8 @@ $al-drawer-small-width: 64px !default;
 
 $al-menu-button-active-background-color: rgba(color-contrast($al-drawer-background-color), 0.1) !default; // only used by material design
 $al-menu-button-active-font-color: $al-focus-color !default; // only used by material design
-$al-menu-button-badge-background-color: $al-focus-color !default;
-$al-menu-button-badge-font-color: color-contrast($al-focus-color) !default;
+$al-menu-button-badge-background-color: #ffffff !default;
+$al-menu-button-badge-font-color: $al-focus-color !default;
 $al-menu-button-badge-border-radius: 5px !default;
 
 $al-menu-button-horizontal-padding: round($al-unit-size/2.4) + round($al-border-radius/3) !default;

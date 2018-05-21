@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.Section.FOOTER;
 import static com.github.appreciated.app.layout.builder.Section.HEADER;
-import static com.github.appreciated.app.layout.builder.entities.DefaultNotification.Priority.MEDIUM;
 
 /**
  * The main view contains a button and a template element.
@@ -49,9 +48,12 @@ public class MainView extends AppLayoutRouterLayout {
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
+        notifications.addNotification(new DefaultNotification("Test1", "Test1"));
+        notifications.addNotification(new DefaultNotification("Test2", "Test2"));
+        notifications.addNotification(new DefaultNotification("Test3", "Test3"));
         return AppLayout.getDefaultBuilder(variant)
                 .withTitle("App Layout")
-                .addToAppBar(new AppBarNotificationButton(notifications, true))
+                .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .add(new MenuHeader("App-Layout", "Version 2.0.0", "/images/logo.png"), HEADER)
@@ -78,7 +80,7 @@ public class MainView extends AppLayoutRouterLayout {
                 .add("Menu", VaadinIcons.MENU.create(), View5.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
     }
-
+/*
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
             currentThread.interrupt();
@@ -97,7 +99,7 @@ public class MainView extends AppLayoutRouterLayout {
             }
         });
         currentThread.start();
-    }
+    }*/
 
     private void addNotification(DefaultNotification.Priority priority) {
         getUI().ifPresent(ui -> {
@@ -109,7 +111,7 @@ public class MainView extends AppLayoutRouterLayout {
     private void setDrawerVariant(Behaviour variant) {
         this.variant = variant;
         reloadConfiguration();
-        reloadNotifications();
+        //reloadNotifications();
     }
 
     private void openModeSelector(Behaviour variant) {

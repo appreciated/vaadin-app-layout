@@ -10,6 +10,9 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.Element;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.github.appreciated.app.layout.builder.design.Styles.EXPANDING_MENU_SUBMENU_CONTAINER;
 
 /**
@@ -18,11 +21,15 @@ import static com.github.appreciated.app.layout.builder.design.Styles.EXPANDING_
 public class ExpandingMenuContainer extends IronCollapseButton implements SubmenuNavigationElement.SubmenuElement {
 
     private final VerticalLayout submenuWrapper;
+    private List<Element> elements;
     private Element toggle;
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super();
         getElement().getStyle().set("width", "100%");
+        //.set("box-sizing", "border-box")
+        //.set("padding-right", "10px");
+        getElement().getShadowRoot().ifPresent(shadowRoot -> elements = getElement().getChildren().collect(Collectors.toList()));
         submenuWrapper = new VerticalLayout();
         submenuWrapper.setMargin(false);
         submenuWrapper.setPadding(false);

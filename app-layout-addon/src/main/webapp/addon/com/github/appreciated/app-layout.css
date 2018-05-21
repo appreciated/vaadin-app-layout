@@ -21,16 +21,16 @@
   --app-layout-drawer-small-width: 64px;
   --app-layout-menu-button-active-background-color: rgba(0, 0, 0, 0.1);
   --app-layout-menu-button-active-font-color: #4285f4;
-  --app-layout-menu-button-badge-background-color: #4285f4;
-  --app-layout-menu-button-badge-font-color: #fff;
+  --app-layout-menu-button-badge-background-color: #ffffff;
+  --app-layout-menu-button-badge-font-color: #4285f4;
   --app-layout-menu-button-badge-border-radius: 5px;
   --app-layout-menu-button-horizontal-padding: 16px;
   --app-layout-menu-button-height: 48px;
   --app-layout-menu-button-spacing: 12px;
   --app-layout-menu-section-padding: 37px;
   --app-layout-menu-submenu-max-height: 999px;
-    --paper-drawer-title-background-color: #fafafa;
-    --paper-drawer-title-color: #000;
+  --paper-drawer-title-background-color: #fafafa;
+  --paper-drawer-title-color: #000;
 }
 
 @media only screen and (min-width: 641px) {
@@ -603,7 +603,7 @@
   height: var(--app-layout-menu-button-height) !important;
 }
 .app-layout.app-layout-default-design .app-layout-menu-button .vaadin-button-container {
-    justify-content: start;
+  justify-content: start;
 }
 .app-layout.app-layout-default-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-default-design .app-layout-menu-button .v-icon + span {
   margin-left: 16px;
@@ -660,7 +660,7 @@
   font-size: 13px;
   height: 20px;
   line-height: 20px;
-    margin: var(--app-layout-menu-button-height) -20px/2 15px;
+  margin: var(--app-layout-menu-button-height) -20px/2 15px;
   margin-left: -50px;
   text-align: center;
   border-radius: 10px;
@@ -674,15 +674,16 @@
 }
 .app-layout.app-layout-material-design .app-bar-badge {
   background: var(--app-layout-menu-button-badge-background-color);
-  color: var(--app-layout-menu-button-badge-background-color);
+  color: var(--app-layout-menu-button-badge-font-color);
   font-size: 13px;
   min-width: 18px;
   min-height: 18px;
   text-align: center;
   line-height: 18px;
-  margin: 7px;
-  padding-right: 4px;
-  padding-left: 3px;
+  margin: 3px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
   border-radius: 17px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
 }
@@ -694,7 +695,7 @@
   height: var(--app-layout-menu-button-height) !important;
 }
 .app-layout.app-layout-material-design .app-layout-menu-button .vaadin-button-container {
-    justify-content: start;
+  justify-content: start;
 }
 .app-layout.app-layout-material-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-material-design .app-layout-menu-button .v-icon + span {
   margin-left: 16px;
@@ -750,7 +751,7 @@
   height: var(--app-layout-menu-button-height) !important;
 }
 .app-layout.app-layout-custom-design .app-layout-menu-button .vaadin-button-container {
-    justify-content: start;
+  justify-content: start;
 }
 .app-layout.app-layout-custom-design .app-layout-menu-button .v-icon + .v-captiontext, .app-layout.app-layout-custom-design .app-layout-menu-button .v-icon + span {
   margin-left: 16px;
@@ -922,9 +923,9 @@
   --app-bar-height: var(--app-layout-bar-height);
 }
 .app-layout.app-layout-behaviour-left paper-icon-button#toggle {
-    width: calc(var(--app-layout-bar-height) - 16px);
-    height: calc(var(--app-layout-bar-height) - 16px);
-    margin: 8px;
+  width: calc(var(--app-layout-bar-height) - 16px);
+  height: calc(var(--app-layout-bar-height) - 16px);
+  margin: 8px;
 }
 .app-layout.app-layout-behaviour-left .app-bar-content {
   left: var(--app-layout-bar-height);
@@ -939,7 +940,7 @@
   position: relative;
   z-index: calc(var(--app-layout-bar-z-index) + 1);
   box-shadow: var(--app-layout-bar-shadow);
-    padding: 0 0;
+  padding: 0 0;
 }
 .app-layout.app-layout-behaviour-left app-toolbar .v-button {
   color: var(--app-layout-bar-font-color) !important;
@@ -1286,7 +1287,7 @@
   color: var(--app-layout-bar-font-color);
   box-shadow: var(--app-layout-bar-shadow);
   position: relative;
-    z-index: var(--app-layout-bar-z-index) -1;
+  z-index: var(--app-layout-bar-z-index) -1;
   padding: 0px;
 }
 .app-layout.app-layout-behaviour-left-responsive-hybrid-overlay-no-app-bar app-toolbar .v-button {

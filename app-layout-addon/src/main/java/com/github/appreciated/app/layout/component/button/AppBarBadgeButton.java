@@ -6,6 +6,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
@@ -19,12 +20,15 @@ public class AppBarBadgeButton extends HorizontalLayout implements NotificationH
     private final Label badge;
     private NotificationHolder notificationHolder;
 
-    public AppBarBadgeButton(String icon, NotificationHolder notificationHolder) {
-        super();
+    public AppBarBadgeButton(Icon icon, NotificationHolder notificationHolder) {
+        this(icon, notificationHolder, null);
+    }
+
+    public AppBarBadgeButton(Icon icon, NotificationHolder notificationHolder, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
         this.notificationHolder = notificationHolder;
         setWidth("48px");
         setHeight("48px");
-        button = new PaperIconButton(icon);
+        button = new PaperIconButton(icon.getElement().getAttribute("icon"));
         button.getElement().getStyle().set("width", "100%");
         button.getElement().getStyle().set("height", "100%");
         badge = new Label();
@@ -32,11 +36,9 @@ public class AppBarBadgeButton extends HorizontalLayout implements NotificationH
         badge.getElement().getClassList().add(APP_BAR_BADGE);
         add(button);
         add(badge);
-    }
-
-    public AppBarBadgeButton(String icon, NotificationHolder notificationHolder, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
-        this(icon, notificationHolder);
-        button.setClickListener(listener);
+        if (listener != null) {
+            button.setClickListener(listener);
+        }
     }
 
     @Override

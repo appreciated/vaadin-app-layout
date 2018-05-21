@@ -21,15 +21,16 @@
     }
     .app-bar-badge {
       background: var(--app-layout-menu-button-badge-background-color);
-      color: var(--app-layout-menu-button-badge-background-color);
+      color: var(--app-layout-menu-button-badge-font-color);
       font-size: 13px;
       min-width: 18px;
       min-height: 18px;
       text-align: center;
       line-height: 18px;
-      margin: 7px;
-      padding-right: 4px;
-      padding-left: 3px;
+      margin: 3px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
       border-radius: 17px;
       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
     }

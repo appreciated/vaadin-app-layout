@@ -91,7 +91,8 @@ public class DefaultNotification implements Notification {
         return "";
     }
 
-    public boolean isUnnread() {
+    @Override
+    public boolean isUnread() {
         return unread;
     }
 

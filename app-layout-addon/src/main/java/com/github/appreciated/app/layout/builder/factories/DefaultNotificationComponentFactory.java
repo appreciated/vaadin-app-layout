@@ -29,7 +29,7 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-        if (!info.isUnnread()) {
+        if (!info.isUnread()) {
             wrapper.getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_READ);
         }
         wrapper.add(new HorizontalLayout(new HorizontalLayout(title, timeAgo)));

@@ -11,7 +11,6 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_NO
 
 /**
  * This Class is a controller for multiple {@link com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification} instances
- *
  */
 
 public class NotificationHolder<T extends NotificationHolder.Notification> {
@@ -41,12 +40,14 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         return notifications.size();
     }
 
-    public List<Component> getNotifications(boolean showAll) {
-        List<T> components = getNotifications();
+    public Component[] getNotificationViews(boolean showAll) {
+        List<T> components = getNotificationViews();
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
+        List<Component> list = components.stream().sorted((o1, o2) -> o1.compare(o1, o2))
+                .map(this::getComponent).collect(Collectors.toList());
+        return list.toArray(new Component[]{});
     }
 
     public void addNotification(T notification) {
@@ -74,7 +75,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         return component;
     }
 
-    public ArrayList<T> getNotifications() {
+    public ArrayList<T> getNotificationViews() {
         Collections.sort(notifications, (o1, o2) -> o1.compare(o2, o1));
         return notifications;
     }
@@ -97,11 +98,11 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public int getUnreadNotifications() {
-        return (int) notifications.stream().filter(notification -> notification.isUnnread()).count();
+        return (int) notifications.stream().filter(notification -> notification.isUnread()).count();
     }
 
     public interface Notification extends Comparator<Notification> {
-        boolean isUnnread();
+        boolean isUnread();
 
         DefaultNotification.Priority getPriority();
 
