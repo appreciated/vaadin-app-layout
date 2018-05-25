@@ -8,7 +8,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class NotificationsView extends VerticalLayout {
 
-    String height = "357px";
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
     private NotificationHolder holder;
@@ -17,10 +16,8 @@ public class NotificationsView extends VerticalLayout {
         super();
         setMargin(false);
         setPadding(false);
-        setSpacing(false);
+        setSpacing(true);
         this.holder = holder;
-        setWidth("300px");
-        setHeight(height);
         initView(holder);
     }
 

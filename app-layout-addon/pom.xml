@@ -118,6 +118,11 @@
             <artifactId>paper-card</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>vaadin-iron-dropdown</artifactId>
+            <version>0.5.1</version>
+        </dependency>
         <!--End of web-components elements -->
 
         <dependency>
@@ -173,9 +178,12 @@
                 <version>9.3.7.v20160115</version>
                 <configuration>
                     <scanIntervalSeconds>-1</scanIntervalSeconds>
-                    <!-- Use test scope because the UI/demo classes are in 
-                        the test package. -->
                     <useTestScope>true</useTestScope>
+                    <webApp>
+                        <resourceBases>
+                            <resourceBase>${project.basedir}/src/main/resources/META-INF/resources</resourceBase>
+                        </resourceBases>
+                    </webApp>
                 </configuration>
             </plugin>
         </plugins>

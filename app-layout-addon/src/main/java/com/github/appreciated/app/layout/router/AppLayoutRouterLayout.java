@@ -9,7 +9,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.RouterLayout;
 
-@StyleSheet("context://addon/com/github/appreciated/app-layout/app-layout.css")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout.css")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public abstract class AppLayoutRouterLayout extends Div implements RouterLayout {
 

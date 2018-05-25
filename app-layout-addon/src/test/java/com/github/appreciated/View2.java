@@ -1,4 +1,4 @@
-package com.github.appreciated.demo;
+package com.github.appreciated;
 
 import com.vaadin.flow.router.Route;
 

@@ -1,4 +1,4 @@
-package com.github.appreciated.demo;
+package com.github.appreciated;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

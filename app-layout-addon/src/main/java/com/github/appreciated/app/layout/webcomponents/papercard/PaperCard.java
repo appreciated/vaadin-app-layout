@@ -11,12 +11,18 @@ public class PaperCard extends Component {
     Div content;
     Div actions;
 
+    public PaperCard() {
+        this(null, null);
+    }
+
     public PaperCard(Component content) {
         this(content, null);
     }
 
     public PaperCard(Component content, Component actions) {
-        add(content);
+        if (content != null) {
+            add(content);
+        }
         if (actions != null) {
             addAction(actions);
         }
@@ -27,7 +33,6 @@ public class PaperCard extends Component {
     }
 
     public void add(Component component) {
-        content.add(component);
         if (content == null) {
             content = new Div();
             content.getElement().getClassList().add("card-content");

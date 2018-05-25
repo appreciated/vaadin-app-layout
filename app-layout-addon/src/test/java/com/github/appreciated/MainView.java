@@ -1,4 +1,4 @@
-package com.github.appreciated.demo;
+package com.github.appreciated;
 
 import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
@@ -12,7 +12,6 @@ import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcons;
 import com.vaadin.flow.component.notification.Notification;
@@ -29,7 +28,7 @@ import static com.github.appreciated.app.layout.builder.Section.HEADER;
  * The main view contains a button and a template element.
  */
 
-@StyleSheet("context://addon/com/github/appreciated/app-layout/app-layout.css")
+
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainView extends AppLayoutRouterLayout {
     private Behaviour variant;
