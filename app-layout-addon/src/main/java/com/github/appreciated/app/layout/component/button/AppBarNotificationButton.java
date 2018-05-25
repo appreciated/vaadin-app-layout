@@ -2,7 +2,10 @@ package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.component.NotificationsView;
+import com.github.appreciated.dropdown.Alignment;
+import com.github.appreciated.dropdown.HorizontalAlignment;
 import com.github.appreciated.dropdown.IronDropdownWrapper;
+import com.github.appreciated.dropdown.VerticalAlignment;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
@@ -12,7 +15,7 @@ import com.vaadin.flow.component.icon.Icon;
 public class AppBarNotificationButton extends IronDropdownWrapper {
 
     public AppBarNotificationButton(Icon icon, NotificationHolder holder) {
-        super(new AppBarBadgeButton(icon, holder), new NotificationsView(holder));
+        super(new AppBarBadgeButton(icon, holder), new NotificationsView(holder), new Alignment(HorizontalAlignment.RIGHT, VerticalAlignment.TOP));
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder) {

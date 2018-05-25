@@ -28,6 +28,8 @@ public class AppBarBadgeButton extends HorizontalLayout implements NotificationH
         this.notificationHolder = notificationHolder;
         setWidth("48px");
         setHeight("48px");
+        setMargin(false);
+        setSpacing(false);
         button = new PaperIconButton(icon.getElement().getAttribute("icon"));
         button.getElement().getStyle().set("width", "100%");
         button.getElement().getStyle().set("height", "100%");
