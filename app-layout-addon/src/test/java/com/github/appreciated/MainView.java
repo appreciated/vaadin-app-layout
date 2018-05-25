@@ -55,7 +55,7 @@ public class MainView extends AppLayoutRouterLayout {
                 .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeader("App-Layout", "Version 2.0.0", "/images/logo.png"), HEADER)
+                .add(new MenuHeader("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
