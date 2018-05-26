@@ -1,23 +1,21 @@
 package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.webcomponents.paperbadge.PaperBadge;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-
-import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
  */
-public class AppBarBadgeButton extends HorizontalLayout implements NotificationHolder.NotificationListener {
+public class AppBarBadgeButton extends Div implements NotificationHolder.NotificationListener {
 
     private final PaperIconButton button;
-    private final Label badge;
+    private final PaperBadge badge;
     private NotificationHolder notificationHolder;
 
     public AppBarBadgeButton(Icon icon, NotificationHolder notificationHolder) {
@@ -28,14 +26,12 @@ public class AppBarBadgeButton extends HorizontalLayout implements NotificationH
         this.notificationHolder = notificationHolder;
         setWidth("48px");
         setHeight("48px");
-        setMargin(false);
-        setSpacing(false);
         button = new PaperIconButton(icon.getElement().getAttribute("icon"));
         button.getElement().getStyle().set("width", "100%");
         button.getElement().getStyle().set("height", "100%");
-        badge = new Label();
+        button.getElement().setAttribute("id", "button");
+        badge = new PaperBadge(button, "0");
         notificationHolder.addStatusListener(this);
-        badge.getElement().getClassList().add(APP_BAR_BADGE);
         add(button);
         add(badge);
         if (listener != null) {
@@ -63,9 +59,9 @@ public class AppBarBadgeButton extends HorizontalLayout implements NotificationH
             if (unreadNotifications > 0) {
                 badge.setVisible(true);
                 if (unreadNotifications < 10) {
-                    badge.setText(String.valueOf(unreadNotifications));
+                    badge.setLabel(String.valueOf(unreadNotifications));
                 } else {
-                    badge.setText("9+");
+                    badge.setLabel("9+");
                 }
             } else {
                 badge.setVisible(false);

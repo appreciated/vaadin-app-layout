@@ -16,7 +16,9 @@ public class NotificationsView extends VerticalLayout {
         super();
         setMargin(false);
         setPadding(false);
-        setSpacing(true);
+        setWidth("300px");
+        getElement().getStyle().set("padding", "5px");
+
         this.holder = holder;
         initView(holder);
     }

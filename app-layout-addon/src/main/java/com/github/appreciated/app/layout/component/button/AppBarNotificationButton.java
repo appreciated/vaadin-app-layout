@@ -14,8 +14,10 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class AppBarNotificationButton extends IronDropdownWrapper {
 
+
     public AppBarNotificationButton(Icon icon, NotificationHolder holder) {
         super(new AppBarBadgeButton(icon, holder), new NotificationsView(holder), new Alignment(HorizontalAlignment.RIGHT, VerticalAlignment.TOP));
+        getDropdown().getElement().getStyle().set("margin-top", "56px").set("margin-right", "-5px");
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder) {
