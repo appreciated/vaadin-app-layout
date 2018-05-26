@@ -21,6 +21,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.polymertemplate.Id;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +35,14 @@ import static com.github.appreciated.app.layout.behaviour.Position.TOP;
  */
 
 public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutElementBase {
+
+
+    @Id("app-bar-elements")
+    Div appBarElements;
+    @Id("menu-elements")
+    Div menuElements;
+    @Id("content")
+    Div content;
 
     private final VerticalLayout contentPanel = new VerticalLayout();
 
@@ -101,6 +110,10 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     @Override
     public void setAppLayoutContent(HasElement content) {
 
+    }
+
+    public Div getAppBarElements() {
+        return appBarElements;
     }
 
     public abstract String getStyleName();

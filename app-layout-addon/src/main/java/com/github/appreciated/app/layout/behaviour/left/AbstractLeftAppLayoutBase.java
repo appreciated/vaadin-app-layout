@@ -20,6 +20,9 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,14 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
 
-public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayoutElementBase {
+public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
+
+    @Id("app-bar-elements")
+    Div appBarElements;
+    @Id("menu-elements")
+    Div menuElements;
+    @Id("content")
+    Div content;
 
     private final VerticalLayout menuHeaderHolder = new VerticalLayout();
     private final VerticalLayout menuElementHolder = new VerticalLayout();
@@ -52,10 +62,11 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
     public AbstractLeftAppLayoutBase() {
         super();
-        setSizeFull();
+        getElement().getStyle().set("width", "100%")
+                .set("height", "100%");
         //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        add(getContent());
-        getMenuElementsHolder().getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
+
+        menuElements.getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
         menuHeaderHolder.setMargin(false);
@@ -67,7 +78,7 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
 
         menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
-        getAppBarElementsHolder().add(titleWrapper, appBarElementWrapper);
+        appBarElements.add(titleWrapper, appBarElementWrapper);
 
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
@@ -84,9 +95,6 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
         titleWrapper.setMargin(false);
         getElement().getClassList().add("app-layout");
     }
-
-    public abstract Component[] getContent();
-
 
     public abstract String getStyleName();
 
@@ -137,7 +145,7 @@ public abstract class AbstractLeftAppLayoutBase extends Div implements AppLayout
     @Override
     public void setAppLayoutContent(HasElement content) {
         if (content != null) {
-            getContentHolder().getElement().appendChild(content.getElement());
+            this.content.getElement().appendChild(content.getElement());
         }
     }
 

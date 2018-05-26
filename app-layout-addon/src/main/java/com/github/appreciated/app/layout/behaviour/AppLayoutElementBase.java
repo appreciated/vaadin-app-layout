@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -57,12 +56,6 @@ public interface AppLayoutElementBase {
     void addAppBarElement(Component component);
 
     void setDesign(AppLayoutDesign design);
-
-    HasComponents getContentHolder();
-
-    Component getMenuElementsHolder();
-
-    HasComponents getAppBarElementsHolder();
 
     HorizontalLayout getAppBarElementWrapper();
 

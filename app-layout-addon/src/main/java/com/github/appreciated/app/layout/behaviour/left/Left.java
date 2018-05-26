@@ -1,105 +1,20 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.app.layout.webcomponents.applayout.AppToolbar;
-import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawer;
-import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
 
 /**
  * Created by appreciated on 01.05.2017.
  * Edited By deyaeddin on 07.02.2018
  */
-
+@Tag("app-layout-left")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header/app-header.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
+@HtmlImport("frontend://com/github/appreciated/app-layout/left/left.html")
 public class Left extends AbstractLeftAppLayoutBase {
-
-    AppToolbar toolbar;
-    PaperIconButton toggle;
-    HorizontalLayout contentDiv;
-    Div appBarElementsDiv;
-    HorizontalLayout appBarElements;
-    VerticalLayout menuElementsDiv;
-    AppDrawer drawer;
-    PaperDrawer paperDrawer;
-
-    /**
-     * <app-toolbar style="height: var(--app-bar-height);">
-     * <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
-     * <div id="app-bar-elements" class="app-bar-content"></div>
-     * </app-toolbar>
-     * <div class="app-bar-application-content" size="100"></div>
-     * <app-drawer id="drawer" slot="drawer" swipe-open>
-     * <div class="drawer-content"></div>
-     * </app-drawer>
-     *
-     * @return
-     */
-
-    @Override
-    public Component[] getContent() {
-        toolbar = new AppToolbar();
-        paperDrawer = new PaperDrawer();
-        paperDrawer.getElement().getStyle().set("width", "100%");
-
-        toggle = new PaperIconButton();
-        contentDiv = new HorizontalLayout();
-        contentDiv.setMargin(false);
-        appBarElements = new HorizontalLayout();
-        appBarElements.setHeight("100%");
-        appBarElementsDiv = new Div();
-        menuElementsDiv = new VerticalLayout();
-        menuElementsDiv.setSizeFull();
-        menuElementsDiv.setPadding(false);
-        menuElementsDiv.setMargin(false);
-        menuElementsDiv.add(paperDrawer);
-        drawer = new AppDrawer();
-
-        toolbar.getElement().setAttribute("style", "height: var(--app-bar-height);");
-        toolbar.getElement().appendChild(toggle.getElement());
-
-        appBarElementsDiv.getElement().appendChild(appBarElements.getElement());
-        toolbar.getElement().appendChild(appBarElementsDiv.getElement());
-        toggle.getElement().setAttribute("icon", "menu");
-        toggle.setId("toggle");
-        appBarElementsDiv.getElement().getClassList().add("app-bar-content");
-        contentDiv.getElement().getClassList().add("app-bar-application-content");
-
-        menuElementsDiv.getElement().getClassList().add("drawer-content");
-        drawer.getElement().setAttribute("swipe-open", true);
-        drawer.getElement().appendChild(menuElementsDiv.getElement());
-        return new Component[]{toolbar, contentDiv, drawer};
-    }
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        getUI().ifPresent(ui -> ui.getPage().executeJavaScript(
-                " var drawer = document.querySelector('app-drawer');\n" +
-                        "        document.querySelector('paper-icon-button').addEventListener('click', function () {\n" +
-                        "            drawer.toggle();\n" +
-                        "        });")
-        );
-    }
-
-    @Override
-    public HasComponents getContentHolder() {
-        return contentDiv;
-    }
-
-    @Override
-    public Component getMenuElementsHolder() {
-        return paperDrawer;
-    }
-
-    @Override
-    public HasComponents getAppBarElementsHolder() {
-        return appBarElements;
-    }
 
     @Override
     public String getStyleName() {
