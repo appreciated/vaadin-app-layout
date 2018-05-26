@@ -27,10 +27,16 @@ public class AppBarBadgeButton extends Div implements NotificationHolder.Notific
         setWidth("48px");
         setHeight("48px");
         button = new PaperIconButton(icon.getElement().getAttribute("icon"));
-        button.getElement().getStyle().set("width", "100%");
-        button.getElement().getStyle().set("height", "100%");
+        button.getElement().getStyle()
+                .set("width", "100%")
+                .set("height", "100%");
         button.getElement().setAttribute("id", "button");
         badge = new PaperBadge(button, "0");
+
+        badge.getElement().getStyle()
+                .set("margin-top", "10px")
+                .set("margin-left", "-10px");
+
         notificationHolder.addStatusListener(this);
         add(button);
         add(badge);
