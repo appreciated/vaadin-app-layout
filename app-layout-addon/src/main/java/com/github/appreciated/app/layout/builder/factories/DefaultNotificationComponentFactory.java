@@ -10,6 +10,7 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
     @Override
     public Component getComponent(NotificationHolder holder, DefaultNotification info) {
         return new NotificationView(info, domEvent -> {
+            domEvent.getSource().getStyle().set("border-left", "3px solid transparent");
             info.setUnread(false);
             holder.onNotificationClicked(info);
         });

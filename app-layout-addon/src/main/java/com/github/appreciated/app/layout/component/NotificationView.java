@@ -46,9 +46,9 @@ public class NotificationView extends PaperCard {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-       /* if (!info.isUnread()) {
-            card.getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_READ);
-        }*/
+        if (info.isUnread()) {
+            getElement().getStyle().set("border-left", "3px solid var(--app-layout-bar-background-color)");
+        }
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -56,7 +56,6 @@ public class NotificationView extends PaperCard {
         add(descriptionWrapper);
         if (clickEvent != null) {
             getElement().addEventListener("click", clickEvent);
-
         }
         getElement().getClassList().add(info.getStyle());
         if (clickEvent != null) {
