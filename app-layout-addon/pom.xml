@@ -182,7 +182,9 @@
                                     <include>app-layout.scss</include>
                                 </includes>
                             </source>
-                            <destination>${basedir}/src/main/webapp/addon/com/github/appreciated/</destination>
+                            <destination>
+                                ${basedir}/src/main/resources/META-INF/resources/frontend/com/github/appreciated/app-layout/
+                            </destination>
                         </resource>
                     </resources>
                 </configuration>

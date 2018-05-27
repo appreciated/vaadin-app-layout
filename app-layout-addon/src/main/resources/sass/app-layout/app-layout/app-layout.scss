@@ -153,13 +153,6 @@ $al-menu-submenu-max-height: 999px !default;
       padding-top: var(--app-layout-menu-section-padding) !important;
     }
   }
-  .app-bar-application-content {
-    position: fixed;
-    width: 100%;
-    box-sizing: border-box;
-    height: 100%;
-    transition: margin 0.2s ease, padding 0.2s ease;
-  }
   app-drawer[opened][persistent] + .app-bar-application-content, app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
     @include application-content(var(--app-layout-bar-height), var(--app-layout-drawer-width));
   }

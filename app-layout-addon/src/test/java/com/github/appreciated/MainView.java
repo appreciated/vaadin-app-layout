@@ -24,6 +24,7 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.builder.Section.FOOTER;
 import static com.github.appreciated.app.layout.builder.Section.HEADER;
+import static com.github.appreciated.app.layout.notification.Priority.MEDIUM;
 
 /**
  * The main view contains a button and a template element.
@@ -80,7 +81,7 @@ public class MainView extends AppLayoutRouterLayout {
                 .add("Menu", VaadinIcons.MENU.create(), View5.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
     }
-/*
+
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
             currentThread.interrupt();
@@ -99,7 +100,7 @@ public class MainView extends AppLayoutRouterLayout {
             }
         });
         currentThread.start();
-    }*/
+    }
 
     private void addNotification(Priority priority) {
         getUI().ifPresent(ui -> {
