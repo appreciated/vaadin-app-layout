@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -41,6 +42,8 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     Div menuElements;
     @Id("content")
     Div content;
+    @Id("drawer")
+    AppDrawer drawer;
 
     private final AppMenu menuHeaderHolder = new AppMenu();
     private final AppMenu menuElementHolder = new AppMenu();
@@ -88,6 +91,11 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         titleWrapper.setPadding(false);
         titleWrapper.setMargin(false);
         getElement().getClassList().add("app-layout");
+    }
+
+    @Override
+    public AppDrawer getDrawer() {
+        return drawer;
     }
 
     public abstract String getStyleName();

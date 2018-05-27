@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
@@ -44,6 +45,8 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     Div menuElements;
     @Id("content")
     Div content;
+    @Id("drawer")
+    AppDrawer drawer;
 
     private final VerticalLayout contentPanel = new VerticalLayout();
 
@@ -102,6 +105,11 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         if (list != null) {
             list.forEach(element -> element.refreshInfo());
         }
+    }
+
+    @Override
+    public AppDrawer getDrawer() {
+        return drawer;
     }
 
     @Override

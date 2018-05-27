@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
+import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Anchor;
@@ -9,9 +10,9 @@ public class AppMenuItem extends Anchor {
     private AppMenuIconItem item;
 
     public AppMenuItem() {
-        setSizeUndefined();
         getElement().getClassList().add("app-menu-item");
         getElement().setAttribute("href", "javascript:void(0)");
+        getElement().appendChild(new PaperRipple().getElement());
     }
 
     private AppMenuItem(String sectionName, String icon, boolean hasIcon) {

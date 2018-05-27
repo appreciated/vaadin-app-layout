@@ -15,17 +15,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --paper-badge-background: #ffffff;
                 --paper-badge-text-color: #000;
             }
-
-            #content {
-
-            }
-
             app-toolbar {
                 height: var(--app-bar-height);
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
             }
+
+            #drawer {
+                --app-drawer-content-container: {
+                    box-shadow: var(--app-layout-drawer-shadow);
+                }
+            }
+
         </style>
         <app-toolbar>
             <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>

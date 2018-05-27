@@ -42,4 +42,20 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
 
     public abstract AbstractAppLayoutBuilderBase getConfiguration();
 
+    public void closeDrawer() {
+        configuration.closeDrawer();
+    }
+
+    public void toggleDrawer() {
+        configuration.toggleDrawer();
+    }
+
+    public void openDrawer() {
+        configuration.openDrawer();
+    }
+
+    public void closeDrawerIfNotPersistent() {
+        configuration.closeDrawerIfNotPersistent();
+    }
+
 }

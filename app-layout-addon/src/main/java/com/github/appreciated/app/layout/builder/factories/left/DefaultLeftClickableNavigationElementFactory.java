@@ -9,7 +9,6 @@ public class DefaultLeftClickableNavigationElementFactory implements ComponentFa
     @Override
     public HasElement get(ClickableNavigationElement element) {
         AppMenuIconItem button = new AppMenuIconItem(element.getName(), element.getIcon().getElement().getAttribute("icon"));
-        button.getElement().getStyle().set("width", "100%");
         button.setClickListener(paperDrawerIconItemClickEvent -> element.getListener().onComponentEvent(paperDrawerIconItemClickEvent));
         return button;
     }

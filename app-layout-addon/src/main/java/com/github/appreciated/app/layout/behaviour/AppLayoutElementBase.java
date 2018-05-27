@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -17,20 +18,20 @@ import java.util.List;
  */
 
 public interface AppLayoutElementBase {
-    static void toggleDrawer() {
-        UI.getCurrent().getPage().executeJavaScript("document.querySelector('app-drawer').toggle();");
+    default void toggleDrawer() {
+        getDrawer().getElement().callFunction("toggle");
     }
 
-    static void openDrawer() {
-        UI.getCurrent().getPage().executeJavaScript("document.querySelector('app-drawer').open();");
+    default void openDrawer() {
+        getDrawer().getElement().callFunction("open");
     }
 
-    static void closeDrawerIfNotPersistent() {
-        UI.getCurrent().getPage().executeJavaScript("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').close();}");
+    default void closeDrawerIfNotPersistent() {
+        UI.getCurrent().getPage().executeJavaScript("if(!document.querySelector('app-drawer').hasAttribute('persistent')){document.querySelector('app-drawer').closeDrawer();}");
     }
 
-    static void closeDrawer() {
-        UI.getCurrent().getPage().executeJavaScript("document.querySelector('app-drawer').close();");
+    default void closeDrawer() {
+        getDrawer().getElement().callFunction("toggle");
     }
 
     String getStyleName();
@@ -60,6 +61,8 @@ public interface AppLayoutElementBase {
     HorizontalLayout getAppBarElementWrapper();
 
     HasElement getTitleComponent();
+
+    AppDrawer getDrawer();
 
     void setTitle(String title);
 

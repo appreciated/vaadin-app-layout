@@ -11,7 +11,6 @@ public class ExpandingMenuContainer extends AppSubmenu implements SubmenuNavigat
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super(sectionName, icon);
-        getElement().getStyle().set("width", "100%");
     }
 
 }

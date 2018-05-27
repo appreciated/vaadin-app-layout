@@ -15,6 +15,7 @@ public class AppMenuIconItem extends Component {
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
 
     public AppMenuIconItem() {
+        getElement().getStyle().set("width", "100%").set("height", "48px").set("line-height", "48px");
         getElement().addEventListener("click", domEvent -> {
             if (this.listener != null) {
                 this.listener.onComponentEvent(new ClickEvent<>(this));
