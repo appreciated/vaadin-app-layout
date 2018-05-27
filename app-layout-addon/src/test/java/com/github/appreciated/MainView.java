@@ -7,7 +7,7 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
-import com.github.appreciated.app.layout.component.MenuHeader;
+import com.github.appreciated.app.layout.component.MenuHeaderView;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
 import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
@@ -45,7 +45,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getConfiguration() {
         if (variant == null) {
-            variant = Behaviour.LEFT;
+            variant = Behaviour.LEFT_HYBRID;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
@@ -57,7 +57,7 @@ public class MainView extends AppLayoutRouterLayout {
                 .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeader("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
+                .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())

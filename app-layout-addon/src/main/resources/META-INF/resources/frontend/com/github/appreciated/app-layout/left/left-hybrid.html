@@ -31,7 +31,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
-                }
+                };
+                margin-top: var(--app-layout-bar-height);
+                transition: 1s width;
+            }
+
+            #drawer.small {
+                --app-drawer-width: 70px;
             }
 
             #toggle {
@@ -40,12 +46,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-right: 8px;
                 margin-left: -8px;
             }
+
+            #drawer.small #menu-header-title, #drawer.small #menu-header-subtitle {
+                opacity: 0;
+                max-height: 0px;
+                margin-top: 0px;
+            }
+
+            #menu-header-title, #menu-header-subtitle {
+                opacity: 1.0;
+                transition: opacity 0.5s, max-height 0.5s, margin-top 0.5s;
+                max-height: 50px;
+            }
+
+            #menu-header-wrapper {
+                transition: padding 0.5s;
+            }
+
+            #drawer.small #menu-header-wrapper {
+                padding: 5px;
+            }
+
+            app-menu-icon-item {
+                transition: color 0.4s;
+            }
+
+            #drawer.small app-menu-icon-item {
+                color: transparent;
+            }
+
         </style>
         <app-header-layout id="layout-wrapper">
             <app-header fixed effects="waterfall" slot="header">
                 <app-toolbar style="height: var(--app-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-                    <div class="app-bar-content" id="app-bar-elements"></div>
+                    <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
                 </app-toolbar>
             </app-header>
             <app-drawer-layout id="drawerLayout">
@@ -63,15 +98,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             onclick() {
-                var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
-                var layoutWrapper = Polymer.dom(this.root).querySelector("#layout-wrapper");
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                if (drawer.persistent) {
-                    layoutWrapper.parentNode.classList.add("small");
-                } else {
-                    layoutWrapper.parentNode.classList.remove("small");
-                    drawerLayout.drawer.toggle();
-                }
+                drawer.classList.toggle("small");
             }
         }
 
