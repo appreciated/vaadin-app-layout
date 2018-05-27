@@ -10,8 +10,6 @@ import com.vaadin.flow.component.icon.IronIcon;
 
 @Tag("app-submenu")
 @HtmlImport("bower_components/app-menu/app-submenu.html")
-@HtmlImport("bower_components/iron-icons/iron-icons.html")
-@HtmlImport("bower_components/iron-icon/iron-icon.html")
 public class AppSubmenu extends Component {
 
     private final AppMenu menu;

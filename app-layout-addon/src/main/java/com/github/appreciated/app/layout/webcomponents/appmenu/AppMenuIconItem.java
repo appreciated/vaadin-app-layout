@@ -8,8 +8,6 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 
 @Tag("app-menu-icon-item")
 @HtmlImport("bower_components/app-menu/app-menu-icon-item.html")
-@HtmlImport("bower_components/iron-icons/iron-icons.html")
-@HtmlImport("bower_components/iron-icon/iron-icon.html")
 public class AppMenuIconItem extends Component {
 
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
