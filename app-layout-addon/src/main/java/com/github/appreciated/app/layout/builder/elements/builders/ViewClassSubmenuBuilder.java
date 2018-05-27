@@ -2,16 +2,17 @@ package com.github.appreciated.app.layout.builder.elements.builders;
 
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.icon.Icon;
+
 
 /**
  * A Builder to build SubmenuNavigationElements
  */
 public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends CDISubmenuBuilder<T> {
 
-    protected ViewClassSubmenuBuilder(String title, Resource resource) {
-        super(title, resource);
+    protected ViewClassSubmenuBuilder(String title, Icon icon) {
+        super(title, icon);
     }
 
     /**
@@ -30,7 +31,7 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param icon
      * @return
      */
-    public static ViewClassSubmenuBuilder get(Resource icon) {
+    public static ViewClassSubmenuBuilder get(Icon icon) {
         return new ViewClassSubmenuBuilder(null, icon);
     }
 
@@ -40,7 +41,7 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param icon
      * @return
      */
-    public static ViewClassSubmenuBuilder get(String title, Resource icon) {
+    public static ViewClassSubmenuBuilder get(String title, Icon icon) {
         return new ViewClassSubmenuBuilder(title, icon);
     }
 
@@ -52,7 +53,7 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param element  This class name of the view
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, Class<? extends View> element) {
+    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> element) {
         return this.add(caption, viewName, icon, null, element);
     }
 
@@ -65,7 +66,7 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param element     This class name of the view
      * @return
      */
-    public T add(String caption, String viewName, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> element) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element) {
         this.add(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element));
         return (T) this;
     }

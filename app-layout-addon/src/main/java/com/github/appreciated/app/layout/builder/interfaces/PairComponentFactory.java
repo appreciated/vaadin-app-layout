@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.Component;
 
 /**
  * An interface for classes that are able to give a specific output {@link Component} for two instances as input one of the type {@link S} and one of the type {@link T}

@@ -1,0 +1,37 @@
+@mixin app-layout-expanding-menu-container {
+  .app-layout-expanding-menu-container {
+    transition: max-height 0.4s;
+    overflow: hidden;
+    max-height: var(--app-layout-menu-button-height);
+  }
+  .app-layout-expanding-menu-container-open {
+    max-height: var(--app-layout-menu-submenu-max-height);
+  }
+  .app-layout-expanding-menu-container-button {
+    position: relative;
+  }
+  .app-layout-expanding-menu-container-button:after {
+    position: absolute;
+    content: "\E967";
+    font-family: "Vaadin-Icons";
+    line-height: var(--app-layout-menu-button-height);
+    text-align: center;
+    width: var(--app-layout-menu-button-height);
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    transform: rotate(0deg);
+    transition: opacity 0.3s, transform 0.3s !important;
+    pointer-events: none;
+  }
+  .app-layout-expanding-menu-container-open > div > .app-layout-expanding-menu-container-button:after {
+    transform: rotate(90deg);
+  }
+  .app-layout-submenu-container {
+    background: var(--app-layout-drawer-submenu-background-color);
+    padding-left: var(--app-layout-drawer-submenu-indention);
+  }
+  .app-layout-top-menu.v-menubar * {
+    color: var(--app-layout-bar-font-color) !important;
+  }
+}

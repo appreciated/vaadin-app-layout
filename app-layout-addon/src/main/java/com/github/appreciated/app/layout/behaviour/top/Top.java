@@ -1,46 +1,17 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
-import com.github.appreciated.app.layout.component.layout.HorizontalFlexBoxLayout;
-import com.vaadin.annotations.HtmlImport;
-import com.vaadin.annotations.JavaScript;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.dependency.HtmlImport;
 
-import java.io.IOException;
 
 /**
  * Created by appreciated on 01.05.2017.
  * Edited By deyaeddin on 07.02.2018
  */
 
-@JavaScript("vaadin://addons/app-layout/babel-helpers.js")
-@JavaScript("vaadin://addons/app-layout/app-layout-es5-listener.js")
-@JavaScript("frontend://bower_components/webcomponentsjs/webcomponents-lite.js")
 
-@HtmlImport("frontend://bower_components/polymer/polymer.html")
-@HtmlImport("frontend://bower_components/iron-icons/iron-icons.html")
-@HtmlImport("frontend://bower_components/paper-icon-button/paper-icon-button.html")
-@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
-@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
-
-public class Top extends AbstractTopAppLayout {
-
-    private final HorizontalFlexBoxLayout appHeaderHolder = new HorizontalFlexBoxLayout();
-    private final HorizontalFlexBoxLayout appElementHolder = new HorizontalFlexBoxLayout();
-    private final HorizontalFlexBoxLayout appFooterHolder = new HorizontalFlexBoxLayout();
-
-    private final HorizontalFlexBoxLayout appbarMenuHolder = new HorizontalFlexBoxLayout(appHeaderHolder, appElementHolder, appFooterHolder);
-
-    public Top() throws IOException {
-        super("top.html");
-        appHeaderHolder.setAlignCenter();
-        appElementHolder.setAlignCenter();
-        appFooterHolder.setAlignCenter();
-        appbarMenuHolder.grow(appElementHolder);
-        getTitleWrapper().addComponent(appbarMenuHolder);
-        ((HorizontalFlexBoxLayout) getTitleWrapper()).grow(appbarMenuHolder);
-        appbarMenuHolder.addStyleName("app-layout-bar-menu-holder");
-        appbarMenuHolder.setHeight(100, Unit.PERCENTAGE);
-    }
+@HtmlImport("src/com/github/appreciated/app/layout/behaviour/top/top.html")
+public class Top extends AbstractTopAppLayoutBase {
 
     @Override
     public String getStyleName() {
@@ -49,16 +20,17 @@ public class Top extends AbstractTopAppLayout {
 
     @Override
     public void addToTopHeader(Component component) {
-        appHeaderHolder.addComponent(component);
+        getAppBar().add(component);
     }
 
     @Override
     public void addToTop(Component component) {
-        appElementHolder.addComponent(component);
+        getAppBar().add(component);
     }
 
     @Override
     public void addToTopFooter(Component component) {
-        appFooterHolder.addComponent(component);
+        getAppBar().add(component);
     }
+
 }

@@ -2,15 +2,15 @@ package com.github.appreciated.app.layout.session;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
-import com.vaadin.ui.UI;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeIconButton;
+import com.vaadin.flow.component.UI;
 
 import java.util.Optional;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT_MENU_ELEMENT_ACTIVE;
 
 public class AppLayoutSessionHelper {
-    
+
     /**
      * FIXME I changed this member to final. Since this seems to be a constant an a constant must always be static final
      */
@@ -22,7 +22,7 @@ public class AppLayoutSessionHelper {
     }
 
     public static void removeStyleFromCurrentlyActiveNavigationElement() {
-        getActiveNavigationElement().ifPresent(element1 -> UI.getCurrent().access(() -> element1.getComponent().removeStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE)));
+        getActiveNavigationElement().ifPresent(element1 -> UI.getCurrent().access(() -> element1.getComponent().getElement().getClassList().add(APP_LAYOUT_MENU_ELEMENT_ACTIVE)));
     }
 
     public static Optional<NavigatorNavigationElement> getActiveNavigationElement() {
@@ -36,9 +36,9 @@ public class AppLayoutSessionHelper {
 
     public static void setActiveNavigationElement(NavigatorNavigationElement element) {
         removeStyleFromCurrentlyActiveNavigationElement();
-        NavigationBadgeButton button = (NavigationBadgeButton) element.getComponent();
+        NavigationBadgeIconButton button = (NavigationBadgeIconButton) element.getComponent();
         UI ui = UI.getCurrent();
-        ui.access(() -> button.addStyleName(APP_LAYOUT_MENU_ELEMENT_ACTIVE));
+        ui.access(() -> button.getElement().getClassList().add(APP_LAYOUT_MENU_ELEMENT_ACTIVE));
         ui.getSession().setAttribute(UI_SESSION_KEY, element);
     }
 

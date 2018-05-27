@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.annotations;
 
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.icons.VaadinIcons;
+import com.vaadin.flow.component.icon.VaadinIcons;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

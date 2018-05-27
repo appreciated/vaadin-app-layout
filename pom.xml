@@ -19,7 +19,6 @@
 
 	<modules>
 		<module>app-layout-addon</module>
-		<module>app-layout-demo</module>
 	</modules>
 
 	<profiles>

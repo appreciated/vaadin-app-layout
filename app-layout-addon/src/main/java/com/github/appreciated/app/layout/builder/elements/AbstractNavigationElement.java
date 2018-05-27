@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.HasElement;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @param <V> The specific Component which can be produced by this wrapper
  * @param <T> The Element itself to only allow Providers to be used that are compatible with the specific {@link AbstractNavigationElement}
  */
-public abstract class AbstractNavigationElement<V extends Component, T> implements Serializable {
+public abstract class AbstractNavigationElement<V extends HasElement, T> implements Serializable {
 
     ComponentFactory<V, T> provider;
     private V component;
@@ -24,14 +24,14 @@ public abstract class AbstractNavigationElement<V extends Component, T> implemen
         return provider;
     }
 
-    public abstract void setProvider(AppLayoutComponent provider);
+    public abstract void setProvider(AppLayoutElementBase provider);
 
     public void setProvider(ComponentFactory<V, T> provider) {
         this.component = null;
         this.provider = provider;
     }
 
-    public abstract void setProvider(AppLayoutComponent provider, Position position);
+    public abstract void setProvider(AppLayoutElementBase provider, Position position);
 
     public V getComponent() {
         if (provider == null) {

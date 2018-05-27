@@ -1,25 +1,20 @@
 package com.github.appreciated.app.layout.builder.factories.top;
 
-import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
-import com.github.appreciated.app.layout.builder.elements.ClickableNavigationElement;
-import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.button.Button;
 
-public class DefaultTopSubmenuNavigationElementFactory implements ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> {
+public class DefaultTopSubmenuNavigationElementFactory implements ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> {
     @Override
-    public SubmenuNavigationElement.SubmenuComponent get(SubmenuNavigationElement element) {
-        SubMenuBar barmenu = new SubMenuBar();
-        barmenu.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
+    public SubmenuNavigationElement.SubmenuElement get(SubmenuNavigationElement element) {
+        SubMenuBar barmenu = new SubMenuBar(element);
+        /*barmenu.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
         barmenu.addStyleName(ValoTheme.MENUBAR_SMALL);
-        barmenu.addStyleName("app-layout-top-menu");
-        addToMenuBar(barmenu, element);
+        barmenu.addStyleName("app-layout-top-menu");*/
+        //addToMenuBar(barmenu, element);
         return barmenu;
     }
-
+/*
     private void addToMenuBar(MenuBar menuBar, AbstractNavigationElement element) {
         if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement submenu = (SubmenuNavigationElement) element;
@@ -48,14 +43,17 @@ public class DefaultTopSubmenuNavigationElementFactory implements ComponentFacto
         }
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement submenu = (NavigatorNavigationElement) element;
-            menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().getNavigator().navigateTo(submenu.getViewName()));
+            menuBar.addItem(submenu.getCaption(), submenu.getIcon(), menuItem -> UI.getCurrent().navigate(submenu.getViewName()));
         }
         if (element instanceof ClickableNavigationElement) {
             ClickableNavigationElement submenu = (ClickableNavigationElement) element;
             menuBar.addItem(submenu.getName(), submenu.getIcon(), menuItem -> submenu.getListener().buttonClick(null));
         }
-    }
+    }*/
 
-    public class SubMenuBar extends MenuBar implements SubmenuNavigationElement.SubmenuComponent {
+    public class SubMenuBar extends Button implements SubmenuNavigationElement.SubmenuElement {
+        public SubMenuBar(SubmenuNavigationElement element) {
+            setText(element.getTitle());
+        }
     }
 }

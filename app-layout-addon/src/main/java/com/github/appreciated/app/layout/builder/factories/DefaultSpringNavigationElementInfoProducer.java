@@ -1,12 +1,11 @@
 package com.github.appreciated.app.layout.builder.factories;
 
-import com.vaadin.navigator.View;
+import com.vaadin.flow.component.HasElement;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Optional;
 
 public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoProducer {
 
@@ -21,7 +20,7 @@ public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoPro
      * @param aClass
      * @return
      */
-    private Optional<String> getSpringViewName(Class<? extends View> aClass) {
+    private String getSpringViewName(Class<? extends HasElement> aClass) {
         Annotation a = Arrays.stream(aClass.getAnnotations())
                 .filter(annotation -> annotation.annotationType().getName().equals("com.vaadin.spring.annotation.SpringView"))
                 .findFirst()
@@ -37,6 +36,6 @@ public class DefaultSpringNavigationElementInfoProducer extends BasicViewInfoPro
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable(result);
+        return result;
     }
 }

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
@@ -8,21 +8,17 @@ import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementClickListener;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.exception.ViewNameMissingException;
-import com.github.appreciated.app.layout.navigator.ComponentNavigator;
-import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.Button;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.icon.Icon;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
- * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.ui.Component} will lead to a call of
- * {@link Navigator#navigateTo(String)} which usually causes a change of the View .
+ * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.ui} will lead to a call of
+ * which usually causes a change of the View .
  */
-public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor, Button.ClickListener {
+public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor {
     private boolean isCDI = false;
 
     /**
@@ -32,15 +28,15 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     /**
      * The respective view behind this menu element (either {@link NavigatorNavigationElement#view} or {@link NavigatorNavigationElement#className} will be initialized)
      */
-    private View view;
+    private HasElement view;
     /**
      * The view behind this menu element
      */
-    private Resource icon;
+    private Icon icon;
     /**
      * The respective view behind this menu element (either {@link NavigatorNavigationElement#view} or {@link NavigatorNavigationElement#className} will be initialized)
      */
-    private Class<? extends View> className;
+    private Class<? extends HasElement> className;
     /**
      * The (url-)path under which this view will available
      */
@@ -72,30 +68,15 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
      */
     private Factory<String, String> captionInterceptor;
 
-    /**
-     * The {@link Navigator} instance to which the view will be added
-     */
-    private Navigator navigator;
-
-    /**
-     * The {@link ComponentNavigator} instance to which the view will be added.
-     */
-    private ComponentNavigator componentNavigator;
-
-    /**
-     *
-     */
-    NavigationElementClickListener clickListener;
-
-    public NavigatorNavigationElement(String caption, Resource icon, View view) {
+    public NavigatorNavigationElement(String caption, Icon icon, HasElement view) {
         this(caption, null, icon, null, view);
     }
 
-    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
+    public NavigatorNavigationElement(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement view) {
         this(caption, null, icon, badgeHolder, view);
     }
 
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, View view) {
+    public NavigatorNavigationElement(String caption, String path, Icon icon, DefaultBadgeHolder badgeHolder, HasElement view) {
         this.caption = caption;
         this.icon = icon;
         this.path = path;
@@ -104,23 +85,23 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         provider = new DefaultLeftNavigationBadgeElementComponentFactory();
     }
 
-    public NavigatorNavigationElement(String caption, Resource icon, Class<? extends View> className) {
+    public NavigatorNavigationElement(String caption, Icon icon, Class<? extends HasElement> className) {
         this(caption, null, icon, null, className);
     }
 
-    public NavigatorNavigationElement(String caption, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+    public NavigatorNavigationElement(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
         this(caption, null, icon, badgeHolder, className);
     }
 
-    public NavigatorNavigationElement(Resource icon, Class<? extends View> className) {
+    public NavigatorNavigationElement(Icon icon, Class<? extends HasElement> className) {
         this(null, null, icon, null, className);
     }
 
-    public NavigatorNavigationElement(Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+    public NavigatorNavigationElement(Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
         this(null, null, icon, badgeHolder, className);
     }
 
-    public NavigatorNavigationElement(String caption, String path, Resource icon, DefaultBadgeHolder badgeHolder, Class<? extends View> className) {
+    public NavigatorNavigationElement(String caption, String path, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
         this.caption = caption;
         this.icon = icon;
         this.path = path;
@@ -129,32 +110,16 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         provider = new DefaultLeftNavigationBadgeElementComponentFactory();
     }
 
-    public void addViewToNavigator(Navigator navigator) {
-        try {
-            this.navigator = navigator;
-            if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
-                if (getViewName() != null) {
-                    if (view != null) {
-                        navigator.addView(getViewName(), view);
-                    } else if (className != null) {
-                        navigator.addView(getViewName(), className);
-                    }
-                } else {
-                    throw new ViewNameMissingException(getViewClassName());
-                }
+    public void addViewToNavigator() {
+/*
+        this.navigator = navigator;
+        if (!isCDI) { // Since adding the views to the navigator will be done by the cdi framework its not necessary to so
+            if (view != null) {
+                navigator.addView(getViewName(), view);
+            } else if (className != null) {
+                navigator.addView(getViewName(), className);
             }
-        } catch (ViewNameMissingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addViewToComponentNavigator(ComponentNavigator navigator) {
-        this.componentNavigator = navigator;
-        if (view != null) {
-            navigator.addView(getViewName(), view);
-        } else if (className != null) {
-            navigator.addView(getViewName(), className);
-        }
+        }*/
     }
 
     public String getCaption() {
@@ -186,15 +151,15 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         }
     }
 
-    public Resource getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 
-    public View getView() {
+    public HasElement getView() {
         return view;
     }
 
-    public Class<? extends View> getViewClassName() {
+    public Class<? extends HasElement> getViewClassName() {
         if (className == null) {
             return view == null ? null : view.getClass();
         } else {
@@ -208,12 +173,12 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElementBase provider) {
         setProvider(provider.getDrawerNavigationElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElementBase provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerNavigationElementProvider());
@@ -242,7 +207,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
 
     public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider) {
         if (caption == null && icon == null && className == null && navigationElementInfoProvider == null) {
-            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProducer for the Injected Views");
+            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
         } else {
             this.navigationElementInfoProvider = navigationElementInfoProvider;
             refreshInfo();
@@ -252,7 +217,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
     public void refreshInfo() {
         if (navigationElementInfoProvider != null) {
             info = navigationElementInfoProvider.apply(className);
-            caption = caption == null ? info.getCaption() : caption;
+            caption = info.getCaption();
             if (info.getIcon() != null) {
                 this.icon = info.getIcon();
             }
@@ -272,19 +237,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
         isCDI = CDI;
     }
 
-    @Override
-    public void buttonClick(Button.ClickEvent clickEvent) {
-        if (navigator != null) {
-            navigator.navigateTo(getViewName());
-        } else if (componentNavigator != null) {
-            componentNavigator.navigateTo(getViewName());
-        }
-        if (clickListener != null) {
-            clickListener.onClick(this, clickEvent);
-        }
-    }
-
-    public void setClickListner(NavigationElementClickListener listener) {
-        this.clickListener = listener;
+    public void onClick() {
+        UI.getCurrent().navigate(getViewName());
     }
 }

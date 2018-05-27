@@ -1,15 +1,16 @@
 package com.github.appreciated.app.layout.builder.elements;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
+import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
-import com.vaadin.ui.Component;
+import com.vaadin.flow.component.HasElement;
+
 
 /**
  * A wrapper class for a menu element that is a {@link SectionNavigationElement}.
  */
-public class SectionNavigationElement extends AbstractNavigationElement<Component, SectionNavigationElement> implements HasCaptionInterceptor {
+public class SectionNavigationElement extends AbstractNavigationElement<HasElement, SectionNavigationElement> implements HasCaptionInterceptor {
 
     private String name;
     private Factory<String, String> captionInterceptor;
@@ -32,12 +33,12 @@ public class SectionNavigationElement extends AbstractNavigationElement<Componen
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider) {
+    public void setProvider(AppLayoutElementBase provider) {
         setProvider(provider.getDrawerSectionElementProvider());
     }
 
     @Override
-    public void setProvider(AppLayoutComponent provider, Position position) {
+    public void setProvider(AppLayoutElementBase provider, Position position) {
         switch (position) {
             case DRAWER:
                 setProvider(provider.getDrawerSectionElementProvider());

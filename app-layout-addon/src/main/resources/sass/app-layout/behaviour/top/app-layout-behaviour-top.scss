@@ -1,0 +1,74 @@
+@media only screen and (min-width: 641px) {
+  .app-layout-behaviour-top {
+    app-toolbar paper-icon-button#toggle {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .app-bar-content {
+      left: 10px !important;
+    }
+    app-drawer {
+      display: none;
+    }
+    .app-layout-bar-menu-holder {
+      display: flex !important;
+    }
+  }
+}
+
+@mixin app-layout-behaviour-top {
+  .app-layout-behaviour-top {
+    --app-drawer-width: var(--app-layout-drawer-width);
+    --app-bar-height: var(--app-layout-bar-height);
+    .app-bar-content {
+      left: var(--app-layout-bar-height);
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      transition: left 0.3s;
+      .app-layout-menu-bar-element {
+        display: none;
+      }
+    }
+    .app-layout-bar-menu-holder {
+      padding-left: 10px;
+      display: none;
+    }
+    app-toolbar paper-icon-button {
+      transition: opacity 0.3s;
+      opacity: 1.0;
+      position: absolute;
+      top: 0px;
+    }
+    app-toolbar {
+      background-color: var(--app-layout-bar-background-color);
+      color: var(--app-layout-bar-font-color);
+      position: relative;
+      z-index: calc(var(--app-layout-bar-z-index) + 1);
+      box-shadow: var(--app-layout-bar-shadow);
+      .v-button {
+        color: var(--app-layout-bar-font-color) !important;
+      }
+      padding: 0px;
+      transition: height 0.3s ease;
+    }
+    app-drawer {
+      --app-drawer-scrim-background: rgba(0, 0, 100, 0.0);
+    }
+    app-drawer[opened] {
+      z-index: var(--app-layout-bar-z-index);
+    }
+    .drawer-content {
+      margin-top: var(--app-layout-bar-height);
+      box-sizing: border-box;
+      height: 100%;
+      margin-bottom: - var(--app-layout-bar-height);
+      padding-bottom: var(--app-layout-bar-height);
+      overflow: visible;
+      box-shadow: var(--app-layout-drawer-shadow);
+      background: var(--app-layout-drawer-background-color);
+      color: var(--app-layout-drawer-font-color) !important;
+    }
+  }
+}

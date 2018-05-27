@@ -1,48 +1,57 @@
 package com.github.appreciated.app.layout.component.button;
 
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
-import com.vaadin.server.Resource;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-
-import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_BADGE;
+import com.github.appreciated.app.layout.webcomponents.paperbadge.PaperBadge;
+import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
  */
-public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHolder.NotificationListener {
+public class AppBarBadgeButton extends Div implements NotificationHolder.NotificationListener {
 
-    private final IconButton button;
-    private final Label badge;
+    private final PaperIconButton button;
+    private final PaperBadge badge;
     private NotificationHolder notificationHolder;
 
-    public AppBarBadgeButton(Resource icon, NotificationHolder notificationHolder) {
-        super();
-        this.notificationHolder = notificationHolder;
-        setWidth("64px");
-        setHeight("64px");
-        button = new IconButton(icon);
-        button.setSizeFull();
-        badge = new Label();
-        notificationHolder.addStatusListener(this);
-        badge.addStyleName(APP_BAR_BADGE);
-        addComponent(button);
-        addComponent(badge, "right: 0px;");
+    public AppBarBadgeButton(Icon icon, NotificationHolder notificationHolder) {
+        this(icon, notificationHolder, null);
     }
 
-    public AppBarBadgeButton(Resource icon, NotificationHolder notificationHolder, Button.ClickListener listener) {
-        this(icon, notificationHolder);
-        button.addClickListener(listener);
+    public AppBarBadgeButton(Icon icon, NotificationHolder notificationHolder, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
+        this.notificationHolder = notificationHolder;
+        setWidth("48px");
+        setHeight("48px");
+        button = new PaperIconButton(icon.getElement().getAttribute("icon"));
+        button.getElement().getStyle()
+                .set("width", "100%")
+                .set("height", "100%");
+        button.getElement().setAttribute("id", "button");
+        badge = new PaperBadge(button, "0");
+
+        badge.getElement().getStyle()
+                .set("margin-top", "10px")
+                .set("margin-left", "-10px");
+
+        notificationHolder.addStatusListener(this);
+        add(button);
+        add(badge);
+        if (listener != null) {
+            button.setClickListener(listener);
+        }
     }
 
     @Override
-    public void attach() {
-        super.attach();
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
         refreshNotifications(notificationHolder);
     }
 
-    public IconButton getButton() {
+    public PaperIconButton getButton() {
         return button;
     }
 
@@ -56,9 +65,9 @@ public class AppBarBadgeButton extends AbsoluteLayout implements NotificationHol
             if (unreadNotifications > 0) {
                 badge.setVisible(true);
                 if (unreadNotifications < 10) {
-                    badge.setValue(String.valueOf(unreadNotifications));
+                    badge.setLabel(String.valueOf(unreadNotifications));
                 } else {
-                    badge.setValue("9+");
+                    badge.setLabel("9+");
                 }
             } else {
                 badge.setVisible(false);
