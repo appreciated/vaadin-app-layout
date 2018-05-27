@@ -10,9 +10,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="app-layout-left">
     <template>
-        <app-toolbar style="height: var(--app-bar-height);">
-            <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
-            <div id="app-bar-elements" class="app-bar-content"></div>
+        <app-toolbar style="height:var(--app-bar-height);background: var(--app-layout-bar-background-color);
+    box-shadow: var(--app-layout-bar-shadow);color: var(--app-layout-bar-font-color);">
+            <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+            <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
         </app-toolbar>
         <div id="content" class="app-bar-application-content" size="100"></div>
         <app-drawer id="drawer" slot="drawer" swipe-open>
@@ -20,9 +21,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer>
     </template>
     <script>
-        var drawer = document.querySelector('app-drawer');
-        document.querySelector('paper-icon-button').addEventListener('click', function () {
-            drawer.toggle();
-        });
+        class AppLayoutLeft extends Polymer.Element {
+            static get is() {
+                return 'app-layout-left'
+            }
+
+            onclick() {
+                Polymer.dom(this.root).querySelector("#drawer").toggle();
+            }
+        }
+
+        customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>
