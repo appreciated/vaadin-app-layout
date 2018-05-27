@@ -15,11 +15,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --paper-badge-background: #ffffff;
                 --paper-badge-text-color: #000;
             }
+
             app-toolbar {
                 height: var(--app-bar-height);
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
+                padding: 0 0 0 16px;
             }
 
             #drawer {
@@ -28,6 +30,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
 
+            #toggle {
+                width: calc(var(--app-layout-bar-height) - 16px);
+                height: calc(var(--app-layout-bar-height) - 16px);
+                margin-right: 8px;
+                margin-left: -8px;
+            }
         </style>
         <app-toolbar>
             <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
@@ -43,10 +51,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             static get is() {
                 return 'app-layout-left'
             }
+
             onclick() {
                 Polymer.dom(this.root).querySelector("#drawer").toggle();
             }
         }
+
         customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>
