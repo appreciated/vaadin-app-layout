@@ -1,7 +1,8 @@
 package com.github.appreciated.app.layout.builder.entities;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
+import com.github.appreciated.app.layout.notification.Notification;
+import com.github.appreciated.app.layout.notification.Priority;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ public class DefaultNotification implements Notification {
     private Priority priority;
     private boolean dismissible;
     private boolean unread;
-    private LocalDateTime time;
+    private LocalDateTime creationTime;
 
     public DefaultNotification(String title, String description) {
         this(title, description, (String) null);
@@ -47,7 +48,7 @@ public class DefaultNotification implements Notification {
         this.image = image;
         this.priority = priority;
         this.dismissible = dismissible;
-        time = LocalDateTime.now();
+        creationTime = LocalDateTime.now();
         unread = true;
     }
 
@@ -63,6 +64,11 @@ public class DefaultNotification implements Notification {
         return description;
     }
 
+    @Override
+    public Priority getPriority() {
+        return null;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -71,13 +77,20 @@ public class DefaultNotification implements Notification {
         return image;
     }
 
+    @Override
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    @Override
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public void setImage(String image) {
         this.image = image;
     }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
 
     public String getStyle() {
         switch (priority) {
@@ -91,14 +104,15 @@ public class DefaultNotification implements Notification {
         return "";
     }
 
+
     @Override
-    public boolean isUnread() {
-        return unread;
+    public boolean isRead() {
+        return false;
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public void setRead(boolean isRead) {
+        this.unread = isRead;
     }
 
     public void setUnread(boolean unread) {
@@ -114,21 +128,12 @@ public class DefaultNotification implements Notification {
     }
 
     public String getTimeAgo() {
-        return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
+        return new PrettyTime().format(Date.from(creationTime.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
-    public enum Priority {
-        HIGH(2), MEDIUM(1), LOW(0);
-
-        private Integer priority;
-
-        Priority(int priority) {
-            this.priority = priority;
-        }
-
-        public Integer getValue() {
-            return priority;
-        }
+    @Override
+    public int compareTo(Notification o) {
+        return 0;
     }
 
 }

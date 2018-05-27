@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.webcomponents.paperdrawer.PaperDrawerIconItem;
 
 /**

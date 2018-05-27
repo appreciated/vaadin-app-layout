@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.component;
 
 import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.Holder;
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -25,7 +25,7 @@ public class NotificationsView extends VerticalLayout {
 
     public void initView(NotificationHolder holder) {
         removeAll();
-        add(this.holder.getNotificationViews(showAll.value));
+        add(this.holder.getNotificationViews(false));
         getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
 
         if (!showAll.value && this.holder.getNotificationSize() > 4) {

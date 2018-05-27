@@ -1,19 +1,16 @@
-package com.github.appreciated.app.layout.builder.entities;
+package com.github.appreciated.app.layout.notification;
 
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.vaadin.flow.component.Component;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_NOTIFICATION;
-
 /**
- * This Class is a controller for multiple {@link com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification} instances
+ * This Class is a controller for multiple {@link Notification} instances
  */
 
-public class NotificationHolder<T extends NotificationHolder.Notification> {
+public class NotificationHolder<T extends Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
@@ -40,14 +37,12 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         return notifications.size();
     }
 
-    public Component[] getNotificationViews(boolean showAll) {
-        List<T> components = getNotificationViews();
+    public List<Component> getNotifications(boolean showAll) {
+        List<T> components = getNotifications();
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        List<Component> list = components.stream().sorted((o1, o2) -> o1.compare(o1, o2))
-                .map(this::getComponent).collect(Collectors.toList());
-        return list.toArray(new Component[]{});
+        return components.stream().sorted((o1, o2) -> o1.compareTo(o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -71,12 +66,26 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
 
     public Component getComponent(T message) {
         Component component = componentProvider.getComponent(this, message);
-        component.getElement().getClassList().add(APP_BAR_NOTIFICATION);
         return component;
     }
 
+    public Component[] getNotificationViews(boolean showAll) {
+        List<T> components = getNotificationViews();
+        if (!showAll) {
+            components = components.size() > 4 ? components.subList(0, 4) : components;
+        }
+        List<Component> list = components.stream().sorted((o1, o2) -> o1.compareTo(o2))
+                .map(this::getComponent).collect(Collectors.toList());
+        return list.toArray(new Component[]{});
+    }
+
     public ArrayList<T> getNotificationViews() {
-        Collections.sort(notifications, (o1, o2) -> o1.compare(o2, o1));
+        Collections.sort(notifications, (o1, o2) -> o1.compareTo(o2));
+        return notifications;
+    }
+
+    public ArrayList<T> getNotifications() {
+        Collections.sort(notifications, Comparable::compareTo);
         return notifications;
     }
 
@@ -98,23 +107,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     }
 
     public int getUnreadNotifications() {
-        return (int) notifications.stream().filter(notification -> notification.isUnread()).count();
-    }
-
-    public interface Notification extends Comparator<Notification> {
-        boolean isUnread();
-
-        DefaultNotification.Priority getPriority();
-
-        LocalDateTime getTime();
-
-        default int compare(Notification o1, Notification o2) {
-            if (o1.getPriority() != o2.getPriority()) {
-                return o1.getPriority().getValue().compareTo(o2.getPriority().getValue());
-            } else {
-                return o1.getTime().compareTo(o2.getTime());
-            }
-        }
+        return (int) notifications.stream().filter(notification -> notification.isRead()).count();
     }
 
     public interface NotificationListener {

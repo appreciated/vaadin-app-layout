@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component;
 
-import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
+import com.github.appreciated.app.layout.notification.Notification;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
 import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
 import com.vaadin.flow.component.html.Label;
@@ -10,12 +10,12 @@ import com.vaadin.flow.dom.DomEventListener;
 
 public class NotificationView extends PaperCard {
 
-    public NotificationView(DefaultNotification info) {
+    public NotificationView(Notification info) {
         this(info, null);
 
     }
 
-    public NotificationView(DefaultNotification info, DomEventListener clickEvent) {
+    public NotificationView(Notification info, DomEventListener clickEvent) {
         getElement().getStyle().set("width", "100%").set("color", "#000000");
 
         Label title = new Label(info.getTitle());
@@ -46,7 +46,7 @@ public class NotificationView extends PaperCard {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-        if (info.isUnread()) {
+        if (!info.isRead()) {
             getElement().getStyle().set("border-left", "3px solid var(--app-layout-bar-background-color)");
         }
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);

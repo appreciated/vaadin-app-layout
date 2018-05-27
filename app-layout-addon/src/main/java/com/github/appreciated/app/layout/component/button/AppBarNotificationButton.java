@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
 import com.github.appreciated.app.layout.component.NotificationsView;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.dropdown.Alignment;
 import com.github.appreciated.dropdown.HorizontalAlignment;
 import com.github.appreciated.dropdown.IronDropdownWrapper;

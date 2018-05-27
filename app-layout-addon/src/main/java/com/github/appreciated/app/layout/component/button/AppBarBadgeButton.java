@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.button;
 
-import com.github.appreciated.app.layout.builder.entities.NotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.webcomponents.paperbadge.PaperBadge;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.AttachEvent;

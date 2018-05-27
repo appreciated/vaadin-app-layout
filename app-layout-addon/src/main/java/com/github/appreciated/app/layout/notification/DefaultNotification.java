@@ -1,13 +1,11 @@
 package com.github.appreciated.app.layout.notification;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
-
-import org.ocpsoft.prettytime.PrettyTime;
-
-import com.vaadin.server.Resource;
 
 /**
  * A concrete implementation of {@link Notification}.
@@ -18,7 +16,7 @@ public class DefaultNotification
 
 	private String title;
 	private String description;
-	private Resource image;
+	private String image;
 	private Priority priority = Priority.MEDIUM;
 	private boolean isSticky = true;
 	private boolean isRead = false;
@@ -65,12 +63,12 @@ public class DefaultNotification
 		this.description = description;
 	}
 
-	public Resource getImage()
+	public String getImage()
 	{
 		return image;
 	}
 
-	public void setImage( Resource image )
+	public void setImage(String image)
 	{
 		this.image = image;
 	}
