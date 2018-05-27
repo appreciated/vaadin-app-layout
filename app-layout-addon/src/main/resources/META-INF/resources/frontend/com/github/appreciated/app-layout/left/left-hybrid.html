@@ -10,10 +10,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="app-layout-left-hybrid">
     <template>
+        <style>
+            :root {
+                --paper-badge-background: #ffffff;
+                --paper-badge-text-color: #000;
+            }
+
+            app-toolbar {
+                height: var(--app-bar-height);
+                background: var(--app-layout-bar-background-color);
+                box-shadow: var(--app-layout-bar-shadow);
+                color: var(--app-layout-bar-font-color);
+                padding: 0 0 0 16px;
+            }
+
+            app-drawer {
+                --iron-icon-fill-color: #727272;
+            }
+
+            #drawer {
+                --app-drawer-content-container: {
+                    box-shadow: var(--app-layout-drawer-shadow);
+                }
+            }
+
+            #toggle {
+                width: calc(var(--app-layout-bar-height) - 16px);
+                height: calc(var(--app-layout-bar-height) - 16px);
+                margin-right: 8px;
+                margin-left: -8px;
+            }
+        </style>
         <app-header-layout id="layout-wrapper">
             <app-header fixed effects="waterfall" slot="header">
                 <app-toolbar style="height: var(--app-bar-height);">
-                    <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
+                    <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements"></div>
                 </app-toolbar>
             </app-header>
@@ -26,16 +57,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header-layout>
     </template>
     <script>
-        var drawerLayout = document.getElementById('drawerLayout');
-        var layoutWrapper = document.getElementById('layout-wrapper');
-        var drawer = document.getElementById('drawer');
-        document.querySelector('paper-icon-button').addEventListener('click', function () {
-            if (drawer.persistent) {
-                layoutWrapper.parentNode.classList.toggle("small");
-            } else {
-                layoutWrapper.parentNode.classList.remove("small");
-                drawerLayout.drawer.toggle();
+        class AppLayoutLeftHybrid extends Polymer.Element {
+            static get is() {
+                return 'app-layout-left-hybrid'
             }
-        });
+
+            onclick() {
+                var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
+                var layoutWrapper = Polymer.dom(this.root).querySelector("#layout-wrapper");
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                if (drawer.persistent) {
+                    layoutWrapper.parentNode.classList.add("small");
+                } else {
+                    layoutWrapper.parentNode.classList.remove("small");
+                    drawerLayout.drawer.toggle();
+                }
+            }
+        }
+
+        customElements.define(AppLayoutLeftHybrid.is, AppLayoutLeftHybrid);
     </script>
 </dom-module>
