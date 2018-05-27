@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
@@ -46,9 +47,9 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
 
     private final VerticalLayout contentPanel = new VerticalLayout();
 
-    private final VerticalLayout menuHeaderHolder = new VerticalLayout();
-    private final VerticalLayout menuElementHolder = new VerticalLayout();
-    private final VerticalLayout menuFooterHolder = new VerticalLayout();
+    private final AppMenu menuHeaderHolder = new AppMenu();
+    private final AppMenu menuElementHolder = new AppMenu();
+    private final AppMenu menuFooterHolder = new AppMenu();
 
     private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
 
@@ -75,10 +76,6 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         menuHolder.getElement().setAttribute("overflow", "auto");
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(true);
-        menuFooterHolder.setMargin(true);
-        menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
         /**add(contentPanel, "content");
          addComponent(menuHolder, "menu-webcomponents");
@@ -170,15 +167,15 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         return titleWrapper;
     }
 
-    public VerticalLayout getMenuElementHolder() {
+    public AppMenu getMenuElementHolder() {
         return menuElementHolder;
     }
 
-    public VerticalLayout getMenuFooterHolder() {
+    public AppMenu getMenuFooterHolder() {
         return menuFooterHolder;
     }
 
-    public VerticalLayout getMenuHeaderHolder() {
+    public AppMenu getMenuHeaderHolder() {
         return menuHeaderHolder;
     }
 

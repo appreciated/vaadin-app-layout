@@ -4,11 +4,11 @@ import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.List;
 
@@ -67,11 +67,11 @@ public interface AppLayoutElementBase {
 
     HasElement getTitleWrapper();
 
-    VerticalLayout getMenuElementHolder();
+    AppMenu getMenuElementHolder();
 
-    VerticalLayout getMenuFooterHolder();
+    AppMenu getMenuFooterHolder();
 
-    VerticalLayout getMenuHeaderHolder();
+    AppMenu getMenuHeaderHolder();
 
     void addAppBarIcon(Component appBarIconComponent);
 

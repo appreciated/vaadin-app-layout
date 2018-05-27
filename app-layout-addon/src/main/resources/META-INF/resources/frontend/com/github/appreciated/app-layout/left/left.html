@@ -10,8 +10,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="app-layout-left">
     <template>
-        <app-toolbar style="height:var(--app-bar-height);background: var(--app-layout-bar-background-color);
-    box-shadow: var(--app-layout-bar-shadow);color: var(--app-layout-bar-font-color);">
+        <style>
+            :root {
+                --paper-badge-background: #ffffff;
+                --paper-badge-text-color: #000;
+            }
+
+            #content {
+
+            }
+
+            app-toolbar {
+                height: var(--app-bar-height);
+                background: var(--app-layout-bar-background-color);
+                box-shadow: var(--app-layout-bar-shadow);
+                color: var(--app-layout-bar-font-color);
+            }
+        </style>
+        <app-toolbar>
             <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
             <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
         </app-toolbar>
@@ -25,12 +41,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             static get is() {
                 return 'app-layout-left'
             }
-
             onclick() {
                 Polymer.dom(this.root).querySelector("#drawer").toggle();
             }
         }
-
         customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>

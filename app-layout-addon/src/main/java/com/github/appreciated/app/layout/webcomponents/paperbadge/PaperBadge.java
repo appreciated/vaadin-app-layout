@@ -9,6 +9,10 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 @HtmlImport("bower_components/paper-badge/paper-badge.html")
 public class PaperBadge extends Component {
 
+    public PaperBadge(Component bind) {
+        this(bind, null, null);
+    }
+
     public PaperBadge(Component bind, String label) {
         this(bind, null, label);
     }
@@ -17,7 +21,9 @@ public class PaperBadge extends Component {
         if (icon != null) {
             getElement().setAttribute("icon", icon);
         }
-        setLabel(label);
+        if (label != null) {
+            setLabel(label);
+        }
         getElement().setAttribute("for", bind.getElement().getAttribute("id"));
     }
 

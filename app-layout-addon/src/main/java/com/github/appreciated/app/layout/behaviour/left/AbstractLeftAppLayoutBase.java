@@ -13,13 +13,13 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.templatemodel.TemplateModel;
@@ -42,9 +42,9 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Id("content")
     Div content;
 
-    private final VerticalLayout menuHeaderHolder = new VerticalLayout();
-    private final VerticalLayout menuElementHolder = new VerticalLayout();
-    private final VerticalLayout menuFooterHolder = new VerticalLayout();
+    private final AppMenu menuHeaderHolder = new AppMenu();
+    private final AppMenu menuElementHolder = new AppMenu();
+    private final AppMenu menuFooterHolder = new AppMenu();
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
@@ -69,16 +69,10 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         menuElements.getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
-        menuHeaderHolder.setMargin(false);
-        menuElementHolder.setMargin(false);
-        menuFooterHolder.setMargin(false);
-        menuHeaderHolder.setPadding(false);
-        menuElementHolder.setPadding(false);
-        menuFooterHolder.setPadding(false);
-
-        menuElementHolder.setWidth("100%");
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
-        appBarElements.add(titleWrapper, appBarElementWrapper);
+        HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
+        appBarContentHolder.setSizeFull();
+        appBarElements.add(appBarContentHolder);
 
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
@@ -164,15 +158,15 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         return titleWrapper;
     }
 
-    public VerticalLayout getMenuElementHolder() {
+    public AppMenu getMenuElementHolder() {
         return menuElementHolder;
     }
 
-    public VerticalLayout getMenuFooterHolder() {
+    public AppMenu getMenuFooterHolder() {
         return menuFooterHolder;
     }
 
-    public VerticalLayout getMenuHeaderHolder() {
+    public AppMenu getMenuHeaderHolder() {
         return menuHeaderHolder;
     }
 

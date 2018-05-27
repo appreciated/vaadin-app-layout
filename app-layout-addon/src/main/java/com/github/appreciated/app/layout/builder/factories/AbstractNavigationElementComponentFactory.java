@@ -14,5 +14,7 @@ public abstract class AbstractNavigationElementComponentFactory implements Compo
             element.onClick();
             AppLayoutElementBase.closeDrawerIfNotPersistent();
         });
+
+
     }
 }
