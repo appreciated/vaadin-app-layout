@@ -93,10 +93,12 @@ $al-menu-submenu-max-height: 999px !default;
   --app-layout-menu-section-padding: #{$al-menu-section-padding};
 
   --app-layout-menu-submenu-max-height: #{$al-menu-submenu-max-height};
+  --app-bar-height: var(--app-layout-bar-height);
   --paper-drawer-title-background-color: #{$al-background-color};
   --paper-drawer-title-color: #{color-contrast($al-background-color)};
 }
 
+/*
 @mixin application-content($margin-top, $margin-left) {
   margin-bottom: -$margin-top;
   padding-bottom: $margin-top;
@@ -222,4 +224,4 @@ $al-menu-submenu-max-height: 999px !default;
 
   @include app-layout-behaviour-top;
   @include app-layout-behaviour-top-large;
-}
+}*/
