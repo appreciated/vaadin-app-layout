@@ -124,11 +124,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             onclick() {
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
-
-                if (drawer.persistent) {
-                    drawerLayout.classList.toggle("small");
-                } else {
+                if (!drawer.persistent) {
                     drawer.toggle();
                 }
             }
