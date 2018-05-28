@@ -1,6 +1,7 @@
 *.iml
 .idea
 *.css
+*.scss.cache
 /.designer/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es5/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es6/

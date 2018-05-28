@@ -5,7 +5,7 @@
 
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-addon</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>app-layout</name>
     <description>Integration of app-layout for Vaadin 10</description>
 
