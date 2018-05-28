@@ -8,36 +8,134 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<!doctype html>
-<html>
-<head>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
 
-</head>
-<body>
-<app-header-layout>
+<dom-module id="app-layout-left-responsive-small-no-app-bar">
+    <template>
+        <style>
+            :root {
+                --paper-badge-background: #ffffff;
+                --paper-badge-text-color: #000;
+            }
 
-    <app-header fixed effects="waterfall" slot="header">
-        <app-toolbar style="height: var(--app-bar-height);">
-            <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
-            <div class="app-bar-content" location="app-bar-elements"></div>
-        </app-toolbar>
-    </app-header>
+            app-toolbar {
+                height: var(--app-bar-height);
+                background: var(--app-layout-bar-background-color);
+                box-shadow: var(--app-layout-bar-shadow);
+                color: var(--app-layout-bar-font-color);
+                padding: 0 0 0 16px;
+            }
 
-    <app-drawer-layout id="drawerLayout">
-        <app-drawer id="drawer" slot="drawer" swipe-open>
-            <div class="drawer-content" location="menu-elements"></div>
-        </app-drawer>
-        <div class="app-bar-application-content" size="100" location="content"></div>
-    </app-drawer-layout>
+            /* non-overlay */
+            :root {
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
+            }
 
-</app-header-layout>
+            app-toolbar {
+                position: relative;
+                z-index: 1;
+            }
 
-<script>
-    var drawerLayout = document.getElementById('drawerLayout');
-    document.querySelector('paper-icon-button').addEventListener('click', function () {
-        drawerLayout.drawer.toggle();
-    });
-</script>
+            #drawer {
+                margin-top: var(--app-layout-bar-height);
+            }
 
-</body>
-</html>
+            /* non-overlay */
+
+            app-drawer {
+                --iron-icon-fill-color: #727272;
+            }
+
+            #drawer {
+                --app-drawer-content-container: {
+                    box-shadow: var(--app-layout-drawer-shadow);
+                };
+                transition: 1s width;
+            }
+
+            #toggle {
+                width: calc(var(--app-layout-bar-height) - 16px);
+                height: calc(var(--app-layout-bar-height) - 16px);
+                margin-right: 8px;
+                margin-left: -8px;
+            }
+
+            @media only screen and (min-width: 640px) {
+                /*responsive*/
+                #toggle {
+                    display: none;
+                }
+
+                /*responsive*/
+                /* small */
+                #drawerLayout {
+                    --app-drawer-width: 70px;
+                }
+
+                #drawerLayout #menu-header-title, #drawerLayout #menu-header-subtitle {
+                    opacity: 0;
+                    max-height: 0px;
+                    margin-top: 0px;
+                }
+
+                #drawerLayout #menu-header-wrapper {
+                    padding: 5px;
+                }
+
+                #drawerLayout app-menu-icon-item {
+                    color: transparent;
+                }
+
+                /* small */
+                /* no-app-bar */
+                app-header {
+                    display: none;
+                }
+
+                #drawer {
+                    margin-top: 0px;
+                }
+
+                /* no-app-bar */
+            }
+        </style>
+        <app-header-layout id="layout-wrapper">
+            <app-header fixed effects="waterfall" slot="header">
+                <app-toolbar style="height: var(--app-bar-height);">
+                    <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+                    <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
+                </app-toolbar>
+            </app-header>
+            <app-drawer-layout id="drawerLayout">
+                <app-drawer id="drawer" slot="drawer" swipe-open>
+                    <div class="drawer-content" id="menu-elements"></div>
+                </app-drawer>
+                <div class="app-bar-application-content" size="100" id="content"></div>
+            </app-drawer-layout>
+        </app-header-layout>
+    </template>
+    <script>
+        class AppLayoutLeftResponsiveSmallNoAppBar extends Polymer.Element {
+            static get is() {
+                return 'app-layout-left-responsive-small-no-app-bar'
+            }
+
+            onclick() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                if (!drawer.persistent) {
+                    drawer.toggle();
+                }
+            }
+        }
+
+        customElements.define(AppLayoutLeftResponsiveSmallNoAppBar.is, AppLayoutLeftResponsiveSmallNoAppBar);
+    </script>
+</dom-module>

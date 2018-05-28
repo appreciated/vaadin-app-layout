@@ -9,6 +9,13 @@ import com.vaadin.flow.component.dependency.HtmlImport;
  */
 
 @Tag("app-layout-left-responsive-overlay-no-app-bar")
+@HtmlImport("frontend://bower_components/vaadin-icons/vaadin-icons.html")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header/app-header.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
+@HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-overlay.html")
 @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.html")
 public class LeftResponsiveOverlayNoAppBar extends AbstractLeftAppLayoutBase {
 

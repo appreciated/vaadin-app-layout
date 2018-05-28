@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 
@@ -8,7 +9,15 @@ import com.vaadin.flow.component.dependency.HtmlImport;
  * Edited By deyaeddin on 07.02.2018
  */
 
-@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-small.html")
+
+@Tag("app-layout-left-responsive-small")
+@HtmlImport("frontend://bower_components/vaadin-icons/vaadin-icons.html")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
+@HtmlImport("frontend://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header/app-header.html")
+@HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
+@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
+@HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-small.html")
 public class LeftResponsiveSmall extends AbstractLeftAppLayoutBase {
 
     @Override
