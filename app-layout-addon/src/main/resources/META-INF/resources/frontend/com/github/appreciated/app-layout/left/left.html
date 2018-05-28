@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :root {
                 --paper-badge-background: #ffffff;
                 --paper-badge-text-color: #000;
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
             }
 
             app-toolbar {
@@ -31,8 +32,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
-                }
+                };
             }
+
+            <!--
+            non-overlay
+
+            -->
+            :root {
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
+            }
+
+            app-toolbar {
+                position: relative;
+                z-index: 1;
+            }
+
+            #drawer {
+                margin-top: var(--app-layout-bar-height);
+            }
+
+            <!--
+            non-overlay
+
+            -->
 
             #toggle {
                 width: calc(var(--app-layout-bar-height) - 16px);

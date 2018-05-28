@@ -8,26 +8,59 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<!doctype html>
-<html>
-<head>
-</head>
-<body>
-<app-toolbar style="height: var(--app-bar-height);">
-    <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
-    <div class="app-bar-content" location="app-bar-elements"></div>
-</app-toolbar>
-<div class="app-bar-application-content" size="100" location="content"></div>
-<app-drawer id="drawer" swipe-open>
-    <div class="drawer-content" location="menu-elements"></div>
-</app-drawer>
+<dom-module id="app-layout-left-overlay">
+    <template>
+        <style>
+            :root {
+                --paper-badge-background: #ffffff;
+                --paper-badge-text-color: #000;
+            }
 
-<script>
-    var drawer = document.querySelector('app-drawer');
-    document.querySelector('paper-icon-button').addEventListener('click', function () {
-        drawer.toggle();
-    });
-</script>
+            app-toolbar {
+                height: var(--app-bar-height);
+                background: var(--app-layout-bar-background-color);
+                box-shadow: var(--app-layout-bar-shadow);
+                color: var(--app-layout-bar-font-color);
+                padding: 0 0 0 16px;
+            }
 
-</body>
-</html>
+            app-drawer {
+                --iron-icon-fill-color: #727272;
+            }
+
+            #drawer {
+                --app-drawer-content-container: {
+                    box-shadow: var(--app-layout-drawer-shadow);
+                };
+            }
+
+            #toggle {
+                width: calc(var(--app-layout-bar-height) - 16px);
+                height: calc(var(--app-layout-bar-height) - 16px);
+                margin-right: 8px;
+                margin-left: -8px;
+            }
+        </style>
+        <app-toolbar>
+            <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+            <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
+        </app-toolbar>
+        <div id="content" class="app-bar-application-content" size="100"></div>
+        <app-drawer id="drawer" slot="drawer" swipe-open>
+            <div id="menu-elements" class="drawer-content"></div>
+        </app-drawer>
+    </template>
+    <script>
+        class AppLayoutLeftOverlay extends Polymer.Element {
+            static get is() {
+                return 'app-layout-left-overlay'
+            }
+
+            onclick() {
+                Polymer.dom(this.root).querySelector("#drawer").toggle();
+            }
+        }
+
+        customElements.define(AppLayoutLeftOverlay.is, AppLayoutLeftOverlay);
+    </script>
+</dom-module>
