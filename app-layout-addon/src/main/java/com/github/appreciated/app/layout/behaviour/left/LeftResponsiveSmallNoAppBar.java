@@ -9,7 +9,7 @@ import com.vaadin.flow.component.dependency.HtmlImport;
  */
 
 @HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-small-no-app-bar.html")
-public class LeftResponsiveSmallNoAppBarBase extends AbstractLeftAppLayoutBase {
+public class LeftResponsiveSmallNoAppBar extends AbstractLeftAppLayoutBase {
 
 
     @Override

@@ -8,7 +8,7 @@ import com.vaadin.flow.component.dependency.HtmlImport;
  */
 
 @HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-overlay.html")
-public class LeftResponsiveOverlayNoAppBarBase extends AbstractLeftAppLayoutBase {
+public class LeftResponsiveOverlayNoAppBar extends AbstractLeftAppLayoutBase {
 
     @Override
     public String getStyleName() {
