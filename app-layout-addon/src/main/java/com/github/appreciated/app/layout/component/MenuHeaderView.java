@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.component;
 
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -13,12 +12,7 @@ public class MenuHeaderView extends VerticalLayout {
         setMargin(false);
         setId("menu-header-wrapper");
         if (src != null) {
-            Image image = new Image(src, "Icon");
-            image.setWidth("60px");
-            image.setHeight("60px");
-            image.getElement().getStyle().set("border-radius", "100%");
-            image.setId("menu-header-image");
-            add(image);
+            add(new RoundImage(src, "60px", "60px"));
         }
         if (title != null) {
             Label titleLabel = new Label(title);
