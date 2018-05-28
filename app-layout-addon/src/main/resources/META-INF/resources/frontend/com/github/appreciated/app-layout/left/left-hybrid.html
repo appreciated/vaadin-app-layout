@@ -36,10 +36,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 transition: 1s width;
             }
 
-            #drawer.small {
-                --app-drawer-width: 70px;
-            }
-
             #toggle {
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
@@ -47,34 +43,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-left: -8px;
             }
 
-            #drawer.small #menu-header-title, #drawer.small #menu-header-subtitle {
-                opacity: 0;
-                max-height: 0px;
-                margin-top: 0px;
-            }
+            @media only screen and (min-width: 640px) {
+                #drawerLayout.small {
+                    --app-drawer-width: 70px;
+                }
 
-            #menu-header-title, #menu-header-subtitle {
-                opacity: 1.0;
-                transition: opacity 0.5s, max-height 0.5s, margin-top 0.5s;
-                max-height: 50px;
-            }
+                #drawerLayout.small #menu-header-title, #drawerLayout.small #menu-header-subtitle {
+                    opacity: 0;
+                    max-height: 0px;
+                    margin-top: 0px;
+                }
 
-            #menu-header-wrapper {
-                transition: padding 0.5s;
-            }
+                #menu-header-title, #menu-header-subtitle {
+                    opacity: 1.0;
+                    transition: opacity 0.5s, max-height 0.5s, margin-top 0.5s;
+                    max-height: 50px;
+                }
 
-            #drawer.small #menu-header-wrapper {
-                padding: 5px;
-            }
+                #menu-header-wrapper {
+                    transition: padding 0.5s;
+                }
 
-            app-menu-icon-item {
-                transition: color 0.4s;
-            }
+                #drawerLayout.small #menu-header-wrapper {
+                    padding: 5px;
+                }
 
-            #drawer.small app-menu-icon-item {
-                color: transparent;
-            }
+                app-menu-icon-item {
+                    transition: color 0.4s;
+                }
 
+                #drawerLayout.small app-menu-icon-item {
+                    color: transparent;
+                }
+            }
         </style>
         <app-header-layout id="layout-wrapper">
             <app-header fixed effects="waterfall" slot="header">
@@ -99,7 +100,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             onclick() {
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                drawer.classList.toggle("small");
+                var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
+
+                if (drawer.persistent) {
+                    drawerLayout.classList.toggle("small");
+                } else {
+                    drawer.toggle();
+                }
             }
         }
 

@@ -15,18 +15,14 @@
                     <div class="app-bar-content" location="app-bar-elements"></div>
                 </app-toolbar>
             </app-header>
-
             <app-drawer-layout id="drawerLayout">
                 <app-drawer slot="drawer" swipe-open>
                     <div class="drawer-content" location="menu-elements"></div>
                 </app-drawer>
                 <div class="app-bar-application-content" size="100" location="content"></div>
             </app-drawer-layout>
-
         </app-header-layout>
-
     </template>
-
     <script>
         class LeftResponsive extends Polymer.Element {
             static get is() {
@@ -42,8 +38,6 @@
                 drawerLayout.drawer.toggle();
             }
         });
-
-
         customElements.define(LeftResponsive.is, LeftResponsive);
     </script>
 </dom-module>
