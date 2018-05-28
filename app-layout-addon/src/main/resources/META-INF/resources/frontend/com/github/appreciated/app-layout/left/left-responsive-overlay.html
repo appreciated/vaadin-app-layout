@@ -8,20 +8,81 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<!doctype html>
-<html lang="en">
-<head>
-</head>
-<body>
-<app-drawer-layout>
-    <app-drawer slot="drawer" id="drawer" swipe-open>
-        <div class="drawer-content" location="menu-elements"></div>
-    </app-drawer>
-    <app-toolbar style="height: var(--app-bar-height);">
-        <paper-icon-button id="toggle" icon="menu" drawer-toggle></paper-icon-button>
-        <div class="app-bar-content" location="app-bar-elements"></div>
-    </app-toolbar>
-    <div class="app-bar-application-content" size="100" location="content"></div>
-</app-drawer-layout>
-</body>
-</html>
+<dom-module id="app-layout-left-responsive-overlay">
+    <template>
+        <style>
+            :root {
+                --paper-badge-background: #ffffff;
+                --paper-badge-text-color: #000;
+            }
+
+            app-toolbar {
+                height: var(--app-bar-height);
+                background: var(--app-layout-bar-background-color);
+                box-shadow: var(--app-layout-bar-shadow);
+                color: var(--app-layout-bar-font-color);
+                padding: 0 0 0 16px;
+            }
+
+            /*
+            app-header {
+              z-index: 0;
+            }
+            */
+
+            app-drawer {
+                --iron-icon-fill-color: #727272;
+            }
+
+            #drawer {
+                --app-drawer-content-container: {
+                    box-shadow: var(--app-layout-drawer-shadow);
+                };
+                transition: 1s width;
+            }
+
+            #toggle {
+                width: calc(var(--app-layout-bar-height) - 16px);
+                height: calc(var(--app-layout-bar-height) - 16px);
+                margin-right: 8px;
+                margin-left: -8px;
+            }
+
+            @media only screen and (min-width: 640px) {
+                #toggle {
+                    display: none;
+                }
+            }
+        </style>
+        <app-drawer-layout id="drawerLayout">
+            <app-header-layout id="layout-wrapper">
+                <app-header fixed effects="waterfall" slot="header">
+                    <app-toolbar style="height: var(--app-bar-height);">
+                        <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
+                    </app-toolbar>
+                </app-header>
+            </app-header-layout>
+            <app-drawer id="drawer" slot="drawer" swipe-open>
+                <div class="drawer-content" id="menu-elements"></div>
+            </app-drawer>
+            <div class="app-bar-application-content" size="100" id="content"></div>
+        </app-drawer-layout>
+    </template>
+    <script>
+        class AppLayoutLeftResponsiveOverlay extends Polymer.Element {
+            static get is() {
+                return 'app-layout-left-responsive-overlay'
+            }
+
+            onclick() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                if (!drawer.persistent) {
+                    drawer.toggle();
+                }
+            }
+        }
+
+        customElements.define(AppLayoutLeftResponsiveOverlay.is, AppLayoutLeftResponsiveOverlay);
+    </script>
+</dom-module>

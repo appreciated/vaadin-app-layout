@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 /**
@@ -7,7 +8,8 @@ import com.vaadin.flow.component.dependency.HtmlImport;
  * Edited By deyaeddin on 07.02.2018
  */
 
-@HtmlImport("/com/github/appreciated/app/layout/behaviour/left/left-responsive-overlay.html")
+@Tag("app-layout-left-responsive-overlay-no-app-bar")
+@HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.html")
 public class LeftResponsiveOverlayNoAppBar extends AbstractLeftAppLayoutBase {
 
     @Override

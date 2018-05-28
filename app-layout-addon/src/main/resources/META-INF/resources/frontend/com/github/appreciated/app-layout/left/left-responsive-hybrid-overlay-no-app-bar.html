@@ -28,9 +28,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --iron-icon-fill-color: #727272;
             }
 
+            /*
             app-header {
                 z-index: 0;
             }
+            */
 
             #drawer {
                 --app-drawer-content-container: {
@@ -104,20 +106,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 /* hybrid */
             }
         </style>
-        <app-header-layout id="layout-wrapper">
-            <app-header fixed effects="waterfall" slot="header">
-                <app-toolbar style="height: var(--app-bar-height);">
-                    <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-                    <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
-                </app-toolbar>
-            </app-header>
-            <app-drawer-layout id="drawerLayout">
-                <app-drawer id="drawer" slot="drawer" swipe-open>
-                    <div class="drawer-content" id="menu-elements"></div>
-                </app-drawer>
-                <div class="app-bar-application-content" size="100" id="content"></div>
-            </app-drawer-layout>
-        </app-header-layout>
+        <app-drawer-layout id="drawerLayout">
+            <app-header-layout id="layout-wrapper">
+                <app-header fixed effects="waterfall" slot="header">
+                    <app-toolbar style="height: var(--app-bar-height);">
+                        <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
+                    </app-toolbar>
+                </app-header>
+            </app-header-layout>
+            <app-drawer id="drawer" slot="drawer" swipe-open>
+                <div class="drawer-content" id="menu-elements"></div>
+            </app-drawer>
+            <div class="app-bar-application-content" size="100" id="content"></div>
+        </app-drawer-layout>
     </template>
     <script>
         class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Polymer.Element {
