@@ -1,5 +1,5 @@
-## Integration of the Webcomponent <app-layout> as a Add-on for Vaadin 10
-A collection of ready to use templates for the Webcomponent [<app-layout>](https://www.webcomponents.org/element/PolymerElements/app-layout)
+## Integration of the Webcomponent \<app-layout\> as a Add-on for Vaadin 10
+A collection of ready to use templates for the Webcomponent [\<app-layout\>](https://www.webcomponents.org/element/PolymerElements/app-layout)
 <br>
 <br>
 <br>
