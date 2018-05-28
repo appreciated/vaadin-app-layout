@@ -12,6 +12,7 @@ public class AppMenuItem extends Anchor {
     public AppMenuItem() {
         getElement().getClassList().add("app-menu-item");
         getElement().setAttribute("href", "javascript:void(0)");
+        getElement().getStyle().set("position", "relative");
         getElement().appendChild(new PaperRipple().getElement());
     }
 
