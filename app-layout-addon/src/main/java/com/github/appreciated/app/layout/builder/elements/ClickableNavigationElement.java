@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.Position;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
@@ -36,19 +35,8 @@ public class ClickableNavigationElement extends AbstractNavigationElement<HasEle
 
     @Override
     public void setProvider(AppLayoutElementBase provider) {
-        setProvider(provider.getDrawerClickableElementProvider());
-    }
 
-    @Override
-    public void setProvider(AppLayoutElementBase provider, Position position) {
-        switch (position) {
-            case DRAWER:
-                setProvider(provider.getDrawerClickableElementProvider());
-                break;
-            case TOP:
-                setProvider(provider.getTopClickableElementProvider());
-                break;
-        }
+        setProvider(provider.getClickableElementProvider());
     }
 
     public ComponentEventListener<ClickEvent<?>> getListener() {

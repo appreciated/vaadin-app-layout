@@ -186,86 +186,47 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Override
     public void addNavigationElement(AbstractNavigationElement component) {
         component.setProvider(this);
-        addToDrawer((Component) component.getComponent());
+        addToMenu((Component) component.getComponent());
     }
 
     @Override
-    public ComponentFactory<HasElement, SectionNavigationElement> getDrawerSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getSectionElementProvider() {
         return drawerSectionElementProvider;
     }
 
     @Override
-    public void setDrawerSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
+    public void setSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         drawerSectionElementProvider = provider;
     }
 
-    @Override
-    public ComponentFactory<HasElement, SectionNavigationElement> getTopSectionElementProvider() {
-        return topSectionElementProvider;
-    }
 
     @Override
-    public void setTopSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
-        topSectionElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getSubmenuElementProvider() {
         return drawerSubmenuElementProvider;
     }
 
     @Override
-    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
+    public void setSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         drawerSubmenuElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getTopSubmenuElementProvider() {
-        return topSubmenuElementProvider;
-    }
-
-    @Override
-    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
-        topSubmenuElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider() {
+    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getNavigationElementProvider() {
         return drawerNavigationElementProvider;
     }
 
     @Override
-    public void setDrawerNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
+    public void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
         drawerNavigationElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider() {
-        return topNavigationElementProvider;
-    }
-
-    @Override
-    public void setTopNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
-        topNavigationElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<HasElement, ClickableNavigationElement> getTopClickableElementProvider() {
-        return topClickableElementProvider;
-    }
-
-    @Override
-    public void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider) {
-        this.topClickableElementProvider = topClickableElementProvider;
-    }
-
-    @Override
-    public ComponentFactory<HasElement, ClickableNavigationElement> getDrawerClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getClickableElementProvider() {
         return drawerClickableElementProvider;
     }
 
     @Override
-    public void setDrawerClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
+    public void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
         this.drawerClickableElementProvider = drawerClickableElementProvider;
     }
 
@@ -282,7 +243,7 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     }
 
     @Override
-    public void addToDrawer(Component component) {
+    public void addToMenu(Component component) {
         menuElementHolder.add(component);
     }
 
@@ -296,20 +257,5 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     public void addToDrawerHeader(Component component) {
         menuHeaderHolder.setVisible(true);
         menuHeaderHolder.add(component);
-    }
-
-    @Override
-    public void addToTop(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
-    }
-
-    @Override
-    public void addToTopFooter(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
-    }
-
-    @Override
-    public void addToTopHeader(Component component) {
-        throw new UnsupportedOperationException("The Left Layout does not support this operation");
     }
 }

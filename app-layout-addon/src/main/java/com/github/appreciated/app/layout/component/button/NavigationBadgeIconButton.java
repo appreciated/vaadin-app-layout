@@ -57,4 +57,9 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
     public void setNavigationCaption(String string) {
         setText(string);
     }
+
+    @Override
+    public void setClickListener(ComponentEventListener listener) {
+        super.setClickListener(listener);
+    }
 }

@@ -45,41 +45,53 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getConfiguration() {
         if (variant == null) {
-            variant = Behaviour.LEFT_RESPONSIVE;
+            variant = Behaviour.TOP;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
         notifications.addNotification(new DefaultNotification("Test1", "Test1"));
         notifications.addNotification(new DefaultNotification("Test2", "Test2"));
         notifications.addNotification(new DefaultNotification("Test3", "Test3"));
-        return AppLayout.getDefaultBuilder(variant)
-                .withTitle("App Layout")
-                .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
-                .withViewNameInterceptor(new DefaultViewNameInterceptor())
-                .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
-                .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                .add("Charts", "view2", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                .add("Contact", "view4", VaadinIcons.CONNECT.create(), View3.class)
-                                .add("More", "view5", VaadinIcons.COG.create(), View4.class)
-                                .build())
-                        .add("Contact1", "view5", VaadinIcons.CONNECT.create(), View3.class)
-                        .add("More1", "view6", VaadinIcons.COG.create(), View4.class)
-                        .build())
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                        .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
-                                .add("More4", VaadinIcons.COG.create(), View4.class)
-                                .build())
-                        .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
-                        .add("More2", VaadinIcons.COG.create(), View4.class)
-                        .build())
-                .add("Menu", VaadinIcons.MENU.create(), View5.class)
-                .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+        if (!variant.isTop()) {
+            return AppLayout.getDefaultBuilder(variant)
+                    .withTitle("App Layout")
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
+                    .withViewNameInterceptor(new DefaultViewNameInterceptor())
+                    .withDesign(AppLayoutDesign.MATERIAL)
+                    .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
+                    .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                    .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
+                    .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                            .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                    .add("Charts", "view2", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                    .add("Contact", "view4", VaadinIcons.CONNECT.create(), View3.class)
+                                    .add("More", "view5", VaadinIcons.COG.create(), View4.class)
+                                    .build())
+                            .add("Contact1", "view5", VaadinIcons.CONNECT.create(), View3.class)
+                            .add("More1", "view6", VaadinIcons.COG.create(), View4.class)
+                            .build())
+                    .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                            .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
+                                    .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
+                                    .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
+                                    .add("More4", VaadinIcons.COG.create(), View4.class)
+                                    .build())
+                            .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
+                            .add("More2", VaadinIcons.COG.create(), View4.class)
+                            .build())
+                    .add("Menu", VaadinIcons.MENU.create(), View5.class)
+                    .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+        } else {
+            return AppLayout.getDefaultBuilder(variant)
+                    .withTitle("App Layout")
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
+                    .withViewNameInterceptor(new DefaultViewNameInterceptor())
+                    .withDesign(AppLayoutDesign.MATERIAL)
+                    .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                    .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
+                    .add("Menu", VaadinIcons.MENU.create(), View5.class)
+                    .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+        }
     }
 
     private void reloadNotifications() {

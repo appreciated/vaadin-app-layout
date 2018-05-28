@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.vaadin.flow.component.HasElement;
 
@@ -30,8 +29,6 @@ public abstract class AbstractNavigationElement<V extends HasElement, T> impleme
         this.component = null;
         this.provider = provider;
     }
-
-    public abstract void setProvider(AppLayoutElementBase provider, Position position);
 
     public V getComponent() {
         if (provider == null) {

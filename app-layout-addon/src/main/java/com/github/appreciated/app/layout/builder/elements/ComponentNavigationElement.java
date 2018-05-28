@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.Position;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 
@@ -23,11 +22,6 @@ public class ComponentNavigationElement extends AbstractNavigationElement<Compon
 
     @Override
     public void setProvider(AppLayoutElementBase provider) {
-
-    }
-
-    @Override
-    public void setProvider(AppLayoutElementBase provider, Position position) {
 
     }
 }

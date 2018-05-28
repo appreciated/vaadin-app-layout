@@ -1,12 +1,13 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 @Tag("app-menu")
 @HtmlImport("bower_components/app-menu/app-menu.html")
-public class AppMenu extends Component {
+public class AppMenu extends Component implements HasComponents {
 
     public AppMenu() {
     }

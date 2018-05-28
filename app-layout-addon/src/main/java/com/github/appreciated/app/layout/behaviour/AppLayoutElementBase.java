@@ -5,8 +5,8 @@ import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -38,15 +38,9 @@ public interface AppLayoutElementBase {
 
     void addToDrawerHeader(Component component);
 
-    void addToDrawer(Component component);
+    void addToMenu(Component component);
 
     void addToDrawerFooter(Component component);
-
-    void addToTopHeader(Component component);
-
-    void addToTop(Component component);
-
-    void addToTopFooter(Component component);
 
     void addNavigationHeaderElement(AbstractNavigationElement component);
 
@@ -70,11 +64,11 @@ public interface AppLayoutElementBase {
 
     HasElement getTitleWrapper();
 
-    AppMenu getMenuElementHolder();
+    HasComponents getMenuElementHolder();
 
-    AppMenu getMenuFooterHolder();
+    HasComponents getMenuFooterHolder();
 
-    AppMenu getMenuHeaderHolder();
+    HasComponents getMenuHeaderHolder();
 
     void addAppBarIcon(Component appBarIconComponent);
 
@@ -82,37 +76,21 @@ public interface AppLayoutElementBase {
 
     void refreshNavigationElementInfo();
 
-    ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider();
+    ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getNavigationElementProvider();
 
-    void setDrawerNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider);
+    void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider);
 
-    ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider();
+    ComponentFactory<HasElement, SectionNavigationElement> getSectionElementProvider();
 
-    void setTopNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider);
+    void setSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider);
 
-    ComponentFactory<HasElement, SectionNavigationElement> getDrawerSectionElementProvider();
+    ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getSubmenuElementProvider();
 
-    void setDrawerSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider);
+    void setSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider);
 
-    ComponentFactory<HasElement, SectionNavigationElement> getTopSectionElementProvider();
+    ComponentFactory<HasElement, ClickableNavigationElement> getClickableElementProvider();
 
-    void setTopSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider);
-
-    ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getDrawerSubmenuElementProvider();
-
-    void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider);
-
-    ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getTopSubmenuElementProvider();
-
-    void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider);
-
-    ComponentFactory<HasElement, ClickableNavigationElement> getDrawerClickableElementProvider();
-
-    void setDrawerClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
-
-    ComponentFactory<HasElement, ClickableNavigationElement> getTopClickableElementProvider();
-
-    void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
+    void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
 
     void setAppLayoutContent(HasElement content);
 }

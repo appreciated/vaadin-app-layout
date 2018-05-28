@@ -3,10 +3,6 @@ package com.github.appreciated.app.layout.behaviour.top;
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.*;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopClickableNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSectionElementComponentFactory;
@@ -14,9 +10,8 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenu
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
+import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTabs;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
@@ -24,20 +19,18 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.github.appreciated.app.layout.behaviour.Position.DRAWER;
-import static com.github.appreciated.app.layout.behaviour.Position.TOP;
 
 
 /**
  * The {@link AbstractTopAppLayoutBase} is supposed to be the base of any {@link AppLayoutElementBase} with a "Top Behaviour".
  */
 
-public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutElementBase {
-
+public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
 
     @Id("app-bar-elements")
     Div appBarElements;
@@ -45,16 +38,16 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     Div menuElements;
     @Id("content")
     Div content;
-    @Id("drawer")
-    AppDrawer drawer;
 
     private final VerticalLayout contentPanel = new VerticalLayout();
 
-    private final AppMenu menuHeaderHolder = new AppMenu();
-    private final AppMenu menuElementHolder = new AppMenu();
-    private final AppMenu menuFooterHolder = new AppMenu();
+    private final HorizontalLayout menuHeaderHolder = new HorizontalLayout();
+    private final HorizontalLayout menuElementHolder = new HorizontalLayout();
+    private final HorizontalLayout menuFooterHolder = new HorizontalLayout();
 
-    private final VerticalLayout menuHolder = new VerticalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
+    private final HorizontalLayout menuHolder = new HorizontalLayout(menuHeaderHolder, menuElementHolder, menuFooterHolder);
+
+    private final PaperTabs paperTabs;
 
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -63,10 +56,6 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     private final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
-    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
-    private ComponentFactory<HasElement, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
-    private ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentFactory();
     private ComponentFactory<HasElement, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
     private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
@@ -76,6 +65,10 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         contentPanel.setSizeFull();
         menuHolder.setSizeFull();
         menuHolder.setFlexGrow(1.0, menuElementHolder);
+
+        paperTabs = new PaperTabs();
+        menuElementHolder.add(paperTabs);
+
         menuHolder.getElement().setAttribute("overflow", "auto");
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
@@ -87,6 +80,8 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
         appBar.setFlexGrow(1.0, titleWrapper);
         appBar.setWidth("100%");
         appBar.setHeight("100%");
+        appBarElements.getElement().appendChild(appBar.getElement());
+        menuElements.getElement().appendChild(menuHolder.getElement());
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
@@ -109,12 +104,14 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
 
     @Override
     public AppDrawer getDrawer() {
-        return drawer;
+        return null;
     }
 
     @Override
     public void setAppLayoutContent(HasElement content) {
-
+        if (content != null) {
+            this.content.getElement().appendChild(content.getElement());
+        }
     }
 
     public Div getAppBarElements() {
@@ -167,28 +164,20 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     }
 
 
-    public HasComponents getContentHolder() {
-        return contentPanel;
-    }
-
     public HorizontalLayout getTitleWrapper() {
         return titleWrapper;
     }
 
-    public AppMenu getMenuElementHolder() {
+    public HorizontalLayout getMenuElementHolder() {
         return menuElementHolder;
     }
 
-    public AppMenu getMenuFooterHolder() {
+    public HorizontalLayout getMenuFooterHolder() {
         return menuFooterHolder;
     }
 
-    public AppMenu getMenuHeaderHolder() {
+    public HorizontalLayout getMenuHeaderHolder() {
         return menuHeaderHolder;
-    }
-
-    public VerticalLayout getMenuHolder() {
-        return menuHolder;
     }
 
     public void addAppBarIcon(Component appBarIconComponent) {
@@ -196,118 +185,69 @@ public abstract class AbstractTopAppLayoutBase extends Div implements AppLayoutE
     }
 
     @Override
-    public ComponentFactory<HasElement, SectionNavigationElement> getDrawerSectionElementProvider() {
-        return drawerSectionElementProvider;
-    }
-
-    @Override
-    public void setDrawerSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
-        drawerSectionElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<HasElement, SectionNavigationElement> getTopSectionElementProvider() {
+    public ComponentFactory<HasElement, SectionNavigationElement> getSectionElementProvider() {
         return topSectionElementProvider;
     }
 
     @Override
-    public void setTopSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
+    public void setSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
         topSectionElementProvider = provider;
     }
 
     @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getDrawerSubmenuElementProvider() {
-        return drawerSubmenuElementProvider;
-    }
-
-    @Override
-    public void setDrawerSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
-        drawerSubmenuElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getTopSubmenuElementProvider() {
+    public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getSubmenuElementProvider() {
         return topSubmenuElementProvider;
     }
 
     @Override
-    public void setTopSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
+    public void setSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
         topSubmenuElementProvider = provider;
     }
 
-    @Override
-    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getDrawerNavigationElementProvider() {
-        return drawerNavigationElementProvider;
-    }
 
     @Override
-    public void setDrawerNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
-        drawerNavigationElementProvider = provider;
-    }
-
-    @Override
-    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getTopNavigationElementProvider() {
+    public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getNavigationElementProvider() {
         return topNavigationElementProvider;
     }
 
     @Override
-    public void setTopNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
+    public void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
         topNavigationElementProvider = provider;
     }
 
+
     @Override
-    public ComponentFactory<HasElement, ClickableNavigationElement> getTopClickableElementProvider() {
+    public ComponentFactory<HasElement, ClickableNavigationElement> getClickableElementProvider() {
         return topClickableElementProvider;
     }
 
     @Override
-    public void setTopClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider) {
-        this.topClickableElementProvider = topClickableElementProvider;
-    }
-
-    @Override
-    public ComponentFactory<HasElement, ClickableNavigationElement> getDrawerClickableElementProvider() {
-        return drawerClickableElementProvider;
-    }
-
-    @Override
-    public void setDrawerClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
-        this.drawerClickableElementProvider = drawerClickableElementProvider;
+    public void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
+        this.topClickableElementProvider = drawerClickableElementProvider;
     }
 
     @Override
     public void addNavigationElement(AbstractNavigationElement element) {
-        element.setProvider(this, DRAWER);
-        addToDrawer((Component) element.getComponent());
-        if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
-            element.setProvider(this, TOP);
-            addToTop((Component) element.getComponent());
-        }
+        element.setProvider(this);
+        addToMenu((Component) element.getComponent());
     }
 
     @Override
     public void addNavigationFooterElement(AbstractNavigationElement element) {
-        element.setProvider(this, DRAWER);
+        element.setProvider(this);
         addToDrawerFooter((Component) element.getComponent());
-        if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
-            element.setProvider(this, TOP);
-            addToTopFooter((Component) element.getComponent());
-        }
     }
 
     @Override
     public void addNavigationHeaderElement(AbstractNavigationElement element) {
-        element.setProvider(this, TOP);
+        element.setProvider(this);
         addToDrawerHeader((Component) element.getComponent());
-        if (!(element instanceof ComponentNavigationElement)) { // Components cannot be added twice
-            element.setProvider(this, TOP);
-            addToTopHeader((Component) element.getComponent());
-        }
     }
 
     @Override
-    public void addToDrawer(Component component) {
-        menuElementHolder.add(component);
+    public void addToMenu(Component component) {
+        //menuElementHolder.add(component);
+        paperTabs.add(component);
     }
 
     @Override

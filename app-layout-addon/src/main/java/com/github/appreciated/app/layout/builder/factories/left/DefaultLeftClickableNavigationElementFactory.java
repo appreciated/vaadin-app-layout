@@ -10,7 +10,7 @@ public class DefaultLeftClickableNavigationElementFactory implements ComponentFa
     public HasElement get(ClickableNavigationElement element) {
         NavigationBadgeIconButton button = new NavigationBadgeIconButton(element.getName(), element.getIcon(), null);
         element.setComponent(button);
-        button.setClickListener(appMenuIconItemClickEvent -> element.getListener().onComponentEvent(appMenuIconItemClickEvent));
+        button.setClickListener(appMenuIconItemClickEvent -> element.getListener().onComponentEvent(null));
         return button;
     }
 }

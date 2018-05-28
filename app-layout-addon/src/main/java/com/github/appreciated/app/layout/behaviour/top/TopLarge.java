@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.behaviour.top;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 
@@ -13,20 +12,6 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 @HtmlImport("src/com/github/appreciated/app/layout/behaviour/top/top-large.html")
 public class TopLarge extends AbstractTopAppLayoutBase {
 
-    @Override
-    public void addToTopHeader(Component component) {
-        getAppBar().add(component);
-    }
-
-    @Override
-    public void addToTop(Component component) {
-        getAppBar().add(component);
-    }
-
-    @Override
-    public void addToTopFooter(Component component) {
-        getAppBar().add(component);
-    }
 
     @Override
     public String getStyleName() {

@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
 
 /**
@@ -10,4 +11,6 @@ public interface NavigationElementComponent extends HasElement {
     void setNavigationIcon(String resource);
 
     void setNavigationCaption(String string);
+
+    void setClickListener(ComponentEventListener listener);
 }

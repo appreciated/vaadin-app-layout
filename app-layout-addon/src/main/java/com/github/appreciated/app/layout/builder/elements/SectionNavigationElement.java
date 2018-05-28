@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.builder.elements;
 
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.Position;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.vaadin.flow.component.HasElement;
@@ -34,20 +33,9 @@ public class SectionNavigationElement extends AbstractNavigationElement<HasEleme
 
     @Override
     public void setProvider(AppLayoutElementBase provider) {
-        setProvider(provider.getDrawerSectionElementProvider());
+        setProvider(provider.getSectionElementProvider());
     }
 
-    @Override
-    public void setProvider(AppLayoutElementBase provider, Position position) {
-        switch (position) {
-            case DRAWER:
-                setProvider(provider.getDrawerSectionElementProvider());
-                break;
-            case TOP:
-                setProvider(provider.getTopSectionElementProvider());
-                break;
-        }
-    }
 
     public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
