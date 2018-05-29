@@ -16,6 +16,7 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -24,9 +25,6 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode.CENTER;
-
 
 /**
  * The {@link AbstractTopAppLayoutBase} is supposed to be the base of any {@link AppLayoutElementBase} with a "Top Behaviour".
@@ -67,14 +65,13 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
         contentPanel.setSizeFull();
         menuHolder.setSizeUndefined();
         menuHolder.setHeight("100%");
-        menuHolder.setFlexGrow(1.0, menuElementHolder);
-        menuHolder.setAlignItems(Alignment.CENTER);
+        menuHolder.setJustifyContentMode(JustifyContentMode.CENTER);
 
-        menuHeaderHolder.setJustifyContentMode(CENTER);
+        menuHeaderHolder.setJustifyContentMode(JustifyContentMode.CENTER);
         menuElementHolder.setHeight("100%");
-        menuElementHolder.setJustifyContentMode(CENTER);
+        menuElementHolder.setJustifyContentMode(JustifyContentMode.CENTER);
         menuElementHolder.setHeight("100%");
-        menuFooterHolder.setJustifyContentMode(CENTER);
+        menuFooterHolder.setJustifyContentMode(JustifyContentMode.CENTER);
         menuFooterHolder.setHeight("100%");
 
         paperTabs = new PaperTabs();

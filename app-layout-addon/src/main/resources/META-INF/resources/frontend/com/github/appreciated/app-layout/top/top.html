@@ -34,25 +34,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
         </style>
-        <!--
-        <app-toolbar>
-            <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-            <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
-        </app-toolbar>
-
-        <app-drawer id="drawer" slot="drawer" swipe-open>
-            <div id="menu-elements" class="drawer-content"></div>
-        </app-drawer>
--->
         <app-header-layout has-scrolling-region="">
-            <app-header slot="header" effects="waterfall" condenses reveals
+            <app-header slot="header" condenses reveals
                         style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar style="transform: translate3d(0px, 0px, 0px);">
                     <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
-                </app-toolbar>
-                <app-toolbar>
-                </app-toolbar>
-                <app-toolbar>
                     <div id="menu-elements" class="drawer-content"></div>
                 </app-toolbar>
             </app-header>
