@@ -12,14 +12,6 @@ public class AppMenu extends Component implements HasComponents {
     public AppMenu() {
     }
 
-    public void addSubmenu(AppSubmenu submenu) {
-        getElement().appendChild(submenu.getElement());
-    }
-
-    public void addItem(AppMenuIconItem item) {
-        getElement().appendChild(item.getElement());
-    }
-
     public void setSelected(int selected) {
         getElement().setAttribute("selected", String.valueOf(selected));
     }

@@ -1,13 +1,15 @@
 package com.github.appreciated.app.layout.webcomponents.papercard;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 
 @Tag("paper-card")
 @HtmlImport("bower_components/paper-card/paper-card.html")
-public class PaperCard extends Component {
+public class PaperCard extends Component implements HasComponents, HasSize {
     Div content;
     Div actions;
 
@@ -32,22 +34,23 @@ public class PaperCard extends Component {
         getElement().setAttribute("heading", header);
     }
 
-    public void add(Component component) {
+    @Override
+    public void add(Component... components) {
         if (content == null) {
             content = new Div();
             content.getElement().getClassList().add("card-content");
             getElement().appendChild(content.getElement());
         }
-        content.add(component);
+        content.add(components);
     }
 
-    public void addAction(Component action) {
+    public void addAction(Component... components) {
         if (actions == null) {
             actions = new Div();
             actions.getElement().getClassList().add("card-actions");
             getElement().appendChild(actions.getElement());
         }
-        actions.add(action);
+        actions.add(components);
     }
 
 }

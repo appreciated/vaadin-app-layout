@@ -7,14 +7,12 @@ import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClick
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.factories.top.DefaultTopClickableNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.factories.top.DefaultTopNavigationBadgeElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSectionElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.router.HasBackNavigation;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
+import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
@@ -36,6 +34,8 @@ import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT
 
 public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
 
+    @Id("toggle")
+    PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     Div appBarElements;
     @Id("menu-elements")
@@ -54,21 +54,16 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     private Component title = new Span("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
     private List<NavigatorNavigationElement> list;
-    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> drawerNavigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> drawerSubmenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
-    private ComponentFactory<HasElement, SectionNavigationElement> drawerSectionElementProvider = new DefaultLeftSectionElementComponentFactory();
-    private ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
-    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> topNavigationElementProvider = new DefaultTopNavigationBadgeElementComponentFactory();
-    private ComponentFactory<HasElement, SectionNavigationElement> topSectionElementProvider = new DefaultTopSectionElementComponentFactory();
-    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> topSubmenuElementProvider = new DefaultTopSubmenuNavigationElementFactory();
-    private ComponentFactory<HasElement, ClickableNavigationElement> topClickableElementProvider = new DefaultTopClickableNavigationElementFactory();
+
+    private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
+    private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> submenuElementProvider = new DefaultLeftSubmenuNavigationElementFactory();
+    private ComponentFactory<HasElement, SectionNavigationElement> sectionElementProvider = new DefaultLeftSectionElementComponentFactory();
+    private ComponentFactory<HasElement, ClickableNavigationElement> clickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
 
     public AbstractLeftAppLayoutBase() {
         super();
         getElement().getStyle().set("width", "100%")
                 .set("height", "100%");
-        //contentPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-
         menuElements.getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
         menuHeaderHolder.setVisible(false);
         menuFooterHolder.setVisible(false);
@@ -148,6 +143,15 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     public void setAppLayoutContent(HasElement content) {
         if (content != null) {
             this.content.getElement().appendChild(content.getElement());
+            setUpBackNavigation(content);
+        }
+    }
+
+    private void setUpBackNavigation(HasElement content) {
+        if (content instanceof HasBackNavigation) {
+            paperIconButton.setIcon("back");
+        } else {
+            paperIconButton.setIcon("menu");
         }
     }
 
@@ -191,43 +195,43 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
 
     @Override
     public ComponentFactory<HasElement, SectionNavigationElement> getSectionElementProvider() {
-        return drawerSectionElementProvider;
+        return sectionElementProvider;
     }
 
     @Override
     public void setSectionElementProvider(ComponentFactory<HasElement, SectionNavigationElement> provider) {
-        drawerSectionElementProvider = provider;
+        sectionElementProvider = provider;
     }
 
 
     @Override
     public ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> getSubmenuElementProvider() {
-        return drawerSubmenuElementProvider;
+        return submenuElementProvider;
     }
 
     @Override
     public void setSubmenuElementProvider(ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> provider) {
-        drawerSubmenuElementProvider = provider;
+        submenuElementProvider = provider;
     }
 
     @Override
     public ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> getNavigationElementProvider() {
-        return drawerNavigationElementProvider;
+        return navigationElementProvider;
     }
 
     @Override
     public void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> provider) {
-        drawerNavigationElementProvider = provider;
+        navigationElementProvider = provider;
     }
 
     @Override
     public ComponentFactory<HasElement, ClickableNavigationElement> getClickableElementProvider() {
-        return drawerClickableElementProvider;
+        return clickableElementProvider;
     }
 
     @Override
     public void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
-        this.drawerClickableElementProvider = drawerClickableElementProvider;
+        this.clickableElementProvider = drawerClickableElementProvider;
     }
 
     @Override

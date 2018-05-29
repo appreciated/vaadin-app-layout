@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.AbstractAppLayoutBuilderBase;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.page.Viewport;
@@ -19,6 +20,7 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
     public AppLayoutRouterLayout() {
         setSizeFull();
         loadConfiguration();
+        UI.getCurrent().getSession().setAttribute("app-layout", this);
     }
 
     public void reloadConfiguration() {
@@ -38,6 +40,14 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
     private void loadConfiguration() {
         configuration = (AppLayoutElementBase) getConfiguration().build();
         add((Component) configuration);
+    }
+
+    public static AppLayoutRouterLayout getCurrent() {
+        return (AppLayoutRouterLayout) UI.getCurrent().getSession().getAttribute("app-layout");
+    }
+
+    public void navigateTo() {
+
     }
 
     public abstract AbstractAppLayoutBuilderBase getConfiguration();

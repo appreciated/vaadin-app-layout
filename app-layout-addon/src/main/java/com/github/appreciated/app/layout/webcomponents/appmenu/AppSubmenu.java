@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
@@ -10,7 +11,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 
 @Tag("app-submenu")
 @HtmlImport("bower_components/app-menu/app-submenu.html")
-public class AppSubmenu extends Component {
+public class AppSubmenu extends Component implements HasComponents {
 
     private final AppMenu menu;
 
@@ -41,10 +42,19 @@ public class AppSubmenu extends Component {
         getElement().appendChild(component.getElement());
     }
 
+    @Override
     public void add(Component... components) {
-        for (Component component : components) {
-            menu.getElement().appendChild(component.getElement());
-        }
+        menu.add(components);
+    }
+
+    @Override
+    public void remove(Component... components) {
+        menu.remove(components);
+    }
+
+    @Override
+    public void removeAll() {
+        menu.removeAll();
     }
 }
 

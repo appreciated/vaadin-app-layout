@@ -9,6 +9,8 @@ public class DefaultTopClickableNavigationElementFactory implements ComponentFac
     @Override
     public HasElement get(ClickableNavigationElement element) {
         Button button = new Button(element.getName(), element.getIcon());
+        button.getElement().setAttribute("theme", "tertiary");
+        button.setHeight("48px");
         button.addClickListener(buttonClickEvent -> element.getListener().onComponentEvent(null));
         return button;
     }

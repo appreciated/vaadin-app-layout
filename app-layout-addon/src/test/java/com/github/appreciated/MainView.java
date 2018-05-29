@@ -89,7 +89,7 @@ public class MainView extends AppLayoutRouterLayout {
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
                     .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
-                    .add("Menu", VaadinIcons.MENU.create(), View5.class)
+                    .add("Menu", "view2", VaadinIcons.MENU.create(), new View5())
                     .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
         }
     }

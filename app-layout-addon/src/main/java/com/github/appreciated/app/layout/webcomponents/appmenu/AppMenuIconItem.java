@@ -1,19 +1,18 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 @Tag("app-menu-icon-item")
 @HtmlImport("bower_components/app-menu/app-menu-icon-item.html")
-public class AppMenuIconItem extends Component {
+public class AppMenuIconItem extends Component implements HasSize {
 
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
 
     public AppMenuIconItem() {
-        getElement().getStyle().set("width", "100%").set("height", "48px").set("line-height", "48px");
+        setWidth("100%");
+        setHeight("48px");
+        getElement().getStyle().set("line-height", "48px");
         getElement().addEventListener("click", domEvent -> {
             if (this.listener != null) {
                 this.listener.onComponentEvent(new ClickEvent<>(this));
