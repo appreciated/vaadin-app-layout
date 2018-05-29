@@ -49,40 +49,13 @@ public class SubmenuNavigationElement extends AbstractNavigationElement<SubmenuN
     @Override
     public void setProvider(AppLayoutElementBase provider) {
         setProvider(provider.getSubmenuElementProvider());
-    }
-
-    public boolean requiresNavigator() {
-        return submenuElements.stream().anyMatch(element -> element instanceof NavigatorNavigationElement ||
-                (element instanceof SubmenuNavigationElement && ((SubmenuNavigationElement) element).requiresNavigator()));
+        getSubmenuElements().stream().forEach(element -> element.setProvider(provider));
     }
 
     public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
     }
 
-    public void closeEventually(NavigatorNavigationElement element) {
-        if (!hasChild(element)) {
-            getComponent().close();
-            submenuElements.stream()
-                    .filter(submenuElement -> submenuElement instanceof SubmenuNavigationElement)
-                    .map(submenuElement -> (SubmenuNavigationElement) submenuElement)
-                    .forEach(submenuNavigationElement -> submenuNavigationElement.getComponent().close());
-        }
-    }
-
-    public boolean hasChild(NavigatorNavigationElement child) {
-        boolean hasChild = submenuElements.stream()
-                .map(element -> element == child)
-                .reduce((b1, b2) -> b1 || b2)
-                .orElse(false);
-        if (hasChild == false)
-            hasChild = submenuElements.stream()
-                    .filter(element -> element instanceof SubmenuNavigationElement)
-                    .map(element -> (SubmenuNavigationElement) element)
-                    .map(element -> element.hasChild(child)).reduce((b1, b2) -> b1 || b2)
-                    .orElse(false);
-        return hasChild;
-    }
 
     public interface SubmenuElement extends HasElement {
         default void close() {

@@ -187,11 +187,6 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
-    @Override
-    public void addNavigationElement(AbstractNavigationElement component) {
-        component.setProvider(this);
-        addToMenu((Component) component.getComponent());
-    }
 
     @Override
     public ComponentFactory<HasElement, SectionNavigationElement> getSectionElementProvider() {
@@ -232,6 +227,12 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Override
     public void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> drawerClickableElementProvider) {
         this.clickableElementProvider = drawerClickableElementProvider;
+    }
+
+    @Override
+    public void addNavigationElement(AbstractNavigationElement component) {
+        component.setProvider(this);
+        addToMenu((Component) component.getComponent());
     }
 
     @Override
