@@ -9,10 +9,6 @@ import com.github.appreciated.app.layout.builder.elements.SectionNavigationEleme
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
-import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
-import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
@@ -24,7 +20,6 @@ import com.vaadin.flow.component.HasElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -34,7 +29,6 @@ import java.util.function.Function;
  * For every "Factory" you find in the class some information:
  * The following factories allow the user to exchange any {@link HasElement} that will be added to the
  * {@link AppLayoutElementBase} instance for any {@link Behaviour} or custom implementation
- * To do this you will have to replace the
  */
 public class AppLayoutConfiguration {
 
@@ -62,9 +56,6 @@ public class AppLayoutConfiguration {
     private Factory<String, String> captionInterceptor;
 
     private boolean isCDI = false;
-    private boolean isScrollToTopOnNavigate = true;
-    private boolean isCloseSubmenusOnNavigate = true;
-    private boolean isNavigatorEnabled = true;
     private HasElement titleComponent;
 
     public AppLayoutConfiguration(AppLayoutElementBase instance) {
@@ -76,33 +67,6 @@ public class AppLayoutConfiguration {
      * This terminating build method is part of the builder and not of the configuration.
      */
     public Component build() {
-
-        // this method has a lot of magic. add some inline comments describing why are you doing what.
-        if (navigationElementProvider == null) {
-            if (variant.isTop())
-                navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-            else
-                navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
-        }
-        if (customElementProvider == null) {
-            if (variant.isTop())
-                customElementProvider = new DefaultLeftClickableNavigationElementFactory();
-            else
-                customElementProvider = new DefaultLeftClickableNavigationElementFactory();
-        }
-        if (sectionProvider == null) {
-            if (variant.isTop())
-                sectionProvider = new DefaultLeftSectionElementComponentFactory();
-            else
-                sectionProvider = new DefaultLeftSectionElementComponentFactory();
-        }
-        if (submenuProvider == null) {
-            if (variant.isTop())
-                submenuProvider = new DefaultTopSubmenuNavigationElementFactory();
-            else
-                submenuProvider = new DefaultLeftSubmenuNavigationElementFactory();
-        }
-
         AppLayoutSessionHelper.setActiveVariant(variant);
         if (titleComponent == null) {
             instance.setTitle(title);
@@ -131,20 +95,7 @@ public class AppLayoutConfiguration {
         } else if (isCDI && defaultNavigationElement != null) {
             System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
         }
-
         return (Component) instance;
-    }
-
-    private Optional<NavigatorNavigationElement> findNextNavigationElement(String viewName) {
-        if (viewName.equals("")) {
-            return navigatorElements.stream()
-                    .filter(element -> (defaultNavigationElement != null && element.getViewClassName().equals(defaultNavigationElement.getViewClassName())) || element.getViewName().equals(""))
-                    .findFirst();
-        }
-        return navigatorElements.stream()
-                .filter(element -> element instanceof NavigatorNavigationElement)
-                .filter(element -> element.getViewName().equals(viewName))
-                .findFirst();
     }
 
     private void addComponents(List<AbstractNavigationElement> elements, Consumer<AbstractNavigationElement> consumer) {
@@ -193,7 +144,7 @@ public class AppLayoutConfiguration {
                     break;
             }
         } catch (Exception e) {
-            System.err.println("Section Can't be null in Element:"+element.getComponent().getElement()+"\n ->"+ Arrays.toString(e.getStackTrace()));
+            System.err.println("Section Can't be null in Element:" + element.getComponent().getElement() + "\n ->" + Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -253,39 +204,6 @@ public class AppLayoutConfiguration {
 
     public void setCDI(boolean CDI) {
         this.isCDI = CDI;
-    }
-
-    public void setNavigatorEnabled(boolean navigatorEnabled) {
-        this.isNavigatorEnabled = navigatorEnabled;
-    }
-
-    public void setScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {
-        this.isScrollToTopOnNavigate = scrollToTopOnNavigate;
-    }
-
-    public void setCloseSubmenusOnNavigate(boolean closeSubmenusOnNavigate) {
-        this.isCloseSubmenusOnNavigate = closeSubmenusOnNavigate;
-    }
-
-    private boolean beforeViewChange(String viewName) {
-        AppLayoutSessionHelper.removeStyleFromCurrentlyActiveNavigationElement();
-        Optional<NavigatorNavigationElement> result = findNextNavigationElement(viewName);
-        if (result.isPresent()) {
-            result.ifPresent(element -> {
-                AppLayoutSessionHelper.setActiveNavigationElement(element);
-                if (isCloseSubmenusOnNavigate) {
-                    navigationElements.stream()
-                            .filter(nelement -> nelement instanceof SubmenuNavigationElement)
-                            .filter(nelement -> nelement != element)
-                            .map(nElement -> (SubmenuNavigationElement) nElement)
-                            .forEach(submenuNavigationElement -> submenuNavigationElement.closeEventually(element));
-                }
-                if (isScrollToTopOnNavigate) {
-                    // instance.getContentHolder().setScrollTop(0);
-                }
-            });
-        }
-        return true;
     }
 
     public void setTitleComponent(HasElement titleComponent) {

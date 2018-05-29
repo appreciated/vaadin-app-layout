@@ -15,7 +15,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -24,6 +24,8 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode.CENTER;
 
 
 /**
@@ -63,8 +65,17 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
 
     public AbstractTopAppLayoutBase() {
         contentPanel.setSizeFull();
-        menuHolder.setSizeFull();
+        menuHolder.setSizeUndefined();
+        menuHolder.setHeight("100%");
         menuHolder.setFlexGrow(1.0, menuElementHolder);
+        menuHolder.setAlignItems(Alignment.CENTER);
+
+        menuHeaderHolder.setJustifyContentMode(CENTER);
+        menuElementHolder.setHeight("100%");
+        menuElementHolder.setJustifyContentMode(CENTER);
+        menuElementHolder.setHeight("100%");
+        menuFooterHolder.setJustifyContentMode(CENTER);
+        menuFooterHolder.setHeight("100%");
 
         paperTabs = new PaperTabs();
         menuElementHolder.add(paperTabs);
@@ -81,13 +92,14 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
         appBar.setWidth("100%");
         appBar.setHeight("100%");
         appBarElements.getElement().appendChild(appBar.getElement());
+        menuElements.setWidth("100%");
         menuElements.getElement().appendChild(menuHolder.getElement());
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
-        appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
+        appBarElementWrapper.setAlignItems(Alignment.START);
         titleWrapper.setHeight("100%");
-        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        titleWrapper.setAlignItems(Alignment.CENTER);
     }
 
     @Override
@@ -123,7 +135,7 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
     @Override
     public void addAppBarElement(Component component) {
         appBarElementContainer.add(component);
-        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
+        appBarElementContainer.setAlignItems(Alignment.CENTER);
     }
 
     public void setDesign(AppLayoutDesign design) {

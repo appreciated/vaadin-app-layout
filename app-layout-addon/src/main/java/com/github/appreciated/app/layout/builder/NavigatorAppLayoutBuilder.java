@@ -9,7 +9,6 @@ public class NavigatorAppLayoutBuilder extends AbstractViewAppLayoutBuilder<Navi
 
     public static NavigatorAppLayoutBuilder get(AppLayoutElementBase layout) {
         NavigatorAppLayoutBuilder builder = new NavigatorAppLayoutBuilder(layout);
-        builder.config.setNavigatorEnabled(true);
         return builder;
     }
 

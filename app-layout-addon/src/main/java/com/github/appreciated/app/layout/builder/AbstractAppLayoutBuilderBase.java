@@ -103,28 +103,6 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
-     * Determines that if the User navigates to another the panel which holds the content will be scrolled to the top
-     *
-     * @param scrollToTopOnNavigate
-     * @return
-     */
-    public T withScrollToTopOnNavigate(boolean scrollToTopOnNavigate) {
-        config.setScrollToTopOnNavigate(scrollToTopOnNavigate);
-        return (T) this;
-    }
-
-    /**
-     * Determines that if the User navigates to another View submenus will be closed if the View is not inside it
-     *
-     * @param closeSubmenusOnNavigate
-     * @return
-     */
-    public T withCloseSubmenusOnNavigate(boolean closeSubmenusOnNavigate) {
-        config.setCloseSubmenusOnNavigate(closeSubmenusOnNavigate);
-        return (T) this;
-    }
-
-    /**
      * Appends a component to the bottom of the menu at the DEFAULT position
      *
      * @param element

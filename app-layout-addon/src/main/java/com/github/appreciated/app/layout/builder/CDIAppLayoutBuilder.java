@@ -10,7 +10,6 @@ public class CDIAppLayoutBuilder extends AbstractCDIAppLayoutBuilder<CDIAppLayou
     public static CDIAppLayoutBuilder get(AppLayoutElementBase layout) {
         CDIAppLayoutBuilder builder = new CDIAppLayoutBuilder(layout);
         builder.config.setCDI(true);
-        builder.config.setNavigatorEnabled(true);
         return builder;
     }
 }
