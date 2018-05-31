@@ -13,8 +13,9 @@ import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTabs;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -52,7 +53,7 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private Component title = new Label("");
+    private Component title = new Span("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
     private List<NavigatorNavigationElement> list;
 
@@ -97,6 +98,7 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
         appBarElementWrapper.setAlignItems(Alignment.START);
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(Alignment.CENTER);
+        ((Span) this.title).getStyle().set("white-space", "nowrap");
     }
 
     @Override
@@ -152,8 +154,8 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
     }
 
     public void setTitle(String title) {
-        if (this.title instanceof Label) {
-            ((Label) this.title).setText(title);
+        if (this.title instanceof HasText) {
+            ((HasText) this.title).setText(title);
         }
     }
 

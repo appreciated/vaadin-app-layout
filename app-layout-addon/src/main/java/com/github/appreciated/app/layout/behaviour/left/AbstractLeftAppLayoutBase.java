@@ -15,6 +15,7 @@ import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -127,15 +128,15 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
 
     @Override
     public void setTitle(String title) {
-        if (this.title instanceof Span) {
-            ((Span) this.title).setText(title);
+        if (this.title instanceof HasText) {
+            ((HasText) this.title).setText(title);
         }
     }
 
     @Override
     public void setTitleElement(HasElement titleComponent) {
-        if (this.title instanceof Span) {
-            ((Span) this.title).setText("test1234");
+        if (this.title instanceof HasText) {
+            ((HasText) this.title).setText("test1234");
         }
     }
 
