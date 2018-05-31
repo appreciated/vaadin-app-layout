@@ -19,6 +19,7 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
 
     public AppLayoutRouterLayout() {
         setSizeFull();
+        getElement().getStyle().set("overflow", "auto");
         loadConfiguration();
         UI.getCurrent().getSession().setAttribute("app-layout", this);
     }
