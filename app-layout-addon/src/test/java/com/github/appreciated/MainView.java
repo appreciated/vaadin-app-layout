@@ -14,7 +14,7 @@ import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.Priority;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.icon.VaadinIcons;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
@@ -55,42 +55,42 @@ public class MainView extends AppLayoutRouterLayout {
         if (!variant.isTop()) {
             return AppLayout.getDefaultBuilder(variant)
                     .withTitle("App Layout")
-                    .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withViewNameInterceptor(new DefaultViewNameInterceptor())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
-                    .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                    .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
-                    .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                            .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                    .add("Charts", "view2", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                    .add("Contact", "view4", VaadinIcons.CONNECT.create(), View3.class)
-                                    .add("More", "view5", VaadinIcons.COG.create(), View4.class)
+                    .addClickable("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                    .add("Home", "", VaadinIcon.HOME.create(), badge, new View1())
+                    .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                            .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                                    .add("Charts", "view2", VaadinIcon.SPLINE_CHART.create(), View2.class)
+                                    .add("Contact", "view4", VaadinIcon.CONNECT.create(), View3.class)
+                                    .add("More", "view5", VaadinIcon.COG.create(), View4.class)
                                     .build())
-                            .add("Contact1", "view5", VaadinIcons.CONNECT.create(), View3.class)
-                            .add("More1", "view6", VaadinIcons.COG.create(), View4.class)
+                            .add("Contact1", "view5", VaadinIcon.CONNECT.create(), View3.class)
+                            .add("More1", "view6", VaadinIcon.COG.create(), View4.class)
                             .build())
-                    .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                            .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS.create())
-                                    .add("Charts4", VaadinIcons.SPLINE_CHART.create(), View2.class)
-                                    .add("Contact4", VaadinIcons.CONNECT.create(), View3.class)
-                                    .add("More4", VaadinIcons.COG.create(), View4.class)
+                    .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                            .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                                    .add("Charts4", VaadinIcon.SPLINE_CHART.create(), View2.class)
+                                    .add("Contact4", VaadinIcon.CONNECT.create(), View3.class)
+                                    .add("More4", VaadinIcon.COG.create(), View4.class)
                                     .build())
-                            .add("Contact2", VaadinIcons.CONNECT.create(), View3.class)
-                            .add("More2", VaadinIcons.COG.create(), View4.class)
+                            .add("Contact2", VaadinIcon.CONNECT.create(), View3.class)
+                            .add("More2", VaadinIcon.COG.create(), View4.class)
                             .build())
-                    .add("Menu", VaadinIcons.MENU.create(), View5.class)
-                    .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+                    .add("Menu", VaadinIcon.MENU.create(), View5.class)
+                    .addClickable("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
         } else {
             return AppLayout.getDefaultBuilder(variant)
                     .withTitle("App Layout")
-                    .addToAppBar(new AppBarNotificationButton(VaadinIcons.BELL.create(), notifications))
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withViewNameInterceptor(new DefaultViewNameInterceptor())
                     .withDesign(AppLayoutDesign.MATERIAL)
-                    .addClickable("Set Behaviour HEADER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                    .add("Home", "", VaadinIcons.HOME.create(), badge, new View1())
-                    .add("Menu", "view2", VaadinIcons.MENU.create(), new View5())
-                    .addClickable("Set Behaviour FOOTER", VaadinIcons.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+                    .addClickable("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                    .add("Home", "", VaadinIcon.HOME.create(), badge, new View1())
+                    .add("Menu", "view2", VaadinIcon.MENU.create(), new View5())
+                    .addClickable("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
         }
     }
 

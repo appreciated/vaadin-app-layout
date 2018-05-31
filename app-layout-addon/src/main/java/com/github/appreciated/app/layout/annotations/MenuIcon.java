@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.annotations;
 
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
-import com.vaadin.flow.component.icon.VaadinIcons;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,5 +18,5 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MenuIcon {
-    VaadinIcons value();
+    VaadinIcon value();
 }
