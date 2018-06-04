@@ -10,7 +10,7 @@ public class DefaultTopClickableNavigationElementFactory implements ComponentFac
     public HasElement get(ClickableNavigationElement element) {
         Button button = new Button(element.getName(), element.getIcon());
         button.getElement().setAttribute("theme", "tertiary");
-        button.setHeight("48px");
+        button.setHeight("calc(var(--app-bar-height) - 4px)");
         button.addClickListener(buttonClickEvent -> element.getListener().onComponentEvent(null));
         return button;
     }

@@ -32,15 +32,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --iron-icon-fill-color: #727272;
             }
 
+            #app-bar-elements {
+                width: 100%;
+                height: calc(var(--app-bar-height) * 2);
+                top: calc(var(--app-bar-height) / -2);
+                position: relative;
+            }
+
         </style>
         <app-header-layout has-scrolling-region="">
-            <app-header slot="header" effects="waterfall" condenses reveals
+            <app-header slot="header" condenses reveals
                         style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-                <app-toolbar style="transform: translate3d(0px, 0px, 0px);">
-                    <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
-                </app-toolbar>
+                <app-toolbar></app-toolbar>
                 <app-toolbar>
-                    <div id="menu-elements" class="drawer-content"></div>
+                    <div id="app-bar-elements" class="app-bar-content"></div>
                 </app-toolbar>
             </app-header>
             <div id="content" class="app-bar-application-content" size="100"></div>

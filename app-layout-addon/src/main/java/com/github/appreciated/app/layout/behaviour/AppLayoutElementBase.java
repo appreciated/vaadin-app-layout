@@ -62,7 +62,7 @@ public interface AppLayoutElementBase {
 
     void setTitleElement(HasElement titleComponent);
 
-    HasElement getTitleWrapper();
+    HorizontalLayout getTitleWrapper();
 
     HasComponents getMenuElementHolder();
 

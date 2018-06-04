@@ -45,7 +45,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
         if (variant == null) {
-            variant = Behaviour.LEFT;
+            variant = Behaviour.TOP_LARGE;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
