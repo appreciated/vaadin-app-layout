@@ -46,9 +46,7 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Id("drawer")
     AppDrawer drawer;
 
-    private final AppMenu menuHeaderHolder = new AppMenu();
     private final AppMenu menuElementHolder = new AppMenu();
-    private final AppMenu menuFooterHolder = new AppMenu();
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
@@ -65,9 +63,9 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         super();
         getElement().getStyle().set("width", "100%")
                 .set("height", "100%");
-        menuElements.getElement().appendChild(menuHeaderHolder.getElement(), menuElementHolder.getElement(), menuFooterHolder.getElement());
-        menuHeaderHolder.setVisible(false);
-        menuFooterHolder.setVisible(false);
+        menuElements.add(menuElementHolder);
+        //menuHeaderHolder.setVisible(false);
+        //menuFooterHolder.setVisible(false);
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
@@ -175,14 +173,6 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         return menuElementHolder;
     }
 
-    public AppMenu getMenuFooterHolder() {
-        return menuFooterHolder;
-    }
-
-    public AppMenu getMenuHeaderHolder() {
-        return menuHeaderHolder;
-    }
-
     public void addAppBarIcon(Component appBarIconComponent) {
         titleWrapper.add(appBarIconComponent);
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -255,13 +245,16 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
 
     @Override
     public void addToDrawerFooter(Component component) {
-        menuFooterHolder.setVisible(true);
-        menuFooterHolder.add(component);
+        menuElementHolder.add(component);
     }
 
     @Override
     public void addToDrawerHeader(Component component) {
-        menuHeaderHolder.setVisible(true);
-        menuHeaderHolder.add(component);
+        menuElementHolder.add(component);
+    }
+
+    @Override
+    public void setBackNavigation(boolean visible) {
+        paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
 }

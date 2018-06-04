@@ -10,6 +10,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenu
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
+import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTabs;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -33,6 +34,8 @@ import java.util.List;
 
 public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
 
+    @Id("toggle")
+    PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     Div appBarElements;
     @Id("menu-elements")
@@ -271,5 +274,10 @@ public abstract class AbstractTopAppLayoutBase extends PolymerTemplate<TemplateM
     public void addToDrawerHeader(Component component) {
         menuHeaderHolder.setVisible(true);
         menuHeaderHolder.add(component);
+    }
+
+    @Override
+    public void setBackNavigation(boolean visible) {
+        paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
 }

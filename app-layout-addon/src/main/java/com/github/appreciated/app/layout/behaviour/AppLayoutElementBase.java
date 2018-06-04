@@ -66,10 +66,6 @@ public interface AppLayoutElementBase {
 
     HasComponents getMenuElementHolder();
 
-    HasComponents getMenuFooterHolder();
-
-    HasComponents getMenuHeaderHolder();
-
     void addAppBarIcon(Component appBarIconComponent);
 
     void setNavigatorNavigationElements(List<NavigatorNavigationElement> list);
@@ -93,4 +89,6 @@ public interface AppLayoutElementBase {
     void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
 
     void setAppLayoutContent(HasElement content);
+
+    void setBackNavigation(boolean visible);
 }

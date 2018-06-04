@@ -43,7 +43,7 @@ public class MainView extends AppLayoutRouterLayout {
     }
 
     @Override
-    public AbstractAppLayoutBuilderBase getConfiguration() {
+    public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
         if (variant == null) {
             variant = Behaviour.LEFT;
             notifications = new DefaultNotificationHolder();
