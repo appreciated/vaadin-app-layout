@@ -118,9 +118,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
 
                 if (drawer.persistent) {
-                    drawerLayout.classList.toggle("small");
+                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                        drawerLayout.classList.toggle("small");
+                    } else {
+                        window.history.back();
+                    }
                 } else {
-                    drawer.toggle();
+                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                        drawer.toggle();
+                    } else {
+                        window.history.back();
+                    }
                 }
             }
         }
