@@ -2,14 +2,14 @@ package com.github.appreciated.app.layout.webcomponents.papercard;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 
 @Tag("paper-card")
 @HtmlImport("bower_components/paper-card/paper-card.html")
-public class PaperCard extends Component implements HasComponents, HasSize {
+public class PaperCard extends Component implements HasComponents, FlexComponent {
     Div content;
     Div actions;
 
