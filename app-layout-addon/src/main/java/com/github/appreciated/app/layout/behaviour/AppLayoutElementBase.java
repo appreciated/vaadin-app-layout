@@ -62,13 +62,9 @@ public interface AppLayoutElementBase {
 
     void setTitleElement(HasElement titleComponent);
 
-    HasElement getTitleWrapper();
+    HorizontalLayout getTitleWrapper();
 
     HasComponents getMenuElementHolder();
-
-    HasComponents getMenuFooterHolder();
-
-    HasComponents getMenuHeaderHolder();
 
     void addAppBarIcon(Component appBarIconComponent);
 
@@ -93,4 +89,6 @@ public interface AppLayoutElementBase {
     void setClickableElementProvider(ComponentFactory<HasElement, ClickableNavigationElement> provider);
 
     void setAppLayoutContent(HasElement content);
+
+    void setBackNavigation(boolean visible);
 }

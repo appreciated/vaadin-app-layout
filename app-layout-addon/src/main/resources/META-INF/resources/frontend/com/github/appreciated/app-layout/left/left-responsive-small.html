@@ -127,7 +127,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             onclick() {
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");
                 if (!drawer.persistent) {
-                    drawer.toggle();
+                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                        drawer.toggle();
+                    } else {
+                        window.history.back();
+                    }
                 }
             }
         }

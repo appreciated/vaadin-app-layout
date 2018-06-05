@@ -11,7 +11,9 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
     public Component getComponent(NotificationHolder holder, Notification info) {
         return new NotificationView(info, domEvent -> {
             domEvent.getSource().getStyle().set("border-left", "3px solid transparent");
-            info.setRead(false);
+            if (info.isSticky()) {
+                info.setRead(false);
+            }
             holder.onNotificationClicked(info);
         });
     }

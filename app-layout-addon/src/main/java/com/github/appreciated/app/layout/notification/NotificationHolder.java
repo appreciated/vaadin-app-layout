@@ -42,7 +42,7 @@ public class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted((o1, o2) -> o1.compareTo(o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
+        return components.stream().sorted(Comparable::compareTo).map(o -> getComponent(o)).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -74,13 +74,13 @@ public class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        List<Component> list = components.stream().sorted((o1, o2) -> o1.compareTo(o2))
+        List<Component> list = components.stream().sorted(Comparable::compareTo)
                 .map(this::getComponent).collect(Collectors.toList());
         return list.toArray(new Component[]{});
     }
 
     public ArrayList<T> getNotificationViews() {
-        Collections.sort(notifications, (o1, o2) -> o1.compareTo(o2));
+        Collections.sort(notifications, Comparable::compareTo);
         return notifications;
     }
 
@@ -107,7 +107,7 @@ public class NotificationHolder<T extends Notification> {
     }
 
     public int getUnreadNotifications() {
-        return (int) notifications.stream().filter(notification -> notification.isRead()).count();
+        return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
     }
 
     public interface NotificationListener {
