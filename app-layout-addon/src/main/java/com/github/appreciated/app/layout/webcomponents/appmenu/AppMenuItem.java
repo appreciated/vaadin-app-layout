@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Anchor;
 public class AppMenuItem extends Anchor {
 
     private AppMenuIconItem item;
+    private AppMenu parent;
 
     public AppMenuItem() {
         getElement().getClassList().add("app-menu-item");
@@ -63,4 +64,15 @@ public class AppMenuItem extends Anchor {
         }
     }
 
+    public AppMenuIconItem getItem() {
+        return item;
+    }
+
+    public void setParent(AppMenu parent) {
+        this.parent = parent;
+    }
+
+    public void setActive() {
+        parent.setSelected(this);
+    }
 }

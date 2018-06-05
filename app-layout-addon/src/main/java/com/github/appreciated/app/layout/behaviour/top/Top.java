@@ -262,4 +262,9 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
     public void setBackNavigation(boolean visible) {
         //paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
+
+    @Override
+    public void setActiveElement(HasElement content) {
+
+    }
 }

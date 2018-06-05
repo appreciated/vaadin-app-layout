@@ -14,8 +14,7 @@ import com.vaadin.flow.component.icon.Icon;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
- * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.ui} will lead to a call of
- * which usually causes a change of the View .
+ * on {@link NavigatorNavigationElement} respectively their {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the AppLayout content view.
  */
 public class NavigatorNavigationElement extends AbstractNavigationElement<NavigationElementComponent, NavigatorNavigationElement> implements HasCaptionInterceptor {
     private boolean isCDI = false;

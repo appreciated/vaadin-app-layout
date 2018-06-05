@@ -14,6 +14,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 public class AppSubmenu extends Component implements HasComponents {
 
     private final AppMenu menu;
+    private AppMenu parent;
 
     /**
      * <div class="app-menu-item" slot="submenu-trigger">
@@ -55,6 +56,15 @@ public class AppSubmenu extends Component implements HasComponents {
     @Override
     public void removeAll() {
         menu.removeAll();
+    }
+
+    public void setParent(AppMenu parent) {
+        this.parent = parent;
+        menu.setParent(this);
+    }
+
+    public void setSelected(AppMenu appMenu) {
+        this.parent.setSelected(this);
     }
 }
 

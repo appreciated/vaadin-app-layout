@@ -13,4 +13,9 @@ public interface NavigationElementComponent extends HasElement {
     void setNavigationCaption(String string);
 
     void setClickListener(ComponentEventListener listener);
+
+    Class getNavigationViewClass();
+
+    void setAsActiveNavigation(boolean b);
+
 }

@@ -34,5 +34,7 @@ public class PaperTab extends Component implements FlexComponent {
 
     private void setIcon(String string) {
     }
+
+
 }
 

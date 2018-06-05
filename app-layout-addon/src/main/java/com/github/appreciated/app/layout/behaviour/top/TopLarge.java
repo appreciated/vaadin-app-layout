@@ -269,5 +269,10 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
     public void setBackNavigation(boolean visible) {
         //paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
+
+    @Override
+    public void setActiveElement(HasElement content) {
+
+    }
 }
 

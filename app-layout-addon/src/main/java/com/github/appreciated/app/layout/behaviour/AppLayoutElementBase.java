@@ -91,4 +91,6 @@ public interface AppLayoutElementBase {
     void setAppLayoutContent(HasElement content);
 
     void setBackNavigation(boolean visible);
+
+    void setActiveElement(HasElement content);
 }

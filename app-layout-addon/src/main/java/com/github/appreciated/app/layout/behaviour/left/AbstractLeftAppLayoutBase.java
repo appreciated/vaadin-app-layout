@@ -9,6 +9,7 @@ import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSecti
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeIconButton;
 import com.github.appreciated.app.layout.router.HasBackNavigation;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenu;
@@ -26,6 +27,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_LAYOUT;
 
@@ -256,5 +258,14 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Override
     public void setBackNavigation(boolean visible) {
         paperIconButton.setIcon(visible ? "arrow-back" : "menu");
+    }
+
+    @Override
+    public void setActiveElement(HasElement content) {
+        List<Component> children = getMenuElementHolder().getChildren().collect(Collectors.toList());
+        children.stream().filter(item -> item instanceof NavigationBadgeIconButton)
+                .map(item -> (NavigationBadgeIconButton) item)
+                .filter(appMenuIconItem -> appMenuIconItem.getNavigationViewClass() != null && appMenuIconItem.getNavigationViewClass().equals(content.getClass()))
+                .forEach(navigationBadgeIconButton -> navigationBadgeIconButton.setAsActiveNavigation(true));
     }
 }
