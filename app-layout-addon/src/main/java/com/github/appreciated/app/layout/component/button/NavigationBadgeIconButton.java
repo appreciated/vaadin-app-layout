@@ -4,14 +4,16 @@ import com.github.appreciated.app.layout.builder.elements.ClickableNavigationEle
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenuItem;
 import com.github.appreciated.app.layout.webcomponents.paperbadge.PaperBadge;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
-public class NavigationBadgeIconButton extends AppMenuItem implements NavigationElementComponent {
+public class NavigationBadgeIconButton extends AppMenuItem implements NavigationElementComponent, NavigationElementContainer {
 
     private final PaperBadge badge;
     private NavigatorNavigationElement element;
@@ -71,13 +73,13 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
         super.setClickListener(listener);
     }
 
-    public Class getNavigationViewClass() {
-        return element != null ? element.getViewClassName() : null;
-    }
-
     @Override
-    public void setAsActiveNavigation(boolean active) {
-        setActive();
+    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
+        if (this.element != null && this.element.getViewClassName() == element.getClass()) {
+            setActive();
+            return true;
+        } else {
+            return false;
+        }
     }
-
 }

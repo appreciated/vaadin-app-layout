@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
+import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.dom.Element;
 
 @Tag("app-menu")
 @HtmlImport("bower_components/app-menu/app-menu.html")
@@ -39,20 +39,7 @@ public class AppMenu extends Component implements HasComponents, FlexComponent {
                 ((AppSubmenu) component).setParent(this);
             }
         }
-        if (components == null) {
-            throw new AssertionError();
-        } else {
-            Component[] var2 = components;
-            int var3 = components.length;
-
-            for (int var4 = 0; var4 < var3; ++var4) {
-                Component component = var2[var4];
-                if (component == null) {
-                    throw new AssertionError();
-                }
-                this.getElement().appendChild(new Element[]{component.getElement()});
-            }
-        }
+        LayoutHelper.add(this, components);
     }
 
     public void setParent(AppSubmenu appSubmenu) {

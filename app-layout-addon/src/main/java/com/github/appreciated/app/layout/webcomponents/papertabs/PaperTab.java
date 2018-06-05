@@ -13,6 +13,8 @@ import com.vaadin.flow.dom.Element;
 @HtmlImport("bower_components/paper-tabs/paper-tab.html")
 public class PaperTab extends Component implements FlexComponent {
 
+    private PaperTabs parent;
+
     public PaperTab(String caption, String icon, DefaultBadgeHolder badgeHolder) {
         setId("my-paper-tab");
         add(new Icon(icon.split(":")[0], icon.split(":")[1]));
@@ -35,6 +37,13 @@ public class PaperTab extends Component implements FlexComponent {
     private void setIcon(String string) {
     }
 
+    public void setActive() {
+        parent.setSelected(this);
+    }
+
+    public void setParent(PaperTabs parent) {
+        this.parent = parent;
+    }
 
 }
 

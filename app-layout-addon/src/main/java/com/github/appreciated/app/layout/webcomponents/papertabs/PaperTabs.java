@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.webcomponents.papertabs;
 
 
+import com.github.appreciated.app.layout.helper.LayoutHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasSize;
@@ -19,7 +20,21 @@ public class PaperTabs extends Component implements HasComponents, HasSize {
         getElement().setAttribute("fit-container", fit);
     }
 
+    public void setSelected(PaperTab tab) {
+        setSelected(getElement().indexOfChild(tab.getElement()));
+    }
+
     public void setSelected(int i) {
         getElement().setAttribute("selected", String.valueOf(i));
+    }
+
+    @Override
+    public void add(Component... components) {
+        for (Component component : components) {
+            if (component instanceof PaperTab) {
+                ((PaperTab) component).setParent(this);
+            }
+        }
+        LayoutHelper.add(this, components);
     }
 }

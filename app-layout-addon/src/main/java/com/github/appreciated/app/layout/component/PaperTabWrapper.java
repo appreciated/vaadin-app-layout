@@ -3,11 +3,13 @@ package com.github.appreciated.app.layout.component;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTab;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
-public class PaperTabWrapper extends PaperTab implements NavigationElementComponent {
+public class PaperTabWrapper extends PaperTab implements NavigationElementComponent, NavigationElementContainer {
 
     private NavigatorNavigationElement element;
 
@@ -37,12 +39,13 @@ public class PaperTabWrapper extends PaperTab implements NavigationElementCompon
     }
 
     @Override
-    public Class getNavigationViewClass() {
-        return element != null ? element.getViewClassName() : null;
-    }
-
-    @Override
-    public void setAsActiveNavigation(boolean b) {
+    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
+        if (this.element != null && this.element.getViewClassName() == element.getClass()) {
+            setActive();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

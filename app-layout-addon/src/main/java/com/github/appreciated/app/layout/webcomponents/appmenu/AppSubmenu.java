@@ -58,6 +58,10 @@ public class AppSubmenu extends Component implements HasComponents {
         menu.removeAll();
     }
 
+    public AppMenu getMenu() {
+        return menu;
+    }
+
     public void setParent(AppMenu parent) {
         this.parent = parent;
         menu.setParent(this);

@@ -14,8 +14,4 @@ public interface NavigationElementComponent extends HasElement {
 
     void setClickListener(ComponentEventListener listener);
 
-    Class getNavigationViewClass();
-
-    void setAsActiveNavigation(boolean b);
-
 }
