@@ -21,7 +21,12 @@ public class PaperTabs extends Component implements HasComponents, HasSize {
     }
 
     public void setSelected(PaperTab tab) {
-        setSelected(getElement().indexOfChild(tab.getElement()));
+        final int indexOfTab = getElement().indexOfChild(tab.getElement());
+        long index = getChildren()
+                .filter(component -> getElement().indexOfChild(component.getElement()) < indexOfTab)
+                .filter(component -> component instanceof PaperTab)
+                .count();
+        setSelected((int) index);
     }
 
     public void setSelected(int i) {

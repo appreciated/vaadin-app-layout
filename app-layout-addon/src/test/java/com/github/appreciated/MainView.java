@@ -45,7 +45,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
         if (variant == null) {
-            variant = Behaviour.LEFT;
+            variant = Behaviour.TOP;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
@@ -87,10 +87,11 @@ public class MainView extends AppLayoutRouterLayout {
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withViewNameInterceptor(new DefaultViewNameInterceptor())
                     .withDesign(AppLayoutDesign.MATERIAL)
-                    .addClickable("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                    .add("Home", "", VaadinIcon.HOME.create(), badge, new View1())
-                    .add("Menu", "view2", VaadinIcon.MENU.create(), new View5())
-                    .addClickable("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
+                    .addClickable("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
+                    .add("Home", VaadinIcon.HOME.create(), badge, new View1())
+                    .add("Contact", VaadinIcon.SPLINE_CHART.create(), new View2())
+                    .addClickable("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER)
+                    .add("More", VaadinIcon.CONNECT.create(), new View3(), FOOTER);
         }
     }
 

@@ -9,7 +9,7 @@ public class DefaultTopNavigationBadgeElementComponentFactory extends AbstractNa
 
     @Override
     public NavigationElementComponent get(NavigatorNavigationElement element) {
-        PaperTabWrapper button = new PaperTabWrapper(element.getCaption(), element.getIcon(), element.getBadgeHolder());
+        PaperTabWrapper button = new PaperTabWrapper(element);
         element.setComponent(button);
         button.setText(element.getCaption());
         setNavigationClickListener(element);

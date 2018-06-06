@@ -9,6 +9,7 @@ import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSection
 import com.github.appreciated.app.layout.builder.factories.top.DefaultTopSubmenuNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTabs;
 import com.vaadin.flow.component.*;
@@ -265,6 +266,9 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
 
     @Override
     public void setActiveElement(HasElement content) {
-
+        paperTabs.getChildren()
+                .filter(item -> item instanceof NavigationElementContainer)
+                .map(item -> (NavigationElementContainer) item)
+                .forEach(navigationBadgeIconButton -> navigationBadgeIconButton.setActiveNavigationElementWithViewClass(content));
     }
 }
