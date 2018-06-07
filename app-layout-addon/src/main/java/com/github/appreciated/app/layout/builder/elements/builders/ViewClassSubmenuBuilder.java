@@ -1,8 +1,5 @@
 package com.github.appreciated.app.layout.builder.elements.builders;
 
-import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 
@@ -53,9 +50,9 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param element  This class name of the view
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> element) {
-        return this.add(caption, viewName, icon, null, element);
-    }
+    // public T add(String caption, String viewName, Icon icon, Class<? extends Component> element) {
+    //    return this.add(caption, viewName, icon, null, element);
+    // }
 
     /**
      * Adds a MenuElement the may show a caption and an icon. If clicked the View passed as parameter will be navigated to.
@@ -66,9 +63,9 @@ public class ViewClassSubmenuBuilder<T extends ViewClassSubmenuBuilder> extends 
      * @param element     This class name of the view
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element) {
-        this.add(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element));
-        return (T) this;
-    }
+    // public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends Component> element) {
+    //     this.add(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element));
+    //   return (T) this;
+    // }
 
 }

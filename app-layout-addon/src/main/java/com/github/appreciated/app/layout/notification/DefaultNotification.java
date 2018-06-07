@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * A concrete implementation of {@link Notification}.
+ * An implementation of {@link Notification}.
  */
 public class DefaultNotification implements Notification {
 

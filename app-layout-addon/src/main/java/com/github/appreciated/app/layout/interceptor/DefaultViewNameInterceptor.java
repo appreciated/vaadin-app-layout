@@ -2,6 +2,9 @@ package com.github.appreciated.app.layout.interceptor;
 
 import java.text.Normalizer;
 
+/**
+ * This class is the default implementation of {@link ViewNameInterceptor}
+ */
 public class DefaultViewNameInterceptor implements ViewNameInterceptor {
     @Override
     public String get(String info) {

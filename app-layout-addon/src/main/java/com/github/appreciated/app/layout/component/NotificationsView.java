@@ -48,7 +48,6 @@ public class NotificationsView extends VerticalLayout {
         this.showAll.value = showAll;
     }
 
-
     public void addNewNotification(NotificationHolder component) {
         initView(component);
     }

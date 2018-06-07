@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Builder to build {@link SubmenuNavigationElement} this buider is meant to be used in combination with the {@link com.github.appreciated.app.layout.builder.CDIAppLayoutBuilder}
+ * A Builder to build {@link SubmenuNavigationElement} this builder is the counterpart to {@link com.github.appreciated.app.layout.builder.AbstractCDIAppLayoutBuilder}
  */
-public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
+class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
 
     final String title;
     final Icon icon;
@@ -61,7 +61,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param className This class name of the view
      * @return
      */
-    public T add(Class<? extends HasElement> className) {
+    public T add(Class<? extends Component> className) {
         return add((Icon) null, className);
     }
 
@@ -71,7 +71,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param className This class name of the view
      * @return
      */
-    public T add(Icon icon, Class<? extends HasElement> className) {
+    public T add(Icon icon, Class<? extends Component> className) {
         return add(new NavigatorNavigationElement(icon, className));
     }
 
@@ -82,7 +82,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Class<? extends HasElement> element) {
+    public T add(String caption, Class<? extends Component> element) {
         return this.add(caption, null, element);
     }
 
@@ -93,7 +93,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Icon icon, Class<? extends HasElement> element) {
+    public T add(String caption, Icon icon, Class<? extends Component> element) {
         this.add(new NavigatorNavigationElement(caption, icon, element));
         return (T) this;
     }
@@ -105,7 +105,7 @@ public class CDISubmenuBuilder<T extends CDISubmenuBuilder> {
      * @param element This class name of the view
      * @return
      */
-    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends Component> element) {
         this.add(new NavigatorNavigationElement(caption, icon, badgeHolder, element));
         return (T) this;
     }

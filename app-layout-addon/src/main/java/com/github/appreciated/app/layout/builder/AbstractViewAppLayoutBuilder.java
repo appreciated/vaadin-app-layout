@@ -4,14 +4,13 @@ import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
-import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder> extends AbstractCDIAppLayoutBuilder<T> {
 
     protected AbstractViewAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
-        config.setCDI(false);
     }
 
     /**
@@ -23,7 +22,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      */
 
     public T withViewNameInterceptor(Factory<String, String> interceptor) {
-        config.setViewNameInterceptor(interceptor);
+        config.setRouteInterceptor(interceptor);
         return (T) this;
     }
 
@@ -36,7 +35,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, Icon icon, HasElement element) {
+    public T add(String caption, Icon icon, Component element) {
         return add(caption, icon, null, element, Section.DEFAULT);
     }
 
@@ -48,7 +47,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, HasElement element) {
+    public T add(String caption, Component element) {
         return add(caption, null, element);
     }
 
@@ -62,7 +61,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param section
      * @return
      */
-    public T add(String caption, Icon icon, HasElement element, Section section) {
+    public T add(String caption, Icon icon, Component element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, icon, element), section);
         return (T) this;
     }
@@ -77,7 +76,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Component element) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), Section.DEFAULT);
         return (T) this;
     }
@@ -93,7 +92,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param section
      * @return
      */
-    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, HasElement element, Section section) {
+    public T add(String caption, Icon icon, DefaultBadgeHolder badgeHolder, Component element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, icon, badgeHolder, element), section);
         return (T) this;
     }
@@ -108,7 +107,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param element
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, HasElement element) {
+    public T add(String caption, String viewName, Icon icon, Component element) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, null, element), Section.DEFAULT);
         return (T) this;
     }
@@ -124,7 +123,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param hasElement
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, HasElement hasElement) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Component hasElement) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, hasElement), Section.DEFAULT);
         return (T) this;
     }
@@ -141,7 +140,7 @@ public class AbstractViewAppLayoutBuilder<T extends AbstractViewAppLayoutBuilder
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, HasElement hasElement, Section section) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Component hasElement, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, hasElement), section);
         return (T) this;
     }

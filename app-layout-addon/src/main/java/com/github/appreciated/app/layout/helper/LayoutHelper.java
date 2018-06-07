@@ -5,13 +5,6 @@ import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.dom.Element;
 
 public class LayoutHelper {
-    public static void makeScrollable(Component component) {
-        component.getElement().getStyle().set("overflow", "auto");
-    }
-
-    public static void disableFlex(Component component) {
-        component.getElement().getStyle().set("display", "block");
-    }
 
     public static void add(HasComponents element, Component... components) {
         if (components == null) {

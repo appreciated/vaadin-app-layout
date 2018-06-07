@@ -1,14 +1,13 @@
 package com.github.appreciated;
 
-import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AbstractAppLayoutBuilderBase;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.component.MenuHeaderView;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
-import com.github.appreciated.app.layout.interceptor.DefaultViewNameInterceptor;
 import com.github.appreciated.app.layout.notification.DefaultNotification;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.Priority;
@@ -45,7 +44,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
         if (variant == null) {
-            variant = Behaviour.TOP;
+            variant = Behaviour.LEFT_RESPONSIVE;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
@@ -53,22 +52,21 @@ public class MainView extends AppLayoutRouterLayout {
         notifications.addNotification(new DefaultNotification("Test2", "Test2"));
         notifications.addNotification(new DefaultNotification("Test3", "Test3"));
         if (!variant.isTop()) {
-            return AppLayout.getDefaultBuilder(variant)
+            return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
-                    .withViewNameInterceptor(new DefaultViewNameInterceptor())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                     .addClickable("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                    .add("Home", "", VaadinIcon.HOME.create(), badge, new View1())
+                    .add("Home", VaadinIcon.HOME.create(), badge, View1.class)
                     .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                             .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
-                                    .add("Charts", "view2", VaadinIcon.SPLINE_CHART.create(), View2.class)
-                                    .add("Contact", "view3", VaadinIcon.CONNECT.create(), View3.class)
-                                    .add("More", "view4", VaadinIcon.COG.create(), View4.class)
+                                    .add("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class)
+                                    .add("Contact", VaadinIcon.CONNECT.create(), View3.class)
+                                    .add("More", VaadinIcon.COG.create(), View4.class)
                                     .build())
-                            .add("Contact1", "view5", VaadinIcon.CONNECT.create(), View3.class)
-                            .add("More1", "view6", VaadinIcon.COG.create(), View4.class)
+                            .add("Contact1", VaadinIcon.CONNECT.create(), View3.class)
+                            .add("More1", VaadinIcon.COG.create(), View4.class)
                             .build())
                     .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                             .add(SubmenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
@@ -82,16 +80,15 @@ public class MainView extends AppLayoutRouterLayout {
                     .add("Menu", VaadinIcon.MENU.create(), View5.class)
                     .addClickable("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER);
         } else {
-            return AppLayout.getDefaultBuilder(variant)
+            return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
-                    .withViewNameInterceptor(new DefaultViewNameInterceptor())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .addClickable("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
-                    .add("Home", VaadinIcon.HOME.create(), badge, new View1())
-                    .add("Contact", VaadinIcon.SPLINE_CHART.create(), new View2())
+                    .add("Home", VaadinIcon.HOME.create(), badge, View1.class)
+                    .add("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class)
                     .addClickable("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), FOOTER)
-                    .add("More", VaadinIcon.CONNECT.create(), new View3(), FOOTER);
+                    .add("More", VaadinIcon.CONNECT.create(), View3.class, FOOTER);
         }
     }
 

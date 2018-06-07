@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
-import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
@@ -15,7 +15,6 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
 
     protected AbstractViewClassAppLayoutBuilder(AppLayoutElementBase component) {
         super(component);
-        config.setCDI(false);
     }
 
 
@@ -28,7 +27,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param element
      * @return
      */
-    public T add(String caption, Icon icon, Class<? extends HasElement> element) {
+    public T add(String caption, Icon icon, Class<? extends Component> element) {
         return add(caption, null, icon, null, element, Section.DEFAULT);
     }
 
@@ -43,7 +42,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param section
      * @return
      */
-    public T add(String caption, Icon icon, Class<? extends HasElement> element, Section section) {
+    public T add(String caption, Icon icon, Class<? extends Component> element, Section section) {
         return add(caption, null, icon, null, element, section);
     }
 
@@ -59,7 +58,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> element, Section section) {
+    public T add(String caption, String viewName, Icon icon, Class<? extends Component> element, Section section) {
         return add(caption, viewName, icon, null, element, section);
     }
 
@@ -70,7 +69,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param className
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, Class<? extends HasElement> className) {
+    public T add(String caption, String viewName, Icon icon, Class<? extends Component> className) {
         return add(caption, viewName, icon, null, className, Section.DEFAULT);
     }
 
@@ -81,7 +80,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param className
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> className) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends Component> className) {
         return add(caption, viewName, icon, badgeHolder, className, Section.DEFAULT);
     }
 
@@ -97,7 +96,7 @@ public class AbstractViewClassAppLayoutBuilder<T extends AbstractViewClassAppLay
      * @param section
      * @return
      */
-    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends HasElement> element, Section section) {
+    public T add(String caption, String viewName, Icon icon, DefaultBadgeHolder badgeHolder, Class<? extends Component> element, Section section) {
         addToPosition(new NavigatorNavigationElement(caption, viewName, icon, badgeHolder, element), section);
         return (T) this;
     }

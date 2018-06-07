@@ -8,12 +8,12 @@ import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationEle
 import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.HasCaptionInterceptor;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
-import com.github.appreciated.app.layout.session.AppLayoutSessionHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 
@@ -32,19 +32,17 @@ import java.util.function.Function;
  */
 public class AppLayoutConfiguration {
 
-    private Behaviour variant = Behaviour.LEFT;
     private List<AbstractNavigationElement> navigationElements = new ArrayList<>();
     private List<Component> appBarElements = new ArrayList<>();
 
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
     private String title;
-    private NavigatorNavigationElement defaultNavigationElement;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
     private DefaultLeftClickableNavigationElementFactory customElementProvider;
     private ComponentFactory<HasElement, SectionNavigationElement> sectionProvider;
     private ComponentFactory<SubmenuNavigationElement.SubmenuElement, SubmenuNavigationElement> submenuProvider;
 
-    private NavigationElementInfoProducer navigationElementInfoProvider = null;
+    private NavigationElementInfoProducer navigationElementInfoProvider = new DefaultNavigationElementInfoProducer();
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
@@ -52,10 +50,9 @@ public class AppLayoutConfiguration {
 
     private AppLayoutElementBase instance;
 
-    private Factory<String, String> viewNameInterceptor = null;
+    private Factory<String, String> routeInterceptor = null;
     private Factory<String, String> captionInterceptor;
 
-    private boolean isCDI = false;
     private HasElement titleComponent;
 
     public AppLayoutConfiguration(AppLayoutElementBase instance) {
@@ -67,17 +64,10 @@ public class AppLayoutConfiguration {
      * This terminating build method is part of the builder and not of the configuration.
      */
     public Component build() {
-        AppLayoutSessionHelper.setActiveVariant(variant);
         if (titleComponent == null) {
             instance.setTitle(title);
         } else {
             instance.setTitleElement(titleComponent);
-        }
-
-        if (!isCDI && defaultNavigationElement == null) {
-            defaultNavigationElement = navigationElements.stream()
-                    .filter(element -> element instanceof NavigatorNavigationElement)
-                    .map(element -> ((NavigatorNavigationElement) element)).findFirst().orElse(null);
         }
 
         addComponents(headerElements, instance::addNavigationHeaderElement);
@@ -89,12 +79,6 @@ public class AppLayoutConfiguration {
             instance.addAppBarIcon(appBarIconComponent);
         }
         instance.setNavigatorNavigationElements(navigatorElements);
-
-        if (!isCDI && defaultNavigationElement != null) {
-            defaultNavigationElement.addViewToNavigator();
-        } else if (isCDI && defaultNavigationElement != null) {
-            System.err.println("WARNING - AppLayout - You are using isCDI but try to set the DefaultNavigationElement this will have no effect");
-        }
         return (Component) instance;
     }
 
@@ -111,14 +95,9 @@ public class AppLayoutConfiguration {
         }
         if (element instanceof NavigatorNavigationElement) {
             NavigatorNavigationElement nElement = (NavigatorNavigationElement) element;
-            nElement.setCDI(isCDI);
             nElement.setNavigationElementInfoProvider(navigationElementInfoProvider);
-            if ((isCDI == false && nElement.getViewClassName() == defaultNavigationElement.getViewClassName()) ||
-                    (isCDI == true && nElement.getViewName().equals(""))) {
-                AppLayoutSessionHelper.updateActiveElementSessionData(nElement);
-            }
-            nElement.setViewNameInterceptor(viewNameInterceptor);
-            nElement.addViewToNavigator();
+            nElement.setRouteInterceptor(routeInterceptor);
+            nElement.initRouterInformation();
             navigatorElements.add(nElement);
         } else if (element instanceof SubmenuNavigationElement) {
             SubmenuNavigationElement sElement = (SubmenuNavigationElement) element;
@@ -170,10 +149,6 @@ public class AppLayoutConfiguration {
         return appBarElements;
     }
 
-    public void setDefaultNavigationElement(NavigatorNavigationElement defaultNavigationElement) {
-        this.defaultNavigationElement = defaultNavigationElement;
-    }
-
     public void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider) {
         this.navigationElementProvider = navigationElementProvider;
     }
@@ -194,16 +169,12 @@ public class AppLayoutConfiguration {
         this.appBarIconComponent = appBarIconComponent;
     }
 
-    public void setViewNameInterceptor(Factory<String, String> viewNameInterceptor) {
-        this.viewNameInterceptor = viewNameInterceptor;
+    public void setRouteInterceptor(Factory<String, String> routeInterceptor) {
+        this.routeInterceptor = routeInterceptor;
     }
 
     public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
-    }
-
-    public void setCDI(boolean CDI) {
-        this.isCDI = CDI;
     }
 
     public void setTitleComponent(HasElement titleComponent) {
@@ -213,6 +184,5 @@ public class AppLayoutConfiguration {
     @FunctionalInterface
     public interface NavigationElementInfoProducer extends Function<Class<? extends HasElement>, NavigationElementInfo> {
     }
-
 
 }

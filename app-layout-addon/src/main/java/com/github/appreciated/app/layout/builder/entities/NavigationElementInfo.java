@@ -11,17 +11,17 @@ import com.vaadin.flow.component.icon.Icon;
 public class NavigationElementInfo {
     String caption;
     Icon icon;
-    String viewName;
+    String route;
 
-    public NavigationElementInfo(String caption, Icon icon, String viewName) {
+    public NavigationElementInfo(String caption, Icon icon, String route) {
         this.caption = caption;
         this.icon = icon;
-        this.viewName = viewName;
+        this.route = route;
     }
 
-    public NavigationElementInfo(String caption, String viewName) {
+    public NavigationElementInfo(String caption, String route) {
         this.caption = caption;
-        this.viewName = viewName;
+        this.route = route;
     }
 
     public String getCaption() {
@@ -40,11 +40,11 @@ public class NavigationElementInfo {
         this.icon = icon;
     }
 
-    public String getViewName() {
-        return viewName;
+    public String getRoute() {
+        return route;
     }
 
-    public void setViewName(String viewName) {
-        this.viewName = viewName;
+    public void setRoute(String route) {
+        this.route = route;
     }
 }

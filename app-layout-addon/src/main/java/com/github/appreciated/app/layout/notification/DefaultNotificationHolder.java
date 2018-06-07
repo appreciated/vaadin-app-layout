@@ -8,7 +8,6 @@ import java.util.Collection;
  * This class is the default implementation of {@link NotificationHolder}
  */
 
-
 public class DefaultNotificationHolder extends NotificationHolder<Notification> {
 
     public DefaultNotificationHolder() {
