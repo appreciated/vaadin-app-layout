@@ -34,6 +34,7 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
         if (listener != null) {
             setClickListener(appMenuIconItemClickEvent -> listener.onComponentEvent(null));
         }
+        getItem().getElement().getStyle().set("white-space", "nowrap");
     }
 
     public NavigationBadgeIconButton(ClickableNavigationElement element) {

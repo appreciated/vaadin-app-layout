@@ -14,6 +14,8 @@ import com.vaadin.flow.component.icon.IronIcon;
 public class AppSubmenu extends Component implements HasComponents {
 
     private final AppMenu menu;
+    private final AppMenuIconItem item;
+    private final IronIcon ironIcon;
     private AppMenu parent;
 
     /**
@@ -29,10 +31,11 @@ public class AppSubmenu extends Component implements HasComponents {
         Div toggleWrapper = new Div();
         toggleWrapper.getElement().getClassList().add("app-menu-item");
         toggleWrapper.getElement().setAttribute("slot", "submenu-trigger");
-        toggleWrapper.add(
-                new AppMenuIconItem(sectionName, icon.getElement().getAttribute("icon")),
-                new IronIcon("icons", "expand-more")
-        );
+
+        item = new AppMenuIconItem(sectionName, icon.getElement().getAttribute("icon"));
+        ironIcon = new IronIcon("icons", "expand-more");
+
+        toggleWrapper.add(item, ironIcon);
         menu = new AppMenu();
         menu.getElement().setAttribute("slot", "submenu-content");
         addToSubmenu(toggleWrapper);
@@ -65,6 +68,14 @@ public class AppSubmenu extends Component implements HasComponents {
     public void setParent(AppMenu parent) {
         this.parent = parent;
         menu.setParent(this);
+    }
+
+    public AppMenuIconItem getItem() {
+        return item;
+    }
+
+    public IronIcon getIronIcon() {
+        return ironIcon;
     }
 
     public void setSelected(AppMenu appMenu) {

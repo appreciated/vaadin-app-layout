@@ -13,6 +13,7 @@ public class ExpandingMenuContainer extends AppSubmenu implements SubmenuNavigat
 
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super(sectionName, icon);
+        getItem().getElement().getStyle().set("white-space", "nowrap");
     }
 
     @Override

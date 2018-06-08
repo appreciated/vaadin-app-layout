@@ -51,6 +51,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 transition: 1s width;
             }
 
+            #drawer .drawer-content {
+                height: 100%;
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
             #toggle {
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
@@ -78,7 +85,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 /* hybrid */
                 #menu-header-title, #menu-header-subtitle {
                     opacity: 1.0;
-                    transition: opacity 0.5s, max-height 0.5s, margin-top 0.5s;
+                    transition: opacity 0.2s, max-height 0.5s, margin-top 0.5s;
                     max-height: 50px;
                 }
 
