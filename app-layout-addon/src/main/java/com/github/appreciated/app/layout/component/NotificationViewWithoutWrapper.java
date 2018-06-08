@@ -12,7 +12,6 @@ public class NotificationViewWithoutWrapper extends Div {
 
     public NotificationViewWithoutWrapper(Notification info) {
         this(info, null);
-
     }
 
     public NotificationViewWithoutWrapper(Notification info, DomEventListener clickEvent) {

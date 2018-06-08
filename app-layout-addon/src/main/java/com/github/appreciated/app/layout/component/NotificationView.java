@@ -12,7 +12,6 @@ public class NotificationView extends PaperCard {
 
     public NotificationView(Notification info) {
         this(info, null);
-
     }
 
     public NotificationView(Notification info, DomEventListener clickEvent) {
