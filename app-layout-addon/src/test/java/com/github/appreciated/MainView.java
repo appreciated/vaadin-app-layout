@@ -44,7 +44,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
         if (variant == null) {
-            variant = Behaviour.LEFT_RESPONSIVE;
+            variant = Behaviour.LEFT;
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
@@ -54,6 +54,7 @@ public class MainView extends AppLayoutRouterLayout {
         if (!variant.isTop()) {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
@@ -82,6 +83,7 @@ public class MainView extends AppLayoutRouterLayout {
         } else {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
+                    .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .addClickable("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant), HEADER)
