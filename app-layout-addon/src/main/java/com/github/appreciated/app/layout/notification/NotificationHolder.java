@@ -102,8 +102,12 @@ public class NotificationHolder<T extends Notification> {
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
     }
 
-    public void addNotificationClickedListener(NotificationClickListener<T> listener) {
+    public void addClickListener(NotificationClickListener<T> listener) {
         this.clickListeners.add(listener);
+    }
+
+    public void removeClickListener(NotificationClickListener<T> listener) {
+        this.clickListeners.remove(listener);
     }
 
     public int getUnreadNotifications() {

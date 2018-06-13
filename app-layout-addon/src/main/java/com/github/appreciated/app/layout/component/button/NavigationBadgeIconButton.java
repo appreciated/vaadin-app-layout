@@ -27,6 +27,12 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
         super(name, icon.getElement().getAttribute("icon"));
         setId("menu-btn");
         badge = new PaperBadge(this);
+        badge.getElement().getStyle()
+                .set("--paper-badge-background", "var(--app-layout-bar-background-color)")
+                .set("--paper-badge-text-color", "var(--app-layout-bar-font-color)")
+                .set("margin-top", "24px")
+                .set("margin-left", "-25px");
+        add(badge);
         if (status != null) {
             status.addListener((newStatus) -> setStatus(newStatus));
         }

@@ -14,7 +14,6 @@ import com.github.appreciated.app.layout.notification.Priority;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -38,7 +37,7 @@ public class MainView extends AppLayoutRouterLayout {
     private Thread currentThread;
 
     public MainView() {
-        notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
+        //notifications.addClickListener(newStatus -> Notification.show(newStatus.getTitle()));
     }
 
     @Override
@@ -51,6 +50,8 @@ public class MainView extends AppLayoutRouterLayout {
         notifications.addNotification(new DefaultNotification("Test1", "Test1"));
         notifications.addNotification(new DefaultNotification("Test2", "Test2"));
         notifications.addNotification(new DefaultNotification("Test3", "Test3"));
+        badge.setCount(3);
+
         if (!variant.isTop()) {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
