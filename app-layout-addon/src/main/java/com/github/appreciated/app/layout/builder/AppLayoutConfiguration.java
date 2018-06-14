@@ -8,6 +8,7 @@ import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationEle
 import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftNavigationBadgeElementComponentFactory;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftSectionElementComponentFactory;
@@ -59,7 +60,7 @@ public class AppLayoutConfiguration {
     private ComponentFactory<Component, SectionNavigationElement> sectionProvider;
     private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider;
 
-    private NavigationElementInfoProducer navigationElementInfoProvider = null;
+    private NavigationElementInfoProducer navigationElementInfoProvider = new DefaultNavigationElementInfoProducer();
     private List<AbstractNavigationElement> footerElements = new ArrayList<>();
     private List<AbstractNavigationElement> headerElements = new ArrayList<>();
     private List<NavigatorNavigationElement> navigatorElements = new ArrayList<>();
