@@ -88,7 +88,7 @@ public class DemoUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do someting with it */})
-                .add(new MenuHeader("Version 0.9.23", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
