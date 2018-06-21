@@ -170,7 +170,7 @@ public class NavigatorNavigationElement extends AbstractNavigationElement<Naviga
             if (viewNameInterceptor != null) {
                 if (path != null) {
                     return viewNameInterceptor.get(path);
-                } else if (info != null) {
+                } else if (info != null && info.getViewName() != null) {
                     return viewNameInterceptor.get(info.getViewName());
                 } else {
                     return viewNameInterceptor.get(caption);
