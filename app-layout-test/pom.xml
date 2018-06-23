@@ -3,10 +3,10 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.appreciated</groupId>
-	<artifactId>app-layout-root</artifactId>
+	<artifactId>app-layout-tests</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0</version>
-	<name>App Layout Addon Root Project</name>
+	<name>App Layout Addon Tests Root</name>
 
 	<organization>
 		<name>appreciated</name>
@@ -18,9 +18,9 @@
 	</prerequisites>
 
 	<modules>
-		<module>app-layout-addon</module>
-		<module>app-layout-demo</module>
-		<module>app-layout-test</module>
+		<module>app-layout-basic-test</module>
+		<module>app-layout-no-navigator-test</module>
+		<module>app-layout-spring-test</module>
 	</modules>
 
 	<profiles>
