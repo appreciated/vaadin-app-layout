@@ -3,6 +3,8 @@ package com.github.appreciated.demo;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import com.github.appreciated.demo.ui.plain.BasicUI;
+import com.github.appreciated.demo.ui.plain.CdiUI;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,8 +23,8 @@ import static com.codeborne.selenide.Selenide.open;
 
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoUI.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MyTestRunner {
+@SpringBootTest(classes = CdiUI.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class CDITestRunner {
 
 
     @LocalServerPort

@@ -1,4 +1,4 @@
-package com.github.appreciated.demo;
+package com.github.appreciated.demo.ui.plain;
 
 import com.github.appreciated.app.layout.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
@@ -9,6 +9,7 @@ import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHol
 import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
+import com.github.appreciated.demo.*;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.PushStateNavigation;
@@ -29,7 +30,7 @@ import static com.github.appreciated.app.layout.builder.Section.HEADER;
 @Viewport("initial-scale=1, maximum-scale=1")
 @Theme("demo")
 @Title("App Layout Demo")
-public class DemoUI extends UI {
+public class BasicUI extends UI {
 
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
@@ -53,7 +54,7 @@ public class DemoUI extends UI {
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class)
+    @VaadinServletConfiguration(productionMode = false, ui = BasicUI.class)
     public static class Servlet extends VaadinServlet {
     }
 
