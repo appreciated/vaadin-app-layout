@@ -26,5 +26,5 @@
 /app-layout-examples/plain/without-navigator/target/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/package-lock.json
 /app-layout-addon/build-tools/yarn.lock
-/app-layout-test/app-layout-spring-cdi-test/selenium/
-/app-layout-test/app-layout-basic-test/selenium/
+/app-layout-tests/build/
+/app-layout-tests/selenium/
