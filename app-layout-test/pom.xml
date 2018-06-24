@@ -19,8 +19,7 @@
 
 	<modules>
 		<module>app-layout-basic-test</module>
-		<module>app-layout-no-navigator-test</module>
-		<module>app-layout-spring-test</module>
+		<module>app-layout-spring-cdi-test</module>
 	</modules>
 
 	<profiles>
