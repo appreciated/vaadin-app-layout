@@ -20,7 +20,7 @@
 	<modules>
 		<module>app-layout-addon</module>
 		<module>app-layout-demo</module>
-		<module>app-layout-test</module>
+		<module>app-layout-tests</module>
 	</modules>
 
 	<profiles>

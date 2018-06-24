@@ -3452,7 +3452,7 @@ fined@^1.0.1:
   resolved "https://registry.yarnpkg.com/fined/-/fined-1.1.0.tgz#b37dc844b76a2f5e7081e884f7c0ae344f153476"
   dependencies:
     expand-tilde "^2.0.2"
-    is-plain-object "^2.0.3"
+    is-annotated-object "^2.0.3"
     object.defaults "^1.1.0"
     object.pick "^1.2.0"
     parse-filepath "^1.0.1"
@@ -3655,7 +3655,7 @@ gh-got@^5.0.0:
   resolved "https://registry.yarnpkg.com/gh-got/-/gh-got-5.0.0.tgz#ee95be37106fd8748a96f8d1db4baea89e1bfa8a"
   dependencies:
     got "^6.2.0"
-    is-plain-obj "^1.1.0"
+    is-annotated-obj "^1.1.0"
 
 github-username@^3.0.0:
   version "3.0.0"
@@ -4597,7 +4597,7 @@ is-extendable@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-1.0.1.tgz#a7470f9e426733d81bd81e1155264e3a3507cab4"
   dependencies:
-    is-plain-object "^2.0.4"
+    is-annotated-object "^2.0.4"
 
 is-extglob@^1.0.0:
   version "1.0.0"
@@ -4712,11 +4712,11 @@ is-path-inside@^1.0.0:
 
 is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
+  resolved "https://registry.yarnpkg.com/is-annotated-obj/-/is-annotated-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
 is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
-  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
+  resolved "https://registry.yarnpkg.com/is-annotated-object/-/is-annotated-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
   dependencies:
     isobject "^3.0.1"
 
@@ -4996,7 +4996,7 @@ liftoff@^2.1.0:
     findup-sync "^2.0.0"
     fined "^1.0.1"
     flagged-respawn "^1.0.0"
-    is-plain-object "^2.0.4"
+    is-annotated-object "^2.0.4"
     object.map "^1.0.0"
     rechoir "^0.6.2"
     resolve "^1.1.7"
@@ -5565,7 +5565,7 @@ minimist-options@^3.0.1:
   resolved "https://registry.yarnpkg.com/minimist-options/-/minimist-options-3.0.2.tgz#fba4c8191339e13ecf4d61beb03f070103f3d954"
   dependencies:
     arrify "^1.0.1"
-    is-plain-obj "^1.1.0"
+    is-annotated-obj "^1.1.0"
 
 minimist@0.0.8:
   version "0.0.8"
@@ -7395,7 +7395,7 @@ set-value@^0.4.3:
   dependencies:
     extend-shallow "^2.0.1"
     is-extendable "^0.1.1"
-    is-plain-object "^2.0.1"
+    is-annotated-object "^2.0.1"
     to-object-path "^0.3.0"
 
 set-value@^2.0.0:
@@ -7404,7 +7404,7 @@ set-value@^2.0.0:
   dependencies:
     extend-shallow "^2.0.1"
     is-extendable "^0.1.1"
-    is-plain-object "^2.0.3"
+    is-annotated-object "^2.0.3"
     split-string "^3.0.1"
 
 setprototypeof@1.0.2:
@@ -7571,7 +7571,7 @@ sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
   dependencies:
-    is-plain-obj "^1.0.0"
+    is-annotated-obj "^1.0.0"
 
 source-map-resolve@^0.5.0:
   version "0.5.1"
@@ -8323,7 +8323,7 @@ unified@^6.0.0:
   dependencies:
     bail "^1.0.0"
     extend "^3.0.0"
-    is-plain-obj "^1.1.0"
+    is-annotated-obj "^1.1.0"
     trough "^1.0.0"
     vfile "^2.0.0"
     x-is-function "^1.0.4"
