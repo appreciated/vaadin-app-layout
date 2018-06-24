@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.test.ui.plain;
 
 import com.github.appreciated.app.layout.AppLayout;
-import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilder;
@@ -39,7 +38,7 @@ public class BasicPlainUI extends UI {
         DefaultNotificationHolder notifications = new DefaultNotificationHolder();
         DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
-        AppLayoutComponent layout = AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        setContent(AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withNavigator(container -> new Navigator(this, container))
                 .withTitle("App Layout Plain Basic Test")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
@@ -56,8 +55,7 @@ public class BasicPlainUI extends UI {
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .build();
-        setContent(layout);
+                .build());
     }
 
     @WebServlet(value = "/*", asyncSupported = true)
