@@ -35,7 +35,7 @@ public class DemoUI extends UI {
 
     public void init(VaadinRequest request) {
         setContent(AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
-                .withTitle("App Layout InfoProvider Example")
+                .withTitle("App Layout Basic Annotated Example")
                 .addToAppBar(new AppBarNotificationButton(notifications))
                 .withNavigationElementInfoProducer(new DefaultNavigationElementInfoProducer())
                 .withDesign(AppLayoutDesign.MATERIAL)

@@ -33,6 +33,7 @@ import static com.github.appreciated.app.layout.builder.Section.HEADER;
 @Title("App Layout Demo")
 public class DemoUI extends UI {
 
+
     DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
@@ -58,7 +59,7 @@ public class DemoUI extends UI {
                 // Request on Github
                 .withNavigationElementInfoProducer(new DefaultSpringNavigationElementInfoProducer())
                 //
-                .withTitle("App Layout Spring CDI Example")
+                .withTitle("App Layout Spring CDI Annotated Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)

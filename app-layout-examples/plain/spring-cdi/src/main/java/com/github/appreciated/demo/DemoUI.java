@@ -33,6 +33,9 @@ import static com.github.appreciated.app.layout.builder.Section.HEADER;
 @Title("App Layout Demo")
 public class DemoUI extends UI {
 
+    DefaultNotificationHolder notifications = new DefaultNotificationHolder();
+    DefaultBadgeHolder badge = new DefaultBadgeHolder();
+
     @Autowired
     SpringViewProvider viewProvider;
 
@@ -40,10 +43,7 @@ public class DemoUI extends UI {
     //SpringNavigator navigator;
 
     public void init(VaadinRequest request) {
-        DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-        DefaultBadgeHolder badge = new DefaultBadgeHolder();
-
-        AppLayoutComponent layout = AppLayout.getCDIBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        setContent(AppLayout.getCDIBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 // You can either set the SpringViewProvider
                 .withViewProvider(() -> viewProvider)
                 // or the SpringNavigator here
@@ -58,21 +58,19 @@ public class DemoUI extends UI {
                 // Request on Github
                 .withNavigationElementInfoProducer(new DefaultSpringNavigationElementInfoProducer())
                 //
-                .withTitle("App Layout Basic Example")
+                .withTitle("App Layout Spring CDI Plain Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .withNavigatorConsumer(navigator -> {/* Do something with it */})
                 .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)
-                .add("Home",VaadinIcons.HOME, badge, View1.class)
-                .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
+                .add("Home", VaadinIcons.HOME, badge, View1.class)
+                .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
                         .add("Contact", VaadinIcons.CONNECT, View3.class)
                         .add("More", VaadinIcons.COG, View4.class)
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .build();
-        setContent(layout);
+                .build());
     }
 
     @WebServlet(value = "/*", asyncSupported = true)

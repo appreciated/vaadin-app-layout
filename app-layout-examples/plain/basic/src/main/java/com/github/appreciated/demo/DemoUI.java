@@ -36,15 +36,15 @@ public class DemoUI extends UI {
         DefaultNotificationHolder notifications = new DefaultNotificationHolder();
         DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
-        AppLayoutComponent layout = AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        setContent(AppLayout.getDefaultBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withNavigator(container -> new Navigator(this, container))
-                .withTitle("App Layout Basic Example")
+                .withTitle("App Layout Plain Basic Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withViewNameInterceptor(new DefaultViewNameInterceptor())
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> {/* Do something with it */})
-                .add(new MenuHeader("Version 0.9.22", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", "test", VaadinIcons.SPLINE_CHART, View2.class)
@@ -53,8 +53,7 @@ public class DemoUI extends UI {
                         .build())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, View6.class)
-                .build();
-        setContent(layout);
+                .build());
     }
 
     @WebServlet(value = "/*", asyncSupported = true)

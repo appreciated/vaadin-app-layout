@@ -34,20 +34,20 @@ public class DemoUI extends UI {
 
     public void init(VaadinRequest request) {
         setContent(AppLayout.getNoNavigatorBuilder(Behaviour.LEFT_RESPONSIVE_HYBRID)
-                .withTitle("App Layout Without Navigator Example")
+                .withTitle("App Layout No Navigator Annotated Example")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> this.navigator = navigator)
                 .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)
-                .add("Home", VaadinIcons.HOME, badge, View1.class)
+                .add(badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
-                        .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
-                        .add("Contact", VaadinIcons.CONNECT, View3.class)
-                        .add("More", VaadinIcons.COG, View4.class)
+                        .add(View2.class)
+                        .add(View3.class)
+                        .add(View4.class)
                         .build())
-                .add("Menu", VaadinIcons.MENU, View5.class)
-                .add("Elements", VaadinIcons.LIST, View6.class)
+                .add(View5.class)
+                .add(View6.class)
                 .build());
     }
 
