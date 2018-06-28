@@ -37,5 +37,8 @@
       background: $al-drawer-background-color;
       color: $al-drawer-font-color !important;
     }
+    .app-drawer-1 .app-drawer#scrim {
+      background: transparent !important;
+    }
   }
 }

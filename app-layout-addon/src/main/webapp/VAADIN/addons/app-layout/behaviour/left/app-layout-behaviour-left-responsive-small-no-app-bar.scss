@@ -153,5 +153,8 @@
     .app-layout-submenu-container {
       padding-left: $al-drawer-submenu-small-indention;
     }
+    .app-drawer-1 .app-drawer#scrim {
+      background: transparent !important;
+    }
   }
 }

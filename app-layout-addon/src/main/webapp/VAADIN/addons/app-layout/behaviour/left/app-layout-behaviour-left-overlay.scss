@@ -28,6 +28,10 @@
       overflow: visible;
       background: $al-drawer-background-color;
       color: $al-drawer-font-color !important;
+      width: $al-drawer-width;
+    }
+    .app-drawer-1 .app-drawer#scrim {
+      background: transparent !important;
     }
   }
 }

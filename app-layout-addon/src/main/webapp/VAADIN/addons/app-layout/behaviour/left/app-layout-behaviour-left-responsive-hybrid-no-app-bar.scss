@@ -164,5 +164,8 @@
       left: 0px;
       pointer-events: none;
     }
+    .app-drawer-1 .app-drawer#scrim {
+      background: transparent !important;
+    }
   }
 }

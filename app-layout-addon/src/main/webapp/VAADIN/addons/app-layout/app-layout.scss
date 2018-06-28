@@ -144,10 +144,7 @@ $al-menu-submenu-max-height: 999px !default;
   app-drawer:not([persistent]):not([opened]) .drawer-content * {
     overflow: hidden;
   }
-  .app-drawer-1 {
-    width: $al-drawer-width;
-  }
-  .app-drawer-1 .drawer-content {
+  [persistent].app-drawer-1 {
     width: $al-drawer-width;
   }
   .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
@@ -164,11 +161,6 @@ $al-menu-submenu-max-height: 999px !default;
 
   .app-drawer-layout-1.small app-drawer[opened] .drawer-content {
     width: $al-drawer-small-width;
-  }
-
-  .app-drawer-1 .app-drawer#scrim {
-    background: transparent !important;
-    box-shadow: $al-drawer-shadow;
   }
 
   .app-toolbar-1 {
