@@ -147,7 +147,9 @@ $al-menu-submenu-max-height: 999px !default;
   .app-drawer-1 {
     width: $al-drawer-width;
   }
-
+  .app-drawer-1 .drawer-content {
+    width: $al-drawer-width;
+  }
   .app-drawer-layout-1 app-drawer[opened][persistent] + .app-bar-application-content, .app-drawer-layout-1 app-drawer[opened][persistent] + #contentContainer .app-bar-application-content {
     left: $al-drawer-width;
   }

@@ -43,7 +43,7 @@ public class NoNavigatorPlainUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .withNavigatorConsumer(navigator -> this.navigator = navigator)
-                .add(new MenuHeader("Version 1.0.0", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.1", new ThemeResource("logo.png")), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add("Charts", VaadinIcons.SPLINE_CHART, View2.class)
