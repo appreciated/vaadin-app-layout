@@ -8,6 +8,10 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * Supplied by JDo-Jimenez on 28.06.2018.
+ */
+
 public class DefaultVaadinCdiNavigationElementInfoProducer extends BasicViewInfoProducer {
 
     public DefaultVaadinCdiNavigationElementInfoProducer() {
