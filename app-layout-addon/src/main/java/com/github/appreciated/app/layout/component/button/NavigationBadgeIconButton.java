@@ -5,8 +5,8 @@ import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationEle
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.component.MenuBadge;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenuItem;
-import com.github.appreciated.app.layout.webcomponents.paperbadge.PaperBadge;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
@@ -15,7 +15,9 @@ import com.vaadin.flow.component.icon.Icon;
 
 public class NavigationBadgeIconButton extends AppMenuItem implements NavigationElementComponent, NavigationElementContainer {
 
-    private final PaperBadge badge;
+    static int idCounter = 0;
+
+    private final MenuBadge badge;
     private NavigatorNavigationElement element;
 
     public NavigationBadgeIconButton(NavigatorNavigationElement element) {
@@ -25,13 +27,9 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
 
     public NavigationBadgeIconButton(String name, Icon icon, DefaultBadgeHolder status, ComponentEventListener<ClickEvent<Button>> listener) {
         super(name, icon.getElement().getAttribute("icon"));
-        setId("menu-btn");
-        badge = new PaperBadge(this);
-        badge.getElement().getStyle()
-                .set("--paper-badge-background", "var(--app-layout-bar-background-color)")
-                .set("--paper-badge-text-color", "var(--app-layout-bar-font-color)")
-                .set("margin-top", "72px")
-                .set("margin-left", "-25px");
+        setId("menu-btn-" + idCounter++);
+        badge = new MenuBadge();
+        badge.setVisible(false);
         add(badge);
         if (status != null) {
             status.addListener((newStatus) -> setStatus(newStatus));
@@ -48,21 +46,23 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
     }
 
     private void setStatus(DefaultBadgeHolder status) {
-        if (status != null) {
-            int unreadNotifications = status.getCount();
-            if (unreadNotifications > 0) {
-                badge.setVisible(true);
-                if (unreadNotifications < 10) {
-                    badge.setLabel(String.valueOf(unreadNotifications));
+        getUI().ifPresent(ui -> ui.access(() -> {
+            if (status != null) {
+                int unreadNotifications = status.getCount();
+                if (unreadNotifications > 0) {
+                    badge.setVisible(true);
+                    if (unreadNotifications < 10) {
+                        badge.setText(String.valueOf(unreadNotifications));
+                    } else {
+                        badge.setText("9+");
+                    }
                 } else {
-                    badge.setLabel("9+");
+                    badge.setVisible(false);
                 }
             } else {
                 badge.setVisible(false);
             }
-        } else {
-            badge.setVisible(false);
-        }
+        }));
     }
 
     @Override

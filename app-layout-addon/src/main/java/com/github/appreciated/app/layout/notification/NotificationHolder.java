@@ -15,8 +15,9 @@ public class NotificationHolder<T extends Notification> {
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
     private ArrayList<T> notifications = new ArrayList<>();
-    private ArrayList<NotificationListener> onChangeListeners = new ArrayList<>();
+    private ArrayList<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
     private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
+    private Notification recentNotification;
 
     public NotificationHolder() {
     }
@@ -46,13 +47,16 @@ public class NotificationHolder<T extends Notification> {
     }
 
     public void addNotification(T notification) {
+        recentNotification = notification;
         notifications.add(notification);
         notifyListeners();
+        notifyAddListeners(notification);
     }
 
     public void removeNotification(T notification) {
         notifications.remove(notification);
         notifyListeners();
+        notifyRemoveListeners(notification);
     }
 
     public void clearNotifications() {
@@ -60,8 +64,8 @@ public class NotificationHolder<T extends Notification> {
         notifyListeners();
     }
 
-    public void addStatusListener(NotificationListener listener) {
-        onChangeListeners.add(listener);
+    public void addNotificationsChangeListener(NotificationsChangeListener listener) {
+        notificationsChangeListeners.add(listener);
     }
 
     public Component getComponent(T message) {
@@ -95,7 +99,15 @@ public class NotificationHolder<T extends Notification> {
     }
 
     private void notifyListeners() {
-        onChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
+        notificationsChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
+    }
+
+    private void notifyAddListeners(Notification notification) {
+        notificationsChangeListeners.forEach(listener -> listener.onNotificationAdded(notification));
+    }
+
+    private void notifyRemoveListeners(Notification notification) {
+        notificationsChangeListeners.forEach(listener -> listener.onNotificationRemoved(notification));
     }
 
     private void notifyClickListeners(T info) {
@@ -114,10 +126,16 @@ public class NotificationHolder<T extends Notification> {
         return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
     }
 
-    public interface NotificationListener {
-        void onNotificationChanges(NotificationHolder newStatus);
+    public Notification getRecentNotification() {
+        return recentNotification;
+    }
 
-        void onUnreadCountChange(NotificationHolder holder);
+    public interface NotificationsChangeListener {
+        void onNotificationChanges(NotificationHolder holder);
+
+        void onNotificationAdded(Notification notification);
+
+        void onNotificationRemoved(Notification notification);
     }
 
     public interface NotificationClickListener<T> {

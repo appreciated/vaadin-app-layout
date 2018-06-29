@@ -16,6 +16,7 @@ public class AppSubmenu extends Component implements HasComponents {
     private final AppMenu menu;
     private final AppMenuIconItem item;
     private final IronIcon ironIcon;
+    private final Div toggleWrapper;
     private AppMenu parent;
 
     /**
@@ -28,7 +29,7 @@ public class AppSubmenu extends Component implements HasComponents {
      * @param icon
      */
     public AppSubmenu(String sectionName, Icon icon) {
-        Div toggleWrapper = new Div();
+        toggleWrapper = new Div();
         toggleWrapper.getElement().getClassList().add("app-menu-item");
         toggleWrapper.getElement().setAttribute("slot", "submenu-trigger");
 
@@ -40,6 +41,10 @@ public class AppSubmenu extends Component implements HasComponents {
         menu.getElement().setAttribute("slot", "submenu-content");
         addToSubmenu(toggleWrapper);
         addToSubmenu(menu);
+    }
+
+    public Div getToggleWrapper() {
+        return toggleWrapper;
     }
 
     private void addToSubmenu(Component component) {

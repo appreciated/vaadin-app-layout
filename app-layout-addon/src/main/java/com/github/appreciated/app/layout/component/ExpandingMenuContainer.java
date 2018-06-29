@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.component;
 import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
+import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -14,6 +15,8 @@ public class ExpandingMenuContainer extends AppSubmenu implements SubmenuNavigat
     public ExpandingMenuContainer(String sectionName, Icon icon) {
         super(sectionName, icon);
         getItem().getElement().getStyle().set("white-space", "nowrap");
+        getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
+        getToggleWrapper().getElement().getStyle().set("position", "relative");
     }
 
     @Override

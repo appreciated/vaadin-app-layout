@@ -15,6 +15,7 @@ import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
@@ -28,17 +29,13 @@ import static com.github.appreciated.app.layout.notification.Priority.MEDIUM;
  * The main view contains a button and a template element.
  */
 
-
+@Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainView extends AppLayoutRouterLayout {
     private Behaviour variant;
-    DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-    DefaultBadgeHolder badge = new DefaultBadgeHolder();
+    DefaultNotificationHolder notifications;
+    DefaultBadgeHolder badge;
     private Thread currentThread;
-
-    public MainView() {
-        //notifications.addClickListener(newStatus -> Notification.show(newStatus.getTitle()));
-    }
 
     @Override
     public AbstractAppLayoutBuilderBase getAppLayoutElementBase() {
@@ -47,15 +44,11 @@ public class MainView extends AppLayoutRouterLayout {
             notifications = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
-        notifications.addNotification(new DefaultNotification("Test1", "Test1"));
-        notifications.addNotification(new DefaultNotification("Test2", "Test2"));
-        notifications.addNotification(new DefaultNotification("Test3", "Test3"));
-        badge.setCount(3);
+        reloadNotifications();
 
         if (!variant.isTop()) {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
-                    .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .addToAppBar(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .add(new MenuHeaderView("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
@@ -103,9 +96,9 @@ public class MainView extends AppLayoutRouterLayout {
         notifications.clearNotifications();
         currentThread = new Thread(() -> {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
                 for (int i = 0; i < 10; i++) {
-                    Thread.sleep(1000);
+                    Thread.sleep(5000);
                     addNotification(MEDIUM);
                 }
             } catch (InterruptedException e) {
@@ -116,26 +109,23 @@ public class MainView extends AppLayoutRouterLayout {
     }
 
     private void addNotification(Priority priority) {
-        getUI().ifPresent(ui -> {
+        getUI().ifPresent(ui -> ui.accessSynchronously(() -> {
             badge.increase();
             notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
-        });
+        }));
     }
 
     private void setDrawerVariant(Behaviour variant) {
         this.variant = variant;
         reloadConfiguration();
-        //reloadNotifications();
     }
 
     private void openModeSelector(Behaviour variant) {
         new BehaviourSelector(variant, variant1 -> setDrawerVariant(variant1)).open();
     }
 
-
     class BehaviourSelector extends Dialog {
         public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
-
             VerticalLayout layout = new VerticalLayout();
             add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
@@ -161,6 +151,4 @@ public class MainView extends AppLayoutRouterLayout {
             });
         }
     }
-
-
 }
