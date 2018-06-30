@@ -32,13 +32,6 @@ import java.util.List;
  */
 
 @Tag("app-layout-top-large")
-@HtmlImport("frontend://bower_components/vaadin-icons/vaadin-icons.html")
-@HtmlImport("frontend://bower_components/app-layout/app-drawer/app-drawer.html")
-@HtmlImport("frontend://bower_components/app-layout/app-drawer-layout/app-drawer-layout.html")
-@HtmlImport("frontend://bower_components/app-layout/app-header/app-header.html")
-@HtmlImport("frontend://bower_components/app-layout/app-header-layout/app-header-layout.html")
-@HtmlImport("frontend://bower_components/app-layout/app-toolbar/app-toolbar.html")
-@HtmlImport("frontend://bower_components/app-layout/app-scroll-effects/effects/waterfall.html")
 @HtmlImport("frontend://com/github/appreciated/app-layout/top/top-large.html")
 public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
     protected final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
