@@ -115,8 +115,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.appreciated</groupId>
-            <artifactId>vaadin-iron-dropdown</artifactId>
-            <version>0.6.0</version>
+            <artifactId>vaadin-paper-menu-button</artifactId>
+            <version>0.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
