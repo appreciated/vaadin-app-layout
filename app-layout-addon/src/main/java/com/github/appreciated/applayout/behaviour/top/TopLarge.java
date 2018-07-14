@@ -5,8 +5,10 @@ import com.github.appreciated.applayout.builder.interfaces.NavigationElementCont
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.applayout.webcomponents.papertabs.PaperTabs;
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.HasText;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
@@ -30,13 +32,10 @@ import java.util.List;
 public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
     protected final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final VerticalLayout contentPanel = new VerticalLayout();
-    private final PaperTabs paperTabs = new PaperTabs();
-    private final HorizontalLayout paperTabWrapper = new HorizontalLayout(paperTabs);
+    private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
     private final VerticalLayout appBarWrapper = new VerticalLayout();
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    //@Id("toggle")
-    // PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     Div appBarElements;
     @Id("content")
@@ -44,11 +43,11 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
     private Component title = new Span("");
     protected final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
     private List<LeftNavigationComponent> list;
+    private NavigationElementContainer appMenuContainer;
 
     public TopLarge() {
         contentPanel.setSizeFull();
-        paperTabs.setHeight("100%");
-        //paperTabs.getElement().getStyle().set("align-items", "center");
+
         paperTabWrapper.getElement().getStyle()
                 .set("flex-grow", "1")
                 .set("flex-shrink", "1")
@@ -58,9 +57,6 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
         paperTabWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
-        /**add(contentPanel, "content");
-         addComponent(menuHolder, "menu-webcomponents");
-         addComponent(appBar, "app-bar-webcomponents");*/
         appBar.add(titleWrapper, appBarElementWrapper);
         appBar.setFlexGrow(1.0, titleWrapper);
         appBar.setWidth("100%");
@@ -105,12 +101,6 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
         return appBarElements;
     }
 
-    @Override
-    public void addAppBarElement(Component component) {
-        appBarElementContainer.add(component);
-        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
-    }
-
     public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
     }
@@ -152,28 +142,8 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
         return titleWrapper;
     }
 
-    @Override
-    public HasComponents getMenuElementHolder() {
-        return paperTabs;
-    }
-
     public void addAppBarIcon(Component appBarIconComponent) {
         titleWrapper.add(appBarIconComponent);
-    }
-
-    @Override
-    public void addToMenu(Component component) {
-        paperTabs.add(component);
-    }
-
-    @Override
-    public void addToDrawerFooter(Component component) {
-        paperTabs.add(component);
-    }
-
-    @Override
-    public void addToDrawerHeader(Component component) {
-        paperTabs.add(component);
     }
 
     @Override
@@ -183,10 +153,20 @@ public class TopLarge extends PolymerTemplate<TemplateModel> implements AppLayou
 
     @Override
     public void setActiveElement(HasElement content) {
-        paperTabs.getChildren()
-                .filter(item -> item instanceof NavigationElementContainer)
-                .map(item -> (NavigationElementContainer) item)
-                .forEach(navigationBadgeIconButton -> navigationBadgeIconButton.setActiveNavigationElementWithViewClass(content));
+        appMenuContainer.setActiveNavigationElementWithViewClass(content);
+    }
+
+    @Override
+    public void setAppBar(Component component) {
+        appBarElementContainer.removeAll();
+        appBarElementContainer.add(component);
+    }
+
+    @Override
+    public void setAppMenu(NavigationElementContainer container) {
+        paperTabWrapper.removeAll();
+        paperTabWrapper.add(container.getComponent());
+        appMenuContainer = container;
     }
 }
 

@@ -1,7 +1,7 @@
 package com.github.appreciated.applayout.component.appmenu.left.builder;
 
 import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.builder.ComponentBuilder;
+import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.component.appmenu.left.LeftMenuComponent;
 import com.github.appreciated.applayout.entity.Section;
 import com.vaadin.flow.component.Component;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * A Builder to build {@link LeftMenuComponent} this buider is meant to be used in combination with the {@link AppLayoutBuilder}
  */
-public class LeftAppMenuBuilder implements ComponentBuilder {
+public class LeftAppMenuBuilder {
 
     ArrayList<Component> components = new ArrayList<>();
 
@@ -68,8 +68,8 @@ public class LeftAppMenuBuilder implements ComponentBuilder {
         return this;
     }
 
-    @Override
-    public Component build() {
+
+    public NavigationElementContainer build() {
         LeftMenuComponent menu = new LeftMenuComponent();
         menu.add(components.toArray(new Component[components.size()]));
         return menu;

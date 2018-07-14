@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class LeftSubmenuComponent extends AppSubmenu implements NavigationElementContainer {
 
-
     private final String title;
     private final Icon icon;
     private Factory<String, String> captionInterceptor;
@@ -53,5 +52,10 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
                 .filter(component -> component instanceof NavigationElementContainer)
                 .map(component -> ((NavigationElementContainer) component).setActiveNavigationElementWithViewClass(element))
                 .reduce((first, next) -> first || next).orElse(false);
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }

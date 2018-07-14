@@ -2,15 +2,23 @@ package com.github.appreciated.applayout.builder;
 
 import com.github.appreciated.applayout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.applayout.behaviour.Behaviour;
+import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
 
 public class AppLayoutBuilder implements ComponentBuilder {
 
-    protected AppLayoutConfiguration config;
+    private Component menu;
+    private Component appBar;
+    private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
+    private String title;
+    private Component appBarIconComponent;
+    private AppLayoutElementBase instance;
+    private HasElement titleComponent;
 
-    protected AppLayoutBuilder(AppLayoutElementBase component) {
-        config = new AppLayoutConfiguration(component);
+    private AppLayoutBuilder(AppLayoutElementBase instance) {
+        this.instance = instance;
     }
 
     public static AppLayoutBuilder get(Behaviour variant) {
@@ -28,7 +36,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @return
      */
     public AppLayoutBuilder withTitle(String title) {
-        config.setTitle(title);
+        setTitle(title);
         return this;
     }
 
@@ -39,7 +47,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @return
      */
     public AppLayoutBuilder withTitle(Component component) {
-        config.setTitleComponent(component);
+        setTitleComponent(component);
         return this;
     }
 
@@ -50,7 +58,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @return
      */
     public AppLayoutBuilder withDesign(AppLayoutDesign design) {
-        config.setDesign(design);
+        setDesign(design);
         return this;
     }
 
@@ -60,18 +68,53 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @return
      */
     public Component build() {
-        return config.build();
+        if (titleComponent == null) {
+            instance.setTitle(title);
+        } else {
+            instance.setTitleElement(titleComponent);
+        }
+        instance.setDesign(design);
+        if (appBarIconComponent != null) {
+            instance.addAppBarIcon(appBarIconComponent);
+        }
+        return (Component) instance;
+
     }
 
     public AppLayoutBuilder withAppBar(Component component) {
-        config.setAppBarComponent(component);
+        setAppBarComponent(component);
         return this;
     }
 
-    public AppLayoutBuilder withAppMenu(Component component) {
-        config.setAppMenu(component);
+    public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
+        setAppMenu(component);
         return this;
     }
+
+    public AppLayoutDesign getDesign() {
+        return design;
+    }
+
+    public void setDesign(AppLayoutDesign design) {
+        this.design = design;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTitleComponent(HasElement titleComponent) {
+        this.titleComponent = titleComponent;
+    }
+
+    public void setAppBarComponent(Component component) {
+        instance.setAppBar(component);
+    }
+
+    public void setAppMenu(NavigationElementContainer component) {
+        instance.setAppMenu(component);
+    }
+
 
 }
 

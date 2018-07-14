@@ -6,7 +6,6 @@ import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.design.Styles;
 import com.github.appreciated.applayout.router.HasBackNavigation;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.applayout.webcomponents.appmenu.AppMenu;
 import com.github.appreciated.applayout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -38,18 +37,16 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     @Id("drawer")
     AppDrawer drawer;
 
-    private final AppMenu menuElementHolder = new AppMenu();
-
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private Component title = new Span("");
     private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private NavigationElementContainer appMenuContainer;
 
     public AbstractLeftAppLayoutBase() {
         super();
         getElement().getStyle().set("width", "100%")
                 .set("height", "100%");
-        menuElements.add(menuElementHolder);
         //menuHeaderHolder.setVisible(false);
         //menuFooterHolder.setVisible(false);
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
@@ -93,12 +90,6 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     }
 
     @Override
-    public void addAppBarElement(Component component) {
-        appBarElementContainer.add(component);
-        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
-    }
-
-    @Override
     public void setTitle(String title) {
         if (this.title instanceof HasText) {
             ((HasText) this.title).setText(title);
@@ -129,6 +120,19 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
     }
 
     @Override
+    public void setAppBar(Component component) {
+        appBarElementContainer.removeAll();
+        appBarElementContainer.add(component);
+    }
+
+    @Override
+    public void setAppMenu(NavigationElementContainer container) {
+        menuElements.removeAll();
+        menuElements.add(container.getComponent());
+        appMenuContainer = container;
+    }
+
+    @Override
     public Component getTitleComponent() {
         return title;
     }
@@ -143,28 +147,9 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
         return titleWrapper;
     }
 
-    public AppMenu getMenuElementHolder() {
-        return menuElementHolder;
-    }
-
     public void addAppBarIcon(Component appBarIconComponent) {
         titleWrapper.add(appBarIconComponent);
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-    }
-
-    @Override
-    public void addToMenu(Component component) {
-        menuElementHolder.add(component);
-    }
-
-    @Override
-    public void addToDrawerFooter(Component component) {
-        menuElementHolder.add(component);
-    }
-
-    @Override
-    public void addToDrawerHeader(Component component) {
-        menuElementHolder.add(component);
     }
 
     @Override
@@ -174,9 +159,6 @@ public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<Template
 
     @Override
     public void setActiveElement(HasElement content) {
-        getMenuElementHolder().getChildren()
-                .filter(item -> item instanceof NavigationElementContainer)
-                .map(item -> (NavigationElementContainer) item)
-                .forEach(navigationBadgeIconButton -> navigationBadgeIconButton.setActiveNavigationElementWithViewClass(content));
+        appMenuContainer.setActiveNavigationElementWithViewClass(content);
     }
 }

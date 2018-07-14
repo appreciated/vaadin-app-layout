@@ -118,6 +118,11 @@ public class TopNavigationComponent extends PaperTab implements NavigationElemen
         }
     }
 
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
     public String getRoute() {
         if (route != null) {
             return route;

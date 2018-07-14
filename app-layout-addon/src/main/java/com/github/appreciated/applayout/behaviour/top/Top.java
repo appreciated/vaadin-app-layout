@@ -5,13 +5,14 @@ import com.github.appreciated.applayout.builder.interfaces.NavigationElementCont
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.applayout.webcomponents.papertabs.PaperTabs;
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.HasText;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -30,6 +31,9 @@ import java.util.List;
 @Tag("app-layout-top")
 @HtmlImport("frontend://com/github/appreciated/app-layout/top/top.html")
 public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
+    private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
+    private NavigationElementContainer appMenuContainer;
+
     @Override
     public String getStyleName() {
         return "top";
@@ -37,12 +41,8 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
 
     protected final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final VerticalLayout contentPanel = new VerticalLayout();
-    private final PaperTabs paperTabs = new PaperTabs();
-    private final HorizontalLayout paperTabWrapper = new HorizontalLayout(paperTabs);
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    //@Id("toggle")
-    // PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     Div appBarElements;
     @Id("content")
@@ -53,20 +53,7 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
 
     public Top() {
         contentPanel.setSizeFull();
-        paperTabs.setHeight("100%");
-        //paperTabs.getElement().getStyle().set("align-items", "center");
-        paperTabWrapper.getElement().getStyle()
-                .set("flex-grow", "1")
-                .set("flex-shrink", "1")
-                .set("align-self", "flex-end");
-        paperTabWrapper.setWidth("100%");
-        paperTabWrapper.setHeight("var(--app-bar-height)");
-        paperTabWrapper.setJustifyContentMode(JustifyContentMode.CENTER);
-
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
-        /**add(contentPanel, "content");
-         addComponent(menuHolder, "menu-webcomponents");
-         addComponent(appBar, "app-bar-webcomponents");*/
         appBar.add(titleWrapper, paperTabWrapper, appBarElementWrapper);
         appBar.setFlexGrow(1.0, titleWrapper);
         appBar.setWidth("100%");
@@ -95,12 +82,6 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
 
     public Div getAppBarElements() {
         return appBarElements;
-    }
-
-    @Override
-    public void addAppBarElement(Component component) {
-        appBarElementContainer.add(component);
-        appBarElementContainer.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     public void setDesign(AppLayoutDesign design) {
@@ -145,28 +126,9 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
         return titleWrapper;
     }
 
-    @Override
-    public HasComponents getMenuElementHolder() {
-        return paperTabs;
-    }
 
     public void addAppBarIcon(Component appBarIconComponent) {
         titleWrapper.add(appBarIconComponent);
-    }
-
-    @Override
-    public void addToMenu(Component component) {
-        paperTabs.add(component);
-    }
-
-    @Override
-    public void addToDrawerFooter(Component component) {
-        paperTabs.add(component);
-    }
-
-    @Override
-    public void addToDrawerHeader(Component component) {
-        paperTabs.add(component);
     }
 
     @Override
@@ -176,9 +138,19 @@ public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElem
 
     @Override
     public void setActiveElement(HasElement content) {
-        paperTabs.getChildren()
-                .filter(item -> item instanceof NavigationElementContainer)
-                .map(item -> (NavigationElementContainer) item)
-                .forEach(navigationBadgeIconButton -> navigationBadgeIconButton.setActiveNavigationElementWithViewClass(content));
+        appMenuContainer.setActiveNavigationElementWithViewClass(content);
+    }
+
+    @Override
+    public void setAppBar(Component component) {
+        appBarElementContainer.removeAll();
+        appBarElementContainer.add(component);
+    }
+
+    @Override
+    public void setAppMenu(NavigationElementContainer container) {
+        paperTabWrapper.removeAll();
+        paperTabWrapper.add(container.getComponent());
+        appMenuContainer = container;
     }
 }

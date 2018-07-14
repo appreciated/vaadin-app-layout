@@ -1,9 +1,9 @@
 package com.github.appreciated.applayout.behaviour;
 
+import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -31,17 +31,7 @@ public interface AppLayoutElementBase {
 
     String getStyleName();
 
-    void addToDrawerHeader(Component component);
-
-    void addToMenu(Component component);
-
-    void addToDrawerFooter(Component component);
-
-    void addAppBarElement(Component component);
-
     void setDesign(AppLayoutDesign design);
-
-    HorizontalLayout getAppBarElementWrapper();
 
     HasElement getTitleComponent();
 
@@ -53,8 +43,6 @@ public interface AppLayoutElementBase {
 
     HorizontalLayout getTitleWrapper();
 
-    HasComponents getMenuElementHolder();
-
     void addAppBarIcon(Component appBarIconComponent);
 
     void setAppLayoutContent(HasElement content);
@@ -62,4 +50,8 @@ public interface AppLayoutElementBase {
     void setBackNavigation(boolean visible);
 
     void setActiveElement(HasElement content);
+
+    void setAppBar(Component component);
+
+    void setAppMenu(NavigationElementContainer component);
 }

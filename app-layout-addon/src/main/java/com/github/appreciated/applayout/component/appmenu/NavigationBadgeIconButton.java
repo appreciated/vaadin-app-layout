@@ -5,6 +5,7 @@ import com.github.appreciated.applayout.component.appmenu.left.LeftClickableComp
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.applayout.webcomponents.appmenu.AppMenuItem;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
@@ -55,5 +56,10 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }

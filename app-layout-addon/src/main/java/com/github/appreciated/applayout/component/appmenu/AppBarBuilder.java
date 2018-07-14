@@ -1,5 +1,6 @@
-package com.github.appreciated.applayout.builder;
+package com.github.appreciated.applayout.component.appmenu;
 
+import com.github.appreciated.applayout.builder.ComponentBuilder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 

@@ -1,8 +1,8 @@
 package com.github.appreciated.example;
 
 import com.github.appreciated.applayout.behaviour.Behaviour;
-import com.github.appreciated.applayout.builder.AppBarBuilder;
 import com.github.appreciated.applayout.builder.AppLayoutBuilder;
+import com.github.appreciated.applayout.component.appmenu.AppBarBuilder;
 import com.github.appreciated.applayout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.applayout.component.appmenu.left.LeftClickableComponent;
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
