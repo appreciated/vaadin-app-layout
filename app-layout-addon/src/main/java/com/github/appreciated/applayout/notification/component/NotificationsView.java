@@ -20,8 +20,7 @@ public class NotificationsView extends VerticalLayout {
         setMargin(false);
         setPadding(false);
         setWidth("300px");
-        getElement().getStyle().set("padding", "5px");
-
+        getElement().getStyle().set("padding", "5px").set("--shadow-elevation-2dp_-_box-shadow", "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)");
         this.holder = holder;
         initView();
     }
@@ -44,8 +43,8 @@ public class NotificationsView extends VerticalLayout {
             }
         } else {
             Label label = new Label("No Notifications");
-            label.getElement().getStyle().set("color", "var(--lumo-shade)");
-            label.getElement().getStyle().set("font-size", "var(--lumo-size-xxs)");
+            label.getStyle().set("color", "var(--lumo-shade)")
+                    .set("font-size", "var(--lumo-size-xxs)");
             HorizontalLayout wrapper = new HorizontalLayout(label);
             wrapper.setWidth("100%");
             wrapper.setJustifyContentMode(JustifyContentMode.CENTER);

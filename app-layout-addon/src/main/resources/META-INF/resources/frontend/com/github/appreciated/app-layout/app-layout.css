@@ -8,9 +8,9 @@
     --app-layout-bar-height: 64px;
     --app-layout-bar-background-color: #4285f4;
     --app-layout-bar-font-color: #fff;
-    --app-layout-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    --app-layout-bar-shadow: var(--shadow-elevation-4dp_-_box-shadow);
     --app-layout-bar-z-index: 10;
-    --app-layout-drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+    --app-layout-drawer-shadow: var(--shadow-elevation-3dp_-_box-shadow);
     --app-layout-drawer-background-color: white;
     --app-layout-drawer-submenu-indention: 0px;
     --app-layout-drawer-submenu-small-indention: 0px;

@@ -1,6 +1,6 @@
 package com.github.appreciated.applayout.behaviour.top;
 
-import com.github.appreciated.applayout.behaviour.AppLayoutElementBase;
+import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
@@ -16,8 +16,6 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
-import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +28,7 @@ import java.util.List;
 
 @Tag("app-layout-top")
 @HtmlImport("frontend://com/github/appreciated/app-layout/top/top.html")
-public class Top extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
+public class Top extends AppLayout {
     private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
     private NavigationElementContainer appMenuContainer;
 

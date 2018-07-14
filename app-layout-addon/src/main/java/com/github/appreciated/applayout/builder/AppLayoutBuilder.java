@@ -1,6 +1,6 @@
 package com.github.appreciated.applayout.builder;
 
-import com.github.appreciated.applayout.behaviour.AppLayoutElementBase;
+import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.behaviour.Behaviour;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
@@ -14,10 +14,10 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
     private String title;
     private Component appBarIconComponent;
-    private AppLayoutElementBase instance;
+    private AppLayout instance;
     private HasElement titleComponent;
 
-    private AppLayoutBuilder(AppLayoutElementBase instance) {
+    private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
     }
 
@@ -25,7 +25,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
         return new AppLayoutBuilder(variant.getInstance());
     }
 
-    public static AppLayoutBuilder get(AppLayoutElementBase variant) {
+    public static AppLayoutBuilder get(AppLayout variant) {
         return new AppLayoutBuilder(variant);
     }
 
@@ -67,7 +67,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      *
      * @return
      */
-    public Component build() {
+    public AppLayout build() {
         if (titleComponent == null) {
             instance.setTitle(title);
         } else {
@@ -77,7 +77,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (appBarIconComponent != null) {
             instance.addAppBarIcon(appBarIconComponent);
         }
-        return (Component) instance;
+        return instance;
 
     }
 

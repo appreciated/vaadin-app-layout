@@ -23,16 +23,20 @@ public class NavigationBadgeIconButton extends AppMenuItem implements Navigation
         this.element = element;
     }
 
-    public NavigationBadgeIconButton(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+    public NavigationBadgeIconButton(String name, Icon icon) {
         super(name, icon.getElement().getAttribute("icon"));
         setId("menu-btn-" + idCounter++);
         badge = new MenuBadgeComponent();
         badge.setVisible(false);
         add(badge);
+        getItem().getElement().getStyle().set("white-space", "nowrap");
+    }
+
+    public NavigationBadgeIconButton(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+        this(name, icon);
         if (listener != null) {
             setClickListener(appMenuIconItemClickEvent -> listener.onComponentEvent(null));
         }
-        getItem().getElement().getStyle().set("white-space", "nowrap");
     }
 
     public NavigationBadgeIconButton(LeftClickableComponent element) {

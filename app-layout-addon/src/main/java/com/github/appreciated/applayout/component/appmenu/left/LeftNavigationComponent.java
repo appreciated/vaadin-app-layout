@@ -62,12 +62,12 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
     }
 
     public LeftNavigationComponent(String caption, String route, Icon icon, Component view) {
-        super(caption, icon, buttonClickEvent -> {
-        });
+        super(caption, icon);
         this.caption = caption;
         this.icon = icon;
         this.route = route;
         this.view = view;
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
     public LeftNavigationComponent(String caption, Icon icon, Class<? extends Component> className) {
@@ -79,17 +79,23 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
     }
 
     public LeftNavigationComponent(String caption, String route, Icon icon, Class<? extends Component> className) {
-        super(caption, icon, buttonClickEvent -> {
-            Element celement = UI.getCurrent().getElement();
-            if (celement.getComponent().get() instanceof AppLayoutRouterLayout) {
-                AppLayoutRouterLayout layout = (AppLayoutRouterLayout) celement.getComponent().get();
-                layout.closeDrawer();
-            }
-        });
+        super(caption, icon);
         this.caption = caption;
         this.icon = icon;
         this.route = route;
         this.className = className;
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
+    public void navigateTo() {
+        System.out.println("navigateTo");
+        UI ui = UI.getCurrent();
+        Element celement = ui.getElement();
+        if (celement.getComponent().get() instanceof AppLayoutRouterLayout) {
+            ui.navigate(route);
+            AppLayoutRouterLayout layout = (AppLayoutRouterLayout) celement.getComponent().get();
+            layout.closeDrawer();
+        }
     }
 
     public String getRoute() {

@@ -1,5 +1,6 @@
 package com.github.appreciated.example;
 
+import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.behaviour.Behaviour;
 import com.github.appreciated.applayout.builder.AppLayoutBuilder;
 import com.github.appreciated.applayout.component.appmenu.AppBarBuilder;
@@ -43,7 +44,7 @@ public class MainView extends AppLayoutRouterLayout {
     private Thread currentThread;
 
     @Override
-    public AppLayoutBuilder getAppLayoutElementBase() {
+    public AppLayout getAppLayout() {
         if (variant == null) {
             variant = Behaviour.LEFT;
             notifications = new DefaultNotificationHolder();
@@ -83,7 +84,7 @@ public class MainView extends AppLayoutRouterLayout {
                                     .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View5.class))
                                     .addToSection(new LeftClickableComponent("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), FOOTER)
                                     .build()
-                    );
+                    ).build();
         } else {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
@@ -98,7 +99,7 @@ public class MainView extends AppLayoutRouterLayout {
                             .add(new TopNavigationComponent("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class))
                             .addToSection(new TopClickableComponent("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), FOOTER)
                             .addToSection(new TopNavigationComponent("More", VaadinIcon.CONNECT.create(), View3.class), FOOTER).build()
-                    );
+                    ).build();
         }
     }
 

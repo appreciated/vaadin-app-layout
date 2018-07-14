@@ -23,6 +23,7 @@ public class AppBarBuilder implements ComponentBuilder {
     }
 
     public AppBarBuilder withElement(Component component) {
+        components.add(component);
         return this;
     }
 }

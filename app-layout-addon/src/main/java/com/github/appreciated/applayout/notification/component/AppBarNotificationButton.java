@@ -18,7 +18,12 @@ public class AppBarNotificationButton extends PaperMenuButton {
 
     public AppBarNotificationButton(Icon icon, NotificationHolder holder) {
         super(new IconBadgeButton(icon), new NotificationsView(holder));
-        getElement().getClassList().add("app-bar-notification-button");
+        setClassName("app-bar-notification-button");
+        getStyle().set("--paper-menu-button-dropdown-background", "transparent")
+                .set("--shadow-elevation-2dp_-_box-shadow", "0px")
+                .set("--paper-menu-button-dropdown_-_margin-top", "64px")
+                .set("--paper-menu-button-dropdown_-_margin-right", "7px");
+
         setHorizontalAlignment(HorizontalAlignment.RIGHT);
         holder.addNotificationsChangeListener(new NotificationHolder.NotificationsChangeListener() {
             @Override

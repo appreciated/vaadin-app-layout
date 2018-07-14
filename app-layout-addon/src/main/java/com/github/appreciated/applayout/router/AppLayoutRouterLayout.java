@@ -1,7 +1,6 @@
 package com.github.appreciated.applayout.router;
 
-import com.github.appreciated.applayout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.applayout.builder.AppLayoutBuilder;
+import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -15,7 +14,7 @@ import com.vaadin.flow.router.RouterLayout;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public abstract class AppLayoutRouterLayout extends Div implements RouterLayout {
 
-    private AppLayoutElementBase appLayoutElementBase;
+    private AppLayout appLayout;
     private HasElement currentContent;
 
     public AppLayoutRouterLayout() {
@@ -36,39 +35,39 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
     @Override
     public void showRouterLayoutContent(HasElement content) {
         currentContent = content;
-        appLayoutElementBase.setAppLayoutContent(content);
+        appLayout.setAppLayoutContent(content);
         if (content.getClass().getAnnotation(Route.class) != null) {
             int value = content.getClass().getAnnotation(Route.class).value().split("/").length;
-            appLayoutElementBase.setBackNavigation(value > 1);
-            appLayoutElementBase.setActiveElement(content);
+            appLayout.setBackNavigation(value > 1);
+            appLayout.setActiveElement(content);
         }
     }
 
     private void loadConfiguration() {
-        appLayoutElementBase = (AppLayoutElementBase) getAppLayoutElementBase().build();
-        add((Component) appLayoutElementBase);
+        appLayout = getAppLayout();
+        add((Component) appLayout);
     }
 
     public static AppLayoutRouterLayout getCurrent() {
         return (AppLayoutRouterLayout) UI.getCurrent().getSession().getAttribute("app-layout");
     }
 
-    public abstract AppLayoutBuilder getAppLayoutElementBase();
+    public abstract AppLayout getAppLayout();
 
     public void closeDrawer() {
-        appLayoutElementBase.closeDrawer();
+        appLayout.closeDrawer();
     }
 
     public void toggleDrawer() {
-        appLayoutElementBase.toggleDrawer();
+        appLayout.toggleDrawer();
     }
 
     public void openDrawer() {
-        appLayoutElementBase.openDrawer();
+        appLayout.openDrawer();
     }
 
     public void closeDrawerIfNotPersistent() {
-        appLayoutElementBase.closeDrawerIfNotPersistent();
+        appLayout.closeDrawerIfNotPersistent();
     }
 
 }

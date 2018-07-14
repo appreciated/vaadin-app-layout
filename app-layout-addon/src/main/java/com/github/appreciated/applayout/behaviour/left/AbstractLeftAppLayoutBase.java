@@ -1,5 +1,6 @@
 package com.github.appreciated.applayout.behaviour.left;
 
+import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
@@ -15,8 +16,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
-import com.vaadin.flow.templatemodel.TemplateModel;
 
 import java.util.Arrays;
 
@@ -24,7 +23,7 @@ import java.util.Arrays;
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
 
-public abstract class AbstractLeftAppLayoutBase extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase {
+public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Id("toggle")
     PaperIconButton paperIconButton;
