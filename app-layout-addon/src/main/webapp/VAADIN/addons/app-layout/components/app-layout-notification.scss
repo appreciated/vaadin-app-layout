@@ -108,6 +108,12 @@
         }
       }
     }
+    .v-window.translucent .v-window-outerheader {
+      border-bottom: none !important;
+    }
+    .v-window.translucent .v-window-contents {
+      padding: 0px !important;
+    }
     .v-window-contents {
       animation: valo-animate-in-fade 0.4s;
     }
