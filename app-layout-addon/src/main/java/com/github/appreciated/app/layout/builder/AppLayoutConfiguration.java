@@ -96,24 +96,31 @@ public class AppLayoutConfiguration {
             else
                 navigationElementProvider = new DefaultLeftNavigationBadgeElementComponentFactory();
         }
+        instance.setDrawerNavigationElementProvider(navigationElementProvider);
+
         if (customElementProvider == null) {
             if (variant.isTop())
                 customElementProvider = new DefaultLeftClickableNavigationElementFactory();
             else
                 customElementProvider = new DefaultLeftClickableNavigationElementFactory();
         }
+        instance.setDrawerClickableElementProvider(customElementProvider);
+
         if (sectionProvider == null) {
             if (variant.isTop())
                 sectionProvider = new DefaultLeftSectionElementComponentFactory();
             else
                 sectionProvider = new DefaultLeftSectionElementComponentFactory();
         }
+        instance.setDrawerSectionElementProvider(sectionProvider);
+
         if (submenuProvider == null) {
             if (variant.isTop())
                 submenuProvider = new DefaultTopSubmenuNavigationElementFactory();
             else
                 submenuProvider = new DefaultLeftSubmenuNavigationElementFactory();
         }
+        instance.setDrawerSubmenuElementProvider(submenuProvider);
 
         AppLayoutSessionHelper.setActiveVariant(variant);
         if (titleComponent == null) {
