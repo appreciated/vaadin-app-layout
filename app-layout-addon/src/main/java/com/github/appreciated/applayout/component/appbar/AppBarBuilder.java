@@ -1,4 +1,4 @@
-package com.github.appreciated.applayout.component.appmenu;
+package com.github.appreciated.applayout.component.appbar;
 
 import com.github.appreciated.applayout.builder.ComponentBuilder;
 import com.vaadin.flow.component.Component;

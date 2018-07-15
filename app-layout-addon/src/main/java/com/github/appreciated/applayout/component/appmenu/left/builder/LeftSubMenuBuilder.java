@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 /**
- * A Builder to build {@link LeftSubmenuComponent} this buider is meant to be used in combination with the {@link AppLayoutBuilder}
+ * A Builder to build {@link LeftSubmenuComponent} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
 public class LeftSubMenuBuilder implements ComponentBuilder {
 

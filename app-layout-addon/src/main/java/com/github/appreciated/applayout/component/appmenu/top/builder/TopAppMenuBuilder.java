@@ -1,8 +1,9 @@
-package com.github.appreciated.applayout.component.appmenu.left.builder;
+package com.github.appreciated.applayout.component.appmenu.top.builder;
 
 import com.github.appreciated.applayout.builder.AppLayoutBuilder;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.component.appmenu.left.LeftMenuComponent;
+import com.github.appreciated.applayout.component.appmenu.top.TopMenuComponent;
 import com.github.appreciated.applayout.entity.Section;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
@@ -13,19 +14,19 @@ import java.util.ArrayList;
 /**
  * A Builder to build {@link LeftMenuComponent} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
-public class LeftAppMenuBuilder {
+public class TopAppMenuBuilder {
 
     ArrayList<Component> components = new ArrayList<>();
 
-    protected LeftAppMenuBuilder() {
+    protected TopAppMenuBuilder() {
     }
 
-    private LeftAppMenuBuilder(String title, Icon icon) {
+    private TopAppMenuBuilder(String title, Icon icon) {
 
     }
 
-    public static LeftAppMenuBuilder get() {
-        return new LeftAppMenuBuilder();
+    public static TopAppMenuBuilder get() {
+        return new TopAppMenuBuilder();
     }
 
     /**
@@ -34,8 +35,8 @@ public class LeftAppMenuBuilder {
      * @param title
      * @return
      */
-    public static LeftAppMenuBuilder get(String title) {
-        return new LeftAppMenuBuilder(title, null);
+    public static TopAppMenuBuilder get(String title) {
+        return new TopAppMenuBuilder(title, null);
     }
 
     /**
@@ -44,8 +45,8 @@ public class LeftAppMenuBuilder {
      * @param icon
      * @return
      */
-    public static LeftAppMenuBuilder get(Icon icon) {
-        return new LeftAppMenuBuilder(null, icon);
+    public static TopAppMenuBuilder get(Icon icon) {
+        return new TopAppMenuBuilder(null, icon);
     }
 
     /**
@@ -54,22 +55,21 @@ public class LeftAppMenuBuilder {
      * @param icon
      * @return
      */
-    public static LeftAppMenuBuilder get(String title, Icon icon) {
-        return new LeftAppMenuBuilder(title, icon);
+    public static TopAppMenuBuilder get(String title, Icon icon) {
+        return new TopAppMenuBuilder(title, icon);
     }
 
-
-    public LeftAppMenuBuilder add(Component element) {
+    public TopAppMenuBuilder add(Component element) {
         return addToSection(element, Section.DEFAULT);
     }
 
-    public LeftAppMenuBuilder addToSection(Component element, Section section) {
+    public TopAppMenuBuilder addToSection(Component element, Section section) {
         components.add(element);
         return this;
     }
 
     public NavigationElementContainer build() {
-        LeftMenuComponent menu = new LeftMenuComponent();
+        TopMenuComponent menu = new TopMenuComponent();
         menu.add(components.toArray(new Component[components.size()]));
         return menu;
     }

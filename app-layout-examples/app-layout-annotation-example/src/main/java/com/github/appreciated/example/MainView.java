@@ -3,7 +3,7 @@ package com.github.appreciated.example;
 import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.behaviour.Behaviour;
 import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.component.appmenu.AppBarBuilder;
+import com.github.appreciated.applayout.component.appbar.AppBarBuilder;
 import com.github.appreciated.applayout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.applayout.component.appmenu.left.LeftClickableComponent;
 import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
@@ -11,6 +11,7 @@ import com.github.appreciated.applayout.component.appmenu.left.builder.LeftAppMe
 import com.github.appreciated.applayout.component.appmenu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.applayout.component.appmenu.top.TopClickableComponent;
 import com.github.appreciated.applayout.component.appmenu.top.TopNavigationComponent;
+import com.github.appreciated.applayout.component.appmenu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.entity.DefaultBadgeHolder;
 import com.github.appreciated.applayout.notification.DefaultNotificationHolder;
@@ -93,7 +94,7 @@ public class MainView extends AppLayoutRouterLayout {
                             .build()
                     )
                     .withDesign(AppLayoutDesign.MATERIAL)
-                    .withAppMenu(LeftAppMenuBuilder.get()
+                    .withAppMenu(TopAppMenuBuilder.get()
                             .addToSection(new TopClickableComponent("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                             .add(new TopNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
                             .add(new TopNavigationComponent("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class))

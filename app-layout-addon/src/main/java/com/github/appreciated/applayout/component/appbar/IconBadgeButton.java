@@ -47,7 +47,6 @@ public class IconBadgeButton extends Div {
         badge.setLabel(caption);
     }
 
-
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);

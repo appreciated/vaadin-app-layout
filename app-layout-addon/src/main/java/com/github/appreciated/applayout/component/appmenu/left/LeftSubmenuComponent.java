@@ -5,7 +5,6 @@ import com.github.appreciated.applayout.builder.interfaces.NavigationElementCont
 import com.github.appreciated.applayout.webcomponents.appmenu.AppSubmenu;
 import com.github.appreciated.applayout.webcomponents.paperripple.PaperRipple;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
@@ -39,19 +38,6 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
         } else {
             return captionInterceptor.get(title);
         }
-    }
-
-    public interface SubmenuElement extends HasElement {
-        default void close() {
-        }
-    }
-
-    @Override
-    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
-        return getMenu().getChildren()
-                .filter(component -> component instanceof NavigationElementContainer)
-                .map(component -> ((NavigationElementContainer) component).setActiveNavigationElementWithViewClass(element))
-                .reduce((first, next) -> first || next).orElse(false);
     }
 
     @Override

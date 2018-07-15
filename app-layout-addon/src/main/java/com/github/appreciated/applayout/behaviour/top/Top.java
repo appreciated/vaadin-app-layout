@@ -28,7 +28,7 @@ import java.util.Arrays;
 @HtmlImport("frontend://com/github/appreciated/app-layout/top/top.html")
 public class Top extends AppLayout {
     private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
-    private NavigationElementContainer appMenuContainer;
+    private NavigationElementContainer navigationElementContainer;
 
     @Override
     public String getStyleName() {
@@ -50,7 +50,9 @@ public class Top extends AppLayout {
         contentPanel.setSizeFull();
         getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
         appBar.add(titleWrapper, paperTabWrapper, appBarElementWrapper);
-        appBar.setFlexGrow(1.0, titleWrapper);
+        paperTabWrapper.setFlexGrow(1.0, titleWrapper);
+        paperTabWrapper.setWidth("100%");
+        paperTabWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         appBar.setWidth("100%");
         appBar.setHeight("100%");
         appBarElements.add(appBar);
@@ -133,7 +135,7 @@ public class Top extends AppLayout {
 
     @Override
     public void setActiveElement(HasElement content) {
-        appMenuContainer.setActiveNavigationElementWithViewClass(content);
+        navigationElementContainer.setActiveNavigationElementWithViewClass(content);
     }
 
     @Override
@@ -146,6 +148,6 @@ public class Top extends AppLayout {
     public void setAppMenu(NavigationElementContainer container) {
         paperTabWrapper.removeAll();
         paperTabWrapper.add(container.getComponent());
-        appMenuContainer = container;
+        navigationElementContainer = container;
     }
 }
