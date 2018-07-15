@@ -55,19 +55,11 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
     private Factory<String, String> captionInterceptor;
 
     public LeftNavigationComponent(String caption, Icon icon, Component view) {
-        this(caption, null, icon, view);
-    }
-
-    public LeftNavigationComponent(String caption, String route, Icon icon, Component view) {
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
         this.view = view;
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
-    }
-
-    public LeftNavigationComponent(Icon icon, Class<? extends Component> className) {
-        this(null, icon, className);
     }
 
     public LeftNavigationComponent(String caption, Icon icon, Class<? extends Component> className) {
