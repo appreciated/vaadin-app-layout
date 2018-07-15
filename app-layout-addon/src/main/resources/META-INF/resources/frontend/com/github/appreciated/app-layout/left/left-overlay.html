@@ -85,6 +85,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     window.history.back();
                 }
             }
+
+            closeIfNotPersistent() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                drawer.close();
+            }
         }
 
         customElements.define(AppLayoutLeftOverlay.is, AppLayoutLeftOverlay);

@@ -154,6 +154,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 }
             }
+
+            closeIfNotPersistent() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                if (!drawer.persistent) {
+                    drawer.close();
+                }
+            }
         }
 
         customElements.define(AppLayoutLeftResponsiveSmallNoAppBar.is, AppLayoutLeftResponsiveSmallNoAppBar);

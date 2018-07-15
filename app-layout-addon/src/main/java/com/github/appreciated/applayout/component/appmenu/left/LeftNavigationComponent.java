@@ -4,11 +4,10 @@ import com.github.appreciated.applayout.builder.AppLayoutConfiguration;
 import com.github.appreciated.applayout.builder.interfaces.Factory;
 import com.github.appreciated.applayout.component.appmenu.NavigationBadgeIconButton;
 import com.github.appreciated.applayout.entity.NavigationElementInfo;
-import com.github.appreciated.applayout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.dom.Element;
+import com.vaadin.flow.router.Route;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
@@ -88,21 +87,14 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
     }
 
     public void navigateTo() {
-        System.out.println("navigateTo");
-        UI ui = UI.getCurrent();
-        Element celement = ui.getElement();
-        if (celement.getComponent().get() instanceof AppLayoutRouterLayout) {
-            ui.navigate(route);
-            AppLayoutRouterLayout layout = (AppLayoutRouterLayout) celement.getComponent().get();
-            layout.closeDrawer();
-        }
+        UI.getCurrent().navigate(getRoute());
     }
 
     public String getRoute() {
-        if (route != null) {
-            return route;
-        } else if (info != null) {
-            return info.getRoute();
+        if (className != null) {
+            return className.getAnnotation(Route.class).value();
+        } else if (view != null) {
+            return view.getClass().getAnnotation(Route.class).value();
         } else {
             return getCaption();
         }
@@ -170,7 +162,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
     public void initRouterInformation() {
         if (UI.getCurrent().getRouter().getRoutes().stream().filter(routeData -> routeData.getUrl().equals(getRoute())).count() == 0) {
             //UI.getCurrent().getRouter().getUrl(getViewClassName());
-            System.err.println("The Menuelement with the route \"" + getRoute() + "\" cannot be navigated to since it wasn't added to the router. Currently it isn't possible to add new Views to the router dynamically (This will be possible in future)");
+            System.err.println("The Menuelement with the route \"" + getRoute() + "\" cannot be navigated to, since it wasn't added to the router. Currently it isn't possible to add new Views to the router dynamically (This will be possible in future)");
         }
     }
 }

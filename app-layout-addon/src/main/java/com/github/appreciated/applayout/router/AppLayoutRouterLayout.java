@@ -1,6 +1,7 @@
 package com.github.appreciated.applayout.router;
 
 import com.github.appreciated.applayout.behaviour.AppLayout;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -21,7 +22,14 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
         setSizeFull();
         getElement().getStyle().set("overflow", "auto");
         loadConfiguration();
-        UI.getCurrent().getSession().setAttribute("app-layout", this);
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        getUI().ifPresent(ui -> ui.addAfterNavigationListener(afterNavigationEvent -> {
+            closeDrawerIfNotPersistent();
+        }));
     }
 
     public void reloadConfiguration() {
