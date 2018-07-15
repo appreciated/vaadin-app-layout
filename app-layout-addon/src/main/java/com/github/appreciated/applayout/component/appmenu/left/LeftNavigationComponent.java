@@ -2,9 +2,11 @@ package com.github.appreciated.applayout.component.appmenu.left;
 
 import com.github.appreciated.applayout.builder.AppLayoutConfiguration;
 import com.github.appreciated.applayout.builder.interfaces.Factory;
+import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.component.appmenu.NavigationBadgeIconButton;
 import com.github.appreciated.applayout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.router.Route;
@@ -13,7 +15,7 @@ import com.vaadin.flow.router.Route;
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
  * on {@link LeftNavigationComponent} respectively their {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the AppLayout content view.
  */
-public class LeftNavigationComponent extends NavigationBadgeIconButton {
+public class LeftNavigationComponent extends NavigationBadgeIconButton implements NavigationElementContainer {
     /**
      * The caption of this menu element
      */
@@ -30,10 +32,6 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
      * The respective view behind this menu element (either {@link LeftNavigationComponent#view} or {@link LeftNavigationComponent#className} will be initialized)
      */
     private Class<? extends Component> className;
-    /**
-     * The (url-)path under which this view will available
-     */
-    private String route;
 
     /**
      * The view name interceptor that allows replace the route before initializing the router cannot be used when using cdi
@@ -64,24 +62,18 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
-        this.route = route;
         this.view = view;
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
-    public LeftNavigationComponent(String caption, Icon icon, Class<? extends Component> className) {
-        this(caption, null, icon, className);
-    }
-
     public LeftNavigationComponent(Icon icon, Class<? extends Component> className) {
-        this(null, null, icon, className);
+        this(null, icon, className);
     }
 
-    public LeftNavigationComponent(String caption, String route, Icon icon, Class<? extends Component> className) {
+    public LeftNavigationComponent(String caption, Icon icon, Class<? extends Component> className) {
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
-        this.route = route;
         this.className = className;
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
@@ -130,39 +122,18 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
         }
     }
 
-    public void setRouteInterceptor(Factory<String, String> routeInterceptor) {
-        if (routeInterceptor != null) {
-            this.routeInterceptor = routeInterceptor;
-        }
-    }
-
-    public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
-        this.captionInterceptor = captionInterceptor;
-    }
-
-    public void setNavigationElementInfoProvider(AppLayoutConfiguration.NavigationElementInfoProducer navigationElementInfoProvider) {
-        if (caption == null && icon == null && className == null && navigationElementInfoProvider == null) {
-            throw new IllegalStateException("Please set a NavigationElementInfoProvider via withNavigationElementInfoProvider for the Injected Views");
+    @Override
+    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
+        if (getViewClassName() == element.getClass()) {
+            setActive();
+            return true;
         } else {
-            this.navigationElementInfoProvider = navigationElementInfoProvider;
-            refreshInfo();
+            return false;
         }
     }
 
-    public void refreshInfo() {
-        if (navigationElementInfoProvider != null) {
-            info = navigationElementInfoProvider.apply(className);
-        }
-    }
-
-    public void onClick() {
-        UI.getCurrent().navigate(getRoute());
-    }
-
-    public void initRouterInformation() {
-        if (UI.getCurrent().getRouter().getRoutes().stream().filter(routeData -> routeData.getUrl().equals(getRoute())).count() == 0) {
-            //UI.getCurrent().getRouter().getUrl(getViewClassName());
-            System.err.println("The Menuelement with the route \"" + getRoute() + "\" cannot be navigated to, since it wasn't added to the router. Currently it isn't possible to add new Views to the router dynamically (This will be possible in future)");
-        }
+    @Override
+    public Component getComponent() {
+        return null;
     }
 }

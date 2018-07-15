@@ -44,11 +44,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     public AbstractLeftAppLayoutBase() {
         super();
-        getElement().getStyle().set("width", "100%")
+        getStyle().set("width", "100%")
                 .set("height", "100%");
-        //menuHeaderHolder.setVisible(false);
-        //menuFooterHolder.setVisible(false);
-        getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
+        getClassNames().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
         appBarElements.add(appBarContentHolder);
@@ -158,6 +156,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void setActiveElement(HasElement content) {
-        appMenuContainer.setActiveNavigationElementWithViewClass(content);
+        boolean res = appMenuContainer.setActiveNavigationElementWithViewClass(content);
+        return;
     }
 }

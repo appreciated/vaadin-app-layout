@@ -2,7 +2,6 @@ package com.github.appreciated.applayout.behaviour.top;
 
 import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
 import com.vaadin.flow.component.Component;
@@ -18,7 +17,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by appreciated on 01.05.2017.
@@ -40,7 +38,6 @@ public class TopLarge extends AppLayout {
     Div content;
     private Component title = new Span("");
     protected final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
-    private List<LeftNavigationComponent> list;
     private NavigationElementContainer appMenuContainer;
 
     public TopLarge() {
