@@ -7,6 +7,13 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
+<link rel="import" href="/frontend/bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/frontend/bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 
 <dom-module id="app-layout-top-large">
     <template>
@@ -56,6 +63,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         class AppLayoutTopLarge extends Polymer.Element {
             static get is() {
                 return 'app-layout-top-large'
+            }
+
+            closeIfNotPersistent() {
+
             }
         }
 

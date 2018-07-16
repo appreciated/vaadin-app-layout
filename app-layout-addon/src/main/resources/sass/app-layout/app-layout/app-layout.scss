@@ -26,10 +26,10 @@ $al-focus-color: #4285f4 !default;
 $al-bar-height: 64px !default;
 $al-bar-background-color: #4285f4 !default;
 $al-bar-font-color: color-contrast($al-bar-background-color) !default;
-$al-bar-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5) !default;
+$al-bar-shadow: var(--shadow-elevation-4dp_-_box-shadow) !default;
 $al-bar-z-index: 10 !default;
 
-$al-drawer-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3) !default;
+$al-drawer-shadow: var(--shadow-elevation-3dp_-_box-shadow) !default;
 $al-drawer-background-color: lighten($al-background-color, 5%) !default;
 
 $al-drawer-submenu-indention: 0px !default;

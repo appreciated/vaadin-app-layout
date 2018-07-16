@@ -19,6 +19,7 @@
 
 	<modules>
 		<module>app-layout-addon</module>
+        <module>app-layout-examples</module>
 	</modules>
 
 	<profiles>
