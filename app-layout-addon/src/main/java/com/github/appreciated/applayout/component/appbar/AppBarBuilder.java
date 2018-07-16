@@ -22,7 +22,7 @@ public class AppBarBuilder implements ComponentBuilder {
         return new HorizontalLayout(components.toArray(new Component[components.size()]));
     }
 
-    public AppBarBuilder withElement(Component component) {
+    public AppBarBuilder add(Component component) {
         components.add(component);
         return this;
     }

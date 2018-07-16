@@ -57,7 +57,7 @@ public class MainView extends AppLayoutRouterLayout {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(
-                            AppBarBuilder.get().withElement(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications)).build())
+                            AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications)).build())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(
                             LeftAppMenuBuilder.get()
@@ -90,7 +90,7 @@ public class MainView extends AppLayoutRouterLayout {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder.get()
-                            .withElement(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
+                            .add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
                             .build()
                     )
                     .withDesign(AppLayoutDesign.MATERIAL)
