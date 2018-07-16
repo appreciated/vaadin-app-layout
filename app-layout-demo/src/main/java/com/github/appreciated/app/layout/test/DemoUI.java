@@ -9,16 +9,12 @@ import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilde
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.builder.factories.AbstractNavigationElementComponentFactory;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
-import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.PushStateNavigation;
 import com.vaadin.navigator.View;
-import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -119,7 +115,6 @@ public class DemoUI extends UI {
                         System.out.println("Element clicked " + nElement.getViewName());
                     }
                 })
-                .withNavigationElementProvider(new CustomLeftNavigationBadgeElementComponentFactory())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, ElementsView.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
@@ -239,22 +234,4 @@ public class DemoUI extends UI {
             });
         }
     }
-
-    class CustomLeftNavigationBadgeElementComponentFactory extends AbstractNavigationElementComponentFactory {
-        @Override
-        public NavigationElementComponent get(NavigatorNavigationElement element) {
-            CustomNavigationBadgeButton button = new CustomNavigationBadgeButton(element.getCaption(), element.getIcon(), element.getBadgeHolder());
-            element.setComponent(button);
-            setNavigationClickListener(element);
-            return button;
-        }
-    }
-
-    class CustomNavigationBadgeButton extends NavigationBadgeButton {
-        public CustomNavigationBadgeButton(String caption, Resource icon, DefaultBadgeHolder badgeHolder) {
-            super(caption, icon, badgeHolder);
-            getButton().setDescription(caption);
-        }
-    }
-
 }
