@@ -17,12 +17,14 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
         VerticalLayout wrapper = new VerticalLayout();
         wrapper.addStyleName("ripple"); // for material theme
         wrapper.setSpacing(false);
+        wrapper.setHeight(70, Sizeable.Unit.PIXELS);
         Label timeAgo = new Label(info.getTimeAgo());
         timeAgo.addStyleName(Styles.APP_BAR_NOTIFICATION_TIME);
         Label title = new Label(info.getTitle());
         title.addStyleName(Styles.APP_BAR_NOTIFICATION_TITLE);
         Label description = new Label(info.getDescription());
         description.setWidth(100, Sizeable.Unit.PERCENTAGE);
+        description.setHeight(100, Sizeable.Unit.PERCENTAGE);
         description.addStyleName(Styles.APP_BAR_NOTIFICATION_DESCRIPTION);
         HorizontalLayout descriptionWrapper = new HorizontalLayout(description);
         descriptionWrapper.setWidth(100, Sizeable.Unit.PERCENTAGE);

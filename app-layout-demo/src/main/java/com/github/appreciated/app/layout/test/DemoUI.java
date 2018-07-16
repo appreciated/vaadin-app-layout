@@ -9,12 +9,16 @@ import com.github.appreciated.app.layout.builder.elements.builders.SubmenuBuilde
 import com.github.appreciated.app.layout.builder.entities.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotification;
 import com.github.appreciated.app.layout.builder.entities.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.builder.factories.AbstractNavigationElementComponentFactory;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.component.MenuHeader;
 import com.github.appreciated.app.layout.component.button.AppBarNotificationButton;
+import com.github.appreciated.app.layout.component.button.NavigationBadgeButton;
 import com.vaadin.annotations.*;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.PushStateNavigation;
 import com.vaadin.navigator.View;
+import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -45,6 +49,7 @@ public class DemoUI extends UI {
     protected void init(VaadinRequest request) {
         holder = new VerticalLayout();
         holder.setMargin(false);
+        notifications.setShowAllButtonCaption("Zeige Alle");
         setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
         setContent(holder);
         holder.setSizeFull();
@@ -74,7 +79,7 @@ public class DemoUI extends UI {
     private void addNotification(DefaultNotification.Priority priority) {
         DemoUI.this.access(() -> {
             badge.increase();
-            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
+            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + badge.getCount(), priority));
         });
     }
 
@@ -87,7 +92,7 @@ public class DemoUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do something with it */})
-                .add(new MenuHeader("Version 1.0.1", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.2", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
@@ -114,6 +119,7 @@ public class DemoUI extends UI {
                         System.out.println("Element clicked " + nElement.getViewName());
                     }
                 })
+                .withNavigationElementProvider(new CustomLeftNavigationBadgeElementComponentFactory())
                 .add("Menu", VaadinIcons.MENU, View5.class)
                 .add("Elements", VaadinIcons.LIST, ElementsView.class)
                 .addClickable("Set Behaviour FOOTER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), FOOTER)
@@ -231,6 +237,23 @@ public class DemoUI extends UI {
                 consumer.accept(singleSelectionEvent.getSelectedItem().orElse(Behaviour.LEFT_RESPONSIVE));
                 close();
             });
+        }
+    }
+
+    class CustomLeftNavigationBadgeElementComponentFactory extends AbstractNavigationElementComponentFactory {
+        @Override
+        public NavigationElementComponent get(NavigatorNavigationElement element) {
+            CustomNavigationBadgeButton button = new CustomNavigationBadgeButton(element.getCaption(), element.getIcon(), element.getBadgeHolder());
+            element.setComponent(button);
+            setNavigationClickListener(element);
+            return button;
+        }
+    }
+
+    class CustomNavigationBadgeButton extends NavigationBadgeButton {
+        public CustomNavigationBadgeButton(String caption, Resource icon, DefaultBadgeHolder badgeHolder) {
+            super(caption, icon, badgeHolder);
+            getButton().setDescription(caption);
         }
     }
 

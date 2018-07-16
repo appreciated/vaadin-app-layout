@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-addon</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>App Layout Add-on</name>
 
     <prerequisites>
@@ -16,8 +16,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>8.4.4</vaadin.version>
-        <vaadin.plugin.version>8.4.4</vaadin.plugin.version>
+        <vaadin.version>8.4.5</vaadin.version>
+        <vaadin.plugin.version>8.4.5</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <!-- ZIP Manifest fields -->
         <Implementation-Version>${project.version}</Implementation-Version>
@@ -32,8 +32,8 @@
         <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
 
         <!-- Frontend -->
-        <node.version>v8.9.4</node.version>
-        <yarn.version>v1.3.2</yarn.version>
+        <node.version>v8.11.3</node.version>
+        <yarn.version>v1.7.0</yarn.version>
         <buildtools.directory>build-tools</buildtools.directory>
         <frontend.directory>src/main/webapp/VAADIN/frontend</frontend.directory>
         <maven.source.excludeResources>true</maven.source.excludeResources>
@@ -140,17 +140,17 @@
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>app-layout</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>iron-icons</artifactId>
-            <version>2.0.1</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.bowergithub.polymerelements</groupId>
             <artifactId>paper-icon-button</artifactId>
-            <version>2.1.0</version>
+            <version>2.2.0</version>
         </dependency>
 
 
@@ -158,13 +158,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
-            <version>4.0.1.Final</version>
+            <version>4.0.2.Final</version>
         </dependency>
     </dependencies>
 

@@ -54,6 +54,7 @@
         font-size: 14px;
         text-overflow: ellipsis;
         overflow: hidden !important;
+        white-space: nowrap;
       }
       &.app-layout-notification-priority-high {
         background: $v-focus-color !important;

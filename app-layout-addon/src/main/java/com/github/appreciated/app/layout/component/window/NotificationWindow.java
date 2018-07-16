@@ -65,7 +65,7 @@ public class NotificationWindow<T> extends Window {
             panel.setSizeFull();
         }
         if (!showAll.value && holder.getNotificationSize() > 4) {
-            Button showAllButton = new Button("Show all");
+            Button showAllButton = new Button(holder.getShowAllButtonCaption());
             showAllButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
             showAllButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
             showAllButton.setWidth(100, Unit.PERCENTAGE);

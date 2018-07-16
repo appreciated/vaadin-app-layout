@@ -21,6 +21,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     private ArrayList<T> notifications = new ArrayList<>();
     private ArrayList<NotificationListener> onChangeListeners = new ArrayList<>();
     private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
+    private String showAllButtonCaption = "Show All";
 
     public NotificationHolder() {
     }
@@ -100,6 +101,10 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         return (int) notifications.stream().filter(notification -> notification.isUnnread()).count();
     }
 
+    public String getShowAllButtonCaption() {
+        return showAllButtonCaption;
+    }
+
     public interface Notification extends Comparator<Notification> {
         boolean isUnnread();
 
@@ -114,6 +119,10 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
                 return o1.getTime().compareTo(o2.getTime());
             }
         }
+    }
+
+    public void setShowAllButtonCaption(String showAllButtonCaption) {
+        this.showAllButtonCaption = showAllButtonCaption;
     }
 
     public interface NotificationListener {

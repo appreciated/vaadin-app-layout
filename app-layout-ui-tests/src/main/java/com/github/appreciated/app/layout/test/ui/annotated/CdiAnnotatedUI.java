@@ -62,7 +62,7 @@ public class CdiAnnotatedUI extends UI {
                 .withTitle("App Layout Spring CDI Annotated Test")
                 .addToAppBar(new AppBarNotificationButton(notifications, true))
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeader("Version 1.0.1", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.2", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)
                 .add(CDISubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add(View2.class)

@@ -40,7 +40,7 @@ public class BasicAnnotatedUI extends UI {
                 .addToAppBar(new AppBarNotificationButton(notifications))
                 .withNavigationElementInfoProducer(new DefaultNavigationElementInfoProducer())
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .add(new MenuHeader("Version 1.0.1", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.2", new ThemeResource("logo.png")), HEADER)
                 .add(badge, View1.class)
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)
                         .add(View2.class)
