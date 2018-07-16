@@ -3,10 +3,7 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayoutComponent;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.design.AppLayoutDesign;
-import com.github.appreciated.app.layout.builder.elements.AbstractNavigationElement;
-import com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement;
-import com.github.appreciated.app.layout.builder.elements.SectionNavigationElement;
-import com.github.appreciated.app.layout.builder.elements.SubmenuNavigationElement;
+import com.github.appreciated.app.layout.builder.elements.*;
 import com.github.appreciated.app.layout.builder.entities.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.builder.factories.left.DefaultLeftClickableNavigationElementFactory;
@@ -56,7 +53,7 @@ public class AppLayoutConfiguration {
     private String title;
     private NavigatorNavigationElement defaultNavigationElement;
     private ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider;
-    private DefaultLeftClickableNavigationElementFactory customElementProvider;
+    private ComponentFactory<Component, ClickableNavigationElement> clickableElementProvider;
     private ComponentFactory<Component, SectionNavigationElement> sectionProvider;
     private ComponentFactory<SubmenuNavigationElement.SubmenuComponent, SubmenuNavigationElement> submenuProvider;
 
@@ -98,13 +95,13 @@ public class AppLayoutConfiguration {
         }
         instance.setDrawerNavigationElementProvider(navigationElementProvider);
 
-        if (customElementProvider == null) {
+        if (clickableElementProvider == null) {
             if (variant.isTop())
-                customElementProvider = new DefaultLeftClickableNavigationElementFactory();
+                clickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
             else
-                customElementProvider = new DefaultLeftClickableNavigationElementFactory();
+                clickableElementProvider = new DefaultLeftClickableNavigationElementFactory();
         }
-        instance.setDrawerClickableElementProvider(customElementProvider);
+        instance.setDrawerClickableElementProvider(clickableElementProvider);
 
         if (sectionProvider == null) {
             if (variant.isTop())
@@ -311,6 +308,10 @@ public class AppLayoutConfiguration {
 
     public void setNavigationElementProvider(ComponentFactory<NavigationElementComponent, NavigatorNavigationElement> navigationElementProvider) {
         this.navigationElementProvider = navigationElementProvider;
+    }
+
+    public void setClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> clickableElementProvider) {
+        this.clickableElementProvider = clickableElementProvider;
     }
 
     public void setSectionProvider(ComponentFactory<Component, SectionNavigationElement> sectionProvider) {

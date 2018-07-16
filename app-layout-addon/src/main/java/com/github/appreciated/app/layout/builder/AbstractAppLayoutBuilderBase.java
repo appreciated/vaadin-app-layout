@@ -91,6 +91,17 @@ public class AbstractAppLayoutBuilderBase<T extends AbstractAppLayoutBuilderBase
     }
 
     /**
+     * Sets the Component provider that is being used to generate navigation elements in the drawer.
+     *
+     * @param provider
+     * @return
+     */
+    public T withClickableElementProvider(ComponentFactory<Component, ClickableNavigationElement> provider) {
+        config.setClickableElementProvider(provider);
+        return (T) this;
+    }
+
+    /**
      * Sets the Component provider that is being used to generate section elements in the drawer.
      *
      * @param provider
