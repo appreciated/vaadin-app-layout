@@ -14,9 +14,13 @@ import java.util.stream.Stream;
 public interface NavigationElementContainer extends NavigationElementComponent {
 
     default boolean setActiveNavigationElementWithViewClass(HasElement element) {
-        return getChildren()
-                .filter(component -> component instanceof NavigationElementContainer)
-                .map(component -> ((NavigationElementContainer) component).setActiveNavigationElementWithViewClass(element))
+        return setActiveNavigationElementWithViewClass(getChildren(), element);
+    }
+
+    default boolean setActiveNavigationElementWithViewClass(Stream<Component> elements, HasElement content) {
+        return elements
+                .filter(component -> component instanceof NavigationElementComponent)
+                .map(component -> ((NavigationElementComponent) component).setActiveNavigationElementWithViewClass(content))
                 .reduce((first, next) -> first || next).orElse(false);
     }
 

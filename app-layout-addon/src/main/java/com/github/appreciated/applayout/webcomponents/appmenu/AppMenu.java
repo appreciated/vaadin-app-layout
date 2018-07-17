@@ -18,14 +18,14 @@ public class AppMenu extends Component implements HasComponents, FlexComponent {
 
     public void setSelected(AppMenuItem selected) {
         if (subparent != null) {
-            subparent.setSelected(this);
+            subparent.setSelected();
         }
         getElement().setAttribute("selected", String.valueOf(indexOf(selected)));
     }
 
     public void setSelected(AppSubmenu appMenu) {
         if (subparent != null) {
-            subparent.setSelected(this);
+            subparent.setSelected();
         }
         getElement().setAttribute("selected", String.valueOf(indexOf(appMenu)));
     }

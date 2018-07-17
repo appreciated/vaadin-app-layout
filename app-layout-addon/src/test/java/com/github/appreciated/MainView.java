@@ -51,7 +51,7 @@ public class MainView extends AppLayoutRouterLayout {
             notificationHolder = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
-        reloadNotifications();
+        //reloadNotifications();
 
         if (!variant.isTop()) {
             LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);

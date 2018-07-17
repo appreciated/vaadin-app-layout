@@ -83,7 +83,7 @@ public class AppSubmenu extends Component implements HasComponents {
         return ironIcon;
     }
 
-    public void setSelected(AppMenu appMenu) {
+    public void setSelected() {
         this.parent.setSelected(this);
     }
 }
