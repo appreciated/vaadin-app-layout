@@ -17,13 +17,13 @@ public class AppBarBuilder implements ComponentBuilder {
         return new AppBarBuilder();
     }
 
-    @Override
-    public Component build() {
-        return new HorizontalLayout(components.toArray(new Component[components.size()]));
-    }
-
     public AppBarBuilder add(Component component) {
         components.add(component);
         return this;
+    }
+
+    @Override
+    public Component build() {
+        return new HorizontalLayout(components.toArray(new Component[components.size()]));
     }
 }
