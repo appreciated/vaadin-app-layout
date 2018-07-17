@@ -40,30 +40,32 @@ import static com.github.appreciated.applayout.notification.entitiy.Priority.MED
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainView extends AppLayoutRouterLayout {
     private Behaviour variant;
-    DefaultNotificationHolder notifications;
+    DefaultNotificationHolder notificationHolder;
     DefaultBadgeHolder badge;
     private Thread currentThread;
 
     @Override
     public AppLayout getAppLayout() {
         if (variant == null) {
-            variant = Behaviour.TOP;
-            notifications = new DefaultNotificationHolder();
+            variant = Behaviour.LEFT_RESPONSIVE;
+            notificationHolder = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
         reloadNotifications();
 
         if (!variant.isTop()) {
+            LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);
+            notificationHolder.bind(home.getBadge());
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(
-                            AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications)).build())
+                            AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notificationHolder)).build())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(
                             LeftAppMenuBuilder.get()
                                     .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
-                                    .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
+                                    .add(home)
                                     .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                             .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                                     .add(new LeftNavigationComponent("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class))
@@ -85,7 +87,7 @@ public class MainView extends AppLayoutRouterLayout {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder.get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
+                            .add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notificationHolder))
                             .build()
                     )
                     .withDesign(AppLayoutDesign.MATERIAL)
@@ -104,7 +106,7 @@ public class MainView extends AppLayoutRouterLayout {
             currentThread.interrupt();
         }
         badge.clearCount();
-        notifications.clearNotifications();
+        notificationHolder.clearNotifications();
         currentThread = new Thread(() -> {
             try {
                 Thread.sleep(5000);
@@ -122,7 +124,7 @@ public class MainView extends AppLayoutRouterLayout {
     private void addNotification(Priority priority) {
         getUI().ifPresent(ui -> ui.accessSynchronously(() -> {
             badge.increase();
-            notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
+            notificationHolder.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
         }));
     }
 

@@ -3,6 +3,7 @@ package com.github.appreciated.applayout.component.appmenu;
 import com.github.appreciated.applayout.webcomponents.appmenu.AppMenuItem;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -28,8 +29,12 @@ public class NavigationBadgeIconButton extends AppMenuItem {
         }
     }
 
-    private void setBadgeCaption(String status) {
+    public void setBadgeCaption(String status) {
         badge.setText(status);
+    }
+
+    public HasText getBadge() {
+        return badge;
     }
 
     @Override

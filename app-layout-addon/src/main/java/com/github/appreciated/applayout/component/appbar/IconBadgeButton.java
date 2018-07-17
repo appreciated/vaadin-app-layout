@@ -5,6 +5,7 @@ import com.github.appreciated.applayout.webcomponents.papericonbutton.PaperIconB
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -44,7 +45,7 @@ public class IconBadgeButton extends Div {
     }
 
     public void setBadgeCaption(String caption) {
-        badge.setLabel(caption);
+        badge.setText(caption);
     }
 
     @Override
@@ -56,6 +57,9 @@ public class IconBadgeButton extends Div {
         return button;
     }
 
+    public HasText getBadge() {
+        return badge;
+    }
 }
 
 

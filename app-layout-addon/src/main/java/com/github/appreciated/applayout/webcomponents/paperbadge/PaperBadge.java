@@ -1,13 +1,14 @@
 package com.github.appreciated.applayout.webcomponents.paperbadge;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 
 
 @Tag("paper-badge")
 @HtmlImport("bower_components/paper-badge/paper-badge.html")
-public class PaperBadge extends Component {
+public class PaperBadge extends Component implements HasText {
 
     public PaperBadge(Component bind) {
         this(bind, null, null);
@@ -22,12 +23,13 @@ public class PaperBadge extends Component {
             getElement().setAttribute("icon", icon);
         }
         if (label != null) {
-            setLabel(label);
+            setText(label);
         }
         getElement().setAttribute("for", bind.getElement().getAttribute("id"));
     }
 
-    public void setLabel(String label) {
+    @Override
+    public void setText(String label) {
         getElement().setAttribute("label", label);
     }
 

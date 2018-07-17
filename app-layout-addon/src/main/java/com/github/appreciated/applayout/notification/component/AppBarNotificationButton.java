@@ -48,6 +48,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
 
             }
         });
+        holder.bind(((IconBadgeButton) getButton()).getBadge());
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder) {

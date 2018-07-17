@@ -3,6 +3,7 @@ package com.github.appreciated.applayout.notification;
 import com.github.appreciated.applayout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.applayout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasText;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -129,6 +130,40 @@ public class NotificationHolder<T extends Notification> {
 
     public Notification getRecentNotification() {
         return recentNotification;
+    }
+
+    public void bind(HasText text) {
+        setBadgeCaption(text);
+        addNotificationsChangeListener(new NotificationsChangeListener() {
+            @Override
+            public void onNotificationChanges(NotificationHolder holder) {
+
+            }
+
+            @Override
+            public void onNotificationAdded(Notification notification) {
+                setBadgeCaption(text);
+            }
+
+            @Override
+            public void onNotificationRemoved(Notification notification) {
+                setBadgeCaption(text);
+            }
+        });
+    }
+
+    private void setBadgeCaption(HasText text) {
+        int unread = NotificationHolder.this.getUnreadNotifications();
+        if (unread < 1) {
+            text.setText(String.valueOf(0));
+        } else if (unread < 10) {
+            text.setText(String.valueOf(unread));
+        } else {
+            text.setText("9+");
+        }
+        if (text instanceof Component) {
+            ((Component) text).setVisible(unread > 0);
+        }
     }
 
     public interface NotificationsChangeListener {
