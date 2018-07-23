@@ -47,11 +47,11 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AppLayout getAppLayout() {
         if (variant == null) {
-            variant = Behaviour.LEFT_RESPONSIVE;
+            variant = Behaviour.TOP;
             notificationHolder = new DefaultNotificationHolder();
             badge = new DefaultBadgeHolder();
         }
-        //reloadNotifications();
+        reloadNotifications();
 
         if (!variant.isTop()) {
             LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);
@@ -109,9 +109,9 @@ public class MainView extends AppLayoutRouterLayout {
         notificationHolder.clearNotifications();
         currentThread = new Thread(() -> {
             try {
-                Thread.sleep(5000);
-                for (int i = 0; i < 10; i++) {
-                    Thread.sleep(5000);
+                Thread.sleep(1000);
+                for (int i = 0; i < 3; i++) {
+                    //Thread.sleep(5000);
                     addNotification(MEDIUM);
                 }
             } catch (InterruptedException e) {
