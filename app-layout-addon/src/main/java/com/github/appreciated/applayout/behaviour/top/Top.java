@@ -4,6 +4,7 @@ import com.github.appreciated.applayout.behaviour.AppLayout;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
+import com.github.appreciated.applayout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasText;
@@ -43,6 +44,8 @@ public class Top extends AppLayout {
     Div appBarElements;
     @Id("content")
     Div content;
+    @Id("toggle")
+    PaperIconButton paperIconButton;
     private Component title = new Span("");
     protected final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
 
@@ -130,7 +133,7 @@ public class Top extends AppLayout {
 
     @Override
     public void setBackNavigation(boolean visible) {
-        //paperIconButton.setIcon(visible ? "arrow-back" : "menu");
+        paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
 
     @Override

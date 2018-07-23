@@ -16,7 +16,7 @@ public class DefaultNotification implements Notification {
     private String description;
     private String image;
     private Priority priority = Priority.MEDIUM;
-    private boolean isSticky = true;
+    private boolean isSticky = false;
     private boolean isRead = false;
     private LocalDateTime creationTime = LocalDateTime.now();
 

@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (min-width: 640px) {
                 /*responsive*/
-                #toggle {
+                #toggle[icon="menu"] {
                     display: none;
                 }
 
@@ -146,12 +146,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             onclick() {
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                if (!drawer.persistent) {
-                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
-                        drawer.toggle();
-                    } else {
-                        window.history.back();
-                    }
+                if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                    drawer.toggle();
+                } else {
+                    window.history.back();
                 }
             }
 

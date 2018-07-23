@@ -39,11 +39,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --iron-icon-fill-color: #727272;
             }
 
+            #toggle[icon="menu"] {
+                display: none;
+            }
+
         </style>
         <app-header-layout has-scrolling-region="">
             <app-header slot="header" condenses reveals
                         style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar style="transform: translate3d(0px, 0px, 0px);">
+                    <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
                 </app-toolbar>
             </app-header>
@@ -55,6 +60,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         class AppLayoutTop extends Polymer.Element {
             static get is() {
                 return 'app-layout-top'
+            }
+
+            onclick() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                    drawer.toggle();
+                } else {
+                    window.history.back();
+                }
             }
 
             closeIfNotPersistent() {

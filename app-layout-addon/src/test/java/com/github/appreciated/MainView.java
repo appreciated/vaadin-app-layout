@@ -124,7 +124,7 @@ public class MainView extends AppLayoutRouterLayout {
     private void addNotification(Priority priority) {
         getUI().ifPresent(ui -> ui.accessSynchronously(() -> {
             badge.increase();
-            notificationHolder.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description" + badge.getCount(), priority));
+            notificationHolder.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description ..............................................." + badge.getCount(), priority));
         }));
     }
 

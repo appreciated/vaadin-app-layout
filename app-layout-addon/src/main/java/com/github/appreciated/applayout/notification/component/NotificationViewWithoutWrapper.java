@@ -37,7 +37,10 @@ public class NotificationViewWithoutWrapper extends Div {
         description.setWidth("100%");
         description.getElement().getStyle()
                 .set("font-size", "15px")
-                .set("font-weight", "400");
+                .set("font-weight", "400")
+                .set("white-space", "nowrap")
+                .set("text-overflow", "ellipsis")
+                .set("overflow", "hidden");
 
         HorizontalLayout descriptionWrapper = new HorizontalLayout(description);
 
