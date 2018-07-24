@@ -2,6 +2,7 @@ package com.github.appreciated.applayout.webcomponents.appmenu;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
@@ -11,7 +12,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 
 @Tag("app-submenu")
 @HtmlImport("bower_components/app-menu/app-submenu.html")
-public class AppSubmenu extends Component implements HasComponents {
+public class AppSubmenu extends Component implements HasComponents, HasStyle {
 
     private final AppMenu menu;
     private final AppMenuIconItem item;

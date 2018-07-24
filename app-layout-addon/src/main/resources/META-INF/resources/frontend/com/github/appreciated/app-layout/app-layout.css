@@ -32,6 +32,8 @@
   --app-bar-height: var(--app-layout-bar-height);
   --paper-drawer-title-background-color: #fafafa;
   --paper-drawer-title-color: #000;
+  --app-menu-background-color: rgba(0, 0, 0, 0) !important;
+  --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
 }
 
 /*# sourceMappingURL=app-layout.css.map */

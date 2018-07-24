@@ -96,4 +96,6 @@ $al-menu-submenu-max-height: 999px !default;
   --app-bar-height: var(--app-layout-bar-height);
   --paper-drawer-title-background-color: #{$al-background-color};
   --paper-drawer-title-color: #{color-contrast($al-background-color)};
+  --app-menu-background-color: rgba(0, 0, 0, 0) !important;
+  --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
 }

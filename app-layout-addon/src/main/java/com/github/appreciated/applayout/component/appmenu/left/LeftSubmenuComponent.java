@@ -24,6 +24,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
         getItem().getElement().getStyle().set("white-space", "nowrap");
         getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
         getToggleWrapper().getElement().getStyle().set("position", "relative");
+        getStyle().set("background", "rgba(0,0,0,0.04)");
         submenuElements.forEach(element1 -> getMenu().add(element1));
         this.title = title;
         this.icon = icon;
