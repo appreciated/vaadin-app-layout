@@ -115,6 +115,7 @@ public class MainView extends AppLayoutRouterLayout {
                 for (int i = 0; i < 3; i++) {
                     //Thread.sleep(5000);
                     addNotification(MEDIUM);
+                    badge.increase();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

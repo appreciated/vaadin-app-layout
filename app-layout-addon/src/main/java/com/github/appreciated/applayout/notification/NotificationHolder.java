@@ -20,7 +20,7 @@ public abstract class NotificationHolder<T extends Notification> {
     private ArrayList<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
     private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
-    private HasText text;
+    private List<HasText> badgeHolderComponents = new ArrayList<>();
 
     public NotificationHolder(NotificationClickListener<T> listener) {
         Objects.requireNonNull(listener);
@@ -138,22 +138,26 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     public void bind(HasText text) {
-        setBadgeComponent(text);
+        addBadgeHolderComponent(text);
         addNotificationsChangeListener(new NotificationsChangeListener() {
             @Override
             public void onNotificationChanges(NotificationHolder holder) {
-                updateBadgeCaption();
+                updateBadgeCaptions();
             }
         });
     }
 
-    private void setBadgeComponent(HasText text) {
-        this.text = text;
-        updateBadgeCaption();
+    private void addBadgeHolderComponent(HasText text) {
+        this.badgeHolderComponents.add(text);
+        updateBadgeCaption(text);
     }
 
-    private void updateBadgeCaption() {
-        if (text != null) {
+    private void updateBadgeCaptions() {
+        badgeHolderComponents.forEach(hasText -> updateBadgeCaption(hasText));
+    }
+
+    private void updateBadgeCaption(HasText hasText) {
+        if (hasText != null) {
             int unread = getUnreadNotifications();
             String value;
             if (unread < 1) {
@@ -163,9 +167,9 @@ public abstract class NotificationHolder<T extends Notification> {
             } else {
                 value = "9+";
             }
-            text.setText(value);
-            if (text instanceof Component) {
-                ((Component) text).setVisible(unread > 0);
+            hasText.setText(value);
+            if (hasText instanceof Component) {
+                ((Component) hasText).setVisible(unread > 0);
             }
         }
     }
