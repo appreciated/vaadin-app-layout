@@ -20,6 +20,7 @@
 	<modules>
 		<module>app-layout-addon</module>
         <module>app-layout-examples</module>
+        <module>app-layout-ui-tests</module>
 	</modules>
 
 	<profiles>

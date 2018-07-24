@@ -23,3 +23,5 @@
 /app-layout-addon/src/main/resources/sass/app-layout/sass_cache/
 !/app-layout-demo/src/main/webapp/addon/com/github/appreciated/app-layout/app-layout.css
 !/app-layout-addon/src/main/resources/META-INF/resources/frontend/com/github/appreciated/app-layout/app-layout.css
+/app-layout-ui-tests/build/
+/app-layout-ui-tests/selenium/

@@ -57,12 +57,12 @@
             <artifactId>vaadin-core</artifactId>
         </dependency>
 
-        <!-- Added to provide logging output as Flow uses -->
-        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <!-- Added to provide logging output as Flow uses
+        the unbound SLF4J no-operation (NOP) logger implementation
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>javax.servlet</groupId>
