@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app-header {
                 right: 0px !important;
             }
+
             app-toolbar {
                 height: var(--app-bar-height);
                 background: var(--app-layout-bar-background-color);
@@ -77,6 +78,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             @media only screen and (min-width: 640px) {
                 #drawerLayout.small {
                     --app-drawer-width: 70px;
+                    --app-layout-badge-width: var(--app-layout-badge-small-width);
+                    --app-layout-badge-height: var(--app-layout-badge-small-height);
+                    --app-layout-badge-top: var(--app-layout-badge-small-top);
+                    --app-layout-badge-right: var(--app-layout-badge-small-right);
+                    --app-layout-badge-color: transparent;
                 }
 
                 #drawerLayout.small #menu-header-title, #drawerLayout.small #menu-header-subtitle {

@@ -34,6 +34,15 @@
   --paper-drawer-title-color: #000;
   --app-menu-background-color: rgba(0, 0, 0, 0) !important;
   --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
+  --app-layout-badge-width: 25px;
+  --app-layout-badge-height: 25px;
+  --app-layout-badge-top: 0px;
+  --app-layout-badge-right: 0px;
+  --app-layout-badge-color: var(--app-layout-bar-font-color);
+  --app-layout-badge-small-width: 5px;
+  --app-layout-badge-small-height: 5px;
+  --app-layout-badge-small-top: -5px;
+  --app-layout-badge-small-right: -5px;
 }
 
 /*# sourceMappingURL=app-layout.css.map */
