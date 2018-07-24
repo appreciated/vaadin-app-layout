@@ -1,5 +1,6 @@
 package com.github.appreciated.applayout.notification;
 
+import com.github.appreciated.applayout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.applayout.notification.entitiy.Notification;
 
 import java.util.Collection;
@@ -10,20 +11,25 @@ import java.util.Collection;
 
 public class DefaultNotificationHolder extends NotificationHolder<Notification> {
 
-    public DefaultNotificationHolder() {
-        setComponentProvider(new DefaultNotificationComponentFactory());
+    public DefaultNotificationHolder(NotificationClickListener<Notification> listener) {
+        super(listener);
     }
 
-    public DefaultNotificationHolder(Notification... notifications) {
-        super(notifications);
+    public DefaultNotificationHolder(NotificationClickListener<Notification> listener, Notification... notifications) {
+        super(listener, notifications);
     }
 
-    public DefaultNotificationHolder(Collection<Notification> notifications) {
-        super(notifications);
+    public DefaultNotificationHolder(NotificationClickListener<Notification> listener, Collection<Notification> notifications) {
+        super(listener, notifications);
     }
 
     @Override
     public void addNotification(Notification notification) {
         super.addNotification(notification);
+    }
+
+    @Override
+    PairComponentFactory<NotificationHolder, Notification> getComponentProvider() {
+        return new DefaultNotificationComponentFactory();
     }
 }

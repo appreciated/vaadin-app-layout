@@ -41,6 +41,11 @@ public class DefaultNotification implements Notification {
         }
     }
 
+    public DefaultNotification(String title, String description, Priority priority, boolean isSticky) {
+        this(title, description, priority);
+        this.isSticky = isSticky;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -116,9 +121,12 @@ public class DefaultNotification implements Notification {
         if (otherNotification == this) {
             return 0;
         }
-
-        if (this.getPriority() != otherNotification.getPriority()) {
+        if (this.isSticky() != otherNotification.isSticky()) {
+            return !isSticky() ? -1 : 1;
+        } else if (this.getPriority() != otherNotification.getPriority()) {
             return this.getPriority().getValue().compareTo(otherNotification.getPriority().getValue());
+        } else if (this.isRead() != otherNotification.isRead()) {
+            return !isRead() ? -1 : 1;
         } else {
             return this.getCreationTime().compareTo(otherNotification.getCreationTime());
         }

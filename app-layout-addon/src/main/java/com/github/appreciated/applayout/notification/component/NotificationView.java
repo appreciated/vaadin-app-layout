@@ -61,8 +61,7 @@ public class NotificationView extends PaperCard {
         add(headerLine);
         add(descriptionWrapper);
         if (clickEvent != null) {
-            getElement().addEventListener("click", domEvent -> {
-            });
+            getElement().addEventListener("click", domEvent -> clickEvent.handleEvent(domEvent));
         }
         getElement().getClassList().add(info.getStyle());
         if (clickEvent != null) {

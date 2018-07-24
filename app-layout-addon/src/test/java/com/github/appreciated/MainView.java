@@ -48,7 +48,7 @@ public class MainView extends AppLayoutRouterLayout {
     public AppLayout getAppLayout() {
         if (variant == null) {
             variant = Behaviour.TOP;
-            notificationHolder = new DefaultNotificationHolder();
+            notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
             badge = new DefaultBadgeHolder();
         }
         reloadNotifications();

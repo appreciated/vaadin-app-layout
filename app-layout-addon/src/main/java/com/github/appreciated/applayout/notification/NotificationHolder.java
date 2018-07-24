@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * This Class is a controller for multiple {@link Notification} instances
  */
 
-public class NotificationHolder<T extends Notification> {
+public abstract class NotificationHolder<T extends Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
@@ -20,16 +20,22 @@ public class NotificationHolder<T extends Notification> {
     private ArrayList<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
     private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
+    private HasText text;
 
-    public NotificationHolder() {
+    public NotificationHolder(NotificationClickListener<T> listener) {
+        Objects.requireNonNull(listener);
+        addClickListener(listener);
+        setComponentProvider(getComponentProvider());
     }
 
-    public NotificationHolder(T... notifications) {
+    public NotificationHolder(NotificationClickListener<T> listener, T... notifications) {
+        this(listener);
         Arrays.stream(notifications).forEach(notification -> this.notifications.add(notification));
     }
 
-    public NotificationHolder(Collection<T> notifications) {
-        this.notifications.addAll(notifications);
+    public NotificationHolder(NotificationClickListener<T> listener, Collection<T> notifications) {
+        this(listener);
+        notifications.addAll(notifications);
     }
 
     public void setComponentProvider(PairComponentFactory<NotificationHolder, T> componentProvider) {
@@ -76,7 +82,7 @@ public class NotificationHolder<T extends Notification> {
     }
 
     public Component[] getNotificationViews(boolean showAll) {
-        List<T> components = getNotificationViews();
+        List<T> components = getNotifications();
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
@@ -85,12 +91,7 @@ public class NotificationHolder<T extends Notification> {
         return list.toArray(new Component[]{});
     }
 
-    public ArrayList<T> getNotificationViews() {
-        Collections.sort(notifications, Comparable::compareTo);
-        return notifications;
-    }
-
-    public ArrayList<T> getNotifications() {
+    public List<T> getNotifications() {
         Collections.sort(notifications, Comparable::compareTo);
         return notifications;
     }
@@ -113,6 +114,10 @@ public class NotificationHolder<T extends Notification> {
     }
 
     private void notifyClickListeners(T info) {
+        info.setRead(true);
+        if (!info.isSticky()) {
+            removeNotification(info);
+        }
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
     }
 
@@ -133,45 +138,49 @@ public class NotificationHolder<T extends Notification> {
     }
 
     public void bind(HasText text) {
-        setBadgeCaption(text);
+        setBadgeComponent(text);
         addNotificationsChangeListener(new NotificationsChangeListener() {
             @Override
             public void onNotificationChanges(NotificationHolder holder) {
-
-            }
-
-            @Override
-            public void onNotificationAdded(Notification notification) {
-                setBadgeCaption(text);
-            }
-
-            @Override
-            public void onNotificationRemoved(Notification notification) {
-                setBadgeCaption(text);
+                updateBadgeCaption();
             }
         });
     }
 
-    private void setBadgeCaption(HasText text) {
-        int unread = NotificationHolder.this.getUnreadNotifications();
-        if (unread < 1) {
-            text.setText(String.valueOf(0));
-        } else if (unread < 10) {
-            text.setText(String.valueOf(unread));
-        } else {
-            text.setText("9+");
-        }
-        if (text instanceof Component) {
-            ((Component) text).setVisible(unread > 0);
+    private void setBadgeComponent(HasText text) {
+        this.text = text;
+        updateBadgeCaption();
+    }
+
+    private void updateBadgeCaption() {
+        if (text != null) {
+            int unread = getUnreadNotifications();
+            String value;
+            if (unread < 1) {
+                value = String.valueOf(0);
+            } else if (unread < 10) {
+                value = String.valueOf(unread);
+            } else {
+                value = "9+";
+            }
+            text.setText(value);
+            if (text instanceof Component) {
+                ((Component) text).setVisible(unread > 0);
+            }
         }
     }
 
+    abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+
     public interface NotificationsChangeListener {
-        void onNotificationChanges(NotificationHolder holder);
+        default void onNotificationChanges(NotificationHolder holder) {
+        }
 
-        void onNotificationAdded(Notification notification);
+        default void onNotificationAdded(Notification notification) {
+        }
 
-        void onNotificationRemoved(Notification notification);
+        default void onNotificationRemoved(Notification notification) {
+        }
     }
 
     public interface NotificationClickListener<T> {
