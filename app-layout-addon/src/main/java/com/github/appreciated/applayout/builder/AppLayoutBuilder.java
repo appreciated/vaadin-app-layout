@@ -5,17 +5,15 @@ import com.github.appreciated.applayout.behaviour.Behaviour;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.applayout.design.AppLayoutDesign;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Span;
 
 public class AppLayoutBuilder implements ComponentBuilder {
 
-    private Component menu;
-    private Component appBar;
     private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
-    private String title;
-    private Component appBarIconComponent;
     private AppLayout instance;
-    private HasElement titleComponent;
+    private Component titleComponent;
+    private Component imageComponent;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -68,14 +66,12 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @return
      */
     public AppLayout build() {
-        if (titleComponent == null) {
-            instance.setTitle(title);
-        } else {
-            instance.setTitleElement(titleComponent);
+        if (titleComponent != null) {
+            instance.setTitleComponent(titleComponent);
         }
         instance.setDesign(design);
-        if (appBarIconComponent != null) {
-            instance.addAppBarIcon(appBarIconComponent);
+        if (imageComponent != null) {
+            instance.setIconComponent(imageComponent);
         }
         return instance;
 
@@ -100,10 +96,12 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Span span = new Span(title);
+        span.getStyle().set("white-space", "nowrap");
+        setTitleComponent(span);
     }
 
-    public void setTitleComponent(HasElement titleComponent) {
+    public void setTitleComponent(Component titleComponent) {
         this.titleComponent = titleComponent;
     }
 
@@ -116,5 +114,16 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
 
+    public AppLayoutBuilder withIcon(String url) {
+        Image image = new Image(url, "icon");
+        image.setWidth("46px");
+        image.setHeight("46px");
+        return withIconComponent(image);
+    }
+
+    public AppLayoutBuilder withIconComponent(Component image) {
+        this.imageComponent = image;
+        return this;
+    }
 }
 

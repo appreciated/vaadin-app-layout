@@ -44,10 +44,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: calc(var(--app-bar-height) * 2);
                 top: calc(var(--app-bar-height) / -2);
                 position: relative;
+                margin-left: 0px;
+                transition: margin-left ease 0.5s;
             }
 
-            #toggle[icon="menu"] {
-                display: none;
+            #app-bar-elements.show-back-arrow {
+                margin-left: 48px;
+            }
+
+            #toggle {
+                opacity: 0.0;
+                transition: opacity ease 0.3s;
+            }
+
+            #toggle.show-back-arrow {
+                opacity: 1.0;
             }
 
         </style>

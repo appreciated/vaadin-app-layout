@@ -10,9 +10,7 @@ import com.github.appreciated.applayout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.applayout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -38,8 +36,8 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private Component title = new Span("");
-    private final HorizontalLayout titleWrapper = new HorizontalLayout(title);
+    private final HorizontalLayout titleWrapper = new HorizontalLayout();
+    private Component title;
     private NavigationElementContainer appMenuContainer;
 
     public AbstractLeftAppLayoutBase() {
@@ -56,8 +54,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
-
-        ((Span) this.title).getStyle().set("white-space", "nowrap");
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -86,18 +82,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         return title;
     }
 
-    @Override
-    public void setTitle(String title) {
-        if (this.title instanceof HasText) {
-            ((HasText) this.title).setText(title);
-        }
-    }
-
-    @Override
-    public void setTitleElement(HasElement titleComponent) {
-        if (this.title instanceof HasText) {
-            ((HasText) this.title).setText("test1234");
-        }
+    public void setIconComponent(Component appBarIconComponent) {
+        titleWrapper.getElement().insertChild(0, appBarIconComponent.getElement());
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override
@@ -134,19 +121,14 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         return title;
     }
 
-    public void setTitleComponent(Component compoent) {
-        titleWrapper.replace(this.title, compoent);
-        this.title = compoent;
+    public void setTitleComponent(Component component) {
+        titleWrapper.replace(this.title, component);
+        this.title = component;
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     public HorizontalLayout getTitleWrapper() {
         return titleWrapper;
-    }
-
-    public void addAppBarIcon(Component appBarIconComponent) {
-        titleWrapper.add(appBarIconComponent);
-        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override

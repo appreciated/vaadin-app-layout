@@ -6,7 +6,6 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 
 public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
 
-
     public void toggleDrawer() {
         getDrawer().getElement().callFunction("toggle");
     }

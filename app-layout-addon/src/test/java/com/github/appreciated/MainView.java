@@ -47,7 +47,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AppLayout getAppLayout() {
         if (variant == null) {
-            variant = Behaviour.TOP;
+            variant = Behaviour.LEFT_RESPONSIVE;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
             badge = new DefaultBadgeHolder();
         }
@@ -58,11 +58,13 @@ public class MainView extends AppLayoutRouterLayout {
             notificationHolder.bind(home.getBadge());
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
+                    .withIcon("frontend/images/logo.png")
                     .withAppBar(
                             AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notificationHolder)).build())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(
                             LeftAppMenuBuilder.get()
+
                                     .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                                     .add(home)

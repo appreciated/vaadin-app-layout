@@ -17,17 +17,15 @@ public interface AppLayoutElementBase {
 
     void setDesign(AppLayoutDesign design);
 
-    HasElement getTitleComponent();
+    Component getTitleComponent();
 
     AppDrawer getDrawer();
 
-    void setTitle(String title);
-
-    void setTitleElement(HasElement titleComponent);
+    void setTitleComponent(Component titleComponent);
 
     HorizontalLayout getTitleWrapper();
 
-    void addAppBarIcon(Component appBarIconComponent);
+    void setIconComponent(Component appBarIconComponent);
 
     void setAppLayoutContent(HasElement content);
 

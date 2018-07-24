@@ -11,7 +11,6 @@ import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -46,8 +45,8 @@ public class Top extends AppLayout {
     Div content;
     @Id("toggle")
     PaperIconButton paperIconButton;
-    private Component title = new Span("");
-    protected final HorizontalLayout titleWrapper = new HorizontalLayout(new HorizontalLayout(title));
+    protected final HorizontalLayout titleWrapper = new HorizontalLayout();
+    private Component title;
 
     public Top() {
         contentPanel.setSizeFull();
@@ -65,7 +64,6 @@ public class Top extends AppLayout {
         appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        ((Span) this.title).getStyle().set("white-space", "nowrap");
     }
 
     @Override
@@ -107,28 +105,24 @@ public class Top extends AppLayout {
     }
 
     @Override
-    public void setTitleElement(HasElement titleComponent) {
-
-    }
-
-    @Override
     public Component getTitleComponent() {
         return title;
     }
 
     public void setTitleComponent(Component component) {
-        titleWrapper.replace(this.title, component);
+        titleWrapper.add(new HorizontalLayout(component));
         this.title = component;
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
-
 
     public HorizontalLayout getTitleWrapper() {
         return titleWrapper;
     }
 
 
-    public void addAppBarIcon(Component appBarIconComponent) {
-        titleWrapper.add(appBarIconComponent);
+    public void setIconComponent(Component appBarIconComponent) {
+        titleWrapper.getElement().insertChild(0, appBarIconComponent.getElement());
+        titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
     @Override
