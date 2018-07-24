@@ -45,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 top: calc(var(--app-bar-height) / -2);
                 position: relative;
                 margin-left: 0px;
-                transition: margin-left ease 0.5s;
+                transition: margin-left ease 0.4s;
             }
 
             #app-bar-elements.show-back-arrow {
@@ -54,13 +54,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 opacity: 0.0;
-                transition: opacity ease 0.3s;
+                transition: opacity ease 0.2s;
             }
 
             #toggle.show-back-arrow {
                 opacity: 1.0;
             }
-
         </style>
         <app-header-layout has-scrolling-region="">
             <app-header slot="header" condenses reveals
@@ -95,7 +94,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             }
         }
-
         customElements.define(AppLayoutTopLarge.is, AppLayoutTopLarge);
     </script>
 </dom-module>
