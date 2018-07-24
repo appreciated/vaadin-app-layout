@@ -59,17 +59,20 @@ public abstract class NotificationHolder<T extends Notification> {
         notifications.add(notification);
         notifyListeners();
         notifyAddListeners(notification);
+        updateBadgeCaptions();
     }
 
     public void removeNotification(T notification) {
         notifications.remove(notification);
         notifyListeners();
         notifyRemoveListeners(notification);
+        updateBadgeCaptions();
     }
 
     public void clearNotifications() {
         notifications.clear();
         notifyListeners();
+        updateBadgeCaptions();
     }
 
     public void addNotificationsChangeListener(NotificationsChangeListener listener) {
@@ -139,12 +142,7 @@ public abstract class NotificationHolder<T extends Notification> {
 
     public void bind(HasText text) {
         addBadgeHolderComponent(text);
-        addNotificationsChangeListener(new NotificationsChangeListener() {
-            @Override
-            public void onNotificationChanges(NotificationHolder holder) {
-                updateBadgeCaptions();
-            }
-        });
+        updateBadgeCaptions();
     }
 
     private void addBadgeHolderComponent(HasText text) {

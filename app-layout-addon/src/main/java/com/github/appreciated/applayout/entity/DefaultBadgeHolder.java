@@ -1,6 +1,10 @@
 package com.github.appreciated.applayout.entity;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasText;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This Class is the controller of a Component that can display a simple badge containing numbers also it allows the user
@@ -10,6 +14,8 @@ public class DefaultBadgeHolder {
 
     private int count;
     private ArrayList<BadgeListener> listeners = new ArrayList<>();
+
+    private List<HasText> badgeHolderComponents = new ArrayList<>();
 
     public DefaultBadgeHolder() {
 
@@ -22,6 +28,7 @@ public class DefaultBadgeHolder {
     public void increase() {
         count++;
         listeners.forEach(listener -> listener.onChange(this));
+        updateBadgeCaptions();
     }
 
     public void decrease() {
@@ -29,6 +36,7 @@ public class DefaultBadgeHolder {
             count--;
         }
         listeners.forEach(listener -> listener.onChange(this));
+        updateBadgeCaptions();
     }
 
     public int getCount() {
@@ -38,6 +46,7 @@ public class DefaultBadgeHolder {
     public void setCount(int count) {
         this.count = count;
         listeners.forEach(listener -> listener.onChange(this));
+        updateBadgeCaptions();
     }
 
     public void clearCount() {
@@ -46,6 +55,28 @@ public class DefaultBadgeHolder {
 
     public void addListener(BadgeListener listener) {
         listeners.add(listener);
+    }
+
+    public void bind(HasText text) {
+        addBadgeHolderComponent(text);
+        if (text instanceof Component) {
+            ((Component) text).setVisible(true);
+        }
+    }
+
+    private void addBadgeHolderComponent(HasText text) {
+        this.badgeHolderComponents.add(text);
+        updateBadgeCaption(text);
+    }
+
+    private void updateBadgeCaptions() {
+        badgeHolderComponents.forEach(hasText -> updateBadgeCaption(hasText));
+    }
+
+    private void updateBadgeCaption(HasText hasText) {
+        if (hasText != null) {
+            hasText.setText(String.valueOf(getCount()));
+        }
     }
 
     public interface BadgeListener {

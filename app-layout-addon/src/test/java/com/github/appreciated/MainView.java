@@ -41,7 +41,7 @@ import static com.github.appreciated.applayout.notification.entitiy.Priority.MED
 public class MainView extends AppLayoutRouterLayout {
     private Behaviour variant;
     DefaultNotificationHolder notificationHolder;
-    DefaultBadgeHolder badge;
+    DefaultBadgeHolder badgeHolder;
     private Thread currentThread;
 
     @Override
@@ -49,13 +49,16 @@ public class MainView extends AppLayoutRouterLayout {
         if (variant == null) {
             variant = Behaviour.LEFT_RESPONSIVE;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-            badge = new DefaultBadgeHolder();
+            badgeHolder = new DefaultBadgeHolder();
         }
         reloadNotifications();
 
         if (!variant.isTop()) {
             LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);
+            LeftNavigationComponent menu = new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View9.class);
+
             notificationHolder.bind(home.getBadge());
+            badgeHolder.bind(menu.getBadge());
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withIcon("frontend/images/logo.png")
@@ -64,7 +67,6 @@ public class MainView extends AppLayoutRouterLayout {
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(
                             LeftAppMenuBuilder.get()
-
                                     .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                                     .add(home)
@@ -81,7 +83,7 @@ public class MainView extends AppLayoutRouterLayout {
                                             .add(new LeftNavigationComponent("Contact2", VaadinIcon.CONNECT.create(), View7.class))
                                             .add(new LeftNavigationComponent("More2", VaadinIcon.COG.create(), View8.class))
                                             .build())
-                                    .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View9.class))
+                                    .add(menu)
                                     .addToSection(new LeftClickableComponent("Set Behaviour FOOTER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), FOOTER)
                                     .build()
                     ).build();
@@ -107,15 +109,18 @@ public class MainView extends AppLayoutRouterLayout {
         if (currentThread != null && !currentThread.isInterrupted()) {
             currentThread.interrupt();
         }
-        badge.clearCount();
+        badgeHolder.clearCount();
         notificationHolder.clearNotifications();
         currentThread = new Thread(() -> {
             try {
                 Thread.sleep(1000);
                 for (int i = 0; i < 3; i++) {
                     //Thread.sleep(5000);
-                    addNotification(MEDIUM);
-                    badge.increase();
+                    getUI().ifPresent(ui -> ui.access(() -> {
+                        addNotification(MEDIUM);
+                        badgeHolder.increase();
+                        badgeHolder.increase();
+                    }));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -125,10 +130,7 @@ public class MainView extends AppLayoutRouterLayout {
     }
 
     private void addNotification(Priority priority) {
-        getUI().ifPresent(ui -> ui.accessSynchronously(() -> {
-            badge.increase();
-            notificationHolder.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description ..............................................." + badge.getCount(), priority));
-        }));
+        notificationHolder.addNotification(new DefaultNotification("Title" + badgeHolder.getCount(), "Description ..............................................." + badgeHolder.getCount(), priority));
     }
 
     private void setDrawerVariant(Behaviour variant) {
