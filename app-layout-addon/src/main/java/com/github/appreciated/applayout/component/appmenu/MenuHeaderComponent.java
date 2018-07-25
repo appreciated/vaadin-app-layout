@@ -24,7 +24,6 @@ public class MenuHeaderComponent extends VerticalLayout {
             subtitleLabel.setId("menu-header-subtitle");
             add(subtitleLabel);
         }
-
     }
 
 }
