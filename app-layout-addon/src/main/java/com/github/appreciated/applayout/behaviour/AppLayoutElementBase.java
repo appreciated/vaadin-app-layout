@@ -11,7 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
  * The interface every AppLayout Variant is required to be implemented to allow any {@link com.github.appreciated.applayout.builder.AppLayoutBuilder} to build it.
  */
 
-public interface AppLayoutElementBase {
+public interface AppLayoutElementBase extends NavigationElementContainer {
 
     String getStyleName();
 
@@ -30,8 +30,6 @@ public interface AppLayoutElementBase {
     void setAppLayoutContent(HasElement content);
 
     void setBackNavigation(boolean visible);
-
-    void setActiveElement(HasElement content);
 
     void setAppBar(Component component);
 
