@@ -31,12 +31,13 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
      */
     public AppSubmenu(String sectionName, Icon icon) {
         toggleWrapper = new Div();
-        toggleWrapper.getElement().getClassList().add("app-menu-item");
+        toggleWrapper.getStyle().set("--expand-icon-fill-color", "var(--iron-icon-fill-color, none)");
+        toggleWrapper.getClassNames().add("app-menu-item");
         toggleWrapper.getElement().setAttribute("slot", "submenu-trigger");
 
         item = new AppMenuIconItem(sectionName, icon.getElement().getAttribute("icon"));
         ironIcon = new IronIcon("icons", "expand-more");
-
+        ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");
         toggleWrapper.add(item, ironIcon);
         menu = new AppMenu();
         menu.getElement().setAttribute("slot", "submenu-content");

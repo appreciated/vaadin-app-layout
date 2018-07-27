@@ -93,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
 
                 app-menu-icon-item {
-                    transition: color 0.4s;
+                    transition: color 0.2s ease;
                 }
             }
 
@@ -119,6 +119,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 #drawerLayout app-menu-icon-item {
                     color: transparent;
+                }
+
+                #drawerLayout * {
+                    --expand-icon-fill-color: transparent !important;
                 }
             }
         </style>
