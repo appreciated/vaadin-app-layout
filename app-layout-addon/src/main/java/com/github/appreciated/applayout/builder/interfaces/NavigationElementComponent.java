@@ -9,9 +9,9 @@ import com.vaadin.flow.component.HasElement;
  * This is especially important to highlight navigation elements if the view they are related with was navigated to,
  * without the elements knowledge (f.e. loading the page with a nested url).
  */
-public interface NavigationElementComponent {
+public interface NavigationElementComponent extends NavigationElement {
 
-    boolean setActiveNavigationElementWithViewClass(HasElement element);
+    Class<? extends HasElement> getNavigationElement();
 
     Component getComponent();
 }

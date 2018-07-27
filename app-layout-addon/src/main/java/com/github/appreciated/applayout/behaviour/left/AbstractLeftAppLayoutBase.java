@@ -137,8 +137,17 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setActiveElement(HasElement content) {
-        boolean res = appMenuContainer.setActiveNavigationElementWithViewClass(content);
-        return;
+    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+        return appMenuContainer.setActiveNavigationComponent(element);
+    }
+
+    @Override
+    public Class<? extends HasElement> getClosestNavigationElement(Class<? extends HasElement> element) {
+        return appMenuContainer.getClosestNavigationElement(element);
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }

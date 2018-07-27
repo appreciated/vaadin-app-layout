@@ -43,8 +43,13 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
     }
 
     @Override
-    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
-        return setActiveNavigationElementWithViewClass(getMenu().getChildren(), element);
+    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+        return setActiveNavigationComponent(getMenu().getChildren(), element);
+    }
+
+    @Override
+    public Class<? extends HasElement> getClosestNavigationElement(Class<? extends HasElement> element) {
+        return getClosestNavigationElement(getMenu().getChildren(), element);
     }
 
     @Override

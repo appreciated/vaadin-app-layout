@@ -131,8 +131,13 @@ public class Top extends AppLayout {
     }
 
     @Override
-    public void setActiveElement(HasElement content) {
-        navigationElementContainer.setActiveNavigationElementWithViewClass(content);
+    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+        return navigationElementContainer.setActiveNavigationComponent(element);
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 
     @Override

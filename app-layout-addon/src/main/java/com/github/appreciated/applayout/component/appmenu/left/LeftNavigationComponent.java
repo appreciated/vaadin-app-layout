@@ -2,7 +2,7 @@ package com.github.appreciated.applayout.component.appmenu.left;
 
 import com.github.appreciated.applayout.builder.AppLayoutConfiguration;
 import com.github.appreciated.applayout.builder.interfaces.Factory;
-import com.github.appreciated.applayout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.applayout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.applayout.component.appmenu.NavigationBadgeIconButton;
 import com.github.appreciated.applayout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.Component;
@@ -15,7 +15,7 @@ import com.vaadin.flow.router.Route;
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
  * on {@link LeftNavigationComponent} respectively their {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the AppLayout content view.
  */
-public class LeftNavigationComponent extends NavigationBadgeIconButton implements NavigationElementContainer {
+public class LeftNavigationComponent extends NavigationBadgeIconButton implements NavigationElementComponent {
     /**
      * The caption of this menu element
      */
@@ -115,13 +115,18 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
     }
 
     @Override
-    public boolean setActiveNavigationElementWithViewClass(HasElement element) {
-        if (getViewClassName() == element.getClass()) {
+    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+        if (getViewClassName() == element) {
             setActive();
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Class<? extends Component> getNavigationElement() {
+        return getViewClassName();
     }
 
     @Override

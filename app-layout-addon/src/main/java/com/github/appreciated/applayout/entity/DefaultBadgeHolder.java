@@ -59,9 +59,6 @@ public class DefaultBadgeHolder {
 
     public void bind(HasText text) {
         addBadgeHolderComponent(text);
-        if (text instanceof Component) {
-            ((Component) text).setVisible(true);
-        }
     }
 
     private void addBadgeHolderComponent(HasText text) {
@@ -76,6 +73,9 @@ public class DefaultBadgeHolder {
     private void updateBadgeCaption(HasText hasText) {
         if (hasText != null) {
             hasText.setText(String.valueOf(getCount()));
+            if (hasText instanceof Component) {
+                ((Component) hasText).setVisible(getCount() > 0);
+            }
         }
     }
 

@@ -146,8 +146,8 @@ public class TopLarge extends AppLayout {
     }
 
     @Override
-    public void setActiveElement(HasElement content) {
-        appMenuContainer.setActiveNavigationElementWithViewClass(content);
+    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+        return appMenuContainer.setActiveNavigationComponent(element);
     }
 
     @Override
@@ -161,6 +161,11 @@ public class TopLarge extends AppLayout {
         paperTabWrapper.removeAll();
         paperTabWrapper.add(container.getComponent());
         appMenuContainer = container;
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }
 
