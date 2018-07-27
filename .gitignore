@@ -25,3 +25,9 @@
 !/app-layout-addon/src/main/resources/META-INF/resources/frontend/com/github/appreciated/app-layout/app-layout.css
 /app-layout-ui-tests/build/
 /app-layout-ui-tests/selenium/
+/app-layout-ui-tests/src/main/webapp/frontend/es5/
+/app-layout-ui-tests/src/main/webapp/frontend/es6/
+/app-layout-ui-tests/src/test/webapp/frontend/es5/
+/app-layout-ui-tests/src/test/webapp/frontend/es6/
+/app-layout-ui-tests/src/test/webapp/frontend/bower_components/
+/app-layout-ui-tests/src/main/webapp/frontend/bower_components/
