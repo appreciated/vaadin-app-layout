@@ -31,7 +31,7 @@ public class BasicAnnotatedTest {
 
     @BeforeClass
     public static void init() {
-        System.setProperty("webdriver.chrome.driver", "selenium/bin/windows/googlechrome/64bit/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "../selenium/bin/windows/googlechrome/64bit/chromedriver.exe");
         driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(driver);
     }
