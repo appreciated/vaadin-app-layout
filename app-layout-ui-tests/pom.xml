@@ -18,7 +18,7 @@
 	</prerequisites>
 
 	<modules>
-		<module>app-layout-ui-tests-left-responsive</module>
+		<module>app-layout-ui-test-left-responsive</module>
 	</modules>
 
 	<profiles>
