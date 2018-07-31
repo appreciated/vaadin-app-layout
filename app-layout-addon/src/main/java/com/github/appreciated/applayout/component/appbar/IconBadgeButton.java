@@ -27,7 +27,7 @@ public class IconBadgeButton extends Div {
         setId("menu-btn-" + idCounter++);
         setWidth("48px");
         setHeight("48px");
-        button = new PaperIconButton(icon.name());
+        button = new PaperIconButton("vaadin:" + icon.name().toLowerCase().replace('_', '-'));
         button.getElement().getStyle()
                 .set("width", "100%")
                 .set("height", "100%");
