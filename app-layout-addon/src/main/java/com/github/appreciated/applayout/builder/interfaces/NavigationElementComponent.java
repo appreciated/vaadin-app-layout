@@ -1,6 +1,5 @@
 package com.github.appreciated.applayout.builder.interfaces;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 
 /**
@@ -13,5 +12,4 @@ public interface NavigationElementComponent extends NavigationElement {
 
     Class<? extends HasElement> getNavigationElement();
 
-    Component getComponent();
 }

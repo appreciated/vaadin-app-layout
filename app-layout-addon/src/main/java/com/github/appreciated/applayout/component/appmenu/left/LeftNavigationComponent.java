@@ -128,9 +128,4 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
     public Class<? extends Component> getNavigationElement() {
         return getViewClassName();
     }
-
-    @Override
-    public Component getComponent() {
-        return null;
-    }
 }
