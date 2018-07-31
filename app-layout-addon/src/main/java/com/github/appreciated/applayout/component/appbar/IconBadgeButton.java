@@ -7,7 +7,7 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
@@ -19,15 +19,15 @@ public class IconBadgeButton extends Div {
     private final PaperIconButton button;
     private final PaperBadge badge;
 
-    public IconBadgeButton(Icon icon) {
+    public IconBadgeButton(VaadinIcon icon) {
         this(icon, null);
     }
 
-    public IconBadgeButton(Icon icon, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
+    public IconBadgeButton(VaadinIcon icon, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
         setId("menu-btn-" + idCounter++);
         setWidth("48px");
         setHeight("48px");
-        button = new PaperIconButton(icon.getElement().getAttribute("icon"));
+        button = new PaperIconButton(icon.name());
         button.getElement().getStyle()
                 .set("width", "100%")
                 .set("height", "100%");

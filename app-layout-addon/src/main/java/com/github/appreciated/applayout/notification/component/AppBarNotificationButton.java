@@ -6,7 +6,7 @@ import com.github.appreciated.applayout.notification.entitiy.Notification;
 import com.github.appreciated.papermenubutton.HorizontalAlignment;
 import com.github.appreciated.papermenubutton.PaperMenuButton;
 import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
  * A component which opens a window containing the notifications on click closely to this component. Also showing an
@@ -16,7 +16,7 @@ import com.vaadin.flow.component.icon.Icon;
 @HtmlImport("frontend://com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
 public class AppBarNotificationButton extends PaperMenuButton {
 
-    public AppBarNotificationButton(Icon icon, NotificationHolder holder) {
+    public AppBarNotificationButton(VaadinIcon icon, NotificationHolder holder) {
         super(new IconBadgeButton(icon), new NotificationsView(holder));
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
