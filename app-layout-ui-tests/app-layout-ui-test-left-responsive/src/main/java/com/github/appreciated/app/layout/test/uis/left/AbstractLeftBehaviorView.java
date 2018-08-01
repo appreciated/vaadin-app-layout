@@ -45,7 +45,7 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
-                        AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notificationHolder)).build())
+                        AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder)).build())
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(
                         LeftAppMenuBuilder.get()

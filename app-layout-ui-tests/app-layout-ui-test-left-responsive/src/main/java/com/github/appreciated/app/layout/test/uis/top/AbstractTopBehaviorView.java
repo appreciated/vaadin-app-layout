@@ -42,7 +42,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         return AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder.get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notificationHolder))
+                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
                         .build()
                 )
                 .withDesign(AppLayoutDesign.MATERIAL)
