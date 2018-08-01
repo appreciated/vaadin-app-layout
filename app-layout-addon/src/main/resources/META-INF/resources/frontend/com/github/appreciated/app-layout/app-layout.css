@@ -34,6 +34,7 @@
   --paper-drawer-title-color: #000;
   --app-menu-background-color: rgba(0, 0, 0, 0) !important;
   --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
+    --app-menu-color: #727272;
   --app-layout-badge-width: 25px;
   --app-layout-badge-height: 25px;
   --app-layout-badge-top: 0px;
