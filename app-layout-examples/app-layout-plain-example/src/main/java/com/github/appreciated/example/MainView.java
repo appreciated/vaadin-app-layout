@@ -47,7 +47,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AppLayout getAppLayout() {
         if (variant == null) {
-            variant = Behaviour.LEFT;
+            variant = Behaviour.LEFT_HYBRID;
             notifications = new DefaultNotificationHolder(newStatus -> {
             });
             badge = new DefaultBadgeHolder();
@@ -65,6 +65,7 @@ public class MainView extends AppLayoutRouterLayout {
                                     .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                                     .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
+                                    .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                                     .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                             .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                                     .add(new LeftNavigationComponent("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class))
