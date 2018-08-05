@@ -19,7 +19,6 @@ public class GridTest extends VerticalLayout {
         for (int i = 0; i < 300; i++) {
             people.add(new Person(UUID.randomUUID().toString(), random.nextInt(), i));
         }
-        setMargin(true);
         setSpacing(true);
 
         Grid<Person> grid = getGrid();
