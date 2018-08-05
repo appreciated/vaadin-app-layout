@@ -43,8 +43,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: none;
             }
 
+            .app-bar-application-content {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                overflow: auto;
+            }
+
         </style>
-        <app-header-layout has-scrolling-region="">
+        <app-header-layout has-scrolling-region="" fullbleed>
             <app-header slot="header" condenses reveals
                         style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar style="transform: translate3d(0px, 0px, 0px);">

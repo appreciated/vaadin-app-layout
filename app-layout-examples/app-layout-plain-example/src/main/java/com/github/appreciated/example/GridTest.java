@@ -1,6 +1,8 @@
 package com.github.appreciated.example;
 
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -14,17 +16,31 @@ public class GridTest extends VerticalLayout {
     List<Person> people = new ArrayList<>();
 
     public GridTest() {
-        setSizeFull();
         Random random = new Random();
         for (int i = 0; i < 300; i++) {
             people.add(new Person(UUID.randomUUID().toString(), random.nextInt(), i));
         }
-        setSpacing(true);
 
         Grid<Person> grid = getGrid();
+        grid.setSelectionMode(Grid.SelectionMode.MULTI);
         grid.setSizeFull();
-        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
-        add(grid);
+
+        HorizontalLayout gridWrapper = new HorizontalLayout(grid);
+        gridWrapper.setMargin(false);
+        gridWrapper.setPadding(false);
+        gridWrapper.setSpacing(false);
+        gridWrapper.setFlexGrow(1, grid);
+        gridWrapper.setSizeFull();
+
+
+        add(gridWrapper);
+        setMargin(false);
+        setPadding(false);
+        setSpacing(false);
+        setAlignItems(Alignment.STRETCH);
+        setFlexGrow(1, gridWrapper);
+        setSizeFull();
+
     }
 
     private Grid<Person> getGrid() {
