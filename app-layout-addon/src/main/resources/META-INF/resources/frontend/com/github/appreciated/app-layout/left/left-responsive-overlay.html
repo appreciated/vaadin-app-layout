@@ -39,6 +39,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
             */
 
+            .app-bar-application-content {
+                width: 100%;
+                height: 100%;
+                padding-top: 64px;
+                box-sizing: border-box;
+                overflow: auto;
+            }
+
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
@@ -66,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
         </style>
-        <app-drawer-layout id="drawerLayout">
+        <app-drawer-layout id="drawerLayout" fullbleed>
             <app-header-layout id="layout-wrapper">
                 <app-header fixed slot="header">
                     <app-toolbar style="height: var(--app-bar-height);">

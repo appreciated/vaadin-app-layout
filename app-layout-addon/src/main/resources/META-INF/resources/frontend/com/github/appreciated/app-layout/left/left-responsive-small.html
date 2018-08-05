@@ -72,6 +72,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 overflow-y: auto;
             }
 
+            .app-bar-application-content {
+                width: 100%;
+                height: 100%;
+                padding-top: 64px;
+                box-sizing: border-box;
+                overflow: auto;
+            }
+
             #toggle {
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
@@ -123,14 +131,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 /* small */
             }
         </style>
-        <app-header-layout id="layout-wrapper">
+        <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed slot="header">
                 <app-toolbar style="height: var(--app-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawerLayout">
+            <app-drawer-layout id="drawerLayout" fullbleed>
                 <app-drawer id="drawer" slot="drawer" swipe-open>
                     <div class="drawer-content" id="menu-elements"></div>
                 </app-drawer>

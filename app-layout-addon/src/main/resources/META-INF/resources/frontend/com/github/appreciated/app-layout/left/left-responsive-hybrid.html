@@ -92,6 +92,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
 
+            .app-bar-application-content {
+                width: 100%;
+                height: 100%;
+                padding-top: 64px;
+                box-sizing: border-box;
+                overflow: auto;
+            }
+
             @media only screen and (min-width: 641px) and (max-width: 1024px) {
                 #drawerLayout {
                     --app-drawer-width: 70px;
@@ -121,14 +129,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
         </style>
-        <app-header-layout id="layout-wrapper">
+        <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed slot="header">
                 <app-toolbar style="height: var(--app-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawerLayout">
+            <app-drawer-layout id="drawerLayout" fullbleed>
                 <app-drawer id="drawer" slot="drawer" swipe-open>
                     <div class="drawer-content" id="menu-elements"></div>
                 </app-drawer>
