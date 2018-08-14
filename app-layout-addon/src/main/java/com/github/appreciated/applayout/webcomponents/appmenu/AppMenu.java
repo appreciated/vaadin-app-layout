@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 
 @Tag("app-menu")
 @HtmlImport("bower_components/app-menu/app-menu.html")
+@HtmlImport("frontend://com/github/appreciated/app-layout/styles/custom-app-menu-shared-styles.html")
 public class AppMenu extends Component implements HasComponents, FlexComponent {
 
     private AppSubmenu subparent;

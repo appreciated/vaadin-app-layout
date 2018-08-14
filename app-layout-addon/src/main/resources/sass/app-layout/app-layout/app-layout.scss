@@ -17,6 +17,11 @@
   }
 }
 
+@function bg-opacity($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+
 $al-background-color: #fafafa !default;
 $al-font-size: 16px !default;
 $al-unit-size: round(2.3 * $al-font-size) !default;
@@ -96,9 +101,12 @@ $al-menu-submenu-max-height: 999px !default;
   --app-bar-height: var(--app-layout-bar-height);
   --paper-drawer-title-background-color: #{$al-background-color};
   --paper-drawer-title-color: #{color-contrast($al-background-color)};
-  --app-menu-background-color: rgba(0, 0, 0, 0) !important;
-  --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
+
+  --primary-color:#{$al-focus-color};
+  --app-menu-background-color: #{$al-background-color};
+  --app-menu-selected-bg-color: #{bg-opacity($al-focus-color, .1)};
   --app-menu-color: #727272;
+
 
   --app-layout-badge-width: 25px;
   --app-layout-badge-height: 25px;

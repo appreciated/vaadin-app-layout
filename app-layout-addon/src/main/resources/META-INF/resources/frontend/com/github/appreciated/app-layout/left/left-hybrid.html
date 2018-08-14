@@ -80,7 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (min-width: 640px) {
                 #drawerLayout.small {
-                    --app-drawer-width: 70px;
+                    --app-drawer-width: var(--app-layout-drawer-small-width);
                     --app-layout-badge-width: var(--app-layout-badge-small-width);
                     --app-layout-badge-height: var(--app-layout-badge-small-height);
                     --app-layout-badge-top: var(--app-layout-badge-small-top);
@@ -112,9 +112,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     transition: color 0.2s ease;
                 }
 
-                #drawerLayout.small app-menu-icon-item {
-                    color: transparent;
-                }
+                /*#drawerLayout.small app-menu-icon-item {*/
+                    /*color: transparent;*/
+                /*}*/
 
                 #drawerLayout.small * {
                     --expand-icon-fill-color: transparent !important;

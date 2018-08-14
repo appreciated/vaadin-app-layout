@@ -147,6 +147,8 @@ public class MainView extends AppLayoutRouterLayout {
             VerticalLayout layout = new VerticalLayout();
             add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
+            group.getElement().getStyle().set("display", "flex");
+            group.getElement().getStyle().set("flexDirection", "column");
             group.setItems(Behaviour.LEFT,
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,

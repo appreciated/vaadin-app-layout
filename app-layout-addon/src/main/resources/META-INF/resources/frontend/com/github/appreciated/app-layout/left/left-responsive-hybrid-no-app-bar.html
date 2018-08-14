@@ -122,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             @media only screen and (min-width: 641px) and (max-width: 1024px) {
                 /* hybrid */
                 #drawerLayout {
-                    --app-drawer-width: 70px;
+                    --app-drawer-width: var(--app-layout-drawer-small-width);
                     --app-layout-badge-width: var(--app-layout-badge-small-width);
                     --app-layout-badge-height: var(--app-layout-badge-small-height);
                     --app-layout-badge-top: var(--app-layout-badge-small-top);
@@ -138,10 +138,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 #drawerLayout #menu-header-wrapper {
                     padding: 5px;
-                }
-
-                #drawerLayout app-menu-icon-item {
-                    color: transparent;
                 }
 
                 #drawerLayout * {

@@ -70,6 +70,7 @@ public class MainView extends AppLayoutRouterLayout {
                                     .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                                     .add(home)
+                                    .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                                     .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                             .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                                     .add(new LeftNavigationComponent("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class))
@@ -147,6 +148,8 @@ public class MainView extends AppLayoutRouterLayout {
             VerticalLayout layout = new VerticalLayout();
             add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
+            group.getElement().getStyle().set("display", "flex");
+            group.getElement().getStyle().set("flexDirection", "column");
             group.setItems(Behaviour.LEFT,
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,
