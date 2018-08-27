@@ -12,7 +12,7 @@ public class MenuHeaderComponent extends VerticalLayout {
         setMargin(false);
         setId("menu-header-wrapper");
         if (src != null) {
-            add(new RoundImage(src, "60px", "60px"));
+            add(new RoundImage(src, "56px", "56px"));
         }
         if (title != null) {
             Label titleLabel = new Label(title);
