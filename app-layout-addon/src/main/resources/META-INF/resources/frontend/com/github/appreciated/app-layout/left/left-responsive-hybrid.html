@@ -116,8 +116,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     margin-top: 0px;
                 }
 
-                #drawerLayout .app-menu-item {
-                    padding: 0 20px;
+                #drawerLayout.small .app-menu-icon-item {
+                    overflow: hidden;
+                    padding: 0 0px;
+                    margin: 0 20px;
+                }
+
+                #drawerLayout.small iron-icon[icon="expand-more"] {
+                    color: transparent;
                 }
 
                 #drawerLayout #menu-header-wrapper {
