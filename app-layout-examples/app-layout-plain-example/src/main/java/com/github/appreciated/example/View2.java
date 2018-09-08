@@ -8,6 +8,7 @@ import com.vaadin.flow.router.Route;
 public class View2 extends AbstractView {
 
     public View2() {
+        // Navigate to content that is not accessible from the menu directly. And see the results in the UI
         add(new Button("SubContent", buttonClickEvent -> UI.getCurrent().navigate(SubContent.class)));
     }
 
