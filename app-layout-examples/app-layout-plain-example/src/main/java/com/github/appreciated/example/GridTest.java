@@ -1,7 +1,6 @@
 package com.github.appreciated.example;
 
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-@Route(value = "GridTest", layout = MainView.class)
+@Route(value = "GridTest", layout = AppLayoutWrapperView.class)
 public class GridTest extends VerticalLayout {
     List<Person> people = new ArrayList<>();
 
