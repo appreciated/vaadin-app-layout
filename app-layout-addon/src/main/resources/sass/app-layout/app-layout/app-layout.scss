@@ -26,7 +26,6 @@ $al-background-color: #fafafa !default;
 $al-font-size: 16px !default;
 $al-unit-size: round(2.3 * $al-font-size) !default;
 $al-border-radius: 4px !default;
-$al-focus-color: #4285f4 !default;
 
 $al-bar-height: 64px !default;
 $al-bar-background-color: #4285f4 !default;
@@ -46,9 +45,9 @@ $al-drawer-width: 256px !default;
 $al-drawer-small-width: 64px !default;
 
 $al-menu-button-active-background-color: rgba(color-contrast($al-drawer-background-color), 0.1) !default; // only used by material design
-$al-menu-button-active-font-color: $al-focus-color !default; // only used by material design
+$al-menu-button-active-font-color: var(--primary-color) !default; // only used by material design
 $al-menu-button-badge-background-color: #ffffff !default;
-$al-menu-button-badge-font-color: $al-focus-color !default;
+$al-menu-button-badge-font-color: var(--primary-color) !default;
 $al-menu-button-badge-border-radius: 5px !default;
 
 $al-menu-button-horizontal-padding: round($al-unit-size/2.4) + round($al-border-radius/3) !default;
@@ -65,11 +64,10 @@ $al-menu-submenu-max-height: 999px !default;
   --app-layout-font-size: #{$al-font-size};
   --app-layout-unit-size: #{$al-unit-size};
   --app-layout-border-radius: #{$al-border-radius};
-  --app-layout-focus-color: #{$al-focus-color};
-  --app-layout-focus-contrast-color: #{color-contrast($al-focus-color)};
+  --app-layout-focus-color: #{var(--primary-color)};
 
   --app-layout-bar-height: #{$al-bar-height};
-  --app-layout-bar-background-color: #{$al-bar-background-color};
+  --app-layout-bar-background-color: #{var(--primary-color)};
   --app-layout-bar-font-color: #{$al-bar-font-color};
   --app-layout-bar-shadow: #{$al-bar-shadow};
   --app-layout-bar-z-index: #{$al-bar-z-index};
@@ -102,11 +100,9 @@ $al-menu-submenu-max-height: 999px !default;
   --paper-drawer-title-background-color: #{$al-background-color};
   --paper-drawer-title-color: #{color-contrast($al-background-color)};
 
-  --primary-color:#{$al-focus-color};
   --app-menu-background-color: #{$al-background-color};
-  --app-menu-selected-bg-color: #{bg-opacity($al-focus-color, .1)};
+  --app-menu-selected-bg-color: #{bg-opacity(var(--primary-color), .1)};
   --app-menu-color: #727272;
-
 
   --app-layout-badge-width: 25px;
   --app-layout-badge-height: 25px;
