@@ -31,8 +31,7 @@ import static com.github.appreciated.applayout.notification.entitiy.Priority.MED
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class AppLayoutWrapperView extends AppLayoutRouterLayout {
 
-    DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
+    DefaultNotificationHolder notifications;
 
     @Override
     public AppLayout getAppLayout() {
@@ -73,6 +72,8 @@ public class AppLayoutWrapperView extends AppLayoutRouterLayout {
     }
 
     private void initNotifications() {
+        notifications = new DefaultNotificationHolder(newStatus -> {
+        });
         for (int i = 0; i < 3; i++) {
             notifications.addNotification(new DefaultNotification("Title" + i, "Description" + i, MEDIUM));
         }

@@ -39,7 +39,6 @@ public class GridTest extends VerticalLayout {
         setAlignItems(Alignment.STRETCH);
         setFlexGrow(1, gridWrapper);
         setSizeFull();
-
     }
 
     private Grid<Person> getGrid() {
