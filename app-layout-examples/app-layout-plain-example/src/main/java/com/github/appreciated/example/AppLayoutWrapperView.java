@@ -42,7 +42,7 @@ public class AppLayoutWrapperView extends AppLayoutRouterLayout {
                 .withAppBar(
                         AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notifications)).build())
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .withAppMenu(
+                .withAppMenu( // Do not use the same Route twice the will lead to some weird effects like the two highlighted elements etc.
                         LeftAppMenuBuilder.get()
                                 .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
                                 .addToSection(new LeftClickableComponent("Click Me Please", VaadinIcon.COG.create(), clickEvent -> Notification.show("You can set this Event as you like")), HEADER)
