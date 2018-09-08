@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app-header {
                 right: 0px !important;
             }
+
             app-toolbar {
                 height: var(--app-bar-height);
                 background: var(--app-layout-bar-background-color);
@@ -112,6 +113,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
 
+            app-menu {
+                background: transparent;
+            }
+
             @media only screen and (min-width: 641px) and (max-width: 1024px) {
                 /* hybrid */
                 #drawerLayout {
@@ -141,6 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 #drawerLayout * {
                     --expand-icon-fill-color: transparent !important;
                 }
+
                 /* hybrid */
             }
         </style>
