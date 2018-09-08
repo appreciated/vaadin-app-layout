@@ -8,11 +8,6 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.IronIcon;
-import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.dom.ShadowRoot;
-import elemental.html.ShadowElement;
-
-import java.util.Optional;
 
 
 @Tag("app-submenu")
@@ -43,7 +38,7 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
         item = new AppMenuIconItem(sectionName, icon.getElement().getAttribute("icon"));
         ironIcon = new IronIcon("icons", "expand-more");
 
-        //ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");
+        ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");
         toggleWrapper.add(item, ironIcon);
         menu = new AppMenu();
         menu.getElement().setAttribute("slot", "submenu-content");
@@ -53,9 +48,9 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
         getElement().addSynchronizedProperty("opened")
                 .addPropertyChangeListener("opened", event ->{
                     if((Boolean) event.getValue())
-                        ironIcon.getElement().setAttribute("icon", "expand-less");
+                        ironIcon.getElement().setAttribute("icon", "icons:expand-less");
                     else
-                        ironIcon.getElement().setAttribute("icon", "expand-more");
+                        ironIcon.getElement().setAttribute("icon", "icons:expand-more");
         } );
 
         addToSubmenu(toggleWrapper);
