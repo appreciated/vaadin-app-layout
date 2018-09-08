@@ -116,8 +116,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
 
     public AppLayoutBuilder withIcon(String url) {
         Image image = new Image(url, "icon");
-        image.setWidth("46px");
-        image.setHeight("46px");
+        image.setHeight("48px");
         return withIconComponent(image);
     }
 
