@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout.test.view;
 
 import com.github.appreciated.app.layout.test.uis.left.LeftResponsiveBehavior;
-import com.github.appreciated.applayout.annotations.MenuCaption;
-import com.github.appreciated.applayout.annotations.MenuIcon;
+import com.github.appreciated.applayout.annotations.Caption;
+import com.github.appreciated.applayout.annotations.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "", layout = LeftResponsiveBehavior.class)
-@MenuCaption("Home View")
-@MenuIcon(VaadinIcon.HOME)
+@Caption("Home View")
+@Icon(VaadinIcon.HOME)
 public class View1 extends ExampleView {
     @Override
     protected String getViewName() {

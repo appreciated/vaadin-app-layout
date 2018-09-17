@@ -1,6 +1,5 @@
 package com.github.appreciated.applayout.entity;
 
-import com.github.appreciated.applayout.builder.factories.DefaultNavigationElementInfoProducer;
 import com.vaadin.flow.component.icon.Icon;
 
 /**

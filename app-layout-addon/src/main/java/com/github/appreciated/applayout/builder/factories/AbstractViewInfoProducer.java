@@ -1,7 +1,6 @@
 package com.github.appreciated.applayout.builder.factories;
 
-import com.github.appreciated.applayout.annotations.MenuCaption;
-import com.github.appreciated.applayout.annotations.MenuIcon;
+import com.github.appreciated.applayout.annotations.Caption;
 import com.github.appreciated.applayout.builder.AppLayoutConfiguration;
 import com.github.appreciated.applayout.builder.interfaces.Factory;
 import com.github.appreciated.applayout.entity.NavigationElementInfo;
@@ -10,8 +9,8 @@ import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractViewInfoProducer implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
-    private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(MenuCaption.class) == null ? null : info.getAnnotation(MenuCaption.class).value();
-    private AnnotationValueProvider<Icon> iconProvider = info -> info.getAnnotation(MenuIcon.class) == null ? null : info.getAnnotation(MenuIcon.class).value().create();
+    private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(Caption.class) == null ? null : info.getAnnotation(Caption.class).value();
+    private AnnotationValueProvider<Icon> iconProvider = info -> info.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class) == null ? null : info.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create();
     private AnnotationValueProvider<String> routeProvider;
 
     public AbstractViewInfoProducer(AnnotationValueProvider<String> routeProvider) {

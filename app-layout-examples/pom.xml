@@ -18,7 +18,7 @@
     </prerequisites>
 
     <modules>
-        <!--<module>app-layout-annotation-example</module>-->
+        <module>app-layout-annotation-example</module>
         <module>app-layout-plain-example</module>
     </modules>
 </project>

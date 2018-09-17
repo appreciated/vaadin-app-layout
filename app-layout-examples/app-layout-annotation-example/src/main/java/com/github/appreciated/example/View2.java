@@ -1,10 +1,15 @@
 package com.github.appreciated.example;
 
+import com.github.appreciated.applayout.annotations.Caption;
+import com.github.appreciated.applayout.annotations.Icon;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "view2", layout = MainView.class)
+@Caption("Charts")
+@Icon(VaadinIcon.SPLINE_CHART)
 public class View2 extends AbstractView {
 
     public View2() {

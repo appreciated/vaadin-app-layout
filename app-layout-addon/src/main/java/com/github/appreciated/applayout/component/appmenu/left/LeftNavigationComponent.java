@@ -1,5 +1,6 @@
 package com.github.appreciated.applayout.component.appmenu.left;
 
+import com.github.appreciated.applayout.annotations.Caption;
 import com.github.appreciated.applayout.builder.AppLayoutConfiguration;
 import com.github.appreciated.applayout.builder.interfaces.Factory;
 import com.github.appreciated.applayout.builder.interfaces.NavigationElementComponent;
@@ -70,6 +71,22 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
+    public LeftNavigationComponent(Component view) {
+        super();
+        this.view = view;
+        setCaption(className.getAnnotation(Caption.class).value());
+        setIcon(className.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create());
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
+    public LeftNavigationComponent(Class<? extends Component> className) {
+        super();
+        this.className = className;
+        setCaption(className.getAnnotation(Caption.class).value());
+        setIcon(className.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create());
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
     public void navigateTo() {
         UI.getCurrent().navigate(getRoute());
     }
@@ -100,6 +117,14 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
             return info.getIcon();
         }
         return null;
+    }
+
+    public void setIcon(Icon icon) {
+        this.icon = icon;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public Component getView() {
