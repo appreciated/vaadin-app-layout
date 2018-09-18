@@ -8,9 +8,9 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  * This interface contains the methods that any behaviour should offer to allow interchangeability.
  */
 
-public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
+public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements com.github.appreciated.app.layout.behaviour.AppLayoutElementBase, HasStyle {
     /**
-     * Causes the the {@link com.github.appreciated.applayout.webcomponents.applayout.AppDrawer} to be toggled. Since this is a "low-level" function of the drawer this should be used with caution.
+     * Causes the the {@link com.github.appreciated.app.layout.webcomponents.app.layout.AppDrawer} to be toggled. Since this is a "low-level" function of the drawer this should be used with caution.
      * Malfunction might happen.
      */
     public void toggleDrawer() {
@@ -18,7 +18,7 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     }
 
     /**
-     * Causes the the {@link com.github.appreciated.applayout.webcomponents.applayout.AppDrawer} to be opened. Since this is a "low-level" function of the drawer this should be used with caution.
+     * Causes the the {@link com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer} to be opened. Since this is a "low-level" function of the drawer this should be used with caution.
      * Malfunction might happen.
      */
     public void openDrawer() {
@@ -26,7 +26,7 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     }
 
     /**
-     * Causes the the {@link com.github.appreciated.applayout.webcomponents.applayout.AppDrawer} to be closed if not persistent.
+     * Causes the the {@link com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer} to be closed if not persistent.
      * This is a custom function of this addon and is supported.
      */
     public void closeDrawerIfNotPersistent() {
@@ -34,7 +34,7 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     }
 
     /**
-     * Causes the the {@link com.github.appreciated.applayout.webcomponents.applayout.AppDrawer} to be closed. Since this is a "low-level" function of the drawer this should be used with caution.
+     * Causes the the {@link com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer} to be closed. Since this is a "low-level" function of the drawer this should be used with caution.
      * Malfunction might happen.
      */
     public void closeDrawer() {

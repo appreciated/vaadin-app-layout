@@ -1,8 +1,8 @@
-package com.github.appreciated.applayout.annotations;
+package com.github.appreciated.app.layout.annotations;
 
-import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.builder.interfaces.ComponentFactory;
-import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.builder.interfaces.ComponentFactory;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

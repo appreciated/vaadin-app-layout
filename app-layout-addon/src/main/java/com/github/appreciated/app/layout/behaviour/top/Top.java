@@ -44,7 +44,7 @@ public class Top extends AppLayout {
     @Id("content")
     Div content;
     @Id("toggle")
-		PaperIconButton paperIconButton;
+    PaperIconButton paperIconButton;
     protected final HorizontalLayout titleWrapper = new HorizontalLayout();
     private Component title;
 
@@ -82,7 +82,7 @@ public class Top extends AppLayout {
         return appBarElements;
     }
 
-    public void setDesign( AppLayoutDesign design) {
+    public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
     }
 

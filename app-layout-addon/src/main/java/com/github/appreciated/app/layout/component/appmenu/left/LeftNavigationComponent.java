@@ -1,5 +1,6 @@
-package com.github.appreciated.applayout.component.appmenu.left;
+package com.github.appreciated.app.layout.component.appmenu.left;
 
+import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
@@ -40,7 +41,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
      */
     private Factory<String, String> routeInterceptor;
     /**
-     * The {@link com.github.appreciated.applayout.builder.AppLayoutConfiguration.NavigationElementInfoProducer} instance
+     * The {@link com.github.appreciated.app.layout.builder.AppLayoutConfiguration.NavigationElementInfoProducer} instance
      * which will eventually later on be used to provide the caption, route and icon for this menu element for the View / view class.
      * Note: May be null
      */
@@ -74,7 +75,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
         super();
         this.view = view;
         setCaption(className.getAnnotation(Caption.class).value());
-        setIcon(className.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create());
+        setIcon(className.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class).value().create());
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
@@ -82,7 +83,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
         super();
         this.className = className;
         setCaption(className.getAnnotation(Caption.class).value());
-        setIcon(className.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create());
+        setIcon(className.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class).value().create());
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 

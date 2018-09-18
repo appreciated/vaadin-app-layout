@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.notification.component;
 
+import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
-import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.papermenubutton.HorizontalAlignment;
 import com.github.appreciated.papermenubutton.PaperMenuButton;
 import com.vaadin.flow.component.dependency.HtmlImport;
@@ -32,7 +32,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
             }
 
             @Override
-            public void onNotificationAdded( Notification notification) {
+            public void onNotificationAdded(Notification notification) {
                 if (!isOpened()) {
                     NotificationViewWithoutWrapper view = new NotificationViewWithoutWrapper(notification);
                     view.setWidth("200px");

@@ -1,17 +1,16 @@
-package com.github.appreciated.applayout.builder.factories;
+package com.github.appreciated.app.layout.builder.factories;
 
-import com.github.appreciated.app.layout.annotations.MenuCaption;
-import com.github.appreciated.app.layout.annotations.MenuIcon;
-import com.github.appreciated.app.layout.entity.NavigationElementInfo;
+import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
+import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 public class AbstractViewInfoProducer implements AppLayoutConfiguration.NavigationElementInfoProducer {
 
     private AnnotationValueProvider<String> captionProvider = info -> info.getAnnotation(Caption.class) == null ? null : info.getAnnotation(Caption.class).value();
-    private AnnotationValueProvider<Icon> iconProvider = info -> info.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class) == null ? null : info.getAnnotation(com.github.appreciated.applayout.annotations.Icon.class).value().create();
+    private AnnotationValueProvider<Icon> iconProvider = info -> info.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class) == null ? null : info.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class).value().create();
     private AnnotationValueProvider<String> routeProvider;
 
     public AbstractViewInfoProducer(AnnotationValueProvider<String> routeProvider) {

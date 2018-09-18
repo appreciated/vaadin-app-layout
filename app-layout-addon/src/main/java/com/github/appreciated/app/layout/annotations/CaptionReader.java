@@ -1,4 +1,4 @@
-package com.github.appreciated.applayout.annotations;
+package com.github.appreciated.app.layout.annotations;
 
 import com.vaadin.flow.component.Component;
 

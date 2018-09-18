@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.builder;
 
-import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.HasElement;
 
 import java.util.function.Function;
