@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.test.view;
 
 import com.github.appreciated.app.layout.test.uis.left.LeftResponsiveBehavior;
-import com.github.appreciated.applayout.annotations.MenuCaption;
-import com.github.appreciated.applayout.annotations.MenuIcon;
+import com.github.appreciated.app.layout.annotations.MenuCaption;
+import com.github.appreciated.app.layout.annotations.MenuIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 
