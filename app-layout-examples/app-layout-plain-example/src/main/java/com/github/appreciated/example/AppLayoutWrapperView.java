@@ -1,27 +1,27 @@
 package com.github.appreciated.example;
 
-import com.github.appreciated.applayout.behaviour.AppLayout;
-import com.github.appreciated.applayout.behaviour.Behaviour;
-import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.component.appbar.AppBarBuilder;
-import com.github.appreciated.applayout.component.appmenu.MenuHeaderComponent;
-import com.github.appreciated.applayout.component.appmenu.left.LeftClickableComponent;
-import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
-import com.github.appreciated.applayout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.applayout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.applayout.design.AppLayoutDesign;
-import com.github.appreciated.applayout.notification.DefaultNotificationHolder;
-import com.github.appreciated.applayout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.applayout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.applayout.router.AppLayoutRouterLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
+import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.design.AppLayoutDesign;
+import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
+import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
-import static com.github.appreciated.applayout.entity.Section.FOOTER;
-import static com.github.appreciated.applayout.entity.Section.HEADER;
-import static com.github.appreciated.applayout.notification.entitiy.Priority.MEDIUM;
+import static com.github.appreciated.app.layout.entity.Section.FOOTER;
+import static com.github.appreciated.app.layout.entity.Section.HEADER;
+import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 /**
  * The AppLayoutWrapperView contains the Menu your Views will be wrapped in. You need to reference this view in the Other views inside the @Route(value = ..., layout = AppLayoutWrapperView.class) Annotation

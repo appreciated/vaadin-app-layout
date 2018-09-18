@@ -3,27 +3,27 @@ package com.github.appreciated.app.layout.test.uis.top;
 import com.github.appreciated.app.layout.test.view.View1;
 import com.github.appreciated.app.layout.test.view.View2;
 import com.github.appreciated.app.layout.test.view.View3;
-import com.github.appreciated.applayout.behaviour.AppLayout;
-import com.github.appreciated.applayout.behaviour.Behaviour;
-import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.component.appbar.AppBarBuilder;
-import com.github.appreciated.applayout.component.appmenu.top.TopClickableComponent;
-import com.github.appreciated.applayout.component.appmenu.top.TopNavigationComponent;
-import com.github.appreciated.applayout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.applayout.design.AppLayoutDesign;
-import com.github.appreciated.applayout.entity.DefaultBadgeHolder;
-import com.github.appreciated.applayout.entity.Section;
-import com.github.appreciated.applayout.notification.DefaultNotificationHolder;
-import com.github.appreciated.applayout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.applayout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.applayout.notification.entitiy.Priority;
-import com.github.appreciated.applayout.router.AppLayoutRouterLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
+import com.github.appreciated.app.layout.design.AppLayoutDesign;
+import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.entity.Section;
+import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
+import com.github.appreciated.app.layout.notification.entitiy.Priority;
+import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
-import static com.github.appreciated.applayout.entity.Section.FOOTER;
-import static com.github.appreciated.applayout.notification.entitiy.Priority.MEDIUM;
+import static com.github.appreciated.app.layout.entity.Section.FOOTER;
+import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")

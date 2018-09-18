@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.test.uis.top;
 
-import com.github.appreciated.applayout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
 
 public class TopLargeBehaviour extends AbstractTopBehaviorView {
     @Override
