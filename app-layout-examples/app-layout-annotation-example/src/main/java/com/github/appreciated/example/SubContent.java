@@ -4,7 +4,12 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "view2/subcontent", layout = MainView.class)
+
+/**
+ * If you choose the route properly the addon supports back navigation. Also if the Subcontent does not appear in the Menu, the parent route will be highlighted.
+ */
+
+@Route(value = "view2/subcontent", layout = AppLayoutWrapperView.class)
 public class SubContent extends VerticalLayout {
 
     public SubContent() {

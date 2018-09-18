@@ -61,6 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     box-shadow: var(--app-layout-drawer-shadow);
                 };
                 transition: 1s width;
+                --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
 
             #toggle {
@@ -68,6 +69,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
                 margin-left: -8px;
+            }
+
+            app-menu {
+                background: transparent;
             }
 
             .app-bar-application-content {

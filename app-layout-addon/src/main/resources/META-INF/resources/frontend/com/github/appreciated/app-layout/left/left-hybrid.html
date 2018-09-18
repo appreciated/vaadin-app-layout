@@ -93,8 +93,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding: 0 21px;
                 }
 
-                #drawerLayout.small iron-icon[icon="icons:expand-more"], #drawerLayout.small iron-icon[icon="expand-more"],
-                #drawerLayout.small iron-icon[icon="icons:expand-less"], #drawerLayout.small iron-icon[icon="expand-less"] {
+                #drawerLayout.small iron-icon[icon="icons:expand-more"],
+                #drawerLayout.small iron-icon[icon="icons:expand-less"] {
                     color: transparent;
                 }
 
@@ -122,9 +122,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     transition: color 0.2s ease;
                 }
 
-                /*#drawerLayout.small app-menu-icon-item {*/
-                /*color: transparent;*/
-                /*}*/
+                #drawerLayout {
+                    --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
+                }
+
+                app-menu {
+                    background: transparent;
+                }
+
+                #drawerLayout.small * {
+                    --expand-icon-fill-color: transparent !important;
+                }
             }
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>

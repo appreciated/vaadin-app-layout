@@ -43,6 +43,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                 };
+                --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
 
             #drawer .drawer-content {
@@ -50,6 +51,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 width: 100%;
                 overflow-x: hidden;
                 overflow-y: auto;
+            }
+
+            app-menu {
+                background: transparent;
             }
 
             #toggle {
