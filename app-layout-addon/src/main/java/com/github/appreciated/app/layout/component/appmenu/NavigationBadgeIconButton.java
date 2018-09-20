@@ -13,6 +13,19 @@ public class NavigationBadgeIconButton extends AppMenuItem {
 
     private final MenuBadgeComponent badge;
 
+    public NavigationBadgeIconButton() {
+        setId("menu-btn-" + idCounter++);
+        badge = new MenuBadgeComponent();
+        badge.setVisible(false);
+        add(badge);
+    }
+
+    @Override
+    public void setIcon(String icon) {
+        super.setIcon(icon);
+        getItem().getElement().getStyle().set("white-space", "nowrap");
+    }
+
     public NavigationBadgeIconButton(String name, Icon icon) {
         super(name, icon.getElement().getAttribute("icon"));
         setId("menu-btn-" + idCounter++);

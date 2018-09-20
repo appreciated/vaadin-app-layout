@@ -49,7 +49,7 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
                 .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), Section.HEADER)
+                                .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.1", "frontend/images/logo.png"), Section.HEADER)
                                 .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                                 }), Section.HEADER)
                                 .add(home)

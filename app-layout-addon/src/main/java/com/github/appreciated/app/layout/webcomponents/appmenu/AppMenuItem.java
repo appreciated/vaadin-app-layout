@@ -51,9 +51,11 @@ public class AppMenuItem extends Anchor {
     }
 
     public void setIcon(String icon) {
-        if (item != null) {
-            item.setIcon(icon);
+        if (item == null) {
+            item = new AppMenuIconItem();
+            add(item);
         }
+        item.setIcon(icon);
     }
 
     public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {

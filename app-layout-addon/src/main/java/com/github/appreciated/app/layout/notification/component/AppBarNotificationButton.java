@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.notification.component;
 
+import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
-import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.papermenubutton.HorizontalAlignment;
 import com.github.appreciated.papermenubutton.PaperMenuButton;
 import com.vaadin.flow.component.dependency.HtmlImport;

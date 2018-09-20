@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.notification.component;
 
-import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.entity.Holder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;

@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component.appmenu.left;
 
+import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
@@ -40,7 +41,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
      */
     private Factory<String, String> routeInterceptor;
     /**
-     * The {@link AppLayoutConfiguration.NavigationElementInfoProducer} instance
+     * The {@link com.github.appreciated.app.layout.builder.AppLayoutConfiguration.NavigationElementInfoProducer} instance
      * which will eventually later on be used to provide the caption, route and icon for this menu element for the View / view class.
      * Note: May be null
      */
@@ -67,6 +68,22 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
         this.caption = caption;
         this.icon = icon;
         this.className = className;
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
+    public LeftNavigationComponent(Component view) {
+        super();
+        this.view = view;
+        setCaption(className.getAnnotation(Caption.class).value());
+        setIcon(className.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class).value().create());
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
+    public LeftNavigationComponent(Class<? extends Component> className) {
+        super();
+        this.className = className;
+        setCaption(className.getAnnotation(Caption.class).value());
+        setIcon(className.getAnnotation(com.github.appreciated.app.layout.annotations.Icon.class).value().create());
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
@@ -100,6 +117,14 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
             return info.getIcon();
         }
         return null;
+    }
+
+    public void setIcon(Icon icon) {
+        this.icon = icon;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public Component getView() {
