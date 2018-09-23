@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.builder.factories;
 
 import com.github.appreciated.app.layout.annotations.Caption;
+import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
-import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -36,7 +36,7 @@ public class AbstractViewInfoProducer implements AppLayoutConfiguration.Navigati
     }
 
     @Override
-    public NavigationElementInfo apply(Class<? extends HasElement> info) {
+    public NavigationElementInfo apply( Class<? extends HasElement> info) {
         return new NavigationElementInfo(
                 captionProvider.get(info),
                 iconProvider.get(info),

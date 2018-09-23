@@ -32,7 +32,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
             }
 
             @Override
-            public void onNotificationAdded(Notification notification) {
+            public void onNotificationAdded( Notification notification) {
                 if (!isOpened()) {
                     NotificationViewWithoutWrapper view = new NotificationViewWithoutWrapper(notification);
                     view.setWidth("200px");

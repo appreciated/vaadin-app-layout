@@ -6,7 +6,7 @@ import com.vaadin.flow.component.polymertemplate.Id;
 public class LeftHybridSmall extends LeftHybrid {
 
     @Id("drawerLayout")
-    AppDrawerLayout layout;
+		AppDrawerLayout layout;
 
     public LeftHybridSmall() {
         layout.getElement().getClassList().add("small");

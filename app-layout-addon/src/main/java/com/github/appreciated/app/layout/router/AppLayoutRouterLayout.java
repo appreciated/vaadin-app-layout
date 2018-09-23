@@ -44,13 +44,13 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
     @Override
     public void showRouterLayoutContent(HasElement content) {
         currentContent = content;
-        appLayout.setAppLayoutContent(content);
+				getInternalAppLayout().setAppLayoutContent(content);
         if (content.getClass().getAnnotation(Route.class) != null) {
             int value = content.getClass().getAnnotation(Route.class).value().split("/").length;
-            appLayout.setBackNavigation(value > 1);
-            if (!appLayout.setActiveNavigationComponent(content.getClass())) {
-                Class<? extends HasElement> closestElement = appLayout.getClosestNavigationElement(content.getClass());
-                appLayout.setActiveNavigationComponent(closestElement);
+						getInternalAppLayout().setBackNavigation(value > 1);
+            if (!getInternalAppLayout().setActiveNavigationComponent(content.getClass())) {
+                Class<? extends HasElement> closestElement = getInternalAppLayout().getClosestNavigationElement(content.getClass());
+                getInternalAppLayout().setActiveNavigationComponent(closestElement);
             }
         }
     }
@@ -68,19 +68,24 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
     public abstract AppLayout getAppLayout();
 
     public void closeDrawer() {
-        appLayout.closeDrawer();
+			getInternalAppLayout().closeDrawer();
     }
 
     public void toggleDrawer() {
-        appLayout.toggleDrawer();
+			getInternalAppLayout().toggleDrawer();
     }
 
     public void openDrawer() {
-        appLayout.openDrawer();
+			getInternalAppLayout().openDrawer();
     }
 
     public void closeDrawerIfNotPersistent() {
-        appLayout.closeDrawerIfNotPersistent();
+			getInternalAppLayout().closeDrawerIfNotPersistent();
     }
 
+    private AppLayout getInternalAppLayout(){
+    	if( appLayout == null )
+    		loadConfiguration();
+    	return appLayout;
+		}
 }
