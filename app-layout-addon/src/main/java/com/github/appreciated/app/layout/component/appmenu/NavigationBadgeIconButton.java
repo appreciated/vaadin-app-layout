@@ -9,7 +9,7 @@ import com.vaadin.flow.component.icon.Icon;
 
 public class NavigationBadgeIconButton extends AppMenuItem {
 
-    static int idCounter = 0;
+    private static int idCounter = 0;
 
     private final MenuBadgeComponent badge;
 

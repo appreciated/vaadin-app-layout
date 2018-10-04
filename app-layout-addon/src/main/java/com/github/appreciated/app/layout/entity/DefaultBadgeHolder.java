@@ -13,7 +13,7 @@ import java.util.List;
 public class DefaultBadgeHolder {
 
     private int count;
-    private ArrayList<BadgeListener> listeners = new ArrayList<>();
+    private List<BadgeListener> listeners = new ArrayList<>();
 
     private List<HasText> badgeHolderComponents = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class DefaultBadgeHolder {
     }
 
     private void updateBadgeCaptions() {
-        badgeHolderComponents.forEach(hasText -> updateBadgeCaption(hasText));
+        badgeHolderComponents.forEach(this::updateBadgeCaption);
     }
 
     private void updateBadgeCaption(HasText hasText) {

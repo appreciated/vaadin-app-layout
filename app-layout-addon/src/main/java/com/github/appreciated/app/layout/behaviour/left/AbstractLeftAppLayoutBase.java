@@ -23,16 +23,11 @@ import java.util.Arrays;
 
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
-    @Id("toggle")
-		PaperIconButton paperIconButton;
-    @Id("app-bar-elements")
-    Div appBarElements;
-    @Id("menu-elements")
-    Div menuElements;
-    @Id("content")
-    Div content;
-    @Id("drawer")
-		AppDrawer drawer;
+    @Id("toggle") private           PaperIconButton paperIconButton;
+    @Id("app-bar-elements") private Div             appBarElements;
+    @Id("menu-elements") private    Div             menuElements;
+    @Id("content") private          Div             content;
+    @Id("drawer") private           AppDrawer       drawer;
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();

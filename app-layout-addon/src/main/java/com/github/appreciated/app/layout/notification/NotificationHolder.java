@@ -30,12 +30,12 @@ public abstract class NotificationHolder<T extends Notification> {
 
     public NotificationHolder(NotificationClickListener<T> listener, T... notifications) {
         this(listener);
-        Arrays.stream(notifications).forEach(notification -> this.notifications.add(notification));
+        this.notifications.addAll(Arrays.asList(notifications));
     }
 
     public NotificationHolder(NotificationClickListener<T> listener, Collection<T> notifications) {
         this(listener);
-        notifications.addAll(notifications);
+        this.notifications.addAll(notifications);
     }
 
     public void setComponentProvider(PairComponentFactory<NotificationHolder, T> componentProvider) {
@@ -51,7 +51,7 @@ public abstract class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted(Comparable::compareTo).map(o -> getComponent(o)).collect(Collectors.toList());
+        return components.stream().sorted(Comparable::compareTo).map(this::getComponent).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -80,8 +80,7 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     public Component getComponent(T message) {
-        Component component = componentProvider.getComponent(this, message);
-        return component;
+        return  componentProvider.getComponent(this, message);
     }
 
     public Component[] getNotificationViews(boolean showAll) {
@@ -89,13 +88,16 @@ public abstract class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        List<Component> list = components.stream().sorted(Comparable::compareTo)
-                .map(this::getComponent).collect(Collectors.toList());
-        return list.toArray(new Component[]{});
+        return components
+            .stream()
+            .sorted(Comparable::compareTo)
+            .map(this::getComponent)
+            .collect(Collectors.toList())
+            .toArray(new Component[]{});
     }
 
     public List<T> getNotifications() {
-        Collections.sort(notifications, Comparable::compareTo);
+        notifications.sort(Comparable::compareTo);
         return notifications;
     }
 
@@ -151,7 +153,7 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     private void updateBadgeCaptions() {
-        badgeHolderComponents.forEach(hasText -> updateBadgeCaption(hasText));
+        badgeHolderComponents.forEach(this::updateBadgeCaption);
     }
 
     private void updateBadgeCaption(HasText hasText) {
