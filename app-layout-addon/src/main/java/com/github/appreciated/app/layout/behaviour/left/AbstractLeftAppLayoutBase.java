@@ -23,11 +23,16 @@ import java.util.Arrays;
 
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
-    @Id("toggle") private           PaperIconButton paperIconButton;
-    @Id("app-bar-elements") private Div             appBarElements;
-    @Id("menu-elements") private    Div             menuElements;
-    @Id("content") private          Div             content;
-    @Id("drawer") private           AppDrawer       drawer;
+    @Id("toggle")
+    private PaperIconButton paperIconButton;
+    @Id("app-bar-elements")
+    private Div appBarElements;
+    @Id("menu-elements")
+    private Div menuElements;
+    @Id("content")
+    private Div content;
+    @Id("drawer")
+    private AppDrawer drawer;
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
@@ -65,7 +70,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     public abstract String getStyleName();
 
-    public void setDesign( AppLayoutDesign design) {
+    public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
     }
 
@@ -91,7 +96,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     private void setUpBackNavigation(HasElement content) {
-        if (content instanceof HasBackNavigation ) {
+        if (content instanceof HasBackNavigation) {
             paperIconButton.setIcon("back");
         } else {
             paperIconButton.setIcon("menu");

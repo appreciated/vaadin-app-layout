@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.helper;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.dom.Element;
 
 public class LayoutHelper {
 

@@ -80,7 +80,7 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     public Component getComponent(T message) {
-        return  componentProvider.getComponent(this, message);
+        return componentProvider.getComponent(this, message);
     }
 
     public Component[] getNotificationViews(boolean showAll) {
@@ -89,11 +89,11 @@ public abstract class NotificationHolder<T extends Notification> {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
         return components
-            .stream()
-            .sorted(Comparable::compareTo)
-            .map(this::getComponent)
-            .collect(Collectors.toList())
-            .toArray(new Component[]{});
+                .stream()
+                .sorted(Comparable::compareTo)
+                .map(this::getComponent)
+                .collect(Collectors.toList())
+                .toArray(new Component[]{});
     }
 
     public List<T> getNotifications() {
