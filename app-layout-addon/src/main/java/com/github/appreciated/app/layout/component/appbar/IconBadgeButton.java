@@ -14,7 +14,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  */
 public class IconBadgeButton extends Div {
 
-    static int idCounter = 0;
+    private static int idCounter = 0;
 
     private final PaperIconButton button;
     private final PaperBadge badge;

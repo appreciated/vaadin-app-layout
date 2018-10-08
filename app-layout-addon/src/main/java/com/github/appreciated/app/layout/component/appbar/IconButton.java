@@ -12,7 +12,7 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class IconButton extends Div {
 
-    static int idCounter = 0;
+    private static int idCounter = 0;
 
     private final PaperIconButton button;
 

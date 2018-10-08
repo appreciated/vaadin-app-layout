@@ -9,6 +9,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  */
 public class TopAppMenuBuilder {
 
-    ArrayList<Component> components = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
 
     protected TopAppMenuBuilder() {
     }
@@ -70,7 +71,7 @@ public class TopAppMenuBuilder {
 
     public NavigationElementContainer build() {
         TopMenuComponent menu = new TopMenuComponent();
-        menu.add(components.toArray(new Component[components.size()]));
+        menu.add(components.toArray(new Component[0]));
         return menu;
     }
 }

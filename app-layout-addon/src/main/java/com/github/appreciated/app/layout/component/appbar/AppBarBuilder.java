@@ -5,10 +5,11 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AppBarBuilder implements ComponentBuilder {
 
-    ArrayList<Component> components = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
 
     protected AppBarBuilder() {
     }
@@ -24,6 +25,6 @@ public class AppBarBuilder implements ComponentBuilder {
 
     @Override
     public Component build() {
-        return new HorizontalLayout(components.toArray(new Component[components.size()]));
+        return new HorizontalLayout(components.toArray(new Component[0]));
     }
 }

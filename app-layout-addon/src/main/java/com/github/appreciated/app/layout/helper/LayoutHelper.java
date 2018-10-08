@@ -10,13 +10,11 @@ public class LayoutHelper {
         if (components == null) {
             throw new AssertionError();
         } else {
-            int length = components.length;
-            for (int i = 0; i < length; ++i) {
-                Component component = components[i];
+            for (final Component component : components) {
                 if (component == null) {
                     throw new AssertionError();
                 }
-                element.getElement().appendChild(new Element[]{component.getElement()});
+                element.getElement().appendChild(component.getElement());
             }
         }
     }

@@ -26,21 +26,18 @@ import java.util.Arrays;
 @Tag("app-layout-top-large")
 @HtmlImport("frontend://com/github/appreciated/app-layout/top/top-large.html")
 public class TopLarge extends AppLayout {
-    protected final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
-    private final VerticalLayout contentPanel = new VerticalLayout();
-    private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
-    private final VerticalLayout appBarWrapper = new VerticalLayout();
-    private final HorizontalLayout appBar = new HorizontalLayout();
-    private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    @Id("app-bar-elements")
-    Div appBarElements;
-    @Id("content")
-    Div content;
-    @Id("toggle")
-		PaperIconButton paperIconButton;
-    protected final HorizontalLayout titleWrapper = new HorizontalLayout();
-    private Component title;
-    private NavigationElementContainer appMenuContainer;
+    private final HorizontalLayout appBarElementWrapper   = new HorizontalLayout();
+    private final                   VerticalLayout             contentPanel           = new VerticalLayout();
+    private final                   HorizontalLayout           paperTabWrapper        = new HorizontalLayout();
+    private final                   VerticalLayout             appBarWrapper          = new VerticalLayout();
+    private final                   HorizontalLayout           appBar                 = new HorizontalLayout();
+    private final                   HorizontalLayout           appBarElementContainer = new HorizontalLayout();
+    @Id("app-bar-elements") private Div                        appBarElements;
+    @Id("content") private          Div                        content;
+    @Id("toggle") private           PaperIconButton            paperIconButton;
+    private final                   HorizontalLayout           titleWrapper           = new HorizontalLayout();
+    private                         Component                  title;
+    private                         NavigationElementContainer appMenuContainer;
 
     public TopLarge() {
         contentPanel.setSizeFull();
