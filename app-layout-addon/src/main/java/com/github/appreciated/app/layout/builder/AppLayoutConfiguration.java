@@ -17,7 +17,6 @@ import java.util.function.Function;
 public class AppLayoutConfiguration {
 
 
-
     /***** Getters and Setters *****/
 
 

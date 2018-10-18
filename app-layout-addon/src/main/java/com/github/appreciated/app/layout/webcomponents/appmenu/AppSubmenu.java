@@ -46,12 +46,12 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
         getElement().addSynchronizedPropertyEvent("app-submenu-open");
         getElement().addSynchronizedPropertyEvent("app-submenu-close");
         getElement().addSynchronizedProperty("opened")
-                .addPropertyChangeListener("opened", event ->{
-                    if((Boolean) event.getValue())
+                .addPropertyChangeListener("opened", event -> {
+                    if ((Boolean) event.getValue())
                         ironIcon.getElement().setAttribute("icon", "icons:expand-less");
                     else
                         ironIcon.getElement().setAttribute("icon", "icons:expand-more");
-        } );
+                });
 
         addToSubmenu(toggleWrapper);
         addToSubmenu(menu);

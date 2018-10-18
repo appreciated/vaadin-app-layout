@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.component.appmenu.left.builder;
 
-import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;

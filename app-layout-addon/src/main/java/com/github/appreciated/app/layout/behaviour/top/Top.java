@@ -35,15 +35,18 @@ public class Top extends AppLayout {
         return "top";
     }
 
-    private final                   HorizontalLayout appBarElementWrapper   = new HorizontalLayout();
-    private final                   VerticalLayout   contentPanel           = new VerticalLayout();
-    private final                   HorizontalLayout appBar                 = new HorizontalLayout();
-    private final                   HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    @Id("app-bar-elements") private Div              appBarElements;
-    @Id("content") private          Div              content;
-    @Id("toggle") private           PaperIconButton  paperIconButton;
-    private final                   HorizontalLayout titleWrapper           = new HorizontalLayout();
-    private                         Component        title;
+    private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
+    private final VerticalLayout contentPanel = new VerticalLayout();
+    private final HorizontalLayout appBar = new HorizontalLayout();
+    private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
+    @Id("app-bar-elements")
+    private Div appBarElements;
+    @Id("content")
+    private Div content;
+    @Id("toggle")
+    private PaperIconButton paperIconButton;
+    private final HorizontalLayout titleWrapper = new HorizontalLayout();
+    private Component title;
 
     public Top() {
         contentPanel.setSizeFull();
@@ -79,7 +82,7 @@ public class Top extends AppLayout {
         return appBarElements;
     }
 
-    public void setDesign( AppLayoutDesign design) {
+    public void setDesign(AppLayoutDesign design) {
         this.getElement().getClassList().add(design.getStyleName());
     }
 

@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class LeftSubMenuBuilder implements ComponentBuilder {
 
-    private final String          title;
-    private final Icon            icon;
-    private       List<Component> components = new ArrayList<>();
+    private final String title;
+    private final Icon icon;
+    private List<Component> components = new ArrayList<>();
 
     protected LeftSubMenuBuilder(String title, Icon icon) {
         this.title = title;

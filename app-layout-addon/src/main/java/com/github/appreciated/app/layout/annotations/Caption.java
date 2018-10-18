@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * This annotation is meant to be used in combination with
  * {@link AppLayoutBuilder#withNavigationElementProvider(ComponentFactory)}
- *
+ * <p>
  * The value of this annotation will be used for the {@link LeftNavigationComponent} as the caption of the button
  */
 @Retention(RetentionPolicy.RUNTIME)
