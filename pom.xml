@@ -1,69 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.appreciated</groupId>
-	<artifactId>app-layout-root</artifactId>
-	<packaging>pom</packaging>
-	<version>2.0.1-SNAPSHOT</version>
-	<name>App Layout Addon Root Project</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.appreciated</groupId>
+  <artifactId>app-layout-root</artifactId>
+  <packaging>pom</packaging>
+  <version>2.0.1-SNAPSHOT</version>
+  <name>App Layout Addon Root Project</name>
 
-	<organization>
-		<name>appreciated</name>
-		<url>https://github.com/appreciated</url>
-	</organization>
+  <organization>
+    <name>appreciated</name>
+    <url>https://github.com/appreciated</url>
+  </organization>
 
-	<prerequisites>
-		<maven>3</maven>
-	</prerequisites>
+  <prerequisites>
+    <maven>3</maven>
+  </prerequisites>
 
-	<modules>
-		<module>app-layout-addon</module>
-        <module>app-layout-examples</module>
-        <module>app-layout-ui-tests</module>
-	</modules>
 
-	<profiles>
-		<profile>
-			<!-- Vaadin pre-release repositories -->
-			<id>vaadin-prerelease</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			
-			<repositories>
-				<repository>
-					<id>vaadin-prereleases</id>
-					<url>http://maven.vaadin.com/vaadin-prereleases</url>
-				</repository>
-				<repository>
-					<id>vaadin-snapshots</id>
-					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>vaadin-prereleases</id>
-					<url>http://maven.vaadin.com/vaadin-prereleases</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>vaadin-snapshots</id>
-					<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-	</profiles>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+
+    <!-- Dependencies -->
+    <vaadin.version>10.0.5</vaadin.version>
+    <jetty.version>9.4.11.v20180605</jetty.version>
+  </properties>
+
+
+  <repositories>
+    <repository>
+      <id>Vaadin prereleases</id>
+      <url>https://maven.vaadin.com/vaadin-prereleases</url>
+    </repository>
+    <repository>
+      <id>Vaadin Directory</id>
+      <url>http://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>vaadin-prereleases</id>
+      <url>https://maven.vaadin.com/vaadin-prereleases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <type>pom</type>
+        <scope>import</scope>
+        <version>${vaadin.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+  <modules>
+    <module>app-layout-addon</module>
+    <module>app-layout-examples</module>
+    <module>app-layout-ui-tests</module>
+  </modules>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <!-- Vaadin pre-release repositories -->
+      <id>vaadin-prerelease</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+
+      <repositories>
+        <repository>
+          <id>vaadin-prereleases</id>
+          <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+        <repository>
+          <id>vaadin-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>vaadin-prereleases</id>
+          <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>vaadin-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
 
 </project>

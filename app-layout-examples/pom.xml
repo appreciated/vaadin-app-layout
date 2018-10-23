@@ -1,24 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <parent>
     <groupId>com.github.appreciated</groupId>
-    <artifactId>app-layout-examples</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>app-layout-root</artifactId>
     <version>2.0.1-SNAPSHOT</version>
-    <name>App Layout Addon Examples</name>
+  </parent>
 
-    <organization>
-        <name>appreciated</name>
-        <url>https://github.com/appreciated</url>
-    </organization>
+  <artifactId>app-layout-examples</artifactId>
 
-    <prerequisites>
-        <maven>3</maven>
-    </prerequisites>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>app-layout-annotation-example</module>
-        <module>app-layout-plain-example</module>
-    </modules>
+  <version>2.0.1-SNAPSHOT</version>
+  <name>App Layout Addon Examples</name>
+
+  <organization>
+    <name>appreciated</name>
+    <url>https://github.com/appreciated</url>
+  </organization>
+
+  <prerequisites>
+    <maven>3</maven>
+  </prerequisites>
+
+
+
+
+  <modules>
+    <module>app-layout-annotation-example</module>
+    <module>app-layout-plain-example</module>
+  </modules>
+
+
+
+  <dependencies>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-core</artifactId>
+    </dependency>
+
+    <!-- Added to provide logging output as Flow uses
+    the unbound SLF4J no-operation (NOP) logger implementation
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+    </dependency> -->
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.appreciated</groupId>
+      <artifactId>app-layout-addon</artifactId>
+      <version>2.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

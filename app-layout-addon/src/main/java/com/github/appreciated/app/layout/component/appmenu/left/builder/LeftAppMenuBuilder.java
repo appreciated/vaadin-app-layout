@@ -70,7 +70,7 @@ public class LeftAppMenuBuilder {
 
     public NavigationElementContainer build() {
         LeftMenuComponent menu = new LeftMenuComponent();
-        menu.add(components.toArray(new Component[components.size()]));
+        menu.add(components.toArray(new Component[0]));
         return menu;
     }
 }

@@ -8,7 +8,8 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 /**
- * The interface every {@link Behaviour} is required to be implemented to allow any {@link com.github.appreciated.app.layout.builder.AppLayoutBuilder} to build it.
+ * The interface every {@link Behaviour} is required
+ * to be implemented to allow any {@link com.github.appreciated.app.layout.builder.AppLayoutBuilder} to build it.
  */
 
 public interface AppLayoutElementBase extends NavigationElementContainer {

@@ -5,7 +5,8 @@ import com.github.appreciated.app.layout.behaviour.top.Top;
 import com.github.appreciated.app.layout.behaviour.top.TopLarge;
 
 /**
- * Contains all the available Behaviours and their specific details {@link Behaviour#Behaviour(Class, boolean, boolean, boolean, boolean)}
+ * Contains all the available Behaviours and their
+ * specific details {@link Behaviour#Behaviour(Class, boolean, boolean, boolean, boolean)}
  */
 public enum Behaviour {
     LEFT(Left.class, false, true, false, false),

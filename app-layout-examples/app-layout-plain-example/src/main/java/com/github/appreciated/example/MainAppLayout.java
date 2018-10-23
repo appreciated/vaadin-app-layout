@@ -1,6 +1,5 @@
-package com.github.appreciated;
+package com.github.appreciated.example;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -38,46 +37,40 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public class MainView extends AppLayoutRouterLayout {
+public class MainAppLayout extends AppLayoutRouterLayout {
   private Behaviour variant;
-  DefaultNotificationHolder notificationHolder;
-  DefaultBadgeHolder        badgeHolder;
-  private Thread currentThread;
+  private DefaultNotificationHolder notifications;
+  private DefaultBadgeHolder        badge;
+//  private Thread currentThread;
 
-  @Override public AppLayout getAppLayout() {
+  @Override public com.github.appreciated.app.layout.behaviour.AppLayout getAppLayout() {
     if (variant == null) {
-      variant = Behaviour.LEFT_HYBRID_SMALL;
-      notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-      badgeHolder = new DefaultBadgeHolder();
+      variant = Behaviour.LEFT_HYBRID;
+      notifications = new DefaultNotificationHolder(newStatus -> {
+      });
+      badge = new DefaultBadgeHolder();
     }
-    reloadNotifications();
 
     if (!variant.isTop()) {
-      LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);
-      LeftNavigationComponent menu = new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View9.class);
-
-      notificationHolder.bind(home.getBadge());
-      badgeHolder.bind(menu.getBadge());
       return AppLayoutBuilder
           .get(variant)
           .withTitle("App Layout")
-          .withIcon("/frontend/images/logo.png")
           .withAppBar(AppBarBuilder
                           .get()
-                          .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                          .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                           .build())
           .withDesign(AppLayoutDesign.MATERIAL)
           .withAppMenu(LeftAppMenuBuilder
                            .get()
-                           .addToSection(new MenuHeaderComponent("App-Layout",
+                           .addToSection(new MenuHeaderComponent("Menu-Header",
                                                                  "Version 2.0.1",
-                                                                 "/frontend/images/logo.png"
+                                                                 null
                            ), HEADER)
                            .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
                                                                     VaadinIcon.COG.create(),
                                                                     clickEvent -> openModeSelector(variant)
                            ), HEADER)
-                           .add(home)
+                           .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
                            .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                            .add(LeftSubMenuBuilder
                                     .get("My Submenu", VaadinIcon.PLUS.create())
@@ -98,19 +91,11 @@ public class MainView extends AppLayoutRouterLayout {
                                              .build())
                                     .add(new LeftNavigationComponent("Contact1",
                                                                      VaadinIcon.CONNECT.create(),
-                                                                     View5.class
+                                                                     View3.class
                                     ))
-                                    .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
+                                    .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View4.class))
                                     .build())
-                           .add(LeftSubMenuBuilder
-                                    .get("My Submenu", VaadinIcon.PLUS.create())
-                                    .add(new LeftNavigationComponent("Contact2",
-                                                                     VaadinIcon.CONNECT.create(),
-                                                                     View7.class
-                                    ))
-                                    .add(new LeftNavigationComponent("More2", VaadinIcon.COG.create(), View8.class))
-                                    .build())
-                           .add(menu)
+                           .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View5.class))
                            .addToSection(new LeftClickableComponent("Set Behaviour FOOTER",
                                                                     VaadinIcon.COG.create(),
                                                                     clickEvent -> openModeSelector(variant)
@@ -123,7 +108,7 @@ public class MainView extends AppLayoutRouterLayout {
           .withTitle("App Layout")
           .withAppBar(AppBarBuilder
                           .get()
-                          .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                          .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                           .build())
           .withDesign(AppLayoutDesign.MATERIAL)
           .withAppMenu(TopAppMenuBuilder
@@ -147,38 +132,6 @@ public class MainView extends AppLayoutRouterLayout {
     }
   }
 
-  private void reloadNotifications() {
-    if (currentThread != null && !currentThread.isInterrupted()) {
-      currentThread.interrupt();
-    }
-    badgeHolder.clearCount();
-    notificationHolder.clearNotifications();
-    currentThread = new Thread(() -> {
-      try {
-        Thread.sleep(1000);
-        for (int i = 0; i < 3; i++) {
-          //Thread.sleep(5000);
-          getUI().ifPresent(ui -> ui.access(() -> {
-            addNotification(MEDIUM);
-            badgeHolder.increase();
-            badgeHolder.increase();
-          }));
-        }
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    });
-    currentThread.start();
-  }
-
-  private void addNotification(Priority priority) {
-    notificationHolder.addNotification(new DefaultNotification(
-        "Title" + badgeHolder.getCount(),
-        "Description ..............................................."
-        + badgeHolder.getCount(),
-        priority
-    ));
-  }
 
   private void setDrawerVariant(Behaviour variant) {
     this.variant = variant;
@@ -190,7 +143,7 @@ public class MainView extends AppLayoutRouterLayout {
   }
 
   class BehaviourSelector extends Dialog {
-    public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
+    BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
       VerticalLayout layout = new VerticalLayout();
       add(layout);
       RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();

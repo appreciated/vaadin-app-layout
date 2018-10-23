@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-@Route(value = "GridTest", layout = AppLayoutWrapperView.class)
+@Route(value = "GridTest", layout = MainAppLayout.class)
 public class GridTest extends VerticalLayout {
-    List<Person> people = new ArrayList<>();
+    private List<Person> people = new ArrayList<>();
 
     public GridTest() {
         Random random = new Random();

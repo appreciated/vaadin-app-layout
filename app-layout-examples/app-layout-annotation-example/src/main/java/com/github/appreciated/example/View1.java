@@ -7,7 +7,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "", layout = MainView.class)
+@Route(value = "", layout = MainAppLayout.class)
 @Caption("Home")
 @Icon(VaadinIcon.HOME)
 public class View1 extends VerticalLayout {
