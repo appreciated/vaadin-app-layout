@@ -31,7 +31,7 @@ public class IconBadgeButton extends Div {
         button.getElement().getStyle()
                 .set("width", "100%")
                 .set("height", "100%");
-        button.getElement().setAttribute("id", "button");
+        getElement().setAttribute("id", "button" + idCounter++);
         badge = new PaperBadge(this, "0");
         badge.getElement().getStyle()
                 .set("margin-top", "6px")
