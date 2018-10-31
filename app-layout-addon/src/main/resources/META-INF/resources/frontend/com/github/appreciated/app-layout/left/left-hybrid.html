@@ -48,12 +48,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-top: var(--app-layout-bar-height);
             }
 
-            /* non-overlay */
-
-            app-drawer {
-                --iron-icon-fill-color: #727272;
+            .app-bar-application-content {
+                width: 100%;
+                height: 100%;
+                padding-top: 64px;
+                box-sizing: border-box;
+                overflow: auto;
             }
 
+            /* non-overlay */
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
@@ -77,12 +80,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (min-width: 640px) {
                 #drawerLayout.small {
-                    --app-drawer-width: 70px;
+                    --app-drawer-width: var(--app-layout-drawer-small-width);
                     --app-layout-badge-width: var(--app-layout-badge-small-width);
                     --app-layout-badge-height: var(--app-layout-badge-small-height);
                     --app-layout-badge-top: var(--app-layout-badge-small-top);
                     --app-layout-badge-right: var(--app-layout-badge-small-right);
                     --app-layout-badge-color: transparent;
+                }
+
+                #drawerLayout.small .app-menu-item {
+                    overflow: hidden;
+                    padding: 0 21px;
+                }
+
+                #drawerLayout.small iron-icon[icon="icons:expand-more"],
+                #drawerLayout.small iron-icon[icon="icons:expand-less"] {
+                    color: transparent;
                 }
 
                 #drawerLayout.small #menu-header-title, #drawerLayout.small #menu-header-subtitle {
@@ -109,8 +122,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     transition: color 0.2s ease;
                 }
 
-                #drawerLayout.small app-menu-icon-item {
-                    color: transparent;
+                #drawerLayout {
+                    --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
+                }
+
+                app-menu {
+                    background: transparent;
                 }
 
                 #drawerLayout.small * {
@@ -118,14 +135,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
         </style>
-        <app-header-layout id="layout-wrapper">
+        <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixedv slot="header">
                 <app-toolbar style="height: var(--app-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
                 </app-toolbar>
             </app-header>
-            <app-drawer-layout id="drawerLayout">
+            <app-drawer-layout id="drawerLayout" fullbleed>
                 <app-drawer id="drawer" slot="drawer" swipe-open>
                     <div class="drawer-content" id="menu-elements"></div>
                 </app-drawer>

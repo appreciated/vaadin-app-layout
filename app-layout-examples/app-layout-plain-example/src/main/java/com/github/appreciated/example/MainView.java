@@ -1,24 +1,24 @@
 package com.github.appreciated.example;
 
-import com.github.appreciated.applayout.behaviour.AppLayout;
-import com.github.appreciated.applayout.behaviour.Behaviour;
-import com.github.appreciated.applayout.builder.AppLayoutBuilder;
-import com.github.appreciated.applayout.component.appbar.AppBarBuilder;
-import com.github.appreciated.applayout.component.appmenu.MenuHeaderComponent;
-import com.github.appreciated.applayout.component.appmenu.left.LeftClickableComponent;
-import com.github.appreciated.applayout.component.appmenu.left.LeftNavigationComponent;
-import com.github.appreciated.applayout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.applayout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.applayout.component.appmenu.top.TopClickableComponent;
-import com.github.appreciated.applayout.component.appmenu.top.TopNavigationComponent;
-import com.github.appreciated.applayout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.applayout.design.AppLayoutDesign;
-import com.github.appreciated.applayout.entity.DefaultBadgeHolder;
-import com.github.appreciated.applayout.notification.DefaultNotificationHolder;
-import com.github.appreciated.applayout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.applayout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.applayout.notification.entitiy.Priority;
-import com.github.appreciated.applayout.router.AppLayoutRouterLayout;
+import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
+import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
+import com.github.appreciated.app.layout.design.AppLayoutDesign;
+import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
+import com.github.appreciated.app.layout.notification.entitiy.Priority;
+import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -28,9 +28,9 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
 import java.util.function.Consumer;
 
-import static com.github.appreciated.applayout.entity.Section.FOOTER;
-import static com.github.appreciated.applayout.entity.Section.HEADER;
-import static com.github.appreciated.applayout.notification.entitiy.Priority.MEDIUM;
+import static com.github.appreciated.app.layout.entity.Section.FOOTER;
+import static com.github.appreciated.app.layout.entity.Section.HEADER;
+import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 /**
  * The main view contains a button and a template element.
@@ -47,7 +47,7 @@ public class MainView extends AppLayoutRouterLayout {
     @Override
     public AppLayout getAppLayout() {
         if (variant == null) {
-            variant = Behaviour.LEFT;
+            variant = Behaviour.LEFT_HYBRID;
             notifications = new DefaultNotificationHolder(newStatus -> {
             });
             badge = new DefaultBadgeHolder();
@@ -58,13 +58,14 @@ public class MainView extends AppLayoutRouterLayout {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(
-                            AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications)).build())
+                            AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notifications)).build())
                     .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(
                             LeftAppMenuBuilder.get()
-                                    .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.0", "frontend/images/logo.png"), HEADER)
+                                    .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.1", "frontend/images/logo.png"), HEADER)
                                     .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> openModeSelector(variant)), HEADER)
                                     .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
+                                    .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                                     .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                             .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                                     .add(new LeftNavigationComponent("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class))
@@ -91,7 +92,7 @@ public class MainView extends AppLayoutRouterLayout {
             return AppLayoutBuilder.get(variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder.get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL.create(), notifications))
+                            .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                             .build()
                     )
                     .withDesign(AppLayoutDesign.MATERIAL)
@@ -146,6 +147,8 @@ public class MainView extends AppLayoutRouterLayout {
             VerticalLayout layout = new VerticalLayout();
             add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
+            group.getElement().getStyle().set("display", "flex");
+            group.getElement().getStyle().set("flexDirection", "column");
             group.setItems(Behaviour.LEFT,
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,

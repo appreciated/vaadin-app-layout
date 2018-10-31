@@ -3,10 +3,9 @@
   --app-layout-font-size: 16px;
   --app-layout-unit-size: 37px;
   --app-layout-border-radius: 4px;
-  --app-layout-focus-color: #4285f4;
-  --app-layout-focus-contrast-color: #fff;
+    --app-layout-focus-color: var(--primary-color);
   --app-layout-bar-height: 64px;
-  --app-layout-bar-background-color: #4285f4;
+    --app-layout-bar-background-color: var(--primary-color);
   --app-layout-bar-font-color: #fff;
   --app-layout-bar-shadow: var(--shadow-elevation-4dp_-_box-shadow);
   --app-layout-bar-z-index: 10;
@@ -20,9 +19,9 @@
   --app-layout-drawer-width: 256px;
   --app-layout-drawer-small-width: 64px;
   --app-layout-menu-button-active-background-color: rgba(0, 0, 0, 0.1);
-  --app-layout-menu-button-active-font-color: #4285f4;
+    --app-layout-menu-button-active-font-color: var(--primary-color);
   --app-layout-menu-button-badge-background-color: #ffffff;
-  --app-layout-menu-button-badge-font-color: #4285f4;
+    --app-layout-menu-button-badge-font-color: var(--primary-color);
   --app-layout-menu-button-badge-border-radius: 5px;
   --app-layout-menu-button-horizontal-padding: 16px;
   --app-layout-menu-button-height: 48px;
@@ -32,8 +31,9 @@
   --app-bar-height: var(--app-layout-bar-height);
   --paper-drawer-title-background-color: #fafafa;
   --paper-drawer-title-color: #000;
-  --app-menu-background-color: rgba(0, 0, 0, 0) !important;
-  --app-menu-selected-bg-color: rgba(0, 0, 0, 0) !important;
+  --app-menu-background-color: #fafafa;
+    --app-menu-selected-bg-color: rgba(var(--primary-color), 0.1);
+  --app-menu-color: #727272;
   --app-layout-badge-width: 25px;
   --app-layout-badge-height: 25px;
   --app-layout-badge-top: 0px;
@@ -41,8 +41,8 @@
   --app-layout-badge-color: var(--app-layout-bar-font-color);
   --app-layout-badge-small-width: 5px;
   --app-layout-badge-small-height: 5px;
-    --app-layout-badge-small-top: -12px;
-    --app-layout-badge-small-right: -4px;
+  --app-layout-badge-small-top: -12px;
+  --app-layout-badge-small-right: -4px;
 }
 
 /*# sourceMappingURL=app-layout.css.map */
