@@ -3,11 +3,14 @@ package com.github.appreciated.app.layout.component.appmenu.left.builder;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  */
 public class LeftAppMenuBuilder {
 
-    ArrayList<Component> components = new ArrayList<>();
+    List<Component> components = new ArrayList<>();
 
     protected LeftAppMenuBuilder() {
     }
@@ -61,6 +64,14 @@ public class LeftAppMenuBuilder {
 
     public LeftAppMenuBuilder add(Component element) {
         return addToSection(element, Section.DEFAULT);
+    }
+
+    public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className){
+        return add(new LeftNavigationComponent(caption , icon , className));
+    }
+
+    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className  ){
+        return add(new LeftNavigationComponent(caption , icon , className));
     }
 
     public LeftAppMenuBuilder addToSection(Component element, Section section) {

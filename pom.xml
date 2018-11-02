@@ -70,6 +70,15 @@
 
 
   <dependencies>
+
+    <!--DEACTIVATE STATISTICS-->
+    <dependency>
+      <groupId>org.webjars.bowergithub.vaadin</groupId>
+      <artifactId>vaadin-usage-statistics</artifactId>
+      <version>1.0.7-optout</version>
+    </dependency>
+    <!--DEACTIVATE STATISTICS-->
+
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-core</artifactId>
