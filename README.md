@@ -27,7 +27,8 @@ Add the following lines to you POM
 --> 
 ```
 
-Excute the following command in the at the root of your project
+Execute the following command in the at the root of your project
+
 ```
 mvn install
 ```
@@ -48,7 +49,7 @@ cd <project-root-dir>/vaadin-app-layout/app-layout-addon
 mvn jetty:run
 ```
 
-To see the demo, navigate to http://localhost:8080/
+To see the demo, navigate to [http://localhost:8080/](http://localhost:8080/)
 
 ## Issue tracking
 

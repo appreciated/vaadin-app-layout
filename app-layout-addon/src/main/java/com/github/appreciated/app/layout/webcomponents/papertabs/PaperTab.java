@@ -24,7 +24,7 @@ public class PaperTab extends Component implements FlexComponent {
 
     private void add(Component component) {
         if (component != null) {
-            getElement().appendChild(new Element[]{component.getElement()});
+            getElement().appendChild(component.getElement());
         }
     }
 

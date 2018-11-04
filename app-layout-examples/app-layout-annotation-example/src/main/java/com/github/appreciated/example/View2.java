@@ -7,7 +7,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "view2", layout = MainView.class)
+@Route(value = "view2", layout = MainAppLayout.class)
 @Caption("Charts")
 @Icon(VaadinIcon.SPLINE_CHART)
 public class View2 extends AbstractView {

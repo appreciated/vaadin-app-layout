@@ -10,6 +10,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -60,6 +61,14 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton implement
         this.caption = caption;
         this.icon = icon;
         this.view = view;
+        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+    }
+
+    public LeftNavigationComponent(String caption, VaadinIcon icon, Class<? extends Component> className) {
+        super(caption, icon.create());
+        this.caption = caption;
+        this.icon = icon.create();
+        this.className = className;
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
