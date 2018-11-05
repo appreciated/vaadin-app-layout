@@ -1,11 +1,5 @@
 :root {
-
-
-  --primary-color: #243347;
-
-
-
-
+    --primary-color: var(--lumo-primary-color);
   --app-layout-background-color: #fafafa;
   --app-layout-font-size: 16px;
   --app-layout-unit-size: 37px;

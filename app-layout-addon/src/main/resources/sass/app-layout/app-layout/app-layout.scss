@@ -60,6 +60,7 @@ $al-menu-disable-active-style: false !default;
 $al-menu-submenu-max-height: 999px !default;
 
 :root {
+  --primary-color: var(--lumo-primary-color);
   --app-layout-background-color: #{$al-background-color};
   --app-layout-font-size: #{$al-font-size};
   --app-layout-unit-size: #{$al-unit-size};
