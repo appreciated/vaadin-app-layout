@@ -161,7 +161,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
   @Override
   public void init() {
     /**
-     * if no menu elements were hide the button and menu
+     * if no menu elements were added hide the button and menu
      */
     if (appMenuContainer == null) {
       hideMenu(true);
