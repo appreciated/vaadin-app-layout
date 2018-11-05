@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
 
-  <parent>
-    <groupId>com.github.appreciated</groupId>
-    <artifactId>app-layout-root</artifactId>
+    <parent>
+        <groupId>com.github.appreciated</groupId>
+        <artifactId>app-layout-root</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>app-layout-addon</artifactId>
+
     <version>2.0.1-SNAPSHOT</version>
-  </parent>
 
-  <artifactId>app-layout-addon</artifactId>
+    <name>App Layout Add-on</name>
+    <description>Integration of app-layout for Vaadin 10</description>
 
-  <version>2.0.1-SNAPSHOT</version>
+    <organization>
+        <name>appreciated</name>
+    </organization>
 
-  <name>App Layout Add-on</name>
-  <description>Integration of app-layout for Vaadin 10</description>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-  <organization>
-    <name>appreciated</name>
-  </organization>
+    <dependencies>
 
-  <licenses>
-    <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+        <!-- The following dependency is generated using webjars.org. If
+             it does not resolve, go to https://www.webjars.org and deploy it as "Bower GitHub"
+             -->
+        <!-- web-components elements -->
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>app-layout</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>iron-icons</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-icon-button</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-tabs</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.jifalops</groupId>
+            <artifactId>iron-collapse-button</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.oyeharry</groupId>
+            <artifactId>app-menu</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <!-- For Notifications -->
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-card</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>vaadin-paper-menu-button</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-badge</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>paper-ripple</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <!--End of web-components elements -->
 
-  <dependencies>
-
-    <!-- The following dependency is generated using webjars.org. If
-         it does not resolve, go to https://www.webjars.org and deploy it as "Bower GitHub"
-         -->
-    <!-- web-components elements -->
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>app-layout</artifactId>
-      <version>2.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>iron-icons</artifactId>
-      <version>2.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>paper-icon-button</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>paper-tabs</artifactId>
-      <version>2.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.jifalops</groupId>
-      <artifactId>iron-collapse-button</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.oyeharry</groupId>
-      <artifactId>app-menu</artifactId>
-      <version>2.1.2</version>
-    </dependency>
-    <!-- For Notifications -->
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>paper-card</artifactId>
-      <version>2.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.appreciated</groupId>
-      <artifactId>vaadin-paper-menu-button</artifactId>
-      <version>0.9.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>paper-badge</artifactId>
-      <version>2.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.bowergithub.polymerelements</groupId>
-      <artifactId>paper-ripple</artifactId>
-      <version>2.1.1</version>
-    </dependency>
-    <!--End of web-components elements -->
-
-    <dependency>
-      <groupId>org.ocpsoft.prettytime</groupId>
-      <artifactId>prettytime</artifactId>
-      <version>4.0.2.Final</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>4.0.2.Final</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
   <build>
     <plugins>
@@ -141,84 +141,84 @@
           </resources>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.3.7.v20160115</version>
-        <configuration>
-          <scanIntervalSeconds>-1</scanIntervalSeconds>
-          <useTestScope>true</useTestScope>
-          <!--<webApp>-->
-          <!--<resourceBases>-->
-          <!--<resourceBase>${project.basedir}/src/main/resources/META-INF/resources</resourceBase>-->
-          <!--<resourceBase>${project.basedir}/src/test/resources/</resourceBase>-->
-          <!--</resourceBases>-->
-          <!--</webApp>-->
-        </configuration>
-      </plugin>
+        <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.3.7.v20160115</version>
+            <configuration>
+                <scanIntervalSeconds>-1</scanIntervalSeconds>
+                <useTestScope>true</useTestScope>
+                <webApp>
+                    <resourceBases>
+                        <resourceBase>${project.basedir}/src/main/resources/META-INF/resources</resourceBase>
+                        <resourceBase>${project.basedir}/src/test/resources/</resourceBase>
+                    </resourceBases>
+                </webApp>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>directory</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.6</version>
-            <configuration>
-              <appendAssemblyId>false</appendAssemblyId>
-              <descriptors>
-                <descriptor>assembly/assembly.xml</descriptor>
-              </descriptors>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <phase>install</phase>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.0.1</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.4</version>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <quiet>true</quiet>
-              <additionalparam>-Xdoclint:none</additionalparam>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+    <profiles>
+        <profile>
+            <id>directory</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>install</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.4</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <quiet>true</quiet>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 
 
