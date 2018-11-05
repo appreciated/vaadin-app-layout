@@ -6,11 +6,14 @@ import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponen
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -18,7 +21,9 @@ import java.util.List;
  */
 public class LeftAppMenuBuilder {
 
-    List<Component> components = new ArrayList<>();
+    Map<Section, List<Component>> components = new HashMap<>();
+    LeftMenuComponent menu = new LeftMenuComponent();
+    private boolean sticky;
 
     protected LeftAppMenuBuilder() {
     }
@@ -66,22 +71,49 @@ public class LeftAppMenuBuilder {
         return addToSection(element, Section.DEFAULT);
     }
 
-    public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className){
-        return add(new LeftNavigationComponent(caption , icon , className));
+    public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className) {
+        return add(new LeftNavigationComponent(caption, icon, className));
     }
 
-    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className  ){
-        return add(new LeftNavigationComponent(caption , icon , className));
+    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className) {
+        return add(new LeftNavigationComponent(caption, icon, className));
     }
 
     public LeftAppMenuBuilder addToSection(Component element, Section section) {
-        components.add(element);
+        if (!components.containsKey(section)) {
+            components.put(section, new ArrayList<>());
+        }
+        components.get(section).add(element);
+        return this;
+    }
+
+    public LeftAppMenuBuilder withSticky(boolean sticky) {
+        if (sticky) {
+            menu.getElement().getStyle()
+                    .set("height", "100%")
+                    .set("padding", "0px");
+        }
+        this.sticky = sticky;
         return this;
     }
 
     public NavigationElementContainer build() {
-        LeftMenuComponent menu = new LeftMenuComponent();
-        menu.add(components.toArray(new Component[0]));
+        if (components.containsKey(Section.HEADER)) {
+            menu.add(components.get(Section.HEADER).toArray(new Component[0]));
+        }
+        if (components.containsKey(Section.DEFAULT)) {
+            menu.add(components.get(Section.DEFAULT).toArray(new Component[0]));
+        }
+        if (sticky) {
+            Div div = new Div();
+            div.setWidth("100%");
+            div.setHeight("50px");
+            div.getStyle().set("flex", "1 1");
+            menu.add(div);
+        }
+        if (components.containsKey(Section.FOOTER)) {
+            menu.add(components.get(Section.FOOTER).toArray(new Component[0]));
+        }
         return menu;
     }
 }
