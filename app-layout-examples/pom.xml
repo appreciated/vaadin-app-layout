@@ -26,15 +26,11 @@
     <maven>3</maven>
   </prerequisites>
 
-
-
-
   <modules>
     <module>app-layout-annotation-example</module>
     <module>app-layout-plain-example</module>
+    <module>app-layout-theme-example</module>
   </modules>
-
-
 
   <dependencies>
     <dependency>
@@ -62,14 +58,5 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>${jetty.version}</version>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>
