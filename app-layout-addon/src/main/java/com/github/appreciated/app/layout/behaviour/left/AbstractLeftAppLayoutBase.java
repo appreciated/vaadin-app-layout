@@ -1,7 +1,5 @@
 package com.github.appreciated.app.layout.behaviour.left;
 
-import java.util.Arrays;
-
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
@@ -16,6 +14,9 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
@@ -138,16 +139,46 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
   @Override
   public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-    return appMenuContainer.setActiveNavigationComponent(element);
+    if (appMenuContainer != null) {
+      return appMenuContainer.setActiveNavigationComponent(element);
+    }
+    return false;
   }
 
   @Override
-  public Class<? extends HasElement> getClosestNavigationElement(Class<? extends HasElement> element) {
-    return appMenuContainer.getClosestNavigationElement(element);
+  public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
+    if (appMenuContainer != null) {
+      return appMenuContainer.getClosestNavigationElement(element);
+    }
+    return Optional.empty();
   }
 
   @Override
   public Component getComponent() {
     return this;
+  }
+
+  @Override
+  public void init() {
+    /**
+     * if no menu elements were hide the button and menu
+     */
+    if (appMenuContainer == null) {
+      hideMenu(true);
+    }
+  }
+
+  public void hideMenu(boolean hide) {
+    if (hide) {
+      drawer.getElement().getStyle().set("display", "none");
+      paperIconButton.getElement().getStyle().set("display", "none");
+      getElement().getStyle().set("--app-layout-drawer-width", "0px");
+      getElement().getStyle().set("--app-layout-drawer-small-width", "0px");
+    } else {
+      drawer.getElement().getStyle().remove("display");
+      paperIconButton.getElement().getStyle().remove("display");
+      getElement().getStyle().remove("--app-layout-drawer-width");
+      getElement().getStyle().remove("--app-layout-drawer-small-width");
+    }
   }
 }
