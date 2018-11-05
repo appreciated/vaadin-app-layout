@@ -52,10 +52,10 @@ body {
   --app-layout-bar-height: 64px;
   --app-layout-bar-background-color: #{var(--app-layout-primary-color)};
   --app-layout-bar-font-color: #fff;
-  --app-layout-bar-shadow: #{var(--lumo-box-shadow-m)};
+  --app-layout-bar-shadow: #{var(--lumo-box-shadow-s)};
   --app-layout-bar-z-index: 10;
 
-  --app-layout-drawer-shadow: #{var(--lumo-box-shadow-m)};
+  --app-layout-drawer-shadow: #{var(--lumo-box-shadow-s)};
   --app-layout-drawer-background-color: #{var(--lumo-base-color)};
 
   --app-layout-drawer-submenu-indention: 0px;
