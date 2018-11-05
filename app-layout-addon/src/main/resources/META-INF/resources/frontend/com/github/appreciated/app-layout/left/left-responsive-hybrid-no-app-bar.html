@@ -17,9 +17,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="app-layout-left-responsive-hybrid-no-app-bar">
     <template>
         <style>
+
             :root {
-                --paper-badge-background: #ffffff;
-                --paper-badge-text-color: #000;
+                --paper-badge-background: var(--app-layout-badge-background);
+                --paper-badge-text-color: var(--app-layout-badge-font-color);
+                --primary-color: var(--app-layout-primary-color);
             }
 
             app-header {

@@ -11,6 +11,7 @@ import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -35,6 +36,11 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         notifications = new DefaultNotificationHolder(newStatus -> {
         });
+
+        notifications.addNotification(new DefaultNotification("Test1", "Test2"));
+        notifications.addNotification(new DefaultNotification("Test1", "Test2"));
+        notifications.addNotification(new DefaultNotification("Test1", "Test2"));
+        notifications.addNotification(new DefaultNotification("Test1", "Test2"));
 
         badge = new DefaultBadgeHolder();
 

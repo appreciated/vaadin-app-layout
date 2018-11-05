@@ -30,10 +30,7 @@ $al-border-radius: 4px !default;
 $al-bar-height: 64px !default;
 $al-bar-background-color: #4285f4 !default;
 $al-bar-font-color: color-contrast($al-bar-background-color) !default;
-$al-bar-shadow: var(--shadow-elevation-4dp_-_box-shadow) !default;
 $al-bar-z-index: 10 !default;
-
-$al-drawer-shadow: var(--shadow-elevation-3dp_-_box-shadow) !default;
 $al-drawer-background-color: lighten($al-background-color, 5%) !default;
 
 $al-drawer-submenu-indention: 0px !default;
@@ -59,21 +56,21 @@ $al-menu-section-padding: round($al-unit-size) !default;
 $al-menu-disable-active-style: false !default;
 $al-menu-submenu-max-height: 999px !default;
 
-:root {
-  --primary-color: var(--lumo-primary-color);
+html {
+  --app-layout-primary-color: #{var(--lumo-primary-color)};
   --app-layout-background-color: #{$al-background-color};
   --app-layout-font-size: #{$al-font-size};
   --app-layout-unit-size: #{$al-unit-size};
   --app-layout-border-radius: #{$al-border-radius};
-  --app-layout-focus-color: #{var(--primary-color)};
+  --app-layout-focus-color: #{ var(--app-layout-primary-color)};
 
   --app-layout-bar-height: #{$al-bar-height};
-  --app-layout-bar-background-color: #{var(--primary-color)};
+  --app-layout-bar-background-color: #{var(--app-layout-primary-color)};
   --app-layout-bar-font-color: #{$al-bar-font-color};
-  --app-layout-bar-shadow: #{$al-bar-shadow};
+  --app-layout-bar-shadow: #{var(--lumo-box-shadow-s)};
   --app-layout-bar-z-index: #{$al-bar-z-index};
 
-  --app-layout-drawer-shadow: #{$al-drawer-shadow};
+  --app-layout-drawer-shadow: #{var(--lumo-box-shadow-s)};
   --app-layout-drawer-background-color: #{$al-drawer-background-color};
 
   --app-layout-drawer-submenu-indention: #{$al-drawer-submenu-indention};
@@ -98,12 +95,10 @@ $al-menu-submenu-max-height: 999px !default;
 
   --app-layout-menu-submenu-max-height: #{$al-menu-submenu-max-height};
   --app-bar-height: var(--app-layout-bar-height);
-  --paper-drawer-title-background-color: #{$al-background-color};
-  --paper-drawer-title-color: #{color-contrast($al-background-color)};
 
   --app-menu-background-color: #{$al-background-color};
-  --app-menu-selected-bg-color: #{bg-opacity(var(--primary-color), .1)};
-  --app-menu-color: #727272;
+  --app-menu-selected-bg-color: #{bg-opacity(var(--app-layout-primary-color), .1)};
+  --app-menu-color: var(--lumo-secondary-text-color);
 
   --app-layout-badge-width: 25px;
   --app-layout-badge-height: 25px;
@@ -114,4 +109,11 @@ $al-menu-submenu-max-height: 999px !default;
   --app-layout-badge-small-height: 5px;
   --app-layout-badge-small-top: -12px;
   --app-layout-badge-small-right: -4px;
+
+  --app-layout-badge-background: var(--lumo-primary-contrast-color);
+  --app-layout-badge-font-color: var(--lumo-primary-text-color);
+
+  --paper-drawer-title-background-color: #{$al-background-color};
+  --paper-drawer-title-color: #{color-contrast($al-background-color)};
+
 }
