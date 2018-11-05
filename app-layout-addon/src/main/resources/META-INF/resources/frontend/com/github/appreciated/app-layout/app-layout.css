@@ -20,9 +20,9 @@ html {
   --app-layout-drawer-width: 256px;
   --app-layout-drawer-small-width: 64px;
   --app-layout-menu-button-active-background-color: rgba(0, 0, 0, 0.1);
-  --app-layout-menu-button-active-font-color: var(--primary-color);
+    --app-layout-menu-button-active-font-color: var(--app-layout-primary-color);
   --app-layout-menu-button-badge-background-color: #ffffff;
-  --app-layout-menu-button-badge-font-color: var(--primary-color);
+    --app-layout-menu-button-badge-font-color: var(--app-layout-primary-color);
   --app-layout-menu-button-badge-border-radius: 5px;
   --app-layout-menu-button-horizontal-padding: 16px;
   --app-layout-menu-button-height: 48px;
