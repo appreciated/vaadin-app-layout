@@ -56,7 +56,8 @@ body {
   --app-layout-bar-z-index: 10;
 
   --app-layout-drawer-shadow: #{var(--lumo-box-shadow-s)};
-  --app-layout-drawer-background-color: #{var(--lumo-base-color)};
+  --app-layout-drawer-background-base-color: #{var(--lumo-base-color)};
+  --app-layout-drawer-background-color: #{var(--lumo-contrast-5pct)};
 
   --app-layout-drawer-submenu-indention: 0px;
   --app-layout-drawer-submenu-small-indention: #{$al-drawer-submenu-small-indention};
@@ -101,4 +102,8 @@ body {
   --paper-drawer-title-background-color: #{var(--lumo-base-color)};
   --paper-drawer-title-color: #{var(--lumo-body-text-color)};
 
+  --app-layout-notification-font-color: #{var(--lumo-body-text-color)};
+  --app-layout-notification-background-base-color: #{var(--lumo-base-color)};
+  --app-layout-notification-background-color: #{var(--lumo-contrast-10pct)};
+  --app-layout-notification-shadow: #{var(--lumo-box-shadow-m)};
 }

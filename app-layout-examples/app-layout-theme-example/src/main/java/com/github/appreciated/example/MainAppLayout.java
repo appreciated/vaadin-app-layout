@@ -13,7 +13,7 @@ import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
@@ -26,7 +26,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@HtmlImport("frontend://theming/custom.html")
+//@HtmlImport("frontend://theming/custom.html")
 public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications;
     private DefaultBadgeHolder badge;
@@ -79,12 +79,18 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                         .build())
                                 .add(new LeftNavigationComponent("Contact1",
                                         VaadinIcon.CONNECT.create(),
-                                        View3.class
+                                        View5.class
                                 ))
-                                .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View4.class))
+                                .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
                                 .build())
-                        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View5.class))
+                        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
                         .build())
                 .build();
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
     }
 }
