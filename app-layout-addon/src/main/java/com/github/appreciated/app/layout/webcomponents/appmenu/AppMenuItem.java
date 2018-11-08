@@ -7,74 +7,78 @@ import com.vaadin.flow.component.html.Anchor;
 
 public class AppMenuItem extends Anchor {
 
-    private AppMenuIconItem item;
-    private AppMenu parent;
+  private AppMenuIconItem item;
+  private AppMenu parent;
 
-    public AppMenuItem() {
-        getElement().getClassList().add("app-menu-item");
-        getElement().setAttribute("href", "javascript:void(0)");
-        getElement().getStyle().set("position", "relative");
-        getElement().appendChild(new PaperRipple().getElement());
-    }
+  public AppMenuItem() {
+    getElement().getClassList().add("app-menu-item");
+    getElement().setAttribute("href", "javascript:void(0)");
+    getElement().getStyle().set("position", "relative");
+    getElement().appendChild(new PaperRipple().getElement());
+  }
 
-    private AppMenuItem(String sectionName, String icon, boolean hasIcon) {
-        this();
-        if (hasIcon) {
-            item = new AppMenuIconItem();
-            item.setIcon(icon);
-            item.setText(sectionName);
-            add(item);
-        }
-        setText(sectionName);
+  private AppMenuItem(String sectionName, String icon, boolean hasIcon) {
+    this();
+    if (hasIcon) {
+      item = new AppMenuIconItem();
+      item.setIcon(icon);
+      item.setText(sectionName);
+      add(item);
     }
+    setText(sectionName);
+  }
 
-    public AppMenuItem(String sectionName) {
-        this(sectionName, null, false);
-    }
+  public AppMenuItem(String sectionName) {
+    this(sectionName, null, false);
+  }
 
-    public AppMenuItem(String sectionName, String icon) {
-        this(sectionName, icon, true);
-        setIcon(icon);
-    }
+  public AppMenuItem(String sectionName, String icon) {
+    this(sectionName, icon, true);
+    setIcon(icon);
+  }
 
-    public AppMenuItem(String sectionName, String icon, ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
-        this(sectionName, icon);
-        item.setClickListener(listener);
-    }
+  public AppMenuItem(String sectionName, String icon,
+      ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+    this(sectionName, icon);
+    item.setClickListener(listener);
+  }
 
-    public void setText(String sectionName) {
-        if (item != null) {
-            item.setText(sectionName);
-        } else {
-            getElement().setText(sectionName);
-        }
+  @Override
+  public void setText(String sectionName) {
+    if (item != null) {
+      item.setText(sectionName);
+    } else {
+      getElement().setText(sectionName);
     }
+  }
 
-    public void setIcon(String icon) {
-        if (item == null) {
-            item = new AppMenuIconItem();
-            add(item);
-        }
-        item.setIcon(icon);
+  public void setIcon(String icon) {
+    if (item == null) {
+      item = new AppMenuIconItem();
+      item.setText(getElement().getText());
+      getElement().setText(null);
+      add(item);
     }
+    item.setIcon(icon);
+  }
 
-    public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
-        if (item != null) {
-            item.setClickListener(listener);
-        } else {
-            getElement().addEventListener("click", domEvent -> listener.onComponentEvent(null));
-        }
+  public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+    if (item != null) {
+      item.setClickListener(listener);
+    } else {
+      getElement().addEventListener("click", domEvent -> listener.onComponentEvent(null));
     }
+  }
 
-    public AppMenuIconItem getItem() {
-        return item;
-    }
+  public AppMenuIconItem getItem() {
+    return item;
+  }
 
-    public void setParent(AppMenu parent) {
-        this.parent = parent;
-    }
+  public void setParent(AppMenu parent) {
+    this.parent = parent;
+  }
 
-    public void setActive() {
-        parent.setSelected(this);
-    }
+  public void setActive() {
+    parent.setSelected(this);
+  }
 }
