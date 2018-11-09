@@ -55,7 +55,7 @@ public class NotificationView extends PaperCard {
             descriptionWrapper.add(image);
         }
         if (!info.isRead()) {
-            getElement().getStyle().set("border-left", "3px solid var(--app-layout-bar-background-color)");
+            getElement().getStyle().set("border-left", "3px solid var(--app-layout-notification-highlight-color)");
         }
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);

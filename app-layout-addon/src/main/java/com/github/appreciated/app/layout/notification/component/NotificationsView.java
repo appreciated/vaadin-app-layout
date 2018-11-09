@@ -24,7 +24,7 @@ public class NotificationsView extends Composite<VerticalLayout> {
         content.setMargin(false);
         content.setPadding(false);
         content.setWidth("300px");
-        getElement().getStyle().set("padding", "5px");
+        getElement().getStyle().set("padding", "5px 10px 18px 8px");
         this.holder = holder;
         initView();
     }
