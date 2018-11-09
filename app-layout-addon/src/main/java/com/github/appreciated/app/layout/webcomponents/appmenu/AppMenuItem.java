@@ -13,7 +13,10 @@ public class AppMenuItem extends Anchor {
     public AppMenuItem() {
         getElement().getClassList().add("app-menu-item");
         getElement().setAttribute("href", "javascript:void(0)");
-        getElement().getStyle().set("position", "relative");
+        getElement().getStyle().set("position", "relative")
+                .set("padding", "var(--app-layout-menu-button-padding)")
+                .set("margin", "var(--app-layout-menu-button-margin)")
+                .set("border-radius", "var(--app-layout-menu-button-border-radius)");
         getElement().appendChild(new PaperRipple().getElement());
     }
 

@@ -13,6 +13,8 @@ public class AppMenuIconItem extends Component implements HasSize {
         setWidth("100%");
         setHeight("48px");
         getElement().getStyle().set("line-height", "48px");
+
+
         getElement().addEventListener("click", domEvent -> {
             if (this.listener != null) {
                 this.listener.onComponentEvent(new ClickEvent<>(this));
