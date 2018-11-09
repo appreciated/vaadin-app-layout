@@ -19,7 +19,8 @@ html {
     --app-layout-drawer-small-width: 63px;
     --app-layout-menu-button-height: 48px;
     --app-layout-menu-button-padding: 0 14px;
-    --app-layout-menu-button-margin: 0 10px;
+    --app-layout-menu-button-margin: 0;
+    --app-layout-menu-padding: 5px;
     --app-layout-menu-button-border-radius: var(--lumo-border-radius);
     --app-layout-menu-submenu-max-height: 999px;
     --app-bar-height: var(--app-layout-bar-height);

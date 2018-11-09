@@ -44,7 +44,10 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
         ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");
         toggleWrapper.add(item, ironIcon);
         menu = new AppMenu();
+
         menu.getElement().setAttribute("slot", "submenu-content");
+        menu.getStyle()
+                .set("border-radius", "var(--app-layout-menu-button-border-radius)");
 
         getElement().addSynchronizedPropertyEvent("app-submenu-open");
         getElement().addSynchronizedPropertyEvent("app-submenu-close");
