@@ -43,7 +43,7 @@ public class NotificationsView extends Composite<VerticalLayout> {
 
         content.removeAll();
         if (holder.getNotificationSize() > 0) {
-            content.add(this.holder.getNotificationViews(false));
+			content.add(this.holder.getNotificationViews(showAll.value));
             getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
 
             if (!showAll.value && this.holder.getNotificationSize() > 4) {
