@@ -10,12 +10,21 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.server.Command;
 
 public class NotificationsView extends Composite<VerticalLayout> {
 
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
     private NotificationHolder holder;
+	private String noNotificationText = "No Notifications";
+	private String showAllText = "Show all";
+	private Command showAllCommand = () -> {
+		showAll.value = true;
+		initView();
+	};
+	private Button showAllButton;
+	private Label noNotificationsLabel;
 
     public NotificationsView(NotificationHolder holder) {
 
@@ -38,20 +47,19 @@ public class NotificationsView extends Composite<VerticalLayout> {
             getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
 
             if (!showAll.value && this.holder.getNotificationSize() > 4) {
-                Button showAllButton = new Button("Show all");
+				showAllButton = new Button(showAllText);
                 showAllButton.setWidth("100%");
                 showAllButton.setHeight("28px");
                 showAllButton.addClickListener(clickEvent -> {
-                    showAll.value = true;
-                    initView();
+					showAllCommand.execute();
                 });
                 content.add(showAllButton);
             }
         } else {
-            Label label = new Label("No Notifications");
-            label.getStyle().set("color", "var(--lumo-shade)")
+			noNotificationsLabel = new Label(noNotificationText);
+			noNotificationsLabel.getStyle().set("color", "var(--lumo-shade)")
                     .set("font-size", "var(--lumo-size-xxs)");
-            HorizontalLayout wrapper = new HorizontalLayout(label);
+			HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
             wrapper.setWidth("100%");
             wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
             PaperCard card = new PaperCard(wrapper);
@@ -76,5 +84,22 @@ public class NotificationsView extends Composite<VerticalLayout> {
         this.blurListenerEnabled = blurListener;
     }
 
+	public void setShowAllCommand(Command showAllCommand) {
+		this.showAllCommand = showAllCommand;
+	}
+
+	public void setShowAllText(String showAllText) {
+		this.showAllText = showAllText;
+		if (this.showAllButton != null) {
+			showAllButton.setText(showAllText);
+		}
+	}
+
+	public void setNoNotificationText(String noNotificationText) {
+		this.noNotificationText = noNotificationText;
+		if (this.noNotificationsLabel != null) {
+			noNotificationsLabel.setText(noNotificationText);
+		}
+	}
 
 }
