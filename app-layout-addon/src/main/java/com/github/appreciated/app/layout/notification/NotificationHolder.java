@@ -105,6 +105,7 @@ public abstract class NotificationHolder<T extends Notification> {
     public void onNotificationClicked(T info) {
         notifyClickListeners(info);
         notifyListeners();
+        updateBadgeCaptions();
     }
 
     private void notifyListeners() {
@@ -121,9 +122,6 @@ public abstract class NotificationHolder<T extends Notification> {
 
     private void notifyClickListeners(T info) {
         info.setRead(true);
-        if (!info.isSticky()) {
-            removeNotification(info);
-        }
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
     }
 
@@ -143,7 +141,7 @@ public abstract class NotificationHolder<T extends Notification> {
         return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
     }
 
-    public Notification getRecentNotification() {
+    public Notification getMostRecentNotification() {
         return recentNotification;
     }
 
@@ -181,8 +179,11 @@ public abstract class NotificationHolder<T extends Notification> {
 
     abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
 
-    public void onNotificationDismissed(Notification info) {
-
+    public void onNotificationDismissed(T info) {
+        if (!info.isSticky()) {
+            removeNotification(info);
+        }
+        notifyListeners();
     }
 
     public interface NotificationsChangeListener {

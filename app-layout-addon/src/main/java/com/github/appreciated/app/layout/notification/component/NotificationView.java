@@ -10,12 +10,13 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.DomListenerRegistration;
 
 public class NotificationView extends PaperCard {
 
-    private final IconButton dismissButton;
-    private final Notification notification;
+    private final VerticalLayout wrapper;
+    private IconButton dismissButton;
     private NotificationListener listener;
     private PaperRipple ripple;
     private DomListenerRegistration registration;
@@ -25,7 +26,6 @@ public class NotificationView extends PaperCard {
     }
 
     public NotificationView(Notification info, NotificationListener listener) {
-        notification = info;
         getStyle()
                 .set("width", "100%")
                 .set("color", "#000000")
@@ -68,30 +68,38 @@ public class NotificationView extends PaperCard {
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
-        add(headerLine);
-        add(descriptionWrapper);
-        dismissButton = new IconButton(VaadinIcon.CLOSE_BIG.create(), paperIconButtonClickEvent -> listener.onDismiss(info));
-        add(dismissButton);
-        dismissButton.getStyle()
-                .set("position", "absolute")
-                .set("right", "0px")
-                .set("margin", "1px 5px 0 0")
-                .set("top", "0px");
-        dismissButton.getButton().getElement().getStyle().set("line-height", "0px");
-        dismissButton.setWidth("27px");
-        dismissButton.setHeight("27px");
+        wrapper = new VerticalLayout(headerLine, descriptionWrapper);
+        wrapper.setMargin(false);
+        wrapper.setPadding(false);
+        wrapper.setSpacing(false);
+        add(wrapper);
 
         getElement().getClassList().add(info.getStyle());
         setNotificationListener(listener);
+
+
+        if (info.isDismissable()) {
+            dismissButton = new IconButton(VaadinIcon.CLOSE_BIG.create(), paperIconButtonClickEvent -> listener.onDismiss());
+            dismissButton.getStyle()
+                    .set("position", "absolute")
+                    .set("right", "0px")
+                    .set("margin", "1px 5px 0 0")
+                    .set("top", "0px");
+            dismissButton.getButton().getElement().getStyle().set("line-height", "0px");
+            dismissButton.setWidth("27px");
+            dismissButton.setHeight("27px");
+            add(dismissButton);
+        }
         addRipple();
+
     }
 
     public void setNotificationListener(NotificationListener listener) {
         this.listener = listener;
-        if (listener != null && registration != null) {
+        if (listener != null && registration == null) {
             registration = getElement().addEventListener("click", domEvent -> {
                 if (listener != null) {
-                    listener.onClick(this.notification);
+                    listener.onClick();
                 }
             });
         }
@@ -99,8 +107,9 @@ public class NotificationView extends PaperCard {
     }
 
     private void addRipple() {
-        if (listener != null && ripple != null) {
+        if (listener != null && ripple == null) {
             this.ripple = new PaperRipple();
+            wrapper.add(this.ripple);
         }
     }
 }

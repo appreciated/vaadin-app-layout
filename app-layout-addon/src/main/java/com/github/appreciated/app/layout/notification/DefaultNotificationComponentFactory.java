@@ -11,12 +11,12 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
     public Component getComponent(NotificationHolder holder, Notification info) {
         return new NotificationView(info, new NotificationListener() {
             @Override
-            public void onClick(Notification notification) {
+            public void onClick() {
                 holder.onNotificationClicked(info);
             }
 
             @Override
-            public void onDismiss(Notification notification) {
+            public void onDismiss() {
                 holder.onNotificationDismissed(info);
             }
         });
