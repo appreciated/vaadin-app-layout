@@ -1,12 +1,17 @@
 package com.github.appreciated.app.layout.notification;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * This Class is a controller for multiple {@link Notification} instances
@@ -21,6 +26,7 @@ public abstract class NotificationHolder<T extends Notification> {
     private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
+	private Comparator<T> comparator = Comparable::compareTo;
 
     public NotificationHolder(NotificationClickListener<T> listener) {
         Objects.requireNonNull(listener);
@@ -51,7 +57,7 @@ public abstract class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted(Comparable::compareTo).map(this::getComponent).collect(Collectors.toList());
+		return components.stream().sorted(comparator).map(this::getComponent).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -90,14 +96,14 @@ public abstract class NotificationHolder<T extends Notification> {
         }
         return components
                 .stream()
-                .sorted(Comparable::compareTo)
+				.sorted(comparator)
                 .map(this::getComponent)
                 .collect(Collectors.toList())
                 .toArray(new Component[]{});
     }
 
     public List<T> getNotifications() {
-        notifications.sort(Comparable::compareTo);
+		notifications.sort(comparator);
         return notifications;
     }
 
@@ -126,6 +132,10 @@ public abstract class NotificationHolder<T extends Notification> {
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
     }
 
+	public void setComparator(Comparator<T> comparator) {
+		this.comparator = comparator;
+	}
+
     public void addClickListener(NotificationClickListener<T> listener) {
         this.clickListeners.add(listener);
     }
@@ -152,7 +162,7 @@ public abstract class NotificationHolder<T extends Notification> {
         updateBadgeCaption(text);
     }
 
-    private void updateBadgeCaptions() {
+	public void updateBadgeCaptions() {
         badgeHolderComponents.forEach(this::updateBadgeCaption);
     }
 
