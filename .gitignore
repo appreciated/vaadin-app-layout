@@ -3,6 +3,10 @@
 *.css
 *.scss.cache
 /.designer/
+.settings
+.classpath
+.project
+**/target/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es5/
 /app-layout-addon/src/main/webapp/VAADIN/frontend/es6/
 /app-layout-demo/build-tools/node/
