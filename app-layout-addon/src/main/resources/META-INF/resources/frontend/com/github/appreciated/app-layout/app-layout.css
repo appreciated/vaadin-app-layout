@@ -4,7 +4,7 @@ html {
     --app-layout-font-size-header: var(--lumo-font-size-m);
     --app-layout-font-size-menu: var(--lumo-font-size-m);
     --app-layout-font-size-notifications: var(--lumo-font-size-m);
-    --app-layout-bar-height: 64px;
+    --app-layout-bar-height: calc(var(--lumo-size-s) * 2.1);
     --app-layout-bar-background-base-color: var(--lumo-base-color);
     --app-layout-bar-background-color: var(--lumo-base-color);
     --app-layout-bar-font-color: var(--lumo-contrast-70pct);
@@ -15,9 +15,9 @@ html {
     --app-layout-drawer-background-color: var(--lumo-base-color);
     --app-layout-drawer-submenu-background-color: var(--lumo-contrast-10pct);
     --app-layout-drawer-font-color: var(--lumo-contrast-90pct);
-    --app-layout-drawer-width: 256px;
-    --app-layout-drawer-small-width: 63px;
-    --app-layout-menu-button-height: 48px;
+    --app-layout-drawer-width: calc(var(--lumo-size-xl) * 4.6);
+    --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
+    --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
     --app-layout-menu-button-padding: 0 14px;
     --app-layout-menu-button-margin: 0;
     --app-layout-menu-padding: 5px;
@@ -27,8 +27,8 @@ html {
     --app-menu-background-color: var(--lumo-base-color);
     --app-menu-selected-bg-color: var(--lumo-primary-color-10pct);
     --app-menu-color: var(--lumo-secondary-text-color);
-    --app-layout-badge-width: 25px;
-    --app-layout-badge-height: 25px;
+    --app-layout-badge-width: calc(var(--lumo-size-s) * 0.8);
+    --app-layout-badge-height: calc(var(--lumo-size-s) * 0.8);
     --app-layout-badge-top: 0px;
     --app-layout-badge-right: 0px;
     --app-layout-badge-color: var(--app-layout-bar-font-color);
@@ -46,6 +46,7 @@ html {
     --app-layout-notification-background-color: var(--lumo-base-color);
     --app-layout-notification-shadow: var(--lumo-box-shadow-m);
     --paper-icon-button-ink-color: var(--lumo-contrast);
+    --app-drawer-width: var(--app-layout-drawer-width);
 }
 
 [theme~="dark"] {

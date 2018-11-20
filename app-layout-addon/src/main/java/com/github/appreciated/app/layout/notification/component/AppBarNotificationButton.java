@@ -26,7 +26,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
                 .set("--shadow-elevation-2dp_-_box-shadow", "0px")
-                .set("--paper-menu-button-dropdown_-_margin-top", "64px")
+                .set("--paper-menu-button-dropdown_-_margin-top", "var(--app-layout-bar-height)")
                 .set("--paper-menu-button-dropdown_-_margin-right", "7px");
 
         setHorizontalAlignment(HorizontalAlignment.RIGHT);

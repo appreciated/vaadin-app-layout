@@ -22,8 +22,8 @@ public class IconButton extends Div {
 
     public IconButton(Icon icon, ComponentEventListener<ClickEvent<PaperIconButton>> listener) {
         setId("menu-btn-" + idCounter++);
-        setWidth("48px");
-        setHeight("48px");
+        setWidth("var(--app-layout-menu-button-height)");
+        setHeight("var(--app-layout-menu-button-height)");
         button = new PaperIconButton(icon.getElement().getAttribute("icon"));
         button.getElement().getStyle()
                 .set("width", "100%")
