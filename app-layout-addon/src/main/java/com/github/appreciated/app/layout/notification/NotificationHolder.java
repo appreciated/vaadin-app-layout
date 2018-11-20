@@ -1,17 +1,12 @@
 package com.github.appreciated.app.layout.notification;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This Class is a controller for multiple {@link Notification} instances
@@ -185,6 +180,10 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+
+    public void onNotificationDismissed(Notification info) {
+
+    }
 
     public interface NotificationsChangeListener {
         default void onNotificationChanges(NotificationHolder holder) {
