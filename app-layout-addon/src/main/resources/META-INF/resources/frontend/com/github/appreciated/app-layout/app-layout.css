@@ -1,55 +1,57 @@
-:root {
-
-
-  --primary-color: #243347;
-
-
-
-
-  --app-layout-background-color: #fafafa;
-  --app-layout-font-size: 16px;
-  --app-layout-unit-size: 37px;
-  --app-layout-border-radius: 4px;
-    --app-layout-focus-color: var(--primary-color);
-  --app-layout-bar-height: 64px;
-    --app-layout-bar-background-color: var(--primary-color);
-  --app-layout-bar-font-color: #fff;
-  --app-layout-bar-shadow: var(--shadow-elevation-4dp_-_box-shadow);
-  --app-layout-bar-z-index: 10;
-  --app-layout-drawer-shadow: var(--shadow-elevation-3dp_-_box-shadow);
-  --app-layout-drawer-background-color: white;
-  --app-layout-drawer-submenu-indention: 0px;
-  --app-layout-drawer-submenu-small-indention: 0px;
-  --app-layout-drawer-submenu-background-color: rgba(0, 0, 0, 0.05);
-  --app-layout-drawer-font-color: #000;
-  --app-layout-drawer-persistent-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
-  --app-layout-drawer-width: 256px;
-  --app-layout-drawer-small-width: 64px;
-  --app-layout-menu-button-active-background-color: rgba(0, 0, 0, 0.1);
-    --app-layout-menu-button-active-font-color: var(--primary-color);
-  --app-layout-menu-button-badge-background-color: #ffffff;
-    --app-layout-menu-button-badge-font-color: var(--primary-color);
-  --app-layout-menu-button-badge-border-radius: 5px;
-  --app-layout-menu-button-horizontal-padding: 16px;
-  --app-layout-menu-button-height: 48px;
-  --app-layout-menu-button-spacing: 12px;
-  --app-layout-menu-section-padding: 37px;
-  --app-layout-menu-submenu-max-height: 999px;
-  --app-bar-height: var(--app-layout-bar-height);
-  --paper-drawer-title-background-color: #fafafa;
-  --paper-drawer-title-color: #000;
-  --app-menu-background-color: #fafafa;
-    --app-menu-selected-bg-color: rgba(var(--primary-color), 0.1);
-  --app-menu-color: #727272;
-  --app-layout-badge-width: 25px;
-  --app-layout-badge-height: 25px;
-  --app-layout-badge-top: 0px;
-  --app-layout-badge-right: 0px;
-  --app-layout-badge-color: var(--app-layout-bar-font-color);
-  --app-layout-badge-small-width: 5px;
-  --app-layout-badge-small-height: 5px;
-  --app-layout-badge-small-top: -12px;
-  --app-layout-badge-small-right: -4px;
+html {
+    --app-layout-primary-color: var(--lumo-primary-color);
+    --app-layout-background-color: var(--lumo-base-color);
+    --app-layout-font-size-header: var(--lumo-font-size-m);
+    --app-layout-font-size-menu: var(--lumo-font-size-m);
+    --app-layout-font-size-notifications: var(--lumo-font-size-m);
+    --app-layout-bar-height: calc(var(--lumo-size-s) * 2.1);
+    --app-layout-bar-background-base-color: var(--lumo-base-color);
+    --app-layout-bar-background-color: var(--lumo-base-color);
+    --app-layout-bar-font-color: var(--lumo-contrast-70pct);
+    --app-layout-bar-shadow: var(--lumo-box-shadow-s);
+    --app-layout-bar-z-index: 10;
+    --app-layout-drawer-shadow: var(--lumo-box-shadow-s);
+    --app-layout-drawer-background-base-color: var(--lumo-base-color);
+    --app-layout-drawer-background-color: var(--lumo-base-color);
+    --app-layout-drawer-submenu-background-color: var(--lumo-contrast-10pct);
+    --app-layout-drawer-font-color: var(--lumo-contrast-90pct);
+    --app-layout-drawer-width: calc(var(--lumo-size-xl) * 4.6);
+    --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
+    --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
+    --app-layout-menu-button-padding: 0 14px;
+    --app-layout-menu-button-margin: 0;
+    --app-layout-menu-padding: 5px;
+    --app-layout-menu-button-border-radius: var(--lumo-border-radius);
+    --app-layout-menu-submenu-max-height: 999px;
+    --app-bar-height: var(--app-layout-bar-height);
+    --app-menu-background-color: var(--lumo-base-color);
+    --app-menu-selected-bg-color: var(--lumo-primary-color-10pct);
+    --app-menu-color: var(--lumo-secondary-text-color);
+    --app-layout-badge-width: calc(var(--lumo-size-s) * 0.8);
+    --app-layout-badge-height: calc(var(--lumo-size-s) * 0.8);
+    --app-layout-badge-top: 0px;
+    --app-layout-badge-right: 0px;
+    --app-layout-badge-color: var(--app-layout-bar-font-color);
+    --app-layout-badge-small-width: 5px;
+    --app-layout-badge-small-height: 5px;
+    --app-layout-badge-small-top: -12px;
+    --app-layout-badge-small-right: -4px;
+    --app-layout-badge-background: var(--lumo-primary-color);
+    --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
+    --paper-drawer-title-background-color: var(--lumo-base-color);
+    --paper-drawer-title-color: var(--lumo-body-text-color);
+    --app-layout-notification-highlight-color: var(--app-layout-primary-color);
+    --app-layout-notification-font-color: var(--lumo-body-text-color);
+    --app-layout-notification-background-base-color: var(--lumo-base-color);
+    --app-layout-notification-background-color: var(--lumo-base-color);
+    --app-layout-notification-shadow: var(--lumo-box-shadow-m);
+    --paper-icon-button-ink-color: var(--lumo-contrast);
+    --app-drawer-width: var(--app-layout-drawer-width);
 }
 
-/*# sourceMappingURL=app-layout.css.map */
+[theme~="dark"] {
+    --app-layout-bar-background-color: var(--lumo-contrast-10pct);
+    --app-layout-bar-font-color: var(--lumo-contrast-90);
+    --app-layout-drawer-background-color: var(--lumo-contrast-5pct);
+    --app-layout-notification-background-color: var(--lumo-contrast-10pct);
+}
