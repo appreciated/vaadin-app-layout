@@ -77,6 +77,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
+        instance.init();
         return instance;
 
     }
