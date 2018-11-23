@@ -119,7 +119,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
     }
   }
 
-  public String getCaption() {
+  private String getCaption() {
     if (caption != null) {
       return caption;
     } else if (info != null) {

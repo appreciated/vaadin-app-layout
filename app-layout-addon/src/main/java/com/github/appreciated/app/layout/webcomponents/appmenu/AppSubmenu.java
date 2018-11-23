@@ -1,9 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
@@ -12,7 +9,7 @@ import com.vaadin.flow.component.icon.IronIcon;
 
 @Tag("app-submenu")
 @HtmlImport("bower_components/app-menu/app-submenu.html")
-public class AppSubmenu extends Component implements HasComponents, HasStyle {
+public class AppSubmenu extends Component implements HasComponents, HasStyle, HasText {
 
     private final AppMenu menu;
     private final AppMenuIconItem item;
@@ -61,6 +58,16 @@ public class AppSubmenu extends Component implements HasComponents, HasStyle {
 
         addToSubmenu(toggleWrapper);
         addToSubmenu(menu);
+    }
+
+    @Override
+    public String getText() {
+        return item.getText();
+    }
+
+    @Override
+    public void setText(String text) {
+        item.setText(text);
     }
 
     public Div getToggleWrapper() {

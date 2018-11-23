@@ -16,18 +16,18 @@ import java.util.Optional;
  */
 public class LeftSubmenuComponent extends AppSubmenu implements NavigationElementContainer {
 
-    private final String title;
+    private final String caption;
     private final Icon icon;
     private Factory<String, String> captionInterceptor;
 
-    public LeftSubmenuComponent(String title, Icon icon, List<Component> submenuElements) {
-        super(title, icon);
+    public LeftSubmenuComponent(String caption, Icon icon, List<Component> submenuElements) {
+        super(caption, icon);
         getItem().getElement().getStyle().set("white-space", "nowrap");
         getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
         getToggleWrapper().getElement().getStyle().set("position", "relative");
         getMenu().getStyle().set("background", "var(--app-layout-drawer-submenu-background-color)");
         submenuElements.forEach(element1 -> getMenu().add(element1));
-        this.title = title;
+        this.caption = caption;
         this.icon = icon;
     }
 
@@ -35,11 +35,11 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
         return icon;
     }
 
-    public String getTitle() {
+    private String getCaption() {
         if (captionInterceptor == null) {
-            return title;
+            return caption;
         } else {
-            return captionInterceptor.get(title);
+            return captionInterceptor.get(caption);
         }
     }
 
