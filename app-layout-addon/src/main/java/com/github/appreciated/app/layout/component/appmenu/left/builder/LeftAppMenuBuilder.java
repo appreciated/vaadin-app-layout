@@ -94,8 +94,8 @@ public class LeftAppMenuBuilder {
         return this;
     }
 
-    public LeftAppMenuBuilder withSticky(boolean sticky) {
-        this.sticky = sticky;
+    public LeftAppMenuBuilder withStickyFooter() {
+        this.sticky = true;
         return this;
     }
 

@@ -4,6 +4,8 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 
+import java.util.Arrays;
+
 public class LeftMenuComponentWrapper extends Div implements NavigationElementContainer {
 
     private final LeftMenuComponent menu;
@@ -13,12 +15,13 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
         menu = new LeftMenuComponent();
         super.add(menu);
         menu.setHeight("100%");
-        menu.getStyle().set("padding", "var(--app-layout-menu-padding)");
-        menu.getStyle().set("box-sizing", "border-box");
+        getStyle().set("padding", "0");
+        menu.getStyle().set("padding", "0");
     }
 
     @Override
     public void add(Component... components) {
+        Arrays.stream(components).forEach(component -> component.getElement().getStyle().set("flex-shrink", "0"));
         menu.add(components);
     }
 
