@@ -20,6 +20,10 @@ public class LeftAppMenuBuilder {
 
     List<Component> components = new ArrayList<>();
 
+    List<Component> header = new ArrayList<>();
+    List<Component> body = new ArrayList<>();
+    List<Component> footer = new ArrayList<>();
+
     protected LeftAppMenuBuilder() {
     }
 
@@ -66,20 +70,32 @@ public class LeftAppMenuBuilder {
         return addToSection(element, Section.DEFAULT);
     }
 
-    public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className){
-        return add(new LeftNavigationComponent(caption , icon , className));
+    public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className) {
+        return add(new LeftNavigationComponent(caption, icon, className));
     }
 
-    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className  ){
-        return add(new LeftNavigationComponent(caption , icon , className));
+    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className) {
+        return add(new LeftNavigationComponent(caption, icon, className));
     }
 
     public LeftAppMenuBuilder addToSection(Component element, Section section) {
-        components.add(element);
+        switch (section) {
+            case HEADER:
+                header.add(element);
+                break;
+            case FOOTER:
+                footer.add(element);
+                break;
+            default:
+                body.add(element);
+        }
         return this;
     }
 
     public NavigationElementContainer build() {
+        components.addAll(header);
+        components.addAll(body);
+        components.addAll(footer);
         LeftMenuComponent menu = new LeftMenuComponent();
         menu.add(components.toArray(new Component[0]));
         return menu;
