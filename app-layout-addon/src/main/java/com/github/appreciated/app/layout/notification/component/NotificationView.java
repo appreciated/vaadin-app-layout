@@ -79,15 +79,15 @@ public class NotificationView extends PaperCard {
         add(headerLine);
         add(descriptionWrapper);
         getContent().getStyle().set("background", "var(--app-layout-notification-background-color)");
-        if (clickEvent != null) {
-            getElement().addEventListener("click", clickEvent::handleEvent);
-        }
         getElement().getClassList().add(info.getStyle());
         setNotificationListener(listener);
 
-
         if (info.isDismissable()) {
-            dismissButton = new IconButton(VaadinIcon.CLOSE_BIG.create(), paperIconButtonClickEvent -> listener.onDismiss());
+            dismissButton = new IconButton(VaadinIcon.CLOSE_BIG.create(), paperIconButtonClickEvent -> {
+                if (listener != null) {
+                    listener.onDismiss();
+                }
+            });
             dismissButton.getStyle()
                     .set("position", "absolute")
                     .set("right", "0px")
@@ -99,7 +99,6 @@ public class NotificationView extends PaperCard {
             add(dismissButton);
         }
         addRipple();
-
     }
 
     public void setNotificationListener(NotificationListener listener) {
