@@ -17,8 +17,8 @@ public class MenuBadgeComponent extends Label implements HasStyle {
         setWidth("var(--app-layout-badge-width)");
         setHeight("var(--app-layout-badge-height)");
 
-        getStyle().set("background", "var(--app-layout-bar-background-color)")
-                .set("color", "var(--app-layout-badge-color)")
+        getStyle().set("background", "var(--app-layout-badge-background)")
+                .set("color", "var(--app-layout-badge-font-color)")
                 .set("border-radius", "25px")
                 .set("line-height", "var(--app-layout-badge-height)")
                 .set("text-align", "center")

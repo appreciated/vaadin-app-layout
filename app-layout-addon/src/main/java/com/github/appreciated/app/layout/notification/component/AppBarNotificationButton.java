@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.papermenubutton.HorizontalAlignment;
 import com.github.appreciated.papermenubutton.PaperMenuButton;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
@@ -16,12 +17,16 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 @HtmlImport("frontend://com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
 public class AppBarNotificationButton extends PaperMenuButton {
 
-    public AppBarNotificationButton(VaadinIcon icon, NotificationHolder holder) {
-        super(new IconBadgeButton(icon), new NotificationsView(holder));
+	private NotificationsView notificationsView;
+
+	public AppBarNotificationButton(VaadinIcon icon, NotificationHolder holder) {
+		super(new IconBadgeButton(icon), new Div());
+		this.notificationsView = new NotificationsView(holder);
+		this.setContent(notificationsView);
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
                 .set("--shadow-elevation-2dp_-_box-shadow", "0px")
-                .set("--paper-menu-button-dropdown_-_margin-top", "64px")
+                .set("--paper-menu-button-dropdown_-_margin-top", "var(--app-layout-bar-height)")
                 .set("--paper-menu-button-dropdown_-_margin-right", "7px");
 
         setHorizontalAlignment(HorizontalAlignment.RIGHT);
@@ -54,7 +59,12 @@ public class AppBarNotificationButton extends PaperMenuButton {
 
     public void refreshNotifications(NotificationHolder notificationHolder) {
         getUI().ifPresent(ui -> ui.access(() -> {
-            setContent(new NotificationsView(notificationHolder));
+			notificationsView.initView();
+			//setContent(new NotificationsView(notificationHolder));
         }));
     }
+
+	public NotificationsView getNotificationsView() {
+		return notificationsView;
+	}
 }

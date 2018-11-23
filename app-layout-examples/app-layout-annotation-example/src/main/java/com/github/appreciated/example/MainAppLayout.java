@@ -58,7 +58,8 @@ public class MainAppLayout extends AppLayoutRouterLayout {
           .withDesign(AppLayoutDesign.MATERIAL)
           .withAppMenu(LeftAppMenuBuilder
                            .get()
-                           .addToSection(new MenuHeaderComponent("Menu-Header", "Version 2.0.1", null), HEADER)
+                  .addToSection(new MenuHeaderComponent("Menu-Header", "Version 2.0.1",
+                          "/frontend/images/logo.png"), HEADER)
                            .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
                                                                     VaadinIcon.COG.create(),
                                                                     clickEvent -> openModeSelector(variant)

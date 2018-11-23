@@ -17,14 +17,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="app-layout-left-overlay">
     <template>
         <style>
+
             :root {
-                --paper-badge-background: #ffffff;
-                --paper-badge-text-color: #000;
+                --paper-badge-background: var(--app-layout-badge-background);
+                --paper-badge-text-color: var(--app-layout-badge-font-color);
+                --primary-color: var(--app-layout-primary-color);
             }
 
             #content {
-                padding-top: 64px;
-                margin-top: -64px;
+                padding-top: var(--app-layout-bar-height);
+                margin-top: calc(var(--app-layout-bar-height) * -1);
                 box-sizing: border-box;
                 overflow: auto;
                 width: 100%;
@@ -42,6 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
+                    background-color: var(--app-layout-drawer-background-base-color);
                 };
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
@@ -51,6 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 width: 100%;
                 overflow-x: hidden;
                 overflow-y: auto;
+                background: var(--app-layout-drawer-background-color);
             }
 
             app-menu {

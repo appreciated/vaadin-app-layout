@@ -6,14 +6,11 @@ import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponen
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -21,9 +18,11 @@ import java.util.Map;
  */
 public class LeftAppMenuBuilder {
 
-    Map<Section, List<Component>> components = new HashMap<>();
-    LeftMenuComponent menu = new LeftMenuComponent();
-    private boolean sticky;
+    List<Component> components = new ArrayList<>();
+
+    List<Component> header = new ArrayList<>();
+    List<Component> body = new ArrayList<>();
+    List<Component> footer = new ArrayList<>();
 
     protected LeftAppMenuBuilder() {
     }
@@ -80,6 +79,16 @@ public class LeftAppMenuBuilder {
     }
 
     public LeftAppMenuBuilder addToSection(Component element, Section section) {
+        switch (section) {
+            case HEADER:
+                header.add(element);
+                break;
+            case FOOTER:
+                footer.add(element);
+                break;
+            default:
+                body.add(element);
+        }
         if (!components.containsKey(section)) {
             components.put(section, new ArrayList<>());
         }
@@ -98,6 +107,11 @@ public class LeftAppMenuBuilder {
     }
 
     public NavigationElementContainer build() {
+        components.addAll(header);
+        components.addAll(body);
+        components.addAll(footer);
+        LeftMenuComponent menu = new LeftMenuComponent();
+        menu.add(components.toArray(new Component[0]));
         if (components.containsKey(Section.HEADER)) {
             menu.add(components.get(Section.HEADER).toArray(new Component[0]));
         }

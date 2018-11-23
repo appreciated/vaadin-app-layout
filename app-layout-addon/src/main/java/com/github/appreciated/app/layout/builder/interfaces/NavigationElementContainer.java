@@ -26,8 +26,8 @@ public interface NavigationElementContainer extends NavigationElement {
                 .reduce((first, next) -> first || next).orElse(false);
     }
 
-    default Class<? extends HasElement> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return getClosestNavigationElement(getChildren(), element);
+    default Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
+        return Optional.of(getClosestNavigationElement(getChildren(), element));
     }
 
     default Class<? extends HasElement> getClosestNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
@@ -38,7 +38,7 @@ public interface NavigationElementContainer extends NavigationElement {
                         Class<? extends HasElement> result = ((NavigationElementComponent) component).getNavigationElement();
                         return result;
                     } else {
-                        Class<? extends HasElement> result = ((NavigationElementContainer) component).getClosestNavigationElement(content);
+                        Class<? extends HasElement> result = ((NavigationElementContainer) component).getClosestNavigationElement(content).get();
                         return result;
                     }
                 })

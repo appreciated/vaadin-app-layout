@@ -18,8 +18,10 @@ public class NotificationView extends PaperCard {
     public NotificationView(Notification info, DomEventListener clickEvent) {
         getStyle()
                 .set("width", "100%")
-                .set("color", "#000000")
-                .set("--shadow-elevation-2dp_-_box-shadow", "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)");
+                .set("--shadow-elevation-2dp_-_box-shadow", "var(--app-layout-notification-shadow)")
+                .set("background", "var(--app-layout-notification-background-base-color)")
+                .set("color", "var(--app-layout-notification-font-color)");
+
 
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
@@ -53,13 +55,14 @@ public class NotificationView extends PaperCard {
             descriptionWrapper.add(image);
         }
         if (!info.isRead()) {
-            getElement().getStyle().set("border-left", "3px solid var(--app-layout-bar-background-color)");
+            getElement().getStyle().set("border-left", "3px solid var(--app-layout-notification-highlight-color)");
         }
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
         add(headerLine);
         add(descriptionWrapper);
+        getContent().getStyle().set("background", "var(--app-layout-notification-background-color)");
         if (clickEvent != null) {
             getElement().addEventListener("click", clickEvent::handleEvent);
         }
