@@ -49,8 +49,9 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
             int value = content.getClass().getAnnotation(Route.class).value().split("/").length;
             getInternalAppLayout().setBackNavigation(value > 1);
             if (!getInternalAppLayout().setActiveNavigationComponent(content.getClass())) {
-                Class<? extends HasElement> closestElement = getInternalAppLayout().getClosestNavigationElement(content.getClass());
-                getInternalAppLayout().setActiveNavigationComponent(closestElement);
+                getInternalAppLayout().getClosestNavigationElement(content.getClass()).ifPresent(aClass -> {
+                    getInternalAppLayout().setActiveNavigationComponent(aClass);
+                });
             }
         }
     }

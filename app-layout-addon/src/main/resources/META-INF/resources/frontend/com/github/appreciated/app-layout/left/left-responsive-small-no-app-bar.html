@@ -27,9 +27,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="app-layout-left-responsive-small-no-app-bar">
     <template>
         <style>
+
             :root {
-                --paper-badge-background: #ffffff;
-                --paper-badge-text-color: #000;
+                --paper-badge-background: var(--app-layout-badge-background);
+                --paper-badge-text-color: var(--app-layout-badge-font-color);
+                --primary-color: var(--app-layout-primary-color);
             }
 
             app-header {
@@ -68,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (max-width: 640px) {
                 .app-bar-application-content {
-                    padding-top: 64px;
+                    padding-top: var(--app-layout-bar-height);
                     box-sizing: border-box;
                 }
             }
@@ -76,6 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
+                    background-color: var(--app-layout-drawer-background-base-color);
                 };
                 transition: 1s width;
             }
@@ -85,6 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 width: 100%;
                 overflow-x: hidden;
                 overflow-y: auto;
+                background: var(--app-layout-drawer-background-color);
             }
 
             #toggle {
@@ -113,11 +117,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     --app-layout-badge-top: var(--app-layout-badge-small-top);
                     --app-layout-badge-right: var(--app-layout-badge-small-right);
                     --app-layout-badge-color: transparent;
+                    --app-layout-menu-button-margin: 0;
+                    --app-layout-menu-button-padding: 0 21px;
+                    --app-layout-menu-padding: 0;
                 }
 
                 #drawerLayout .app-menu-item {
                     overflow: hidden;
-                    padding: 0 21px;
                 }
 
                 #drawerLayout #menu-header-title, #drawerLayout #menu-header-subtitle {
@@ -127,11 +133,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
 
                 #drawerLayout #menu-header-wrapper {
-                    padding: 5px;
+                    padding: 4px;
                 }
 
                 #drawerLayout * {
                     --expand-icon-fill-color: transparent !important;
+                    --app-layout-badge-font-color: transparent;
                 }
 
                 /* small */

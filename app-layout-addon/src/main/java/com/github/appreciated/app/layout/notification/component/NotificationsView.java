@@ -33,7 +33,7 @@ public class NotificationsView extends Composite<VerticalLayout> {
         content.setMargin(false);
         content.setPadding(false);
         content.setWidth("300px");
-        getElement().getStyle().set("padding", "5px").set("--shadow-elevation-2dp_-_box-shadow", "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)");
+        getElement().getStyle().set("padding", "5px 10px 18px 8px");
         this.holder = holder;
         initView();
     }

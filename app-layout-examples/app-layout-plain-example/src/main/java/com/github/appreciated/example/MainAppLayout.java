@@ -15,8 +15,6 @@ import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.app.layout.notification.entitiy.Priority;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -29,7 +27,6 @@ import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
-import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 /**
  * The main view contains a button and a template element.
@@ -64,7 +61,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                            .get()
                            .addToSection(new MenuHeaderComponent("Menu-Header",
                                                                  "Version 2.0.1",
-                                                                 null
+                                   "/frontend/images/logo.png"
                            ), HEADER)
                            .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
                                                                     VaadinIcon.COG.create(),

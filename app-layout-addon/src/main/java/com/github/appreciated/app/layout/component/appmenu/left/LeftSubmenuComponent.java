@@ -9,6 +9,7 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
@@ -48,8 +49,8 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
     }
 
     @Override
-    public Class<? extends HasElement> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return getClosestNavigationElement(getMenu().getChildren(), element);
+    public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
+        return Optional.of(getClosestNavigationElement(getMenu().getChildren(), element));
     }
 
     @Override

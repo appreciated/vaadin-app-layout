@@ -10,8 +10,8 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 @Tag("paper-card")
 @HtmlImport("bower_components/paper-card/paper-card.html")
 public class PaperCard extends Component implements HasComponents, FlexComponent {
-    Div content;
-    Div actions;
+    private Div content;
+    private Div actions;
 
     public PaperCard() {
         this(null, null);
@@ -53,4 +53,11 @@ public class PaperCard extends Component implements HasComponents, FlexComponent
         actions.add(components);
     }
 
+    public Div getContent() {
+        return content;
+    }
+
+    public Div getActions() {
+        return actions;
+    }
 }

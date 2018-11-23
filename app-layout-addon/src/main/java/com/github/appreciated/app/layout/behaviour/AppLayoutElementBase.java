@@ -35,4 +35,7 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
     void setAppBar(Component component);
 
     void setAppMenu(NavigationElementContainer component);
+
+    default void init() {
+    }
 }
