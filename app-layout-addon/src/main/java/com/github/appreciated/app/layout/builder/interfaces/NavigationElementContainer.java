@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public interface NavigationElementContainer extends NavigationElement {
 
     default boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-        return setActiveNavigationComponent(getChildren(), element);
+        return setActiveNavigationComponent(getMenuChildren(), element);
     }
 
     default boolean setActiveNavigationComponent(Stream<Component> elements, Class<? extends HasElement> content) {
@@ -27,7 +27,7 @@ public interface NavigationElementContainer extends NavigationElement {
     }
 
     default Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return Optional.of(getClosestNavigationElement(getChildren(), element));
+        return Optional.of(getClosestNavigationElement(getMenuChildren(), element));
     }
 
     default Class<? extends HasElement> getClosestNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
@@ -73,6 +73,10 @@ public interface NavigationElementContainer extends NavigationElement {
         if (element.getAnnotation(Route.class) != null)
             return Optional.of(element.getAnnotation(Route.class));
         return Optional.empty();
+    }
+
+    default Stream<Component> getMenuChildren() {
+        return getChildren();
     }
 
     Stream<Component> getChildren();

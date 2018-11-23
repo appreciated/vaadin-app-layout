@@ -2,10 +2,11 @@ package com.github.appreciated.app.layout.component.appmenu.left.builder;
 
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponentWrapper;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 /**
- * A Builder to build {@link LeftMenuComponent} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
+ * A Builder to build {@link LeftMenuComponentWrapper} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
 public class LeftAppMenuBuilder {
 
@@ -23,6 +24,7 @@ public class LeftAppMenuBuilder {
     List<Component> header = new ArrayList<>();
     List<Component> body = new ArrayList<>();
     List<Component> footer = new ArrayList<>();
+    private boolean sticky;
 
     protected LeftAppMenuBuilder() {
     }
@@ -89,45 +91,28 @@ public class LeftAppMenuBuilder {
             default:
                 body.add(element);
         }
-        if (!components.containsKey(section)) {
-            components.put(section, new ArrayList<>());
-        }
-        components.get(section).add(element);
         return this;
     }
 
     public LeftAppMenuBuilder withSticky(boolean sticky) {
-        if (sticky) {
-            menu.getElement().getStyle()
-                    .set("height", "100%")
-                    .set("padding", "0px");
-        }
         this.sticky = sticky;
         return this;
     }
 
     public NavigationElementContainer build() {
         components.addAll(header);
+        LeftMenuComponentWrapper menu = new LeftMenuComponentWrapper();
         components.addAll(body);
-        components.addAll(footer);
-        LeftMenuComponent menu = new LeftMenuComponent();
-        menu.add(components.toArray(new Component[0]));
-        if (components.containsKey(Section.HEADER)) {
-            menu.add(components.get(Section.HEADER).toArray(new Component[0]));
-        }
-        if (components.containsKey(Section.DEFAULT)) {
-            menu.add(components.get(Section.DEFAULT).toArray(new Component[0]));
-        }
         if (sticky) {
+            menu.setHeight("100%");
             Div div = new Div();
             div.setWidth("100%");
-            div.setHeight("50px");
+            div.setHeight("0px");
             div.getStyle().set("flex", "1 1");
-            menu.add(div);
+            components.add(div);
         }
-        if (components.containsKey(Section.FOOTER)) {
-            menu.add(components.get(Section.FOOTER).toArray(new Component[0]));
-        }
+        components.addAll(footer);
+        menu.add(components.toArray(new Component[0]));
         return menu;
     }
 }
