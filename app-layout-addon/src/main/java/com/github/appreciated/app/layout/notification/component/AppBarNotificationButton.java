@@ -53,7 +53,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
 
             }
         });
-        //holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(() -> AppBarNotificationButton.this.close())));
+        holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(() -> AppBarNotificationButton.this.close())));
         holder.bind(((IconBadgeButton) getButton()).getBadge());
     }
 

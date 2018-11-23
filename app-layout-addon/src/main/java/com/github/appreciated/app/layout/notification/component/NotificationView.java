@@ -32,7 +32,6 @@ public class NotificationView extends PaperCard {
                 .set("background", "var(--app-layout-notification-background-base-color)")
                 .set("color", "var(--app-layout-notification-font-color)");
 
-
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
                 .set("font-size", "15px")
@@ -64,9 +63,7 @@ public class NotificationView extends PaperCard {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-        if (!info.isRead()) {
-            getElement().getStyle().set("border-left", "3px solid var(--app-layout-notification-highlight-color)");
-        }
+        setHighlightBorder(!info.isRead());
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -99,6 +96,10 @@ public class NotificationView extends PaperCard {
             add(dismissButton);
         }
         addRipple();
+    }
+
+    public void setHighlightBorder(boolean highlight) {
+        getElement().getStyle().set("border-left", "3px solid " + (highlight ? "var(--app-layout-notification-highlight-color)" : "transparent"));
     }
 
     public void setNotificationListener(NotificationListener listener) {

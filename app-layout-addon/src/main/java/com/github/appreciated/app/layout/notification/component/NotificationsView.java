@@ -17,14 +17,14 @@ public class NotificationsView extends Composite<VerticalLayout> {
     boolean blurListenerEnabled = true;
     Holder<Boolean> showAll = new Holder<>(false);
     private NotificationHolder holder;
-	private String noNotificationText = "No Notifications";
-	private String showAllText = "Show all";
-	private Command showAllCommand = () -> {
-		showAll.value = true;
-		initView();
-	};
-	private Button showAllButton;
-	private Label noNotificationsLabel;
+    private String noNotificationText = "No Notifications";
+    private String showAllText = "Show all";
+    private Button showAllButton;
+    private Label noNotificationsLabel;
+    private Command showAllCommand = () -> {
+        showAll.value = true;
+        initView();
+    };
 
     public NotificationsView(NotificationHolder holder) {
 
@@ -43,27 +43,26 @@ public class NotificationsView extends Composite<VerticalLayout> {
 
         content.removeAll();
         if (holder.getNotificationSize() > 0) {
-			content.add(this.holder.getNotificationViews(showAll.value));
+            content.add(this.holder.getNotificationViews(showAll.value));
             getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
 
             if (!showAll.value && this.holder.getNotificationSize() > 4) {
-				showAllButton = new Button(showAllText);
+                showAllButton = new Button(showAllText);
                 showAllButton.setWidth("100%");
                 showAllButton.setHeight("28px");
-                showAllButton.addClickListener(clickEvent -> {
-					showAllCommand.execute();
-                });
+                showAllButton.addClickListener(clickEvent -> showAllCommand.execute());
                 content.add(showAllButton);
             }
         } else {
-			noNotificationsLabel = new Label(noNotificationText);
-			noNotificationsLabel.getStyle().set("color", "var(--lumo-shade)")
+            noNotificationsLabel = new Label(noNotificationText);
+            noNotificationsLabel.getStyle().set("color", "var(--lumo-shade)")
                     .set("font-size", "var(--lumo-size-xxs)");
-			HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
+            HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
             wrapper.setWidth("100%");
             wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
             PaperCard card = new PaperCard(wrapper);
             card.setWidth("100%");
+            card.getElement().getStyle().set("box-shadow", "var(--app-layout-notification-shadow)");
             content.add(card);
         }
     }
@@ -84,22 +83,22 @@ public class NotificationsView extends Composite<VerticalLayout> {
         this.blurListenerEnabled = blurListener;
     }
 
-	public void setShowAllCommand(Command showAllCommand) {
-		this.showAllCommand = showAllCommand;
-	}
+    public void setShowAllCommand(Command showAllCommand) {
+        this.showAllCommand = showAllCommand;
+    }
 
-	public void setShowAllText(String showAllText) {
-		this.showAllText = showAllText;
-		if (this.showAllButton != null) {
-			showAllButton.setText(showAllText);
-		}
-	}
+    public void setShowAllText(String showAllText) {
+        this.showAllText = showAllText;
+        if (this.showAllButton != null) {
+            showAllButton.setText(showAllText);
+        }
+    }
 
-	public void setNoNotificationText(String noNotificationText) {
-		this.noNotificationText = noNotificationText;
-		if (this.noNotificationsLabel != null) {
-			noNotificationsLabel.setText(noNotificationText);
-		}
-	}
+    public void setNoNotificationText(String noNotificationText) {
+        this.noNotificationText = noNotificationText;
+        if (this.noNotificationsLabel != null) {
+            noNotificationsLabel.setText(noNotificationText);
+        }
+    }
 
 }

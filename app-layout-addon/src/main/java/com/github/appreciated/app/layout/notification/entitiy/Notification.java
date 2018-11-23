@@ -29,7 +29,6 @@ public interface Notification extends Comparable<Notification> {
 
     void setDismissable(boolean sticky);
 
-
     String getImage();
 
     LocalDateTime getCreationTime();
