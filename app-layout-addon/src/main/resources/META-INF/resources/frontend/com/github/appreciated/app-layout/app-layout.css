@@ -47,6 +47,9 @@ html {
     --app-layout-notification-shadow: var(--lumo-box-shadow-m);
     --paper-icon-button-ink-color: var(--lumo-contrast);
     --app-drawer-width: var(--app-layout-drawer-width);
+/ / -webkit-tap-highlight-color: transparent;
+    --paper-tabs-selection-bar-color: var(--lumo-primary-color);
+    --paper-tab-ink: var(--lumo-primary-color);
 }
 
 [theme~="dark"] {
