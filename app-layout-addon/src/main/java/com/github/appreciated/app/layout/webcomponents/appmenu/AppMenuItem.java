@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Anchor;

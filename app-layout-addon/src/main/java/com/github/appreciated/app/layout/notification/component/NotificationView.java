@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.notification.component;
 import com.github.appreciated.app.layout.component.appmenu.RoundImage;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

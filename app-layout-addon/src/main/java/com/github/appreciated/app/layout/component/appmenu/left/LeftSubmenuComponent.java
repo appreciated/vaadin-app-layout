@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.component.appmenu.left;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
