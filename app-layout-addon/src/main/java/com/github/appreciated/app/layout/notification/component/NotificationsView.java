@@ -1,7 +1,5 @@
 package com.github.appreciated.app.layout.notification.component;
 
-import java.util.Optional;
-
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
