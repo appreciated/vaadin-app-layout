@@ -1,7 +1,8 @@
 package com.github.appreciated.app.layout.notification.component;
 
+import java.util.Optional;
+
 import com.github.appreciated.app.layout.design.Styles;
-import com.github.appreciated.app.layout.entity.Holder;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
 import com.vaadin.flow.component.Composite;
@@ -15,14 +16,14 @@ import com.vaadin.flow.server.Command;
 public class NotificationsView extends Composite<VerticalLayout> {
 
     boolean blurListenerEnabled = true;
-    Holder<Boolean> showAll = new Holder<>(false);
+    private Optional<Boolean> showAll = Optional.of(false);
     private NotificationHolder holder;
     private String noNotificationText = "No Notifications";
     private String showAllText = "Show all";
     private Button showAllButton;
     private Label noNotificationsLabel;
     private Command showAllCommand = () -> {
-        showAll.value = true;
+        showAll = Optional.of(true); //TODO why an optional?
         initView();
     };
 
@@ -43,10 +44,10 @@ public class NotificationsView extends Composite<VerticalLayout> {
 
         content.removeAll();
         if (holder.getNotificationSize() > 0) {
-            content.add(this.holder.getNotificationViews(showAll.value));
+            content.add(this.holder.getNotificationViews(showAll.get()));
             getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
 
-            if (!showAll.value && this.holder.getNotificationSize() > 4) {
+            if (!showAll.get() && this.holder.getNotificationSize() > 4) {
                 showAllButton = new Button(showAllText);
                 showAllButton.setWidth("100%");
                 showAllButton.setHeight("28px");
@@ -68,11 +69,11 @@ public class NotificationsView extends Composite<VerticalLayout> {
     }
 
     public boolean isShowAll() {
-        return this.showAll.value;
+        return this.showAll.get();
     }
 
     public void setShowAll(boolean showAll) {
-        this.showAll.value = showAll;
+        this.showAll= Optional.of(showAll);
     }
 
     public void refreshNotificationViews(NotificationHolder component) {
