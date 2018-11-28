@@ -15,91 +15,91 @@ import com.vaadin.flow.server.Command;
 
 public class NotificationsView extends Composite<VerticalLayout> {
 
-    boolean blurListenerEnabled = true;
-    private Optional<Boolean> showAll = Optional.of(false);
-    private NotificationHolder holder;
-    private String noNotificationText = "No Notifications";
-    private String showAllText = "Show all";
-    private Button showAllButton;
-    private Label noNotificationsLabel;
-    private Command showAllCommand = () -> {
-        showAll = Optional.of(true); //TODO why an optional?
-        initView();
-    };
+  boolean blurListenerEnabled = true;
+  private Boolean showAll = Boolean.FALSE;
+  private NotificationHolder holder;
+  private String noNotificationText = "No Notifications";
+  private String showAllText = "Show all";
+  private Button showAllButton;
+  private Label noNotificationsLabel;
+  private Command showAllCommand = () -> {
+    showAll = Boolean.TRUE;
+    initView();
+  };
 
-    public NotificationsView(NotificationHolder holder) {
+  public NotificationsView(NotificationHolder holder) {
 
-        VerticalLayout content = getContent();
+    VerticalLayout content = getContent();
 
-        content.setMargin(false);
-        content.setPadding(false);
-        content.setWidth("300px");
-        getElement().getStyle().set("padding", "5px 10px 18px 8px");
-        this.holder = holder;
-        initView();
+    content.setMargin(false);
+    content.setPadding(false);
+    content.setWidth("300px");
+    getElement().getStyle().set("padding" , "5px 10px 18px 8px");
+    this.holder = holder;
+    initView();
+  }
+
+  public void initView() {
+    VerticalLayout content = getContent();
+
+    content.removeAll();
+    if (holder.getNotificationSize() > 0) {
+      content.add(this.holder.getNotificationViews(showAll));
+      getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
+
+      if (! showAll && this.holder.getNotificationSize() > 4) {
+        showAllButton = new Button(showAllText);
+        showAllButton.setWidth("100%");
+        showAllButton.setHeight("28px");
+        showAllButton.addClickListener(clickEvent -> showAllCommand.execute());
+        content.add(showAllButton);
+      }
+    } else {
+      noNotificationsLabel = new Label(noNotificationText);
+      noNotificationsLabel.getStyle().set("color" , "var(--lumo-shade)")
+                          .set("font-size" , "var(--lumo-size-xxs)");
+      HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
+      wrapper.setWidth("100%");
+      wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+      PaperCard card = new PaperCard(wrapper);
+      card.setWidth("100%");
+      card.getElement().getStyle().set("box-shadow" , "var(--app-layout-notification-shadow)");
+      content.add(card);
     }
+  }
 
-    public void initView() {
-        VerticalLayout content = getContent();
+  public boolean isShowAll() {
+    return this.showAll;
+  }
 
-        content.removeAll();
-        if (holder.getNotificationSize() > 0) {
-            content.add(this.holder.getNotificationViews(showAll.get()));
-            getElement().getClassList().add(Styles.APP_BAR_NOTIFICATION_LIST);
+  public void setShowAll(boolean showAll) {
+    this.showAll = showAll;
+  }
 
-            if (!showAll.get() && this.holder.getNotificationSize() > 4) {
-                showAllButton = new Button(showAllText);
-                showAllButton.setWidth("100%");
-                showAllButton.setHeight("28px");
-                showAllButton.addClickListener(clickEvent -> showAllCommand.execute());
-                content.add(showAllButton);
-            }
-        } else {
-            noNotificationsLabel = new Label(noNotificationText);
-            noNotificationsLabel.getStyle().set("color", "var(--lumo-shade)")
-                    .set("font-size", "var(--lumo-size-xxs)");
-            HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
-            wrapper.setWidth("100%");
-            wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-            PaperCard card = new PaperCard(wrapper);
-            card.setWidth("100%");
-            card.getElement().getStyle().set("box-shadow", "var(--app-layout-notification-shadow)");
-            content.add(card);
-        }
+  public void refreshNotificationViews(NotificationHolder component) {
+    initView();
+  }
+
+  public void setBlurListenerEnabled(boolean blurListener) {
+    this.blurListenerEnabled = blurListener;
+  }
+
+  public void setShowAllCommand(Command showAllCommand) {
+    this.showAllCommand = showAllCommand;
+  }
+
+  public void setShowAllText(String showAllText) {
+    this.showAllText = showAllText;
+    if (this.showAllButton != null) {
+      showAllButton.setText(showAllText);
     }
+  }
 
-    public boolean isShowAll() {
-        return this.showAll.get();
+  public void setNoNotificationText(String noNotificationText) {
+    this.noNotificationText = noNotificationText;
+    if (this.noNotificationsLabel != null) {
+      noNotificationsLabel.setText(noNotificationText);
     }
-
-    public void setShowAll(boolean showAll) {
-        this.showAll= Optional.of(showAll);
-    }
-
-    public void refreshNotificationViews(NotificationHolder component) {
-        initView();
-    }
-
-    public void setBlurListenerEnabled(boolean blurListener) {
-        this.blurListenerEnabled = blurListener;
-    }
-
-    public void setShowAllCommand(Command showAllCommand) {
-        this.showAllCommand = showAllCommand;
-    }
-
-    public void setShowAllText(String showAllText) {
-        this.showAllText = showAllText;
-        if (this.showAllButton != null) {
-            showAllButton.setText(showAllText);
-        }
-    }
-
-    public void setNoNotificationText(String noNotificationText) {
-        this.noNotificationText = noNotificationText;
-        if (this.noNotificationsLabel != null) {
-            noNotificationsLabel.setText(noNotificationText);
-        }
-    }
+  }
 
 }
