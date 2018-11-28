@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.component.appmenu.top.builder;
 
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponentWrapper;
 import com.github.appreciated.app.layout.component.appmenu.top.TopMenuComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * A Builder to build {@link LeftMenuComponent} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
+ * A Builder to build {@link LeftMenuComponentWrapper} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
 public class TopAppMenuBuilder {
 

@@ -2,10 +2,11 @@ package com.github.appreciated.app.layout.component.appmenu.left.builder;
 
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponentWrapper;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 /**
- * A Builder to build {@link LeftMenuComponent} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
+ * A Builder to build {@link LeftMenuComponentWrapper} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
 public class LeftAppMenuBuilder {
 
@@ -23,6 +24,7 @@ public class LeftAppMenuBuilder {
     List<Component> header = new ArrayList<>();
     List<Component> body = new ArrayList<>();
     List<Component> footer = new ArrayList<>();
+    private boolean sticky;
 
     protected LeftAppMenuBuilder() {
     }
@@ -92,11 +94,24 @@ public class LeftAppMenuBuilder {
         return this;
     }
 
+    public LeftAppMenuBuilder withStickyFooter() {
+        this.sticky = true;
+        return this;
+    }
+
     public NavigationElementContainer build() {
         components.addAll(header);
+        LeftMenuComponentWrapper menu = new LeftMenuComponentWrapper();
         components.addAll(body);
+        if (sticky) {
+            menu.setHeight("100%");
+            Div div = new Div();
+            div.setWidth("100%");
+            div.setHeight("0px");
+            div.getStyle().set("flex", "1 1");
+            components.add(div);
+        }
         components.addAll(footer);
-        LeftMenuComponent menu = new LeftMenuComponent();
         menu.add(components.toArray(new Component[0]));
         return menu;
     }
