@@ -62,7 +62,7 @@ public class TopNavigationComponent extends PaperTab implements NavigationElemen
         }
     }
 
-    public String getCaption() {
+    private String getCaption() {
         if (caption != null) {
             return caption;
         }
