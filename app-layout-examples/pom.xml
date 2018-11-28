@@ -29,6 +29,7 @@
   <modules>
     <module>app-layout-annotation-example</module>
     <module>app-layout-plain-example</module>
+    <module>app-layout-sticky-header-footer-example</module>
     <module>app-layout-theme-example</module>
   </modules>
 

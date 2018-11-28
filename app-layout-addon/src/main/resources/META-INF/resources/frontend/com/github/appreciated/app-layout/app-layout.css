@@ -44,9 +44,12 @@ html {
     --app-layout-notification-font-color: var(--lumo-body-text-color);
     --app-layout-notification-background-base-color: var(--lumo-base-color);
     --app-layout-notification-background-color: var(--lumo-base-color);
-    --app-layout-notification-shadow: var(--lumo-box-shadow-m);
+    --app-layout-notification-shadow: var(--lumo-box-shadow-s);
     --paper-icon-button-ink-color: var(--lumo-contrast);
     --app-drawer-width: var(--app-layout-drawer-width);
+/ / -webkit-tap-highlight-color: transparent;
+    --paper-tabs-selection-bar-color: var(--lumo-primary-color);
+    --paper-tab-ink: var(--lumo-primary-color);
 }
 
 [theme~="dark"] {

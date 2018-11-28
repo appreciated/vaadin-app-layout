@@ -34,6 +34,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
             }
 
             /*
@@ -53,8 +57,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer .drawer-content {
                 height: 100%;
                 width: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
                 background: var(--app-layout-drawer-background-color);
             }
 
@@ -108,8 +110,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (max-width: 640px) {
                 .app-bar-application-content {
-                    padding-top: var(--app-layout-bar-height);
                     box-sizing: border-box;
+                    padding-top: var(--app-layout-bar-height);
                 }
             }
 

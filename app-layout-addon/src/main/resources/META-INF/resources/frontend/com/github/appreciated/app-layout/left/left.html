@@ -26,7 +26,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #content {
                 padding-top: var(--app-layout-bar-height);
-                margin-top: calc(var(--app-layout-bar-height) * -1);
                 box-sizing: border-box;
                 overflow: auto;
                 width: 100%;
@@ -51,8 +50,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer .drawer-content {
                 height: 100%;
                 width: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
                 background: var(--app-layout-drawer-background-color);
             }
 
@@ -71,8 +68,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             app-toolbar {
-                position: relative;
                 z-index: 1;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
             }
 
             #drawer {

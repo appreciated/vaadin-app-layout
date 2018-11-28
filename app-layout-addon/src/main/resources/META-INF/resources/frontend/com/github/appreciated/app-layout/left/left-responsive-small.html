@@ -55,8 +55,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             app-toolbar {
-                position: relative;
                 z-index: 1;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
             }
 
             #drawer {
@@ -75,8 +78,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer .drawer-content {
                 height: 100%;
                 width: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
                 background: var(--app-layout-drawer-background-color);
             }
 

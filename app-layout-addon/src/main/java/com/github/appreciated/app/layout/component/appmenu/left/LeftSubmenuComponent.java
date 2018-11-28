@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.component.appmenu.left;
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
@@ -20,8 +20,10 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
     private final Icon icon;
     private Factory<String, String> captionInterceptor;
 
+
     public LeftSubmenuComponent(String caption, Icon icon, List<Component> submenuElements) {
         super(caption, icon);
+        getStyle().set("--app-layout-menu-padding", "0");
         getItem().getElement().getStyle().set("white-space", "nowrap");
         getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
         getToggleWrapper().getElement().getStyle().set("position", "relative");

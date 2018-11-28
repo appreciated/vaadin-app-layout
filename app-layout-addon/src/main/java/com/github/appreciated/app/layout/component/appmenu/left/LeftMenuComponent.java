@@ -7,7 +7,7 @@ import com.vaadin.flow.component.Component;
 public class LeftMenuComponent extends AppMenu implements NavigationElementContainer {
 
     public LeftMenuComponent() {
-        getStyle().set("padding", "var(--app-layout-menu-padding)");
+
     }
 
     @Override

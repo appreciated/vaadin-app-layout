@@ -19,6 +19,7 @@ public class DefaultNotification implements Notification {
     private boolean isSticky = false;
     private boolean isRead = false;
     private LocalDateTime creationTime = LocalDateTime.now();
+    private boolean dismissable = true;
 
     /**
      * Creates a new {@link DefaultNotification} with the given arguments.
@@ -110,6 +111,16 @@ public class DefaultNotification implements Notification {
 
     public void setSticky(boolean isSticky) {
         this.isSticky = isSticky;
+    }
+
+    @Override
+    public boolean isDismissable() {
+        return dismissable;
+    }
+
+    @Override
+    public void setDismissable(boolean dismissable) {
+        this.dismissable = dismissable;
     }
 
     public String getTimeAgo() {
