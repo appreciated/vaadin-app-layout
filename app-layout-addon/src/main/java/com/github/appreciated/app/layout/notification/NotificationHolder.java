@@ -1,17 +1,12 @@
 package com.github.appreciated.app.layout.notification;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This Class is a controller for multiple {@link Notification} instances
@@ -110,6 +105,7 @@ public abstract class NotificationHolder<T extends Notification> {
     public void onNotificationClicked(T info) {
         notifyClickListeners(info);
         notifyListeners();
+        updateBadgeCaptions();
     }
 
     private void notifyListeners() {
@@ -126,9 +122,6 @@ public abstract class NotificationHolder<T extends Notification> {
 
     private void notifyClickListeners(T info) {
         info.setRead(true);
-        if (!info.isSticky()) {
-            removeNotification(info);
-        }
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
     }
 
@@ -148,7 +141,7 @@ public abstract class NotificationHolder<T extends Notification> {
         return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
     }
 
-    public Notification getRecentNotification() {
+    public Notification getMostRecentNotification() {
         return recentNotification;
     }
 
@@ -185,6 +178,13 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+
+    public void onNotificationDismissed(T info) {
+        if (!info.isSticky()) {
+            removeNotification(info);
+        }
+        notifyListeners();
+    }
 
     public interface NotificationsChangeListener {
         default void onNotificationChanges(NotificationHolder holder) {
