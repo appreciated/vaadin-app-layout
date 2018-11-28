@@ -1,5 +1,7 @@
 package com.github.appreciated.app.layout.behaviour;
 
+import java.lang.reflect.InvocationTargetException;
+
 import com.github.appreciated.app.layout.behaviour.left.*;
 import com.github.appreciated.app.layout.behaviour.top.Top;
 import com.github.appreciated.app.layout.behaviour.top.TopLarge;
@@ -41,10 +43,14 @@ public enum Behaviour {
 
     public AppLayout getInstance() {
         try {
-            return className.newInstance();
+            return className.getDeclaredConstructor().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
