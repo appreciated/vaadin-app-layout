@@ -39,8 +39,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private AppDrawer drawer;
     private Component title;
     private NavigationElementContainer appMenuContainer;
-    private HasElement appLayoutContent;
     private boolean isMenuVisible = true;
+
+    //prepare to delete
+    //    private HasElement appLayoutContent;
+
 
     public AbstractLeftAppLayoutBase() {
         super();
