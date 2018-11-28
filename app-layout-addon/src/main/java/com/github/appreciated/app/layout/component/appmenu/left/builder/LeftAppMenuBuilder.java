@@ -19,11 +19,10 @@ import java.util.List;
  */
 public class LeftAppMenuBuilder {
 
-    List<Component> components = new ArrayList<>();
-
-    List<Component> header = new ArrayList<>();
-    List<Component> body = new ArrayList<>();
-    List<Component> footer = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
+    private List<Component> header = new ArrayList<>();
+    private List<Component> body = new ArrayList<>();
+    private List<Component> footer = new ArrayList<>();
     private boolean sticky;
 
     protected LeftAppMenuBuilder() {
