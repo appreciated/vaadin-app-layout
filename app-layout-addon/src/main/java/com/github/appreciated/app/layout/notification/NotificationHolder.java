@@ -16,9 +16,9 @@ public abstract class NotificationHolder<T extends Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
-    private ArrayList<T> notifications = new ArrayList<>();
-    private ArrayList<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
-    private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
+    private List<T> notifications = new ArrayList<>();
+    private List<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
+    private List<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
 	private Comparator<T> comparator = Comparable::compareTo;
