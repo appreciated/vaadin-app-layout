@@ -22,7 +22,7 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
 
   public AppLayoutRouterLayout() {
     appLayout = createAppLayoutInstance();
-    setLayouToSession();
+    setLayoutToSession();
     getContent().add(appLayout);
     getContent().setSizeFull();
     getContent().getElement().getStyle().set("overflow" , "auto");
@@ -40,7 +40,7 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
   public void reloadConfiguration() {
     getContent().removeAll();
     appLayout = createAppLayoutInstance();
-    setLayouToSession();
+    setLayoutToSession();
     getContent().add(appLayout);
     if (currentContent != null) {
       showRouterLayoutContent(currentContent);
@@ -81,7 +81,7 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
     appLayout.closeDrawerIfNotPersistent();
   }
 
-  public void setLayouToSession() {
+  public void setLayoutToSession() {
     UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, appLayout);
   }
 
