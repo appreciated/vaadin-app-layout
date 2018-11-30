@@ -38,7 +38,7 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public class MainView extends AppLayoutRouterLayout {
+public class MainLayout extends AppLayoutRouterLayout {
     DefaultNotificationHolder notificationHolder;
     DefaultBadgeHolder badgeHolder;
     private Behaviour variant;

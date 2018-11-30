@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-@Route(value = "GridTest", layout = MainView.class)
+@Route(value = "GridTest", layout = MainLayout.class)
 public class GridTest extends VerticalLayout {
     List<Person> people = new ArrayList<>();
 
