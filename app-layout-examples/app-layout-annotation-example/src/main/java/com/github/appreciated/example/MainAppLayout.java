@@ -40,7 +40,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
   private DefaultNotificationHolder notifications;
   private DefaultBadgeHolder badge;
 
-  @Override public AppLayout getAppLayout() {
+  @Override public AppLayout createAppLayoutInstance() {
     if (variant == null) {
       variant = Behaviour.LEFT;
       notifications = new DefaultNotificationHolder(newStatus -> {

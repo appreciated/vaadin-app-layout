@@ -34,7 +34,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
     private Thread currentThread;
 
     @Override
-    public AppLayout getAppLayout() {
+    public AppLayout createAppLayoutInstance() {
         notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
         badgeHolder = new DefaultBadgeHolder();
 

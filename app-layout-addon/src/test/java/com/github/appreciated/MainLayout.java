@@ -45,7 +45,7 @@ public class MainLayout extends AppLayoutRouterLayout {
     private Thread currentThread;
 
     @Override
-    public AppLayout getAppLayout() {
+    public AppLayout createAppLayoutInstance() {
         if (variant == null) {
             variant = Behaviour.LEFT_HYBRID_SMALL;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
