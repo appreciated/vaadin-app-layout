@@ -2,9 +2,20 @@ package com.github.appreciated.app.layout.behaviour;
 
 import java.lang.reflect.InvocationTargetException;
 
-import com.github.appreciated.app.layout.behaviour.left.*;
-import com.github.appreciated.app.layout.behaviour.top.Top;
-import com.github.appreciated.app.layout.behaviour.top.TopLarge;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.Left;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftHybrid;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftHybridSmall;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftOverlay;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsive;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybrid;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybridNoAppBar;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybridOverlayNoAppBar;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveOverlay;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveOverlayNoAppBar;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveSmall;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveSmallNoAppBar;
+import com.github.appreciated.app.layout.behaviour.TopLayouts.Top;
+import com.github.appreciated.app.layout.behaviour.TopLayouts.TopLarge;
 
 /**
  * Contains all the available Behaviours and their

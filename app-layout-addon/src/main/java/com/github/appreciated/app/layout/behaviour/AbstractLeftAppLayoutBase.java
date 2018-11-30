@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.behaviour.left;
+package com.github.appreciated.app.layout.behaviour;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
+import static java.util.Arrays.asList;
+
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.design.Styles;
@@ -45,11 +45,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     //    private HasElement appLayoutContent;
 
 
-    public AbstractLeftAppLayoutBase() {
+    AbstractLeftAppLayoutBase() {
         super();
         getStyle().set("width", "100%")
                 .set("height", "100%");
-        getClassNames().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
+        getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
         appBarElements.add(appBarContentHolder);
