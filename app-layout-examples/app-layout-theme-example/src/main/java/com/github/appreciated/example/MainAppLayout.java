@@ -1,7 +1,9 @@
 package com.github.appreciated.example;
 
+import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
@@ -14,6 +16,7 @@ import com.github.appreciated.app.layout.notification.component.AppBarNotificati
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
@@ -31,8 +34,51 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications;
     private DefaultBadgeHolder badge;
 
+    private Component appBar = AppBarBuilder
+        .get()
+        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+        .build();
+
+    private NavigationElementContainer appMenu = LeftAppMenuBuilder
+        .get()
+        .addToSection(new MenuHeaderComponent("Menu-Header",
+                                              "Version 2.0.1",
+                                              "/frontend/images/logo.png"
+        ), HEADER)
+        .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
+        .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
+        .add(LeftSubMenuBuilder
+                 .get("My Submenu", VaadinIcon.PLUS.create())
+                 .add(LeftSubMenuBuilder
+                          .get("My Submenu", VaadinIcon.PLUS.create())
+                          .add(new LeftNavigationComponent("Charts",
+                                                           VaadinIcon.SPLINE_CHART.create(),
+                                                           View2.class
+                          ))
+                          .add(new LeftNavigationComponent("Contact",
+                                                           VaadinIcon.CONNECT.create(),
+                                                           View3.class
+                          ))
+                          .add(new LeftNavigationComponent("More",
+                                                           VaadinIcon.COG.create(),
+                                                           View4.class
+                          ))
+                          .build())
+                 .add(new LeftNavigationComponent("Contact1",
+                                                  VaadinIcon.CONNECT.create(),
+                                                  View5.class
+                 ))
+                 .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
+                 .build())
+        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
+        .build();
+
+
+
+
+
     @Override
-    public com.github.appreciated.app.layout.behaviour.AppLayout getAppLayout() {
+    public AppLayout createAppLayoutInstance() {
 
         notifications = new DefaultNotificationHolder(newStatus -> {
         });
@@ -47,44 +93,9 @@ public class MainAppLayout extends AppLayoutRouterLayout {
         return AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
                 .withTitle("App Layout")
-                .withAppBar(AppBarBuilder
-                        .get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
-                        .build())
+                .withAppBar(appBar)
                 .withDesign(AppLayoutDesign.MATERIAL)
-                .withAppMenu(LeftAppMenuBuilder
-                        .get()
-                        .addToSection(new MenuHeaderComponent("Menu-Header",
-                                "Version 2.0.1",
-                                "/frontend/images/logo.png"
-                        ), HEADER)
-                        .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
-                        .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
-                        .add(LeftSubMenuBuilder
-                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(LeftSubMenuBuilder
-                                        .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationComponent("Charts",
-                                                VaadinIcon.SPLINE_CHART.create(),
-                                                View2.class
-                                        ))
-                                        .add(new LeftNavigationComponent("Contact",
-                                                VaadinIcon.CONNECT.create(),
-                                                View3.class
-                                        ))
-                                        .add(new LeftNavigationComponent("More",
-                                                VaadinIcon.COG.create(),
-                                                View4.class
-                                        ))
-                                        .build())
-                                .add(new LeftNavigationComponent("Contact1",
-                                        VaadinIcon.CONNECT.create(),
-                                        View5.class
-                                ))
-                                .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
-                                .build())
-                        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
-                        .build())
+                .withAppMenu(appMenu)
                 .build();
     }
 

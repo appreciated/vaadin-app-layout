@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 
 @FunctionalInterface
+//@Deprecated(since = "2.0.1", forRemoval= true)
+@Deprecated
 public interface Factory<T, V> extends Serializable {
     T get(V info);
 }

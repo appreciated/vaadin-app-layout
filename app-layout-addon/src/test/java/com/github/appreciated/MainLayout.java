@@ -38,14 +38,14 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public class MainView extends AppLayoutRouterLayout {
+public class MainLayout extends AppLayoutRouterLayout {
     DefaultNotificationHolder notificationHolder;
     DefaultBadgeHolder badgeHolder;
     private Behaviour variant;
     private Thread currentThread;
 
     @Override
-    public AppLayout getAppLayout() {
+    public AppLayout createAppLayoutInstance() {
         if (variant == null) {
             variant = Behaviour.LEFT_HYBRID_SMALL;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});

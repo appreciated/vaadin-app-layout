@@ -19,45 +19,11 @@ public class TopAppMenuBuilder {
 
     private List<Component> components = new ArrayList<>();
 
-    protected TopAppMenuBuilder() {
-    }
-
-    private TopAppMenuBuilder(String title, Icon icon) {
-
+    private TopAppMenuBuilder() {
     }
 
     public static TopAppMenuBuilder get() {
         return new TopAppMenuBuilder();
-    }
-
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that only has a title
-     *
-     * @param title
-     * @return
-     */
-    public static TopAppMenuBuilder get(String title) {
-        return new TopAppMenuBuilder(title, null);
-    }
-
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that only has an icon
-     *
-     * @param icon
-     * @return
-     */
-    public static TopAppMenuBuilder get(Icon icon) {
-        return new TopAppMenuBuilder(null, icon);
-    }
-
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that has an icon and a title
-     *
-     * @param icon
-     * @return
-     */
-    public static TopAppMenuBuilder get(String title, Icon icon) {
-        return new TopAppMenuBuilder(title, icon);
     }
 
     public TopAppMenuBuilder add(Component element) {

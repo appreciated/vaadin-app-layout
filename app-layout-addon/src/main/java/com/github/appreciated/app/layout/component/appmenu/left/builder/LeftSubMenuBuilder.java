@@ -19,7 +19,7 @@ public class LeftSubMenuBuilder implements ComponentBuilder {
     private final Icon icon;
     private List<Component> components = new ArrayList<>();
 
-    protected LeftSubMenuBuilder(String title, Icon icon) {
+    private LeftSubMenuBuilder(String title, Icon icon) {
         this.title = title;
         this.icon = icon;
     }

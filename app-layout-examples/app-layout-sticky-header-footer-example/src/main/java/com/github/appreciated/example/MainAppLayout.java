@@ -32,7 +32,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultBadgeHolder badge;
 
     @Override
-    public com.github.appreciated.app.layout.behaviour.AppLayout getAppLayout() {
+    public com.github.appreciated.app.layout.behaviour.AppLayout createAppLayoutInstance() {
 
         notifications = new DefaultNotificationHolder(newStatus -> {
         });

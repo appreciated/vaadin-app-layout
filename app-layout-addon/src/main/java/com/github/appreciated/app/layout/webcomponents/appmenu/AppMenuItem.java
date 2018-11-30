@@ -48,20 +48,15 @@ public class AppMenuItem extends Anchor {
 
     @Override
     public String getText() {
-        if (item != null) {
-            return item.getText();
-        } else {
-            return getElement().getText();
-        }
+        return item != null
+               ? item.getText()
+               : getElement().getText();
     }
 
     @Override
     public void setText(String sectionName) {
-        if (item != null) {
-            item.setText(sectionName);
-        } else {
-            getElement().setText(sectionName);
-        }
+        if (item != null) item.setText(sectionName);
+        else getElement().setText(sectionName);
     }
 
     public void setIcon(String icon) {

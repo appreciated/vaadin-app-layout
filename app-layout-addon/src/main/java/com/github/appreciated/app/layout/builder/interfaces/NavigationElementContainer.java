@@ -33,16 +33,11 @@ public interface NavigationElementContainer extends NavigationElement {
     default Class<? extends HasElement> getClosestNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
         return elements
                 .filter(component -> component instanceof NavigationElement)
-                .map(component -> {
-                    if (component instanceof NavigationElementComponent) {
-                        Class<? extends HasElement> result = ((NavigationElementComponent) component).getNavigationElement();
-                        return result;
-                    } else {
-                        Class<? extends HasElement> result = ((NavigationElementContainer) component).getClosestNavigationElement(content).get();
-                        return result;
-                    }
-                })
-                .reduce((first, next) -> compareRoute(content, first, next)).orElse(null);
+                .map(component -> component instanceof NavigationElementComponent
+                                  ? ((NavigationElementComponent) component).getNavigationElement()
+                                  : ((NavigationElementContainer) component).getClosestNavigationElement(content).get())
+                .reduce((first, next) -> compareRoute(content, first, next))
+                .orElse(null);
     }
 
     default Class<? extends HasElement> compareRoute(Class<? extends HasElement> compare, Class<? extends HasElement> route1, Class<? extends HasElement> route2) {
@@ -61,18 +56,17 @@ public interface NavigationElementContainer extends NavigationElement {
         String[] desiredRoute = getRoute(compare).get().value().split("/");
         String[] elementRoute = getRoute(compare2).map(route -> route.value().split("/")).orElse(null);
         int score = 0;
-        for (; score < elementRoute.length; score++) {
-            if (desiredRoute.length >= score && !elementRoute[score].equals(desiredRoute[score])) {
+        for (; score < elementRoute.length; score++)
+            if (desiredRoute.length >= score && ! elementRoute[score].equals(desiredRoute[score])) {
                 return score;
             }
-        }
         return score;
     }
 
     default Optional<Route> getRoute(Class<? extends HasElement> element) {
-        if (element.getAnnotation(Route.class) != null)
-            return Optional.of(element.getAnnotation(Route.class));
-        return Optional.empty();
+        return element.getAnnotation(Route.class) != null
+               ? Optional.of(element.getAnnotation(Route.class))
+               : Optional.empty();
     }
 
     default Stream<Component> getMenuChildren() {
