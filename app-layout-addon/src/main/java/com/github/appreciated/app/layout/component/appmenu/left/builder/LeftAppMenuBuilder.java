@@ -25,46 +25,46 @@ public class LeftAppMenuBuilder {
     private List<Component> footer = new ArrayList<>();
     private boolean sticky;
 
-    protected LeftAppMenuBuilder() {
+    private LeftAppMenuBuilder() {
     }
 
-    private LeftAppMenuBuilder(String title, Icon icon) {
-
-    }
+//    private LeftAppMenuBuilder(String title, Icon icon) {
+//
+//    }
 
     public static LeftAppMenuBuilder get() {
         return new LeftAppMenuBuilder();
     }
 
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that only has a title
-     *
-     * @param title
-     * @return
-     */
-    public static LeftAppMenuBuilder get(String title) {
-        return new LeftAppMenuBuilder(title, null);
-    }
-
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that only has an icon
-     *
-     * @param icon
-     * @return
-     */
-    public static LeftAppMenuBuilder get(Icon icon) {
-        return new LeftAppMenuBuilder(null, icon);
-    }
-
-    /**
-     * returns a SubmenuBuilder with a predefined expanding element that has an icon and a title
-     *
-     * @param icon
-     * @return
-     */
-    public static LeftAppMenuBuilder get(String title, Icon icon) {
-        return new LeftAppMenuBuilder(title, icon);
-    }
+////    /**
+////     * returns a SubmenuBuilder with a predefined expanding element that only has a title
+////     *
+////     * @param title
+////     * @return
+////     */
+////    public static LeftAppMenuBuilder get(String title) {
+////        return new LeftAppMenuBuilder(title, null);
+////    }
+////
+////    /**
+////     * returns a SubmenuBuilder with a predefined expanding element that only has an icon
+////     *
+////     * @param icon
+////     * @return
+////     */
+////    public static LeftAppMenuBuilder get(Icon icon) {
+////        return new LeftAppMenuBuilder(null, icon);
+////    }
+////
+//    /**
+//     * returns a SubmenuBuilder with a predefined expanding element that has an icon and a title
+//     *
+//     * @param icon
+//     * @return
+//     */
+//    public static LeftAppMenuBuilder get(String title, Icon icon) {
+//        return new LeftAppMenuBuilder(title, icon);
+//    }
 
 
     public LeftAppMenuBuilder add(Component element) {
