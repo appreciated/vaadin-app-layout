@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.notification.component;
 
 import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.app.layout.component.appmenu.RoundImage;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.notification.listener.NotificationListener;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
@@ -13,6 +14,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.DomListenerRegistration;
 
+import java.util.function.Function;
+
 public class NotificationView extends PaperCard {
 
     private final VerticalLayout wrapper;
@@ -21,11 +24,11 @@ public class NotificationView extends PaperCard {
     private PaperRipple ripple;
     private DomListenerRegistration registration;
 
-    public NotificationView(Notification info) {
-        this(info, null);
+    public NotificationView(Notification info, NotificationHolder holder) {
+        this(info, holder, null);
     }
 
-    public NotificationView(Notification info, NotificationListener listener) {
+    public NotificationView(Notification info, NotificationHolder holder, NotificationListener listener) {
         getStyle()
                 .set("width", "100%")
                 .set("--shadow-elevation-2dp_-_box-shadow", "var(--app-layout-notification-shadow)")
@@ -41,7 +44,7 @@ public class NotificationView extends PaperCard {
         dot.getElement().getStyle()
                 .set("margin-left", "5px");
 
-        Label timeAgo = new Label(info.getTimeAgo());
+        Label timeAgo = new Label(((Function<Notification, String>) holder.getDateTimeFormatter()).apply(info));
         timeAgo.getElement().getStyle()
                 .set("font-size", "13px")
                 .set("margin-left", "5px")
