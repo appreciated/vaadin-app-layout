@@ -6,10 +6,6 @@ import com.vaadin.flow.component.Component;
 
 public class LeftMenuComponent extends AppMenu implements NavigationElementContainer {
 
-    public LeftMenuComponent() {
-
-    }
-
     @Override
     public Component getComponent() {
         return this;
