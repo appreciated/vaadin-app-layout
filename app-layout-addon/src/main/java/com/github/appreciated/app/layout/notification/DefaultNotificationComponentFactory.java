@@ -9,7 +9,7 @@ import com.vaadin.flow.component.Component;
 public class DefaultNotificationComponentFactory implements PairComponentFactory<NotificationHolder, Notification> {
     @Override
     public Component getComponent(NotificationHolder holder, Notification info) {
-        return new NotificationView(info, new NotificationListener() {
+        return new NotificationView(info, holder, new NotificationListener() {
             @Override
             public void onClick() {
                 holder.onNotificationClicked(info);

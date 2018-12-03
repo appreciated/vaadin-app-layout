@@ -1,10 +1,6 @@
 package com.github.appreciated.app.layout.notification.entitiy;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -121,10 +117,6 @@ public class DefaultNotification implements Notification {
     @Override
     public void setDismissable(boolean dismissable) {
         this.dismissable = dismissable;
-    }
-
-    public String getTimeAgo() {
-        return new PrettyTime().format(Date.from(creationTime.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.notification.component;
 
 import com.github.appreciated.app.layout.component.appmenu.RoundImage;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.html.Div;
@@ -9,13 +10,15 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.dom.DomEventListener;
 
+import java.util.function.Function;
+
 public class NotificationViewWithoutWrapper extends Div {
 
-    public NotificationViewWithoutWrapper(Notification info) {
-        this(info, null);
+    public NotificationViewWithoutWrapper(Notification info, NotificationHolder holder) {
+        this(info, holder, null);
     }
 
-    public NotificationViewWithoutWrapper(Notification info, DomEventListener clickEvent) {
+    public NotificationViewWithoutWrapper(Notification info, NotificationHolder holder, DomEventListener clickEvent) {
         getElement().getStyle().set("width", "100%").set("color", "#000000");
 
         Label title = new Label(info.getTitle());
@@ -27,7 +30,7 @@ public class NotificationViewWithoutWrapper extends Div {
         dot.getElement().getStyle()
                 .set("margin-left", "5px");
 
-        Label timeAgo = new Label(info.getTimeAgo());
+        Label timeAgo = new Label(((Function<Notification, String>) holder.getDateTimeFormatter()).apply(info));
         timeAgo.getElement().getStyle()
                 .set("font-size", "13px")
                 .set("margin-left", "5px")

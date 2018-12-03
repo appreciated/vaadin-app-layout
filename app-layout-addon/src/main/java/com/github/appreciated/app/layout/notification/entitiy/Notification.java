@@ -35,8 +35,5 @@ public interface Notification extends Comparable<Notification> {
 
     void setCreationTime(LocalDateTime creationTime);
 
-    String getTimeAgo();
-
     String getStyle();
-
 }
