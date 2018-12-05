@@ -46,7 +46,7 @@ public class DemoUI extends UI {
         holder = new VerticalLayout();
         holder.setMargin(false);
         notifications.setShowAllButtonCaption("Zeige Alle");
-        setDrawerVariant(Behaviour.LEFT_RESPONSIVE);
+        setDrawerVariant(Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR);
         setContent(holder);
         holder.setSizeFull();
         notifications.addNotificationClickedListener(newStatus -> Notification.show(newStatus.getTitle()));
@@ -88,7 +88,7 @@ public class DemoUI extends UI {
                 .withDefaultNavigationView(View1.class)
                 .withDesign(AppLayoutDesign.MATERIAL)
                 //.withNavigatorConsumer(navigator -> {/* Do something with it */})
-                .add(new MenuHeader("Version 1.0.2", new ThemeResource("logo.png")), HEADER)
+                .add(new MenuHeader("Version 1.0.3", new ThemeResource("logo.png")), HEADER)
                 .addClickable("Set Behaviour HEADER", VaadinIcons.COG, clickEvent -> openModeSelector(variant), HEADER)
                 .add("Home", VaadinIcons.HOME, badge, new View1())
                 .add(SubmenuBuilder.get("My Submenu", VaadinIcons.PLUS)

@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-spring-cdi-annotation-example</artifactId>
     <packaging>war</packaging>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>App Layout Add-on Spring CDI Example</name>
 
     <prerequisites>
