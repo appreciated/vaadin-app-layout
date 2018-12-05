@@ -3,11 +3,8 @@ package com.github.appreciated.app.layout.builder.entities;
 import com.github.appreciated.app.layout.builder.design.Styles;
 import com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification;
 import com.vaadin.server.Resource;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  * Data structure that contains the information for a {@link Notification}
@@ -111,10 +108,6 @@ public class DefaultNotification implements Notification {
 
     public void setDismissible(boolean dismissible) {
         this.dismissible = dismissible;
-    }
-
-    public String getTimeAgo() {
-        return new PrettyTime().format(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     public enum Priority {

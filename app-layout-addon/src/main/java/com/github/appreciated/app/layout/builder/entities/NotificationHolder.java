@@ -5,16 +5,16 @@ import com.vaadin.ui.Component;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.github.appreciated.app.layout.builder.design.Styles.APP_BAR_NOTIFICATION;
 
 /**
  * This Class is a controller for multiple {@link com.github.appreciated.app.layout.builder.entities.NotificationHolder.Notification} instances
- *
  */
 
-public class NotificationHolder<T extends NotificationHolder.Notification> {
+public abstract class NotificationHolder<T extends NotificationHolder.Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
@@ -47,7 +47,7 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(o -> getComponent((T) o)).collect(Collectors.toList());
+        return components.stream().sorted((o1, o2) -> o1.compare(o1, o2)).map(this::getComponent).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -134,5 +134,9 @@ public class NotificationHolder<T extends NotificationHolder.Notification> {
     public interface NotificationClickListener<T> {
         void onNotificationClicked(T newStatus);
     }
+
+    public abstract Function<Notification, String> getDateTimeFormatter();
+
+    public abstract void setDateTimeFormatter(Function<Notification, String> formatter);
 
 }

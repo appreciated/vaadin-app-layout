@@ -18,7 +18,7 @@ public class DefaultNotificationComponentFactory implements PairComponentFactory
         wrapper.addStyleName("ripple"); // for material theme
         wrapper.setSpacing(false);
         wrapper.setHeight(70, Sizeable.Unit.PIXELS);
-        Label timeAgo = new Label(info.getTimeAgo());
+        Label timeAgo = new Label((String) holder.getDateTimeFormatter().apply(info));
         timeAgo.addStyleName(Styles.APP_BAR_NOTIFICATION_TIME);
         Label title = new Label(info.getTitle());
         title.addStyleName(Styles.APP_BAR_NOTIFICATION_TITLE);
