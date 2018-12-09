@@ -1,6 +1,6 @@
 html {
     --app-layout-primary-color: var(--lumo-primary-color);
-    --app-layout-background-color: var(--lumo-base-color);
+    --app-layout-background: var(--lumo-base-color);
     --app-layout-font-size-header: var(--lumo-font-size-m);
     --app-layout-font-size-menu: var(--lumo-font-size-m);
     --app-layout-font-size-notifications: var(--lumo-font-size-m);

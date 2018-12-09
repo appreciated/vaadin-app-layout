@@ -46,6 +46,8 @@ public class MainLayout extends AppLayoutRouterLayout {
 
     @Override
     public AppLayout createAppLayoutInstance() {
+        getElement().getStyle().set("background", "red");
+
         if (variant == null) {
             variant = Behaviour.LEFT_HYBRID_SMALL;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
