@@ -787,3 +787,4 @@ app-layout-ui-tests/app-layout-ui-test-left-responsive/target/package.json
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/vaadin-flow-bundle.html
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/yarn.lock
 !/app-layout-ui-tests/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive/src/main/resources/META-INF/resources/frontend/bower_components/
