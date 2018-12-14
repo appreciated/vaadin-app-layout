@@ -185,7 +185,6 @@ app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/defau
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/defaults/node_modules/clone/clone.js
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/defaults/node_modules/clone/package.json
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/defaults/package.json
-app-layout-ui-tests/app-layout-ui-test-left-responsive/
 target/node_modules/defaults/test.js
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/define-property/
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/del/
@@ -787,3 +786,4 @@ app-layout-ui-tests/app-layout-ui-test-left-responsive/target/node_modules/yalli
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/package.json
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/vaadin-flow-bundle.html
 app-layout-ui-tests/app-layout-ui-test-left-responsive/target/yarn.lock
+!/app-layout-ui-tests/
