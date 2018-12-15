@@ -1,7 +1,5 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import static java.util.Arrays.asList;
-
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.design.Styles;
@@ -15,8 +13,9 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 
-import java.util.Arrays;
 import java.util.Optional;
+
+import static java.util.Arrays.asList;
 
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
@@ -46,7 +45,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
 
     AbstractLeftAppLayoutBase() {
-        super();
         getStyle().set("width", "100%")
                 .set("height", "100%");
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
