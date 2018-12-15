@@ -1,13 +1,8 @@
 package com.github.appreciated.app.layout.test.annotated;
 
-import static com.codeborne.selenide.Selenide.open;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import com.github.appreciated.app.layout.test.leftresponsive.LeftResponsiveMain;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,15 +17,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import com.github.appreciated.app.layout.test.BasicMain;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+import static com.codeborne.selenide.Selenide.open;
 
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = BasicMain.class,
+@SpringBootTest(classes = LeftResponsiveMain.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class BasicAnnotatedTest {
+public class LeftResponsiveTest {
 
 
   private static WebDriver driver;
