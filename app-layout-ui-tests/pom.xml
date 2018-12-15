@@ -26,10 +26,10 @@
         <module>app-layout-ui-test-left-responsive</module>
         <module>app-layout-ui-test-left-responsive-hybrid</module>
         <module>app-layout-ui-test-left-responsive-hybrid-no-app-bar</module>
-        <module>app-layout-ui-test-left-responsive-no-app-bar</module>
         <module>app-layout-ui-test-left-responsive-overlay</module>
         <module>app-layout-ui-test-left-responsive-overlay-no-app-bar</module>
         <module>app-layout-ui-test-left-responsive-small</module>
+        <module>app-layout-ui-test-left-responsive-small-no-app-bar</module>
         <module>app-layout-ui-test-top</module>
         <module>app-layout-ui-test-top-large</module>
     </modules>
