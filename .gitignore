@@ -17,3 +17,13 @@ app-layout-ui-tests
 /app-layout-ui-tests/app-layout-ui-test-left-responsive/src/test/resources/META-INF/resources/frontend/bower_components/
 /app-layout-ui-tests/app-layout-ui-test-left/src/test/resources/META-INF/resources/frontend/bower_components/
 /app-layout-ui-tests/app-layout-ui-test-left-hybrid/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-hybrid-small/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-overlay/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-hybrid/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-hybrid-no-app-bar/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-no-app-bar/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-overlay/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-overlay-no-app-bar/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-responsive-small/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-top/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-top-large/src/test/resources/META-INF/resources/frontend/bower_components/
