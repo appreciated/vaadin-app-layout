@@ -69,6 +69,10 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
                 ).build();
     }
 
+    private Class<? extends Component> getViewForI(int i) {
+        return getViews()[i - 1];
+    }
+
 
     public void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
@@ -103,5 +107,5 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
         reloadConfiguration();
     }
 
-    public abstract Class<? extends Component> getViewForI(int i);
+    public abstract Class<? extends Component>[] getViews();
 }

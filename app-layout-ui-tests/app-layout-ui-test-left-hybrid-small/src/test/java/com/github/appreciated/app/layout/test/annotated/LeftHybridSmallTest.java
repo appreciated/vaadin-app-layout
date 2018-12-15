@@ -62,7 +62,6 @@ public class LeftHybridSmallTest {
         WebElement elementRoot = getShadowRootElement("app-layout-left-hybrid");
         WebElement drawerRoot = getShadowRootDrawer("app-layout-left-hybrid");
         clickByID(elementRoot, "#toggle");
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 0);
         clickByClassName(drawerRoot, ".app-menu-item", 1);
         clickByClassName(drawerRoot, ".app-menu-item", 2);
