@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-ui-test-left-hybrid</artifactId>
-    <name>App Layout Add-on UI Test Left Responsive</name>
+    <name>App Layout Add-on UI Test Left Hybrid</name>
     <version>2.0.1</version>
     <packaging>jar</packaging>
 
