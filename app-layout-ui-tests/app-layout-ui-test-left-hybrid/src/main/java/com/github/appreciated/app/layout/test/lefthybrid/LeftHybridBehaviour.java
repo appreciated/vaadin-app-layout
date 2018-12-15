@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 public class LeftHybridBehaviour extends AbstractLeftBehaviorView {
     @Override
     public Behaviour getVariant() {
-        return Behaviour.LEFT;
+        return Behaviour.LEFT_HYBRID;
     }
 
     @Override

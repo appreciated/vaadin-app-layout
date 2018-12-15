@@ -59,26 +59,20 @@ public class LeftHybridTest {
     @Test
     public void testMenu() {
         openWebsite();
-
-        WebElement elementRoot = getShadowRootElement("app-layout-left");
-        WebElement drawerRoot = getShadowRootDrawer("app-layout-left");
+        WebElement elementRoot = getShadowRootElement("app-layout-left-hybrid");
+        WebElement drawerRoot = getShadowRootDrawer("app-layout-left-hybrid");
+        clickByID(elementRoot, "#toggle");
+        clickByID(elementRoot, "#toggle");
         clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 0);
         clickByClassName(drawerRoot, ".app-menu-item", 1);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 2);
         clickByClassName(drawerRoot, ".app-menu-item", 3);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 4);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 5);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 6);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 7);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 8);
-        clickByID(elementRoot, "#toggle");
         clickByClassName(drawerRoot, ".app-menu-item", 9);
     }
 
