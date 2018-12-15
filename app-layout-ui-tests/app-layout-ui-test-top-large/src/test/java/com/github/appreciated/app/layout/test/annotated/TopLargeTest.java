@@ -58,18 +58,10 @@ public class TopLargeTest {
     @Test
     public void testMenu() {
         openWebsite();
-        WebElement root = getShadowRoot("app-layout-left-responsive");
-
-        clickByClassName(root, "app-menu-item", 0);
-        clickByClassName(root, "app-menu-item", 1);
-        clickByClassName(root, "app-menu-item", 2);
-        clickByClassName(root, "app-menu-item", 3);
-        clickByClassName(root, "app-menu-item", 4);
-        clickByClassName(root, "app-menu-item", 5);
-        clickByClassName(root, "app-menu-item", 6);
-        clickByClassName(root, "app-menu-item", 7);
-        clickByClassName(root, "app-menu-item", 8);
-        clickByClassName(root, "app-menu-item", 9);
+        WebElement root = getShadowRoot("app-layout-top-large");
+        clickByTagName(root, "paper-tab", 0);
+        clickByTagName(root, "paper-tab", 1);
+        clickByTagName(root, "paper-tab", 2);
     }
 
 
