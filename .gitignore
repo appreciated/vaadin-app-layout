@@ -15,3 +15,5 @@ app-layout-examples/app-layout-plain-example/target/
 app-layout-ui-tests
 !/app-layout-ui-tests/
 /app-layout-ui-tests/app-layout-ui-test-left-responsive/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-left-hybrid/src/test/resources/META-INF/resources/frontend/bower_components/
