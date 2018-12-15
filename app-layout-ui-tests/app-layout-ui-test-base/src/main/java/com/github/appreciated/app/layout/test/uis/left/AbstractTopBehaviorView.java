@@ -1,14 +1,26 @@
 package com.github.appreciated.app.layout.test.uis.left;
 
+import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
+import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
+import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.entity.Section;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.notification.entitiy.Priority;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
+import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 @Push
@@ -19,7 +31,35 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
     private Behaviour variant;
     private Thread currentThread;
 
-    abstract Behaviour getVariant();
+    @Override
+    public AppLayout createAppLayoutInstance() {
+        notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
+        badgeHolder = new DefaultBadgeHolder();
+
+        reloadNotifications();
+        return AppLayoutBuilder.get(getVariant())
+                .withTitle("App Layout")
+                .withAppBar(AppBarBuilder.get()
+                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                        .build()
+                )
+                .withDesign(AppLayoutDesign.MATERIAL)
+                .withAppMenu(TopAppMenuBuilder.get()
+                        .addToSection(new TopClickableComponent("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
+                        }), Section.HEADER)
+                        .add(new TopNavigationComponent("Home", VaadinIcon.HOME.create(), getViewForI(1)))
+                        .add(new TopNavigationComponent("Contact", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
+                        .addToSection(new TopClickableComponent("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
+                        }), FOOTER)
+                        .addToSection(new TopNavigationComponent("More", VaadinIcon.CONNECT.create(), getViewForI(3)), FOOTER).build()
+                ).build();
+    }
+
+    private Class<? extends Component> getViewForI(int i) {
+        return getViews()[i - 1];
+    }
+
+    public abstract Behaviour getVariant();
 
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
@@ -52,4 +92,6 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         this.variant = variant;
         reloadConfiguration();
     }
+
+    public abstract Class<? extends Component>[] getViews();
 }
