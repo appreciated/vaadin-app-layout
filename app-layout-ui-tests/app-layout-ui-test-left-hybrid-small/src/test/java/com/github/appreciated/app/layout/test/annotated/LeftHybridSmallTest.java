@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.test.annotated;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-import com.github.appreciated.app.layout.test.lefthybrid.LeftHybridMain;
+import com.github.appreciated.app.layout.test.lefthybridsmall.LeftHybridSmallMain;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,9 +28,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LeftHybridMain.class,
+@SpringBootTest(classes = LeftHybridSmallMain.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LeftHybridTest {
+public class LeftHybridSmallTest {
 
 
     private static WebDriver driver;
