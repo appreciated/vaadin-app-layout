@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.behaviour;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawerLayout;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.polymertemplate.Id;
 
 public interface LeftLayouts {
@@ -19,6 +20,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-hybrid")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-hybrid.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-hybrid.css")
   class LeftHybrid extends AbstractLeftAppLayoutBase {
 
       @Override
@@ -60,6 +62,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-hybrid")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
   class LeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
 
       @Override
@@ -70,6 +73,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-hybrid-no-app-bar")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
   class LeftResponsiveHybridNoAppBar extends AbstractLeftAppLayoutBase {
 
       @Override
@@ -80,6 +84,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-hybrid-overlay-no-app-bar")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
   class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftAppLayoutBase {
 
       @Override
@@ -110,6 +115,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-small")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-small.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-responsive-small.css")
   class LeftResponsiveSmall extends AbstractLeftAppLayoutBase {
 
       @Override
@@ -120,6 +126,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-small-no-app-bar")
   @HtmlImport("frontend://com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.html")
+  @StyleSheet("frontend://com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
   class LeftResponsiveSmallNoAppBar extends AbstractLeftAppLayoutBase {
 
       @Override

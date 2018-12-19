@@ -106,26 +106,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     color: transparent;
                 }
 
-                #drawerLayout.small #menu-header-title, #drawerLayout.small #menu-header-subtitle {
-                    opacity: 0;
-                    max-height: 0px;
-                    margin-top: 0px;
-                }
-
-                #menu-header-title, #menu-header-subtitle {
-                    opacity: 1.0;
-                    transition: opacity 0.2s, max-height 0.5s, margin-top 0.5s;
-                    max-height: 50px;
-                }
-
-                #menu-header-wrapper {
-                    transition: padding 0.5s;
-                }
-
-                #drawerLayout.small #menu-header-wrapper {
-                    padding: 4px;
-                }
-
                 app-menu-icon-item {
                     transition: color 0.2s ease;
                 }
@@ -178,6 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (drawer.persistent) {
                     if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                         drawerLayout.classList.toggle("small");
+                        this.classList.toggle("small");
                     } else {
                         window.history.back();
                     }
