@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.test.annotated;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import com.github.appreciated.app.layout.test.test.BaseTest;
 import com.github.appreciated.app.layout.test.top.TopMain;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -29,102 +30,22 @@ import static com.codeborne.selenide.Selenide.open;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TopMain.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TopTest {
+public class TopTest extends BaseTest {
 
-    private static WebDriver driver;
     @LocalServerPort
     int randomServerPort;
-
-    @BeforeClass
-    public static void init() {
-        try (Stream<Path> stream = Files.find(Paths.get("../selenium/bin"), 15,
-                (path, attr) -> (path.getFileName().toString().contains("chromedriver")))) {
-            System.setProperty("webdriver.chrome.driver", stream.findFirst().get().toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        driver = new ChromeDriver();
-        WebDriverRunner.setWebDriver(driver);
-    }
-
-    @AfterClass
-    public static void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
     @Test
     public void testMenu() {
         openWebsite();
-        WebElement root = getShadowRoot("app-layout-top");
-        clickByTagName(root, "paper-tab", 0);
-        clickByTagName(root, "paper-tab", 1);
-        clickByTagName(root, "paper-tab", 2);
+        WebElement root = getShadowRootElement("app-layout-top");
+        clickByCssSelector("paper-tab", 0);
+        clickByCssSelector("paper-tab", 1);
+        clickByCssSelector("paper-tab", 2);
     }
 
-
-    /**
-     * document.getElementsByTagName("app-layout-left-responsive")[0].shadowRoot.childNodes[2].getElementsByTagName("app-drawer-layout")[0].getElementsByTagName("app-drawer")
-     *
-     * @param element
-     * @return
-     */
-    public WebElement getShadowRoot(String element) {
-        return (WebElement) ((JavascriptExecutor) driver).executeScript(
-                "return document.getElementsByTagName(\"" + element + "\")[0].shadowRoot.childNodes[2]");
-    }
-
-    public WebElement findByTagName(WebElement element, String tag) {
-        return findByTagName(element, tag, 0);
-    }
-
-    public WebElement findByTagName(WebElement element, String tag, int i) {
-        return (WebElement) ((JavascriptExecutor) driver).executeScript(
-                "return arguments[0].getElementsByTagName(\"" + tag + "\")[" + i + "]", element);
-    }
-
-    public void clickByTagName(WebElement element, String tag, int i) {
-        findByTagName(element, tag, i).click();
-        try {
-            Thread.sleep(900);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public WebElement findByClassName(WebElement element, String className) {
-        return findByClassName(element, className, 0);
-    }
-
-    public WebElement findByClassName(WebElement element, String className, int i) {
-        WebElement root = (WebElement) ((JavascriptExecutor) driver).executeScript(
-                "return arguments[0].getElementsByClassName(\"" + className + "\")[" + i + "]", element);
-        return root;
-    }
-
-    public void clickByClassName(WebElement element, String className, int i) {
-        findByClassName(element, className, i).click();
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void clickElement(SelenideElement element) {
-        Actions actions = new Actions(driver);
-        actions.click(element).perform();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void openWebsite() {
-        open("http://localhost:" + randomServerPort);
+    @Override
+    public int getServerPort() {
+        return randomServerPort;
     }
 }
