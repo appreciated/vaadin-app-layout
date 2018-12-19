@@ -23,6 +23,8 @@ public interface TopLayouts {
   @HtmlImport("frontend://com/github/appreciated/app-layout/top/top.html")
   class Top extends AppLayout {
     private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
+      private final Div appBarElements;
+      private final Div content;
     private NavigationElementContainer navigationElementContainer;
 
     @Override
@@ -34,10 +36,7 @@ public interface TopLayouts {
     private final VerticalLayout contentPanel = new VerticalLayout();
     private final HorizontalLayout appBar = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    @Id("app-bar-elements")
-    private Div appBarElements;
-    @Id("content")
-    private Div content;
+
     @Id("toggle")
     private PaperIconButton paperIconButton;
     private final HorizontalLayout titleWrapper = new HorizontalLayout();
@@ -52,6 +51,15 @@ public interface TopLayouts {
       paperTabWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
       appBar.setWidth("100%");
       appBar.setHeight("100%");
+
+        appBarElements = new Div();
+        appBarElements.setHeight("100%");
+        appBarElements.getElement().setAttribute("slot", "app-bar-content");
+        content = new Div();
+        content.setHeight("100%");
+        content.setWidth("100%");
+        content.getElement().setAttribute("slot", "application-content");
+
       appBarElements.add(appBar);
       appBarElementWrapper.setSpacing(false);
       appBarElementWrapper.add(appBarElementContainer);
@@ -59,6 +67,8 @@ public interface TopLayouts {
       appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
       titleWrapper.setHeight("100%");
       titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+
+        getElement().appendChild(appBarElements.getElement(), content.getElement());
     }
 
     @Override

@@ -72,11 +72,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
         <app-toolbar>
             <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-            <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;"></div>
+            <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;">
+                <slot name="app-bar-content"></slot>
+            </div>
         </app-toolbar>
-        <div id="content" class="app-bar-application-content" size="100"></div>
+        <div id="content" class="application-content" size="100">
+            <slot name="application-content"></slot>
+        </div>
         <app-drawer id="drawer" slot="drawer" swipe-open>
-            <div id="menu-elements" class="drawer-content"></div>
+            <div id="menu-elements" class="drawer-content">
+                <slot name="drawer-content"></slot>
+            </div>
         </app-drawer>
     </template>
     <script>

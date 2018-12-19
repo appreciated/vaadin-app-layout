@@ -16,7 +16,8 @@ public class AppMenuItem extends Anchor {
         getElement().getStyle().set("position", "relative")
                 .set("padding", "var(--app-layout-menu-button-padding)")
                 .set("margin", "var(--app-layout-menu-button-margin)")
-                .set("border-radius", "var(--app-layout-menu-button-border-radius)");
+                .set("border-radius", "var(--app-layout-menu-button-border-radius)")
+                .set("--lumo-primary-text-color", "var(--app-layout-app-color)");
         getElement().appendChild(new PaperRipple().getElement());
     }
 
@@ -49,8 +50,8 @@ public class AppMenuItem extends Anchor {
     @Override
     public String getText() {
         return item != null
-               ? item.getText()
-               : getElement().getText();
+                ? item.getText()
+                : getElement().getText();
     }
 
     @Override

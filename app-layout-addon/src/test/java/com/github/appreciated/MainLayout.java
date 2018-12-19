@@ -47,7 +47,7 @@ public class MainLayout extends AppLayoutRouterLayout {
     @Override
     public AppLayout createAppLayoutInstance() {
         if (variant == null) {
-            variant = Behaviour.TOP;
+            variant = Behaviour.LEFT_RESPONSIVE;
             notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
             badgeHolder = new DefaultBadgeHolder();
         }

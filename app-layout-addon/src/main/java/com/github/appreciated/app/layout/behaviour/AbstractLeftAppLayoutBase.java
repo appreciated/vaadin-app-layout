@@ -26,14 +26,13 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final HorizontalLayout titleWrapper = new HorizontalLayout();
+    private final Div menuElements;
+    private final Div content;
     @Id("toggle")
     private PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     private Div appBarElements;
-    @Id("menu-elements")
-    private Div menuElements;
-    @Id("content")
-    private Div content;
+
     @Id("drawer")
     private AppDrawer drawer;
     private Component title;
@@ -50,7 +49,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
-        appBarElements.add(appBarContentHolder);
+        appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
         appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.setSizeFull();
@@ -58,12 +57,22 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
+
+        menuElements = new Div();
+        menuElements.getElement().setAttribute("slot", "drawer-content");
+        content = new Div();
+        content.setHeight("100%");
+        content.setWidth("100%");
+        content.getElement().setAttribute("slot", "application-content");
+
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         titleWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         titleWrapper.setPadding(false);
         titleWrapper.setMargin(false);
         getElement().getClassList().add("app-layout");
+
+        getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), content.getElement());
     }
 
     @Override
