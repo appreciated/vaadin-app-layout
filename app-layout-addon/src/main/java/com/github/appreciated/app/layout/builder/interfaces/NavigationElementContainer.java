@@ -27,7 +27,7 @@ public interface NavigationElementContainer extends NavigationElement {
     }
 
     default Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return Optional.of(getClosestNavigationElement(getMenuChildren(), element));
+        return Optional.ofNullable(getClosestNavigationElement(getMenuChildren(), element));
     }
 
     default Class<? extends HasElement> getClosestNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
