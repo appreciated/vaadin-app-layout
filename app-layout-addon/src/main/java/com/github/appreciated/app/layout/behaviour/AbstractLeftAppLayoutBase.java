@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.router.HasBackNavigation;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
@@ -81,10 +80,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     public abstract String getStyleName();
-
-    public void setDesign(AppLayoutDesign design) {
-        this.getElement().getClassList().add(design.getStyleName());
-    }
 
     public HorizontalLayout getAppBarElementWrapper() {
         return appBarElementWrapper;

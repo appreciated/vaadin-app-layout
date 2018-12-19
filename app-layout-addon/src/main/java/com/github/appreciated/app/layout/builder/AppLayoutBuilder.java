@@ -3,7 +3,6 @@ package com.github.appreciated.app.layout.builder;
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -14,7 +13,6 @@ import com.vaadin.flow.component.html.Span;
  */
 public class AppLayoutBuilder implements ComponentBuilder {
 
-    private AppLayoutDesign design = AppLayoutDesign.DEFAULT;
     private AppLayout instance;
     private Component titleComponent;
     private Component imageComponent;
@@ -54,17 +52,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     * Set the Design which the build menu is supposed to have
-     *
-     * @param design
-     * @return
-     */
-    public AppLayoutBuilder withDesign(AppLayoutDesign design) {
-        setDesign(design);
-        return this;
-    }
-
-    /**
      * Build the layout and returns an instance of an AppLayout which also is a Component
      *
      * @return
@@ -76,7 +63,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
-        instance.setDesign(design);
         instance.init();
         return instance;
 
@@ -90,14 +76,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
     public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
         setAppMenu(component);
         return this;
-    }
-
-    public AppLayoutDesign getDesign() {
-        return design;
-    }
-
-    public void setDesign(AppLayoutDesign design) {
-        this.design = design;
     }
 
     public void setTitle(String title) {

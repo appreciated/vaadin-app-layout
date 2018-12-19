@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
@@ -85,10 +84,6 @@ public interface TopLayouts {
 
         public Div getAppBarElements() {
             return appBarElements;
-        }
-
-        public void setDesign(AppLayoutDesign design) {
-            this.getElement().getClassList().add(design.getStyleName());
         }
 
         public HorizontalLayout getAppBar() {
@@ -239,10 +234,6 @@ public interface TopLayouts {
 
         public Div getAppBarElements() {
             return appBarElements;
-        }
-
-        public void setDesign(AppLayoutDesign design) {
-            this.getElement().getClassList().add(design.getStyleName());
         }
 
         public HorizontalLayout getAppBar() {

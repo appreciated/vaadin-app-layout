@@ -12,7 +12,6 @@ import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubM
 import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -67,7 +66,6 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .get()
                             .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
                             .build())
-                    .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
                             .addToSection(new MenuHeaderComponent("App-Layout",
@@ -126,7 +124,6 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .get()
                             .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
                             .build())
-                    .withDesign(AppLayoutDesign.MATERIAL)
                     .withAppMenu(TopAppMenuBuilder
                             .get()
                             .addToSection(new TopClickableComponent("Set Behaviour 1",

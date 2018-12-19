@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -15,8 +14,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public interface AppLayoutElementBase extends NavigationElementContainer {
 
     String getStyleName();
-
-    void setDesign(AppLayoutDesign design);
 
     Component getTitleComponent();
 
