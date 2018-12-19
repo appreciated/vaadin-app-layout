@@ -1,7 +1,5 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import java.util.Arrays;
-
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
@@ -16,6 +14,8 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+
+import java.util.Arrays;
 
 public interface TopLayouts {
 
@@ -176,7 +176,7 @@ public interface TopLayouts {
                      .set("flex-shrink" , "1")
                      .set("align-self" , "flex-end");
       paperTabWrapper.setWidth("100%");
-      paperTabWrapper.setHeight("var(--app-bar-height)");
+        paperTabWrapper.setHeight("var(--app-layout-bar-height)");
       paperTabWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
       getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName() , "app-layout"));
@@ -195,10 +195,10 @@ public interface TopLayouts {
       appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
       titleWrapper.setHeight("100%");
       titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-      titleWrapper.setHeight("var(--app-bar-height)");
+        titleWrapper.setHeight("var(--app-layout-bar-height)");
 
       appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
-      appBarElementWrapper.setHeight("var(--app-bar-height)");
+        appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
       paperIconButton.setIcon("arrow-back");
     }
 

@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: transparent;
             }
             app-toolbar {
-                height: var(--app-bar-height);
+                height: var(--app-layout-bar-height);
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
@@ -147,7 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed slot="header">
-                <app-toolbar style="height: var(--app-bar-height);">
+                <app-toolbar style="height: var(--app-layout-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
                 </app-toolbar>

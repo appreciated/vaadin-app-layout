@@ -7,7 +7,7 @@
             .app-menu-item {
                 cursor: pointer;
                 text-decoration: none;
-                color: var(--app-menu-color, var(--primary-text-color));
+                color: var(--app-layout-app-color, var(--primary-text-color));
                 transition: color 0.4s ease-out;
                 display: flex;
                 flex-direction: row;
@@ -35,26 +35,26 @@
             .selectable-content ::slotted(.app-menu-item.iron-selected),
             .app-menu-item.iron-selected {
                 font-weight: 600;
-                background-color: var(--app-menu-selected-bg-color, var(--primary-background-color));
+                background-color: var(--app-layout-app-selected-bg-color, var(--primary-background-color));
                 color: var(--primary-color);
                 fill: var(--primary-color);
-                @apply(--app-menu-selected-item);
+                @apply(--app-layout-app-selected-item);
             }
 
             .selectable-content ::slotted(.app-menu-item:hover),
             .selectable-content ::slotted(.app-menu-item:focus) {
-                background-color: var(--app-menu-selected-bg-color, var(--primary-background-color));
+                background-color: var(--app-layout-app-selected-bg-color, var(--primary-background-color));
             }
 
             .selectable-content ::slotted(.app-menu-item[disabled]) {
-                color: var(--app-menu-disabled-color, var(--disabled-text-color));
+                color: var(--app-layout-app-disabled-color, var(--disabled-text-color));
                 pointer-events: none;
             }
 
             .selectable-content ::slotted(:focus) {
                 position: relative;
                 outline: 0;
-                @apply(--app-menu-focused-item);
+                @apply(--app-layout-app-focused-item);
             }
 
             .selectable-content ::slotted(.app-menu-item:focus:after) {
@@ -62,7 +62,7 @@
                 opacity: var(--dark-divider-opacity);
                 content: '';
                 pointer-events: none;
-                @apply(--app-menu-focused-item-after);
+                @apply(--app-layout-app-focused-item-after);
             }
 
             .selectable-content ::slotted(.app-menu-item[colored]:focus:after) {

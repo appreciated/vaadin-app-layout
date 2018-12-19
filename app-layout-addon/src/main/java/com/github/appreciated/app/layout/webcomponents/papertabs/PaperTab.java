@@ -16,6 +16,7 @@ public class PaperTab extends Component implements FlexComponent, HasText {
         setId("my-paper-tab");
         add(icon);
         setText(caption);
+        getElement().getStyle().set("font-size", "var(--app-layout-font-size-app-bar)");
     }
 
     private void add(Component component) {

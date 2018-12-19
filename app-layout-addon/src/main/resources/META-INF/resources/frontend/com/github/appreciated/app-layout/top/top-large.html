@@ -25,13 +25,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             app-toolbar {
-                height: var(--app-bar-height);
+                height: var(--app-layout-bar-height);
                 padding: 0 0 0 16px;
                 color: var(--app-layout-bar-font-color);
             }
 
             app-header {
-                --lumo-primary-text-color: #ffffff;
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
@@ -51,8 +50,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #app-bar-elements {
                 width: 100%;
-                height: calc(var(--app-bar-height) * 2);
-                top: calc(var(--app-bar-height) / -2);
+                height: calc(var(--app-layout-bar-height) * 2);
+                top: calc(var(--app-layout-bar-height) / -2);
                 position: relative;
                 margin-left: 0px;
                 transition: margin-left ease 0.4s;
