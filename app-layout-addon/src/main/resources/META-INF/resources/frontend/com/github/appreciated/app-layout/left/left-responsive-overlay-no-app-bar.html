@@ -118,12 +118,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <app-header fixed slot="header">
                     <app-toolbar style="height: var(--app-layout-bar-height);">
                         <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
+                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
+                            <slot name="app-bar-content"></slot>
+                        </div>
                     </app-toolbar>
                 </app-header>
             </app-header-layout>
             <app-drawer id="drawer" slot="drawer" swipe-open>
-                <div class="drawer-content" id="menu-elements"></div>
+                <div class="drawer-content" id="menu-elements">
+                    <slot name="drawer-content"></slot>
+                </div>
             </app-drawer>
             <div class="application-content" size="100" id="content">
                 <slot>
