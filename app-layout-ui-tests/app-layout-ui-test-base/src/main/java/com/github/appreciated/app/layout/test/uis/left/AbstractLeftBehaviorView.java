@@ -9,7 +9,6 @@ import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableCom
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
@@ -48,7 +47,6 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
                         AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder)).build())
-                .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
                                 .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.1", "frontend/images/logo.png"), Section.HEADER)

@@ -7,7 +7,6 @@ import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
@@ -43,7 +42,6 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
                         .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
                         .build()
                 )
-                .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(TopAppMenuBuilder.get()
                         .addToSection(new TopClickableComponent("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
                         }), Section.HEADER)
