@@ -7,7 +7,6 @@ import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -45,7 +44,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         .get()
                         .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                         .build())
-                .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
                         .addToSection(new MenuHeaderComponent("Menu-Header",

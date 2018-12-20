@@ -9,7 +9,6 @@ import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -17,6 +16,7 @@ import com.github.appreciated.app.layout.notification.entitiy.DefaultNotificatio
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
@@ -29,7 +29,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-//@HtmlImport("frontend://theming/custom.html")
+@HtmlImport("frontend://theming/custom.html")
 public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications;
     private DefaultBadgeHolder badge;
@@ -94,7 +94,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .get(Behaviour.LEFT_HYBRID)
                 .withTitle("App Layout")
                 .withAppBar(appBar)
-                .withDesign(AppLayoutDesign.MATERIAL)
                 .withAppMenu(appMenu)
                 .build();
     }

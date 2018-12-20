@@ -1,10 +1,5 @@
 package com.github.appreciated.example;
 
-import static com.github.appreciated.app.layout.entity.Section.FOOTER;
-import static com.github.appreciated.app.layout.entity.Section.HEADER;
-
-import java.util.function.Consumer;
-
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
@@ -17,7 +12,6 @@ import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubM
 import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.app.layout.design.AppLayoutDesign;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -28,6 +22,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+
+import java.util.function.Consumer;
+
+import static com.github.appreciated.app.layout.entity.Section.FOOTER;
+import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 /**
  * The main view contains a button and a template element.
@@ -58,7 +57,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                           .get()
                           .add(new AppBarNotificationButton(VaadinIcon.BELL , notifications))
                           .build())
-          .withDesign(AppLayoutDesign.MATERIAL)
           .withAppMenu(LeftAppMenuBuilder
                            .get()
                            .addToSection(new MenuHeaderComponent("Menu-Header" ,
@@ -109,7 +107,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                           .get()
                           .add(new AppBarNotificationButton(VaadinIcon.BELL , notifications))
                           .build())
-          .withDesign(AppLayoutDesign.MATERIAL)
           .withAppMenu(TopAppMenuBuilder
                            .get()
                            .addToSection(new TopClickableComponent("Set Behaviour 1" ,
