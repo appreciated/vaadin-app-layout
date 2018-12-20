@@ -5,5 +5,16 @@
             --lumo-primary-color-50pct: hsla(174, 41%, 51%, 0.5) !important;
             --lumo-primary-color: hsl(174, 41%, 51%) !important;
         }
+
     </style>
 </custom-style>
+
+<dom-module id="my-custom-layout" theme-for="app-layout-left">
+    <template>
+        <style>
+            [part="app-bar"] {
+                border: 1px solid gray;
+            }
+        </style>
+    </template>
+</dom-module>

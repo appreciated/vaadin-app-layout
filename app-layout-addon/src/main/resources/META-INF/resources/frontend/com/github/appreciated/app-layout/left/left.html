@@ -7,9 +7,10 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-ref="..
-
-<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
+<link href="../../../../../bower_components/polymer/polymer-element.html" rel="import">
+<link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
@@ -91,41 +92,50 @@ ref="..
                 margin-left: -8px;
             }
         </style>
-        <app-toolbar>
+        <app-toolbar part="app-bar">
             <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
             <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;">
                 <slot name="app-bar-content"></slot>
             </div>
         </app-toolbar>
-        <div id="content" class="application-content" size="100">
+        <div id="content" part="application-content" class="application-content" size="100">
             <slot name="application-content"></slot>
         </div>
-        <app-drawer id="drawer" slot="drawer" swipe-open>
+        <app-drawer part="drawer" id="drawer" slot="drawer" swipe-open>
             <div id="menu-elements" class="drawer-content">
                 <slot name="drawer-content"></slot>
             </div>
         </app-drawer>
     </template>
     <script>
-        class AppLayoutLeft extends Polymer.Element {
-            static get is() {
-                return 'app-layout-left'
-            }
+        (function () {
+            class AppLayoutLeft extends Vaadin.ThemableMixin
 
-            onclick() {
-                if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
-                    Polymer.dom(this.root).querySelector("#drawer").toggle();
-                } else {
-                    window.history.back();
+            (Polymer.Element)
+            {
+                static
+                get
+                is()
+                {
+                    return 'app-layout-left'
+                }
+
+                onclick()
+                {
+                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                        Polymer.dom(this.root).querySelector("#drawer").toggle();
+                    } else {
+                        window.history.back();
+                    }
+                }
+
+                closeIfNotPersistent()
+                {
+                    var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                    drawer.close();
                 }
             }
-
-            closeIfNotPersistent() {
-                var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                drawer.close();
-            }
-        }
-
-        customElements.define(AppLayoutLeft.is, AppLayoutLeft);
+            customElements.define(AppLayoutLeft.is, AppLayoutLeft);
+        })();
     </script>
 </dom-module>
