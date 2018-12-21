@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             app-toolbar {
                 height: var(--app-layout-bar-height);
-                background: var(--app-layout-bar-background-color);
+                background: var(--app-layout-bar-background-base-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
@@ -38,6 +38,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 top: 0px;
                 left: 0px;
                 right: 0px;
+            }
+
+            app-toolbar:before {
+                background: var(--app-layout-bar-background-color);
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
             }
 
             /*
