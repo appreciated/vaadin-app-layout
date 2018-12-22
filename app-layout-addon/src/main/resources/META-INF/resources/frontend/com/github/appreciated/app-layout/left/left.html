@@ -43,7 +43,7 @@ ref="..
                 padding: 0 0 0 16px;
             }
 
-            app-toolbar:before {
+            app-toolbar:after {
                 background: var(--app-layout-bar-background-color);
                 position: absolute;
                 content: "";
@@ -51,6 +51,7 @@ ref="..
                 width: 100%;
                 left: 0px;
                 top: 0px;
+                z-index: -1;
             }
 
             #drawer {
