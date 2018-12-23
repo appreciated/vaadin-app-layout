@@ -22,7 +22,6 @@ public class LeftOverlayTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement elementRoot = getShadowRootElement("app-layout-left-overlay");
         clickByID(elementRoot, "#toggle");
         clickByCssSelector(".app-menu-item", 0);

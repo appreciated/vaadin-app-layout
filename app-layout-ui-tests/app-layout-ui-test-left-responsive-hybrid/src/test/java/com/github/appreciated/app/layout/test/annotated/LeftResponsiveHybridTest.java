@@ -9,8 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.codeborne.selenide.Selenide.open;
-
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LeftResponsiveHybridMain.class,
@@ -22,7 +20,6 @@ public class LeftResponsiveHybridTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         clickByCssSelector(".app-menu-item", 0);
         clickByCssSelector(".app-menu-item", 1);
         clickByCssSelector(".app-menu-item", 2);

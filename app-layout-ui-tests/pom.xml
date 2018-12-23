@@ -19,6 +19,7 @@
 
     <modules>
         <module>app-layout-ui-test-base</module>
+        <module>app-layout-ui-test-annotation</module>
         <module>app-layout-ui-test-left</module>
         <module>app-layout-ui-test-left-hybrid</module>
         <module>app-layout-ui-test-left-hybrid-small</module>

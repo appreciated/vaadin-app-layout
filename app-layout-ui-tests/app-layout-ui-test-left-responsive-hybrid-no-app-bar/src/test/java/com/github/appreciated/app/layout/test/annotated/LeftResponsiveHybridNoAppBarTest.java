@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.codeborne.selenide.Selenide.open;
-
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LeftResponsiveHybridNoAppBarMain.class,
@@ -23,7 +21,6 @@ public class LeftResponsiveHybridNoAppBarTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement root = getShadowRootElement("app-layout-left-responsive-hybrid-no-app-bar");
         clickByCssSelector(".app-menu-item", 0);
         clickByCssSelector(".app-menu-item", 1);

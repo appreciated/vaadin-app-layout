@@ -21,7 +21,6 @@ public class TopLargeTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement root = getShadowRootElement("app-layout-top-large");
         clickByCssSelector("paper-tab", 0);
         clickByCssSelector("paper-tab", 1);

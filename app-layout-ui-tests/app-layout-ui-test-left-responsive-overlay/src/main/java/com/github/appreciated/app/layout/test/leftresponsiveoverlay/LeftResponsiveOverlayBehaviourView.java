@@ -2,10 +2,10 @@ package com.github.appreciated.app.layout.test.leftresponsiveoverlay;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.test.leftresponsiveoverlay.view.*;
-import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorView;
+import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
 import com.vaadin.flow.component.Component;
 
-public class LeftResponsiveOverlayBehaviourView extends AbstractLeftBehaviorView {
+public class LeftResponsiveOverlayBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
     public Behaviour getVariant() {
         return Behaviour.LEFT_RESPONSIVE_OVERLAY;

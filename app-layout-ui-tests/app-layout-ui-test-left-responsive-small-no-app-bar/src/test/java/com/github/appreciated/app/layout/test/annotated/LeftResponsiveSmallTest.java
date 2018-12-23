@@ -21,7 +21,6 @@ public class LeftResponsiveSmallTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement root = getShadowRootElement("app-layout-left-responsive-small-no-app-bar");
         clickByCssSelector( ".app-menu-item", 0);
         clickByCssSelector( ".app-menu-item", 1);

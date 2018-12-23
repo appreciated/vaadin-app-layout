@@ -1,14 +1,14 @@
-package com.github.appreciated.app.layout.test.leftoverlay;
+package com.github.appreciated.app.layout.test.annotation;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.test.leftoverlay.view.*;
-import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
+import com.github.appreciated.app.layout.test.annotation.view.*;
+import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorAnnotationView;
 import com.vaadin.flow.component.Component;
 
-public class LeftOverlayBehaviourView extends AbstractLeftBehaviorBasicView {
+public class AnnotationView extends AbstractLeftBehaviorAnnotationView {
     @Override
     public Behaviour getVariant() {
-        return Behaviour.LEFT_OVERLAY;
+        return Behaviour.LEFT_RESPONSIVE;
     }
 
     @Override
