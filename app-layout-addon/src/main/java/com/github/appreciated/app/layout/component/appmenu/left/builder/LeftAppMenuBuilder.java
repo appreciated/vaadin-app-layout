@@ -68,7 +68,7 @@ public class LeftAppMenuBuilder {
         LeftMenuComponentWrapper menu = new LeftMenuComponentWrapper();
         components.addAll(body);
         if (sticky) {
-            menu.setHeight("100%");
+            menu.getMenu().getStyle().set("display", "flex");
             Div div = new Div();
             div.setWidth("100%");
             div.setHeight("0px");
