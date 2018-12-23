@@ -28,3 +28,4 @@ app-layout-ui-tests
 /app-layout-ui-tests/app-layout-ui-test-top-large/src/test/resources/META-INF/resources/frontend/bower_components/
 /app-layout-ui-tests/app-layout-ui-test-left-overlay-no-app-bar/src/test/resources/META-INF/resources/frontend/bower_components/
 /app-layout-ui-tests/app-layout-ui-test-left-responsive-small-no-app-bar/src/test/resources/META-INF/resources/frontend/bower_components/
+/app-layout-ui-tests/app-layout-ui-test-annotation/src/test/resources/META-INF/resources/frontend/bower_components/
