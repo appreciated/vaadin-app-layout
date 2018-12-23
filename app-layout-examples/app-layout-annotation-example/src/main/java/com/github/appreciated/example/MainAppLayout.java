@@ -53,7 +53,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                           .build())
           .withAppMenu(LeftAppMenuBuilder
                            .get()
-                  .addToSection(new MenuHeaderComponent("Menu-Header", "Version 2.0.1",
+                  .addToSection(new MenuHeaderComponent("Menu-Header", "Version 2.0.2",
                           "/frontend/images/logo.png"), HEADER)
                            .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
                                                                     VaadinIcon.COG.create(),
