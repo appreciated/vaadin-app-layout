@@ -20,6 +20,8 @@ import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
@@ -30,52 +32,10 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @HtmlImport("frontend://theming/custom.html")
+@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications;
     private DefaultBadgeHolder badge;
-
-    private Component appBar = AppBarBuilder
-        .get()
-        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
-        .build();
-
-    private NavigationElementContainer appMenu = LeftAppMenuBuilder
-        .get()
-        .addToSection(new MenuHeaderComponent("Menu-Header",
-                                              "Version 2.0.1",
-                                              "/frontend/images/logo.png"
-        ), HEADER)
-        .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
-        .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
-        .add(LeftSubMenuBuilder
-                 .get("My Submenu", VaadinIcon.PLUS.create())
-                 .add(LeftSubMenuBuilder
-                          .get("My Submenu", VaadinIcon.PLUS.create())
-                          .add(new LeftNavigationComponent("Charts",
-                                                           VaadinIcon.SPLINE_CHART.create(),
-                                                           View2.class
-                          ))
-                          .add(new LeftNavigationComponent("Contact",
-                                                           VaadinIcon.CONNECT.create(),
-                                                           View3.class
-                          ))
-                          .add(new LeftNavigationComponent("More",
-                                                           VaadinIcon.COG.create(),
-                                                           View4.class
-                          ))
-                          .build())
-                 .add(new LeftNavigationComponent("Contact1",
-                                                  VaadinIcon.CONNECT.create(),
-                                                  View5.class
-                 ))
-                 .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
-                 .build())
-        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
-        .build();
-
-
-
-
 
     @Override
     public AppLayout createAppLayoutInstance() {
@@ -89,6 +49,45 @@ public class MainAppLayout extends AppLayoutRouterLayout {
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
 
         badge = new DefaultBadgeHolder();
+
+        Component appBar = AppBarBuilder
+                .get()
+                .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                .build();
+
+        NavigationElementContainer appMenu = LeftAppMenuBuilder
+                .get()
+                .addToSection(new MenuHeaderComponent("Menu-Header",
+                        "Version 2.0.1",
+                        "/frontend/images/logo.png"
+                ), HEADER)
+                .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
+                .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
+                .add(LeftSubMenuBuilder
+                        .get("My Submenu", VaadinIcon.PLUS.create())
+                        .add(LeftSubMenuBuilder
+                                .get("My Submenu", VaadinIcon.PLUS.create())
+                                .add(new LeftNavigationComponent("Charts",
+                                        VaadinIcon.SPLINE_CHART.create(),
+                                        View2.class
+                                ))
+                                .add(new LeftNavigationComponent("Contact",
+                                        VaadinIcon.CONNECT.create(),
+                                        View3.class
+                                ))
+                                .add(new LeftNavigationComponent("More",
+                                        VaadinIcon.COG.create(),
+                                        View4.class
+                                ))
+                                .build())
+                        .add(new LeftNavigationComponent("Contact1",
+                                VaadinIcon.CONNECT.create(),
+                                View5.class
+                        ))
+                        .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
+                        .build())
+                .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
+                .build();
 
         return AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
