@@ -12,6 +12,7 @@ abstract class AbstractView extends HorizontalLayout {
         layout.setMargin(false);
         layout.add(new Label("< " + getViewName() + " >"));
         layout.setAlignItems(Alignment.CENTER);
+        layout.setJustifyContentMode(JustifyContentMode.CENTER);
 
         add(layout);
         setMargin(false);

@@ -5,21 +5,22 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 abstract class AbstractView extends HorizontalLayout {
 
-  public AbstractView() {
+    public AbstractView() {
 
-    HorizontalLayout layout = new HorizontalLayout();
-    layout.setSizeFull();
-    layout.setMargin(false);
-    layout.add(new Label("< " + getViewName() + " >"));
-    layout.setAlignItems(Alignment.CENTER);
+        HorizontalLayout layout = new HorizontalLayout();
+        layout.setSizeFull();
+        layout.setMargin(false);
+        layout.add(new Label("< " + getViewName() + " >"));
+        layout.setAlignItems(Alignment.CENTER);
+        layout.setJustifyContentMode(JustifyContentMode.CENTER);
 
-    add(layout);
-    setMargin(false);
-    setSizeFull();
-    getElement()
-        .getStyle()
-        .set("overflow", "auto");
-  }
+        add(layout);
+        setMargin(false);
+        setSizeFull();
+        getElement()
+                .getStyle()
+                .set("overflow", "auto");
+    }
 
-  abstract String getViewName();
+    abstract String getViewName();
 }
