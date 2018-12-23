@@ -12,7 +12,6 @@ import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubM
 import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
-import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
@@ -37,14 +36,12 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 public class MainAppLayout extends AppLayoutRouterLayout {
   private Behaviour variant;
   private DefaultNotificationHolder notifications;
-  private DefaultBadgeHolder badge;
 
   @Override public AppLayout createAppLayoutInstance() {
     if (variant == null) {
       variant = Behaviour.LEFT;
       notifications = new DefaultNotificationHolder(newStatus -> {
       });
-      badge = new DefaultBadgeHolder();
     }
     if (!variant.isTop()) {
       return AppLayoutBuilder
