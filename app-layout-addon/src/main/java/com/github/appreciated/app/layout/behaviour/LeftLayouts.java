@@ -36,6 +36,7 @@ public interface LeftLayouts {
 
       public LeftHybridSmall() {
           layout.getElement().getClassList().add("small");
+          this.getElement().getClassList().add("small");
       }
 
   }
