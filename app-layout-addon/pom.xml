@@ -2,17 +2,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-
-    <parent>
-        <groupId>com.github.appreciated</groupId>
-        <artifactId>app-layout-root</artifactId>
-        <version>2.0.2-SNAPSHOT</version>
-    </parent>
-
     <artifactId>app-layout-addon</artifactId>
-
-    <version>2.0.2-SNAPSHOT</version>
+    <groupId>com.github.appreciated</groupId>
+    <version>2.0.2</version>
 
     <name>App Layout Add-on</name>
     <description>Integration of app-layout for Vaadin 10</description>
@@ -21,6 +13,18 @@
         <name>appreciated</name>
     </organization>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <!-- Dependencies -->
+        <vaadin.version>10.0.9</vaadin.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
+    </properties>
+
     <licenses>
         <license>
             <name>Apache 2</name>
@@ -28,8 +32,37 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <repositories>
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- The following dependency is generated using webjars.org. If
              it does not resolve, go to https://www.webjars.org and deploy it as "Bower GitHub"
