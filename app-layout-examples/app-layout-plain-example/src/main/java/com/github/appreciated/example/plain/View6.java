@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.plain;
 
 import com.vaadin.flow.router.Route;
 
