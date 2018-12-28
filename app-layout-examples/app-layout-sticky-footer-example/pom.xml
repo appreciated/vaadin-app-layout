@@ -11,7 +11,7 @@
         <version>2.0.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>app-layout-sticky-header-footer-example</artifactId>
+    <artifactId>app-layout-sticky-footer-example</artifactId>
 
     <name>App Layout Addon Examples - Sticky Header/Footer</name>
     <version>2.0.2-SNAPSHOT</version>
