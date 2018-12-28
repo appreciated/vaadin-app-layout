@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.annotation;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
