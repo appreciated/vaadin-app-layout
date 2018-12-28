@@ -19,5 +19,5 @@ A clear and concise description of any alternative solutions or features you've 
 **Additional context**
 Add any other context or screenshots about the feature request here.
 
-**Vaadin Version**
-For which Vaadin version you want this feature [e.g. 8, 10 ...]
+**Target Version**
+ - For which Version you want the feature [e.g. 1.*, 2.* ...]?
