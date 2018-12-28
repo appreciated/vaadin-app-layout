@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.theme;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
