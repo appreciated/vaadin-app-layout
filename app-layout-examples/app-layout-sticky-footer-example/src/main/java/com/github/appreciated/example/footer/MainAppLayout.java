@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.footer;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;

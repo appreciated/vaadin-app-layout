@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.footer;
 
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

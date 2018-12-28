@@ -1,4 +1,4 @@
-package com.github.appreciated.example;
+package com.github.appreciated.example.footer;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
