@@ -8,4 +8,4 @@ assignees: ''
 ---
 
 **What is it you are trying to archive?**
-A clear and concise description of what the bug is.
+A clear and concise description of what you are trying to archive.
