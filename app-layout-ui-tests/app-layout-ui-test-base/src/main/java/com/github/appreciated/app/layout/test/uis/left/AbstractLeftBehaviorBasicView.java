@@ -32,7 +32,7 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
                         AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder)).build())
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.2", "frontend/images/logo.png"), Section.HEADER)
+                                .addToSection(new MenuHeaderComponent("App-Layout", "Version 2.0.3", "frontend/images/logo.png"), Section.HEADER)
                                 .addToSection(new LeftClickableComponent("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                                 }), Section.HEADER)
                                 .add(home)
