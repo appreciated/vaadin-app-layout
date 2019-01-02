@@ -52,7 +52,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
 
     @Override
     public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return Optional.of(getClosestNavigationElement(getMenu().getChildren(), element));
+        return getClosestNavigationElementForElements(getMenu().getChildren(), element);
     }
 
     @Override
