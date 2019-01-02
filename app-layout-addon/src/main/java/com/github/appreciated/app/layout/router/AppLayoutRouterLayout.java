@@ -85,7 +85,7 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
     UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, appLayout);
   }
 
-  public static AppLayoutRouterLayout getCurrent() {
-    return (AppLayoutRouterLayout) UI.getCurrent().getSession().getAttribute(SESSION_ATTRIBUTE_APP_LAYOUT);
+    public static AppLayout getCurrent() {
+        return (AppLayout) UI.getCurrent().getSession().getAttribute(SESSION_ATTRIBUTE_APP_LAYOUT);
   }
 }
