@@ -1,8 +1,7 @@
 package com.github.appreciated.app.layout.component.appmenu.left;
 
 import com.github.appreciated.app.layout.builder.interfaces.Factory;
-
-import java.awt.*;
+import com.vaadin.flow.component.html.Label;
 
 
 /**
