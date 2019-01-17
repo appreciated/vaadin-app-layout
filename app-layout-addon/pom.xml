@@ -95,11 +95,6 @@
             <version>2.1.1</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars.bowergithub.jifalops</groupId>
-            <artifactId>iron-collapse-button</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.webjars.bowergithub.oyeharry</groupId>
             <artifactId>app-menu</artifactId>
             <version>2.1.2</version>
