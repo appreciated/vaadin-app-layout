@@ -11,8 +11,6 @@ A collection of ready to use templates for the Webcomponent [\<app-layout\>](htt
 <br>
 ![Markup](https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true "App-Layout Markup")
 
-## [Demo](https://app-layout-demo.herokuapp.com/)
-
 ## Installation
 
 Add the following lines to you POM
