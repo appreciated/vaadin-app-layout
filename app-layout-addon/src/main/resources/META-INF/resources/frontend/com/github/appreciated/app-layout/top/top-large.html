@@ -101,7 +101,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     drawer.toggle();
                 } else {
-                    window.history.back();
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '../';
+                    }
                 }
             }
 
