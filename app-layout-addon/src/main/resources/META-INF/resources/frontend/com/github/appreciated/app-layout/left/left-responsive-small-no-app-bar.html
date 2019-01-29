@@ -86,6 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                     background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
                 };
                 transition: 1s width;
             }
@@ -97,6 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;

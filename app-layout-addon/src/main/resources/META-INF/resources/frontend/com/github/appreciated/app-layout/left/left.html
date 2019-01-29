@@ -7,8 +7,6 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-ref="..
-
 <link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -58,6 +56,7 @@ ref="..
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                     background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
                 };
             }
 
@@ -96,6 +95,7 @@ ref="..
             /* non-overlay */
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;

@@ -63,6 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     box-shadow: var(--app-layout-drawer-shadow);
                     /* Since the drawer is visually in front of the app-bar its background needs to be lighter */
                     background-color: var(--app-layout-bar-background-base-color);
+                    max-width: 100%;
                 };
                 transition: 1s width;
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
@@ -76,6 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
