@@ -4,6 +4,9 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
+/**
+ * Every AppLayout is supposed to derive from a Polymer Template
+ */
 public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
 
     public void toggleDrawer() {

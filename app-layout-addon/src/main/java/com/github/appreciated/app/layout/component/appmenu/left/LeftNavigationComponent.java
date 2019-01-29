@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.component.appmenu.left;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
-import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.component.appmenu.NavigationBadgeIconButton;
 import com.github.appreciated.app.layout.entity.NavigationElementInfo;
@@ -11,6 +10,8 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+
+import java.util.function.Function;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that
@@ -44,7 +45,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
      * be used when using cdi This can come in handy in some situations where the route does not
      * conform a proper URL-encoding Note: May be null
      */
-    private Factory<String, String> routeInterceptor;
+    private Function<String, String> routeInterceptor;
     /**
      * The
      * {@link com.github.appreciated.app.layout.builder.AppLayoutConfiguration.NavigationElementInfoProducer}
@@ -59,7 +60,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
      * initializing. This can f.e. be used to replace I18N string with their localized string value
      * Note: May be null
      */
-    private Factory<String, String> captionInterceptor;
+    private Function<String, String> captionInterceptor;
 
     public LeftNavigationComponent(String caption, Icon icon, Component view) {
         super(caption, icon);

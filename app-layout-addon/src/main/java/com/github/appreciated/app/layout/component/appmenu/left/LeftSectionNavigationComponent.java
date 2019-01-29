@@ -1,7 +1,8 @@
 package com.github.appreciated.app.layout.component.appmenu.left;
 
-import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.vaadin.flow.component.html.Label;
+
+import java.util.function.Function;
 
 
 /**
@@ -10,7 +11,7 @@ import com.vaadin.flow.component.html.Label;
 public class LeftSectionNavigationComponent extends Label {
 
     private String name;
-    private Factory<String, String> captionInterceptor;
+    private Function<String, String> captionInterceptor;
 
     public LeftSectionNavigationComponent(String name) {
         this.name = name;
@@ -21,11 +22,11 @@ public class LeftSectionNavigationComponent extends Label {
         if (captionInterceptor == null) {
             return name;
         } else {
-            return captionInterceptor.get(name);
+            return captionInterceptor.apply(name);
         }
     }
 
-    public void setCaptionInterceptor(Factory<String, String> captionInterceptor) {
+    public void setCaptionInterceptor(Function<String, String> captionInterceptor) {
         this.captionInterceptor = captionInterceptor;
     }
 }

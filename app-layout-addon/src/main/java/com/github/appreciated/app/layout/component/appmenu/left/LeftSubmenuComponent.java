@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.component.appmenu.left;
 
-import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
 import com.github.appreciated.ripple.PaperRipple;
@@ -8,6 +7,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -17,7 +17,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
 
     private final String caption;
     private final Icon icon;
-    private Factory<String, String> captionInterceptor;
+    private Function<String, String> captionInterceptor;
 
 
     public LeftSubmenuComponent(String caption, Icon icon, List<Component> submenuElements) {
@@ -40,7 +40,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
         if (captionInterceptor == null) {
             return caption;
         } else {
-            return captionInterceptor.get(caption);
+            return captionInterceptor.apply(caption);
         }
     }
 
