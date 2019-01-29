@@ -88,7 +88,7 @@ public class TopNavigationComponent extends PaperTab implements NavigationElemen
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         if (getViewClassName() == element) {
             setActive();
             return true;

@@ -21,5 +21,4 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     public void closeDrawer() {
         getDrawer().getElement().callFunction("close");
     }
-
 }

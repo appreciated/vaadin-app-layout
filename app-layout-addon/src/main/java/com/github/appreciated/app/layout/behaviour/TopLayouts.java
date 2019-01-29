@@ -131,8 +131,8 @@ public interface TopLayouts {
         }
 
         @Override
-        public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-            return navigationElementContainer.setActiveNavigationComponent(element);
+        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
+            return navigationElementContainer.setActiveNavigationElement(element);
         }
 
         @Override
@@ -281,8 +281,8 @@ public interface TopLayouts {
         }
 
         @Override
-        public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-            return appMenuContainer.setActiveNavigationComponent(element);
+        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
+            return appMenuContainer.setActiveNavigationElement(element);
         }
 
         @Override

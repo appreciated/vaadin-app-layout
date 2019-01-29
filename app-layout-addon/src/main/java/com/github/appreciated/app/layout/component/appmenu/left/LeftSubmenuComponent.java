@@ -5,11 +5,10 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
@@ -46,13 +45,8 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-        return setActiveNavigationComponent(getMenu().getChildren(), element);
-    }
-
-    @Override
-    public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return getClosestNavigationElementForElements(getMenu().getChildren(), element);
+    public Stream<Component> getMenuChildren() {
+        return getMenu().getChildren();
     }
 
     @Override

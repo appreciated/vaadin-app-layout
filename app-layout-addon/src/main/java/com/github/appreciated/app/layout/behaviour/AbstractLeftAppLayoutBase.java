@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 
@@ -147,9 +148,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         if (appMenuContainer != null) {
-            return appMenuContainer.setActiveNavigationComponent(element);
+            return appMenuContainer.setActiveNavigationElement(element);
         }
         return false;
     }
@@ -175,6 +176,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         if (appMenuContainer == null) {
             setMenuVisible(false);
         }
+    }
+
+    @Override
+    public Stream<Component> getMenuChildren() {
+        return appMenuContainer.getMenuChildren();
     }
 
     /**

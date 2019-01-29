@@ -65,12 +65,11 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
         currentContent = content;
         appLayout.setAppLayoutContent(content);
         if (content.getClass().getAnnotation(Route.class) != null) {
-            int value = content.getClass().getAnnotation(Route.class).value().split("/").length;
-            appLayout.setBackNavigation(value > 1);
-            if (!appLayout.setActiveNavigationComponent(content.getClass())) {
-                appLayout
-                        .getClosestNavigationElement(content.getClass())
-                        .ifPresent(aClass -> appLayout.setActiveNavigationComponent(aClass));
+            boolean has = appLayout.hasNavigationElement(content.getClass());
+            appLayout.setBackNavigation(!has);
+            if (!appLayout.setActiveNavigationElement(content.getClass())) {
+                appLayout.getClosestNavigationElement(content.getClass())
+                        .ifPresent(aClass -> appLayout.setActiveNavigationElement(aClass));
             }
         }
     }

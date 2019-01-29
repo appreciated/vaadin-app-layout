@@ -69,6 +69,29 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
+    public void navigateTo() {
+        UI.getCurrent().navigate(getRoute());
+    }
+
+    public String getRoute() {
+        if (className != null) {
+            return UI.getCurrent().getRouter().getUrl(className);
+        } else if (view != null) {
+            return UI.getCurrent().getRouter().getUrl(view.getClass());
+        } else {
+            return getCaption();
+        }
+    }
+
+    private String getCaption() {
+        if (caption != null) {
+            return caption;
+        } else if (info != null) {
+            return info.getCaption();
+        }
+        return null;
+    }
+
     public LeftNavigationComponent(String caption, VaadinIcon icon,
                                    Class<? extends Component> className) {
         super(caption, icon.create());
@@ -104,29 +127,6 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
         setClickListener(appMenuIconItemClickEvent -> navigateTo());
     }
 
-    public void navigateTo() {
-        UI.getCurrent().navigate(getRoute());
-    }
-
-    public String getRoute() {
-        if (className != null) {
-            return UI.getCurrent().getRouter().getUrl(className);
-        } else if (view != null) {
-            return UI.getCurrent().getRouter().getUrl(view.getClass());
-        } else {
-            return getCaption();
-        }
-    }
-
-    private String getCaption() {
-        if (caption != null) {
-            return caption;
-        } else if (info != null) {
-            return info.getCaption();
-        }
-        return null;
-    }
-
     public Icon getIcon() {
         if (icon != null) {
             return icon;
@@ -145,6 +145,16 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
         return view;
     }
 
+    @Override
+    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
+        if (getViewClassName() == element) {
+            setActive();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Class<? extends Component> getViewClassName() {
         if (className == null) {
             return view == null ? null : view.getClass();
@@ -154,13 +164,8 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-        if (getViewClassName() == element) {
-            setActive();
-            return true;
-        } else {
-            return false;
-        }
+    public boolean hasNavigationElement(Class<? extends HasElement> element) {
+        return className == element;
     }
 
     @Override

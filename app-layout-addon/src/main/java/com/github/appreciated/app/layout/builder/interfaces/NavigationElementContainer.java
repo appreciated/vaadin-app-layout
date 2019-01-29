@@ -16,14 +16,31 @@ import java.util.stream.Stream;
  */
 public interface NavigationElementContainer extends NavigationElement {
 
-    default boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+    default boolean hasNavigationElement(Class<? extends HasElement> element) {
+        return hasNavigationElement(getMenuChildren(), element);
+    }
+
+    default boolean hasNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
+        return elements
+                .filter(component -> component instanceof NavigationElement)
+                .map(component -> ((NavigationElement) component).hasNavigationElement(content))
+                .reduce((first, next) -> first || next).orElse(false);
+    }
+
+    default Stream<Component> getMenuChildren() {
+        return getChildren();
+    }
+
+    Stream<Component> getChildren();
+
+    default boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         return setActiveNavigationComponent(getMenuChildren(), element);
     }
 
     default boolean setActiveNavigationComponent(Stream<Component> elements, Class<? extends HasElement> content) {
         return elements
                 .filter(component -> component instanceof NavigationElement)
-                .map(component -> ((NavigationElement) component).setActiveNavigationComponent(content))
+                .map(component -> ((NavigationElement) component).setActiveNavigationElement(content))
                 .reduce((first, next) -> first || next).orElse(false);
     }
 
@@ -69,12 +86,6 @@ public interface NavigationElementContainer extends NavigationElement {
                 ? Optional.of(element.getAnnotation(Route.class))
                 : Optional.empty();
     }
-
-    default Stream<Component> getMenuChildren() {
-        return getChildren();
-    }
-
-    Stream<Component> getChildren();
 
     Component getComponent();
 }
