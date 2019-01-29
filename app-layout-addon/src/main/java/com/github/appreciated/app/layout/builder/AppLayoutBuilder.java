@@ -40,6 +40,20 @@ public class AppLayoutBuilder implements ComponentBuilder {
         return this;
     }
 
+    public void setTitle(String title) {
+        Span span = new Span(title);
+        span.setWidth("100%");
+        span.getStyle()
+                .set("white-space", "nowrap")
+                .set("overflow", "hidden")
+                .set("text-overflow", "ellipsis");
+        setTitleComponent(span);
+    }
+
+    public void setTitleComponent(Component titleComponent) {
+        this.titleComponent = titleComponent;
+    }
+
     /**
      * Replaces the title component with another component
      *
@@ -73,23 +87,13 @@ public class AppLayoutBuilder implements ComponentBuilder {
         return this;
     }
 
+    public void setAppBarComponent(Component component) {
+        instance.setAppBar(component);
+    }
+
     public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
         setAppMenu(component);
         return this;
-    }
-
-    public void setTitle(String title) {
-        Span span = new Span(title);
-        span.getStyle().set("white-space", "nowrap");
-        setTitleComponent(span);
-    }
-
-    public void setTitleComponent(Component titleComponent) {
-        this.titleComponent = titleComponent;
-    }
-
-    public void setAppBarComponent(Component component) {
-        instance.setAppBar(component);
     }
 
     public void setAppMenu(NavigationElementContainer component) {

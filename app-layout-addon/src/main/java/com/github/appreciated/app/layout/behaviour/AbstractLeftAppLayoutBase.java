@@ -48,10 +48,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
+        appBarContentHolder.setSpacing(false);
         appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
         appBarElementWrapper.setSpacing(false);
-        appBarElementWrapper.setSizeFull();
+        appBarElementWrapper.getStyle().set("flex", "1 1");
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
@@ -67,20 +68,21 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        titleWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         titleWrapper.setPadding(false);
         titleWrapper.setMargin(false);
+        titleWrapper.getElement().getStyle().set("flex", "1 1 100px").set("overflow", "hidden");
+        titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
 
         getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), content.getElement());
     }
 
+    public abstract String getStyleName();
+
     @Override
     public AppDrawer getDrawer() {
         return drawer;
     }
-
-    public abstract String getStyleName();
 
     public HorizontalLayout getAppBarElementWrapper() {
         return appBarElementWrapper;
