@@ -42,12 +42,12 @@ html {
     --app-layout-notification-background-base-color: var(--lumo-base-color);
     --app-layout-notification-background-color: var(--lumo-base-color);
     --app-layout-notification-shadow: var(--lumo-box-shadow-s);
-/ / Variables of webcomponents;
+    /* Variables of webcomponents */
     --paper-drawer-title-background-color: var(--lumo-base-color);
     --paper-drawer-title-color: var(--lumo-body-text-color);
     --paper-icon-button-ink-color: var(--lumo-contrast);
     --app-drawer-width: var(--app-layout-drawer-width);
-/ / -webkit-tap-highlight-color: transparent;
+    /* -webkit-tap-highlight-color: transparent; */
     --paper-tabs-selection-bar-color: var(--lumo-primary-color);
     --paper-tab-ink: var(--lumo-primary-color);
     --app-bar-height: var(--app-layout-bar-height);

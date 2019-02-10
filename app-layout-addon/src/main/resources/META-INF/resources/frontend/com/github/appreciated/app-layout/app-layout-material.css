@@ -1,19 +1,24 @@
 html {
+    --material-size-xs: 1.625rem;
+    --material-size-s: 1.875rem;
+    --material-size-m: 2.25rem;
+    --material-size-l: 2.75rem;
+    --material-size-xl: 3.5rem;
     --app-layout-primary-color: var(--material-primary-color);
-    --app-layout-background: var(--material-base-color);
+    --app-layout-background: var(--primary-background-color);
     --app-layout-font-size-header: var(--material-font-size-m);
     --app-layout-font-size-menu: var(--material-font-size-m);
     --app-layout-font-size-notifications: var(--material-font-size-m);
     --app-layout-font-size-app-bar: var(--material-font-size-m);
     --app-layout-bar-height: calc(var(--material-size-s) * 2.1);
-    --app-layout-bar-background-base-color: var(--material-base-color);
-    --app-layout-bar-background-color: var(--material-base-color);
+    --app-layout-bar-background-base-color: var(--primary-background-color);
+    --app-layout-bar-background-color: var(--primary-background-color);
     --app-layout-bar-font-color: var(--material-contrast-70pct);
-    --app-layout-bar-shadow: var(--material-box-shadow-s);
+    --app-layout-bar-shadow: var(--shadow-elevation-2dp_-_box-shadow);
     --app-layout-bar-z-index: 10;
-    --app-layout-drawer-shadow: var(--material-box-shadow-s);
-    --app-layout-drawer-background-base-color: var(--material-base-color);
-    --app-layout-drawer-background-color: var(--material-base-color);
+    --app-layout-drawer-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+    --app-layout-drawer-background-base-color: var(--primary-background-color);
+    --app-layout-drawer-background-color: var(--primary-background-color);
     --app-layout-drawer-submenu-background-color: var(--material-contrast-10pct);
     --app-layout-drawer-font-color: var(--material-contrast-90pct);
     --app-layout-drawer-width: calc(var(--material-size-xl) * 4.6);
@@ -39,15 +44,15 @@ html {
     --app-layout-badge-font-color: var(--material-primary-contrast-color);
     --app-layout-notification-highlight-color: var(--app-layout-primary-color);
     --app-layout-notification-font-color: var(--material-body-text-color);
-    --app-layout-notification-background-base-color: var(--material-base-color);
-    --app-layout-notification-background-color: var(--material-base-color);
-    --app-layout-notification-shadow: var(--material-box-shadow-s);
-/ / Variables of webcomponents;
-    --paper-drawer-title-background-color: var(--material-base-color);
+    --app-layout-notification-background-base-color: var(--primary-background-color);
+    --app-layout-notification-background-color: var(--primary-background-color);
+    --app-layout-notification-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+    /* Variables of webcomponents */
+    --paper-drawer-title-background-color: var(--primary-background-color);
     --paper-drawer-title-color: var(--material-body-text-color);
     --paper-icon-button-ink-color: var(--material-contrast);
     --app-drawer-width: var(--app-layout-drawer-width);
-/ / -webkit-tap-highlight-color: transparent;
+    /* -webkit-tap-highlight-color: transparent; */
     --paper-tabs-selection-bar-color: var(--material-primary-color);
     --paper-tab-ink: var(--material-primary-color);
     --app-bar-height: var(--app-layout-bar-height);
@@ -56,10 +61,11 @@ html {
     --app-menu-color: var(--app-layout-drawer-font-color);
 }
 
+/*
 [theme~="dark"] {
     --app-layout-bar-background-color: var(--material-contrast-10pct);
     --app-layout-bar-font-color: var(--material-contrast-90);
     --app-layout-drawer-background-color: var(--material-contrast-5pct);
     --app-layout-notification-background-color: var(--material-contrast-10pct);
 }
-
+*/

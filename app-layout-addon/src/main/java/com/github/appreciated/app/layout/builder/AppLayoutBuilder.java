@@ -148,8 +148,9 @@ public class AppLayoutBuilder implements ComponentBuilder {
         return this;
     }
 
-    public void withTheme(Class<AbstractTheme> theme) {
+    public AppLayoutBuilder withTheme(Class<? extends AbstractTheme> theme) {
         this.theme = theme;
+        return this;
     }
 }
 
