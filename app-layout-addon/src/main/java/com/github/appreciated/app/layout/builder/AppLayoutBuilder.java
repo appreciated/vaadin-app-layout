@@ -6,6 +6,8 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.theme.AbstractTheme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 
 /**
@@ -16,6 +18,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private AppLayout instance;
     private Component titleComponent;
     private Component imageComponent;
+    private Class<? extends AbstractTheme> theme = Lumo.class;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -57,6 +60,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
 
     /**
      * Sets the {@link Component} that is supposed to represent the title in the app-bar
+     *
      * @param titleComponent
      */
     public void setTitleComponent(Component titleComponent) {
@@ -87,12 +91,14 @@ public class AppLayoutBuilder implements ComponentBuilder {
             instance.setIconComponent(imageComponent);
         }
         instance.init();
+        instance.setTheme(theme);
         return instance;
 
     }
 
     /**
      * set the app-bar {@link Component} of the {@link AppLayout} that is built
+     *
      * @param component
      * @return Itself to allow method chaining
      */
@@ -106,7 +112,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     *
      * @param component
      * @return Itself to allow method chaining
      */
@@ -117,6 +122,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
 
     /**
      * Sets the Component that represents the menu on the left hand / the top side (depending which {@link Behaviour} you are using).
+     *
      * @param component
      */
     public void setAppMenu(NavigationElementContainer component) {
@@ -124,7 +130,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     *
      * @param url a url to the image that is supposed to be shown in the app bar
      * @return Itself to allow method chaining
      */
@@ -135,13 +140,16 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     *
      * @param image
      * @return Itself to allow method chaining
      */
     public AppLayoutBuilder withIconComponent(Component image) {
         this.imageComponent = image;
         return this;
+    }
+
+    public void withTheme(Class<AbstractTheme> theme) {
+        this.theme = theme;
     }
 }
 

@@ -69,7 +69,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
                             .addToSection(new MenuHeaderComponent("App-Layout",
-                                    "Version 2.0.5",
+                                    "Version 2.0.6",
                                     "/frontend/images/logo.png"
                             ), HEADER)
                             .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
