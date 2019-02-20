@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.test.uis.left;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -25,21 +24,19 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
-    DefaultNotificationHolder notificationHolder;
-    DefaultBadgeHolder badgeHolder;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
+    });
+    private DefaultBadgeHolder badge = new DefaultBadgeHolder();
+
     private Behaviour variant;
     private Thread currentThread;
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
-        notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-        badgeHolder = new DefaultBadgeHolder();
-
+    public AbstractTopBehaviorView() {
         reloadNotifications();
-        return AppLayoutBuilder.get(getVariant())
+        init(AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder.get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                         .build()
                 )
                 .withAppMenu(TopAppMenuBuilder.get()
@@ -50,29 +47,23 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
                         .addToSection(new TopClickableComponent("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
                         }), FOOTER)
                         .addToSection(new TopNavigationComponent("More", VaadinIcon.CONNECT.create(), getViewForI(3)), FOOTER).build()
-                ).build();
+                ).build());
     }
-
-    private Class<? extends Component> getViewForI(int i) {
-        return getViews()[i - 1];
-    }
-
-    public abstract Behaviour getVariant();
 
     private void reloadNotifications() {
         if (currentThread != null && !currentThread.isInterrupted()) {
             currentThread.interrupt();
         }
-        badgeHolder.clearCount();
-        notificationHolder.clearNotifications();
+        badge.clearCount();
+        notifications.clearNotifications();
         currentThread = new Thread(() -> {
             try {
                 Thread.sleep(1000);
                 for (int i = 0; i < 3; i++) {
                     getUI().ifPresent(ui -> ui.access(() -> {
                         addNotification(MEDIUM);
-                        badgeHolder.increase();
-                        badgeHolder.increase();
+                        badge.increase();
+                        badge.increase();
                     }));
                 }
             } catch (InterruptedException e) {
@@ -82,13 +73,14 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         currentThread.start();
     }
 
-    private void addNotification(Priority priority) {
-        notificationHolder.addNotification(new DefaultNotification("Title" + badgeHolder.getCount(), "Description ..............................................." + badgeHolder.getCount(), priority));
+    public abstract Behaviour getVariant();
+
+    private Class<? extends Component> getViewForI(int i) {
+        return getViews()[i - 1];
     }
 
-    private void setDrawerVariant(Behaviour variant) {
-        this.variant = variant;
-        reloadConfiguration();
+    private void addNotification(Priority priority) {
+        notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description ..............................................." + badge.getCount(), priority));
     }
 
     public abstract Class<? extends Component>[] getViews();

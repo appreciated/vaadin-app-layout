@@ -54,10 +54,5 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
         notificationHolder.addNotification(new DefaultNotification("Title" + badgeHolder.getCount(), "Description ..............................................." + badgeHolder.getCount(), priority));
     }
 
-    private void setDrawerVariant(Behaviour variant) {
-        this.variant = variant;
-        reloadConfiguration();
-    }
-
     public abstract Class<? extends Component>[] getViews();
 }

@@ -1,6 +1,5 @@
 package com.github.appreciated.example.annotation;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -27,14 +26,13 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
+    });
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
-        notifications = new DefaultNotificationHolder(newStatus -> {
-        });
+    public MainAppLayout() {
+        this.notifications = notifications;
 
-        return AppLayoutBuilder
+        init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
@@ -67,6 +65,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 clickEvent -> Notification.show("onClick ...")
                         ), FOOTER)
                         .build())
-                .build();
+                .build());
     }
 }

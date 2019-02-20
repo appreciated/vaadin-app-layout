@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.test.uis.left;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
@@ -16,8 +15,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 
 public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehaviorView {
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
+    public AbstractLeftBehaviorBasicView() {
         notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
         badgeHolder = new DefaultBadgeHolder();
         reloadNotifications();
@@ -25,7 +23,7 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
         LeftNavigationComponent menu = new LeftNavigationComponent("View9", VaadinIcon.MENU.create(), getViewForI(9));
         notificationHolder.bind(home.getBadge());
         badgeHolder.bind(menu.getBadge());
-        return AppLayoutBuilder.get(getVariant())
+        init(AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
@@ -47,7 +45,6 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
                                 .add(new LeftNavigationComponent("View8", VaadinIcon.COG.create(), getViewForI(8)))
                                 .add(menu)
                                 .build()
-                ).build();
+                ).build());
     }
-
 }

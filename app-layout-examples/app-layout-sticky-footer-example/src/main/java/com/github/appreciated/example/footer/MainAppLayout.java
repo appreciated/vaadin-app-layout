@@ -27,17 +27,12 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
 
-    private DefaultNotificationHolder notifications;
-    private DefaultBadgeHolder badge;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
+    });
+    private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
-    @Override
-    public com.github.appreciated.app.layout.behaviour.AppLayout createAppLayoutInstance() {
-
-        notifications = new DefaultNotificationHolder(newStatus -> {
-        });
-        badge = new DefaultBadgeHolder();
-
-        return AppLayoutBuilder
+    public MainAppLayout() {
+        init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
@@ -58,6 +53,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 clickEvent -> Notification.show("Clicked!")
                         ), FOOTER)
                         .build())
-                .build();
+                .build());
     }
 }

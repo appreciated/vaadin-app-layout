@@ -1,6 +1,5 @@
 package com.github.appreciated.example.plain;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -31,19 +30,16 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     /**
      * Do not initialize here. This will lead to NPEs
      */
-    private DefaultNotificationHolder notifications;
-    private DefaultBadgeHolder badge;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
+    });
+    private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
-        notifications = new DefaultNotificationHolder(newStatus -> {
-        });
-        badge = new DefaultBadgeHolder(5);
+    public MainAppLayout() {
 
         LeftNavigationComponent menuEntry = new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View6.class);
         badge.bind(menuEntry.getBadge());
 
-        return AppLayoutBuilder
+        init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
@@ -91,6 +87,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                 clickEvent -> Notification.show("onClick ...")
                         ), FOOTER)
                         .build())
-                .build();
+                .build());
     }
 }

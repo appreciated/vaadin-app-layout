@@ -1,6 +1,5 @@
 package com.github.appreciated.example.theme;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
@@ -36,8 +35,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications;
     private DefaultBadgeHolder badge;
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
+    public MainAppLayout() {
 
         notifications = new DefaultNotificationHolder(newStatus -> {
         });
@@ -88,13 +86,13 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
                 .build();
 
-        return AppLayoutBuilder
+        init(AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
                 .withTitle("App Layout")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
                 .withTheme(Material.class)
-                .build();
+                .build());
     }
 
     @Override

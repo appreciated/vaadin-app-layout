@@ -1,6 +1,5 @@
 package com.github.appreciated.example.theme;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
@@ -35,21 +34,16 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
  */
 // @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications;
-    private DefaultBadgeHolder badge;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
+    });
+    private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
-
-        notifications = new DefaultNotificationHolder(newStatus -> {
-        });
+    public MainAppLayout() {
 
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
-
-        badge = new DefaultBadgeHolder();
 
         Component appBar = AppBarBuilder
                 .get()
@@ -90,12 +84,12 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
                 .build();
 
-        return AppLayoutBuilder
+        init(AppLayoutBuilder
                 .get(Behaviour.LEFT_HYBRID)
                 .withTitle("App Layout")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
-                .build();
+                .build());
     }
 
     @Override
