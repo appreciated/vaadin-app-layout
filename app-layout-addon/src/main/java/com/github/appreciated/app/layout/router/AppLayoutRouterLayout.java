@@ -15,25 +15,44 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
 
     public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
 
-    private AppLayout appLayout;
     private HasElement currentContent;
+    private AppLayout layout;
 
     public AppLayoutRouterLayout() {
-        appLayout = createAppLayoutInstance();
-        setLayoutToSession();
-        getContent().add(appLayout);
         getContent().setSizeFull();
         getContent().getElement().getStyle().set("overflow", "auto");
     }
 
-    public abstract AppLayout createAppLayoutInstance();
-
-    public void setLayoutToSession() {
-        UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, appLayout);
-    }
-
     public static AppLayout getCurrent() {
         return (AppLayout) UI.getCurrent().getSession().getAttribute(SESSION_ATTRIBUTE_APP_LAYOUT);
+    }
+
+    public void init(AppLayout layout) {
+        setLayout(layout);
+        if (currentContent != null) {
+            showRouterLayoutContent(currentContent);
+        }
+    }
+
+    public void setLayout(AppLayout layout) {
+        getContent().removeAll();
+        this.layout = layout;
+        getContent().add(layout);
+        UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, layout);
+    }
+
+    @Override
+    public void showRouterLayoutContent(HasElement content) {
+        currentContent = content;
+        layout.setAppLayoutContent(content);
+        if (content.getClass().getAnnotation(Route.class) != null) {
+            boolean has = layout.hasNavigationElement(content.getClass());
+            layout.setBackNavigation(!has);
+            if (!layout.setActiveNavigationElement(content.getClass())) {
+                layout.getClosestNavigationElement(content.getClass())
+                        .ifPresent(aClass -> layout.setActiveNavigationElement(aClass));
+            }
+        }
     }
 
     @Override
@@ -45,46 +64,22 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
     }
 
     public void closeDrawerIfNotPersistent() {
-        appLayout.closeDrawerIfNotPersistent();
-    }
-
-    public void reloadConfiguration() {
-        getContent().removeAll();
-        appLayout = createAppLayoutInstance();
-        setLayoutToSession();
-        getContent().add(appLayout);
-        if (currentContent != null) {
-            showRouterLayoutContent(currentContent);
-        }
-    }
-
-    @Override
-    public void showRouterLayoutContent(HasElement content) {
-        currentContent = content;
-        appLayout.setAppLayoutContent(content);
-        if (content.getClass().getAnnotation(Route.class) != null) {
-            boolean has = appLayout.hasNavigationElement(content.getClass());
-            appLayout.setBackNavigation(!has);
-            if (!appLayout.setActiveNavigationElement(content.getClass())) {
-                appLayout.getClosestNavigationElement(content.getClass())
-                        .ifPresent(aClass -> appLayout.setActiveNavigationElement(aClass));
-            }
-        }
+        layout.closeDrawerIfNotPersistent();
     }
 
     public void closeDrawer() {
-        appLayout.closeDrawer();
+        layout.closeDrawer();
     }
 
     public void toggleDrawer() {
-        appLayout.toggleDrawer();
+        layout.toggleDrawer();
     }
 
     public void openDrawer() {
-        appLayout.openDrawer();
+        layout.openDrawer();
     }
 
     public AppLayout getAppLayout() {
-        return appLayout;
+        return layout;
     }
 }
