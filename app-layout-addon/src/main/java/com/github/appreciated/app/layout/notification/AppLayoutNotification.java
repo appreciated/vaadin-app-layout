@@ -7,7 +7,9 @@ import java.util.Optional;
 
 public class AppLayoutNotification {
     public static void show(Notification notification) {
-        getNotificationHolder().ifPresent(holder -> holder.addNotification(notification));
+        getNotificationHolder().ifPresent(holder ->
+                UI.getCurrent().access(() -> holder.addNotification(notification))
+        );
     }
 
     public static Optional<NotificationHolder> getNotificationHolder() {

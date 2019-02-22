@@ -53,7 +53,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
         NavigationElementContainer appMenu = LeftAppMenuBuilder
                 .get()
                 .addToSection(new MenuHeaderComponent("Menu-Header",
-                        "Version 2.1.0",
+                        "Version 2.0.6",
                         "/frontend/images/logo.png"
                 ), HEADER)
                 .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
