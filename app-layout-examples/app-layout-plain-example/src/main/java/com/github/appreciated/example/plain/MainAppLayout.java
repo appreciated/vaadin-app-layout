@@ -89,9 +89,4 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         .build())
                 .build());
     }
-
-    public final void createAppLayoutInstance() {
-    }
-
-    ;
 }

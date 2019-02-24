@@ -82,4 +82,7 @@ public abstract class AppLayoutRouterLayout extends Composite<Div> implements Ro
     public AppLayout getAppLayout() {
         return layout;
     }
+
+    public final void createAppLayoutInstance() {
+    }
 }
