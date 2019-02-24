@@ -49,7 +49,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
                         .addToSection(new MenuHeaderComponent("Menu-Header",
-                                "Version 2.0.6",
+                                "Version 2.0.7",
                                 "/frontend/images/logo.png"
                         ), HEADER)
                         .addToSection(new LeftClickableComponent("Clickable Entry",
@@ -89,4 +89,9 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         .build())
                 .build());
     }
+
+    public final void createAppLayoutInstance() {
+    }
+
+    ;
 }
