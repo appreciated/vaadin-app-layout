@@ -2,27 +2,57 @@ package com.github.appreciated.app.layout.router;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 
-import javax.annotation.PostConstruct;
-
-@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout.css")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public abstract class AppLayoutRouterLayout extends Div implements RouterLayout {
+public abstract class AppLayoutRouterLayout extends Composite<Div> implements RouterLayout {
 
-    private AppLayout appLayout;
+    public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
+
     private HasElement currentContent;
+    private AppLayout layout;
 
     public AppLayoutRouterLayout() {
-        setSizeFull();
-        getElement().getStyle().set("overflow", "auto");
+        getContent().setSizeFull();
+        getContent().getElement().getStyle().set("overflow", "auto");
+    }
+
+    public static AppLayout getCurrent() {
+        return (AppLayout) UI.getCurrent().getSession().getAttribute(SESSION_ATTRIBUTE_APP_LAYOUT);
+    }
+
+    public void init(AppLayout layout) {
+        setLayout(layout);
+        if (currentContent != null) {
+            showRouterLayoutContent(currentContent);
+        }
+    }
+
+    public void setLayout(AppLayout layout) {
+        getContent().removeAll();
+        this.layout = layout;
+        getContent().add(layout);
+        UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, layout);
+    }
+
+    @Override
+    public void showRouterLayoutContent(HasElement content) {
+        currentContent = content;
+        layout.setAppLayoutContent(content);
+        if (content.getClass().getAnnotation(Route.class) != null) {
+            boolean has = layout.hasNavigationElement(content.getClass());
+            layout.setBackNavigation(!has);
+            if (!layout.setActiveNavigationElement(content.getClass())) {
+                layout.getClosestNavigationElement(content.getClass())
+                        .ifPresent(aClass -> layout.setActiveNavigationElement(aClass));
+            }
+        }
     }
 
     @Override
@@ -33,59 +63,27 @@ public abstract class AppLayoutRouterLayout extends Div implements RouterLayout 
         }));
     }
 
-    public void reloadConfiguration() {
-        removeAll();
-        loadConfiguration();
-        if (currentContent != null) {
-            showRouterLayoutContent(currentContent);
-        }
+    public void closeDrawerIfNotPersistent() {
+        layout.closeDrawerIfNotPersistent();
     }
-
-    @Override
-    public void showRouterLayoutContent(HasElement content) {
-        currentContent = content;
-        getInternalAppLayout().setAppLayoutContent(content);
-        if (content.getClass().getAnnotation(Route.class) != null) {
-            int value = content.getClass().getAnnotation(Route.class).value().split("/").length;
-            getInternalAppLayout().setBackNavigation(value > 1);
-            if (!getInternalAppLayout().setActiveNavigationComponent(content.getClass())) {
-                Class<? extends HasElement> closestElement = getInternalAppLayout().getClosestNavigationElement(content.getClass());
-                getInternalAppLayout().setActiveNavigationComponent(closestElement);
-            }
-        }
-    }
-
-    @PostConstruct
-    private void loadConfiguration() {
-        appLayout = getAppLayout();
-        add((Component) appLayout);
-    }
-
-    public static AppLayoutRouterLayout getCurrent() {
-        return (AppLayoutRouterLayout) UI.getCurrent().getSession().getAttribute("app-layout");
-    }
-
-    public abstract AppLayout getAppLayout();
 
     public void closeDrawer() {
-        getInternalAppLayout().closeDrawer();
+        layout.closeDrawer();
     }
 
     public void toggleDrawer() {
-        getInternalAppLayout().toggleDrawer();
+        layout.toggleDrawer();
     }
 
     public void openDrawer() {
-        getInternalAppLayout().openDrawer();
+        layout.openDrawer();
     }
 
-    public void closeDrawerIfNotPersistent() {
-        getInternalAppLayout().closeDrawerIfNotPersistent();
+    public AppLayout getAppLayout() {
+        return layout;
     }
 
-    private AppLayout getInternalAppLayout() {
-        if (appLayout == null)
-            loadConfiguration();
-        return appLayout;
+    public final AppLayout createAppLayoutInstance() {
+        return null;
     }
 }

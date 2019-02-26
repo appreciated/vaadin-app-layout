@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Anchor;
@@ -13,7 +13,12 @@ public class AppMenuItem extends Anchor {
     public AppMenuItem() {
         getElement().getClassList().add("app-menu-item");
         getElement().setAttribute("href", "javascript:void(0)");
-        getElement().getStyle().set("position", "relative");
+        getElement().getStyle().set("position", "relative")
+                .set("padding", "var(--app-layout-menu-button-padding)")
+                .set("margin", "var(--app-layout-menu-button-margin)")
+                .set("border-radius", "var(--app-layout-menu-button-border-radius)")
+                .set("--lumo-primary-text-color", "var(--app-layout-app-color)")
+                .set("text-decoration", "none");
         getElement().appendChild(new PaperRipple().getElement());
     }
 
@@ -37,22 +42,30 @@ public class AppMenuItem extends Anchor {
         setIcon(icon);
     }
 
-    public AppMenuItem(String sectionName, String icon, ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+    public AppMenuItem(String sectionName, String icon,
+                       ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
         this(sectionName, icon);
         item.setClickListener(listener);
     }
 
+    @Override
+    public String getText() {
+        return item != null
+                ? item.getText()
+                : getElement().getText();
+    }
+
+    @Override
     public void setText(String sectionName) {
-        if (item != null) {
-            item.setText(sectionName);
-        } else {
-            getElement().setText(sectionName);
-        }
+        if (item != null) item.setText(sectionName);
+        else getElement().setText(sectionName);
     }
 
     public void setIcon(String icon) {
         if (item == null) {
             item = new AppMenuIconItem();
+            item.setText(getElement().getText());
+            getElement().setText(null);
             add(item);
         }
         item.setIcon(icon);

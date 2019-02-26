@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
-import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.Component;
 
 /**
  * This interface is for Components that contain Elements that are clickable and the interaction with it leads to route
@@ -10,6 +10,6 @@ import com.vaadin.flow.component.HasElement;
  */
 public interface NavigationElementComponent extends NavigationElement {
 
-    Class<? extends HasElement> getNavigationElement();
+    Class<? extends Component> getNavigationElement();
 
 }

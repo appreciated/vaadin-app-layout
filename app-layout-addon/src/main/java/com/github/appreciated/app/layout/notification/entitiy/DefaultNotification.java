@@ -1,10 +1,6 @@
 package com.github.appreciated.app.layout.notification.entitiy;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -19,6 +15,7 @@ public class DefaultNotification implements Notification {
     private boolean isSticky = false;
     private boolean isRead = false;
     private LocalDateTime creationTime = LocalDateTime.now();
+    private boolean dismissable = true;
 
     /**
      * Creates a new {@link DefaultNotification} with the given arguments.
@@ -112,8 +109,14 @@ public class DefaultNotification implements Notification {
         this.isSticky = isSticky;
     }
 
-    public String getTimeAgo() {
-        return new PrettyTime().format(Date.from(creationTime.atZone(ZoneId.systemDefault()).toInstant()));
+    @Override
+    public boolean isDismissable() {
+        return dismissable;
+    }
+
+    @Override
+    public void setDismissable(boolean dismissable) {
+        this.dismissable = dismissable;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class TopClickableComponent extends Button {
         this.icon = icon;
         this.listener = listener;
         getElement().setAttribute("theme", "tertiary");
-        setHeight("calc(var(--app-bar-height) - 4px)");
+        getStyle().set("margin", "unset").set("--lumo-primary-text-color", "var(--app-layout-bar-font-color)");
         addClickListener(appMenuIconItemClickEvent -> getListener().onComponentEvent(null));
     }
 

@@ -7,45 +7,51 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link rel="import" href="/frontend/bower_components/vaadin-icons/vaadin-icons.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
+<link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
 <dom-module id="app-layout-left-responsive-overlay">
     <template>
         <style>
+
             :root {
-                --paper-badge-background: #ffffff;
-                --paper-badge-text-color: #000;
+                --paper-badge-background: var(--app-layout-badge-background);
+                --paper-badge-text-color: var(--app-layout-badge-font-color);
+                --primary-color: var(--app-layout-primary-color);
             }
 
             app-header {
                 right: 0px !important;
+                /* Since the app-bar is visually behind the drawer its background needs to be darker */
+                background: var(--app-layout-drawer-background-base-color);
+                top: 0px;
+                height: var(--app-layout-bar-height);
             }
 
             app-toolbar {
-                height: var(--app-bar-height);
-                background: var(--app-layout-bar-background-color);
+                height: var(--app-layout-bar-height);
+                /* Since the app-bar is visually behind the drawer its background needs to be darker */
+                background: var(--app-layout-drawer-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
             }
 
-            /*
-            app-header {
-              z-index: 0;
-            }
-            */
-
-            .app-bar-application-content {
+            .application-content {
                 width: 100%;
                 height: 100%;
-                padding-top: 64px;
                 box-sizing: border-box;
+                padding-top: var(--app-layout-bar-height);
                 overflow: auto;
+                background: var(--app-layout-background);
             }
 
             app-menu {
@@ -55,6 +61,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
+                    /* Since the drawer is visually in front of the app-bar its background needs to be lighter */
+                    background-color: var(--app-layout-bar-background-base-color);
+                    max-width: 100%;
                 };
                 transition: 1s width;
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
@@ -63,11 +72,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #drawer .drawer-content {
                 height: 100%;
                 width: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
+                /* Since the drawer is visually in front of the app-bar its background needs to be lighter */
+                background: var(--app-layout-bar-background-color);
             }
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
@@ -83,16 +93,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-drawer-layout id="drawerLayout" fullbleed>
             <app-header-layout id="layout-wrapper">
                 <app-header fixed slot="header">
-                    <app-toolbar style="height: var(--app-bar-height);">
+                    <app-toolbar style="height: var(--app-layout-bar-height);">
                         <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;"></div>
+                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
+                            <slot name="app-bar-content"></slot>
+                        </div>
                     </app-toolbar>
                 </app-header>
             </app-header-layout>
             <app-drawer id="drawer" slot="drawer" swipe-open>
-                <div class="drawer-content" id="menu-elements"></div>
+                <div class="drawer-content" id="menu-elements">
+                    <slot name="drawer-content"></slot>
+                </div>
             </app-drawer>
-            <div class="app-bar-application-content" size="100" id="content"></div>
+            <div class="application-content" size="100" id="content">
+                <slot name="application-content"></slot>
+            </div>
         </app-drawer-layout>
     </template>
     <script>
@@ -106,7 +122,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     drawer.toggle();
                 } else {
-                    window.history.back();
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '../';
+                    }
                 }
             }
 

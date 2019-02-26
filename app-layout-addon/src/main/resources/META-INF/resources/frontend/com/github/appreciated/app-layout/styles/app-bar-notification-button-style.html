@@ -1,4 +1,4 @@
-<link rel="import" href="/frontend/bower_components/polymer/lib/elements/custom-style.html">
+<link href="../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
 <custom-style>
     <style>
         .app-bar-notification-button {
@@ -8,8 +8,12 @@
                 margin-top: 52px;
                 margin-right: 7px;
             };
-            --paper-menu-button-content: {
-                max-height: unset !important;
+            --notification-width: 300px
+        }
+
+        @media only screen and (max-width: 310px) {
+            .app-bar-notification-button {
+                --notification-width: 100%;
             }
         }
     </style>

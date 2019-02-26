@@ -6,6 +6,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -16,11 +17,12 @@ public abstract class NotificationHolder<T extends Notification> {
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
-    private ArrayList<T> notifications = new ArrayList<>();
-    private ArrayList<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
-    private ArrayList<NotificationClickListener<T>> clickListeners = new ArrayList<>();
+    private List<T> notifications = new ArrayList<>();
+    private List<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
+    private List<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
+    private Comparator<T> comparator = Comparable::compareTo;
 
     public NotificationHolder(NotificationClickListener<T> listener) {
         Objects.requireNonNull(listener);
@@ -51,7 +53,7 @@ public abstract class NotificationHolder<T extends Notification> {
         if (!showAll) {
             components = components.size() > 4 ? components.subList(0, 4) : components;
         }
-        return components.stream().sorted(Comparable::compareTo).map(this::getComponent).collect(Collectors.toList());
+        return components.stream().sorted(comparator).map(this::getComponent).collect(Collectors.toList());
     }
 
     public void addNotification(T notification) {
@@ -90,20 +92,21 @@ public abstract class NotificationHolder<T extends Notification> {
         }
         return components
                 .stream()
-                .sorted(Comparable::compareTo)
+                .sorted(comparator)
                 .map(this::getComponent)
                 .collect(Collectors.toList())
                 .toArray(new Component[]{});
     }
 
     public List<T> getNotifications() {
-        notifications.sort(Comparable::compareTo);
+        notifications.sort(comparator);
         return notifications;
     }
 
     public void onNotificationClicked(T info) {
         notifyClickListeners(info);
         notifyListeners();
+        updateBadgeCaptions();
     }
 
     private void notifyListeners() {
@@ -120,10 +123,11 @@ public abstract class NotificationHolder<T extends Notification> {
 
     private void notifyClickListeners(T info) {
         info.setRead(true);
-        if (!info.isSticky()) {
-            removeNotification(info);
-        }
         clickListeners.forEach(listener -> listener.onNotificationClicked(info));
+    }
+
+    public void setComparator(Comparator<T> comparator) {
+        this.comparator = comparator;
     }
 
     public void addClickListener(NotificationClickListener<T> listener) {
@@ -138,7 +142,7 @@ public abstract class NotificationHolder<T extends Notification> {
         return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
     }
 
-    public Notification getRecentNotification() {
+    public Notification getMostRecentNotification() {
         return recentNotification;
     }
 
@@ -152,7 +156,7 @@ public abstract class NotificationHolder<T extends Notification> {
         updateBadgeCaption(text);
     }
 
-    private void updateBadgeCaptions() {
+    public void updateBadgeCaptions() {
         badgeHolderComponents.forEach(this::updateBadgeCaption);
     }
 
@@ -175,6 +179,17 @@ public abstract class NotificationHolder<T extends Notification> {
     }
 
     abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+
+    public void onNotificationDismissed(T info) {
+        if (!info.isSticky()) {
+            removeNotification(info);
+        }
+        notifyListeners();
+    }
+
+    public abstract Function<Notification, String> getDateTimeFormatter();
+
+    public abstract void setDateTimeFormatter(Function<Notification, String> formatter);
 
     public interface NotificationsChangeListener {
         default void onNotificationChanges(NotificationHolder holder) {

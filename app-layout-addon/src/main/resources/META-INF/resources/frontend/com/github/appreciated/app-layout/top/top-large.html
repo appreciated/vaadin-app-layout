@@ -7,30 +7,32 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link rel="import" href="/frontend/bower_components/vaadin-icons/vaadin-icons.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="/frontend/bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
+<link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 
 <dom-module id="app-layout-top-large">
     <template>
         <style>
+
             :root {
-                --paper-badge-background: #ffffff;
-                --paper-badge-text-color: #000;
+                --paper-badge-background: var(--app-layout-badge-background);
+                --paper-badge-text-color: var(--app-layout-badge-font-color);
             }
 
             app-toolbar {
-                height: var(--app-bar-height);
+                height: var(--app-layout-bar-height);
                 padding: 0 0 0 16px;
+                color: var(--app-layout-bar-font-color);
+                background: var(--app-layout-bar-background-color);
             }
 
             app-header {
-                --lumo-primary-text-color: #ffffff;
-                background: var(--app-layout-bar-background-color);
+                background: var(--app-layout-bar-background-base-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
             }
@@ -39,27 +41,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --iron-icon-fill-color: #727272;
             }
 
-            .app-bar-application-content {
+            .application-content {
                 width: 100%;
                 height: 100%;
                 box-sizing: border-box;
                 overflow: auto;
+                background: var(--app-layout-background);
             }
 
             #app-bar-elements {
                 width: 100%;
-                height: calc(var(--app-bar-height) * 2);
-                top: calc(var(--app-bar-height) / -2);
+                height: calc(var(--app-layout-bar-height) * 2);
+                top: calc(var(--app-layout-bar-height) / -2);
                 position: relative;
                 margin-left: 0px;
                 transition: margin-left ease 0.4s;
             }
 
             #app-bar-elements.show-back-arrow {
-                margin-left: 48px;
+                margin-left: var(--app-layout-menu-button-height);
             }
 
             #toggle {
+                flex-shrink: 0;
                 opacity: 0.0;
                 transition: opacity ease 0.2s;
             }
@@ -75,10 +79,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                 </app-toolbar>
                 <app-toolbar>
-                    <div id="app-bar-elements" class="app-bar-content"></div>
+                    <div id="app-bar-elements" class="app-bar-content">
+                        <slot name="app-bar-content"></slot>
+                    </div>
                 </app-toolbar>
             </app-header>
-            <div id="content" class="app-bar-application-content" size="100"></div>
+            <div id="content" class="application-content" size="100">
+                <slot name="application-content"></slot>
+            </div>
         </app-header-layout>
 
     </template>
@@ -93,7 +101,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     drawer.toggle();
                 } else {
-                    window.history.back();
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '../';
+                    }
                 }
             }
 

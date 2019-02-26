@@ -1,25 +1,39 @@
 package com.github.appreciated.app.layout.notification.component;
 
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.app.layout.component.appmenu.RoundImage;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
+import com.github.appreciated.app.layout.notification.listener.NotificationListener;
 import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
-import com.github.appreciated.app.layout.webcomponents.paperripple.PaperRipple;
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.dom.DomEventListener;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.dom.DomListenerRegistration;
+
+import java.util.function.Function;
 
 public class NotificationView extends PaperCard {
 
-    public NotificationView(Notification info) {
-        this(info, null);
+    private final VerticalLayout wrapper;
+    private IconButton dismissButton;
+    private NotificationListener listener;
+    private PaperRipple ripple;
+    private DomListenerRegistration registration;
+
+    public NotificationView(Notification info, NotificationHolder holder) {
+        this(info, holder, null);
     }
 
-    public NotificationView(Notification info, DomEventListener clickEvent) {
+    public NotificationView(Notification info, NotificationHolder holder, NotificationListener listener) {
         getStyle()
                 .set("width", "100%")
-                .set("color", "#000000")
-                .set("--shadow-elevation-2dp_-_box-shadow", "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)");
+                .set("--shadow-elevation-2dp_-_box-shadow", "var(--app-layout-notification-shadow)")
+                .set("background", "var(--app-layout-notification-background-base-color)")
+                .set("color", "var(--app-layout-notification-font-color)");
 
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
@@ -30,7 +44,7 @@ public class NotificationView extends PaperCard {
         dot.getElement().getStyle()
                 .set("margin-left", "5px");
 
-        Label timeAgo = new Label(info.getTimeAgo());
+        Label timeAgo = new Label(((Function<Notification, String>) holder.getDateTimeFormatter()).apply(info));
         timeAgo.getElement().getStyle()
                 .set("font-size", "13px")
                 .set("margin-left", "5px")
@@ -52,20 +66,61 @@ public class NotificationView extends PaperCard {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-        if (!info.isRead()) {
-            getElement().getStyle().set("border-left", "3px solid var(--app-layout-bar-background-color)");
-        }
+        setHighlightBorder(!info.isRead());
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
+        wrapper = new VerticalLayout(headerLine, descriptionWrapper);
+        wrapper.setMargin(false);
+        wrapper.setPadding(false);
+        wrapper.setSpacing(false);
+        add(wrapper);
+
         add(headerLine);
         add(descriptionWrapper);
-        if (clickEvent != null) {
-            getElement().addEventListener("click", clickEvent::handleEvent);
-        }
+        getContent().getStyle().set("background", "var(--app-layout-notification-background-color)");
         getElement().getClassList().add(info.getStyle());
-        if (clickEvent != null) {
-            add(new PaperRipple());
+        setNotificationListener(listener);
+
+        if (info.isDismissable()) {
+            dismissButton = new IconButton(VaadinIcon.CLOSE_BIG.create(), paperIconButtonClickEvent -> {
+                if (listener != null) {
+                    listener.onDismiss();
+                }
+            });
+            dismissButton.getStyle()
+                    .set("position", "absolute")
+                    .set("right", "0px")
+                    .set("margin", "1px 5px 0 0")
+                    .set("top", "0px");
+            dismissButton.getButton().getElement().getStyle().set("line-height", "0px");
+            dismissButton.setWidth("27px");
+            dismissButton.setHeight("27px");
+            add(dismissButton);
+        }
+        addRipple();
+    }
+
+    public void setHighlightBorder(boolean highlight) {
+        getElement().getStyle().set("border-left", "3px solid " + (highlight ? "var(--app-layout-notification-highlight-color)" : "transparent"));
+    }
+
+    public void setNotificationListener(NotificationListener listener) {
+        this.listener = listener;
+        if (listener != null && registration == null) {
+            registration = getElement().addEventListener("click", domEvent -> {
+                if (listener != null) {
+                    listener.onClick();
+                }
+            });
+        }
+        addRipple();
+    }
+
+    private void addRipple() {
+        if (listener != null && ripple == null) {
+            this.ripple = new PaperRipple();
+            wrapper.add(this.ripple);
         }
     }
 }
