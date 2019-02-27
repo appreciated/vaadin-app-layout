@@ -33,6 +33,7 @@
         <module>app-layout-ui-test-left-responsive-small-no-app-bar</module>
         <module>app-layout-ui-test-top</module>
         <module>app-layout-ui-test-top-large</module>
+        <module>app-layout-ui-test-left-nested-layout</module>
     </modules>
 
     <profiles>
