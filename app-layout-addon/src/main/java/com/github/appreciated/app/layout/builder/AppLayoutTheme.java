@@ -5,14 +5,14 @@ import com.vaadin.flow.theme.AbstractTheme;
 import java.util.Arrays;
 
 public enum AppLayoutTheme {
-    LUMO("com.vaadin.flow.theme.lumo.Lumo", "frontend://com/github/appreciated/app-layout/app-layout-lumo.css"),
-    MATERIAL("com.vaadin.flow.theme.material.Material", "frontend://com/github/appreciated/app-layout/app-layout-material.css");
+    LUMO("com.vaadin.flow.theme.lumo.Lumo", "lumo"),
+    MATERIAL("com.vaadin.flow.theme.material.Material", "material");
     private String themeClassName;
-    private String themeStylePath;
+    private String themeCssClass;
 
-    AppLayoutTheme(String themeClassName, String themeStylePath) {
+    AppLayoutTheme(String themeClassName, String themeCssClass) {
         this.themeClassName = themeClassName;
-        this.themeStylePath = themeStylePath;
+        this.themeCssClass = themeCssClass;
     }
 
     static public AppLayoutTheme toTheme(Class<? extends AbstractTheme> theme) {
@@ -26,7 +26,7 @@ public enum AppLayoutTheme {
         return themeClassName;
     }
 
-    public String getThemeStylePath() {
-        return themeStylePath;
+    public String getThemeCssClass() {
+        return themeCssClass;
     }
 }

@@ -1,4 +1,4 @@
-html {
+.app-layout.lumo {
     --app-layout-primary-color: var(--lumo-primary-color);
     --app-layout-background: var(--lumo-base-color);
     --app-layout-font-size-header: var(--lumo-font-size-m);
@@ -56,7 +56,7 @@ html {
     --app-menu-color: var(--app-layout-drawer-font-color);
 }
 
-[theme~="dark"] {
+[theme~="dark"] .app-layout.lumo {
     --app-layout-bar-background-color: var(--lumo-contrast-10pct);
     --app-layout-bar-font-color: var(--lumo-contrast-90);
     --app-layout-drawer-background-color: var(--lumo-contrast-5pct);

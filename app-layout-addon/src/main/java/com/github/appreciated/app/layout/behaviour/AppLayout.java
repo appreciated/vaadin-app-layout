@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.AppLayoutTheme;
 import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import com.vaadin.flow.theme.AbstractTheme;
@@ -36,6 +35,6 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
 
     public void setTheme(Class<? extends AbstractTheme> theme) {
         this.theme = theme;
-        UI.getCurrent().getPage().addStyleSheet(AppLayoutTheme.toTheme(theme).getThemeStylePath());
+        this.getElement().getClassList().add(AppLayoutTheme.toTheme(theme).getThemeCssClass());
     }
 }

@@ -5,12 +5,15 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
 public abstract class AppLayoutRouterLayout extends Composite<Div> implements RouterLayout {
 
     public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
