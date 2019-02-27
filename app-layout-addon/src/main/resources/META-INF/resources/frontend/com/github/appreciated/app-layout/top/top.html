@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         </style>
         <app-header-layout has-scrolling-region="" fullbleed>
-            <app-header slot="header" condenses reveals
+            <app-header part="app-bar" slot="header" condenses reveals
                         style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar style="transform: translate3d(0px, 0px, 0px);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
@@ -70,7 +70,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </template>
     <script>
-        class AppLayoutTop extends Polymer.Element {
+        class AppLayoutTop extends Vaadin.ThemableMixin
+
+        (Polymer.Element)
+        {
             static get is() {
                 return 'app-layout-top'
             }

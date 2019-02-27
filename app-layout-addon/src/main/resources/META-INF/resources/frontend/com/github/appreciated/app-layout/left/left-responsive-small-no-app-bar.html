@@ -17,7 +17,10 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
@@ -152,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
-            <app-header fixed slot="header">
+            <app-header part="app-bar" fixed slot="header">
                 <app-toolbar style="height: var(--app-layout-bar-height);">
                     <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
@@ -161,19 +164,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </app-toolbar>
             </app-header>
             <app-drawer-layout id="drawerLayout" fullbleed>
-                <app-drawer id="drawer" slot="drawer" swipe-open>
+                <app-drawer part="drawer" id="drawer" slot="drawer" swipe-open>
                     <div class="drawer-content" id="menu-elements">
                         <slot name="drawer-content"></slot>
                     </div>
                 </app-drawer>
-                <div class="application-content" size="100" id="content">
+                <div class="application-content" size="100" part="application-content" id="content">
                     <slot name="application-content"></slot>
                 </div>
             </app-drawer-layout>
         </app-header-layout>
     </template>
     <script>
-        class AppLayoutLeftResponsiveSmallNoAppBar extends Polymer.Element {
+        class AppLayoutLeftResponsiveSmallNoAppBar extends Vaadin.ThemableMixin
+
+        (Polymer.Element)
+        {
             static get is() {
                 return 'app-layout-left-responsive-small-no-app-bar'
             }

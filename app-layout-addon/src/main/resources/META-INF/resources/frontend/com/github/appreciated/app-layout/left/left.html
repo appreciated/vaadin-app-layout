@@ -7,11 +7,11 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link href="../../../../../bower_components/polymer/polymer-element.html" rel="import">
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
 <link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
 <link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
-<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
+<link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
@@ -112,7 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <slot name="app-bar-content"></slot>
             </div>
         </app-toolbar>
-        <div id="content" part="application-content" class="application-content" size="100">
+        <div class="application-content" size="100" part="application-content" id="content">
             <slot name="application-content"></slot>
         </div>
         <app-drawer part="drawer" id="drawer" slot="drawer" swipe-open>
@@ -122,17 +122,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer>
     </template>
     <script>
-        (function () {
-            class AppLayoutLeft extends Vaadin.ThemableMixin
+        class AppLayoutLeft extends Vaadin.ThemableMixin
 
-            (Polymer.Element)
+        (Polymer.Element)
+        {
+            static
+            get
+            is()
             {
-                static
-                get
-                is()
-                {
-                    return 'app-layout-left'
-                }
+                return 'app-layout-left'
+            }
 
             onclick() {
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
@@ -151,7 +150,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 drawer.close();
             }
         }
-
         customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>
