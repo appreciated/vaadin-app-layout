@@ -38,28 +38,50 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends AppLayoutRouterLayout {
-    DefaultNotificationHolder notificationHolder;
-    DefaultBadgeHolder badgeHolder;
-    private Behaviour variant;
+    DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
+    DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
+    private Behaviour variant = Behaviour.LEFT_RESPONSIVE;
     private Thread currentThread;
 
-    @Override
-    public AppLayout createAppLayoutInstance() {
-        if (variant == null) {
-            variant = Behaviour.LEFT_RESPONSIVE;
-            notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-            badgeHolder = new DefaultBadgeHolder();
-        }
+    public MainLayout() {
+        init(getLayoutConfiguration(variant));
         reloadNotifications();
+    }
 
-        if (!variant.isTop()) {
+    private void reloadNotifications() {
+        if (currentThread != null && !currentThread.isInterrupted()) {
+            currentThread.interrupt();
+        }
+        badgeHolder.clearCount();
+        notificationHolder.clearNotifications();
+        currentThread = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                for (int i = 0; i < 3; i++) {
+                    //Thread.sleep(5000);
+                    getUI().ifPresent(ui -> ui.access(() -> {
+                        addNotification(MEDIUM);
+                        badgeHolder.increase();
+                        badgeHolder.increase();
+                    }));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        currentThread.start();
+    }
+
+    private AppLayout getLayoutConfiguration(Behaviour variant) {
+        this.variant = variant;
+        if (!this.variant.isTop()) {
             LeftNavigationComponent home = new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class);
             LeftNavigationComponent menu = new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View9.class);
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
             return AppLayoutBuilder
-                    .get(variant)
+                    .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
                     .withAppBar(AppBarBuilder
@@ -69,12 +91,12 @@ public class MainLayout extends AppLayoutRouterLayout {
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
                             .addToSection(new MenuHeaderComponent("App-Layout",
-                                    "Version 2.0.1",
+                                    "Version 2.0.7",
                                     "/frontend/images/logo.png"
                             ), HEADER)
                             .addToSection(new LeftClickableComponent("Set Behaviour HEADER",
                                     VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(variant)
+                                    clickEvent -> openModeSelector(this.variant)
                             ), HEADER)
                             .add(home)
                             .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
@@ -112,13 +134,13 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .add(menu)
                             .addToSection(new LeftClickableComponent("Set Behaviour FOOTER",
                                     VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(variant)
+                                    clickEvent -> openModeSelector(this.variant)
                             ), FOOTER)
                             .build())
                     .build();
         } else {
             return AppLayoutBuilder
-                    .get(variant)
+                    .get(this.variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder
                             .get()
@@ -128,13 +150,13 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .get()
                             .addToSection(new TopClickableComponent("Set Behaviour 1",
                                     VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(variant)
+                                    clickEvent -> openModeSelector(this.variant)
                             ), HEADER)
                             .add(new TopNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
                             .add(new TopNavigationComponent("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class))
                             .addToSection(new TopClickableComponent("Set Behaviour 2",
                                     VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(variant)
+                                    clickEvent -> openModeSelector(this.variant)
                             ), FOOTER)
                             .addToSection(
                                     new TopNavigationComponent("More", VaadinIcon.CONNECT.create(), View3.class),
@@ -143,36 +165,6 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .build())
                     .build();
         }
-    }
-
-  /*@Override
-  protected void onAttach(AttachEvent attachEvent) {
-    super.onAttach(attachEvent);
-    getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
-  }*/
-
-    private void reloadNotifications() {
-        if (currentThread != null && !currentThread.isInterrupted()) {
-            currentThread.interrupt();
-        }
-        badgeHolder.clearCount();
-        notificationHolder.clearNotifications();
-        currentThread = new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-                for (int i = 0; i < 3; i++) {
-                    //Thread.sleep(5000);
-                    getUI().ifPresent(ui -> ui.access(() -> {
-                        addNotification(MEDIUM);
-                        badgeHolder.increase();
-                        badgeHolder.increase();
-                    }));
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        currentThread.start();
     }
 
     private void addNotification(Priority priority) {
@@ -184,13 +176,13 @@ public class MainLayout extends AppLayoutRouterLayout {
         ));
     }
 
-    private void setDrawerVariant(Behaviour variant) {
-        this.variant = variant;
-        reloadConfiguration();
-    }
-
     private void openModeSelector(Behaviour variant) {
         new BehaviourSelector(variant, this::setDrawerVariant).open();
+    }
+
+    private void setDrawerVariant(Behaviour variant) {
+        this.variant = variant;
+        init(getLayoutConfiguration(variant));
     }
 
     class BehaviourSelector extends Dialog {
@@ -198,12 +190,10 @@ public class MainLayout extends AppLayoutRouterLayout {
             VerticalLayout layout = new VerticalLayout();
             add(layout);
             RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
-            group
-                    .getElement()
+            group.getElement()
                     .getStyle()
                     .set("display", "flex");
-            group
-                    .getElement()
+            group.getElement()
                     .getStyle()
                     .set("flexDirection", "column");
             group.setItems(Behaviour.LEFT,

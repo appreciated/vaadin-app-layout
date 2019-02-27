@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
 <link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
 <link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
+<link href="../../../../../bower_components/vaadin-icons/vaadin-icons.html" rel="import">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
@@ -38,16 +39,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             app-toolbar {
                 height: var(--app-layout-bar-height);
-                background: var(--app-layout-bar-background-color);
+                background: var(--app-layout-bar-background-base-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
+            }
+
+            app-toolbar:after {
+                background: var(--app-layout-bar-background-color);
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                z-index: -1;
             }
 
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                     background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
                 };
             }
 
@@ -86,6 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             /* non-overlay */
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
@@ -120,22 +134,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     return 'app-layout-left'
                 }
 
-                onclick()
-                {
-                    if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
-                        Polymer.dom(this.root).querySelector("#drawer").toggle();
-                    } else {
+            onclick() {
+                if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+                    Polymer.dom(this.root).querySelector("#drawer").toggle();
+                } else {
+                    if (window.history.length > 1) {
                         window.history.back();
+                    } else {
+                        window.location.href = '../';
                     }
                 }
-
-                closeIfNotPersistent()
-                {
-                    var drawer = Polymer.dom(this.root).querySelector("#drawer");
-                    drawer.close();
-                }
             }
-            customElements.define(AppLayoutLeft.is, AppLayoutLeft);
-        })();
+
+            closeIfNotPersistent() {
+                var drawer = Polymer.dom(this.root).querySelector("#drawer");
+                drawer.close();
+            }
+        }
+
+        customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>

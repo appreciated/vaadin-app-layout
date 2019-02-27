@@ -2,10 +2,10 @@ package com.github.appreciated.app.layout.test.left;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.test.left.view.*;
-import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorView;
+import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
 import com.vaadin.flow.component.Component;
 
-public class LeftBehaviourView extends AbstractLeftBehaviorView {
+public class LeftBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
     public Behaviour getVariant() {
         return Behaviour.LEFT;

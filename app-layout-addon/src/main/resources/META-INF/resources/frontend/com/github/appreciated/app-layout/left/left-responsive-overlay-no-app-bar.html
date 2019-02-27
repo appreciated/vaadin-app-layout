@@ -36,6 +36,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             app-header {
                 right: 0px !important;
+                background: var(--app-layout-bar-background-base-color);
+                top: 0px;
+                height: var(--app-layout-bar-height);
             }
 
             app-toolbar {
@@ -49,12 +52,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 left: 0px;
                 right: 0px;
             }
-
-            /*
-            app-header {
-              z-index: 0;
-            }
-            */
 
             .application-content {
                 width: 100%;
@@ -74,6 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                     background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
                 };
                 transition: 1s width;
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
@@ -90,6 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
@@ -147,7 +146,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     drawer.toggle();
                 } else {
-                    window.history.back();
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '../';
+                    }
                 }
             }
 

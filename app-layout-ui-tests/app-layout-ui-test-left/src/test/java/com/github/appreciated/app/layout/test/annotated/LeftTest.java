@@ -21,7 +21,6 @@ public class LeftTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement elementRoot = getShadowRootElement("app-layout-left");
         clickByID(elementRoot, "#toggle");
         clickByCssSelector(".app-menu-item", 0);

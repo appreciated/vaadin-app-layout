@@ -2,10 +2,10 @@ package com.github.appreciated.app.layout.test.leftresponsivehybridnoappbar;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.test.leftresponsivehybridnoappbar.view.*;
-import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorView;
+import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
 import com.vaadin.flow.component.Component;
 
-public class LeftResponsiveHybridNoAppBarBehaviourView extends AbstractLeftBehaviorView {
+public class LeftResponsiveHybridNoAppBarBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
     public Behaviour getVariant() {
         return Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR;

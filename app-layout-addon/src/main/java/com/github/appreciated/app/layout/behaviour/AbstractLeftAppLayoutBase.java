@@ -7,19 +7,22 @@ import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
-
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -38,26 +41,24 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private NavigationElementContainer appMenuContainer;
     private boolean isMenuVisible = true;
 
-    //prepare to delete
-    //    private HasElement appLayoutContent;
-
-
     AbstractLeftAppLayoutBase() {
         getStyle().set("width", "100%")
                 .set("height", "100%");
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
+        appBarContentHolder.setSpacing(false);
         appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
         appBarElementWrapper.setSpacing(false);
-        appBarElementWrapper.setSizeFull();
+        appBarElementWrapper.getStyle().set("flex", "1 1");
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
 
         menuElements = new Div();
+        menuElements.setHeight("100%");
         menuElements.getElement().setAttribute("slot", "drawer-content");
         content = new Div();
         content.setHeight("100%");
@@ -66,20 +67,21 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        titleWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         titleWrapper.setPadding(false);
         titleWrapper.setMargin(false);
+        titleWrapper.getElement().getStyle().set("flex", "1 1 100px").set("overflow", "hidden");
+        titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
 
         getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), content.getElement());
     }
 
+    public abstract String getStyleName();
+
     @Override
     public AppDrawer getDrawer() {
         return drawer;
     }
-
-    public abstract String getStyleName();
 
     public HorizontalLayout getAppBarElementWrapper() {
         return appBarElementWrapper;
@@ -144,9 +146,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         if (appMenuContainer != null) {
-            return appMenuContainer.setActiveNavigationComponent(element);
+            return appMenuContainer.setActiveNavigationElement(element);
         }
         return false;
     }
@@ -172,6 +174,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         if (appMenuContainer == null) {
             setMenuVisible(false);
         }
+    }
+
+    @Override
+    public Stream<Component> getMenuChildren() {
+        return appMenuContainer.getMenuChildren();
     }
 
     /**

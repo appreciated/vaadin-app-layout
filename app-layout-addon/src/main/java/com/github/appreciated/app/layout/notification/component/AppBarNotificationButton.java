@@ -22,7 +22,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
     public AppBarNotificationButton(VaadinIcon icon, NotificationHolder holder) {
         super(new IconBadgeButton(icon), new Div());
         this.notificationsView = new NotificationsView(holder);
-        this.setContent(notificationsView);
+        this.setContentComponent(notificationsView);
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
                 .set("--shadow-elevation-2dp_-_box-shadow", "0px")
@@ -54,7 +54,7 @@ public class AppBarNotificationButton extends PaperMenuButton {
             }
         });
         holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(AppBarNotificationButton.this::close)));
-        holder.bind(((IconBadgeButton) getButton()).getBadge());
+        holder.bind(((IconBadgeButton) getTriggerComponent()).getBadge());
     }
 
     public void refreshNotifications(NotificationHolder notificationHolder) {

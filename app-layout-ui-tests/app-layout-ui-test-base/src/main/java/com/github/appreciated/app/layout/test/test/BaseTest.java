@@ -1,14 +1,13 @@
 package com.github.appreciated.app.layout.test.test;
 
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,6 +41,11 @@ public abstract class BaseTest {
         }
     }
 
+    @Before
+    public void beforeTest() {
+        openWebsite();
+    }
+
     public void clickByCssSelector(String cssSelector, int i) {
         $$(cssSelector).get(i).click();
         try {
@@ -51,18 +55,8 @@ public abstract class BaseTest {
         }
     }
 
-
-// document.getElementsByTagName("app-layout-left")[0].shadowRoot.querySelector("app-drawer").querySelector("app-menu-icon-item")
-
-    /**
-     * document.getElementsByTagName("app-layout-left-responsive")[0].shadowRoot.childNodes[2].getElementsByTagName("app-drawer-layout")[0].getElementsByTagName("app-drawer")
-     *
-     * @param element
-     * @return
-     */
-    public WebElement getShadowRootDrawer(String element) {
-        return (WebElement) ((JavascriptExecutor) driver).executeScript(
-                "return document.getElementsByTagName(\"" + element + "\")[0].shadowRoot.querySelector(\"app-drawer\")");
+    public String getTextByCssSelector(String cssSelector, int i) {
+        return $$(cssSelector).get(i).getText();
     }
 
     public WebElement getShadowRootElement(String element) {
@@ -70,28 +64,9 @@ public abstract class BaseTest {
                 "return document.getElementsByTagName(\"" + element + "\")[0].shadowRoot");
     }
 
-    public WebElement findByTagName(WebElement element, String tag) {
-        return findByTagName(element, tag, 0);
-    }
-
-    public WebElement findByTagName(WebElement element, String tag, int i) {
-        return (WebElement) ((JavascriptExecutor) driver).executeScript(
-                "return arguments[0].getElementsByTagName(\"" + tag + "\")[" + i + "]", element);
-    }
-
-
     public WebElement findByID(WebElement element, String tag) {
         return (WebElement) ((JavascriptExecutor) driver).executeScript(
                 "return arguments[0].querySelector(\"" + tag + "\")", element);
-    }
-
-    public void clickByTagName(WebElement element, String tag, int i) {
-        findByTagName(element, tag, i).click();
-        try {
-            Thread.sleep(SLEEP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void clickByID(WebElement element, String id) {
@@ -103,11 +78,6 @@ public abstract class BaseTest {
         }
     }
 
-
-    public WebElement findByClassName(WebElement element, String className) {
-        return findByClassName(element, className, 0);
-    }
-
     public WebElement findByClassName(WebElement element, String className, int i) {
         WebElement root = (WebElement) ((JavascriptExecutor) driver).executeScript(
                 "return arguments[0].querySelectorAll(\"" + className + "\")[" + i + "]", element);
@@ -116,17 +86,6 @@ public abstract class BaseTest {
 
     public void clickByCssSelector(WebElement element, String className, int i) {
         findByClassName(element, className, i).click();
-        try {
-            Thread.sleep(SLEEP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void clickElement(SelenideElement element) {
-        Actions actions = new Actions(driver);
-        actions.click(element).perform();
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {

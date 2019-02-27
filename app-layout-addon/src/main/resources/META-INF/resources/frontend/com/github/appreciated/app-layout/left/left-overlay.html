@@ -45,10 +45,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 right: 0px;
             }
 
+            app-toolbar:after {
+                background: var(--app-layout-bar-background-base-color);
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                z-index: -1;
+            }
+
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
                     background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
                 };
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
@@ -64,6 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             #toggle {
+                flex-shrink: 0;
                 width: calc(var(--app-layout-bar-height) - 16px);
                 height: calc(var(--app-layout-bar-height) - 16px);
                 margin-right: 8px;
@@ -95,7 +108,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     Polymer.dom(this.root).querySelector("#drawer").toggle();
                 } else {
-                    window.history.back();
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = '../';
+                    }
                 }
             }
 

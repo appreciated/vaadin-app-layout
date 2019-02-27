@@ -2,10 +2,10 @@ package com.github.appreciated.app.layout.test.lefthybridsmall;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.test.lefthybridsmall.view.*;
-import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorView;
+import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
 import com.vaadin.flow.component.Component;
 
-public class LeftHybridSmallBehaviourView extends AbstractLeftBehaviorView {
+public class LeftHybridSmallBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
     public Behaviour getVariant() {
         return Behaviour.LEFT_HYBRID_SMALL;

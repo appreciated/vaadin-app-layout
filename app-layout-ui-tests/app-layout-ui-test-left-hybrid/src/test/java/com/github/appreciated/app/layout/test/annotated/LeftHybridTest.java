@@ -22,7 +22,6 @@ public class LeftHybridTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        openWebsite();
         WebElement elementRoot = getShadowRootElement("app-layout-left-hybrid");
         clickByID(elementRoot, "#toggle");
         clickByID(elementRoot, "#toggle");

@@ -7,7 +7,6 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.router.Route;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
@@ -54,9 +53,9 @@ public class TopNavigationComponent extends PaperTab implements NavigationElemen
 
     public String getRoute() {
         if (className != null) {
-            return className.getAnnotation(Route.class).value();
+            return UI.getCurrent().getRouter().getUrl(className);
         } else if (view != null) {
-            return view.getClass().getAnnotation(Route.class).value();
+            return UI.getCurrent().getRouter().getUrl(view.getClass());
         } else {
             return getCaption();
         }
@@ -89,7 +88,7 @@ public class TopNavigationComponent extends PaperTab implements NavigationElemen
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
+    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         if (getViewClassName() == element) {
             setActive();
             return true;

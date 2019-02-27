@@ -14,7 +14,10 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
         setSizeFull();
         menu = new LeftMenuComponent();
         super.add(menu);
+        setHeight("100%");
+        setWidth("100%");
         menu.setHeight("100%");
+        menu.getStyle().set("overflow", "auto");
         getStyle().set("padding", "0");
         menu.getStyle().set("padding", "0");
     }
@@ -23,6 +26,10 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
     public void add(Component... components) {
         Arrays.stream(components).forEach(component -> component.getElement().getStyle().set("flex-shrink", "0"));
         menu.add(components);
+    }
+
+    public LeftMenuComponent getMenu() {
+        return menu;
     }
 
     @Override

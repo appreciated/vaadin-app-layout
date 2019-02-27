@@ -1,15 +1,14 @@
 package com.github.appreciated.app.layout.component.appmenu.left;
 
-import com.github.appreciated.app.layout.builder.interfaces.Factory;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
@@ -18,7 +17,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
 
     private final String caption;
     private final Icon icon;
-    private Factory<String, String> captionInterceptor;
+    private Function<String, String> captionInterceptor;
 
 
     public LeftSubmenuComponent(String caption, Icon icon, List<Component> submenuElements) {
@@ -41,18 +40,13 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
         if (captionInterceptor == null) {
             return caption;
         } else {
-            return captionInterceptor.get(caption);
+            return captionInterceptor.apply(caption);
         }
     }
 
     @Override
-    public boolean setActiveNavigationComponent(Class<? extends HasElement> element) {
-        return setActiveNavigationComponent(getMenu().getChildren(), element);
-    }
-
-    @Override
-    public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return Optional.of(getClosestNavigationElement(getMenu().getChildren(), element));
+    public Stream<Component> getMenuChildren() {
+        return getMenu().getChildren();
     }
 
     @Override

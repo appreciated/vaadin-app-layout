@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElem
 import com.vaadin.flow.component.icon.Icon;
 
 /**
- * Data structure that contains all the needed information of a {@link com.github.appreciated.app.layout.builder.elements.NavigatorNavigationElement}. This class is being used by
+ * Data structure that contains all the needed information of a {@link com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent} This class is being used by
  * by the {@link DefaultNavigationElementInfoProducer}.
  */
 

@@ -6,6 +6,8 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.theme.AbstractTheme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 
 /**
@@ -16,6 +18,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private AppLayout instance;
     private Component titleComponent;
     private Component imageComponent;
+    private Class<? extends AbstractTheme> theme = Lumo.class;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -30,7 +33,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     * Set the title which the layout is supposed to have after building
+     * Creates a title {@link Component} and set it in the app-bar of the {@link AppLayout}
      *
      * @param title
      * @return
@@ -41,10 +44,34 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     * Replaces the title component with another component
+     * Sets a title {@link Component} in the app-bar of the {@link AppLayout}
+     *
+     * @param title
+     */
+    public void setTitle(String title) {
+        Span span = new Span(title);
+        span.setWidth("100%");
+        span.getStyle()
+                .set("white-space", "nowrap")
+                .set("overflow", "hidden")
+                .set("text-overflow", "ellipsis");
+        setTitleComponent(span);
+    }
+
+    /**
+     * Sets the {@link Component} that is supposed to represent the title in the app-bar
+     *
+     * @param titleComponent
+     */
+    public void setTitleComponent(Component titleComponent) {
+        this.titleComponent = titleComponent;
+    }
+
+    /**
+     * Sets the title component by using {@link AppLayoutBuilder#setTitleComponent(Component)}
      *
      * @param component
-     * @return
+     * @return Itself to allow method chaining
      */
     public AppLayoutBuilder withTitle(Component component) {
         setTitleComponent(component);
@@ -52,7 +79,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     * Build the layout and returns an instance of an AppLayout which also is a Component
+     * Builds the layout and returns an instance of an AppLayout which also is a Component
      *
      * @return
      */
@@ -64,47 +91,65 @@ public class AppLayoutBuilder implements ComponentBuilder {
             instance.setIconComponent(imageComponent);
         }
         instance.init();
+        instance.setTheme(theme);
         return instance;
 
     }
 
+    /**
+     * set the app-bar {@link Component} of the {@link AppLayout} that is built
+     *
+     * @param component
+     * @return Itself to allow method chaining
+     */
     public AppLayoutBuilder withAppBar(Component component) {
         setAppBarComponent(component);
         return this;
-    }
-
-    public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
-        setAppMenu(component);
-        return this;
-    }
-
-    public void setTitle(String title) {
-        Span span = new Span(title);
-        span.getStyle().set("white-space", "nowrap");
-        setTitleComponent(span);
-    }
-
-    public void setTitleComponent(Component titleComponent) {
-        this.titleComponent = titleComponent;
     }
 
     public void setAppBarComponent(Component component) {
         instance.setAppBar(component);
     }
 
+    /**
+     * @param component
+     * @return Itself to allow method chaining
+     */
+    public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
+        setAppMenu(component);
+        return this;
+    }
+
+    /**
+     * Sets the Component that represents the menu on the left hand / the top side (depending which {@link Behaviour} you are using).
+     *
+     * @param component
+     */
     public void setAppMenu(NavigationElementContainer component) {
         instance.setAppMenu(component);
     }
 
-
+    /**
+     * @param url a url to the image that is supposed to be shown in the app bar
+     * @return Itself to allow method chaining
+     */
     public AppLayoutBuilder withIcon(String url) {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
         return withIconComponent(image);
     }
 
+    /**
+     * @param image
+     * @return Itself to allow method chaining
+     */
     public AppLayoutBuilder withIconComponent(Component image) {
         this.imageComponent = image;
+        return this;
+    }
+
+    public AppLayoutBuilder withTheme(Class<? extends AbstractTheme> theme) {
+        this.theme = theme;
         return this;
     }
 }

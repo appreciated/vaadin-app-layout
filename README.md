@@ -1,3 +1,9 @@
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/app-layout-add-on)
+[![Lastest version on vaadin.com/directory](https://img.shields.io/vaadin-directory/version/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/rating/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
+[![Lastest release date on vaadin.com/directory](https://img.shields.io/vaadin-directory/release-date/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
+
+
 ## Integration of the Webcomponent \<app-layout\> as a Add-on for Vaadin 10
 A collection of ready to use templates for the Webcomponent [\<app-layout\>](https://www.webcomponents.org/element/PolymerElements/app-layout)
 <br>
@@ -5,9 +11,7 @@ A collection of ready to use templates for the Webcomponent [\<app-layout\>](htt
 <br>
 ![Markup](https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true "App-Layout Markup")
 
-## [Vaadin Directory](https://vaadin.com/directory#!addon/app-layout-add-on)
-
-## [Demo](https://app-layout-demo.herokuapp.com/)
+## [Demo](https://appreciated-collection.herokuapp.com/app-layout/)
 
 ## Installation
 
