@@ -7,6 +7,7 @@ import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,7 +21,8 @@ import static java.util.Arrays.asList;
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
-
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -38,10 +40,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private Component title;
     private NavigationElementContainer appMenuContainer;
     private boolean isMenuVisible = true;
-
-    //prepare to delete
-    //    private HasElement appLayoutContent;
-
 
     AbstractLeftAppLayoutBase() {
         getStyle().set("width", "100%")
