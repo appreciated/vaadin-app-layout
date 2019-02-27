@@ -9,6 +9,7 @@
         <version>2.0.7-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.github.appreciated.examples</groupId>
     <artifactId>app-layout-examples</artifactId>
 
     <packaging>pom</packaging>
