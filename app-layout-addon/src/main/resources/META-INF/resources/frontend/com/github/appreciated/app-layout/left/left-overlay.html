@@ -102,10 +102,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer>
     </template>
     <script>
-        class AppLayoutLeftOverlay extends Vaadin.ThemableMixin
-
-        (Polymer.Element)
-        {
+        class AppLayoutLeftOverlay extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-overlay'
             }

@@ -168,10 +168,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer-layout>
     </template>
     <script>
-        class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin
-
-        (Polymer.Element)
-        {
+        class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-hybrid-overlay-no-app-bar'
             }

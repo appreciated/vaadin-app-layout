@@ -162,10 +162,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header-layout>
     </template>
     <script>
-        class AppLayoutLeftResponsiveHybrid extends Vaadin.ThemableMixin
-
-        (Polymer.Element)
-        {
+        class AppLayoutLeftResponsiveHybrid extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-hybrid'
             }

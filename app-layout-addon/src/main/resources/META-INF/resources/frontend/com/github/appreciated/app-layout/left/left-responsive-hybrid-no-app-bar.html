@@ -207,10 +207,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header-layout>
     </template>
     <script>
-        class AppLayoutLeftResponsiveHybridNoAppBar extends Vaadin.ThemableMixin
-
-        (Polymer.Element)
-        {
+        class AppLayoutLeftResponsiveHybridNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-hybrid-no-app-bar'
             }

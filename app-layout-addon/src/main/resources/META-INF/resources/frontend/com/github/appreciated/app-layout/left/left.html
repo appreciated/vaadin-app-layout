@@ -122,14 +122,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer>
     </template>
     <script>
-        class AppLayoutLeft extends Vaadin.ThemableMixin
-
-        (Polymer.Element)
-        {
-            static
-            get
-            is()
-            {
+        class AppLayoutLeft extends Vaadin.ThemableMixin(Polymer.Element){
+            static get is(){
                 return 'app-layout-left'
             }
 
