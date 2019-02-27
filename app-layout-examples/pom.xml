@@ -35,6 +35,23 @@
     <module>app-layout-spring-example</module>
   </modules>
 
+  <properties>
+    <!--<maven.install.skip>true</maven.install.skip>-->
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
+  <!-- Just to disable any accidental deployment to maven.central -->
+  <distributionManagement>
+    <repository>
+      <id>localhost</id>
+      <url>file://${basedir}/target/repo/</url>
+    </repository>
+    <snapshotRepository>
+      <id>localhost</id>
+      <url>file://${basedir}/target/snapshot-repo/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>com.vaadin</groupId>
