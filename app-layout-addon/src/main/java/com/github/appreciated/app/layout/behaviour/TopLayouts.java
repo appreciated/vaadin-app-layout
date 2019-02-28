@@ -77,6 +77,7 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
+            this.content.getElement().removeAllChildren();
             if (content != null) {
                 this.content.getElement().appendChild(content.getElement());
             }
@@ -227,6 +228,7 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
+            this.content.getElement().removeAllChildren();
             if (content != null) {
                 this.content.getElement().appendChild(content.getElement());
             }

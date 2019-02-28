@@ -98,10 +98,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void setAppLayoutContent(HasElement content) {
+        this.content.getElement().removeAllChildren();
         if (content != null) {
             this.content.getElement().appendChild(content.getElement());
-            setUpBackNavigation(content);
         }
+        setUpBackNavigation(content);
     }
 
     private void setUpBackNavigation(HasElement content) {
