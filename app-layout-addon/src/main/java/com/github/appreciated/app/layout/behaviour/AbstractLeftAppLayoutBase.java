@@ -21,8 +21,6 @@ import static java.util.Arrays.asList;
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
-@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
-@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
