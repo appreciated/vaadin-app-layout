@@ -5,6 +5,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
@@ -13,6 +14,8 @@ import com.vaadin.flow.router.RouterLayout;
  * Base class implementing router layout. Extending class is supposed to call {@link #init(AppLayout)} to initialize
  * the {@link AppLayout}. This can be extended directly if there is another parent layout defining a viewport.
  */
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
+@StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
 public class AppLayoutRouterLayoutBase  extends Composite<Div> implements RouterLayout {
 
     public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
