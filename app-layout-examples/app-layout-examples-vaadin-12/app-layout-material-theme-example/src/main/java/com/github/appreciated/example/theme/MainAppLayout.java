@@ -8,7 +8,6 @@ import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
@@ -29,23 +28,17 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-
 @Theme(Material.class)
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications;
-    private DefaultBadgeHolder badge;
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
 
     public MainAppLayout() {
-
-        notifications = new DefaultNotificationHolder(newStatus -> {
-        });
+        notifications.addClickListener(notification -> {/* ... */});
 
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
-
-        badge = new DefaultBadgeHolder();
 
         Component appBar = AppBarBuilder
                 .get()
@@ -103,6 +96,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
          * the wrong color making them seemingly invisible instead do it the following way as long as the issue is not
          * solved see here -> https://github.com/vaadin/flow/issues/4765
          */
-        //getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
+        getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
     }
 }

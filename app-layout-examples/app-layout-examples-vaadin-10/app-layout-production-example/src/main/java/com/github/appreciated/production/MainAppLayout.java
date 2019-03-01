@@ -10,7 +10,9 @@ import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppM
 import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -27,14 +29,13 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
-    /**
-     * Do not initialize here. This will lead to NPEs
-     */
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
+
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
 
     public MainAppLayout() {
+        notifications.addClickListener(notification -> System.out.println(notification.getTitle()));
+        notifications.addNotification(new DefaultNotification("title","description"));
 
         LeftNavigationComponent menuEntry = new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View6.class);
         badge.bind(menuEntry.getBadge());

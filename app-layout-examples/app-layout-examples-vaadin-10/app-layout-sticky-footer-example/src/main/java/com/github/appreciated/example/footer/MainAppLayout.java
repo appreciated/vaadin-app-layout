@@ -27,11 +27,11 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
 
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
     public MainAppLayout() {
+        notifications.addClickListener(notification -> {/* ... */});
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withTitle("App Layout")

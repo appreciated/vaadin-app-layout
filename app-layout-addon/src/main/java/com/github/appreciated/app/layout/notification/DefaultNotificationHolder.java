@@ -15,13 +15,20 @@ import java.util.function.Function;
 
 public class DefaultNotificationHolder extends NotificationHolder<Notification> {
 
-
     private Function<Notification, String> dateTimeFormatter = notification -> new PrettyTime().
             format(Date.from(notification.getCreationTime().atZone(ZoneId.systemDefault()).
                     toInstant()));
 
     public DefaultNotificationHolder(NotificationClickListener<Notification> listener) {
         super(listener);
+    }
+
+    public DefaultNotificationHolder(Notification... notifications) {
+        super(notifications);
+    }
+
+    public DefaultNotificationHolder(Collection<Notification> notifications) {
+        super(notifications);
     }
 
     public DefaultNotificationHolder(NotificationClickListener<Notification> listener, Notification... notifications) {

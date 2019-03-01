@@ -26,12 +26,10 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
 
     public MainAppLayout() {
-        this.notifications = notifications;
-
+        notifications.addClickListener(notification -> {/* ... */});
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE)
                 .withTitle("App Layout")

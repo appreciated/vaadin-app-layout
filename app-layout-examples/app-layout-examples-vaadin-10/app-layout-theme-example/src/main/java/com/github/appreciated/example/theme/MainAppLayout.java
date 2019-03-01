@@ -30,15 +30,14 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @HtmlImport("frontend://theming/custom.html") // You can use HTML Imports to manipulate f.e. the accent color
 /**
- * !Don't use the @Theme annotation! see details and alternative approach in the the "onAttach" method.
+ * !Don't use the @Theme annotation! to set the dark theme and see details for workaround in the the "onAttach" method.
+ * @Theme(value = Lumo.class, variant = Lumo.DARK)
  */
-// @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
-    private DefaultBadgeHolder badge = new DefaultBadgeHolder();
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
 
     public MainAppLayout() {
+        notifications.addClickListener(notification -> {/* ... */});
 
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
@@ -96,9 +95,9 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
         /**
-         * Using the @Theme Annotation to set the Dark Theme will cause some issues with shadows which will appear in
-         * the wrong color making them seemingly invisible instead do it the following way as long as the issue is not
-         * solved see here -> https://github.com/vaadin/flow/issues/4765
+         * Using the @Theme Annotation to set the Dark Theme causes issues with shadows which will appear in
+         * the wrong color making them seemingly invisible. Instead do it the following way as long as the issue is not
+         * solved (https://github.com/vaadin/flow/issues/4765)
          */
         getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
     }
