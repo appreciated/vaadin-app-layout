@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout.router;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
+
+import java.util.Comparator;
+import java.util.Optional;
 
 /**
  * Base class implementing router layout. Extending class is supposed to call {@link #init(AppLayout)} to initialize
@@ -16,7 +16,7 @@ import com.vaadin.flow.router.RouterLayout;
  */
 @StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-lumo.css")
 @StyleSheet("frontend://com/github/appreciated/app-layout/app-layout-material.css")
-public class AppLayoutRouterLayoutBase  extends Composite<Div> implements RouterLayout {
+public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterLayout {
 
     public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
 
@@ -57,6 +57,28 @@ public class AppLayoutRouterLayoutBase  extends Composite<Div> implements Router
                 layout.getClosestNavigationElement(content.getClass())
                         .ifPresent(aClass -> layout.setActiveNavigationElement(aClass));
             }
+        }
+        setBackNavigation(content);
+    }
+
+    private void setBackNavigation(HasElement content) {
+        if (content instanceof Component) {
+            String currentRoute = UI.getCurrent().getRouter().getUrl(((Component) content).getClass());
+            if (currentRoute.lastIndexOf("/") > 0) {
+                System.out.println(currentRoute);
+                String[] currentRouteParts = currentRoute.substring(0, (currentRoute.lastIndexOf("/"))).split("/");
+                Optional<RouteDataSimilarity> result = UI.getCurrent().getRouter().getRoutes()
+                        .stream()
+                        .filter(routeData -> !routeData.getUrl().equals(currentRoute))
+                        .map(routeData -> new RouteDataSimilarity(routeData, currentRouteParts))
+                        .max(Comparator.comparingInt(RouteDataSimilarity::getSimilarity));
+                result.ifPresent(parentRoute -> System.out.println(parentRoute.getSimilarity()));
+                layout.setBackNavigation(result.isPresent());
+            } else {
+                layout.setBackNavigation(false);
+            }
+        } else {
+            layout.setBackNavigation(false);
         }
     }
 
