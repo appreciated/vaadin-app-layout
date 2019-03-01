@@ -77,9 +77,9 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                                         .build())
                                 .add(new LeftNavigationComponent("Contact1",
                                         VaadinIcon.CONNECT.create(),
-                                        View3.class
+                                        View5.class
                                 ))
-                                .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View5.class))
+                                .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
                                 .build())
                         .add(menuEntry)
                         .addToSection(new LeftClickableComponent("Clickable Entry",
