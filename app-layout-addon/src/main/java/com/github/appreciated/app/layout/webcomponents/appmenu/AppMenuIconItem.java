@@ -1,12 +1,12 @@
 package com.github.appreciated.app.layout.webcomponents.appmenu;
 
 import com.vaadin.flow.component.*;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-@Tag("app-menu-icon-item")
-@HtmlImport("bower_components/app-menu/app-menu-icon-item.html")
-public class AppMenuIconItem extends Component implements HasSize, HasText {
+public class AppMenuIconItem extends HorizontalLayout implements HasSize, HasText {
 
+    private final Icon icon;
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
 
     public AppMenuIconItem() {
@@ -20,6 +20,8 @@ public class AppMenuIconItem extends Component implements HasSize, HasText {
                 this.listener.onComponentEvent(new ClickEvent<>(this));
             }
         });
+        this.icon = new Icon();
+        this.getElement().r
     }
 
     public AppMenuIconItem(String caption) {
@@ -38,11 +40,13 @@ public class AppMenuIconItem extends Component implements HasSize, HasText {
     }
 
     public void setIcon(String icon) {
-        getElement().setAttribute("icon", icon);
     }
 
     public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
         this.listener = listener;
     }
-}
 
+    public void setParent(AppMenu appMenu) {
+
+    }
+}

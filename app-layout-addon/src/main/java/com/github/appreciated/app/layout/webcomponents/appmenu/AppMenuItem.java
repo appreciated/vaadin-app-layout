@@ -4,8 +4,9 @@ import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-public class AppMenuItem extends Anchor {
+public class AppMenuItem extends HorizontalLayout {
 
     private AppMenuIconItem item;
     private AppMenu parent;
@@ -43,7 +44,7 @@ public class AppMenuItem extends Anchor {
     }
 
     public AppMenuItem(String sectionName, String icon,
-                       ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+                        ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
         this(sectionName, icon);
         item.setClickListener(listener);
     }

@@ -1,13 +1,13 @@
 package com.github.appreciated.app.layout.component.appmenu;
 
-import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenuItem;
+import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenuIconItem;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
-public class NavigationBadgeIconButton extends AppMenuItem {
+public class NavigationBadgeIconButton extends AppMenuIconItem {
 
     private static int idCounter = 0;
 
