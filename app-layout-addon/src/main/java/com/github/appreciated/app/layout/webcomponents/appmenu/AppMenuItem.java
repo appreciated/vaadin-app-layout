@@ -49,14 +49,12 @@ public class AppMenuItem extends HorizontalLayout {
         item.setClickListener(listener);
     }
 
-    @Override
     public String getText() {
         return item != null
                 ? item.getText()
                 : getElement().getText();
     }
 
-    @Override
     public void setText(String sectionName) {
         if (item != null) item.setText(sectionName);
         else getElement().setText(sectionName);

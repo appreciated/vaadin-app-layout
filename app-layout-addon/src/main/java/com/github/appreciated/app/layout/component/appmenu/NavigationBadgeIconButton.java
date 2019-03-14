@@ -23,7 +23,7 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
     @Override
     public void setIcon(String icon) {
         super.setIcon(icon);
-        getItem().getElement().getStyle().set("white-space", "nowrap");
+        //getItem().getElement().getStyle().set("white-space", "nowrap");
     }
 
     public NavigationBadgeIconButton(String name, Icon icon) {
@@ -32,7 +32,7 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
         badge = new MenuBadgeComponent();
         badge.setVisible(false);
         add(badge);
-        getItem().getElement().getStyle().set("white-space", "nowrap");
+        //getItem().getElement().getStyle().set("white-space", "nowrap");
     }
 
     public NavigationBadgeIconButton(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {

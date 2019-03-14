@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.component.appmenu.left;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.appmenu.AppSubmenu;
-import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -22,12 +21,12 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
 
     public LeftSubmenuComponent(String caption, Icon icon, List<Component> submenuElements) {
         super(caption, icon);
-        getStyle().set("--app-layout-menu-padding", "0");
-        getItem().getElement().getStyle().set("white-space", "nowrap");
-        getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
-        getToggleWrapper().getElement().getStyle().set("position", "relative");
-        getMenu().getStyle().set("background", "var(--app-layout-drawer-submenu-background-color)");
-        submenuElements.forEach(element1 -> getMenu().add(element1));
+        //getStyle().set("--app-layout-menu-padding", "0");
+        //getItem().getElement().getStyle().set("white-space", "nowrap");
+        //getToggleWrapper().getElement().appendChild(new PaperRipple().getElement());
+        //getToggleWrapper().getElement().getStyle().set("position", "relative");
+        //getMenu().getStyle().set("background", "var(--app-layout-drawer-submenu-background-color)");
+        getSubmenuContainer().add(submenuElements.toArray(new Component[]{}));
         this.caption = caption;
         this.icon = icon;
     }
@@ -46,7 +45,7 @@ public class LeftSubmenuComponent extends AppSubmenu implements NavigationElemen
 
     @Override
     public Stream<Component> getMenuChildren() {
-        return getMenu().getChildren();
+        return getSubmenuContainer().getChildren();
     }
 
     @Override

@@ -12,7 +12,7 @@ public class AppMenu extends VerticalLayout {
             if (component instanceof AppMenuIconItem) {
                 ((AppMenuIconItem) component).setParent(this);
             } else if (component instanceof AppSubmenu) {
-                ((AppSubmenu) component).setParent(this);
+                //((AppSubmenu) component).setParent(this);
             }
         }
         super.add(components);

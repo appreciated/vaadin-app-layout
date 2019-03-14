@@ -3,8 +3,9 @@ package com.github.appreciated.app.layout.webcomponents.appmenu;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.router.RouterLink;
 
-public class AppMenuIconItem extends HorizontalLayout implements HasSize, HasText {
+public class AppMenuIconItem extends RouterLink implements HasSize{
 
     private final Icon icon;
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
@@ -21,7 +22,6 @@ public class AppMenuIconItem extends HorizontalLayout implements HasSize, HasTex
             }
         });
         this.icon = new Icon();
-        this.getElement().r
     }
 
     public AppMenuIconItem(String caption) {

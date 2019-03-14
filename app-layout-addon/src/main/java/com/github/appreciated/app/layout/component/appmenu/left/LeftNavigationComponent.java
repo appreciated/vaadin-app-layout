@@ -10,6 +10,7 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.RouterLink;
 
 import java.util.function.Function;
 
@@ -149,7 +150,7 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton
     @Override
     public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
         if (getViewClassName() == element) {
-            setActive();
+            //setActive();
             return true;
         } else {
             return false;
