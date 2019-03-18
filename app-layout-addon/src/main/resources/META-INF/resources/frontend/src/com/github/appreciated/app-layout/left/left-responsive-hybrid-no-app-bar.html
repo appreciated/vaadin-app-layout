@@ -7,17 +7,17 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
-<link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
-<link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../../bower_components/polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="../../../../../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
-<dom-module id="app-layout-left-responsive-hybrid-overlay-no-app-bar">
+<dom-module id="app-layout-left-responsive-hybrid-no-app-bar">
     <template>
         <style>
 
@@ -40,18 +40,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
+            }
+
+            /* non-overlay */
+            :root {
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
+            }
+
+            app-toolbar {
+                z-index: 1;
                 position: absolute;
                 top: 0px;
                 left: 0px;
                 right: 0px;
             }
 
-            /*
-            app-header {
-                z-index: 0;
+            #drawer {
+                margin-top: var(--app-layout-bar-height);
             }
-            */
 
+            /* non-overlay */
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
@@ -81,23 +89,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
 
-            @media only screen and (min-width: 640px) {
-                /* no-app-bar */
-                app-header {
-                    display: none;
-                }
-
-                #drawer {
-                    margin-top: 0px;
-                }
-
-                app-menu-icon-item {
-                    transition: color 0.2s ease;
-                }
-
-                /* hybrid */
-            }
-
             .application-content {
                 width: 100%;
                 height: 100%;
@@ -107,9 +98,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media only screen and (max-width: 640px) {
                 .application-content {
-                    box-sizing: border-box;
                     padding-top: var(--app-layout-bar-height);
+                    box-sizing: border-box;
                 }
+            }
+
+            @media only screen and (min-width: 640px) {
+
+                /* no-app-bar */
+                app-header {
+                    display: none;
+                }
+
+                #drawer {
+                    margin-top: 0px;
+                }
+
+                /* no-app-bar */
+                /* hybrid */
+                #menu-header-title, #menu-header-subtitle {
+                    opacity: 1.0;
+                    transition: opacity 0.2s, max-height 0.5s, margin-top 0.5s;
+                    max-height: 50px;
+                }
+
+                #menu-header-wrapper {
+                    transition: padding 0.5s;
+                }
+
+                app-menu-icon-item {
+                    transition: color 0.2s ease;
+                }
+
+                /* hybrid */
             }
 
             #drawerLayout {
@@ -138,39 +159,57 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     overflow: hidden;
                 }
 
+                #drawerLayout iron-icon[icon="icons:expand-more"], #drawerLayout iron-icon[icon="expand-more"],
+                #drawerLayout iron-icon[icon="icons:expand-less"], #drawerLayout iron-icon[icon="expand-less"] {
+                    color: transparent;
+                }
+
+                #drawerLayout #menu-header-title, #drawerLayout #menu-header-subtitle {
+                    opacity: 0;
+                    max-height: 0px;
+                    margin-top: 0px;
+                }
+
+                #drawerLayout #menu-header-wrapper {
+                    padding: 4px;
+                }
+
                 #drawerLayout * {
                     --expand-icon-fill-color: transparent !important;
                     --app-layout-badge-font-color: transparent;
                 }
 
                 /* hybrid */
+
             }
         </style>
-        <app-drawer-layout id="drawerLayout" fullbleed>
-            <app-header-layout id="layout-wrapper">
-                <app-header part="app-bar" fixed slot="header">
-                    <app-toolbar style="height: var(--app-layout-bar-height);">
-                        <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
-                        <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
-                            <slot name="app-bar-content"></slot>
-                        </div>
-                    </app-toolbar>
-                </app-header>
-            </app-header-layout>
-            <app-drawer part="drawer" id="drawer" slot="drawer" swipe-open>
-                <div class="drawer-content" id="menu-elements">
-                    <slot name="drawer-content"></slot>
+        <app-header-layout id="layout-wrapper" fullbleed>
+            <app-header part="app-bar" fixed slot="header">
+                <app-toolbar style="height: var(--app-layout-bar-height);">
+                    <paper-icon-button id="toggle" icon="menu" on-tap="onclick"></paper-icon-button>
+                    <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
+                        <slot name="app-bar-content"></slot>
+                    </div>
+                </app-toolbar>
+            </app-header>
+            <app-drawer-layout id="drawerLayout" fullbleed>
+                <app-drawer part="drawer" id="drawer" slot="drawer" swipe-open>
+                    <div class="drawer-content" id="menu-elements">
+                        <slot name="drawer-content"></slot>
+                    </div>
+                </app-drawer>
+                <div class="application-content" size="100" part="application-content" id="content">
+                    <slot>
+                        <slot name="application-content"></slot>
+                    </slot>
                 </div>
-            </app-drawer>
-            <div class="application-content" size="100" part="application-content" id="content">
-                <slot name="application-content"></slot>
-            </div>
-        </app-drawer-layout>
+            </app-drawer-layout>
+        </app-header-layout>
     </template>
     <script>
-        class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
+        class AppLayoutLeftResponsiveHybridNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
-                return 'app-layout-left-responsive-hybrid-overlay-no-app-bar'
+                return 'app-layout-left-responsive-hybrid-no-app-bar'
             }
 
             onclick() {
@@ -194,6 +233,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         }
 
-        customElements.define(AppLayoutLeftResponsiveHybridOverlayNoAppBar.is, AppLayoutLeftResponsiveHybridOverlayNoAppBar);
+        customElements.define(AppLayoutLeftResponsiveHybridNoAppBar.is, AppLayoutLeftResponsiveHybridNoAppBar);
     </script>
 </dom-module>

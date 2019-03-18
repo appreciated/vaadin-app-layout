@@ -7,24 +7,25 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../../../bower_components/polymer/lib/elements/custom-style.html">
-<link rel="import" href="../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
-<link rel="import" href="../../../../../bower_components/vaadin-icons/vaadin-icons.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../../bower_components/polymer/lib/elements/custom-style.html">
+<link rel="import" href="../../../../../../bower_components/vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="../../../../../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../../../../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
-<dom-module id="app-layout-left-overlay">
+<dom-module id="app-layout-left">
     <template>
         <style>
-
             :root {
                 --paper-badge-background: var(--app-layout-badge-background);
                 --paper-badge-text-color: var(--app-layout-badge-font-color);
                 --primary-color: var(--app-layout-primary-color);
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
             }
 
             #content {
@@ -38,18 +39,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             app-toolbar {
                 height: var(--app-layout-bar-height);
-                background: var(--app-layout-bar-background-color);
+                background: var(--app-layout-bar-background-base-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                right: 0px;
             }
 
             app-toolbar:after {
-                background: var(--app-layout-bar-background-base-color);
+                background: var(--app-layout-bar-background-color);
                 position: absolute;
                 content: "";
                 height: 100%;
@@ -65,7 +62,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     background-color: var(--app-layout-drawer-background-base-color);
                     max-width: 100%;
                 };
-                --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
             }
 
             #drawer .drawer-content {
@@ -77,6 +73,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app-menu {
                 background: transparent;
             }
+
+            #drawer {
+                --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
+            }
+
+            /* non-overlay */
+
+            :root {
+                --app-drawer-scrim-background: rgba(0, 0, 0, 0);
+            }
+
+            app-toolbar {
+                z-index: 1;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+            }
+
+            #drawer {
+                margin-top: var(--app-layout-bar-height);
+            }
+
+            /* non-overlay */
 
             #toggle {
                 flex-shrink: 0;
@@ -102,9 +122,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-drawer>
     </template>
     <script>
-        class AppLayoutLeftOverlay extends Vaadin.ThemableMixin(Polymer.Element){
-            static get is() {
-                return 'app-layout-left-overlay'
+        class AppLayoutLeft extends Vaadin.ThemableMixin(Polymer.Element){
+            static get is(){
+                return 'app-layout-left'
             }
 
             onclick() {
@@ -124,7 +144,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 drawer.close();
             }
         }
-
-        customElements.define(AppLayoutLeftOverlay.is, AppLayoutLeftOverlay);
+        customElements.define(AppLayoutLeft.is, AppLayoutLeft);
     </script>
 </dom-module>
