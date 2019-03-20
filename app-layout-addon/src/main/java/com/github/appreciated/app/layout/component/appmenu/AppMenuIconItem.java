@@ -1,8 +1,7 @@
-package com.github.appreciated.app.layout.webcomponents.appmenu;
+package com.github.appreciated.app.layout.component.appmenu;
 
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouterLink;
 
 public class AppMenuIconItem extends RouterLink implements HasSize{

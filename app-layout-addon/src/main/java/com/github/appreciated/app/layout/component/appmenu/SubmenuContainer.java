@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.webcomponents.appmenu;
+package com.github.appreciated.app.layout.component.appmenu;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.vaadin.flow.component.Component;

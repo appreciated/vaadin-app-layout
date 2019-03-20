@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.papertabs;
 
-import com.github.appreciated.app.layout.webcomponents.appmenu.AppMenuIconItem;
+import com.github.appreciated.app.layout.component.appmenu.AppMenuIconItem;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.Icon;

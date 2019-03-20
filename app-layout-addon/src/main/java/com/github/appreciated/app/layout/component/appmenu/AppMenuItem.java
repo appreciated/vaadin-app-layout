@@ -1,9 +1,8 @@
-package com.github.appreciated.app.layout.webcomponents.appmenu;
+package com.github.appreciated.app.layout.component.appmenu;
 
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 public class AppMenuItem extends HorizontalLayout {
