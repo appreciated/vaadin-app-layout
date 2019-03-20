@@ -37,7 +37,7 @@ public abstract class BaseTest {
     }
 
     public void clickByCssSelector(String cssSelector, int i) {
-        $$(cssSelector).get(i).click();
+        clickElement($$(cssSelector).get(i));
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {
@@ -60,7 +60,11 @@ public abstract class BaseTest {
     }
 
     public void clickByID(WebElement element, String id) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", findByID(element, id));
+       clickElement(findByID(element, id));
+    }
+
+    public void clickElement(WebElement webElement){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", webElement);
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {
