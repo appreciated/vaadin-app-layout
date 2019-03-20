@@ -51,9 +51,18 @@ public interface LeftLayouts {
       }
   }
 
+  abstract class AbstractLeftResponsive extends AbstractLeftAppLayoutBase {
+
+      /** Sets the responsive width. */
+      public void setResponsiveWidth(String width) {
+          getElement().setProperty("responsiveWidth", width);
+      }
+
+  }
+
   @Tag("app-layout-left-responsive")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive.html")
-  class LeftResponsive extends AbstractLeftAppLayoutBase {
+  class LeftResponsive extends AbstractLeftResponsive {
 
       @Override
       public String getStyleName() {
