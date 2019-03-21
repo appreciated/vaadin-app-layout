@@ -1,13 +1,11 @@
-@media only screen and (min-width: 640px) {
+app-layout-left-responsive-small-no-app-bar:not([narrow]) #menu-header-title,
+app-layout-left-responsive-small-no-app-bar:not([narrow]) #menu-header-subtitle
+{
+    opacity: 0;
+    max-height: 0px;
+    margin-top: 0px;
+}
 
-    app-layout-left-responsive-small-no-app-bar #menu-header-title, app-layout-left-responsive-small-no-app-bar #menu-header-subtitle {
-        opacity: 0;
-        max-height: 0px;
-        margin-top: 0px;
-    }
-
-    app-layout-left-responsive-small-no-app-bar #menu-header-wrapper {
-        padding: 4px;
-    }
-
+app-layout-left-responsive-small-no-app-bar:not([narrow]) #menu-header-wrapper {
+    padding: 4px;
 }

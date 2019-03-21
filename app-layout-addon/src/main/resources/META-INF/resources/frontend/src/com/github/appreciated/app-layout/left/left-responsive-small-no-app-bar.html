@@ -26,6 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../../bower_components/iron-media-query/iron-media-query.html">
 
 <dom-module id="app-layout-left-responsive-small-no-app-bar">
     <template>
@@ -78,13 +79,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-background);
             }
 
-            @media only screen and (max-width: 640px) {
-                .application-content {
-                    padding-top: var(--app-layout-bar-height);
-                    box-sizing: border-box;
-                }
-            }
-
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
@@ -112,47 +106,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: transparent;
             }
 
-            @media only screen and (min-width: 640px) {
-                /*responsive*/
-                #toggle[icon="menu"] {
-                    display: none;
-                }
-
-                /*responsive*/
-                /* small */
-                #drawerLayout {
-                    --app-drawer-width: var(--app-layout-drawer-small-width);
-                    --app-layout-badge-width: var(--app-layout-badge-small-width);
-                    --app-layout-badge-height: var(--app-layout-badge-small-height);
-                    --app-layout-badge-top: var(--app-layout-badge-small-top);
-                    --app-layout-badge-right: var(--app-layout-badge-small-right);
-                    --app-layout-badge-color: transparent;
-                    --app-layout-menu-button-margin: 0;
-                    --app-layout-menu-button-padding: 0 21px;
-                    --app-layout-menu-padding: 0;
-                }
-
-                #drawerLayout .app-menu-item {
-                    overflow: hidden;
-                }
-
-                #drawerLayout * {
-                    --expand-icon-fill-color: transparent !important;
-                    --app-layout-badge-font-color: transparent;
-                }
-
-                /* small */
-                /* no-app-bar */
-                app-header {
-                    display: none;
-                }
-
-                #drawer {
-                    margin-top: 0px;
-                }
-
-                /* no-app-bar */
+            :host([narrow]) .application-content {
+                padding-top: var(--app-layout-bar-height);
+                box-sizing: border-box;
             }
+
+            :host(:not([narrow])) #toggle[icon="menu"] {
+                display: none;
+            }
+
+            :host(:not([narrow])) #drawerLayout {
+                --app-drawer-width: var(--app-layout-drawer-small-width);
+                --app-layout-badge-width: var(--app-layout-badge-small-width);
+                --app-layout-badge-height: var(--app-layout-badge-small-height);
+                --app-layout-badge-top: var(--app-layout-badge-small-top);
+                --app-layout-badge-right: var(--app-layout-badge-small-right);
+                --app-layout-badge-color: transparent;
+                --app-layout-menu-button-margin: 0;
+                --app-layout-menu-button-padding: 0 21px;
+                --app-layout-menu-padding: 0;
+            }
+
+            :host(:not([narrow])) #drawerLayout .app-menu-item {
+                overflow: hidden;
+            }
+
+            :host(:not([narrow])) #drawerLayout * {
+                --expand-icon-fill-color: transparent !important;
+                --app-layout-badge-font-color: transparent;
+            }
+
+            :host(:not([narrow])) app-header {
+                display: none;
+            }
+
+            :host(:not([narrow])) #drawer {
+                margin-top: 0px;
+            }
+
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
             <app-header part="app-bar" fixed slot="header">
@@ -174,11 +165,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
             </app-drawer-layout>
         </app-header-layout>
+        <iron-media-query query="[[_computeMediaQuery(responsiveWidth)]]" on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
     </template>
     <script>
         class AppLayoutLeftResponsiveSmallNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-small-no-app-bar'
+            }
+
+            static get properties() {
+                return {
+                     responsiveWidth: {
+                        type: String,
+                        value: "640px",
+                        observer: "_responsiveWidthChanged"
+                    },
+                };
             }
 
             onclick() {
@@ -199,6 +201,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (!drawer.persistent) {
                     drawer.close();
                 }
+            }
+
+            _responsiveWidthChanged() {
+                Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidth;
+            }
+
+            _onQueryMatchesChanged(event) {
+                if (event.detail.value)
+                    this.setAttribute("narrow", "");
+                else
+                    this.removeAttribute("narrow");
+            }
+
+            _computeMediaQuery(responsiveWidth) {
+                return "(max-width: " + responsiveWidth + ")";
             }
         }
 

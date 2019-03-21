@@ -126,7 +126,7 @@ public interface LeftLayouts {
   @Tag("app-layout-left-responsive-small")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-small.html")
   @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-small.css")
-  class LeftResponsiveSmall extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveSmall extends AbstractLeftResponsive {
 
       @Override
       public String getStyleName() {
@@ -137,7 +137,7 @@ public interface LeftLayouts {
   @Tag("app-layout-left-responsive-small-no-app-bar")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.html")
   @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
-  class LeftResponsiveSmallNoAppBar extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveSmallNoAppBar extends AbstractLeftResponsive {
 
       @Override
       public String getStyleName() {
