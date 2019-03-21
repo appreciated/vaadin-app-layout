@@ -8,12 +8,13 @@ import com.vaadin.flow.component.HasText;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.io.Serializable;
 
 /**
  * This Class is a controller for multiple {@link Notification} instances
  */
 
-public abstract class NotificationHolder<T extends Notification> {
+public abstract class NotificationHolder<T extends Notification> implements Serializable{
 
     private PairComponentFactory<NotificationHolder, T> componentProvider;
 
