@@ -63,13 +63,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-background);
             }
 
-            @media only screen and (max-width: 640px) {
-                .application-content {
-                    box-sizing: border-box;
-                    padding-top: var(--app-layout-bar-height);
-                }
-            }
-
             #drawer {
                 --app-drawer-content-container: {
                     box-shadow: var(--app-layout-drawer-shadow);
@@ -98,21 +91,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-left: -8px;
             }
 
-            @media only screen and (min-width: 640px) {
-                #toggle[icon="menu"] {
-                    display: none;
-                }
+            :host(:not([narrow])) #toggle[icon="menu"] {
+                display: none;
+            }
 
-                /* no-app-bar */
-                app-header {
-                    display: none;
-                }
+            :host(:not([narrow])) app-header {
+                display: none;
+            }
 
-                #drawer {
-                    margin-top: 0px;
-                }
+            :host(:not([narrow])) #drawer {
+                margin-top: 0px;
+            }
 
-                /* no-app-bar */
+            :host([narrow]) .application-content {
+                box-sizing: border-box;
+                padding-top: var(--app-layout-bar-height);
             }
         </style>
         <app-drawer-layout id="drawerLayout" fullbleed>
@@ -137,11 +130,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </slot>
             </div>
         </app-drawer-layout>
+        <iron-media-query query="[[_computeMediaQuery(responsiveWidth)]]" on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
     </template>
     <script>
         class AppLayoutLeftResponsiveOverlayNoAppBar extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-overlay-no-app-bar'
+            }
+
+            static get properties() {
+                return {
+                     responsiveWidth: {
+                        type: String,
+                        value: "640px",
+                        observer: "_responsiveWidthChanged"
+                    },
+                };
             }
 
             onclick() {
@@ -162,6 +166,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (!drawer.persistent) {
                     drawer.close();
                 }
+            }
+
+            _responsiveWidthChanged() {
+                console.log(this.responsiveWidth);
+                Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidth;
+            }
+
+            _onQueryMatchesChanged(event) {
+                if (event.detail.value)
+                    this.setAttribute("narrow", "");
+                else
+                    this.removeAttribute("narrow");
+            }
+
+            _computeMediaQuery(responsiveWidth) {
+                return "(max-width: " + responsiveWidth + ")";
             }
         }
 

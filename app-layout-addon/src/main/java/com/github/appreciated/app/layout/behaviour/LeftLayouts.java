@@ -105,7 +105,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-overlay")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-overlay.html")
-  class LeftResponsiveOverlay extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveOverlay extends AbstractLeftResponsive {
 
       @Override
       public String getStyleName() {
@@ -115,7 +115,7 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-overlay-no-app-bar")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.html")
-  class LeftResponsiveOverlayNoAppBar extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveOverlayNoAppBar extends AbstractLeftResponsive {
 
       @Override
       public String getStyleName() {
