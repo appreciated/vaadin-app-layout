@@ -10,6 +10,7 @@ public class AppMenuIconItem extends RouterLink implements HasSize{
     private ComponentEventListener<ClickEvent<AppMenuIconItem>> listener;
 
     public AppMenuIconItem() {
+        getElement().getClassList().set("app-menu-icon-item",true);
         setWidth("100%");
         setHeight("var(--app-layout-menu-button-height)");
         getElement().getStyle().set("line-height", "var(--app-layout-menu-button-height)");

@@ -18,7 +18,7 @@ public class LeftClickableComponent extends NavigationBadgeIconButton {
         this.name = name;
         this.icon = icon;
         this.listener = listener;
-
+        setHighlightCondition((routerLink, event) -> false);
         setClickListener(appMenuIconItemClickEvent -> getListener().onComponentEvent(null));
     }
 

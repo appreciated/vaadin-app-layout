@@ -48,10 +48,10 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
     public HasText getBadge() {
         return badge;
     }
-
+/*
     @Override
     public void setClickListener(ComponentEventListener listener) {
         super.setClickListener(listener);
-    }
+    }*/
 
 }
