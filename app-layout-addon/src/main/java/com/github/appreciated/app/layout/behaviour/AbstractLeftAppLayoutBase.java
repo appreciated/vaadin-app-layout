@@ -2,11 +2,12 @@ package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.Styles;
+import com.github.appreciated.app.layout.router.HasBackNavigation;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -95,8 +96,18 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void setAppLayoutContent(HasElement content) {
+        this.content.getElement().removeAllChildren();
         if (content != null) {
             this.content.getElement().appendChild(content.getElement());
+        }
+        setUpBackNavigation(content);
+    }
+
+    private void setUpBackNavigation(HasElement content) {
+        if (content instanceof HasBackNavigation) {
+            paperIconButton.setIcon("back");
+        } else {
+            paperIconButton.setIcon("menu");
         }
     }
 

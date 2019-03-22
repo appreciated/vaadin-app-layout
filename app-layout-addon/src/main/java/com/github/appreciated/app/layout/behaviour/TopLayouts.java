@@ -19,7 +19,7 @@ import java.util.Arrays;
 public interface TopLayouts {
 
     @Tag("app-layout-top")
-    @HtmlImport("frontend://com/github/appreciated/app-layout/top/top.html")
+    @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top.html")
     class Top extends AppLayout {
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
         private final Div appBarElements;
@@ -77,6 +77,7 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
+            this.content.getElement().removeAllChildren();
             if (content != null) {
                 this.content.getElement().appendChild(content.getElement());
             }
@@ -155,7 +156,7 @@ public interface TopLayouts {
     }
 
     @Tag("app-layout-top-large")
-    @HtmlImport("frontend://com/github/appreciated/app-layout/top/top-large.html")
+    @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top-large.html")
     class TopLarge extends AppLayout {
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
         private final VerticalLayout contentPanel = new VerticalLayout();
@@ -227,6 +228,7 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
+            this.content.getElement().removeAllChildren();
             if (content != null) {
                 this.content.getElement().appendChild(content.getElement());
             }

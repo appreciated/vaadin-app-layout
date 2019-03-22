@@ -6,9 +6,6 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.theme.AbstractTheme;
-import com.vaadin.flow.theme.lumo.Lumo;
-
 
 /**
  * This is the supposed entry class to build an instance of the app-layout. The {@link AppLayoutBuilder} is a builder pattern.
@@ -18,7 +15,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private AppLayout instance;
     private Component titleComponent;
     private Component imageComponent;
-    private Class<? extends AbstractTheme> theme = Lumo.class;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -91,7 +87,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
             instance.setIconComponent(imageComponent);
         }
         instance.init();
-        instance.setTheme(theme);
         return instance;
 
     }
@@ -145,11 +140,6 @@ public class AppLayoutBuilder implements ComponentBuilder {
      */
     public AppLayoutBuilder withIconComponent(Component image) {
         this.imageComponent = image;
-        return this;
-    }
-
-    public AppLayoutBuilder withTheme(Class<? extends AbstractTheme> theme) {
-        this.theme = theme;
         return this;
     }
 }

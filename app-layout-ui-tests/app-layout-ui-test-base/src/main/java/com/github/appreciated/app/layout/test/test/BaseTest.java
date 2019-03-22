@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.test;
 
 import com.codeborne.selenide.WebDriverRunner;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -8,12 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,12 +19,7 @@ public abstract class BaseTest {
 
     @BeforeClass
     public static void init() {
-        try (Stream<Path> stream = Files.find(Paths.get("../selenium/bin"), 15,
-                (path, attr) -> (path.getFileName().toString().contains("chromedriver")))) {
-            System.setProperty("webdriver.chrome.driver", stream.findFirst().get().toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        WebDriverManager.chromedriver().version("73.0.3683.68").setup();
         driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(driver);
     }
@@ -47,7 +37,7 @@ public abstract class BaseTest {
     }
 
     public void clickByCssSelector(String cssSelector, int i) {
-        $$(cssSelector).get(i).click();
+        clickElement($$(cssSelector).get(i));
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {
@@ -70,7 +60,11 @@ public abstract class BaseTest {
     }
 
     public void clickByID(WebElement element, String id) {
-        findByID(element, id).click();
+       clickElement(findByID(element, id));
+    }
+
+    public void clickElement(WebElement webElement){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", webElement);
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {

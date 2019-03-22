@@ -14,7 +14,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-@HtmlImport("frontend://com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
+@HtmlImport("frontend://src/com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
 public class AppBarNotificationButton extends PaperMenuButton {
 
     private NotificationsView notificationsView;

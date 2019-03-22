@@ -84,7 +84,6 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .withTitle("App Layout")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
-                .withTheme(Material.class)
                 .build());
     }
 
