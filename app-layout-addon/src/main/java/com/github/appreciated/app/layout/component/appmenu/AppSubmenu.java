@@ -27,7 +27,7 @@ public class AppSubmenu extends Composite<VerticalLayout> implements NavigationE
                 .set("margin", "var(--app-layout-submenuElements-button-margin)")
                 .set("border-radius", "var(--app-layout-submenuElements-button-border-radius)");
 
-        item = new AppMenuIconItem(sectionName, icon.getElement().getAttribute("icon"));
+        item = new AppMenuIconItem(sectionName, icon);
         ironIcon = new IronIcon("icons", "expand-more");
 
         ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");

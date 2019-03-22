@@ -3,12 +3,28 @@ package com.github.appreciated.app.layout.component.appmenu;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 public class AppMenuItem extends HorizontalLayout {
 
     private AppMenuIconItem item;
     private AppMenu parent;
+
+    public AppMenuItem(String sectionName) {
+        this(sectionName, null, false);
+    }
+
+    private AppMenuItem(String sectionName, Icon icon, boolean hasIcon) {
+        this();
+        if (hasIcon) {
+            item = new AppMenuIconItem();
+            item.setIcon(icon);
+            item.setCaption(sectionName);
+            add(item);
+        }
+        setText(sectionName);
+    }
 
     public AppMenuItem() {
         getElement().getClassList().add("app-menu-item");
@@ -22,30 +38,14 @@ public class AppMenuItem extends HorizontalLayout {
         getElement().appendChild(new PaperRipple().getElement());
     }
 
-    private AppMenuItem(String sectionName, String icon, boolean hasIcon) {
-        this();
-        if (hasIcon) {
-            item = new AppMenuIconItem();
-            item.setIcon(icon);
-            item.setText(sectionName);
-            add(item);
-        }
-        setText(sectionName);
-    }
-
-    public AppMenuItem(String sectionName) {
-        this(sectionName, null, false);
-    }
-
-    public AppMenuItem(String sectionName, String icon) {
-        this(sectionName, icon, true);
-        setIcon(icon);
-    }
-
-    public AppMenuItem(String sectionName, String icon,
-                        ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+    public AppMenuItem(String sectionName, Icon icon,
+                       ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
         this(sectionName, icon);
         item.setClickListener(listener);
+    }
+
+    public AppMenuItem(String sectionName, Icon icon) {
+        this(sectionName, icon, true);
     }
 
     public String getText() {
@@ -59,7 +59,7 @@ public class AppMenuItem extends HorizontalLayout {
         else getElement().setText(sectionName);
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(Icon icon) {
         if (item == null) {
             item = new AppMenuIconItem();
             item.setText(getElement().getText());

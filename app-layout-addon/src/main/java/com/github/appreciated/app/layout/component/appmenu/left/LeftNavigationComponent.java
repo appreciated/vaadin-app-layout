@@ -66,9 +66,4 @@ public class LeftNavigationComponent extends NavigationBadgeIconButton {
         }
         return null;
     }
-
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-        this.setIcon(icon.getElement().getAttribute("icon"));
-    }
 }

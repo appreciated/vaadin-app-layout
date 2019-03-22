@@ -19,21 +19,6 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
         add(badge);
     }
 
-    @Override
-    public void setIcon(String icon) {
-        super.setIcon(icon);
-        //getItem().getElement().getStyle().set("white-space", "nowrap");
-    }
-
-    public NavigationBadgeIconButton(String name, Icon icon) {
-        super(name, icon.getElement().getAttribute("icon"));
-        setId("menu-btn-" + idCounter++);
-        badge = new MenuBadgeComponent();
-        badge.setVisible(false);
-        add(badge);
-        //getItem().getElement().getStyle().set("white-space", "nowrap");
-    }
-
     public NavigationBadgeIconButton(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
         this(name, icon);
         if (listener != null) {
@@ -41,17 +26,18 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
         }
     }
 
-    public void setBadgeCaption(String status) {
-        badge.setText(status);
+    public NavigationBadgeIconButton(String name, Icon icon) {
+        super(name, icon);
+        setId("menu-btn-" + idCounter++);
+        badge = new MenuBadgeComponent();
+        badge.setVisible(false);
+        add(badge);
     }
+
 
     public HasText getBadge() {
         return badge;
     }
-/*
-    @Override
-    public void setClickListener(ComponentEventListener listener) {
-        super.setClickListener(listener);
-    }*/
+
 
 }
