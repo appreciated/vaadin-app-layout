@@ -23,7 +23,7 @@
             --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
             --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
             --app-layout-menu-button-padding: 0 14px;
-            --app-layout-menu-button-margin: 0;
+            --app-layout-menu-button-margin: 0px;
             --app-layout-menu-padding: 5px;
             --app-layout-menu-button-border-radius: var(--lumo-border-radius);
             --app-layout-menu-submenu-max-height: 999px;
@@ -31,13 +31,13 @@
             --app-layout-app-color: var(--lumo-secondary-text-color);
             --app-layout-badge-width: calc(var(--lumo-size-s) * 0.8);
             --app-layout-badge-height: calc(var(--lumo-size-s) * 0.8);
-            --app-layout-badge-top: 0px;
+            --app-layout-badge-top: 50%;
             --app-layout-badge-right: 0px;
             --app-layout-badge-color: var(--app-layout-bar-font-color);
             --app-layout-badge-small-width: 5px;
             --app-layout-badge-small-height: 5px;
-            --app-layout-badge-small-top: -12px;
-            --app-layout-badge-small-right: -4px;
+            --app-layout-badge-small-top: 25%;
+            --app-layout-badge-small-right: 1px;
             --app-layout-badge-background: var(--lumo-primary-color);
             --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
             --app-layout-notification-highlight-color: var(--app-layout-primary-color);
@@ -79,7 +79,7 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--app-layout-app-color, var(--primary-text-color));
-            transition: color 0.4s ease-out;
+            transition: color 0.4s ease-out, background 0.4s ease-out;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -90,9 +90,20 @@
             min-height: var(--app-layout-menu-button-height);
             white-space: nowrap;
         }
+
+        .app-menu-item:hover, .app-menu-item[highlight] {
+            background: var(--lumo-primary-color-10pct);
+            color: var(--lumo-primary-color);
+        }
+
+        .app-menu-item .badge {
+
+        }
+
         .app-menu-item iron-icon {
             flex-shrink: 0;
         }
+
         .app-menu-item label {
             margin-left: 18px;
         }

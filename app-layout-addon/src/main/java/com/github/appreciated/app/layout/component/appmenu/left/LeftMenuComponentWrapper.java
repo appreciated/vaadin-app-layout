@@ -24,7 +24,7 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
 
     @Override
     public void add(Component... components) {
-        //Arrays.stream(components).forEach(component -> component.getElement().getStyle().set("flex-shrink", "0"));
+        Arrays.stream(components).forEach(component -> component.getElement().getStyle().set("flex-shrink", "0"));
         menu.add(components);
     }
 

@@ -22,9 +22,12 @@ public class MenuBadgeComponent extends Label implements HasStyle {
                 .set("border-radius", "25px")
                 .set("line-height", "var(--app-layout-badge-height)")
                 .set("text-align", "center")
-                .set("position", "relative")
                 .set("top", "var(--app-layout-badge-top)")
-                .set("right", "var(--app-layout-badge-right)");
+                .set("right", "var(--app-layout-badge-right)")
+                .set("position", "absolute")
+                .set("top", "var(--app-layout-badge-top)")
+                .set("transform", "translate(0%, -50%)")
+                .set("margin-right", "10px");
     }
 
 }

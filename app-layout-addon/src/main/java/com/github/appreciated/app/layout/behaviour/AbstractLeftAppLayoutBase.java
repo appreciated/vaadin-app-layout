@@ -56,6 +56,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         menuElements = new Div();
         menuElements.setHeight("100%");
         menuElements.getElement().setAttribute("slot", "drawer-content");
+        menuElements.getStyle().set("padding", "var(--app-layout-menu-padding)");
         content = new Div();
         content.setHeight("100%");
         content.setWidth("100%");
