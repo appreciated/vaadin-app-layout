@@ -14,20 +14,19 @@ public class AppSubmenu extends Composite<VerticalLayout> implements NavigationE
     private final AppMenuIconItem item;
     private final IronIcon ironIcon;
 
-    public AppSubmenu(String sectionName, Icon icon) {
+    public AppSubmenu(String caption, Icon icon) {
         submenuElements = new SubmenuContainer();
         submenuElements.getElement().setAttribute("slot", "submenu-content");
         submenuElements.getStyle().set("border-radius", "var(--app-layout-submenuElements-button-border-radius)");
 
         toggleWrapper = new Div();
-        //toggleWrapper.getStyle().set("--expand-icon-fill-color", "var(--iron-icon-fill-color, none)");
         toggleWrapper.getClassNames().add("app-submenuElements-item");
         toggleWrapper.getElement().setAttribute("slot", "submenu-trigger");
         toggleWrapper.getStyle().set("padding", "var(--app-layout-submenuElements-button-padding)")
                 .set("margin", "var(--app-layout-submenuElements-button-margin)")
                 .set("border-radius", "var(--app-layout-submenuElements-button-border-radius)");
 
-        item = new AppMenuIconItem(sectionName, icon);
+        item = new AppMenuIconItem(caption, icon);
         ironIcon = new IronIcon("icons", "expand-more");
 
         ironIcon.getElement().getStyle().set("fill", "var(--expand-icon-fill-color)");

@@ -19,8 +19,8 @@ public class NavigationBadgeIconButton extends AppMenuIconItem {
         add(badge);
     }
 
-    public NavigationBadgeIconButton(String name, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
-        this(name, icon);
+    public NavigationBadgeIconButton(String caption, Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
+        this(caption, icon);
         if (listener != null) {
             setClickListener(appMenuIconItemClickEvent -> listener.onComponentEvent(null));
         }

@@ -66,7 +66,16 @@
             --app-layout-notification-background-color: var(--lumo-contrast-10pct);
         }
 
-        .app-menu-icon-item {
+        .app-menu-item {
+            box-sizing: border-box;
+            height: var(--app-layout-menu-button-height);
+            width: 100%;
+            position: relative;
+            padding: var(--app-layout-menu-button-padding);
+            margin: var(--app-layout-menu-button-margin);
+            border-radius: var(--app-layout-menu-button-border-radius);
+            --lumo-primary-text-color: var(--app-layout-app-color);
+            line-height: var(--app-layout-menu-button-height);
             cursor: pointer;
             text-decoration: none;
             color: var(--app-layout-app-color, var(--primary-text-color));
@@ -74,15 +83,20 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
             font-size: 14px;
             font-weight: 500;
-            line-height: 24px;
             min-height: var(--app-layout-menu-button-height);
-            padding: 0 24px;
+            white-space: nowrap;
         }
+        .app-menu-item iron-icon {
+            flex-shrink: 0;
+        }
+        .app-menu-item label {
+            margin-left: 18px;
+        }
+
 
     </style>
 </custom-styles>

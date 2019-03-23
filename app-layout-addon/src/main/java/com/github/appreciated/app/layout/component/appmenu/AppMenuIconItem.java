@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component.appmenu;
 
+import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasSize;
@@ -14,25 +15,17 @@ public class AppMenuIconItem extends RouterLink implements HasSize {
     private Icon icon;
 
     public AppMenuIconItem() {
-        getElement().getClassList().set("app-menu-icon-item", true);
-        setWidth("100%");
-        setHeight("var(--app-layout-menu-button-height)");
-        getElement().getStyle().set("line-height", "var(--app-layout-menu-button-height)");
-
-
+        getElement().getClassList().add("app-menu-item");
         getElement().addEventListener("click", domEvent -> {
             if (this.listener != null) {
                 this.listener.onComponentEvent(new ClickEvent<>(this));
             }
         });
-    }
-
-    public AppMenuIconItem(String caption, Icon icon, ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
-        this(caption, icon);
-        this.listener = listener;
+        add(new PaperRipple());
     }
 
     public AppMenuIconItem(String caption, Icon icon) {
+        this();
         setCaption(caption);
         setIcon(icon);
     }
@@ -50,7 +43,7 @@ public class AppMenuIconItem extends RouterLink implements HasSize {
             remove(caption);
         }
         this.icon = icon;
-        add(this.icon);
+        getElement().insertChild(0, this.icon.getElement());
     }
 
     public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
