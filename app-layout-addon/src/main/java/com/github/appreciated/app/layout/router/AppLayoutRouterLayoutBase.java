@@ -49,20 +49,20 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         layout.setAppLayoutContent(content);
         if (content.getClass().getAnnotation(Route.class) != null) {
             boolean has = layout.hasNavigationElement(content.getClass());
-            layout.setBackNavigation(!has);
+            layout.setUpNavigation(!has);
             if (!layout.setActiveNavigationElement(content.getClass())) {
                 layout.getClosestNavigationElement(content.getClass())
                         .ifPresent(aClass -> layout.setActiveNavigationElement(aClass));
             }
         }
-        setBackNavigation(content);
+        setUpNavigation(content);
     }
 
-    private void setBackNavigation(HasElement content) {
+    private void setUpNavigation(HasElement content) {
         if (content instanceof Component) {
-            layout.setBackNavigation(UpNavigationHelper.routeHasUpNavigation(((Component) content).getClass()));
+            layout.setUpNavigation(UpNavigationHelper.routeHasUpNavigation(((Component) content).getClass()));
         } else {
-            layout.setBackNavigation(false);
+            layout.setUpNavigation(false);
         }
     }
 

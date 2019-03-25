@@ -1,7 +1,7 @@
 <link href="../../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
 <custom-styles>
     <style>
-        .app-layout {
+        html {
             --app-layout-primary-color: var(--lumo-primary-color);
             --app-layout-background: var(--lumo-base-color);
             --app-layout-font-size-header: var(--lumo-font-size-m);
@@ -60,7 +60,7 @@
             --app-menu-color: var(--app-layout-drawer-font-color);
         }
 
-        [theme~="dark"] .app-layout {
+        html[theme~="dark"] {
             --app-layout-bar-background-color: var(--lumo-contrast-10pct);
             --app-layout-bar-font-color: var(--lumo-contrast-90);
             --app-layout-drawer-background-color: var(--lumo-contrast-5pct);
