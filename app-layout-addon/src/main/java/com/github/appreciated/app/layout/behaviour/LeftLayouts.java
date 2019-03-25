@@ -70,10 +70,25 @@ public interface LeftLayouts {
       }
   }
 
+  abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
+
+      /** Sets the responsive width for narrow-mode. */
+      public void setResponsiveWidthNarrow(String width) {
+          getElement().setProperty("responsiveWidthNarrow", width);
+      }
+
+      /** Sets the responsive width for wide-mode. */
+      public void setResponsiveWidthWide(String width) {
+          getElement().setProperty("responsiveWidthWide", width);
+      }
+
+  }
+
+
   @Tag("app-layout-left-responsive-hybrid")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid.html")
   @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
-  class LeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveHybrid extends AbstractLeftResponsiveHybrid {
 
       @Override
       public String getStyleName() {
@@ -84,7 +99,7 @@ public interface LeftLayouts {
   @Tag("app-layout-left-responsive-hybrid-no-app-bar")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.html")
   @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
-  class LeftResponsiveHybridNoAppBar extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveHybridNoAppBar extends AbstractLeftResponsiveHybrid {
 
       @Override
       public String getStyleName() {
@@ -95,7 +110,7 @@ public interface LeftLayouts {
   @Tag("app-layout-left-responsive-hybrid-overlay-no-app-bar")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.html")
   @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
-  class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftAppLayoutBase {
+  class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftResponsiveHybrid {
 
       @Override
       public String getStyleName() {

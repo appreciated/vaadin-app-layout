@@ -16,6 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../../bower_components/iron-media-query/iron-media-query.html">
 
 <dom-module id="app-layout-left-responsive-hybrid">
     <template>
@@ -83,18 +84,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-left: -8px;
             }
 
-            @media only screen and (min-width: 640px) {
-                #toggle[icon="menu"] {
+            :host(:not([narrow])) #toggle[icon="menu"] {
                     display: none;
-                }
             }
 
-            @media only screen and (min-width: 640px) {
-
-
-                app-menu-icon-item {
-                    transition: color 0.2s ease;
-                }
+            :host(:not([narrow])) app-menu-icon-item {
+                transition: color 0.2s ease;
             }
 
             .application-content {
@@ -114,29 +109,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: transparent;
             }
 
-
-            @media only screen and (min-width: 641px) and (max-width: 1024px) {
-                #drawerLayout {
-                    --app-drawer-width: var(--app-layout-drawer-small-width);
-                    --app-layout-badge-width: var(--app-layout-badge-small-width);
-                    --app-layout-badge-height: var(--app-layout-badge-small-height);
-                    --app-layout-badge-top: var(--app-layout-badge-small-top);
-                    --app-layout-badge-right: var(--app-layout-badge-small-right);
-                    --app-layout-badge-color: transparent;
-                    --app-layout-menu-button-margin: 0;
-                    --app-layout-menu-button-padding: 0 21px;
-                    --app-layout-menu-padding: 0;
-                }
-
-                #drawerLayout .app-menu-item {
-                    overflow: hidden;
-                }
-
-                #drawerLayout {
-                    --expand-icon-fill-color: transparent !important;
-                    --app-layout-badge-font-color: transparent;
-                }
+            :host(:not([narrow]):not([wide])) #drawerLayout {
+                --app-drawer-width: var(--app-layout-drawer-small-width);
+                --app-layout-badge-width: var(--app-layout-badge-small-width);
+                --app-layout-badge-height: var(--app-layout-badge-small-height);
+                --app-layout-badge-top: var(--app-layout-badge-small-top);
+                --app-layout-badge-right: var(--app-layout-badge-small-right);
+                --app-layout-badge-color: transparent;
+                --app-layout-menu-button-margin: 0;
+                --app-layout-menu-button-padding: 0 21px;
+                --app-layout-menu-padding: 0;
             }
+
+            :host(:not([narrow]):not([wide])) #drawerLayout .app-menu-item {
+                overflow: hidden;
+            }
+
+            :host(:not([narrow]):not([wide])) #drawerLayout * {
+                --expand-icon-fill-color: transparent !important;
+                --app-layout-badge-font-color: transparent;
+            }
+
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed part="app-bar" slot="header">
@@ -160,11 +153,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
             </app-drawer-layout>
         </app-header-layout>
+        <iron-media-query query="[[_computeNarrowMediaQuery(responsiveWidthNarrow)]]" on-query-matches-changed="_onNarrowQueryMatchesChanged"></iron-media-query>
+        <iron-media-query query="[[_computeWideMediaQuery(responsiveWidthWide)]]" on-query-matches-changed="_onWideQueryMatchesChanged"></iron-media-query>
     </template>
     <script>
         class AppLayoutLeftResponsiveHybrid extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive-hybrid'
+            }
+
+            static get properties() {
+                return {
+                     responsiveWidthNarrow: {
+                        type: String,
+                        value: "640px",
+                    },
+                    responsiveWidthWide: {
+                        type: String,
+                        value: "1024px",
+                    },
+                };
+            }
+
+            static get observers() {
+                return [
+                    "_responsiveWidthChanged(responsiveWidthNarrow, responsiveWidthWide)"
+                ];
             }
 
             onclick() {
@@ -185,6 +199,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (!drawer.persistent) {
                     drawer.close();
                 }
+            }
+
+            _responsiveWidthChanged() {
+                Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidthNarrow;
+            }
+
+            _onNarrowQueryMatchesChanged(event) {
+                if (event.detail.value)
+                    this.setAttribute("narrow", "");
+                else
+                    this.removeAttribute("narrow");
+            }
+            _onWideQueryMatchesChanged(event) {
+                if (event.detail.value)
+                    this.setAttribute("wide", "");
+                else
+                    this.removeAttribute("wide");
+            }
+
+            _computeNarrowMediaQuery(responsiveWidthNarrow) {
+                return "(max-width: " + responsiveWidthNarrow + ")";
+            }
+
+            _computeWideMediaQuery(responsiveWidthWide) {
+                return "(min-width: " + responsiveWidthWide + ")";
             }
         }
 
