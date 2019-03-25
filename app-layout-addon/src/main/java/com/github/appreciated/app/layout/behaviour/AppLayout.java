@@ -30,9 +30,10 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     }
 
     @EventHandler
-    public void onUpNavigation(){
+    public void onUpNavigation() {
         if (getContentElement() != null && getContentElement() instanceof Component) {
-        UpNavigationHelper.performUpNavigation((Class<? extends Component>) getContentElement().getClass());}
+            UpNavigationHelper.performUpNavigation((Class<? extends Component>) getContentElement().getClass());
+        }
     }
 
     public abstract HasElement getContentElement();
