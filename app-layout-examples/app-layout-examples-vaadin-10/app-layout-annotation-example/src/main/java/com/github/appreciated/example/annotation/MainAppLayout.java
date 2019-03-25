@@ -3,11 +3,11 @@ package com.github.appreciated.example.annotation;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
@@ -39,26 +39,26 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .addToSection(new MenuHeaderComponent("Menu-Header", "Version 2.0.8",
+                        .addToSection(new LeftHeaderItem("Menu-Header", "Version 2.0.8",
                                 "/frontend/images/logo.png"), HEADER)
-                        .addToSection(new LeftClickableComponent("Clickable Entry",
+                        .addToSection(new LeftClickableItem("Clickable Entry",
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
                         ), HEADER)
-                        .add(new LeftNavigationComponent(View1.class))
+                        .add(new LeftNavigationItem(View1.class))
                         .add(LeftSubMenuBuilder
                                 .get("My Submenu", VaadinIcon.PLUS.create())
                                 .add(LeftSubMenuBuilder
                                         .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationComponent(View2.class))
-                                        .add(new LeftNavigationComponent(View3.class))
-                                        .add(new LeftNavigationComponent(View4.class))
+                                        .add(new LeftNavigationItem(View2.class))
+                                        .add(new LeftNavigationItem(View3.class))
+                                        .add(new LeftNavigationItem(View4.class))
                                         .build())
-                                .add(new LeftNavigationComponent(View3.class))
-                                .add(new LeftNavigationComponent(View4.class))
+                                .add(new LeftNavigationItem(View3.class))
+                                .add(new LeftNavigationItem(View4.class))
                                 .build())
-                        .add(new LeftNavigationComponent(View5.class))
-                        .addToSection(new LeftClickableComponent("Clickable Entry",
+                        .add(new LeftNavigationItem(View5.class))
+                        .addToSection(new LeftClickableItem("Clickable Entry",
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
                         ), FOOTER)

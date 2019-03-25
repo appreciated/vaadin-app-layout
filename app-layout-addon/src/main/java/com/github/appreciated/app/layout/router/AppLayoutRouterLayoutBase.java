@@ -1,22 +1,19 @@
 package com.github.appreciated.app.layout.router;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
+import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
-
-import java.util.Comparator;
-import java.util.Optional;
 
 /**
  * Base class implementing router layout. Extending class is supposed to call {@link #init(AppLayout)} to initialize
  * the {@link AppLayout}. This can be extended directly if there is another parent layout defining a viewport.
  */
 @HtmlImport("frontend://src/com/github/appreciated/app-layout/app-layout-styles.html")
-public class AppLayoutRouterLayoutBase  extends Composite<Div> implements RouterLayout {
+public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterLayout {
 
     public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
 
@@ -63,20 +60,7 @@ public class AppLayoutRouterLayoutBase  extends Composite<Div> implements Router
 
     private void setBackNavigation(HasElement content) {
         if (content instanceof Component) {
-            String currentRoute = UI.getCurrent().getRouter().getUrl(((Component) content).getClass());
-            if (currentRoute.lastIndexOf("/") > 0) {
-                System.out.println(currentRoute);
-                String[] currentRouteParts = currentRoute.substring(0, (currentRoute.lastIndexOf("/"))).split("/");
-                Optional<RouteDataSimilarity> result = UI.getCurrent().getRouter().getRoutes()
-                        .stream()
-                        .filter(routeData -> !routeData.getUrl().equals(currentRoute))
-                        .map(routeData -> new RouteDataSimilarity(routeData, currentRouteParts))
-                        .max(Comparator.comparingInt(RouteDataSimilarity::getSimilarity));
-                result.ifPresent(parentRoute -> System.out.println(parentRoute.getSimilarity()));
-                layout.setBackNavigation(result.isPresent());
-            } else {
-                layout.setBackNavigation(false);
-            }
+            layout.setBackNavigation(UpNavigationHelper.routeHasUpNavigation(((Component) content).getClass()));
         } else {
             layout.setBackNavigation(false);
         }

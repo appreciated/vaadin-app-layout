@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.webcomponents.papertabs;
 
-import com.github.appreciated.app.layout.component.appmenu.AppMenuIconItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftIconItem;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.Icon;
@@ -25,7 +25,7 @@ public class PaperTab extends Component implements FlexComponent, HasText {
         }
     }
 
-    public void setClickListener(ComponentEventListener<ClickEvent<AppMenuIconItem>> listener) {
+    public void setClickListener(ComponentEventListener<ClickEvent<LeftIconItem>> listener) {
         getElement().addEventListener("click", domEvent -> listener.onComponentEvent(null));
     }
 

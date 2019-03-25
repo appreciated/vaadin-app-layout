@@ -1,10 +1,11 @@
 package com.github.appreciated.app.layout.entity;
 
 import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
- * Data structure that contains all the needed information of a {@link com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent} This class is being used by
+ * Data structure that contains all the needed information of a {@link LeftNavigationItem} This class is being used by
  * by the {@link DefaultNavigationElementInfoProducer}.
  */
 

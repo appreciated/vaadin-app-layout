@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.notification.component;
 
 import com.github.appreciated.app.layout.component.appbar.IconButton;
-import com.github.appreciated.app.layout.component.appmenu.RoundImage;
+import com.github.appreciated.app.layout.component.menu.RoundImage;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.notification.listener.NotificationListener;
