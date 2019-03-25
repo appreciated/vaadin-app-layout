@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component.appmenu;
 
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -9,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class AppMenuItem extends HorizontalLayout {
 
     private AppMenuIconItem item;
-    private AppMenu parent;
+    private LeftMenuComponent parent;
 
     public AppMenuItem(String sectionName) {
         this(sectionName, null, false);
@@ -31,7 +32,6 @@ public class AppMenuItem extends HorizontalLayout {
         getElement().setAttribute("href", "javascript:void(0)");
         getElement().getStyle().set("position", "relative")
                 .set("padding", "var(--app-layout-menu-button-padding)")
-                .set("margin", "var(--app-layout-menu-button-margin)")
                 .set("border-radius", "var(--app-layout-menu-button-border-radius)")
                 .set("--lumo-primary-text-color", "var(--app-layout-app-color)")
                 .set("text-decoration", "none");
@@ -81,11 +81,11 @@ public class AppMenuItem extends HorizontalLayout {
         return item;
     }
 
-    public void setParent(AppMenu parent) {
+    public void setParent(LeftMenuComponent parent) {
         this.parent = parent;
     }
 
     public void setActive() {
-        parent.setSelected(this);
+        //parent.setSelected(this);
     }
 }

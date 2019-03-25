@@ -95,9 +95,9 @@
             <version>2.1.1</version>
         </dependency>
         <dependency>
-            <groupId>org.vaadin.ironcollapsebutton</groupId>
-            <artifactId>iron-collapse-button</artifactId>
-            <version>1.2.1</version>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>iron-collapse</artifactId>
+            <version>0.9</version>
         </dependency>
 
         <!-- For Notifications -->

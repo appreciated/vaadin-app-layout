@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component.appmenu;
 
+import com.github.appreciated.app.layout.component.appmenu.left.LeftMenuComponent;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -50,7 +51,7 @@ public class AppMenuIconItem extends RouterLink implements HasSize {
         this.listener = listener;
     }
 
-    public void setParent(AppMenu appMenu) {
+    public void setParent(LeftMenuComponent appMenu) {
 
     }
 }
