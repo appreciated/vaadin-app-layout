@@ -16,6 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../../../../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../../../../bower_components/iron-media-query/iron-media-query.html">
 
 <dom-module id="app-layout-left-responsive">
     <template>
@@ -97,10 +98,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-background);
             }
 
-            @media only screen and (min-width: 640px) {
-                #toggle[icon="menu"] {
-                    display: none;
-                }
+            :host(:not([narrow])) #toggle[icon="menu"] {
+                display: none;
             }
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
@@ -123,11 +122,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </div>
             </app-drawer-layout>
         </app-header-layout>
+        <iron-media-query query="[[_computeMediaQuery(responsiveWidth)]]" on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
     </template>
     <script>
         class AppLayoutLeftResponsive extends Vaadin.ThemableMixin(Polymer.Element){
             static get is() {
                 return 'app-layout-left-responsive'
+            }
+
+            static get properties() {
+                return {
+                     responsiveWidth: {
+                        type: String,
+                        value: "640px",
+                        observer: "_responsiveWidthChanged"
+                    },
+                };
             }
 
             onclick() {
@@ -146,6 +156,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (!drawer.persistent) {
                     drawer.close();
                 }
+            }
+
+            _responsiveWidthChanged() {
+                Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidth;
+            }
+
+            _onQueryMatchesChanged(event) {
+                if (event.detail.value)
+                    this.setAttribute("narrow", "");
+                else
+                    this.removeAttribute("narrow");
+            }
+
+            _computeMediaQuery(responsiveWidth) {
+                return "(max-width: " + responsiveWidth + ")";
             }
         }
 
