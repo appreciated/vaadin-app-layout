@@ -1,9 +1,9 @@
-package com.github.appreciated.app.layout.test.toplarge;
+package com.github.appreciated.app.layout.test.top.large;
 
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.test.toplarge.view.View1;
-import com.github.appreciated.app.layout.test.toplarge.view.View2;
-import com.github.appreciated.app.layout.test.toplarge.view.View3;
+import com.github.appreciated.app.layout.test.top.large.view.View1;
+import com.github.appreciated.app.layout.test.top.large.view.View2;
+import com.github.appreciated.app.layout.test.top.large.view.View3;
 import com.github.appreciated.app.layout.test.uis.left.AbstractTopBehaviorView;
 import com.vaadin.flow.component.Component;
 

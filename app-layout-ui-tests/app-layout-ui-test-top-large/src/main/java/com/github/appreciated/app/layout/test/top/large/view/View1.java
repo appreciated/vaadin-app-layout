@@ -1,8 +1,8 @@
-package com.github.appreciated.app.layout.test.toplarge.view;
+package com.github.appreciated.app.layout.test.top.large.view;
 
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.annotations.Icon;
-import com.github.appreciated.app.layout.test.toplarge.TopLargeBehaviourView;
+import com.github.appreciated.app.layout.test.top.large.TopLargeBehaviourView;
 import com.github.appreciated.app.layout.test.view.ExampleView;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
