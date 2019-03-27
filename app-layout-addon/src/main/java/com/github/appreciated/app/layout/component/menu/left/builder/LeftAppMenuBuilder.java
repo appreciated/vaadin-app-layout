@@ -63,7 +63,7 @@ public class LeftAppMenuBuilder {
         return this;
     }
 
-    public NavigationElementContainer build() {
+    public Component build() {
         components.addAll(header);
         LeftMenuComponentWrapper menu = new LeftMenuComponentWrapper();
         components.addAll(body);

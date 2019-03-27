@@ -10,7 +10,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.IronIcon;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 /**
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
@@ -22,19 +22,19 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     private final IronIcon ironIcon;
     private final String caption;
     private final Icon icon;
+    private Optional<NavigationElementContainer> parent = Optional.empty();
 
     public LeftSubmenu(String caption, Icon icon, List<Component> submenuElements) {
         submenuContainer = new LeftSubmenuContainer();
         submenuContainer.getStyle()
                 .set("border-radius", "var(--app-layout-menu-button-border-radius)")
-                .set("background","var(--app-layout-drawer-submenu-background-color)");;
+                .set("background", "var(--app-layout-drawer-submenu-background-color)");
         getSubmenuContainer().add(submenuElements.toArray(new Component[]{}));
-
+        applyParentToItems(submenuElements.stream());
         toggleWrapper = new Div();
-        toggleWrapper.getStyle().set("position","relative");
+        toggleWrapper.getStyle().set("position", "relative");
 
         item = new LeftIconItem(caption, icon);
-        item.setHighlightCondition((routerLink, event) -> false);
         ironIcon = new IronIcon("icons", "expand-more");
 
         ironIcon.getElement().getStyle()
@@ -61,12 +61,25 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     }
 
     @Override
-    public Stream<Component> getMenuChildren() {
-        return getSubmenuContainer().getChildren();
+    public void setNavigationElementContainer(NavigationElementContainer parent) {
+        this.parent = Optional.of(parent);
     }
 
     @Override
-    public Component getComponent() {
-        return submenuContainer;
+    public void setActiveNavigationElement(boolean active) {
+        item.getElement().setAttribute("highlight", active);
+        this.parent.ifPresent(container -> container.setActiveNavigationElement(active));
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public LeftIconItem getItem() {
+        return item;
+    }
+
+    public IronIcon getIronIcon() {
+        return ironIcon;
     }
 }

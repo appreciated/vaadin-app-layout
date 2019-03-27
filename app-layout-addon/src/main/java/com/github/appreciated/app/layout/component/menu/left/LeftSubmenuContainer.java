@@ -13,9 +13,4 @@ public class LeftSubmenuContainer extends VerticalLayout implements NavigationEl
         getElement().getThemeList().set("spacing-s",true);
     }
 
-    @Override
-    public Component getComponent() {
-        return this;
-    }
-
 }

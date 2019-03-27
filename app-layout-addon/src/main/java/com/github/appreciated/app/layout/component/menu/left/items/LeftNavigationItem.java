@@ -1,11 +1,16 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
 import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.entity.NavigationElementInfo;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.HighlightAction;
+import com.vaadin.flow.router.RouterLink;
+
+import java.util.Optional;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that
@@ -13,7 +18,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the
  * AppLayout content view.
  */
-public class LeftNavigationItem extends LeftBadgeIconItem {
+public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElementComponent {
     /**
      * The caption of this menu element
      */
@@ -24,7 +29,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem {
      */
     private Icon icon;
 
-    private NavigationElementInfo info;
+    private Optional<NavigationElementContainer> parent = Optional.empty();
 
     public LeftNavigationItem(String caption, Icon icon, Component view) {
         this(caption, icon, view.getClass());
@@ -38,8 +43,15 @@ public class LeftNavigationItem extends LeftBadgeIconItem {
         this.icon = icon;
         setRoute(UI.getCurrent().getRouter(), className);
         setHighlightCondition((routerLink, event) ->
-                UI.getCurrent().getRouter().getUrl(className).equals(event.getLocation().getPath())
+               getHref().equals(event.getLocation().getPath())
         );
+        HighlightAction<RouterLink> action = getHighlightAction();
+
+        setHighlightAction((routerLink, highlight) -> {
+            action.highlight(routerLink, highlight);
+            System.out.println(routerLink.getHref() + " : " + highlight);
+            parent.ifPresent(container -> container.setActiveNavigationElement(highlight));
+        });
     }
 
     public LeftNavigationItem(String caption, VaadinIcon icon, Class<? extends Component> className) {
@@ -58,11 +70,12 @@ public class LeftNavigationItem extends LeftBadgeIconItem {
     }
 
     public Icon getIcon() {
-        if (icon != null) {
-            return icon;
-        } else if (info != null) {
-            return info.getIcon();
-        }
-        return null;
+        return icon;
     }
+
+    @Override
+    public void setNavigationElementContainer(NavigationElementContainer parent) {
+        this.parent = Optional.of(parent);
+    }
+
 }

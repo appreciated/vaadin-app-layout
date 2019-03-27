@@ -34,7 +34,7 @@ public class TopAppMenuBuilder {
         return this;
     }
 
-    public NavigationElementContainer build() {
+    public Component build() {
         TopMenuComponent menu = new TopMenuComponent();
         menu.add(components.toArray(new Component[0]));
         return menu;

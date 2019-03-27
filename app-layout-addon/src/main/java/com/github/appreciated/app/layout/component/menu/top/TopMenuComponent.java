@@ -10,8 +10,4 @@ public class TopMenuComponent extends PaperTabs implements NavigationElementCont
         setHeight("100%");
     }
 
-    @Override
-    public Component getComponent() {
-        return this;
-    }
 }

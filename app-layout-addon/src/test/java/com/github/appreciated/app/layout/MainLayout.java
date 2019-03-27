@@ -102,9 +102,9 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .add(home)
                             .add(new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                             .add(LeftSubMenuBuilder
-                                    .get("My Submenu", VaadinIcon.PLUS.create())
+                                    .get("My Submenu 1", VaadinIcon.PLUS.create())
                                     .add(LeftSubMenuBuilder
-                                            .get("My Submenu", VaadinIcon.PLUS.create())
+                                            .get("My Submenu 2", VaadinIcon.PLUS.create())
                                             .add(new LeftNavigationItem("Charts",
                                                     VaadinIcon.SPLINE_CHART.create(),
                                                     View2.class
@@ -126,7 +126,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     .build())
                             .add(new LeftSectionItem())
                             .add(LeftSubMenuBuilder
-                                    .get("My Submenu", VaadinIcon.PLUS.create())
+                                    .get("My Submenu 3", VaadinIcon.PLUS.create())
                                     .add(new LeftNavigationItem("Contact2",
                                             VaadinIcon.CONNECT.create(),
                                             View7.class

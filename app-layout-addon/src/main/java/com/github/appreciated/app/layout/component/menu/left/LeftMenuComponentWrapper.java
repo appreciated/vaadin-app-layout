@@ -30,9 +30,4 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
     public LeftMenu getMenu() {
         return menu;
     }
-
-    @Override
-    public Component getComponent() {
-        return this;
-    }
 }

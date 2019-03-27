@@ -29,7 +29,6 @@ public interface TopLayouts {
         private final HorizontalLayout appBar = new HorizontalLayout();
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
         private final HorizontalLayout titleWrapper = new HorizontalLayout();
-        private NavigationElementContainer navigationElementContainer;
         private HasElement content;
         @Id("toggle")
         private PaperIconButton paperIconButton;
@@ -137,20 +136,9 @@ public interface TopLayouts {
         }
 
         @Override
-        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-            return navigationElementContainer.setActiveNavigationElement(element);
-        }
-
-        @Override
-        public Component getComponent() {
-            return this;
-        }
-
-        @Override
-        public void setAppMenu(NavigationElementContainer container) {
+        public void setAppMenu(Component container) {
             paperTabWrapper.removeAll();
-            paperTabWrapper.add(container.getComponent());
-            navigationElementContainer = container;
+            paperTabWrapper.add(container);
         }
 
         @Override
@@ -174,7 +162,6 @@ public interface TopLayouts {
         @Id("toggle")
         private PaperIconButton paperIconButton;
         private Component title;
-        private NavigationElementContainer appMenuContainer;
         private HasElement content;
 
         TopLarge() {
@@ -294,20 +281,9 @@ public interface TopLayouts {
         }
 
         @Override
-        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-            return appMenuContainer.setActiveNavigationElement(element);
-        }
-
-        @Override
-        public void setAppMenu(NavigationElementContainer container) {
+        public void setAppMenu(Component container) {
             paperTabWrapper.removeAll();
-            paperTabWrapper.add(container.getComponent());
-            appMenuContainer = container;
-        }
-
-        @Override
-        public Component getComponent() {
-            return this;
+            paperTabWrapper.add(container);
         }
 
         @Override

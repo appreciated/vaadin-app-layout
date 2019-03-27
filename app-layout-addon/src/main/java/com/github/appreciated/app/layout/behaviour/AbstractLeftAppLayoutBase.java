@@ -34,9 +34,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     @Id("drawer")
     private AppDrawer drawer;
     private Component title;
-    private NavigationElementContainer appMenuContainer;
     private boolean isMenuVisible = true;
     private HasElement content;
+    private Component container;
 
     AbstractLeftAppLayoutBase() {
         getStyle().set("width", "100%")
@@ -109,10 +109,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setAppMenu(NavigationElementContainer container) {
+    public void setAppMenu(Component container) {
+        this.container = container;
         menuElements.removeAll();
-        menuElements.add(container.getComponent());
-        appMenuContainer = container;
+        menuElements.add(container);
     }
 
     @Override
@@ -140,40 +140,15 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         return content;
     }
 
-    @Override
-    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-        if (appMenuContainer != null) {
-            return appMenuContainer.setActiveNavigationElement(element);
-        }
-        return false;
-    }
-
-    @Override
-    public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        if (appMenuContainer != null) {
-            return appMenuContainer.getClosestNavigationElement(element);
-        }
-        return Optional.empty();
-    }
-
-    @Override
-    public Component getComponent() {
-        return this;
-    }
 
     @Override
     public void init() {
         /**
          * if no menu elements were added hide the button and menu
          */
-        if (appMenuContainer == null) {
+        if (container == null) {
             setMenuVisible(false);
         }
-    }
-
-    @Override
-    public Stream<Component> getMenuChildren() {
-        return appMenuContainer.getMenuChildren();
     }
 
     /**
@@ -195,8 +170,8 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         if (isMenuVisible != this.isMenuVisible) { // only do something if the state was changed
             this.isMenuVisible = isMenuVisible;
             if (isMenuVisible) {
-                if (menuElements.getChildren().count() == 0 && appMenuContainer != null) { // if the container is empty add the component
-                    menuElements.add(appMenuContainer.getComponent());
+                if (menuElements.getChildren().count() == 0 && container != null) { // if the container is empty add the component
+                    menuElements.add(container);
                 }
                 drawer.getElement().getStyle().remove("display");
                 paperIconButton.getElement().getStyle().remove("display");

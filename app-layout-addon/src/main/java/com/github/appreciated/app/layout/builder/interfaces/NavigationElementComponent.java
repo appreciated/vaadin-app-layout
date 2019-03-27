@@ -10,6 +10,4 @@ import com.vaadin.flow.component.Component;
  */
 public interface NavigationElementComponent extends NavigationElement {
 
-    Class<? extends Component> getNavigationElement();
-
 }

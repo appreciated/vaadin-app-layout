@@ -47,14 +47,6 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
     public void showRouterLayoutContent(HasElement content) {
         currentContent = content;
         layout.setAppLayoutContent(content);
-        if (content.getClass().getAnnotation(Route.class) != null) {
-            boolean has = layout.hasNavigationElement(content.getClass());
-            layout.setUpNavigation(!has);
-            if (!layout.setActiveNavigationElement(content.getClass())) {
-                layout.getClosestNavigationElement(content.getClass())
-                        .ifPresent(aClass -> layout.setActiveNavigationElement(aClass));
-            }
-        }
         setUpNavigation(content);
     }
 
@@ -69,7 +61,7 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        getUI().ifPresent(ui -> ui.addAfterNavigationListener(afterNavigationEvent -> {
+        getUI().ifPresent(ui -> ui.addAfterNavigationListener(event -> {
             closeDrawerIfNotPersistent();
         }));
     }
