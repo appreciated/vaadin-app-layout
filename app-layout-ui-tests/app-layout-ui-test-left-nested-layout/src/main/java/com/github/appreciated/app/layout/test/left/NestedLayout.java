@@ -37,7 +37,7 @@ public class NestedLayout extends AppLayoutRouterLayoutBase {
                 .withIcon("frontend/images/logo.png")
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new LeftHeaderItem("App-Layout", "Version 2.1.0",
+                                .addToSection(new LeftHeaderItem("App-Layout", "Version 3.0.0",
                                         "frontend/images/logo.png"), Section.HEADER)
                                 .addToSection(new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                                 }), Section.HEADER)
