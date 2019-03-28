@@ -15,6 +15,12 @@ public class LeftIconItem extends RouterLink implements HasSize {
     private Label caption;
     private Icon icon;
 
+    public LeftIconItem(String caption, Icon icon) {
+        this();
+        setCaption(caption);
+        setIcon(icon);
+    }
+
     public LeftIconItem() {
         getElement().getClassList().add("app-menu-item");
         getElement().addEventListener("click", domEvent -> {
@@ -23,12 +29,6 @@ public class LeftIconItem extends RouterLink implements HasSize {
             }
         });
         add(new PaperRipple());
-    }
-
-    public LeftIconItem(String caption, Icon icon) {
-        this();
-        setCaption(caption);
-        setIcon(icon);
     }
 
     public void setCaption(String text) {
@@ -44,14 +44,12 @@ public class LeftIconItem extends RouterLink implements HasSize {
             remove(caption);
         }
         this.icon = icon;
-        getElement().insertChild(0, this.icon.getElement());
+        if (icon != null) {
+            getElement().insertChild(0, this.icon.getElement());
+        }
     }
 
     public void setClickListener(ComponentEventListener<ClickEvent<LeftIconItem>> listener) {
         this.listener = listener;
-    }
-
-    public void setParent(LeftMenu appMenu) {
-
     }
 }

@@ -126,7 +126,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     .build())
                             .add(new LeftSectionItem())
                             .add(LeftSubMenuBuilder
-                                    .get("My Submenu 3", VaadinIcon.PLUS.create())
+                                    .get("My Submenu 3")
                                     .add(new LeftNavigationItem("Contact2",
                                             VaadinIcon.CONNECT.create(),
                                             View7.class
