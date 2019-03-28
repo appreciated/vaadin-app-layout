@@ -46,7 +46,7 @@ public abstract class BaseTest {
     }
 
     public String getTextByCssSelector(String cssSelector, int i) {
-        return $$(cssSelector).get(i).getText();
+        return $$(cssSelector).get(i).$("label",0).getText();
     }
 
     public WebElement getShadowRootElement(String element) {
