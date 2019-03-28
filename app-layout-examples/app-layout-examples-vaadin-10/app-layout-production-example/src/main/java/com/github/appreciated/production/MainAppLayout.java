@@ -36,7 +36,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
         notifications.addClickListener(notification -> System.out.println(notification.getTitle()));
         notifications.addNotification(new DefaultNotification("title","description"));
 
-        LeftNavigationItem menuEntry = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View6.class);
+        LeftNavigationItem menuEntry = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View7.class);
         badge.bind(menuEntry.getBadge());
 
         init(AppLayoutBuilder
