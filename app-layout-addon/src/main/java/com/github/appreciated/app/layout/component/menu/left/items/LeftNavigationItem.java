@@ -7,6 +7,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.HighlightAction;
 import com.vaadin.flow.router.RouterLink;
 
@@ -18,7 +20,8 @@ import java.util.Optional;
  * {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the
  * AppLayout content view.
  */
-public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElementComponent {
+public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElementComponent, BeforeEnterObserver {
+    private boolean highlight = false;
     /**
      * The caption of this menu element
      */
@@ -43,15 +46,20 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.icon = icon;
         setRoute(UI.getCurrent().getRouter(), className);
         setHighlightCondition((routerLink, event) ->
-               getHref().equals(event.getLocation().getPath())
+                UI.getCurrent().getRouter().getUrl(className).equals(event.getLocation().getPath())
         );
         HighlightAction<RouterLink> action = getHighlightAction();
 
         setHighlightAction((routerLink, highlight) -> {
             action.highlight(routerLink, highlight);
-            System.out.println(routerLink.getHref() + " : " + highlight);
-            parent.ifPresent(container -> container.setActiveNavigationElement(highlight));
+            parent.ifPresent(container -> {
+                if (highlight) {
+                    container.setActiveNavigationElement(highlight);
+                }
+            });
+            this.highlight = highlight;
         });
+
     }
 
     public LeftNavigationItem(String caption, VaadinIcon icon, Class<? extends Component> className) {
@@ -78,4 +86,10 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.parent = Optional.of(parent);
     }
 
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        if (highlight) {
+            parent.ifPresent(container -> container.setActiveNavigationElement(false));
+        }
+    }
 }

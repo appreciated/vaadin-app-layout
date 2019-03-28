@@ -35,6 +35,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
         toggleWrapper.getStyle().set("position", "relative");
 
         item = new LeftIconItem(caption, icon);
+        item.setHighlightCondition((routerLink, event) -> false);
+        item.setHighlightAction((routerLink, highlight) -> {});
         ironIcon = new IronIcon("icons", "expand-more");
 
         ironIcon.getElement().getStyle()
@@ -67,7 +69,11 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
     @Override
     public void setActiveNavigationElement(boolean active) {
-        item.getElement().setAttribute("highlight", active);
+        if (active) {
+            item.getElement().setAttribute("highlight", active);
+        } else {
+            item.getElement().removeAttribute("highlight");
+        }
         this.parent.ifPresent(container -> container.setActiveNavigationElement(active));
     }
 
