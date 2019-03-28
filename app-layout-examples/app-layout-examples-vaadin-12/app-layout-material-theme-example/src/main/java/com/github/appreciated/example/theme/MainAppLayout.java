@@ -45,10 +45,10 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                 .build();
 
-        NavigationElementContainer appMenu = LeftAppMenuBuilder
+        Component appMenu = LeftAppMenuBuilder
                 .get()
                 .addToSection(new LeftHeaderItem("Menu-Header",
-                        "Version 2.0.8",
+                        "Version 2.1.0",
                         "/frontend/images/logo.png"
                 ), HEADER)
                 .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
