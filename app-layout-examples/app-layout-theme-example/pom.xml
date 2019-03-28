@@ -20,7 +20,7 @@
     <artifactId>app-layout-theme-example</artifactId>
     <name>App Layout Addon Examples - Theming</name>
     <version>${project.parent.version}</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>

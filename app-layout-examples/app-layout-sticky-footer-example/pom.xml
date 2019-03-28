@@ -21,7 +21,7 @@
 
     <name>App Layout Addon Examples - Sticky Header/Footer</name>
     <version>${project.parent.version}</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
