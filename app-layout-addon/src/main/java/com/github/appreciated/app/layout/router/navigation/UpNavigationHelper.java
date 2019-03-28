@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.router.navigation;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.RouteData;
 
 import java.util.Comparator;
@@ -35,5 +36,9 @@ public class UpNavigationHelper {
     public static void performUpNavigation(Class<? extends Component> currentNavigation) {
         Optional<RouteData> closest = getClosestRoute(currentNavigation);
         closest.ifPresent(routeData -> UI.getCurrent().navigate(routeData.getUrl()));
+    }
+
+    public static boolean isClosestRouteInMenu(Class<? extends Component> className, AfterNavigationEvent event) {
+        return UI.getCurrent().getRouter().getUrl(className).equals(event.getLocation().getPath());
     }
 }

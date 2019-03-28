@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.component.menu.left.items;
 import com.github.appreciated.app.layout.annotations.Caption;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
@@ -45,9 +46,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.caption = caption;
         this.icon = icon;
         setRoute(UI.getCurrent().getRouter(), className);
-        setHighlightCondition((routerLink, event) ->
-                UI.getCurrent().getRouter().getUrl(className).equals(event.getLocation().getPath())
-        );
+        setHighlightCondition((routerLink, event) -> UpNavigationHelper.isClosestRouteInMenu(className,event));
         HighlightAction<RouterLink> action = getHighlightAction();
 
         setHighlightAction((routerLink, highlight) -> {
