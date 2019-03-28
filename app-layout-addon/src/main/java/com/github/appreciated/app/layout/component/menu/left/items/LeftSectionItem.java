@@ -1,34 +1,34 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H3;
-
-import java.util.function.Function;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 
 /**
  * A wrapper class for a menu element that is a {@link LeftSectionItem}.
  */
-public class LeftSectionItem extends Div {
+public class LeftSectionItem extends HorizontalLayout {
 
+    private Label sectionLabel;
     private String name;
-    private Function<String, String> captionInterceptor;
 
     public LeftSectionItem(String name) {
         this();
         this.name = name;
-        add(new H3(name));
+        sectionLabel = new Label(name);
+        sectionLabel.getStyle().set("font-size", "var(--lumo-font-size-m)");
+
+        add(sectionLabel);
+        getStyle().set("padding","var(--lumo-space-s) var(--lumo-space-s) 0 var(--lumo-space-s)");
     }
 
     public LeftSectionItem() {
-        getStyle().set("border-top", "1px grey");
+        getStyle().set("border-top", "1px solid var(--lumo-contrast-20pct)");
+        setWidth("100%");
     }
 
     public String getName() {
-        if (captionInterceptor == null) {
-            return name;
-        } else {
-            return captionInterceptor.apply(name);
-        }
+        return name;
     }
 }
