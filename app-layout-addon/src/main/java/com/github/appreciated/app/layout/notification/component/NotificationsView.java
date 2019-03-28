@@ -58,8 +58,10 @@ public class NotificationsView extends Composite<VerticalLayout> {
                           .set("font-size" , "var(--lumo-size-xxs)");
       HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
       wrapper.setWidth("100%");
+      wrapper.setPadding(true);
       wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
       Card card = new Card(wrapper);
+      card.getTemplateDiv().getStyle().set("background","var(--app-layout-notification-background-color)");
       card.setWidth("100%");
       content.add(card);
     }
