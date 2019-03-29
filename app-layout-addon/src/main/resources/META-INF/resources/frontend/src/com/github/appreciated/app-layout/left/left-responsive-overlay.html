@@ -36,6 +36,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: var(--app-layout-bar-height);
             }
 
+            app-header-layout {
+                z-index: 1;
+            }
+
+            app-drawer-layout {
+                overflow: hidden;
+            }
+
             app-toolbar {
                 height: var(--app-layout-bar-height);
                 /* Since the app-bar is visually behind the drawer its background needs to be darker */
@@ -47,6 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 top: 0px;
                 left: 0px;
                 right: 0px;
+                z-index: 2;
             }
 
             .application-content {
