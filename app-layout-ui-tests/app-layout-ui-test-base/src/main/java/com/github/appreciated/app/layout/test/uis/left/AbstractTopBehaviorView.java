@@ -14,6 +14,7 @@ import com.github.appreciated.app.layout.notification.entitiy.DefaultNotificatio
 import com.github.appreciated.app.layout.notification.entitiy.Priority;
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
@@ -23,6 +24,7 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+@StyleSheet("styles.css")
 public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
     });
