@@ -110,7 +110,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      * @param component
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withAppMenu(NavigationElementContainer component) {
+    public AppLayoutBuilder withAppMenu(Component component) {
         setAppMenu(component);
         return this;
     }
@@ -120,7 +120,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
      *
      * @param component
      */
-    public void setAppMenu(NavigationElementContainer component) {
+    public void setAppMenu(Component component) {
         instance.setAppMenu(component);
     }
 

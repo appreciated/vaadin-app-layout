@@ -1,6 +1,10 @@
 package com.github.appreciated.app.layout.behaviour;
 
+import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
@@ -24,4 +28,13 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
     public void closeDrawer() {
         getDrawer().getElement().callFunction("close");
     }
+
+    @EventHandler
+    public void onUpNavigation() {
+        if (getContentElement() != null && getContentElement() instanceof Component) {
+            UpNavigationHelper.performUpNavigation((Class<? extends Component>) getContentElement().getClass());
+        }
+    }
+
+    public abstract HasElement getContentElement();
 }

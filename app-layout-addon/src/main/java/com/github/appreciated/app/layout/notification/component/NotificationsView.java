@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.notification.component;
 
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
-import com.github.appreciated.app.layout.webcomponents.papercard.PaperCard;
+import com.github.appreciated.card.Card;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
@@ -58,10 +58,11 @@ public class NotificationsView extends Composite<VerticalLayout> {
                           .set("font-size" , "var(--lumo-size-xxs)");
       HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
       wrapper.setWidth("100%");
+      wrapper.setPadding(true);
       wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-      PaperCard card = new PaperCard(wrapper);
+      Card card = new Card(wrapper);
+      card.getTemplateDiv().getStyle().set("background","var(--app-layout-notification-background-color)");
       card.setWidth("100%");
-      card.getElement().getStyle().set("box-shadow" , "var(--app-layout-notification-shadow)");
       content.add(card);
     }
   }

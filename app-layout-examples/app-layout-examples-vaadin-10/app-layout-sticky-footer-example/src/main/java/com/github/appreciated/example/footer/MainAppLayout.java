@@ -3,10 +3,10 @@ package com.github.appreciated.example.footer;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftClickableComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -27,11 +27,11 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout {
 
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
     public MainAppLayout() {
+        notifications.addClickListener(notification -> {/* ... */});
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withTitle("App Layout")
@@ -41,14 +41,14 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .addToSection(new MenuHeaderComponent("Menu-Header",
-                                "Version 2.0.8",
+                        .addToSection(new LeftHeaderItem("Menu-Header",
+                                "Version 2.1.0",
                                 "/frontend/images/logo.png"
                         ), HEADER)
-                        .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
-                        .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View2.class))
+                        .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
+                        .add(new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View2.class))
                         .withStickyFooter()
-                        .addToSection(new LeftClickableComponent("Footer Clickable!",
+                        .addToSection(new LeftClickableItem("Footer Clickable!",
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("Clicked!")
                         ), FOOTER)

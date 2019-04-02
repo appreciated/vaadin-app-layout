@@ -23,22 +23,15 @@ public interface TopLayouts {
     class Top extends AppLayout {
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
         private final Div appBarElements;
-        private final Div content;
-        private NavigationElementContainer navigationElementContainer;
-
-        @Override
-        public String getStyleName() {
-            return "top";
-        }
-
+        private final Div contentHolder;
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
         private final VerticalLayout contentPanel = new VerticalLayout();
         private final HorizontalLayout appBar = new HorizontalLayout();
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-
+        private final HorizontalLayout titleWrapper = new HorizontalLayout();
+        private HasElement content;
         @Id("toggle")
         private PaperIconButton paperIconButton;
-        private final HorizontalLayout titleWrapper = new HorizontalLayout();
         private Component title;
 
         Top() {
@@ -54,10 +47,10 @@ public interface TopLayouts {
             appBarElements = new Div();
             appBarElements.setHeight("100%");
             appBarElements.getElement().setAttribute("slot", "app-bar-content");
-            content = new Div();
-            content.setHeight("100%");
-            content.setWidth("100%");
-            content.getElement().setAttribute("slot", "application-content");
+            contentHolder = new Div();
+            contentHolder.setHeight("100%");
+            contentHolder.setWidth("100%");
+            contentHolder.getElement().setAttribute("slot", "application-content");
 
             appBarElements.add(appBar);
             appBarElementWrapper.setSpacing(false);
@@ -67,7 +60,12 @@ public interface TopLayouts {
             titleWrapper.setHeight("100%");
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
 
-            getElement().appendChild(appBarElements.getElement(), content.getElement());
+            getElement().appendChild(appBarElements.getElement(), contentHolder.getElement());
+        }
+
+        @Override
+        public String getStyleName() {
+            return "top";
         }
 
         @Override
@@ -77,9 +75,10 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
-            this.content.getElement().removeAllChildren();
+            this.contentHolder.getElement().removeAllChildren();
             if (content != null) {
-                this.content.getElement().appendChild(content.getElement());
+                this.contentHolder.getElement().appendChild(content.getElement());
+                this.content = content;
             }
         }
 
@@ -89,6 +88,12 @@ public interface TopLayouts {
 
         public HorizontalLayout getAppBar() {
             return appBar;
+        }
+
+        @Override
+        public void setAppBar(Component component) {
+            appBarElementContainer.removeAll();
+            appBarElementContainer.add(component);
         }
 
         public HorizontalLayout getAppBarElementWrapper() {
@@ -120,38 +125,25 @@ public interface TopLayouts {
             return titleWrapper;
         }
 
-
         public void setIconComponent(Component appBarIconComponent) {
             titleWrapper.getElement().insertChild(0, appBarIconComponent.getElement());
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         }
 
         @Override
-        public void setBackNavigation(boolean visible) {
+        public void setUpNavigation(boolean visible) {
             paperIconButton.setIcon(visible ? "arrow-back" : "menu");
         }
 
         @Override
-        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-            return navigationElementContainer.setActiveNavigationElement(element);
-        }
-
-        @Override
-        public Component getComponent() {
-            return this;
-        }
-
-        @Override
-        public void setAppBar(Component component) {
-            appBarElementContainer.removeAll();
-            appBarElementContainer.add(component);
-        }
-
-        @Override
-        public void setAppMenu(NavigationElementContainer container) {
+        public void setAppMenu(Component container) {
             paperTabWrapper.removeAll();
-            paperTabWrapper.add(container.getComponent());
-            navigationElementContainer = container;
+            paperTabWrapper.add(container);
+        }
+
+        @Override
+        public Component getContentElement() {
+            return (Component) content;
         }
     }
 
@@ -165,13 +157,12 @@ public interface TopLayouts {
         private final HorizontalLayout appBar = new HorizontalLayout();
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
         private final Div appBarElements;
-        private final Div content;
-
+        private final Div contentElement;
+        private final HorizontalLayout titleWrapper = new HorizontalLayout();
         @Id("toggle")
         private PaperIconButton paperIconButton;
-        private final HorizontalLayout titleWrapper = new HorizontalLayout();
         private Component title;
-        private NavigationElementContainer appMenuContainer;
+        private HasElement content;
 
         TopLarge() {
             contentPanel.setSizeFull();
@@ -196,10 +187,10 @@ public interface TopLayouts {
             appBarElements = new Div();
             appBarElements.setHeight("100%");
             appBarElements.getElement().setAttribute("slot", "app-bar-content");
-            content = new Div();
-            content.setHeight("100%");
-            content.setWidth("100%");
-            content.getElement().setAttribute("slot", "application-content");
+            contentElement = new Div();
+            contentElement.setHeight("100%");
+            contentElement.setWidth("100%");
+            contentElement.getElement().setAttribute("slot", "application-content");
             appBarElements.add(appBarWrapper);
             appBarElementWrapper.setSpacing(false);
             appBarElementWrapper.add(appBarElementContainer);
@@ -213,7 +204,7 @@ public interface TopLayouts {
             appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
             paperIconButton.setIcon("arrow-back");
 
-            getElement().appendChild(appBarElements.getElement(), content.getElement());
+            getElement().appendChild(appBarElements.getElement(), contentElement.getElement());
         }
 
         @Override
@@ -228,9 +219,10 @@ public interface TopLayouts {
 
         @Override
         public void setAppLayoutContent(HasElement content) {
-            this.content.getElement().removeAllChildren();
+            this.contentElement.getElement().removeAllChildren();
             if (content != null) {
-                this.content.getElement().appendChild(content.getElement());
+                this.contentElement.getElement().appendChild(content.getElement());
+                this.content = content;
             }
         }
 
@@ -240,6 +232,12 @@ public interface TopLayouts {
 
         public HorizontalLayout getAppBar() {
             return appBar;
+        }
+
+        @Override
+        public void setAppBar(Component component) {
+            appBarElementContainer.removeAll();
+            appBarElementContainer.add(component);
         }
 
         public HorizontalLayout getAppBarElementWrapper() {
@@ -277,32 +275,20 @@ public interface TopLayouts {
         }
 
         @Override
-        public void setBackNavigation(boolean visible) {
+        public void setUpNavigation(boolean visible) {
             appBarElements.getElement().getClassList().set("show-back-arrow", visible);
             paperIconButton.getElement().getClassList().set("show-back-arrow", visible);
         }
 
         @Override
-        public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-            return appMenuContainer.setActiveNavigationElement(element);
-        }
-
-        @Override
-        public void setAppBar(Component component) {
-            appBarElementContainer.removeAll();
-            appBarElementContainer.add(component);
-        }
-
-        @Override
-        public void setAppMenu(NavigationElementContainer container) {
+        public void setAppMenu(Component container) {
             paperTabWrapper.removeAll();
-            paperTabWrapper.add(container.getComponent());
-            appMenuContainer = container;
+            paperTabWrapper.add(container);
         }
 
         @Override
-        public Component getComponent() {
-            return this;
+        public HasElement getContentElement() {
+            return content;
         }
     }
 }

@@ -122,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-layout-badge-right: var(--app-layout-badge-small-right);
                 --app-layout-badge-color: transparent;
                 --app-layout-menu-button-margin: 0;
-                --app-layout-menu-button-padding: 0 21px;
+                --app-layout-menu-button-padding: 0 11px;
                 --app-layout-menu-padding: 0;
             }
 
@@ -168,12 +168,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return {
                      responsiveWidthNarrow: {
                         type: String,
-                        value: "640px",
+                        value: "640px"
                     },
                     responsiveWidthWide: {
                         type: String,
-                        value: "1024px",
-                    },
+                        value: "1024px"
+                    }
                 };
             }
 
@@ -188,13 +188,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                     drawer.toggle();
                 } else {
-                    if (window.history.length > 1) {
-                        window.history.back();
-                    } else {
-                        window.location.href = '../';
-                    }
+                    this.onUpNavigation();
                 }
             }
+
+            onUpNavigation(){}
 
             closeIfNotPersistent() {
                 var drawer = Polymer.dom(this.root).querySelector("#drawer");

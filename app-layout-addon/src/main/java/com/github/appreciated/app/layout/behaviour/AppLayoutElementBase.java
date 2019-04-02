@@ -27,11 +27,11 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     void setAppLayoutContent(HasElement content);
 
-    void setBackNavigation(boolean visible);
+    void setUpNavigation(boolean visible);
 
     void setAppBar(Component component);
 
-    void setAppMenu(NavigationElementContainer component);
+    void setAppMenu(Component component);
 
     default void init() {
     }

@@ -1,7 +1,7 @@
-<link href="../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
+<link href="../../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
 <custom-styles>
     <style>
-        .app-layout {
+        html {
             --app-layout-primary-color: var(--lumo-primary-color);
             --app-layout-background: var(--lumo-base-color);
             --app-layout-font-size-header: var(--lumo-font-size-m);
@@ -22,22 +22,23 @@
             --app-layout-drawer-width: calc(var(--lumo-size-xl) * 4.6);
             --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
             --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
-            --app-layout-menu-button-padding: 0 14px;
+            --app-layout-menu-button-padding: 0 var(--lumo-space-s);
             --app-layout-menu-button-margin: 0;
-            --app-layout-menu-padding: 5px;
+            --app-layout-menu-toggle-button-padding: var(--lumo-space-s);
+            --app-layout-menu-padding: var(--lumo-space-xs);
             --app-layout-menu-button-border-radius: var(--lumo-border-radius);
             --app-layout-menu-submenu-max-height: 999px;
             --app-layout-app-selected-bg-color: var(--lumo-primary-color-10pct);
             --app-layout-app-color: var(--lumo-secondary-text-color);
             --app-layout-badge-width: calc(var(--lumo-size-s) * 0.8);
             --app-layout-badge-height: calc(var(--lumo-size-s) * 0.8);
-            --app-layout-badge-top: 0px;
+            --app-layout-badge-top: 50%;
             --app-layout-badge-right: 0px;
             --app-layout-badge-color: var(--app-layout-bar-font-color);
             --app-layout-badge-small-width: 5px;
             --app-layout-badge-small-height: 5px;
-            --app-layout-badge-small-top: -12px;
-            --app-layout-badge-small-right: -4px;
+            --app-layout-badge-small-top: 25%;
+            --app-layout-badge-small-right: 1px;
             --app-layout-badge-background: var(--lumo-primary-color);
             --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
             --app-layout-notification-highlight-color: var(--app-layout-primary-color);
@@ -59,11 +60,54 @@
             --app-menu-color: var(--app-layout-drawer-font-color);
         }
 
-        [theme~="dark"] .app-layout {
+        html[theme~="dark"] {
             --app-layout-bar-background-color: var(--lumo-contrast-10pct);
             --app-layout-bar-font-color: var(--lumo-contrast-90);
             --app-layout-drawer-background-color: var(--lumo-contrast-5pct);
             --app-layout-notification-background-color: var(--lumo-contrast-10pct);
         }
+
+        .app-menu-item {
+            box-sizing: border-box;
+            height: var(--app-layout-menu-button-height);
+            width: 100%;
+            position: relative;
+            padding: var(--app-layout-menu-button-padding);
+            border-radius: var(--app-layout-menu-button-border-radius);
+            --lumo-primary-text-color: var(--app-layout-app-color);
+            line-height: var(--app-layout-menu-button-height);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--app-layout-app-color, var(--primary-text-color));
+            transition: color 0.4s ease-out, background 0.4s ease-out;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            font-size: 14px;
+            font-weight: 500;
+            min-height: var(--app-layout-menu-button-height);
+            white-space: nowrap;
+        }
+
+        .app-menu-item:hover, .app-menu-item[highlight] {
+            background: var(--lumo-primary-color-10pct);
+            color: var(--lumo-primary-color);
+        }
+
+        .app-menu-item .badge {
+
+        }
+
+        .app-menu-item iron-icon {
+            flex-shrink: 0;
+        }
+
+        .app-menu-item label {
+            margin-left: 18px;
+        }
+
+
     </style>
 </custom-styles>

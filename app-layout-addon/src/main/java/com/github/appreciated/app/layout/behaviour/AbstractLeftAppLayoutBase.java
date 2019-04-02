@@ -2,12 +2,10 @@ package com.github.appreciated.app.layout.behaviour;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.Styles;
-import com.github.appreciated.app.layout.router.HasBackNavigation;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -27,7 +25,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
     private final HorizontalLayout titleWrapper = new HorizontalLayout();
     private final Div menuElements;
-    private final Div content;
+    private final Div contentHolder;
     @Id("toggle")
     private PaperIconButton paperIconButton;
     @Id("app-bar-elements")
@@ -36,8 +34,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     @Id("drawer")
     private AppDrawer drawer;
     private Component title;
-    private NavigationElementContainer appMenuContainer;
     private boolean isMenuVisible = true;
+    private HasElement content;
+    private Component container;
 
     AbstractLeftAppLayoutBase() {
         getStyle().set("width", "100%")
@@ -58,10 +57,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         menuElements = new Div();
         menuElements.setHeight("100%");
         menuElements.getElement().setAttribute("slot", "drawer-content");
-        content = new Div();
-        content.setHeight("100%");
-        content.setWidth("100%");
-        content.getElement().setAttribute("slot", "application-content");
+        contentHolder = new Div();
+        contentHolder.setHeight("100%");
+        contentHolder.setWidth("100%");
+        contentHolder.getElement().setAttribute("slot", "application-content");
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -71,7 +70,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
 
-        getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), content.getElement());
+        getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), contentHolder.getElement());
     }
 
     public abstract String getStyleName();
@@ -96,18 +95,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void setAppLayoutContent(HasElement content) {
-        this.content.getElement().removeAllChildren();
+        this.contentHolder.getElement().removeAllChildren();
         if (content != null) {
-            this.content.getElement().appendChild(content.getElement());
-        }
-        setUpBackNavigation(content);
-    }
-
-    private void setUpBackNavigation(HasElement content) {
-        if (content instanceof HasBackNavigation) {
-            paperIconButton.setIcon("back");
-        } else {
-            paperIconButton.setIcon("menu");
+            this.contentHolder.getElement().appendChild(content.getElement());
+            this.content = content;
         }
     }
 
@@ -118,10 +109,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setAppMenu(NavigationElementContainer container) {
+    public void setAppMenu(Component container) {
+        this.container = container;
         menuElements.removeAll();
-        menuElements.add(container.getComponent());
-        appMenuContainer = container;
+        menuElements.add(container);
     }
 
     @Override
@@ -140,44 +131,24 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setBackNavigation(boolean visible) {
+    public void setUpNavigation(boolean visible) {
         paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
 
     @Override
-    public boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-        if (appMenuContainer != null) {
-            return appMenuContainer.setActiveNavigationElement(element);
-        }
-        return false;
+    public HasElement getContentElement() {
+        return content;
     }
 
-    @Override
-    public Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        if (appMenuContainer != null) {
-            return appMenuContainer.getClosestNavigationElement(element);
-        }
-        return Optional.empty();
-    }
-
-    @Override
-    public Component getComponent() {
-        return this;
-    }
 
     @Override
     public void init() {
         /**
          * if no menu elements were added hide the button and menu
          */
-        if (appMenuContainer == null) {
+        if (container == null) {
             setMenuVisible(false);
         }
-    }
-
-    @Override
-    public Stream<Component> getMenuChildren() {
-        return appMenuContainer.getMenuChildren();
     }
 
     /**
@@ -199,8 +170,8 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         if (isMenuVisible != this.isMenuVisible) { // only do something if the state was changed
             this.isMenuVisible = isMenuVisible;
             if (isMenuVisible) {
-                if (menuElements.getChildren().count() == 0 && appMenuContainer != null) { // if the container is empty add the component
-                    menuElements.add(appMenuContainer.getComponent());
+                if (menuElements.getChildren().count() == 0 && container != null) { // if the container is empty add the component
+                    menuElements.add(container);
                 }
                 drawer.getElement().getStyle().remove("display");
                 paperIconButton.getElement().getStyle().remove("display");

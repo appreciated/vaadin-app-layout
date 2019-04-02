@@ -1,11 +1,7 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.router.Route;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -16,76 +12,17 @@ import java.util.stream.Stream;
  */
 public interface NavigationElementContainer extends NavigationElement {
 
-    default boolean hasNavigationElement(Class<? extends HasElement> element) {
-        return hasNavigationElement(getMenuChildren(), element);
+    default void setActiveNavigationElement(boolean active) {
     }
 
-    default boolean hasNavigationElement(Stream<Component> elements, Class<? extends HasElement> content) {
-        return elements
-                .filter(component -> component instanceof NavigationElement)
-                .map(component -> ((NavigationElement) component).hasNavigationElement(content))
-                .reduce((first, next) -> first || next).orElse(false);
+    default void applyParentToItems(Stream<Component> elements) {
+        elements.filter(component -> component instanceof NavigationElement)
+                .map(component -> (NavigationElement) component)
+                .forEach(this::applyParentToItem);
     }
 
-    default Stream<Component> getMenuChildren() {
-        return getChildren();
+    default void applyParentToItem(NavigationElement element) {
+        element.setNavigationElementContainer(this);
     }
 
-    Stream<Component> getChildren();
-
-    default boolean setActiveNavigationElement(Class<? extends HasElement> element) {
-        return setActiveNavigationComponent(getMenuChildren(), element);
-    }
-
-    default boolean setActiveNavigationComponent(Stream<Component> elements, Class<? extends HasElement> content) {
-        return elements
-                .filter(component -> component instanceof NavigationElement)
-                .map(component -> ((NavigationElement) component).setActiveNavigationElement(content))
-                .reduce((first, next) -> first || next).orElse(false);
-    }
-
-    default Optional<Class<? extends HasElement>> getClosestNavigationElement(Class<? extends HasElement> element) {
-        return getClosestNavigationElementForElements(getMenuChildren(), element);
-    }
-
-    default Optional<Class<? extends HasElement>> getClosestNavigationElementForElements(Stream<Component> elements, Class<? extends HasElement> content) {
-        return elements
-                .filter(component -> component instanceof NavigationElement)
-                .map(component -> component instanceof NavigationElementComponent
-                        ? ((NavigationElementComponent) component).getNavigationElement()
-                        : ((NavigationElementContainer) component).getClosestNavigationElement(content).orElse(null))
-                .filter(Objects::nonNull)
-                .reduce((first, next) -> compareRoute(content, first, next));
-    }
-
-    default Class<? extends HasElement> compareRoute(Class<? extends HasElement> compare, Class<? extends HasElement> route1, Class<? extends HasElement> route2) {
-        if (route2 == null) {
-            return route1;
-        }
-        if (route1 == null) {
-            return route2;
-        }
-        int score1 = computeClosenessScore(compare, route1);
-        int score2 = computeClosenessScore(compare, route2);
-        return score1 > score2 ? route1 : route2;
-    }
-
-    default int computeClosenessScore(Class<? extends HasElement> compare, Class<? extends HasElement> compare2) {
-        String[] desiredRoute = getRoute(compare).get().value().split("/");
-        String[] elementRoute = getRoute(compare2).map(route -> route.value().split("/")).orElse(null);
-        int score = 0;
-        for (; score < elementRoute.length; score++)
-            if (desiredRoute.length >= score && !elementRoute[score].equals(desiredRoute[score])) {
-                return score;
-            }
-        return score;
-    }
-
-    default Optional<Route> getRoute(Class<? extends HasElement> element) {
-        return element.getAnnotation(Route.class) != null
-                ? Optional.of(element.getAnnotation(Route.class))
-                : Optional.empty();
-    }
-
-    Component getComponent();
 }

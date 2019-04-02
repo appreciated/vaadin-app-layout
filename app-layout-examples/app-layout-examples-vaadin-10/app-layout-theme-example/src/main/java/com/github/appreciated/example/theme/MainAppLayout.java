@@ -4,11 +4,10 @@ import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.appmenu.MenuHeaderComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.LeftNavigationComponent;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.app.layout.component.appmenu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
@@ -30,15 +29,14 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @HtmlImport("frontend://theming/custom.html") // You can use HTML Imports to manipulate f.e. the accent color
 /**
- * !Don't use the @Theme annotation! see details and alternative approach in the the "onAttach" method.
+ * !Don't use the @Theme annotation! to set the dark theme and see details for workaround in the the "onAttach" method.
+ * @Theme(value = Lumo.class, variant = Lumo.DARK)
  */
-// @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder(newStatus -> {
-    });
-    private DefaultBadgeHolder badge = new DefaultBadgeHolder();
+    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
 
     public MainAppLayout() {
+        notifications.addClickListener(notification -> {/* ... */});
 
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
@@ -50,38 +48,38 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
                 .build();
 
-        NavigationElementContainer appMenu = LeftAppMenuBuilder
+        Component appMenu = LeftAppMenuBuilder
                 .get()
-                .addToSection(new MenuHeaderComponent("Menu-Header",
-                        "Version 2.0.8",
+                .addToSection(new LeftHeaderItem("Menu-Header",
+                        "Version 2.1.0",
                         "/frontend/images/logo.png"
                 ), HEADER)
-                .add(new LeftNavigationComponent("Home", VaadinIcon.HOME.create(), View1.class))
-                .add(new LeftNavigationComponent("Grid", VaadinIcon.TABLE.create(), GridTest.class))
+                .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
+                .add(new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class))
                 .add(LeftSubMenuBuilder
                         .get("My Submenu", VaadinIcon.PLUS.create())
                         .add(LeftSubMenuBuilder
                                 .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(new LeftNavigationComponent("Charts",
+                                .add(new LeftNavigationItem("Charts",
                                         VaadinIcon.SPLINE_CHART.create(),
                                         View2.class
                                 ))
-                                .add(new LeftNavigationComponent("Contact",
+                                .add(new LeftNavigationItem("Contact",
                                         VaadinIcon.CONNECT.create(),
                                         View3.class
                                 ))
-                                .add(new LeftNavigationComponent("More",
+                                .add(new LeftNavigationItem("More",
                                         VaadinIcon.COG.create(),
                                         View4.class
                                 ))
                                 .build())
-                        .add(new LeftNavigationComponent("Contact1",
+                        .add(new LeftNavigationItem("Contact1",
                                 VaadinIcon.CONNECT.create(),
                                 View5.class
                         ))
-                        .add(new LeftNavigationComponent("More1", VaadinIcon.COG.create(), View6.class))
+                        .add(new LeftNavigationItem("More1", VaadinIcon.COG.create(), View6.class))
                         .build())
-                .add(new LeftNavigationComponent("Menu", VaadinIcon.MENU.create(), View7.class))
+                .add(new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View7.class))
                 .build();
 
         init(AppLayoutBuilder
@@ -96,9 +94,9 @@ public class MainAppLayout extends AppLayoutRouterLayout {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
         /**
-         * Using the @Theme Annotation to set the Dark Theme will cause some issues with shadows which will appear in
-         * the wrong color making them seemingly invisible instead do it the following way as long as the issue is not
-         * solved see here -> https://github.com/vaadin/flow/issues/4765
+         * Using the @Theme Annotation to set the Dark Theme causes issues with shadows which will appear in
+         * the wrong color making them seemingly invisible. Instead do it the following way as long as the issue is not
+         * solved (https://github.com/vaadin/flow/issues/4765)
          */
         getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
     }

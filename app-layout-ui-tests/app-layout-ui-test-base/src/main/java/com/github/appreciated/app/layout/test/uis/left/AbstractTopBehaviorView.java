@@ -3,9 +3,9 @@ package com.github.appreciated.app.layout.test.uis.left;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.appmenu.top.TopClickableComponent;
-import com.github.appreciated.app.layout.component.appmenu.top.TopNavigationComponent;
-import com.github.appreciated.app.layout.component.appmenu.top.builder.TopAppMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.top.item.TopClickableItem;
+import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
+import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
@@ -42,13 +42,13 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
                         .build()
                 )
                 .withAppMenu(TopAppMenuBuilder.get()
-                        .addToSection(new TopClickableComponent("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
+                        .addToSection(new TopClickableItem("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
                         }), Section.HEADER)
-                        .add(new TopNavigationComponent("Home", VaadinIcon.HOME.create(), getViewForI(1)))
-                        .add(new TopNavigationComponent("Contact", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
-                        .addToSection(new TopClickableComponent("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
+                        .add(new TopNavigationItem("Home", VaadinIcon.HOME.create(), getViewForI(1)))
+                        .add(new TopNavigationItem("Contact", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
+                        .addToSection(new TopClickableItem("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
                         }), FOOTER)
-                        .addToSection(new TopNavigationComponent("More", VaadinIcon.CONNECT.create(), getViewForI(3)), FOOTER).build()
+                        .addToSection(new TopNavigationItem("More", VaadinIcon.CONNECT.create(), getViewForI(3)), FOOTER).build()
                 ).build());
     }
 
