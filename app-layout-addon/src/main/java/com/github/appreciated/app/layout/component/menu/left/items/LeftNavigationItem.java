@@ -86,7 +86,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         if (parent != null && highlight) {
-            parent.setActiveNavigationElement(highlight);
+            parent.setActiveNavigationElement(false);
         }
     }
 
