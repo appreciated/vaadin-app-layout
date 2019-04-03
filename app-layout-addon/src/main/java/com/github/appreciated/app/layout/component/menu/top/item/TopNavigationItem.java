@@ -1,7 +1,10 @@
 package com.github.appreciated.app.layout.component.menu.top.item;
 
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTab;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -12,7 +15,7 @@ import com.vaadin.flow.component.icon.Icon;
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
  * on {@link TopNavigationItem} respectively their {@link Component} which will usually causes a change of the View at the AppLayout content view.
  */
-public class TopNavigationItem extends PaperTab implements NavigationElementContainer {
+public class TopNavigationItem extends PaperTab implements NavigationElementComponent {
 
     /**
      * The caption of this menu element
@@ -85,5 +88,10 @@ public class TopNavigationItem extends PaperTab implements NavigationElementCont
         } else {
             return className;
         }
+    }
+
+    @Override
+    public void register() {
+        //UpNavigationHelper.registerNavigationRoute();
     }
 }

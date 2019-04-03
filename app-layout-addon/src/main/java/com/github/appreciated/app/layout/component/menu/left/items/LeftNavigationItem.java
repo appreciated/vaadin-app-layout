@@ -13,8 +13,6 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.HighlightAction;
 import com.vaadin.flow.router.RouterLink;
 
-import java.util.Optional;
-
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that
  * clicks on instances on {@link LeftNavigationItem} respectively their
@@ -32,8 +30,9 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
      * The view behind this menu element
      */
     private Icon icon;
+    private Class<? extends Component> className;
 
-    private Optional<NavigationElementContainer> parent = Optional.empty();
+    private NavigationElementContainer parent;
 
     public LeftNavigationItem(String caption, Icon icon, Component view) {
         this(caption, icon, view.getClass());
@@ -45,20 +44,19 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
+        this.className = className;
         setRoute(UI.getCurrent().getRouter(), className);
-        setHighlightCondition((routerLink, event) -> UpNavigationHelper.isClosestRouteInMenu(className,event));
+        UpNavigationHelper.registerNavigationRoute(className);
+        setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event));
         HighlightAction<RouterLink> action = getHighlightAction();
 
         setHighlightAction((routerLink, highlight) -> {
             action.highlight(routerLink, highlight);
-            parent.ifPresent(container -> {
-                if (highlight) {
-                    container.setActiveNavigationElement(highlight);
-                }
-            });
+            if (parent != null && highlight) {
+                parent.setActiveNavigationElement(true);
+            }
             this.highlight = highlight;
         });
-
     }
 
     public LeftNavigationItem(String caption, VaadinIcon icon, Class<? extends Component> className) {
@@ -82,13 +80,18 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
 
     @Override
     public void setNavigationElementContainer(NavigationElementContainer parent) {
-        this.parent = Optional.of(parent);
+        this.parent = parent;
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        if (highlight) {
-            parent.ifPresent(container -> container.setActiveNavigationElement(false));
+        if (parent != null && highlight) {
+            parent.setActiveNavigationElement(highlight);
         }
+    }
+
+    @Override
+    public void register() {
+        UpNavigationHelper.registerNavigationRoute(className);
     }
 }
