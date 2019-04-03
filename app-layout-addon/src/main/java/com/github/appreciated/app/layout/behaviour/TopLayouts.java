@@ -161,6 +161,10 @@ public interface TopLayouts {
         private final HorizontalLayout titleWrapper = new HorizontalLayout();
         @Id("toggle")
         private PaperIconButton paperIconButton;
+
+        @Id("app-bar-elements")
+        private Div appBarContent;
+
         private Component title;
         private HasElement content;
 
@@ -276,7 +280,7 @@ public interface TopLayouts {
 
         @Override
         public void setUpNavigation(boolean visible) {
-            appBarElements.getElement().getClassList().set("show-back-arrow", visible);
+            appBarContent.getElement().getClassList().set("show-back-arrow", visible);
             paperIconButton.getElement().getClassList().set("show-back-arrow", visible);
         }
 
