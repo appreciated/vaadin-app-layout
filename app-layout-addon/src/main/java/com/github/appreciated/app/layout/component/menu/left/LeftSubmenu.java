@@ -49,7 +49,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
         toggleWrapper.add(item, ironIcon);
         getContent().getElement().appendChild(toggleWrapper.getElement());
-        getContent().addCollpasableContent(submenuContainer);
+        getContent().addCollapsibleContent(submenuContainer);
         getContent().getElement().getStyle().set("width", "100%");
         this.caption = caption;
         this.icon = icon;
