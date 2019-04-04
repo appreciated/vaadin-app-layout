@@ -45,9 +45,11 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
         appBarElementWrapper.getStyle().set("flex", "1 1");
         appBarElementWrapper.add(appBarElementContainer);
-        appBarElementContainer.setHeight("100%");
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
+        appBarElementWrapper.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
+        appBarElementContainer.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
+        titleWrapper.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
 
         menuElements = new Div();
         menuElements.setHeight("100%");
@@ -60,8 +62,8 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
 
-        titleWrapper.getElement().getStyle().set("flex", "1 1 100px").set("overflow", "hidden");
-        titleWrapper.setWidth("0px");
+        titleWrapper.getElement().getStyle().set("flex", "1 1").set("overflow", "hidden");
+        //titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
 
         getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), contentHolder.getElement());
