@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.component.appbar;
 import com.github.appreciated.app.layout.builder.ComponentBuilder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class AppBarBuilder implements ComponentBuilder {
 
     @Override
     public Component build() {
-        HorizontalLayout layout = new HorizontalLayout(components.toArray(new Component[0]));
+        FlexLayout layout = new FlexLayout(components.toArray(new Component[0]));
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
         return layout;
     }

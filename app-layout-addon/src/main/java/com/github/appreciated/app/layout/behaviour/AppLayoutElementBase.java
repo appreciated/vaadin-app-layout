@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.builder.interfaces.NavigationElementCon
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 /**
  * The interface every {@link Behaviour} is required
@@ -21,7 +21,7 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     void setTitleComponent(Component titleComponent);
 
-    HorizontalLayout getTitleWrapper();
+    FlexLayout getTitleWrapper();
 
     void setIconComponent(Component appBarIconComponent);
 

@@ -70,6 +70,16 @@ public interface LeftLayouts {
       }
   }
 
+  @Tag("app-layout-left-responsive-double")
+  @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-double.html")
+  @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-double.css")
+  class LeftResponsiveDouble extends AbstractLeftResponsive {
+      @Override
+      public String getStyleName() {
+            return "left-responsive-double";
+        }
+  }
+
   abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
 
       /** Sets the responsive width for narrow-mode. */
@@ -83,7 +93,6 @@ public interface LeftLayouts {
       }
 
   }
-
 
   @Tag("app-layout-left-responsive-hybrid")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-hybrid.html")

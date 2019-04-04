@@ -7,6 +7,7 @@ import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftHybrid;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftHybridSmall;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftOverlay;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsive;
+import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveDouble;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybrid;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybridNoAppBar;
 import com.github.appreciated.app.layout.behaviour.LeftLayouts.LeftResponsiveHybridOverlayNoAppBar;
@@ -24,6 +25,7 @@ import com.github.appreciated.app.layout.behaviour.TopLayouts.TopLarge;
 public enum Behaviour {
     LEFT(Left.class, false, true, false, false),
     LEFT_RESPONSIVE(LeftResponsive.class, false, true, false, false),
+    LEFT_RESPONSIVE_DOUBLE(LeftResponsiveDouble.class, false, true, false, false),
     LEFT_HYBRID(LeftHybrid.class, false, true, false, false),
     LEFT_HYBRID_SMALL(LeftHybridSmall.class, false, true, false, true),
     LEFT_RESPONSIVE_HYBRID(LeftResponsiveHybrid.class, false, true, false, false),

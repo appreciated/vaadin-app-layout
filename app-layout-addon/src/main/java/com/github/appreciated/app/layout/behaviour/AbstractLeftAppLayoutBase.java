@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
@@ -8,11 +7,9 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 
@@ -21,9 +18,9 @@ import static java.util.Arrays.asList;
  */
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
-    private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
-    private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-    private final HorizontalLayout titleWrapper = new HorizontalLayout();
+    private final FlexLayout appBarElementWrapper = new FlexLayout();
+    private final FlexLayout appBarElementContainer = new FlexLayout();
+    private final FlexLayout titleWrapper = new FlexLayout();
     private final Div menuElements;
     private final Div contentHolder;
     @Id("toggle")
@@ -42,12 +39,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         getStyle().set("width", "100%")
                 .set("height", "100%");
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
-        HorizontalLayout appBarContentHolder = new HorizontalLayout(titleWrapper, appBarElementWrapper);
+        FlexLayout appBarContentHolder = new FlexLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
-        appBarContentHolder.setSpacing(false);
         appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
-        appBarElementWrapper.setSpacing(false);
         appBarElementWrapper.getStyle().set("flex", "1 1");
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementContainer.setHeight("100%");
@@ -64,8 +59,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
         titleWrapper.setHeight("100%");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        titleWrapper.setPadding(false);
-        titleWrapper.setMargin(false);
+
         titleWrapper.getElement().getStyle().set("flex", "1 1 100px").set("overflow", "hidden");
         titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
@@ -80,7 +74,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         return drawer;
     }
 
-    public HorizontalLayout getAppBarElementWrapper() {
+    public FlexLayout getAppBarElementWrapper() {
         return appBarElementWrapper;
     }
 
@@ -126,7 +120,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
-    public HorizontalLayout getTitleWrapper() {
+    public FlexLayout getTitleWrapper() {
         return titleWrapper;
     }
 
