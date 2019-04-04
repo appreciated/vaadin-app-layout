@@ -9,5 +9,5 @@ import com.vaadin.flow.component.Component;
  * without the elements knowledge (f.e. loading the page with a nested url).
  */
 public interface NavigationElementComponent extends NavigationElement {
-
+    void register();
 }

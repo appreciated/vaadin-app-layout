@@ -22,7 +22,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     private final IronIcon ironIcon;
     private final String caption;
     private final Icon icon;
-    private Optional<NavigationElementContainer> parent = Optional.empty();
+    private NavigationElementContainer parent;
 
     public LeftSubmenu(String caption, Icon icon, List<Component> submenuElements) {
         submenuContainer = new LeftSubmenuContainer();
@@ -49,7 +49,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
         toggleWrapper.add(item, ironIcon);
         getContent().getElement().appendChild(toggleWrapper.getElement());
-        getContent().addCollpasableContent(submenuContainer);
+        getContent().addCollapsibleContent(submenuContainer);
         getContent().getElement().getStyle().set("width", "100%");
         this.caption = caption;
         this.icon = icon;
@@ -65,17 +65,19 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
     @Override
     public void setNavigationElementContainer(NavigationElementContainer parent) {
-        this.parent = Optional.of(parent);
+        this.parent = parent;
     }
 
     @Override
     public void setActiveNavigationElement(boolean active) {
         if (active) {
-            item.getElement().setAttribute("highlight", active);
+            item.getElement().setAttribute("highlight", true);
         } else {
             item.getElement().removeAttribute("highlight");
         }
-        this.parent.ifPresent(container -> container.setActiveNavigationElement(active));
+        if (this.parent != null){
+            parent.setActiveNavigationElement(active);
+        }
     }
 
     public String getCaption() {
