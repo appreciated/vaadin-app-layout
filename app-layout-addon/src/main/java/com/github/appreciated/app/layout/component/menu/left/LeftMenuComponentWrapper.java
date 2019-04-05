@@ -29,7 +29,7 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
             if (component instanceof LeftNavigationItem || component instanceof LeftClickableItem || component instanceof LeftSubmenu) {
                 Div div = new Div(component);
                 div.getStyle()
-                        .set("padding", "0 var(--lumo-space-s)")
+                        .set("padding", "0 var(--app-layout-space-s)")
                         .set("flex-shrink", "0")
                         .set("box-sizing","border-box");
                 div.setWidth("100%");

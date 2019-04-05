@@ -1,8 +1,12 @@
-<link href="../../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
+<link href="../../../../../bower_components/polymer/lib/elements/custom-style.html" rel="import">
 <custom-styles>
     <style>
         html {
             --app-layout-primary-color: var(--lumo-primary-color);
+            --app-layout-primary-text-color: var(--lumo-primary-text-color);
+            --app-layout-space-s: var(--lumo-space-s);
+            --app-layout-section-divider-color: var(--lumo-contrast-20pct);
+            --app-layout-badge-background: var(--lumo-primary-color);
             --app-layout-background: var(--lumo-base-color);
             --app-layout-font-size-header: var(--lumo-font-size-m);
             --app-layout-font-size-menu: var(--lumo-font-size-m);
@@ -22,9 +26,9 @@
             --app-layout-drawer-width: calc(var(--lumo-size-xl) * 4.6);
             --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
             --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
-            --app-layout-menu-button-padding: 0 var(--lumo-space-s);
+            --app-layout-menu-button-padding: 0 var(--app-layout-space-s);
             --app-layout-menu-button-margin: 0;
-            --app-layout-menu-toggle-button-padding: var(--lumo-space-s);
+            --app-layout-menu-toggle-button-padding: var(--app-layout-space-s);
             --app-layout-menu-padding: var(--lumo-space-xs);
             --app-layout-menu-button-border-radius: var(--lumo-border-radius);
             --app-layout-menu-submenu-max-height: 999px;
@@ -58,6 +62,7 @@
             --app-menu-background-color: transparent;
             --app-menu-selected-bg-color: var(--app-layout-app-selected-bg-color);
             --app-menu-color: var(--app-layout-drawer-font-color);
+            --app-layout-app-bar-flex-direction: row;
         }
 
         html[theme~="dark"] {
@@ -74,7 +79,6 @@
             position: relative;
             padding: var(--app-layout-menu-button-padding);
             border-radius: var(--app-layout-menu-button-border-radius);
-            overflow: hidden;
             --lumo-primary-text-color: var(--app-layout-app-color);
             line-height: var(--app-layout-menu-button-height);
             cursor: pointer;

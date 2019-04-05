@@ -54,8 +54,8 @@ public class NotificationsView extends Composite<VerticalLayout> {
       }
     } else {
       noNotificationsLabel = new Label(noNotificationText);
-      noNotificationsLabel.getStyle().set("color" , "var(--lumo-shade)")
-                          .set("font-size" , "var(--lumo-size-xxs)");
+      noNotificationsLabel.getStyle().set("color" , "var(--app-layout-notification-font-color)")
+                          .set("font-size" , "var(--app-layout-font-size-menu)");
       HorizontalLayout wrapper = new HorizontalLayout(noNotificationsLabel);
       wrapper.setWidth("100%");
       wrapper.setPadding(true);
