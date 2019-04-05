@@ -12,8 +12,15 @@
             --material-space-m: 1rem;
             --material-space-l: 1.5rem;
             --material-space-xl: 2.5rem;
+            --material-border-radius: 3px;
+            --lumo-box-shadow-s: var(--shadow-elevation-2dp_-_box-shadow);
+            --lumo-border-radius: var(--material-border-radius);
             --app-layout-primary-color: var(--material-primary-color);
-            --app-layout-background: var(--primary-background-color);
+            --app-layout-primary-text-color: var(--light-theme-text-color);
+            --app-layout-space-s: var(--material-space-s);
+            --app-layout-section-divider-color: var(--light-theme-divider-color);
+            --app-layout-badge-background: var(--material-primary-color);
+            --app-layout-background: var(--material-base-color);
             --app-layout-font-size-header: var(--material-font-size-m);
             --app-layout-font-size-menu: var(--material-font-size-m);
             --app-layout-font-size-notifications: var(--material-font-size-m);
@@ -21,14 +28,14 @@
             --app-layout-bar-height: calc(var(--material-size-s) * 2.1);
             --app-layout-bar-background-base-color: var(--primary-background-color);
             --app-layout-bar-background-color: var(--primary-background-color);
-            --app-layout-bar-font-color: var(--material-contrast-70pct);
+            --app-layout-bar-font-color: var(--light-theme-text-color);
             --app-layout-bar-shadow: var(--shadow-elevation-2dp_-_box-shadow);
             --app-layout-bar-z-index: 10;
             --app-layout-drawer-shadow: var(--shadow-elevation-2dp_-_box-shadow);
             --app-layout-drawer-background-base-color: var(--primary-background-color);
             --app-layout-drawer-background-color: var(--primary-background-color);
-            --app-layout-drawer-submenu-background-color: var(--material-contrast-10pct);
-            --app-layout-drawer-font-color: var(--material-contrast-90pct);
+            --app-layout-drawer-submenu-background-color: var(--material-secondary-background-color);
+            --app-layout-drawer-font-color: var(--light-theme-text-color);
             --app-layout-drawer-width: calc(var(--material-size-xl) * 4.6);
             --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
             --app-layout-menu-button-height: calc(var(--material-size-s) * 1.6);
@@ -36,9 +43,9 @@
             --app-layout-menu-button-margin: 0;
             --app-layout-menu-toggle-button-padding: var(--material-space-s);
             --app-layout-menu-padding: var(--material-space-xs);
-            --app-layout-menu-button-border-radius: var(--material-border-radius);
+            --app-layout-menu-button-border-radius: 3px;
             --app-layout-menu-submenu-max-height: 999px;
-            --app-layout-app-selected-bg-color: var(--material-primary-color-10pct);
+            --app-layout-app-selected-bg-color: var(--material-secondary-background-color);
             --app-layout-app-color: var(--material-secondary-text-color);
             --app-layout-badge-width: calc(var(--material-size-s) * 0.8);
             --app-layout-badge-height: calc(var(--material-size-s) * 0.8);
@@ -104,7 +111,7 @@
         }
 
         .app-menu-item:hover, .app-menu-item[highlight] {
-            background: var(--material-primary-color-10pct);
+            background: var(--light-primary-color);
             color: var(--material-primary-color);
         }
 
