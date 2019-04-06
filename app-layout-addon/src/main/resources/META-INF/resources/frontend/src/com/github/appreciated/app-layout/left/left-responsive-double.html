@@ -113,46 +113,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: none;
             }
 
-            @media only screen and (min-width: 640px) {
-
-                app-header {
-                    bottom: 0px !important;
-                    right: unset !important;
-                    width: var(--app-layout-bar-height);
-                    height: 100%;
-                }
-
-                app-toolbar {
-                    width: var(--app-layout-bar-height);
-                    padding: unset;
-                    height: 100% !important;
-                }
-
-                slot[name=app-bar-content]::slotted(*) {
-                    --app-layout-app-bar-flex-direction: column;
-                }
-
-                #drawer {
-                    --app-drawer-content-container: {
-                        left: var(--app-layout-bar-height);
-                        box-shadow: var(--app-layout-drawer-shadow);
-                        background-color: var(--app-layout-drawer-background-base-color);
-                        max-width: 100%;
-                    };
-                    margin-top: 0px;
-                }
-
-                .app-bar-content {
-                    padding: 8px 0;
-                    box-sizing: border-box;
-                }
-
-                .application-content {
-                    padding-top: 0px;
-                    padding-left: var(--app-layout-bar-height);
-                }
+            :host(:not([narrow])) app-header {
+                bottom: 0px !important;
+                right: unset !important;
+                width: var(--app-layout-bar-height);
+                height: 100%;
             }
 
+            :host(:not([narrow])) app-toolbar {
+                width: var(--app-layout-bar-height);
+                padding: unset;
+                height: 100% !important;
+            }
+
+            :host(:not([narrow])) slot[name=app-bar-content]::slotted(*) {
+                --app-layout-app-bar-flex-direction: column;
+            }
+
+            :host(:not([narrow])) #drawer {
+                --app-drawer-content-container: {
+                    left: var(--app-layout-bar-height);
+                    box-shadow: var(--app-layout-drawer-shadow);
+                    background-color: var(--app-layout-drawer-background-base-color);
+                    max-width: 100%;
+                };
+                margin-top: 0px;
+            }
+
+            :host(:not([narrow])) .app-bar-content {
+                padding: 8px 0;
+                box-sizing: border-box;
+            }
+
+            :host(:not([narrow])) .application-content {
+                padding-top: 0px;
+                padding-left: var(--app-layout-bar-height);
+            }
         </style>
         <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed part="app-bar" slot="header">
@@ -186,7 +182,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return {
                     responsiveWidth: {
                         type: String,
-                        value: "640px",
+                        value: "875px",
                         observer: "_responsiveWidthChanged"
                     },
                 };

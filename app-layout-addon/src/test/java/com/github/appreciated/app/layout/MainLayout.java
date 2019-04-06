@@ -202,6 +202,7 @@ public class MainLayout extends AppLayoutRouterLayout {
             group.setItems(Behaviour.LEFT,
                     Behaviour.LEFT_OVERLAY,
                     Behaviour.LEFT_RESPONSIVE,
+                    Behaviour.LEFT_RESPONSIVE_DOUBLE,
                     Behaviour.LEFT_HYBRID,
                     Behaviour.LEFT_HYBRID_SMALL,
                     Behaviour.LEFT_RESPONSIVE_HYBRID,
