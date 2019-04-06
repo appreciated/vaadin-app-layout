@@ -8,7 +8,6 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
 
 import static java.util.Arrays.asList;
@@ -34,6 +33,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private boolean isMenuVisible = true;
     private HasElement content;
     private Component container;
+    private boolean upNavigationEnabled = false;
 
     AbstractLeftAppLayoutBase() {
         getStyle().set("width", "100%")
@@ -127,7 +127,17 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setUpNavigation(boolean visible) {
+    public void setUpNavigationEnabled(boolean enable) {
+        this.upNavigationEnabled = enable;
+    }
+
+    @Override
+    public boolean isUpNavigationEnabled() {
+        return upNavigationEnabled;
+    }
+
+    @Override
+    public void showUpNavigation(boolean visible) {
         paperIconButton.setIcon(visible ? "arrow-back" : "menu");
     }
 

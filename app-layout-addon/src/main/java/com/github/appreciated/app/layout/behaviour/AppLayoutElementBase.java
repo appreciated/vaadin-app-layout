@@ -27,7 +27,11 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     void setAppLayoutContent(HasElement content);
 
-    void setUpNavigation(boolean visible);
+    void setUpNavigationEnabled(boolean enable);
+
+    boolean isUpNavigationEnabled();
+
+    void showUpNavigation(boolean visible);
 
     void setAppBar(Component component);
 
