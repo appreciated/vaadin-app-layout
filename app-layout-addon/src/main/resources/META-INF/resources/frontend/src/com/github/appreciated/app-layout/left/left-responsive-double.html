@@ -212,10 +212,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             _onQueryMatchesChanged(event){
-                if (event.detail.value)
+                if (event.detail.value) {
                     this.setAttribute("narrow", "");
-                else
+                    this.updateNotificationButtonContentAlignment(true)
+                } else {
                     this.removeAttribute("narrow");
+                    this.updateNotificationButtonContentAlignment(false);
+                }
+            }
+
+            updateNotificationButtonContentAlignment(top){
+                var button = document.querySelector("app-layout-left-responsive-double").querySelector(".app-bar-notification-button");
+                if (top) {
+                    button.setAttribute("vertical-align", "top");
+                    button.setAttribute("horizontal-align", "right")
+                } else {
+                    button.setAttribute("vertical-align", "bottom");
+                    button.setAttribute("horizontal-align", "left")
+                }
             }
 
             _computeMediaQuery(responsiveWidth){
