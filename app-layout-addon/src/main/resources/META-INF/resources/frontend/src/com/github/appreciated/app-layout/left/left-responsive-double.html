@@ -45,6 +45,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 color: var(--app-layout-bar-font-color);
                 padding: 0 0 0 16px;
             }
+
+            #app-bar-elements {
+                min-width: 0;
+            }
+
             slot[name=app-bar-content]::slotted(*) {
                 flex-direction: var(--app-layout-app-bar-flex-direction);
             }

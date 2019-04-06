@@ -43,7 +43,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         appBarContentHolder.setSizeFull();
         appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
-        appBarElementWrapper.getStyle().set("flex", "1 1");
+        appBarElementWrapper.getStyle().set("flex", "0 1");
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
