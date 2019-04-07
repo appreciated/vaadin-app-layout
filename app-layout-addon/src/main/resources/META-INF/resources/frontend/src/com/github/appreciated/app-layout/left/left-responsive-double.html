@@ -128,6 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             :host(:not([narrow])) slot[name=app-bar-content]::slotted(*) {
                 --app-layout-app-bar-flex-direction: column;
+                --app-layout-app-bar-large-object-display: none;
             }
 
             :host(:not([narrow])) #drawer {
@@ -185,6 +186,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         value: "800px",
                         observer: "_responsiveWidthChanged"
                     },
+                    queryMatches: {
+                        type: Boolean,
+                        value: false
+                    }
                 };
             }
 
@@ -195,6 +200,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else {
                     this.onUpNavigation();
                 }
+            }
+
+            ready(){
+                super.ready();
+                this.updateNotificationButtonContentAlignment(this.queryMatches);
             }
 
             onUpNavigation(){
@@ -219,6 +229,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.removeAttribute("narrow");
                     this.updateNotificationButtonContentAlignment(false);
                 }
+                this.queryMatches = event.detail.value;
             }
 
             updateNotificationButtonContentAlignment(top){

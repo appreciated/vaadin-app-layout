@@ -119,6 +119,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     public void setTitleComponent(Component component) {
         titleWrapper.replace(this.title, component);
         this.title = component;
+        this.title.getElement().getStyle().set("display","var(--app-layout-app-bar-large-object-display)");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
