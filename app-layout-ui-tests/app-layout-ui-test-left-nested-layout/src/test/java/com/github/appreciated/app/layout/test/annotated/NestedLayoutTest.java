@@ -36,7 +36,7 @@ public class NestedLayoutTest extends BaseTest {
         clickByCssSelector(".app-menu-item", 5);
         clickByID(elementRoot, "#toggle");
         clickByCssSelector(".app-menu-item", 6);
-        String message = getTextByCssSelector("#" + AccessDeniedExceptionHandler.ID, 0);
+        String message = getTextOfElementByCssSelector("#" + AccessDeniedExceptionHandler.ID, 0);
         Assert.assertEquals(AccessDeniedExceptionHandler.ERROR_MESSAGE, message);
     }
 
