@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 
 /**
@@ -47,14 +46,16 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
     public void showRouterLayoutContent(HasElement content) {
         currentContent = content;
         layout.setAppLayoutContent(content);
-        setUpNavigation(content);
+        if (layout.isUpNavigationEnabled()) {
+            setUpNavigation(content);
+        }
     }
 
     private void setUpNavigation(HasElement content) {
         if (content instanceof Component) {
-            layout.setUpNavigation(UpNavigationHelper.routeHasUpNavigation(((Component) content).getClass()));
+            layout.showUpNavigation(UpNavigationHelper.routeHasUpNavigation(((Component) content).getClass()));
         } else {
-            layout.setUpNavigation(false);
+            layout.showUpNavigation(false);
         }
     }
 

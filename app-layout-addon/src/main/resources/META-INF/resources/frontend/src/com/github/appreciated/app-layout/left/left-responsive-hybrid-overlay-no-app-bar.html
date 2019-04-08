@@ -46,6 +46,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 left: 0px;
                 right: 0px;
             }
+
+            #app-bar-elements {
+                min-width: 0;
+            }
+
             app-drawer-layout {
                 overflow: hidden;
             }
@@ -103,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             :host([narrow]) .application-content {
                 box-sizing: border-box;
-                padding-top: var(--app-layout-bar-height);
+                height: calc(100% - var(--app-layout-bar-height));
             }
 
             #drawerLayout {

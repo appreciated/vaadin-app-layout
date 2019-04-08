@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.behaviour;
 
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
@@ -10,6 +9,7 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -28,11 +28,12 @@ public interface TopLayouts {
         private final VerticalLayout contentPanel = new VerticalLayout();
         private final HorizontalLayout appBar = new HorizontalLayout();
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
-        private final HorizontalLayout titleWrapper = new HorizontalLayout();
+        private final FlexLayout titleWrapper = new FlexLayout();
         private HasElement content;
         @Id("toggle")
         private PaperIconButton paperIconButton;
         private Component title;
+        private boolean enableUpNavigation;
 
         Top() {
             contentPanel.setSizeFull();
@@ -82,6 +83,7 @@ public interface TopLayouts {
             }
         }
 
+
         public Div getAppBarElements() {
             return appBarElements;
         }
@@ -121,7 +123,7 @@ public interface TopLayouts {
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         }
 
-        public HorizontalLayout getTitleWrapper() {
+        public FlexLayout getTitleWrapper() {
             return titleWrapper;
         }
 
@@ -131,8 +133,19 @@ public interface TopLayouts {
         }
 
         @Override
-        public void setUpNavigation(boolean visible) {
+        public void showUpNavigation(boolean visible) {
             paperIconButton.setIcon(visible ? "arrow-back" : "menu");
+        }
+
+        @Override
+        public boolean isUpNavigationEnabled() {
+            return false;
+        }
+
+
+        @Override
+        public void setUpNavigationEnabled(boolean enable) {
+            this.enableUpNavigation = enable;
         }
 
         @Override
@@ -158,7 +171,7 @@ public interface TopLayouts {
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
         private final Div appBarElements;
         private final Div contentElement;
-        private final HorizontalLayout titleWrapper = new HorizontalLayout();
+        private final FlexLayout titleWrapper = new FlexLayout();
         @Id("toggle")
         private PaperIconButton paperIconButton;
 
@@ -167,6 +180,7 @@ public interface TopLayouts {
 
         private Component title;
         private HasElement content;
+        private boolean upNavigationEnabled;
 
         TopLarge() {
             contentPanel.setSizeFull();
@@ -269,7 +283,7 @@ public interface TopLayouts {
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         }
 
-        public HorizontalLayout getTitleWrapper() {
+        public FlexLayout getTitleWrapper() {
             return titleWrapper;
         }
 
@@ -279,7 +293,17 @@ public interface TopLayouts {
         }
 
         @Override
-        public void setUpNavigation(boolean visible) {
+        public void setUpNavigationEnabled(boolean enable) {
+            this.upNavigationEnabled = enable;
+        }
+
+        @Override
+        public boolean isUpNavigationEnabled() {
+            return upNavigationEnabled;
+        }
+
+        @Override
+        public void showUpNavigation(boolean visible) {
             appBarContent.getElement().getClassList().set("show-back-arrow", visible);
             paperIconButton.getElement().getClassList().set("show-back-arrow", visible);
         }

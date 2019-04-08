@@ -17,14 +17,14 @@ public class LeftSectionItem extends HorizontalLayout {
         this();
         this.name = name;
         sectionLabel = new Label(name);
-        sectionLabel.getStyle().set("font-size", "var(--lumo-font-size-m)");
+        sectionLabel.getStyle().set("font-size", "var(--app-layout-font-size-menu)");
 
         add(sectionLabel);
-        getStyle().set("padding","var(--lumo-space-s) var(--lumo-space-s) 0 var(--lumo-space-s)");
+        getStyle().set("padding","var(--app-layout-space-s) var(--app-layout-space-s) 0 var(--app-layout-space-s)");
     }
 
     public LeftSectionItem() {
-        getStyle().set("border-top", "1px solid var(--lumo-contrast-20pct)");
+        getStyle().set("border-top", "1px solid var(--app-layout-section-divider-color)");
         setWidth("100%");
     }
 

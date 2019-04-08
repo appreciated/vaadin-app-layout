@@ -2,7 +2,6 @@ package com.github.appreciated.app.layout.builder;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -15,6 +14,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private AppLayout instance;
     private Component titleComponent;
     private Component imageComponent;
+    private boolean upNavigation;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -86,6 +86,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
+        instance.setUpNavigationEnabled(upNavigation);
         instance.init();
         return instance;
 
@@ -140,6 +141,11 @@ public class AppLayoutBuilder implements ComponentBuilder {
      */
     public AppLayoutBuilder withIconComponent(Component image) {
         this.imageComponent = image;
+        return this;
+    }
+
+    public AppLayoutBuilder withUpNavigation() {
+        this.upNavigation = true;
         return this;
     }
 }

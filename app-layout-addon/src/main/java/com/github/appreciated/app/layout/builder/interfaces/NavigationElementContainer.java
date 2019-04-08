@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  */
 public interface NavigationElementContainer extends NavigationElement {
 
-    default void setActiveNavigationElement(boolean active) {
+    default void setActiveNavigationElement(NavigationElementComponent active) {
     }
 
     default void applyParentToItems(Stream<Component> elements) {

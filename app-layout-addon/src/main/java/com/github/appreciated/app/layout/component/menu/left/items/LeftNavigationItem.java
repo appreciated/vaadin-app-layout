@@ -53,7 +53,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         setHighlightAction((routerLink, highlight) -> {
             action.highlight(routerLink, highlight);
             if (parent != null && highlight) {
-                parent.setActiveNavigationElement(true);
+                parent.setActiveNavigationElement(this);
             }
             this.highlight = highlight;
         });
@@ -86,7 +86,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         if (parent != null && highlight) {
-            parent.setActiveNavigationElement(false);
+            parent.setActiveNavigationElement(null);
         }
     }
 

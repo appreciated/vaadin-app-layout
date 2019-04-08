@@ -12,14 +12,11 @@ public class PaperTab extends Component implements FlexComponent, HasText {
 
     private PaperTabs parent;
 
-    public PaperTab(String caption, Icon icon) {
-        setId("my-paper-tab");
-        add(icon);
-        setText(caption);
+    public PaperTab() {
         getElement().getStyle().set("font-size", "var(--app-layout-font-size-app-bar)");
     }
 
-    private void add(Component component) {
+    void add(Component component) {
         if (component != null) {
             getElement().appendChild(component.getElement());
         }

@@ -60,6 +60,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 right: 0px;
             }
 
+            #app-bar-elements {
+                min-width: 0;
+            }
+
             .application-content {
                 width: 100%;
                 height: 100%;
@@ -108,8 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             :host([narrow]) .application-content {
-                box-sizing: border-box;
-                padding-top: var(--app-layout-bar-height);
+                height: calc(100% - var(--app-layout-bar-height));
             }
         </style>
         <app-drawer-layout id="drawerLayout" fullbleed>

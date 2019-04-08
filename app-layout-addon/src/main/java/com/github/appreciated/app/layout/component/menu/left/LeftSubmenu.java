@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component.menu.left;
 
 import com.github.appreciated.IronCollapseLayout;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftIconItem;
 import com.vaadin.flow.component.Component;
@@ -69,8 +70,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     }
 
     @Override
-    public void setActiveNavigationElement(boolean active) {
-        if (active) {
+    public void setActiveNavigationElement(NavigationElementComponent active) {
+        if (active != null) {
             item.getElement().setAttribute("highlight", true);
         } else {
             item.getElement().removeAttribute("highlight");

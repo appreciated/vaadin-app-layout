@@ -1,97 +1,47 @@
 package com.github.appreciated.app.layout.component.menu.top.item;
 
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
-import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTab;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that clicks on instances
  * on {@link TopNavigationItem} respectively their {@link Component} which will usually causes a change of the View at the AppLayout content view.
  */
-public class TopNavigationItem extends PaperTab implements NavigationElementComponent {
+public class TopNavigationItem extends PaperTab implements NavigationElementContainer, NavigationElementComponent {
 
-    /**
-     * The caption of this menu element
-     */
-    private String caption;
-    /**
-     * The respective view behind this menu element (either {@link LeftNavigationItem#view} or {@link LeftNavigationItem#className} will be initialized)
-     */
-    private Component view;
-    /**
-     * The view behind this menu element
-     */
-    private Icon icon;
-    /**
-     * The respective view behind this menu element (either {@link LeftNavigationItem#view} or {@link LeftNavigationItem#className} will be initialized)
-     */
-    private Class<? extends Component> className;
+    private NavigationElementContainer parent;
 
     public TopNavigationItem(String caption, Icon icon, Component view) {
-        super(caption, icon);
-        this.caption = caption;
-        this.icon = icon;
-        this.view = view;
-        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+        super();
+        addNavigationElement(new TopNavigationLink(caption, icon, view.getClass()));
+    }
+
+    private void addNavigationElement(TopNavigationLink topNavigationLink) {
+        add(topNavigationLink);
+        applyParentToItem(topNavigationLink);
     }
 
     public TopNavigationItem(String caption, Icon icon, Class<? extends Component> className) {
-        super(caption, icon);
-        this.caption = caption;
-        this.icon = icon;
-        this.className = className;
-        setClickListener(appMenuIconItemClickEvent -> navigateTo());
+        super();
+        addNavigationElement(new TopNavigationLink(caption, icon, className));
     }
 
-    public void navigateTo() {
-        UI.getCurrent().navigate(getRoute());
+    @Override
+    public void setNavigationElementContainer(NavigationElementContainer parent) {
+        this.parent = parent;
     }
 
-    public String getRoute() {
-        if (className != null) {
-            return UI.getCurrent().getRouter().getUrl(className);
-        } else if (view != null) {
-            return UI.getCurrent().getRouter().getUrl(view.getClass());
-        } else {
-            return getCaption();
-        }
-    }
-
-    private String getCaption() {
-        if (caption != null) {
-            return caption;
-        }
-        return null;
-    }
-
-    public Icon getIcon() {
-        if (icon != null) {
-            return icon;
-        }
-        return null;
-    }
-
-    public Component getView() {
-        return view;
-    }
-
-    public Class<? extends Component> getViewClassName() {
-        if (className == null) {
-            return view == null ? null : view.getClass();
-        } else {
-            return className;
+    @Override
+    public void setActiveNavigationElement(NavigationElementComponent component) {
+        if (parent != null) {
+            parent.setActiveNavigationElement(this);
         }
     }
 
     @Override
     public void register() {
-        //UpNavigationHelper.registerNavigationRoute();
     }
 }
