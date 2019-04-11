@@ -1,7 +1,5 @@
 package com.github.appreciated.app.layout.builder.interfaces;
 
-import com.vaadin.flow.component.Component;
-
 /**
  * This interface is for Components that contain Elements that are clickable and the interaction with it leads to route
  * changes.
@@ -9,5 +7,5 @@ import com.vaadin.flow.component.Component;
  * without the elements knowledge (f.e. loading the page with a nested url).
  */
 public interface NavigationElementComponent extends NavigationElement {
-    void register();
+
 }
