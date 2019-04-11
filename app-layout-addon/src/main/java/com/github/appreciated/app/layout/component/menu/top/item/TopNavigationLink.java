@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.component.menu.top.item;
 
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
@@ -13,7 +12,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.HighlightAction;
 import com.vaadin.flow.router.RouterLink;
 
-public class TopNavigationLink extends RouterLink implements NavigationElementComponent {
+public class TopNavigationLink extends RouterLink implements NavigationElement {
     private Class<? extends Component> view;
     private NavigationElementContainer parent;
 
@@ -31,7 +30,6 @@ public class TopNavigationLink extends RouterLink implements NavigationElementCo
         wrapper.setHeight("100%");
         add(wrapper);
         setRoute(UI.getCurrent().getRouter(), view);
-        UpNavigationHelper.registerNavigationRoute(view);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(view, event));
         HighlightAction<RouterLink> action = getHighlightAction();
         setHighlightAction((routerLink, highlight) -> {
@@ -46,10 +44,5 @@ public class TopNavigationLink extends RouterLink implements NavigationElementCo
     @Override
     public void setNavigationElementContainer(NavigationElementContainer parent) {
         this.parent = parent;
-    }
-
-    @Override
-    public void register() {
-        UpNavigationHelper.registerNavigationRoute(view);
     }
 }
