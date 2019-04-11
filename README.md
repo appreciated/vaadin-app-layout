@@ -63,10 +63,9 @@ The issues for this add-on are tracked on its github.com page. All bug reports a
 ## Branching information
 
 * `master` the latest version of the app-layout, currently even with `V13`
-* `V8` the version for Vaadin 8 -> App-Layout 1.*
-* `V10` the version for Vaadin 10 -> App-Layout 2.*
-* `V13` the version for Vaadin 13 -> App-Layout 3.*
-
+* `V8` the version for Vaadin 8 -> App-Layout `1.*`
+* `V10` the version for Vaadin 10 -> App-Layout `2.*`
+* `V13` the version for Vaadin 13 -> App-Layout `3.*`
 
 ## Contributions
 
