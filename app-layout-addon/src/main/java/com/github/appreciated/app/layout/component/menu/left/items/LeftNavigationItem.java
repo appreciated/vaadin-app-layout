@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
 import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
@@ -19,7 +19,7 @@ import com.vaadin.flow.router.RouterLink;
  * {@link com.vaadin.flow.component.Component} which will usually causes a change of the View at the
  * AppLayout content view.
  */
-public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElementComponent, BeforeEnterObserver {
+public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElement, BeforeEnterObserver {
     private boolean highlight = false;
     /**
      * The caption of this menu element
@@ -46,7 +46,6 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.icon = icon;
         this.className = className;
         setRoute(UI.getCurrent().getRouter(), className);
-        UpNavigationHelper.registerNavigationRoute(className);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event));
         HighlightAction<RouterLink> action = getHighlightAction();
 
@@ -88,10 +87,5 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         if (parent != null && highlight) {
             parent.setActiveNavigationElement(null);
         }
-    }
-
-    @Override
-    public void register() {
-        UpNavigationHelper.registerNavigationRoute(className);
     }
 }

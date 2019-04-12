@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.menu.top;
 
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementComponent;
+import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
 import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTab;
 import com.github.appreciated.app.layout.webcomponents.papertabs.PaperTabs;
@@ -21,7 +21,7 @@ public class TopMenuComponent extends PaperTabs implements NavigationElementCont
     }
 
     @Override
-    public void setActiveNavigationElement(NavigationElementComponent active) {
+    public void setActiveNavigationElement(NavigationElement active) {
         setSelected((PaperTab) active);
     }
 }

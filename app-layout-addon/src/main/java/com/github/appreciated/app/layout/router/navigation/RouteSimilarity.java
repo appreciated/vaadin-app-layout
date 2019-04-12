@@ -4,33 +4,39 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.RouteData;
 
+import com.vaadin.flow.router.RouteData.AliasData;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class RouteSimilarity {
+
     private Class<? extends Component> route;
     private RouteData routeData;
-    int similarity = 0;
+    private final int similarity;
 
     public RouteSimilarity(RouteData routeData, String[] currentRouteParts) {
+        this.route = routeData.getNavigationTarget();
         this.routeData = routeData;
-        List<String> paths = Arrays.stream(routeData.getUrl().split("/")).collect(Collectors.toList());
-        for (int i = 0; i < paths.size() && i < currentRouteParts.length; i++) {
-            if (paths.get(i).equals(currentRouteParts[i])) {
-                similarity++;
-            }
-        }
+        this.similarity = Stream.concat(Stream.of(routeData.getUrl()),
+            routeData.getRouteAliases().stream().map(AliasData::getUrl))
+            .mapToInt(url -> calculateSimilarity(url, currentRouteParts))
+            .max()
+            .orElse(0);
     }
 
-    public RouteSimilarity(Class<? extends Component> route, String[] currentRouteParts) {
-        this.route = route;
-        List<String> paths = Arrays.stream(UI.getCurrent().getRouter().getUrl(route).split("/")).collect(Collectors.toList());
+    private int calculateSimilarity(String url, String[] currentRouteParts) {
+        int calculatedSimilarity = 0;
+
+        List<String> paths = Arrays.stream(url.split("/")).collect(Collectors.toList());
         for (int i = 0; i < paths.size() && i < currentRouteParts.length; i++) {
             if (paths.get(i).equals(currentRouteParts[i])) {
-                similarity++;
+                calculatedSimilarity++;
             }
         }
+
+        return calculatedSimilarity;
     }
 
     public RouteData getRouteData() {
