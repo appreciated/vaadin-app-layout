@@ -41,7 +41,7 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 public class MainLayout extends AppLayoutRouterLayout {
     DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
     DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT_RESPONSIVE;
+    private Behaviour variant = Behaviour.LEFT;
     private Thread currentThread;
 
     public MainLayout() {
@@ -81,7 +81,7 @@ public class MainLayout extends AppLayoutRouterLayout {
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
-            return AppLayoutBuilder
+            AppLayout layout = AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
@@ -142,6 +142,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .build())
                     .withUpNavigation()
                     .build();
+            return layout;
         } else {
             return AppLayoutBuilder
                     .get(this.variant)

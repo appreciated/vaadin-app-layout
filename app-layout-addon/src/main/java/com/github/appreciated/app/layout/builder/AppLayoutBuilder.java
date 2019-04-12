@@ -15,6 +15,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private Component titleComponent;
     private Component imageComponent;
     private boolean upNavigation;
+    private boolean swipeOpen = true;
 
     private AppLayoutBuilder(AppLayout instance) {
         this.instance = instance;
@@ -86,6 +87,9 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
+        if (swipeOpen) {
+            instance.getDrawer().getElement().setAttribute("swipe-open",true);
+        }
         instance.setUpNavigationEnabled(upNavigation);
         instance.init();
         return instance;
@@ -133,6 +137,12 @@ public class AppLayoutBuilder implements ComponentBuilder {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
         return withIconComponent(image);
+    }
+
+
+    public AppLayoutBuilder withSwipeOpen(boolean swipeOpen) {
+        this.swipeOpen = swipeOpen;
+        return this;
     }
 
     /**
