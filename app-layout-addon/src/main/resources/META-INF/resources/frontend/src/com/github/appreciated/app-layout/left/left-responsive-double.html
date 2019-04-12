@@ -43,7 +43,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0 0 0 16px;
+                padding: 0;
             }
 
             #app-bar-elements {
@@ -65,6 +65,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 top: 0px;
                 left: 0px;
                 right: 0px;
+                display: flex;
+                flex-direction: var(--app-layout-app-bar-flex-direction);
             }
 
             #drawer {
@@ -90,10 +92,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 16px);
-                height: calc(var(--app-layout-bar-height) - 16px);
-                margin-right: 8px;
-                margin-left: -8px;
+                width: calc(var(--app-layout-bar-height) - 14px);
+                height: calc(var(--app-layout-bar-height) - 14px);
+                margin: 7px;
             }
 
             app-menu {
@@ -131,6 +132,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-layout-app-bar-large-object-display: none;
             }
 
+            :host(:not([narrow])) app-toolbar {
+                --app-layout-app-bar-flex-direction: column;
+                --app-layout-app-bar-large-object-display: none;
+            }
+
             :host(:not([narrow])) #drawer {
                 --app-drawer-content-container: {
                     left: var(--app-layout-bar-height);
@@ -141,9 +147,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-top: 0px;
             }
 
+            .app-bar-content {
+                flex: 1 1;
+            }
             :host(:not([narrow])) .app-bar-content {
                 padding: 8px 0;
                 box-sizing: border-box;
+                height: unset !important;
             }
 
             :host(:not([narrow])) .application-content {

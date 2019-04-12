@@ -72,7 +72,6 @@ public interface LeftLayouts {
 
   @Tag("app-layout-left-responsive-double")
   @HtmlImport("frontend://src/com/github/appreciated/app-layout/left/left-responsive-double.html")
-  @StyleSheet("frontend://src/com/github/appreciated/app-layout/left/left-responsive-double.css")
   class LeftResponsiveDouble extends AbstractLeftResponsive {
       @Override
       public String getStyleName() {
