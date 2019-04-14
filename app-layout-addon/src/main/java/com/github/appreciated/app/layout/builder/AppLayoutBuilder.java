@@ -87,13 +87,12 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
-        if (swipeOpen) {
+        if (swipeOpen && instance.getDrawer() != null) {
             instance.getDrawer().getElement().setAttribute("swipe-open",true);
         }
         instance.setUpNavigationEnabled(upNavigation);
         instance.init();
         return instance;
-
     }
 
     /**
