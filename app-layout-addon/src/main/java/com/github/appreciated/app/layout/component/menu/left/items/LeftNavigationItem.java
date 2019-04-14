@@ -45,6 +45,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.caption = caption;
         this.icon = icon;
         this.className = className;
+        UpNavigationHelper.registerNavigationRoute(className);
         setRoute(UI.getCurrent().getRouter(), className);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event));
         HighlightAction<RouterLink> action = getHighlightAction();
