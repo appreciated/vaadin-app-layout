@@ -13,21 +13,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @EnableAutoConfiguration
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TopLargeMain.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Ignore // This test does not seem to run
+@SpringBootTest(classes = TopLargeMain.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TopLargeTest extends BaseTest {
 
     @LocalServerPort
     int randomServerPort;
 
-    /*@Test
+    @Test
     public void testMenu() {
         WebElement root = getShadowRootElement("app-layout-top-large");
         clickByCssSelector("paper-tab", 0);
         clickByCssSelector("paper-tab", 1);
         clickByCssSelector("paper-tab", 2);
-    }*/
+    }
 
     @Override
     public int getServerPort() {
