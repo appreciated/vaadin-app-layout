@@ -2,11 +2,11 @@ package com.github.appreciated.app.layout.test.uis.left;
 
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
@@ -23,7 +23,7 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
         LeftNavigationItem menu = new LeftNavigationItem(getViewForI(9));
         notificationHolder.bind(home.getBadge());
         badgeHolder.bind(menu.getBadge());
-        init(AppLayoutBuilder.get(getVariant())
+        AppLayoutBuilder builder = AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
@@ -45,7 +45,12 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
                                 .add(new LeftNavigationItem(getViewForI(8)))
                                 .add(menu)
                                 .build()
-                ).build());
+                );
+        furtherConfiguration(builder);
+        init(builder.build());
+    }
+
+    public void furtherConfiguration(AppLayoutBuilder builder) {
     }
 
 }

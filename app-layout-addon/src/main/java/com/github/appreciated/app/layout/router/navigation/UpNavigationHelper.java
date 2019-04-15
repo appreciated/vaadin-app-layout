@@ -4,7 +4,6 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.RouteData;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
