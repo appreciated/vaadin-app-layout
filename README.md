@@ -4,7 +4,7 @@
 [![Lastest release date on vaadin.com/directory](https://img.shields.io/vaadin-directory/release-date/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
 
 
-## Integration of the \<app-layout\> as a Add-on for Vaadin
+## Integration of the \<app-layout\> for Vaadin
 A collection of ready to use templates for the Webcomponent [\<app-layout\>](https://www.webcomponents.org/element/PolymerElements/app-layout)
 <br>
 <br>
