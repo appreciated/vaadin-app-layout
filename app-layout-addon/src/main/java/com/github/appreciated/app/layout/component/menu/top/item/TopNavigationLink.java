@@ -29,6 +29,7 @@ public class TopNavigationLink extends RouterLink implements NavigationElement {
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setHeight("100%");
         add(wrapper);
+        UpNavigationHelper.registerNavigationRoute(view);
         setRoute(UI.getCurrent().getRouter(), view);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(view, event));
         HighlightAction<RouterLink> action = getHighlightAction();

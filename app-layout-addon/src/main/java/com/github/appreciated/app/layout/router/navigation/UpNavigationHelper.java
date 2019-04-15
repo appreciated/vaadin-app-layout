@@ -13,9 +13,9 @@ import java.util.Optional;
  * A helper class that checks whether <a href="https://developer.android.com/training/design-navigation/ancestral-temporal">Up Navigation</a>is available for a specific route,
  * and helps in finding possible parent views
  */
-public class UpNavigationHelper {
+public final class UpNavigationHelper {
 
-    private HashMap<RouteData, String> registeredRoutes = new HashMap();
+    private HashMap<RouteData, String> registeredRoutes = new HashMap<>();
 
     private UpNavigationHelper() {
 
@@ -29,14 +29,11 @@ public class UpNavigationHelper {
         String currentRoute = UI.getCurrent().getRouter().getUrl(navigationTarget);
         if (currentRoute.lastIndexOf("/") > 0) {
             String[] currentRouteParts = currentRoute.substring(0, (currentRoute.lastIndexOf("/"))).split("/");
-            Optional<RouteSimilarity> result = UI.getCurrent().getRouter().getRoutes()
-                    .stream()
+            return UI.getCurrent().getRouter().getRoutes().stream()
                     .filter(routeData -> !routeData.getUrl().equals(currentRoute))
                     .map(routeData -> new RouteSimilarity(routeData, currentRouteParts))
-                    .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
-            if (result.isPresent()) {
-                return Optional.ofNullable(result.get().getRouteData());
-            }
+                    .max(Comparator.comparingInt(RouteSimilarity::getSimilarity))
+                    .map(RouteSimilarity::getRouteData);
         }
         return Optional.empty();
     }
@@ -49,9 +46,8 @@ public class UpNavigationHelper {
         HashMap<RouteData, String> routes = getUpNavigationHelper().registeredRoutes;
 
         String[] currentRouteParts = event.getLocation().getSegments().toArray(new String[]{});
-        Optional<RouteSimilarity> result = routes.entrySet()
-                .stream()
-                .map(routeData -> new RouteSimilarity(routeData.getKey(), currentRouteParts))
+        Optional<RouteSimilarity> result = routes.keySet().stream()
+                .map(routeData -> new RouteSimilarity(routeData, currentRouteParts))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
     }
@@ -68,7 +64,7 @@ public class UpNavigationHelper {
     }
 
     /**
-     * We need to be able to differenciate between routes that have been added to the
+     * We need to be able to differentiate between routes that have been added to the
      *
      * @param className
      */
@@ -77,10 +73,7 @@ public class UpNavigationHelper {
     }
 
     public void register(Class<? extends Component> className) {
-        UI.getCurrent()
-                .getRouter()
-                .getRoutes()
-                .stream()
+        UI.getCurrent().getRouter().getRoutes().stream()
                 .filter(routeData -> routeData.getNavigationTarget() == className)
                 .findFirst()
                 .ifPresent(routeData -> registeredRoutes.put(routeData, UI.getCurrent().getRouter().getUrl(className)));
