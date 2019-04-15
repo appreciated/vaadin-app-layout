@@ -49,11 +49,9 @@ public class UpNavigationHelper {
 
     public static boolean shouldHighlight(Class<? extends Component> className, AfterNavigationEvent event) {
         String[] currentRouteParts = event.getLocation().getSegments().toArray(new String[]{});
-        List<RouteData> availableRoutes = RouteConfiguration
-                .forRegistry(UI.getCurrent().getRouter().getRegistry()).getAvailableRoutes();
 
-        Optional<RouteSimilarity> result = availableRoutes.stream()
-                .map(ar -> new RouteSimilarity(ar, currentRouteParts))
+        Optional<RouteSimilarity> result = getUpNavigationHelper().registeredRoutes.entrySet().stream()
+                .map(entry -> new RouteSimilarity(entry.getKey(), currentRouteParts))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
 
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
