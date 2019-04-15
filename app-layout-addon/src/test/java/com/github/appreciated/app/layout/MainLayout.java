@@ -81,7 +81,7 @@ public class MainLayout extends AppLayoutRouterLayout {
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
-            return AppLayoutBuilder
+            AppLayout layout = AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
@@ -140,7 +140,9 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     clickEvent -> openModeSelector(this.variant)
                             ), FOOTER)
                             .build())
+                    .withUpNavigation()
                     .build();
+            return layout;
         } else {
             return AppLayoutBuilder
                     .get(this.variant)

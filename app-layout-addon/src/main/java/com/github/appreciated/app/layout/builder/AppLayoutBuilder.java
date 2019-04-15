@@ -87,13 +87,12 @@ public class AppLayoutBuilder implements ComponentBuilder {
         if (imageComponent != null) {
             instance.setIconComponent(imageComponent);
         }
-        if (swipeOpen) {
+        if (swipeOpen && instance.getDrawer() != null) {
             instance.getDrawer().getElement().setAttribute("swipe-open",true);
         }
         instance.setUpNavigationEnabled(upNavigation);
         instance.init();
         return instance;
-
     }
 
     /**
@@ -136,6 +135,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     public AppLayoutBuilder withIcon(String url) {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
+        image.getStyle().set("margin","calc(calc(var(--app-layout-bar-height) - var(--app-layout-menu-button-height)) / 2)");
         return withIconComponent(image);
     }
 

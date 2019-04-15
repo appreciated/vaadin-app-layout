@@ -40,7 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0 0 0 16px;
+                padding: 0;
                 position: absolute;
                 top: 0px;
                 left: 0px;
@@ -77,10 +77,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 16px);
-                height: calc(var(--app-layout-bar-height) - 16px);
-                margin-right: 8px;
-                margin-left: -8px;
+                width: calc(var(--app-layout-bar-height) - 14px);
+                height: calc(var(--app-layout-bar-height) - 14px);
+                margin: 7px;
             }
 
             :host(:not([narrow])) #toggle[icon="menu"] {

@@ -31,10 +31,24 @@ public abstract class BaseTest {
         }
     }
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
     @Before
     public void beforeTest() {
         openWebsite();
     }
+
+    public void openWebsite() {
+        open(getWebsiteUrl());
+    }
+
+    public String getWebsiteUrl() {
+        return "http://localhost:" + getServerPort();
+    }
+
+    public abstract int getServerPort();
 
     public void clickByCssSelector(String cssSelector, int i) {
         clickElement($$(cssSelector).get(i));
@@ -45,8 +59,17 @@ public abstract class BaseTest {
         }
     }
 
+    public void clickElement(WebElement webElement) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", webElement);
+        try {
+            Thread.sleep(SLEEP);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getTextByCssSelector(String cssSelector, int i) {
-        return $$(cssSelector).get(i).$("label",0).getText();
+        return $$(cssSelector).get(i).$("label", 0).getText();
     }
 
     public String getTextOfElementByCssSelector(String cssSelector, int i) {
@@ -58,17 +81,17 @@ public abstract class BaseTest {
                 "return document.getElementsByTagName(\"" + element + "\")[0].shadowRoot");
     }
 
+    public void clickByID(WebElement element, String id) {
+        clickElement(findByID(element, id));
+    }
+
     public WebElement findByID(WebElement element, String tag) {
         return (WebElement) ((JavascriptExecutor) driver).executeScript(
                 "return arguments[0].querySelector(\"" + tag + "\")", element);
     }
 
-    public void clickByID(WebElement element, String id) {
-       clickElement(findByID(element, id));
-    }
-
-    public void clickElement(WebElement webElement){
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", webElement);
+    public void clickByCssSelector(WebElement element, String className, int i) {
+        findByClassName(element, className, i).click();
         try {
             Thread.sleep(SLEEP);
         } catch (InterruptedException e) {
@@ -82,18 +105,9 @@ public abstract class BaseTest {
         return root;
     }
 
-    public void clickByCssSelector(WebElement element, String className, int i) {
-        findByClassName(element, className, i).click();
-        try {
-            Thread.sleep(SLEEP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void openWebsite(String relativePath) {
+        open(getWebsiteUrl() + "/" + relativePath);
     }
 
-    public void openWebsite() {
-        open("http://localhost:" + getServerPort());
-    }
 
-    public abstract int getServerPort();
 }
