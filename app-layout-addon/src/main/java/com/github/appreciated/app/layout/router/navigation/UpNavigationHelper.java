@@ -8,7 +8,6 @@ import com.vaadin.flow.router.RouteData;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,10 +27,11 @@ public class UpNavigationHelper {
     }
 
     public static Optional<RouteData> getClosestRoute(Class<? extends Component> navigationTarget) {
-        String currentRoute = UI.getCurrent().getRouter().getUrl(navigationTarget);
+        String currentRoute = RouteConfiguration.forSessionScope().getUrl(navigationTarget);
         if (currentRoute.lastIndexOf("/") > 0) {
             String[] currentRouteParts = currentRoute.substring(0, (currentRoute.lastIndexOf("/"))).split("/");
-            Optional<RouteSimilarity> result = UI.getCurrent().getRouter().getRoutes()
+            Optional<RouteSimilarity> result = RouteConfiguration.forApplicationScope()
+                    .getAvailableRoutes()
                     .stream()
                     .filter(routeData -> !routeData.getUrl().equals(currentRoute))
                     .map(routeData -> new RouteSimilarity(routeData, currentRouteParts))
@@ -50,11 +50,22 @@ public class UpNavigationHelper {
     public static boolean shouldHighlight(Class<? extends Component> className, AfterNavigationEvent event) {
         String[] currentRouteParts = event.getLocation().getSegments().toArray(new String[]{});
 
-        Optional<RouteSimilarity> result = getUpNavigationHelper().registeredRoutes.entrySet().stream()
-                .map(entry -> new RouteSimilarity(entry.getKey(), currentRouteParts))
+        Optional<RouteSimilarity> result = getUpNavigationHelper().registeredRoutes.keySet().stream()
+                .map(s -> new RouteSimilarity(s, currentRouteParts))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
 
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
+    }
+
+    public static UpNavigationHelper getUpNavigationHelper() {
+        if (UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class) == null) {
+            setUpNavigationHelper();
+        }
+        return UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class);
+    }
+
+    public static void setUpNavigationHelper() {
+        UI.getCurrent().getSession().setAttribute(UpNavigationHelper.class, new UpNavigationHelper());
     }
 
     /**
@@ -67,23 +78,12 @@ public class UpNavigationHelper {
     }
 
     public void register(Class<? extends Component> className) {
-        RouteConfiguration.forApplicationScope()
+        RouteConfiguration.forSessionScope()
                 .getAvailableRoutes()
                 .stream()
                 .filter(routeData -> routeData.getNavigationTarget() == className)
                 .findFirst()
-                .ifPresent(routeData -> registeredRoutes.put(routeData, UI.getCurrent().getRouter().getUrl(className)));
-    }
-
-    public static UpNavigationHelper getUpNavigationHelper() {
-        if (UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class) == null) {
-            setUpNavigationHelper();
-        }
-        return UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class);
-    }
-
-    public static void setUpNavigationHelper() {
-        UI.getCurrent().getSession().setAttribute(UpNavigationHelper.class, new UpNavigationHelper());
+                .ifPresent(routeData -> registeredRoutes.put(routeData, RouteConfiguration.forSessionScope().getUrl(className)));
     }
 
 }
