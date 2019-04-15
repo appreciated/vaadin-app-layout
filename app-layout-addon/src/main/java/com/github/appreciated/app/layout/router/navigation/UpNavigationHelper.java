@@ -5,7 +5,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouteData;
-import com.vaadin.flow.router.RouterLink;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -17,6 +16,8 @@ import java.util.Optional;
  * and helps in finding possible parent views
  */
 public class UpNavigationHelper {
+
+    private HashMap<RouteData, String> registeredRoutes = new HashMap<>();
 
     private UpNavigationHelper() {
 
@@ -49,12 +50,42 @@ public class UpNavigationHelper {
     public static boolean shouldHighlight(Class<? extends Component> className, AfterNavigationEvent event) {
         String[] currentRouteParts = event.getLocation().getSegments().toArray(new String[]{});
         List<RouteData> availableRoutes = RouteConfiguration
-            .forRegistry(UI.getCurrent().getRouter().getRegistry()).getAvailableRoutes();
+                .forRegistry(UI.getCurrent().getRouter().getRegistry()).getAvailableRoutes();
 
         Optional<RouteSimilarity> result = availableRoutes.stream()
-            .map(ar -> new RouteSimilarity(ar, currentRouteParts))
-            .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
+                .map(ar -> new RouteSimilarity(ar, currentRouteParts))
+                .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
 
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
     }
+
+    /**
+     * We need to be able to differenciate between routes that have been added to the
+     *
+     * @param className
+     */
+    public static void registerNavigationRoute(Class<? extends Component> className) {
+        getUpNavigationHelper().register(className);
+    }
+
+    public void register(Class<? extends Component> className) {
+        RouteConfiguration.forApplicationScope()
+                .getAvailableRoutes()
+                .stream()
+                .filter(routeData -> routeData.getNavigationTarget() == className)
+                .findFirst()
+                .ifPresent(routeData -> registeredRoutes.put(routeData, UI.getCurrent().getRouter().getUrl(className)));
+    }
+
+    public static UpNavigationHelper getUpNavigationHelper() {
+        if (UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class) == null) {
+            setUpNavigationHelper();
+        }
+        return UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class);
+    }
+
+    public static void setUpNavigationHelper() {
+        UI.getCurrent().getSession().setAttribute(UpNavigationHelper.class, new UpNavigationHelper());
+    }
+
 }

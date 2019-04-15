@@ -48,7 +48,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .build();
 
         LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
-        LeftNavigationItem menu = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View9.class);
+        LeftNavigationItem menu = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View8.class);
 
         Component appMenu = LeftAppMenuBuilder
                 .get()

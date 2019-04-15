@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.router.navigation;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.RouteBaseData;
 import com.vaadin.flow.router.RouteData;
 
