@@ -83,6 +83,10 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         return componentProvider.getComponent(this, message);
     }
 
+    /**
+     * Needs to be called from UI Thread otherwise there will be issues.
+     * @param notification
+     */
     public void addNotification(T notification) {
         recentNotification = notification;
         notifications.add(notification);
@@ -202,17 +206,6 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     public abstract Function<T, String> getDateTimeFormatter();
 
     public abstract void setDateTimeFormatter(Function<T, String> formatter);
-
-    public interface NotificationsChangeListener {
-        default void onNotificationChanges(NotificationHolder holder) {
-        }
-
-        default void onNotificationAdded(Notification notification) {
-        }
-
-        default void onNotificationRemoved(Notification notification) {
-        }
-    }
 
     public interface NotificationClickListener<T> {
         void onNotificationClicked(T notification);
