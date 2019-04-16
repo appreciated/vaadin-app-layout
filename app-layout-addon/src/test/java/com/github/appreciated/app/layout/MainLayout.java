@@ -4,15 +4,15 @@ import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionItem;
+import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.top.item.TopClickableItem;
 import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
-import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -39,10 +39,9 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends AppLayoutRouterLayout {
-    DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-    DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT;
-    private Thread currentThread;
+    private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
+    private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
+    private Behaviour variant = Behaviour.LEFT_HYBRID;
 
     public MainLayout() {
         init(getLayoutConfiguration(variant));
@@ -50,27 +49,16 @@ public class MainLayout extends AppLayoutRouterLayout {
     }
 
     private void reloadNotifications() {
-        if (currentThread != null && !currentThread.isInterrupted()) {
-            currentThread.interrupt();
-        }
         badgeHolder.clearCount();
         notificationHolder.clearNotifications();
-        currentThread = new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-                for (int i = 0; i < 3; i++) {
-                    //Thread.sleep(5000);
-                    getUI().ifPresent(ui -> ui.access(() -> {
-                        addNotification(MEDIUM);
-                        badgeHolder.increase();
-                        badgeHolder.increase();
-                    }));
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        currentThread.start();
+        for (int i = 0; i < 1; i++) {
+            addNotification(MEDIUM);
+            badgeHolder.increase();
+            badgeHolder.increase();
+        }
+        addNotification(Priority.WARNING);
+        addNotification(Priority.ERROR);
+        addNotification(MEDIUM);
     }
 
     private AppLayout getLayoutConfiguration(Behaviour variant) {
@@ -81,13 +69,13 @@ public class MainLayout extends AppLayoutRouterLayout {
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
-            AppLayout layout = AppLayoutBuilder
+            return AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
                     .withAppBar(AppBarBuilder
                             .get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
@@ -142,14 +130,13 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .build())
                     .withUpNavigation()
                     .build();
-            return layout;
         } else {
             return AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder
                             .get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(TopAppMenuBuilder
                             .get()
