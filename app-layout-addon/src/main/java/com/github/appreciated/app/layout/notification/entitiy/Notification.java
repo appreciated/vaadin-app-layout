@@ -15,25 +15,42 @@ public interface Notification extends Comparable<Notification> {
 
     String getDescription();
 
-    Priority getPriority();
-
-    boolean isRead();
-
-    void setRead(boolean isRead);
-
-    boolean isSticky();
-
-    void setSticky(boolean sticky);
-
     boolean isDismissable();
 
     void setDismissable(boolean sticky);
 
     String getImage();
 
+    @Override
+    default int compareTo(Notification o) {
+        if (o == this) {
+            return 0;
+        }
+        if (this.getPriority().getValue() > 2 || o.getPriority().getValue() > 2) {
+            return getPriority().getValue().compareTo(o.getPriority().getValue());
+        } else if (this.isSticky() != o.isSticky()) {
+            return !isSticky() ? -1 : 1;
+        } else if (getPriority() != o.getPriority()) {
+            return getPriority().getValue().compareTo(o.getPriority().getValue());
+        } else if (isRead() != o.isRead()) {
+            return !isRead() ? -1 : 1;
+        } else {
+            return this.getCreationTime().compareTo(o.getCreationTime());
+        }
+    }
+
+    Priority getPriority();
+
+    boolean isSticky();
+
+    boolean isRead();
+
+    void setRead(boolean isRead);
+
     LocalDateTime getCreationTime();
 
     void setCreationTime(LocalDateTime creationTime);
 
-    String getStyle();
+    void setSticky(boolean sticky);
+
 }
