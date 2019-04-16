@@ -60,7 +60,6 @@ public class NotificationViewWithoutWrapper<T extends Notification> extends Div 
         if (clickEvent != null) {
             getElement().addEventListener("click", clickEvent);
         }
-        getElement().getClassList().add(info.getStyle());
         if (clickEvent != null) {
             add(new PaperRipple());
         }

@@ -19,11 +19,11 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     private PairComponentFactory<NotificationHolder<T>, T> componentProvider;
 
     private List<T> notifications = new ArrayList<>();
-    private List<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
+    private List<NotificationsChangeListener<T>> notificationsChangeListeners = new ArrayList<>();
     private List<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
-    private Comparator<T> comparator = Comparable::compareTo;
+    private Comparator<T> comparator = Comparator.reverseOrder();
 
     public NotificationHolder(NotificationClickListener<T> listener, T... notifications) {
         this(listener);
@@ -79,7 +79,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         return notifications;
     }
 
-    public Component getComponent(T message) {
+    private Component getComponent(T message) {
         return componentProvider.getComponent(this, message);
     }
 
@@ -99,7 +99,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         notificationsChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
     }
 
-    private void notifyAddListeners(Notification notification) {
+    private void notifyAddListeners(T notification) {
         notificationsChangeListeners.forEach(listener -> listener.onNotificationAdded(notification));
     }
 
@@ -135,7 +135,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         updateBadgeCaptions();
     }
 
-    public void addNotificationsChangeListener(NotificationsChangeListener listener) {
+    public void addNotificationsChangeListener(NotificationsChangeListener<T> listener) {
         notificationsChangeListeners.add(listener);
     }
 
@@ -199,7 +199,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         updateBadgeCaptions();
     }
 
-    private void notifyRemoveListeners(Notification notification) {
+    private void notifyRemoveListeners(T notification) {
         notificationsChangeListeners.forEach(listener -> listener.onNotificationRemoved(notification));
     }
 

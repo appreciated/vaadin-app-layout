@@ -3,12 +3,11 @@ package com.github.appreciated.app.layout.notification.entitiy;
 import com.github.appreciated.app.layout.design.Styles;
 
 public enum Priority {
-
-    ERROR(4, Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH),
-    WARNING(3, Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH),
-    HIGH(2, Styles.APP_BAR_NOTIFICATION_PRIORITY_HIGH),
-    MEDIUM(1, Styles.APP_BAR_NOTIFICATION_PRIORITY_MEDIUM),
-    LOW(0, Styles.APP_BAR_NOTIFICATION_PRIORITY_LOW);
+    ERROR(4, "var(--app-layout-notification-error-color)"),
+    WARNING(3, "var(--app-layout-notification-warning-color)"),
+    HIGH(2, "var(--app-layout-notification-highlight-color)"),
+    MEDIUM(1, "var(--app-layout-notification-highlight-color)"),
+    LOW(0, "var(--app-layout-notification-highlight-color)");
 
     private Integer priority;
 

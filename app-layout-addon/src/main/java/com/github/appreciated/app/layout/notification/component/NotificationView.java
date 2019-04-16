@@ -6,7 +6,6 @@ import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.notification.listener.NotificationListener;
 import com.github.appreciated.card.RippleClickableCard;
-import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -14,11 +13,11 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.DomListenerRegistration;
 
-import java.util.function.Function;
-
 public class NotificationView<T extends Notification> extends RippleClickableCard {
 
     private final VerticalLayout wrapper;
+    private final T info;
+    private final NotificationHolder<T> holder;
     private IconButton dismissButton;
     private DomListenerRegistration registration;
 
@@ -27,6 +26,8 @@ public class NotificationView<T extends Notification> extends RippleClickableCar
     }
 
     public NotificationView(T info, NotificationHolder<T> holder, NotificationListener listener) {
+        this.info = info;
+        this.holder = holder;
         setWidth("100%");
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
@@ -73,7 +74,6 @@ public class NotificationView<T extends Notification> extends RippleClickableCar
         add(descriptionWrapper);
         getContent().getStyle().set("background", "var(--app-layout-notification-background-color)");
         getContent().setPadding(true);
-        getElement().getClassList().add(info.getStyle());
         setNotificationListener(listener);
 
         if (info.isDismissable()) {
@@ -95,7 +95,7 @@ public class NotificationView<T extends Notification> extends RippleClickableCar
     }
 
     public void setHighlightBorder(boolean highlight) {
-        getContent().getStyle().set("border-left", "3px solid " + (highlight ? "var(--app-layout-notification-highlight-color)" : "transparent"));
+        getContent().getStyle().set("border-left", "3px solid " + (highlight ? info.getPriority().getStyle() : "transparent"));
     }
 
     public void setNotificationListener(NotificationListener listener) {
