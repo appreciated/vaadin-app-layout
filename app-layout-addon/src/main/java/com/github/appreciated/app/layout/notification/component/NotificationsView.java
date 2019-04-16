@@ -13,7 +13,6 @@ import com.vaadin.flow.server.Command;
 
 public class NotificationsView extends Composite<VerticalLayout> {
 
-  boolean blurListenerEnabled = true;
   private Boolean showAll = Boolean.FALSE;
   private NotificationHolder holder;
   private String noNotificationText = "No Notifications";
@@ -37,7 +36,7 @@ public class NotificationsView extends Composite<VerticalLayout> {
     initView();
   }
 
-  public void initView() {
+  void initView() {
     VerticalLayout content = getContent();
 
     content.removeAll();
@@ -77,10 +76,6 @@ public class NotificationsView extends Composite<VerticalLayout> {
 
   public void refreshNotificationViews(NotificationHolder component) {
     initView();
-  }
-
-  public void setBlurListenerEnabled(boolean blurListener) {
-    this.blurListenerEnabled = blurListener;
   }
 
   public void setShowAllCommand(Command showAllCommand) {

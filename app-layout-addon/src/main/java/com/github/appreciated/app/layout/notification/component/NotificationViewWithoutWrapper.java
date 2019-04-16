@@ -12,13 +12,13 @@ import com.vaadin.flow.dom.DomEventListener;
 
 import java.util.function.Function;
 
-public class NotificationViewWithoutWrapper extends Div {
+public class NotificationViewWithoutWrapper<T extends Notification> extends Div {
 
-    public NotificationViewWithoutWrapper(Notification info, NotificationHolder holder) {
+    public NotificationViewWithoutWrapper(T info, NotificationHolder<T> holder) {
         this(info, holder, null);
     }
 
-    public NotificationViewWithoutWrapper(Notification info, NotificationHolder holder, DomEventListener clickEvent) {
+    public NotificationViewWithoutWrapper(T info, NotificationHolder<T> holder, DomEventListener clickEvent) {
         getElement().getStyle().set("width", "100%").set("color", "#000000");
 
         Label title = new Label(info.getTitle());
@@ -30,7 +30,7 @@ public class NotificationViewWithoutWrapper extends Div {
         dot.getElement().getStyle()
                 .set("margin-left", "5px");
 
-        Label timeAgo = new Label(((Function<Notification, String>) holder.getDateTimeFormatter()).apply(info));
+        Label timeAgo = new Label(holder.getDateTimeFormatter().apply(info));
         timeAgo.getElement().getStyle()
                 .set("font-size", "13px")
                 .set("margin-left", "5px")
@@ -60,7 +60,6 @@ public class NotificationViewWithoutWrapper extends Div {
         if (clickEvent != null) {
             getElement().addEventListener("click", clickEvent);
         }
-        getElement().getClassList().add(info.getStyle());
         if (clickEvent != null) {
             add(new PaperRipple());
         }

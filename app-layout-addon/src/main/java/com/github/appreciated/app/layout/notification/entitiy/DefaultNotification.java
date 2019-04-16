@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.notification.entitiy;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -69,46 +70,6 @@ public class DefaultNotification implements Notification {
         this.image = image;
     }
 
-    public LocalDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    @Override
-    public void setCreationTime(LocalDateTime creationTime) {
-        Objects.requireNonNull(creationTime, "The creationTime must not be null.");
-        this.creationTime = creationTime;
-    }
-
-    public String getStyle() {
-
-        if (priority == null) {
-            return "";
-        }
-
-        return priority.getStyle();
-    }
-
-    public boolean isRead() {
-        return isRead;
-    }
-
-    public void setRead(boolean isRead) {
-        this.isRead = isRead;
-    }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public boolean isSticky() {
-        return isSticky;
-    }
-
-    public void setSticky(boolean isSticky) {
-        this.isSticky = isSticky;
-    }
-
     @Override
     public boolean isDismissable() {
         return dismissable;
@@ -120,19 +81,33 @@ public class DefaultNotification implements Notification {
     }
 
     @Override
-    public int compareTo(Notification otherNotification) {
-        if (otherNotification == this) {
-            return 0;
-        }
-        if (this.isSticky() != otherNotification.isSticky()) {
-            return !isSticky() ? -1 : 1;
-        } else if (this.getPriority() != otherNotification.getPriority()) {
-            return this.getPriority().getValue().compareTo(otherNotification.getPriority().getValue());
-        } else if (this.isRead() != otherNotification.isRead()) {
-            return !isRead() ? -1 : 1;
-        } else {
-            return this.getCreationTime().compareTo(otherNotification.getCreationTime());
-        }
+    public Priority getPriority() {
+        return priority;
     }
 
+    public boolean isSticky() {
+        return isSticky;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    @Override
+    public void setCreationTime(LocalDateTime creationTime) {
+        Objects.requireNonNull(creationTime, "The creationTime must not be null.");
+        this.creationTime = creationTime;
+    }
+
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public void setSticky(boolean isSticky) {
+        this.isSticky = isSticky;
+    }
 }

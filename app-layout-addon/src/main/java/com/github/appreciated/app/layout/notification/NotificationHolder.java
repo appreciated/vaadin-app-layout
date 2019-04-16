@@ -16,14 +16,14 @@ import java.io.Serializable;
 
 public abstract class NotificationHolder<T extends Notification> implements Serializable{
 
-    private PairComponentFactory<NotificationHolder, T> componentProvider;
+    private PairComponentFactory<NotificationHolder<T>, T> componentProvider;
 
     private List<T> notifications = new ArrayList<>();
-    private List<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
+    private List<NotificationsChangeListener<T>> notificationsChangeListeners = new ArrayList<>();
     private List<NotificationClickListener<T>> clickListeners = new ArrayList<>();
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
-    private Comparator<T> comparator = Comparable::compareTo;
+    private Comparator<T> comparator = Comparator.reverseOrder();
 
     public NotificationHolder(NotificationClickListener<T> listener, T... notifications) {
         this(listener);
@@ -51,9 +51,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         this.clickListeners.add(listener);
     }
 
-    abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+    abstract PairComponentFactory<NotificationHolder<T>, T> getComponentProvider();
 
-    public void setComponentProvider(PairComponentFactory<NotificationHolder, T> componentProvider) {
+    public void setComponentProvider(PairComponentFactory<NotificationHolder<T>, T> componentProvider) {
         this.componentProvider = componentProvider;
     }
 
@@ -79,10 +79,14 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         return notifications;
     }
 
-    public Component getComponent(T message) {
+    private Component getComponent(T message) {
         return componentProvider.getComponent(this, message);
     }
 
+    /**
+     * Needs to be called from UI Thread otherwise there will be issues.
+     * @param notification
+     */
     public void addNotification(T notification) {
         recentNotification = notification;
         notifications.add(notification);
@@ -95,7 +99,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         notificationsChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
     }
 
-    private void notifyAddListeners(Notification notification) {
+    private void notifyAddListeners(T notification) {
         notificationsChangeListeners.forEach(listener -> listener.onNotificationAdded(notification));
     }
 
@@ -131,7 +135,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         updateBadgeCaptions();
     }
 
-    public void addNotificationsChangeListener(NotificationsChangeListener listener) {
+    public void addNotificationsChangeListener(NotificationsChangeListener<T> listener) {
         notificationsChangeListeners.add(listener);
     }
 
@@ -195,24 +199,13 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         updateBadgeCaptions();
     }
 
-    private void notifyRemoveListeners(Notification notification) {
+    private void notifyRemoveListeners(T notification) {
         notificationsChangeListeners.forEach(listener -> listener.onNotificationRemoved(notification));
     }
 
-    public abstract Function<Notification, String> getDateTimeFormatter();
+    public abstract Function<T, String> getDateTimeFormatter();
 
-    public abstract void setDateTimeFormatter(Function<Notification, String> formatter);
-
-    public interface NotificationsChangeListener {
-        default void onNotificationChanges(NotificationHolder holder) {
-        }
-
-        default void onNotificationAdded(Notification notification) {
-        }
-
-        default void onNotificationRemoved(Notification notification) {
-        }
-    }
+    public abstract void setDateTimeFormatter(Function<T, String> formatter);
 
     public interface NotificationClickListener<T> {
         void onNotificationClicked(T notification);
