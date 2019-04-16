@@ -16,19 +16,17 @@ import com.vaadin.flow.dom.DomListenerRegistration;
 
 import java.util.function.Function;
 
-public class NotificationView extends RippleClickableCard {
+public class NotificationView<T extends Notification> extends RippleClickableCard {
 
     private final VerticalLayout wrapper;
     private IconButton dismissButton;
-    private NotificationListener listener;
-    private PaperRipple ripple;
     private DomListenerRegistration registration;
 
-    public NotificationView(Notification info, NotificationHolder holder) {
+    public NotificationView(T info, NotificationHolder<T> holder) {
         this(info, holder, null);
     }
 
-    public NotificationView(Notification info, NotificationHolder holder, NotificationListener listener) {
+    public NotificationView(T info, NotificationHolder<T> holder, NotificationListener listener) {
         setWidth("100%");
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
@@ -39,7 +37,7 @@ public class NotificationView extends RippleClickableCard {
         dot.getElement().getStyle()
                 .set("margin-left", "5px");
 
-        Label timeAgo = new Label(((Function<Notification, String>) holder.getDateTimeFormatter()).apply(info));
+        Label timeAgo = new Label(holder.getDateTimeFormatter().apply(info));
         timeAgo.getElement().getStyle()
                 .set("font-size", "13px")
                 .set("margin-left", "5px")
@@ -101,13 +99,8 @@ public class NotificationView extends RippleClickableCard {
     }
 
     public void setNotificationListener(NotificationListener listener) {
-        this.listener = listener;
         if (listener != null && registration == null) {
-            registration = getElement().addEventListener("click", domEvent -> {
-                if (listener != null) {
-                    listener.onClick();
-                }
-            });
+            registration = getElement().addEventListener("click", domEvent -> listener.onClick());
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.notification;
 
 import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
+import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -13,49 +14,49 @@ import java.util.function.Function;
  * This class is the default implementation of {@link NotificationHolder}
  */
 
-public class DefaultNotificationHolder extends NotificationHolder<Notification> {
+public class DefaultNotificationHolder extends NotificationHolder<DefaultNotification> {
 
-    private Function<Notification, String> dateTimeFormatter = notification -> new PrettyTime().
+    private Function<DefaultNotification, String> dateTimeFormatter = notification -> new PrettyTime().
             format(Date.from(notification.getCreationTime().atZone(ZoneId.systemDefault()).
                     toInstant()));
 
-    public DefaultNotificationHolder(NotificationClickListener<Notification> listener) {
+    public DefaultNotificationHolder(NotificationClickListener<DefaultNotification> listener) {
         super(listener);
     }
 
-    public DefaultNotificationHolder(Notification... notifications) {
+    public DefaultNotificationHolder(DefaultNotification... notifications) {
         super(notifications);
     }
 
-    public DefaultNotificationHolder(Collection<Notification> notifications) {
+    public DefaultNotificationHolder(Collection<DefaultNotification> notifications) {
         super(notifications);
     }
 
-    public DefaultNotificationHolder(NotificationClickListener<Notification> listener, Notification... notifications) {
+    public DefaultNotificationHolder(NotificationClickListener<DefaultNotification> listener, DefaultNotification... notifications) {
         super(listener, notifications);
     }
 
-    public DefaultNotificationHolder(NotificationClickListener<Notification> listener, Collection<Notification> notifications) {
+    public DefaultNotificationHolder(NotificationClickListener<DefaultNotification> listener, Collection<DefaultNotification> notifications) {
         super(listener, notifications);
     }
 
     @Override
-    public void addNotification(Notification notification) {
+    public void addNotification(DefaultNotification notification) {
         super.addNotification(notification);
     }
 
     @Override
-    PairComponentFactory<NotificationHolder, Notification> getComponentProvider() {
-        return new DefaultNotificationComponentFactory();
+    PairComponentFactory<NotificationHolder<DefaultNotification>, DefaultNotification> getComponentProvider() {
+        return new DefaultNotificationComponentFactory<>();
     }
 
     @Override
-    public Function<Notification, String> getDateTimeFormatter() {
+    public Function<DefaultNotification, String> getDateTimeFormatter() {
         return dateTimeFormatter;
     }
 
     @Override
-    public void setDateTimeFormatter(Function<Notification, String> formatter) {
+    public void setDateTimeFormatter(Function<DefaultNotification, String> formatter) {
         this.dateTimeFormatter = formatter;
     }
 }

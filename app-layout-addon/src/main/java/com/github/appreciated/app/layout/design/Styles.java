@@ -16,6 +16,8 @@ public class Styles {
 
     public static final String APP_LAYOUT = "app-layout";
     public static final String APP_BAR_NOTIFICATION_LIST = "app-layout-notification-list";
+    public static final String APP_BAR_NOTIFICATION_PRIORITY_ERROR = "app-layout-notification-priority-high";
+    public static final String APP_BAR_NOTIFICATION_PRIORITY_WARNING = "app-layout-notification-priority-high";
     public static final String APP_BAR_NOTIFICATION_PRIORITY_HIGH = "app-layout-notification-priority-high";
     public static final String APP_BAR_NOTIFICATION_PRIORITY_MEDIUM = "app-layout-notification-priority-medium";
     public static final String APP_BAR_NOTIFICATION_PRIORITY_LOW = "app-layout-notification-priority-low";

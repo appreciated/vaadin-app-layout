@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 public abstract class NotificationHolder<T extends Notification> implements Serializable{
 
-    private PairComponentFactory<NotificationHolder, T> componentProvider;
+    private PairComponentFactory<NotificationHolder<T>, T> componentProvider;
 
     private List<T> notifications = new ArrayList<>();
     private List<NotificationsChangeListener> notificationsChangeListeners = new ArrayList<>();
@@ -51,9 +51,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         this.clickListeners.add(listener);
     }
 
-    abstract PairComponentFactory<NotificationHolder, T> getComponentProvider();
+    abstract PairComponentFactory<NotificationHolder<T>, T> getComponentProvider();
 
-    public void setComponentProvider(PairComponentFactory<NotificationHolder, T> componentProvider) {
+    public void setComponentProvider(PairComponentFactory<NotificationHolder<T>, T> componentProvider) {
         this.componentProvider = componentProvider;
     }
 
@@ -199,9 +199,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         notificationsChangeListeners.forEach(listener -> listener.onNotificationRemoved(notification));
     }
 
-    public abstract Function<Notification, String> getDateTimeFormatter();
+    public abstract Function<T, String> getDateTimeFormatter();
 
-    public abstract void setDateTimeFormatter(Function<Notification, String> formatter);
+    public abstract void setDateTimeFormatter(Function<T, String> formatter);
 
     public interface NotificationsChangeListener {
         default void onNotificationChanges(NotificationHolder holder) {
