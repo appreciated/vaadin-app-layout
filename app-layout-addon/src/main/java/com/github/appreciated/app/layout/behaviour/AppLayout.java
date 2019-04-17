@@ -35,6 +35,4 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
             UpNavigationHelper.performUpNavigation((Class<? extends Component>) getContentElement().getClass());
         }
     }
-
-    public abstract HasElement getContentElement();
 }

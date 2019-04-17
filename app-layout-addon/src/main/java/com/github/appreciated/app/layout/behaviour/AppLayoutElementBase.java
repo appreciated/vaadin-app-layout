@@ -39,4 +39,8 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     default void init() {
     }
+
+    HasElement getContentElement();
+
+    void setPercentageHeight(boolean set);
 }

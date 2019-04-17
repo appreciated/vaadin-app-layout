@@ -29,6 +29,8 @@ public interface TopLayouts {
         private final HorizontalLayout appBar = new HorizontalLayout();
         private final HorizontalLayout appBarElementContainer = new HorizontalLayout();
         private final FlexLayout titleWrapper = new FlexLayout();
+        @Id("content")
+        Div contentWrapper;
         private HasElement content;
         @Id("toggle")
         private PaperIconButton paperIconButton;
@@ -155,6 +157,15 @@ public interface TopLayouts {
         }
 
         @Override
+        public void setPercentageHeight(boolean set) {
+            if (set) {
+                contentWrapper.getStyle().set("height", "100%");
+            } else {
+                contentWrapper.getStyle().remove("height");
+            }
+        }
+
+        @Override
         public Component getContentElement() {
             return (Component) content;
         }
@@ -172,6 +183,9 @@ public interface TopLayouts {
         private final Div appBarElements;
         private final Div contentElement;
         private final FlexLayout titleWrapper = new FlexLayout();
+        @Id("content")
+        Div contentWrapper;
+
         @Id("toggle")
         private PaperIconButton paperIconButton;
 
@@ -244,6 +258,7 @@ public interface TopLayouts {
             }
         }
 
+
         public Div getAppBarElements() {
             return appBarElements;
         }
@@ -293,13 +308,13 @@ public interface TopLayouts {
         }
 
         @Override
-        public void setUpNavigationEnabled(boolean enable) {
-            this.upNavigationEnabled = enable;
+        public boolean isUpNavigationEnabled() {
+            return upNavigationEnabled;
         }
 
         @Override
-        public boolean isUpNavigationEnabled() {
-            return upNavigationEnabled;
+        public void setUpNavigationEnabled(boolean enable) {
+            this.upNavigationEnabled = enable;
         }
 
         @Override
@@ -317,6 +332,15 @@ public interface TopLayouts {
         @Override
         public HasElement getContentElement() {
             return content;
+        }
+
+        @Override
+        public void setPercentageHeight(boolean set) {
+            if (set) {
+                contentWrapper.getStyle().set("height", "100%");
+            } else {
+                contentWrapper.getStyle().remove("height");
+            }
         }
     }
 }

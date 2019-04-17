@@ -22,11 +22,12 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private final FlexLayout titleWrapper = new FlexLayout();
     private final Div menuElements;
     private final Div contentHolder;
+    @Id("content")
+    Div contentWrapper;
     @Id("toggle")
     private PaperIconButton paperIconButton;
     @Id("app-bar-elements")
     private Div appBarElements;
-
     @Id("drawer")
     private AppDrawer drawer;
     private Component title;
@@ -47,9 +48,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         appBarElementWrapper.add(appBarElementContainer);
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
-        appBarElementWrapper.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
-        appBarElementContainer.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
-        titleWrapper.getStyle().set("flex-direction","var(--app-layout-app-bar-flex-direction)");
+        appBarElementWrapper.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        appBarElementContainer.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        titleWrapper.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
 
         menuElements = new Div();
         menuElements.setHeight("100%");
@@ -119,7 +120,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     public void setTitleComponent(Component component) {
         titleWrapper.replace(this.title, component);
         this.title = component;
-        this.title.getElement().getStyle().set("display","var(--app-layout-app-bar-large-object-display)");
+        this.title.getElement().getStyle().set("display", "var(--app-layout-app-bar-large-object-display)");
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
     }
 
@@ -128,13 +129,13 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     }
 
     @Override
-    public void setUpNavigationEnabled(boolean enable) {
-        this.upNavigationEnabled = enable;
+    public boolean isUpNavigationEnabled() {
+        return upNavigationEnabled;
     }
 
     @Override
-    public boolean isUpNavigationEnabled() {
-        return upNavigationEnabled;
+    public void setUpNavigationEnabled(boolean enable) {
+        this.upNavigationEnabled = enable;
     }
 
     @Override
@@ -191,6 +192,15 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
                 getElement().getStyle().set("--app-layout-drawer-width", "0px");
                 getElement().getStyle().set("--app-layout-drawer-small-width", "0px");
             }
+        }
+    }
+
+    @Override
+    public void setPercentageHeight(boolean set) {
+        if (set) {
+            contentWrapper.getStyle().set("height", "100%");
+        } else {
+            contentWrapper.getStyle().remove("height");
         }
     }
 }

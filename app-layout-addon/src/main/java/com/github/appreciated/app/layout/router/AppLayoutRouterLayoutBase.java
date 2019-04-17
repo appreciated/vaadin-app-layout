@@ -49,6 +49,10 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         if (layout.isUpNavigationEnabled()) {
             setUpNavigation(content);
         }
+        layout.setPercentageHeight(
+                currentContent.getElement().getStyle().get("height") != null &&
+                        currentContent.getElement().getStyle().get("height").endsWith("%")
+        );
     }
 
     private void setUpNavigation(HasElement content) {
