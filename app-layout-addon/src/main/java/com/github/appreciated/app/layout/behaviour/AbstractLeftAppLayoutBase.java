@@ -37,8 +37,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     private boolean upNavigationEnabled = false;
 
     AbstractLeftAppLayoutBase() {
-        getStyle().set("width", "100%")
-                .set("height", "100%");
         getClassNames().addAll(asList("app-layout-behaviour-" + getStyleName(), Styles.APP_LAYOUT));
         FlexLayout appBarContentHolder = new FlexLayout(titleWrapper, appBarElementWrapper);
         appBarContentHolder.setSizeFull();
@@ -198,7 +196,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     @Override
     public void setPercentageHeight(boolean set) {
         if (set) {
-            contentWrapper.getStyle().set("height", "100%");
+            contentWrapper.getStyle().set("height", "100vh");
         } else {
             contentWrapper.getStyle().remove("height");
         }
