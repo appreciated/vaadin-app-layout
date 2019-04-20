@@ -18,6 +18,6 @@ public class AppLayoutNotification {
     }
 
     public static void setNotificationHolder(NotificationHolder holder) {
-        UI.getCurrent().getSession().setAttribute(NotificationHolder.class, holder);
+        UIAttributes.set(NotificationHolder.class, holder);
     }
 }
