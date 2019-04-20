@@ -49,7 +49,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
                         .addToSection(new LeftHeaderItem("Menu-Header",
-                                "Version 2.1.0",
+                                "Version 2.1.1",
                                 "/frontend/images/logo.png"
                         ), HEADER)
                         .addToSection(new LeftClickableItem("Clickable Entry",
