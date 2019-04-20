@@ -12,6 +12,12 @@ public class UIAttributes {
     private UIAttributes() {
     }
 
+    /**
+     * Needs to be called from the UI Thread.
+     * @param type
+     * @param <T>
+     * @return
+     */
     public static <T> T get(Class<T> type) {
         UIAttributes session = getSession();
         UI ui = UI.getCurrent();
@@ -21,6 +27,12 @@ public class UIAttributes {
         return (T) session.map.get(ui).get(type);
     }
 
+    /**
+     * Needs to be called from the UI Thread.
+     * @param type
+     * @param <T>
+     * @return
+     */
     public static <T> void set(Class<T> type, T value) {
         UIAttributes session = getSession();
         UI ui = UI.getCurrent();
