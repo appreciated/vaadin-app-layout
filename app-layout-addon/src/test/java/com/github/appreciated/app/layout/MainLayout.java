@@ -41,7 +41,8 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 public class MainLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
     private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT_HYBRID;
+    private Behaviour variant = Behaviour.TOP_LARGE;
+    private Thread currentThread;
 
     public MainLayout() {
         init(getLayoutConfiguration(variant));
@@ -49,16 +50,27 @@ public class MainLayout extends AppLayoutRouterLayout {
     }
 
     private void reloadNotifications() {
+        if (currentThread != null && !currentThread.isInterrupted()) {
+            currentThread.interrupt();
+        }
         badgeHolder.clearCount();
         notificationHolder.clearNotifications();
-        for (int i = 0; i < 1; i++) {
-            addNotification(MEDIUM);
-            badgeHolder.increase();
-            badgeHolder.increase();
-        }
-        addNotification(Priority.WARNING);
-        addNotification(Priority.ERROR);
-        addNotification(MEDIUM);
+        currentThread = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                for (int i = 0; i < 3; i++) {
+                    //Thread.sleep(5000);
+                    getUI().ifPresent(ui -> ui.access(() -> {
+                        addNotification(MEDIUM);
+                        badgeHolder.increase();
+                        badgeHolder.increase();
+                    }));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        currentThread.start();
     }
 
     private AppLayout getLayoutConfiguration(Behaviour variant) {
@@ -69,7 +81,7 @@ public class MainLayout extends AppLayoutRouterLayout {
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
-            return AppLayoutBuilder
+            AppLayout build = AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
@@ -130,6 +142,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .build())
                     .withUpNavigation()
                     .build();
+            return build;
         } else {
             return AppLayoutBuilder
                     .get(this.variant)

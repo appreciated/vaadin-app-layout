@@ -40,10 +40,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 z-index: 1;
             }
 
-            app-drawer-layout {
-                overflow: hidden;
-            }
-
             app-toolbar {
                 height: var(--app-layout-bar-height);
                 /* Since the app-bar is visually behind the drawer its background needs to be darker */
@@ -64,9 +60,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .application-content {
                 width: 100%;
-                height: calc(100% - var(--app-layout-bar-height));
-                overflow: auto;
                 background: var(--app-layout-background);
+            }
+
+            :host([narrow]) .application-content {
+                margin-top: calc(var(--app-layout-bar-height) * -1);
+                padding-top: var(--app-layout-bar-height);
+                box-sizing: border-box;
             }
 
             app-menu {
@@ -118,7 +118,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <slot name="drawer-content"></slot>
                 </div>
             </app-drawer>
-            <div class="application-content" size="100" part="application-content" id="content">
+            <div class="application-content" part="application-content" id="content">
                 <slot name="application-content"></slot>
             </div>
         </app-drawer-layout>

@@ -21,7 +21,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="app-layout-left-responsive-hybrid-overlay-no-app-bar">
     <template>
         <style>
-
             :root {
                 --paper-badge-background: var(--app-layout-badge-background);
                 --paper-badge-text-color: var(--app-layout-badge-font-color);
@@ -33,6 +32,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-base-color);
                 top: 0px;
                 height: var(--app-layout-bar-height);
+            }
+
+            app-header-layout {
+                z-index: 1;
             }
 
             app-toolbar {
@@ -50,15 +53,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             #app-bar-elements {
                 min-width: 0;
             }
-
-            app-drawer-layout {
-                overflow: hidden;
-            }
-            /*
-            app-header {
-                z-index: 0;
-            }
-            */
 
             #drawer {
                 --app-drawer-content-container: {
@@ -100,14 +94,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .application-content {
                 width: 100%;
-                height: 100%;
-                overflow: auto;
                 background: var(--app-layout-background);
             }
 
             :host([narrow]) .application-content {
+                margin-top: calc(var(--app-layout-bar-height) * -1);
+                padding-top: var(--app-layout-bar-height);
                 box-sizing: border-box;
-                height: calc(100% - var(--app-layout-bar-height));
             }
 
             #drawerLayout {
@@ -155,7 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <slot name="drawer-content"></slot>
                 </div>
             </app-drawer>
-            <div class="application-content" size="100" part="application-content" id="content">
+            <div class="application-content" part="application-content" id="content">
                 <slot name="application-content"></slot>
             </div>
         </app-drawer-layout>

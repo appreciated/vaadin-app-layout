@@ -34,10 +34,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: var(--app-layout-bar-height);
             }
 
-            app-header-layout {
-                overflow: hidden;
-            }
-
             app-toolbar {
                 height: var(--app-layout-bar-height);
                 background: var(--app-layout-bar-background-color);
@@ -103,10 +99,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .application-content {
                 width: 100%;
-                height: 100%;
                 padding-top: var(--app-layout-bar-height);
                 box-sizing: border-box;
-                overflow: auto;
                 background: var(--app-layout-background);
             }
 
@@ -176,7 +170,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <slot name="drawer-content"></slot>
                     </div>
                 </app-drawer>
-                <div class="application-content" size="100" part="application-content" id="content">
+                <div class="application-content" part="application-content" id="content">
                     <slot name="application-content"></slot>
                 </div>
             </app-drawer-layout>
