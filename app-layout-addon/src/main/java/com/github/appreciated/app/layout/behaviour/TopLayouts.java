@@ -13,6 +13,8 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.server.InitialPageSettings;
+import com.vaadin.flow.server.PageConfigurator;
 
 import java.util.Arrays;
 
@@ -20,7 +22,7 @@ public interface TopLayouts {
 
     @Tag("app-layout-top")
     @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top.html")
-    class Top extends AppLayout {
+    class Top extends AppLayout implements PageConfigurator {
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
         private final Div appBarElements;
         private final Div contentHolder;
@@ -168,11 +170,16 @@ public interface TopLayouts {
         public Component getContentElement() {
             return (Component) content;
         }
+
+        @Override
+        public void configurePage(InitialPageSettings settings) {
+            settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
+        }
     }
 
     @Tag("app-layout-top-large")
     @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top-large.html")
-    class TopLarge extends AppLayout {
+    class TopLarge extends AppLayout implements PageConfigurator {
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
         private final VerticalLayout contentPanel = new VerticalLayout();
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
@@ -340,6 +347,11 @@ public interface TopLayouts {
             } else {
                 contentWrapper.getStyle().remove("height");
             }
+        }
+
+        @Override
+        public void configurePage(InitialPageSettings settings) {
+            settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
         }
     }
 }

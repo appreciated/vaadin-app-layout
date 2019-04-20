@@ -17,7 +17,7 @@ import static java.util.Arrays.asList;
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
-public abstract class AbstractLeftAppLayoutBase extends AppLayout implements PageConfigurator {
+public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     private final FlexLayout appBarElementWrapper = new FlexLayout();
     private final FlexLayout appBarElementContainer = new FlexLayout();
@@ -202,11 +202,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout implements Pag
         } else {
             contentWrapper.getStyle().remove("height");
         }
-    }
-
-    @Override
-    public void configurePage(InitialPageSettings settings) {
-        settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
     }
 
 }
