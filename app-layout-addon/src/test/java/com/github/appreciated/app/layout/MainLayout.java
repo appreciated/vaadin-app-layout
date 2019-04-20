@@ -4,15 +4,15 @@ import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.behaviour.Behaviour;
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
+import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionItem;
+import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.top.item.TopClickableItem;
 import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
-import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
@@ -22,7 +22,6 @@ import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.BodySize;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -39,11 +38,10 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@BodySize(width = "100%",height = "100%")
 public class MainLayout extends AppLayoutRouterLayout {
-    DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-    DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR;
+    private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
+    private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
+    private Behaviour variant = Behaviour.TOP_LARGE;
     private Thread currentThread;
 
     public MainLayout() {
@@ -83,13 +81,13 @@ public class MainLayout extends AppLayoutRouterLayout {
 
             notificationHolder.bind(home.getBadge());
             badgeHolder.bind(menu.getBadge());
-            AppLayout layout = AppLayoutBuilder
+            AppLayout build = AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withIcon("/frontend/images/logo.png")
                     .withAppBar(AppBarBuilder
                             .get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
@@ -144,14 +142,14 @@ public class MainLayout extends AppLayoutRouterLayout {
                             .build())
                     .withUpNavigation()
                     .build();
-            return layout;
+            return build;
         } else {
             return AppLayoutBuilder
                     .get(this.variant)
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder
                             .get()
-                            .add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder))
+                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(TopAppMenuBuilder
                             .get()

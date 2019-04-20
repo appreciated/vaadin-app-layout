@@ -9,13 +9,15 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.server.InitialPageSettings;
+import com.vaadin.flow.server.PageConfigurator;
 
 import static java.util.Arrays.asList;
 
 /**
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
-public abstract class AbstractLeftAppLayoutBase extends AppLayout {
+public abstract class AbstractLeftAppLayoutBase extends AppLayout implements PageConfigurator {
 
     private final FlexLayout appBarElementWrapper = new FlexLayout();
     private final FlexLayout appBarElementContainer = new FlexLayout();
@@ -201,4 +203,10 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
             contentWrapper.getStyle().remove("height");
         }
     }
+
+    @Override
+    public void configurePage(InitialPageSettings settings) {
+        settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
+    }
+
 }

@@ -35,7 +35,7 @@ public interface TopLayouts {
         @Id("toggle")
         private PaperIconButton paperIconButton;
         private Component title;
-        private boolean enableUpNavigation;
+        private boolean upNavigationEnabled;
 
         Top() {
             contentPanel.setSizeFull();
@@ -141,13 +141,12 @@ public interface TopLayouts {
 
         @Override
         public boolean isUpNavigationEnabled() {
-            return false;
+            return upNavigationEnabled;
         }
-
 
         @Override
         public void setUpNavigationEnabled(boolean enable) {
-            this.enableUpNavigation = enable;
+            this.upNavigationEnabled = enable;
         }
 
         @Override
@@ -159,7 +158,7 @@ public interface TopLayouts {
         @Override
         public void setPercentageHeight(boolean set) {
             if (set) {
-                contentWrapper.getStyle().set("height", "100%");
+                contentWrapper.getStyle().set("height", "100vh");
             } else {
                 contentWrapper.getStyle().remove("height");
             }
@@ -337,7 +336,7 @@ public interface TopLayouts {
         @Override
         public void setPercentageHeight(boolean set) {
             if (set) {
-                contentWrapper.getStyle().set("height", "100%");
+                contentWrapper.getStyle().set("height", "100vh");
             } else {
                 contentWrapper.getStyle().remove("height");
             }
