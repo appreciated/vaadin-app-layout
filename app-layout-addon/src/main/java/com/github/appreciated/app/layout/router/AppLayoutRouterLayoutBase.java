@@ -2,9 +2,14 @@ package com.github.appreciated.app.layout.router;
 
 import com.github.appreciated.app.layout.behaviour.AppLayout;
 import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
-import com.vaadin.flow.component.*;
+import com.github.appreciated.app.layout.session.UIAttributes;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouterLayout;
 
 /**
@@ -13,8 +18,6 @@ import com.vaadin.flow.router.RouterLayout;
  */
 @HtmlImport("frontend://src/com/github/appreciated/app-layout/app-layout-styles.html")
 public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterLayout {
-
-    public static final String SESSION_ATTRIBUTE_APP_LAYOUT = "app-layout-instance";
 
     private HasElement currentContent;
     private AppLayout layout;
@@ -25,7 +28,7 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
     }
 
     public static AppLayout getCurrent() {
-        return (AppLayout) UI.getCurrent().getSession().getAttribute(SESSION_ATTRIBUTE_APP_LAYOUT);
+        return UIAttributes.get(AppLayout.class);
     }
 
     public void init(AppLayout layout) {
@@ -39,7 +42,7 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         getContent().removeAll();
         this.layout = layout;
         getContent().add(layout);
-        UI.getCurrent().getSession().setAttribute(SESSION_ATTRIBUTE_APP_LAYOUT, layout);
+        UIAttributes.set(AppLayout.class, layout);
     }
 
     @Override
@@ -49,6 +52,10 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         if (layout.isUpNavigationEnabled()) {
             setUpNavigation(content);
         }
+        layout.setPercentageHeight(
+                currentContent.getElement().getStyle().get("height") != null &&
+                        currentContent.getElement().getStyle().get("height").endsWith("%")
+        );
     }
 
     private void setUpNavigation(HasElement content) {
