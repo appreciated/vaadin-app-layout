@@ -135,7 +135,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     public AppLayoutBuilder withIcon(String url) {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
-        image.getStyle().set("margin","calc(calc(var(--app-layout-bar-height) - var(--app-layout-menu-button-height)) / 2)");
+        image.getStyle().set("margin","var(--app-layout-space-s)");
         return withIconComponent(image);
     }
 
