@@ -28,6 +28,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-drawer-scrim-background: rgba(0, 0, 0, 0);
             }
 
+            slot[name="app-bar-content"]::slotted(*) {
+                pointer-events: inherit;
+            }
+
             #content {
                 padding-top: var(--app-layout-bar-height);
                 box-sizing: border-box;

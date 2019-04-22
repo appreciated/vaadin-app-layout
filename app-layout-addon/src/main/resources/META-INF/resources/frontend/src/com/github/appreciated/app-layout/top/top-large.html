@@ -23,6 +23,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --paper-badge-text-color: var(--app-layout-badge-font-color);
             }
 
+            slot[name="app-bar-content"]::slotted(*) {
+                pointer-events: inherit;
+            }
+
             app-toolbar {
                 height: var(--app-layout-bar-height);
                 padding: 0 0 0 16px;

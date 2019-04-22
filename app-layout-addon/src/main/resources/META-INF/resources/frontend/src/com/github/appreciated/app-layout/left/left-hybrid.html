@@ -26,6 +26,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --primary-color: var(--app-layout-primary-color);
             }
 
+            slot[name="app-bar-content"]::slotted(*) {
+                pointer-events: inherit;
+            }
+
             app-header {
                 right: 0px !important;
                 background: var(--app-layout-bar-background-base-color);
