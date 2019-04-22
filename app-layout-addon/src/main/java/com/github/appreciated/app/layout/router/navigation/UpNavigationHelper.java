@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.router.navigation;
 
+import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -58,14 +59,14 @@ public class UpNavigationHelper {
     }
 
     public static UpNavigationHelper getUpNavigationHelper() {
-        if (UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class) == null) {
+        if (UIAttributes.get(UpNavigationHelper.class) == null) {
             setUpNavigationHelper();
         }
-        return UI.getCurrent().getSession().getAttribute(UpNavigationHelper.class);
+        return UIAttributes.get(UpNavigationHelper.class);
     }
 
     public static void setUpNavigationHelper() {
-        UI.getCurrent().getSession().setAttribute(UpNavigationHelper.class, new UpNavigationHelper());
+        UIAttributes.set(UpNavigationHelper.class, new UpNavigationHelper());
     }
 
     /**

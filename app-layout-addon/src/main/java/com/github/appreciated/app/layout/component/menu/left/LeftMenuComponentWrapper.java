@@ -20,7 +20,7 @@ public class LeftMenuComponentWrapper extends Div implements NavigationElementCo
         setWidth("100%");
         menu.setHeight("100%");
         menu.getStyle().set("overflow", "auto");
-        //menu.getStyle().set("padding", "var(--app-layout-menu-padding)");
+        menu.getStyle().set("padding", "var(--app-layout-menu-padding)");
     }
 
     @Override

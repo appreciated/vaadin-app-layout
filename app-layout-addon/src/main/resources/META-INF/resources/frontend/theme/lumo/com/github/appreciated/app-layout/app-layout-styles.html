@@ -18,6 +18,9 @@
             --app-layout-bar-font-color: var(--lumo-contrast-70pct);
             --app-layout-bar-shadow: var(--lumo-box-shadow-s);
             --app-layout-bar-z-index: 10;
+            --app-layout-bar-padding: 0 var(--app-layout-space-s);
+            --app-layout-bar-padding-small: 0 0;
+            --app-layout-bar-padding-double: 0 0;
             --app-layout-drawer-shadow: var(--lumo-box-shadow-s);
             --app-layout-drawer-background-base-color: var(--lumo-base-color);
             --app-layout-drawer-background-color: var(--lumo-base-color);
@@ -29,9 +32,9 @@
             --app-layout-menu-button-padding: 0 var(--app-layout-space-s);
             --app-layout-menu-button-margin: 0;
             --app-layout-menu-toggle-button-padding: var(--app-layout-space-s);
-            --app-layout-menu-padding: var(--lumo-space-xs);
+            --app-layout-menu-padding: var(--app-layout-space-s) 0;
             --app-layout-menu-button-border-radius: var(--lumo-border-radius);
-            --app-layout-menu-submenu-max-height: 999px;
+            --app-layout-menu-header-padding: var(--app-layout-space-s) calc(var(--app-layout-space-s) * 2) 0 calc(var(--app-layout-space-s) * 2);
             --app-layout-app-selected-bg-color: var(--lumo-primary-color-10pct);
             --app-layout-app-color: var(--lumo-secondary-text-color);
             --app-layout-badge-width: calc(var(--lumo-size-s) * 0.8);
@@ -41,8 +44,8 @@
             --app-layout-badge-color: var(--app-layout-bar-font-color);
             --app-layout-badge-small-width: 5px;
             --app-layout-badge-small-height: 5px;
-            --app-layout-badge-small-top: 25%;
-            --app-layout-badge-small-right: 1px;
+            --app-layout-badge-small-top: 22%;
+            --app-layout-badge-small-right: -5px;
             --app-layout-badge-background: var(--lumo-primary-color);
             --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
             --app-layout-notification-highlight-color: var(--app-layout-primary-color);
@@ -73,6 +76,10 @@
             --app-layout-bar-font-color: var(--lumo-contrast-90);
             --app-layout-drawer-background-color: var(--lumo-contrast-5pct);
             --app-layout-notification-background-color: var(--lumo-contrast-10pct);
+        }
+
+        body {
+            overflow-x: hidden;
         }
 
         .app-menu-item {

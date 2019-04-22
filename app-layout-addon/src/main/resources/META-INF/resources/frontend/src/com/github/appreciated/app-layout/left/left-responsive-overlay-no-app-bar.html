@@ -44,16 +44,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: var(--app-layout-bar-height);
             }
 
-            app-drawer-layout {
-                overflow: hidden;
-            }
-
             app-toolbar {
                 height: var(--app-layout-bar-height);
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0;
+                padding: var(--app-layout-bar-padding);
                 position: absolute;
                 top: 0px;
                 left: 0px;
@@ -66,9 +62,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .application-content {
                 width: 100%;
-                height: 100%;
-                overflow: auto;
                 background: var(--app-layout-background);
+            }
+
+            :host([narrow]) .application-content {
+                margin-top: calc(var(--app-layout-bar-height) * -1);
+                padding-top: var(--app-layout-bar-height);
+                box-sizing: border-box;
             }
 
             #drawer {
@@ -93,9 +93,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 14px);
-                height: calc(var(--app-layout-bar-height) - 14px);
-                margin: 7px;
+                width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                margin: 0 var(--app-layout-space-s) 0 0;
             }
 
             :host(:not([narrow])) #toggle[icon="menu"] {
@@ -111,7 +111,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             :host([narrow]) .application-content {
-                height: calc(100% - var(--app-layout-bar-height));
             }
         </style>
         <app-drawer-layout id="drawerLayout" fullbleed>
@@ -130,7 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <slot name="drawer-content"></slot>
                 </div>
             </app-drawer>
-            <div class="application-content" size="100" part="application-content" id="content">
+            <div class="application-content" part="application-content" id="content">
                <slot name="application-content"></slot>
             </div>
         </app-drawer-layout>

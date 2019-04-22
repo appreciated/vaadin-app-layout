@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.entity;
 
+import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.UI;
 
 import java.util.Optional;
@@ -13,18 +14,18 @@ public class AppLayoutBadges {
         return Optional.empty();
     }
 
+    public static BadgesHolder getBadgesHolder() {
+        BadgesHolder badges = UIAttributes.get(BadgesHolder.class);
+        if (badges == null) {
+            badges = new BadgesHolder();
+            UIAttributes.set(BadgesHolder.class, badges);
+        }
+        return badges;
+    }
+
     public static void addBadgeWithIdentifier(DefaultBadgeHolder holder, String identifier) {
         BadgesHolder badges = getBadgesHolder();
 
-        UI.getCurrent().getSession().setAttribute(DefaultBadgeHolder.class, holder);
-    }
-
-    public static BadgesHolder getBadgesHolder() {
-        BadgesHolder badges = UI.getCurrent().getSession().getAttribute(BadgesHolder.class);
-        if (badges == null) {
-            badges = new BadgesHolder();
-            UI.getCurrent().getSession().setAttribute(BadgesHolder.class, badges);
-        }
-        return badges;
+        UIAttributes.set(DefaultBadgeHolder.class, holder);
     }
 }

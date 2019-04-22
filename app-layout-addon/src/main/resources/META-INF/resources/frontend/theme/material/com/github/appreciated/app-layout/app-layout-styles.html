@@ -29,8 +29,11 @@
             --app-layout-bar-background-base-color: var(--material-background-color);
             --app-layout-bar-background-color: var(--material-background-color);
             --app-layout-bar-font-color: var(--material-body-text-color);
-            --app-layout-bar-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+            --app-layout-bar-shadow: var(--lumo-box-shadow-s);
             --app-layout-bar-z-index: 10;
+            --app-layout-bar-padding: 0 var(--app-layout-space-s);
+            --app-layout-bar-padding-small: 0 0;
+            --app-layout-bar-padding-double: 0 0;
             --app-layout-drawer-shadow: var(--shadow-elevation-2dp_-_box-shadow);
             --app-layout-drawer-background-base-color: var(--material-background-color);
             --app-layout-drawer-background-color: var(--material-background-color);
@@ -42,9 +45,9 @@
             --app-layout-menu-button-padding: 0 var(--material-space-s);
             --app-layout-menu-button-margin: 0;
             --app-layout-menu-toggle-button-padding: var(--material-space-s);
-            --app-layout-menu-padding: var(--material-space-xs);
+            --app-layout-menu-padding: var(--app-layout-space-s) 0;
             --app-layout-menu-button-border-radius: 3px;
-            --app-layout-menu-submenu-max-height: 999px;
+            --app-layout-menu-header-padding: var(--app-layout-space-s) calc(var(--app-layout-space-s) * 2) 0 calc(var(--app-layout-space-s) * 2);
             --app-layout-app-selected-bg-color: var(--material-secondary-background-color);
             --app-layout-app-color: var(--material-secondary-text-color);
             --app-layout-badge-width: calc(var(--material-size-s) * 0.8);
@@ -54,8 +57,8 @@
             --app-layout-badge-color: var(--app-layout-bar-font-color);
             --app-layout-badge-small-width: 5px;
             --app-layout-badge-small-height: 5px;
-            --app-layout-badge-small-top: 25%;
-            --app-layout-badge-small-right: 1px;
+            --app-layout-badge-small-top: 22%;
+            --app-layout-badge-small-right: -5px;
             --app-layout-badge-background: var(--material-primary-color);
             --app-layout-badge-font-color: var(--material-primary-contrast-color);
             --app-layout-notification-highlight-color: var(--app-layout-primary-color);
@@ -86,6 +89,10 @@
             --app-layout-bar-font-color: var(--material-body-text-color);
             --app-layout-drawer-background-color: var(--material-secondary-background-color);
             --app-layout-notification-background-color: var(--material-secondary-background-color);
+        }
+
+        body {
+            overflow-x: hidden;
         }
 
         .app-menu-item {

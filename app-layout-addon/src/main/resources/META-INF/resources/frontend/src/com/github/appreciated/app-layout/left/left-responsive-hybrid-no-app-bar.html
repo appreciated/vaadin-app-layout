@@ -40,7 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0;
+                padding: var(--app-layout-bar-padding);
             }
 
             #app-bar-elements {
@@ -82,15 +82,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 14px);
-                height: calc(var(--app-layout-bar-height) - 14px);
-                margin: 7px;
+                width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                margin: 0 var(--app-layout-space-s) 0 0;
             }
 
             .application-content {
                 width: 100%;
-                height: 100%;
-                overflow: auto;
                 background: var(--app-layout-background);
             }
 
@@ -137,6 +135,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --app-layout-menu-button-margin: 0;
                 --app-layout-menu-button-padding: 0 11px;
                 --app-layout-menu-padding: 0;
+                --app-layout-bar-padding: var(--app-layout-bar-padding-small);
             }
 
             :host(:not([narrow]):not([wide])) #drawerLayout .app-menu-item {
@@ -171,7 +170,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <slot name="drawer-content"></slot>
                     </div>
                 </app-drawer>
-                <div class="application-content" size="100" part="application-content" id="content">
+                <div class="application-content" part="application-content" id="content">
                     <slot name="application-content"></slot>
                 </div>
             </app-drawer-layout>
