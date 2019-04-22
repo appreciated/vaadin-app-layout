@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.router.navigation;
 import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.Location;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouteData;
 
@@ -48,8 +48,8 @@ public class UpNavigationHelper {
         getClosestRoute(currentNavigation).ifPresent(routeData -> UI.getCurrent().navigate(routeData.getUrl()));
     }
 
-    public static boolean shouldHighlight(Class<? extends Component> className, AfterNavigationEvent event) {
-        String[] currentRouteParts = event.getLocation().getSegments().toArray(new String[]{});
+    public static boolean shouldHighlight(Class<? extends Component> className, Location location) {
+        String[] currentRouteParts = location.getSegments().toArray(new String[]{});
 
         Optional<RouteSimilarity> result = getUpNavigationHelper().registeredRoutes.keySet().stream()
                 .map(s -> new RouteSimilarity(s, currentRouteParts))
