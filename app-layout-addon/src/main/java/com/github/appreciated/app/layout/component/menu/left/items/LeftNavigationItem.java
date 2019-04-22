@@ -10,8 +10,6 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.HighlightAction;
-import com.vaadin.flow.router.RouterLink;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that
@@ -47,16 +45,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         this.className = className;
         UpNavigationHelper.registerNavigationRoute(className);
         setRoute(UI.getCurrent().getRouter(), className);
-        setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event));
-        HighlightAction<RouterLink> action = getHighlightAction();
-
-        setHighlightAction((routerLink, highlight) -> {
-            action.highlight(routerLink, highlight);
-            if (parent != null && highlight) {
-                parent.setActiveNavigationElement(this);
-            }
-            this.highlight = highlight;
-        });
+        setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event.getLocation()));
     }
 
     public LeftNavigationItem(String caption, VaadinIcon icon, Class<? extends Component> className) {
@@ -85,8 +74,8 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        if (parent != null && highlight) {
-            parent.setActiveNavigationElement(null);
+        if (parent != null) {
+            parent.setActiveNavigationElement(UpNavigationHelper.shouldHighlight(className, event.getLocation()) ? this : null);
         }
     }
 }
