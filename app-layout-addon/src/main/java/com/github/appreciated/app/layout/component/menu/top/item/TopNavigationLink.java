@@ -9,16 +9,17 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.router.HighlightAction;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.RouterLink;
 
-public class TopNavigationLink extends RouterLink implements NavigationElement {
-    private Class<? extends Component> view;
+public class TopNavigationLink extends RouterLink implements NavigationElement, BeforeEnterObserver {
+    private Class<? extends Component> className;
     private NavigationElementContainer parent;
 
-    public TopNavigationLink(String caption, Icon icon, Class<? extends Component> view) {
+    public TopNavigationLink(String caption, Icon icon, Class<? extends Component> className) {
         super();
-        this.view = view;
+        this.className = className;
         HorizontalLayout wrapper = new HorizontalLayout();
         if (icon != null){
             wrapper.add(icon);
@@ -29,18 +30,17 @@ public class TopNavigationLink extends RouterLink implements NavigationElement {
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setHeight("100%");
         add(wrapper);
-        UpNavigationHelper.registerNavigationRoute(view);
-        setRoute(UI.getCurrent().getRouter(), view);
-        setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(view, event));
-        HighlightAction<RouterLink> action = getHighlightAction();
-        setHighlightAction((routerLink, highlight) -> {
-            action.highlight(routerLink, highlight);
-            if (parent != null && highlight) {
-                parent.setActiveNavigationElement(this);
-            }
-        });
+        UpNavigationHelper.registerNavigationRoute(className);
+        setRoute(UI.getCurrent().getRouter(), className);
+        setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event.getLocation()));
     }
 
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        if (parent != null) {
+            parent.setActiveNavigationElement(UpNavigationHelper.shouldHighlight(className, event.getLocation()) ? this : null);
+        }
+    }
 
     @Override
     public void setNavigationElementContainer(NavigationElementContainer parent) {

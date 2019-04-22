@@ -9,14 +9,17 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.IronIcon;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.router.BeforeLeaveEvent;
+import com.vaadin.flow.router.BeforeLeaveObserver;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
  */
-public class LeftSubmenu extends Composite<IronCollapseLayout> implements NavigationElementContainer {
+public class LeftSubmenu extends Composite<IronCollapseLayout> implements NavigationElementContainer, AfterNavigationObserver, BeforeLeaveObserver {
     private final LeftSubmenuContainer submenuContainer;
     private final Div toggleWrapper;
     private final LeftIconItem item;
@@ -24,6 +27,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     private final String caption;
     private final Icon icon;
     private NavigationElementContainer parent;
+    private NavigationElement active;
+    private boolean close = true;
 
     public LeftSubmenu(String caption, Icon icon, List<Component> submenuElements) {
         submenuContainer = new LeftSubmenuContainer();
@@ -37,7 +42,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
         item = new LeftIconItem(caption, icon);
         item.setHighlightCondition((routerLink, event) -> false);
-        item.setHighlightAction((routerLink, highlight) -> {});
+        item.setHighlightAction((routerLink, highlight) -> {
+        });
         ironIcon = new IronIcon("icons", "expand-more");
 
         ironIcon.getElement().getStyle()
@@ -46,7 +52,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
                 .set("right", "var(--app-layout-menu-toggle-button-padding)")
                 .set("top", "50%")
                 .set("transform", "translate(0%,-50%)")
-                .set("pointer-events","none");
+                .set("pointer-events", "none");
 
         toggleWrapper.add(item, ironIcon);
         getContent().getElement().appendChild(toggleWrapper.getElement());
@@ -72,11 +78,9 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     @Override
     public void setActiveNavigationElement(NavigationElement active) {
         if (active != null) {
-            item.getElement().setAttribute("highlight", true);
-        } else {
-            item.getElement().removeAttribute("highlight");
+            this.active = active;
         }
-        if (this.parent != null){
+        if (this.parent != null) {
             parent.setActiveNavigationElement(active);
         }
     }
@@ -91,5 +95,31 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
 
     public IronIcon getIronIcon() {
         return ironIcon;
+    }
+
+    public void setCloseMenuOnNavigation(boolean close) {
+        this.close = close;
+    }
+
+    public LeftSubmenu withCloseMenuOnNavigation(boolean close) {
+        this.close = close;
+        return this;
+    }
+
+    @Override
+    public void afterNavigation(AfterNavigationEvent event) {
+        if (active != null) {
+            item.getElement().setAttribute("highlight", true);
+        } else {
+            item.getElement().removeAttribute("highlight");
+            if (this.close) {
+                getContent().getIronCollapse().hide();
+            }
+        }
+    }
+
+    @Override
+    public void beforeLeave(BeforeLeaveEvent event) {
+        this.active = null;
     }
 }
