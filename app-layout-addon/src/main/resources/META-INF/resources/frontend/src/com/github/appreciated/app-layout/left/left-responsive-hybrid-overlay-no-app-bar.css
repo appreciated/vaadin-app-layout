@@ -19,5 +19,5 @@ app-layout-left-responsive-hybrid-overlay-no-app-bar:not([narrow]):not([wide]) #
 }
 
 app-layout-left-responsive-hybrid-overlay-no-app-bar:not([narrow]):not([wide]) #menu-header-wrapper {
-    padding: 4px;
+    --app-layout-menu-header-padding: 4px;
 }

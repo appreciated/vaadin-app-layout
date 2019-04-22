@@ -7,5 +7,5 @@ app-layout-left-responsive-small:not([narrow]) #menu-header-subtitle
 }
 
 app-layout-left-responsive-small:not([narrow]) #menu-header-wrapper {
-    padding: 4px;
+    --app-layout-menu-header-padding: 4px;
 }
