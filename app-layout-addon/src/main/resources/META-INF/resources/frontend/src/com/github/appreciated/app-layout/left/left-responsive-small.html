@@ -36,6 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --paper-badge-background: var(--app-layout-badge-background);
                 --paper-badge-text-color: var(--app-layout-badge-font-color);
                 --primary-color: var(--app-layout-primary-color);
+                --app-layout-bar-padding: var(--app-layout-bar-padding-small);
             }
 
             app-header {
@@ -54,7 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0;
+                padding: var(--app-layout-bar-padding);
             }
 
             #app-bar-elements {
@@ -103,9 +104,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 14px);
-                height: calc(var(--app-layout-bar-height) - 14px);
-                margin: 7px;
+                width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                margin: 0 var(--app-layout-space-s) 0 0;
             }
 
            :host(:not([narrow])) #toggle {

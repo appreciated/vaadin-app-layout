@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: var(--app-layout-bar-background-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
-                padding: 0;
+                padding: var(--app-layout-bar-padding);
             }
 
             #app-bar-elements {
@@ -88,9 +88,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             #toggle {
                 flex-shrink: 0;
-                width: calc(var(--app-layout-bar-height) - 14px);
-                height: calc(var(--app-layout-bar-height) - 14px);
-                margin: 7px;
+                width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
+                margin: 0 var(--app-layout-space-s) 0 0;
             }
 
             app-menu {
@@ -129,6 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :host(:not([narrow])) app-toolbar {
                 --app-layout-app-bar-flex-direction: column;
                 --app-layout-app-bar-large-object-display: none;
+                --app-layout-bar-padding: var(--app-layout-bar-padding-double);
             }
 
             :host(:not([narrow])) #drawer {
@@ -145,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 flex: 1 1;
             }
             :host(:not([narrow])) .app-bar-content {
-                padding: 8px 0;
+                padding: var(--app-layout-bar-padding);
                 box-sizing: border-box;
                 height: unset !important;
             }
