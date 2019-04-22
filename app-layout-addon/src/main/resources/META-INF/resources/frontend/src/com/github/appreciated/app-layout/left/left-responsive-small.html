@@ -31,12 +31,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="app-layout-left-responsive-small">
     <template>
         <style>
-
             :root {
                 --paper-badge-background: var(--app-layout-badge-background);
                 --paper-badge-text-color: var(--app-layout-badge-font-color);
                 --primary-color: var(--app-layout-primary-color);
                 --app-layout-bar-padding: var(--app-layout-bar-padding-small);
+            }
+
+            slot[name="app-bar-content"]::slotted(*) {
+                pointer-events: inherit;
             }
 
             app-header {
