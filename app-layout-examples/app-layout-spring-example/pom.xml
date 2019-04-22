@@ -15,7 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <vaadin.version>13.0.2</vaadin.version>
+        <vaadin.version>13.0.4</vaadin.version>
     </properties>
 
     <parent>
