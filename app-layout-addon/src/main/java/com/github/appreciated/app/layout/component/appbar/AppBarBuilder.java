@@ -4,7 +4,6 @@ import com.github.appreciated.app.layout.builder.ComponentBuilder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.ArrayList;
 import java.util.List;
