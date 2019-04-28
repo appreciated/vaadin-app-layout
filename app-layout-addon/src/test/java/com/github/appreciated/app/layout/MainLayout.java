@@ -41,7 +41,7 @@ import static com.github.appreciated.app.layout.notification.entitiy.Priority.ME
 public class MainLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
     private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT_RESPONSIVE;
+    private Behaviour variant = Behaviour.LEFT_RESPONSIVE_HYBRID;
     private Thread currentThread;
 
     public MainLayout() {
