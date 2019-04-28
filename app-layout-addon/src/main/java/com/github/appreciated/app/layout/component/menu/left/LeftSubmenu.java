@@ -51,7 +51,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
                 .set("position", "absolute")
                 .set("right", "var(--app-layout-menu-toggle-button-padding)")
                 .set("top", "50%")
-                .set("transform", "translate(0%,-50%)")
+                .set("transform", "translate(0%, -50%) rotate(0deg)")
+                .set("transition", "transform 0.3s ease")
                 .set("pointer-events", "none");
 
         toggleWrapper.add(item, ironIcon);
