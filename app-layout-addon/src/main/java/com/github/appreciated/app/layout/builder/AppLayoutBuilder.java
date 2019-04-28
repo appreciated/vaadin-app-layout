@@ -49,6 +49,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
         Span span = new Span(title);
         span.setWidth("100%");
         span.getStyle()
+                .set("margin-left", "var(--app-layout-menu-toggle-button-padding")
                 .set("white-space", "nowrap")
                 .set("overflow", "hidden")
                 .set("text-overflow", "ellipsis");
