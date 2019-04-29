@@ -19,7 +19,7 @@ public abstract class BaseTest {
 
     @BeforeClass
     public static void init() {
-        WebDriverManager.chromedriver().version("73.0.3683.68").setup();
+        WebDriverManager.chromedriver().version("74.0.3729.6").setup();
         driver = new ChromeDriver();
         WebDriverRunner.setWebDriver(driver);
     }
