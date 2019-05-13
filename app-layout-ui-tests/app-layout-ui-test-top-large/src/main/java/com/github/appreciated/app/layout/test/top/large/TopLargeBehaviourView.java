@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.test.top.large;
 
-import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.test.top.large.view.View1;
 import com.github.appreciated.app.layout.test.top.large.view.View2;
 import com.github.appreciated.app.layout.test.top.large.view.View3;

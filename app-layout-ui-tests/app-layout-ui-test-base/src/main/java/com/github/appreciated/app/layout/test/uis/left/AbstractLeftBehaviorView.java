@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.test.uis.left;
 
-import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.notification.entitiy.Priority;
-import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.page.Push;

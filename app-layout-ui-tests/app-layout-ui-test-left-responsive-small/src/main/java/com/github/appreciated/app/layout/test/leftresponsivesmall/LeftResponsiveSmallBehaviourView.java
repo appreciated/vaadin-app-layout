@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.test.leftresponsivesmall;
 
-import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.test.leftresponsivesmall.view.*;
 import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorBasicView;
 import com.vaadin.flow.component.Component;

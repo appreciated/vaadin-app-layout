@@ -1,16 +1,8 @@
 package com.github.appreciated.app.layout.test.annotation;
 
-import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.test.annotation.view.View1;
-import com.github.appreciated.app.layout.test.annotation.view.View2;
-import com.github.appreciated.app.layout.test.annotation.view.View3;
-import com.github.appreciated.app.layout.test.annotation.view.View4;
-import com.github.appreciated.app.layout.test.annotation.view.View5;
-import com.github.appreciated.app.layout.test.annotation.view.View6;
-import com.github.appreciated.app.layout.test.annotation.view.View7;
-import com.github.appreciated.app.layout.test.annotation.view.View8;
-import com.github.appreciated.app.layout.test.annotation.view.View9;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.test.annotation.view.*;
 import com.github.appreciated.app.layout.test.uis.left.AbstractLeftBehaviorAnnotationView;
 import com.vaadin.flow.component.Component;
 

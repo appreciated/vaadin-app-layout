@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout.test.left;
 
-import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayoutBase;
 import com.github.appreciated.app.layout.entity.Section;
-import com.github.appreciated.app.layout.router.AppLayoutRouterLayoutBase;
 import com.github.appreciated.app.layout.test.left.view.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.VaadinIcon;

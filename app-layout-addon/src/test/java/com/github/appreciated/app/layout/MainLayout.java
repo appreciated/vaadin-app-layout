@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.behaviour.Behaviour;
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
@@ -13,12 +13,12 @@ import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionIt
 import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.top.item.TopClickableItem;
 import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
+import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.github.appreciated.app.layout.notification.entitiy.Priority;
-import com.github.appreciated.app.layout.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
