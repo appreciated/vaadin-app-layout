@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.router;
+package com.github.appreciated.app.layout.component.router;
 
-import com.github.appreciated.app.layout.behaviour.AppLayout;
-import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
 import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -9,7 +9,6 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouterLayout;
 
 /**

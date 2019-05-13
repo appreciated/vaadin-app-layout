@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.component.menu.left.builder;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.builder.ComponentBuilder;
+import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
+import com.github.appreciated.app.layout.component.builder.ComponentBuilder;
 import com.github.appreciated.app.layout.component.menu.left.LeftSubmenu;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;

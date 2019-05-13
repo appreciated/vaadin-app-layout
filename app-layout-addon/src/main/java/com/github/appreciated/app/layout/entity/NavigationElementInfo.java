@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.entity;
 
-import com.github.appreciated.app.layout.builder.factories.DefaultNavigationElementInfoProducer;
+import com.github.appreciated.app.layout.component.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.vaadin.flow.component.icon.Icon;
 

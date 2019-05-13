@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
 import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
-import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
+import com.github.appreciated.app.layout.component.builder.interfaces.NavigationElement;
+import com.github.appreciated.app.layout.component.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.Icon;

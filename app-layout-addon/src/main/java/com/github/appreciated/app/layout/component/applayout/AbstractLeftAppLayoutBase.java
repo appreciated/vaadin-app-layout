@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.behaviour;
+package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
@@ -9,8 +9,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.server.InitialPageSettings;
-import com.vaadin.flow.server.PageConfigurator;
 
 import static java.util.Arrays.asList;
 

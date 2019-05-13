@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.builder.factories;
+package com.github.appreciated.app.layout.component.builder.factories;
 
 import com.github.appreciated.app.layout.annotations.Caption;
-import com.github.appreciated.app.layout.builder.AppLayoutConfiguration;
+import com.github.appreciated.app.layout.component.builder.AppLayoutConfiguration;
 import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.icon.Icon;

@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.component.menu.left.builder;
 
-import com.github.appreciated.app.layout.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.LeftMenuComponentWrapper;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.entity.Section;

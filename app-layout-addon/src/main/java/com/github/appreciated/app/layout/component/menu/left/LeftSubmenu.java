@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.component.menu.left;
 
 import com.github.appreciated.IronCollapseLayout;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElement;
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.component.builder.interfaces.NavigationElement;
+import com.github.appreciated.app.layout.component.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftIconItem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;

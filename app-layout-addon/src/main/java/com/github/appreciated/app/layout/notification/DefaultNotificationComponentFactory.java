@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.notification;
 
-import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
+import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.component.NotificationView;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.notification.listener.NotificationListener;

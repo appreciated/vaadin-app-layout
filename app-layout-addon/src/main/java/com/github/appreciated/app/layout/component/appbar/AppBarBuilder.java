@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.appbar;
 
-import com.github.appreciated.app.layout.builder.ComponentBuilder;
+import com.github.appreciated.app.layout.component.builder.ComponentBuilder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;

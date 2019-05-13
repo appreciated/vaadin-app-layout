@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout.notification;
 
-import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
+import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.io.Serializable;
 
 /**
  * This Class is a controller for multiple {@link Notification} instances

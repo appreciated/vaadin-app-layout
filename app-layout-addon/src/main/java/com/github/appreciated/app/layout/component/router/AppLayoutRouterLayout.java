@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.router;
+package com.github.appreciated.app.layout.component.router;
 
 import com.vaadin.flow.component.page.Viewport;
 

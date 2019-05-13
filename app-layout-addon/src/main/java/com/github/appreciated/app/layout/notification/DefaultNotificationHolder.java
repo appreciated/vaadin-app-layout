@@ -1,8 +1,7 @@
 package com.github.appreciated.app.layout.notification;
 
-import com.github.appreciated.app.layout.builder.interfaces.PairComponentFactory;
+import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.ZoneId;

@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.behaviour;
+package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;

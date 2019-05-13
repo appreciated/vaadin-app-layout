@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder.factories;
+package com.github.appreciated.app.layout.component.builder.factories;
 
 import com.vaadin.flow.router.Route;
 

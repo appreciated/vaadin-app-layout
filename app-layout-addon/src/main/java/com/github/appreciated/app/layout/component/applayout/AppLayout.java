@@ -1,8 +1,7 @@
-package com.github.appreciated.app.layout.behaviour;
+package com.github.appreciated.app.layout.component.applayout;
 
-import com.github.appreciated.app.layout.router.navigation.UpNavigationHelper;
+import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;

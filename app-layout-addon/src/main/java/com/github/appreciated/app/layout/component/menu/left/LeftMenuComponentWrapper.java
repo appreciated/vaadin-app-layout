@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.menu.left;
 
-import com.github.appreciated.app.layout.builder.interfaces.NavigationElementContainer;
+import com.github.appreciated.app.layout.component.builder.interfaces.NavigationElementContainer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.vaadin.flow.component.Component;

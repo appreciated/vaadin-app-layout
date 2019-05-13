@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.router.navigation;
+package com.github.appreciated.app.layout.navigation;
 
 import com.vaadin.flow.router.RouteData;
 

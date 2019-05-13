@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.builder;
+package com.github.appreciated.app.layout.component.builder;
 
 import com.vaadin.flow.component.Component;
 

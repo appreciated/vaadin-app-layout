@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.builder;
+package com.github.appreciated.app.layout.component.builder;
 
-import com.github.appreciated.app.layout.behaviour.AppLayoutElementBase;
-import com.github.appreciated.app.layout.behaviour.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayoutElementBase;
+import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.entity.NavigationElementInfo;
 import com.vaadin.flow.component.HasElement;
 
