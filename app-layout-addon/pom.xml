@@ -7,7 +7,7 @@
     <version>3.0.0-SNAPSHOT</version>
 
     <name>App Layout Add-on</name>
-    <description>Integration of app-layout for Vaadin 13</description>
+    <description>Integration of app-layout for Vaadin 14</description>
 
     <organization>
         <name>appreciated</name>
