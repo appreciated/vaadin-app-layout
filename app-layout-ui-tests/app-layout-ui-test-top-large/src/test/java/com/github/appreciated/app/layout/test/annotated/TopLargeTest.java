@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.test.annotated;
 
 import com.github.appreciated.app.layout.test.test.BaseTest;
-import com.github.appreciated.app.layout.test.top.TopLargeMain;
+import com.github.appreciated.app.layout.test.top.large.TopLargeMain;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

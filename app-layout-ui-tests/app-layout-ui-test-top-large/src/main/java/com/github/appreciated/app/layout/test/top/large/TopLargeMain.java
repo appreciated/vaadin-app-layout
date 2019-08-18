@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.test.top;
+package com.github.appreciated.app.layout.test.top.large;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
