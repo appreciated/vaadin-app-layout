@@ -6,7 +6,7 @@
     <groupId>com.github.appreciated.examples</groupId>
     <artifactId>app-layout-examples</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <name>App Layout Addon Examples</name>
 
     <organization>
@@ -19,7 +19,7 @@
     </prerequisites>
 
     <properties>
-        <vaadin.version>13.0.6</vaadin.version>
+        <vaadin.version>14.0.0</vaadin.version>
     </properties>
 
     <modules>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.github.appreciated</groupId>
             <artifactId>app-layout-addon</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <version>4.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

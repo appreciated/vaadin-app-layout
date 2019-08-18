@@ -6,10 +6,12 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.NpmPackage;
 
 @Tag("paper-tabs")
-@HtmlImport("bower_components/paper-tabs/paper-tabs.html")
+@NpmPackage(value = "@polymer/app-layout", version = "3.1.0")
+@JsModule("@polymer/paper-tabs/paper-tabs.js")
 public class PaperTabs extends Component implements HasComponents, HasSize {
 
     public void setScrollable(boolean scrollable) {

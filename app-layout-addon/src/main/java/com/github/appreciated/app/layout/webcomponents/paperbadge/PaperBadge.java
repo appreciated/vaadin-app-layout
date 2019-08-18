@@ -3,11 +3,13 @@ package com.github.appreciated.app.layout.webcomponents.paperbadge;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.NpmPackage;
 
 
 @Tag("paper-badge")
-@HtmlImport("bower_components/paper-badge/paper-badge.html")
+@NpmPackage(value = "@polymer/paper-badge", version = "3.0.1")
+@JsModule("@polymer/paper-badge/paper-badge.js")
 public class PaperBadge extends Component implements HasText {
 
     public PaperBadge(Component bind) {

@@ -2,10 +2,11 @@ package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.design.Styles;
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
@@ -25,7 +26,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     @Id("content")
     Div contentWrapper;
     @Id("toggle")
-    private PaperIconButton paperIconButton;
+    private Button paperIconButton;
     @Id("app-bar-elements")
     private Div appBarElements;
     @Id("drawer")
@@ -138,7 +139,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void showUpNavigation(boolean visible) {
-        paperIconButton.setIcon(visible ? "arrow-back" : "menu");
+        paperIconButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
     }
 
     @Override

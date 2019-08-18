@@ -5,9 +5,7 @@ import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.NotificationsChangeListener;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
-import com.github.appreciated.papermenubutton.HorizontalAlignment;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
@@ -15,22 +13,22 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-@HtmlImport("frontend://src/com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
+@CssImport("./com/github/appreciated/app-layout/styles/app-bar-notification-button-style.css")
 public class AppBarNotificationButton<T extends Notification> extends ContextMenuAppBarButton {
 
     private NotificationsView notificationsView;
 
     public AppBarNotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
-        super(new IconBadgeButton(icon), new Div());
+        super(new IconBadgeButton(icon));//, new Div());
         this.notificationsView = new NotificationsView(holder);
-        this.setContentComponent(notificationsView);
+        //this.setContentComponent(notificationsView);
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
                 .set("--shadow-elevation-2dp_-_box-shadow", "0px")
                 .set("--paper-menu-button-dropdown_-_margin-top", "var(--app-layout-bar-height)")
                 .set("--paper-menu-button-dropdown_-_margin-right", "7px");
 
-        setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        //setHorizontalAlignment(HorizontalAlignment.RIGHT);
         holder.addNotificationsChangeListener(new NotificationsChangeListener<T>() {
             @Override
             public void onNotificationChanges(NotificationHolder<T> holder) {
@@ -39,7 +37,7 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
 
             @Override
             public void onNotificationAdded(T notification) {
-                if (!isOpened()) {
+                /*if (!isOpened()) {
                     NotificationViewWithoutWrapper view = new NotificationViewWithoutWrapper<>(notification, holder);
                     view.setWidth("200px");
                     com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(view);
@@ -47,7 +45,7 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
                     notificationView.setDuration(2000);
                     notificationView.open();
                 }
-                refreshNotifications();
+                refreshNotifications();*/
             }
 
             @Override
@@ -55,8 +53,8 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
 
             }
         });
-        holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(AppBarNotificationButton.this::close)));
-        holder.bind(((IconBadgeButton) getTriggerComponent()).getBadge());
+        //holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(AppBarNotificationButton.this::close)));
+        // holder.bind(((IconBadgeButton) getTriggerComponent()).getBadge());
     }
 
     public void refreshNotifications() {

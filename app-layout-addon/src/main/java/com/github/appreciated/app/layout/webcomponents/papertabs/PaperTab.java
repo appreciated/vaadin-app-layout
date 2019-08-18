@@ -2,12 +2,13 @@ package com.github.appreciated.app.layout.webcomponents.papertabs;
 
 import com.github.appreciated.app.layout.component.menu.left.items.LeftIconItem;
 import com.vaadin.flow.component.*;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 
 @Tag("paper-tab")
-@HtmlImport("bower_components/paper-tabs/paper-tab.html")
+@JsModule("@polymer/paper-tabs/paper-tab.js")
+@NpmPackage(value = "@polymer/paper-tabs", version = "3.1.0")
 public class PaperTab extends Component implements FlexComponent, HasText {
 
     private PaperTabs parent;

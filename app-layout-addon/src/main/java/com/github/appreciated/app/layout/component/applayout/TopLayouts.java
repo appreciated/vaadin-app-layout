@@ -1,13 +1,14 @@
 package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
-import com.github.appreciated.app.layout.webcomponents.papericonbutton.PaperIconButton;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 public interface TopLayouts {
 
     @Tag("app-layout-top")
-    @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top.html")
+    @JsModule("./com/github/appreciated/app-layout/top/top.js")
     class Top extends AppLayout implements PageConfigurator {
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
         private final Div appBarElements;
@@ -35,7 +36,7 @@ public interface TopLayouts {
         Div contentWrapper;
         private HasElement content;
         @Id("toggle")
-        private PaperIconButton paperIconButton;
+        private Button paperIconButton;
         private Component title;
         private boolean upNavigationEnabled;
 
@@ -138,7 +139,7 @@ public interface TopLayouts {
 
         @Override
         public void showUpNavigation(boolean visible) {
-            paperIconButton.setIcon(visible ? "arrow-back" : "menu");
+            paperIconButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
         }
 
         @Override
@@ -178,7 +179,7 @@ public interface TopLayouts {
     }
 
     @Tag("app-layout-top-large")
-    @HtmlImport("frontend://src/com/github/appreciated/app-layout/top/top-large.html")
+    @JsModule("./com/github/appreciated/app-layout/top/top-large.js")
     class TopLarge extends AppLayout implements PageConfigurator {
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
         private final VerticalLayout contentPanel = new VerticalLayout();
@@ -193,7 +194,7 @@ public interface TopLayouts {
         Div contentWrapper;
 
         @Id("toggle")
-        private PaperIconButton paperIconButton;
+        private Button paperIconButton;
 
         @Id("app-bar-elements")
         private Div appBarContent;
@@ -240,7 +241,7 @@ public interface TopLayouts {
 
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
             appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
-            paperIconButton.setIcon("arrow-back");
+            paperIconButton.setIcon(VaadinIcon.ARROW_BACKWARD.create());
 
             getElement().appendChild(appBarElements.getElement(), contentElement.getElement());
         }
