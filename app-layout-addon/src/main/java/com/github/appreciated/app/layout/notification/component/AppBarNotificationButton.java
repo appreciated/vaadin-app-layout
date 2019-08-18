@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.notification.component;
 
+import com.github.appreciated.app.layout.component.appbar.ContextMenuAppBarButton;
 import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.NotificationsChangeListener;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.papermenubutton.HorizontalAlignment;
-import com.github.appreciated.papermenubutton.PaperMenuButton;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -16,7 +16,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  */
 
 @HtmlImport("frontend://src/com/github/appreciated/app-layout/styles/app-bar-notification-button-style.html")
-public class AppBarNotificationButton<T extends Notification> extends PaperMenuButton {
+public class AppBarNotificationButton<T extends Notification> extends ContextMenuAppBarButton {
 
     private NotificationsView notificationsView;
 
