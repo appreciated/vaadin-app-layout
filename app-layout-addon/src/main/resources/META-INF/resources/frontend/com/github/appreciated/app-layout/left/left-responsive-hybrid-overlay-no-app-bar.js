@@ -18,7 +18,7 @@ import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/iron-media-query/iron-media-query.js';
 
-class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin(PolymerElement) {
+class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends PolymerElement {
     static get template() {
         return html`<style>
             :root {
@@ -184,8 +184,8 @@ class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin(
     }
 
     onclick() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
-        if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        var drawer = this.shadowRoot.querySelector("#drawer");
+        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
             drawer.toggle();
         } else {
             this.onUpNavigation();
@@ -196,14 +196,14 @@ class AppLayoutLeftResponsiveHybridOverlayNoAppBar extends Vaadin.ThemableMixin(
     }
 
     closeIfNotPersistent() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
+        var drawer = this.shadowRoot.querySelector("#drawer");
         if (!drawer.persistent) {
             drawer.close();
         }
     }
 
     _responsiveWidthChanged() {
-        Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidthNarrow;
+        this.shadowRoot.querySelector("#drawerLayout").responsiveWidth = this.responsiveWidthNarrow;
     }
 
     _onNarrowQueryMatchesChanged(event) {

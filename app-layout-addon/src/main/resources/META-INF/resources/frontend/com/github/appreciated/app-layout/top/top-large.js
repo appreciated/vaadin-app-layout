@@ -7,6 +7,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@vaadin/vaadin-icons/vaadin-icons.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
@@ -15,7 +16,7 @@ import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 
-class AppLayoutTopLarge extends Vaadin.ThemableMixin(PolymerElement) {
+class AppLayoutTopLarge extends PolymerElement {
 
     static get template() {
         return html`
@@ -99,8 +100,8 @@ class AppLayoutTopLarge extends Vaadin.ThemableMixin(PolymerElement) {
     }
 
     onclick() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
-        if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        var drawer = this.shadowRoot.querySelector("#drawer");
+        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
             drawer.toggle();
         } else {
             this.onUpNavigation();

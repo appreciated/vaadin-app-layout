@@ -17,7 +17,7 @@ import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 
-class AppLayoutLeft extends Vaadin.ThemableMixin(PolymerElement) {
+class AppLayoutLeft extends PolymerElement {
 
     static get template() {
         return html`
@@ -136,8 +136,8 @@ class AppLayoutLeft extends Vaadin.ThemableMixin(PolymerElement) {
     }
 
     onclick() {
-        if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
-            Polymer.dom(this.root).querySelector("#drawer").toggle();
+        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+            this.shadowRoot.querySelector("#drawer").toggle();
         } else {
             this.onUpNavigation();
         }
@@ -147,7 +147,7 @@ class AppLayoutLeft extends Vaadin.ThemableMixin(PolymerElement) {
     }
 
     closeIfNotPersistent() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
+        var drawer = this.shadowRoot.querySelector("#drawer");
         drawer.close();
     }
 }

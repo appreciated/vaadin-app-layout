@@ -7,6 +7,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/custom-style.js';
 import '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import '@vaadin/vaadin-icons/vaadin-icons.js';
@@ -15,9 +16,8 @@ import '@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
 import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
-import {html} from "@polymer/polymer";
 
-class AppLayoutLeftHybrid extends Vaadin.ThemableMixin(PolymerElement) {
+class AppLayoutLeftHybrid extends PolymerElement {
     static get is() {
         return 'app-layout-left-hybrid'
     }
@@ -163,18 +163,20 @@ class AppLayoutLeftHybrid extends Vaadin.ThemableMixin(PolymerElement) {
     }
 
     onclick() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
-        var drawerLayout = Polymer.dom(this.root).querySelector("#drawerLayout");
+        var drawer = this.shadowRoot.querySelector("#drawer");
+        var drawerLayout = this.shadowRoot.querySelector("#drawerLayout");
 
         if (drawer.persistent) {
-            if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+            //
+
+            if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                 drawerLayout.classList.toggle("small");
                 this.classList.toggle("small");
             } else {
                 this.onUpNavigation();
             }
         } else {
-            if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+            if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
                 drawer.toggle();
             } else {
                 this.onUpNavigation();
@@ -186,7 +188,7 @@ class AppLayoutLeftHybrid extends Vaadin.ThemableMixin(PolymerElement) {
     }
 
     closeIfNotPersistent() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
+        var drawer = this.shadowRoot.querySelector("#drawer");
         if (!drawer.persistent) {
             drawer.close();
         }

@@ -19,7 +19,7 @@ import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@polymer/iron-media-query/iron-media-query.js';
 
-class AppLayoutLeftResponsiveSmallNoAppBar extends Vaadin.ThemableMixin(PolymerElement) {
+class AppLayoutLeftResponsiveSmallNoAppBar extends PolymerElement {
 
     static get template() {
         return html`<style>
@@ -179,8 +179,8 @@ class AppLayoutLeftResponsiveSmallNoAppBar extends Vaadin.ThemableMixin(PolymerE
     }
 
     onclick() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
-        if (Polymer.dom(this.root).querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        var drawer = this.shadowRoot.querySelector("#drawer");
+        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
             drawer.toggle();
         } else {
             this.onUpNavigation();
@@ -191,14 +191,14 @@ class AppLayoutLeftResponsiveSmallNoAppBar extends Vaadin.ThemableMixin(PolymerE
     }
 
     closeIfNotPersistent() {
-        var drawer = Polymer.dom(this.root).querySelector("#drawer");
+        var drawer = this.shadowRoot.querySelector("#drawer");
         if (!drawer.persistent) {
             drawer.close();
         }
     }
 
     _responsiveWidthChanged() {
-        Polymer.dom(this.root).querySelector("#drawerLayout").responsiveWidth = this.responsiveWidth;
+        this.shadowRoot.querySelector("#drawerLayout").responsiveWidth = this.responsiveWidth;
     }
 
     _onQueryMatchesChanged(event) {
