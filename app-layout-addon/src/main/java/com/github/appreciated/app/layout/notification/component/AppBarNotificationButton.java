@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.notification.component;
 
 import com.github.appreciated.app.layout.component.appbar.ContextMenuAppBarButton;
-import com.github.appreciated.app.layout.component.appbar.IconBadgeButton;
 import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.NotificationsChangeListener;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
@@ -19,9 +18,9 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
     private NotificationsView notificationsView;
 
     public AppBarNotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
-        super(new IconBadgeButton(icon));//, new Div());
+        super(icon.create());
         this.notificationsView = new NotificationsView(holder);
-        //this.setContentComponent(notificationsView);
+        this.setContentComponent(notificationsView);
         setClassName("app-bar-notification-button");
         getStyle().set("--paper-menu-button-dropdown-background", "transparent")
                 .set("--shadow-elevation-2dp_-_box-shadow", "0px")

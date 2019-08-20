@@ -12,22 +12,21 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @JsModule("@polymer/paper-badge/paper-badge.js")
 public class PaperBadge extends Component implements HasText {
 
-    public PaperBadge(Component bind) {
-        this(bind, null, null);
+    public PaperBadge() {
+        this(null, null);
     }
 
-    public PaperBadge(Component bind, String label) {
-        this(bind, null, label);
+    public PaperBadge(String label) {
+        this(null, label);
     }
 
-    public PaperBadge(Component bind, String icon, String label) {
+    public PaperBadge(String icon, String label) {
         if (icon != null) {
             getElement().setAttribute("icon", icon);
         }
         if (label != null) {
             setText(label);
         }
-        getElement().setAttribute("for", bind.getElement().getAttribute("id"));
     }
 
     @Override

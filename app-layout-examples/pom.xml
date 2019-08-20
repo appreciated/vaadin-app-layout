@@ -19,7 +19,7 @@
     </prerequisites>
 
     <properties>
-        <vaadin.version>14.0.0</vaadin.version>
+        <vaadin.version>14.0.1</vaadin.version>
     </properties>
 
     <modules>

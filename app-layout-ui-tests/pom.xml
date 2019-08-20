@@ -1,83 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-ui-tests</artifactId>
-    <packaging>pom</packaging>
     <version>4.0.0-SNAPSHOT</version>
     <name>App Layout Add-on UI Tests</name>
+    <packaging>war</packaging>
 
-    <organization>
-        <name>appreciated</name>
-        <url>https://github.com/appreciated</url>
-    </organization>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
 
-    <prerequisites>
-        <maven>3</maven>
-    </prerequisites>
+        <vaadin.version>14.0.1</vaadin.version>
 
-    <modules>
-        <module>app-layout-ui-test-base</module>
-        <module>app-layout-ui-test-annotation</module>
-        <module>app-layout-ui-test-left</module>
-        <module>app-layout-ui-test-left-hybrid</module>
-        <module>app-layout-ui-test-left-hybrid-small</module>
-        <module>app-layout-ui-test-left-overlay</module>
-        <module>app-layout-ui-test-left-responsive</module>
-        <module>app-layout-ui-test-left-responsive-hybrid</module>
-        <module>app-layout-ui-test-left-responsive-hybrid-no-app-bar</module>
-        <module>app-layout-ui-test-left-responsive-overlay</module>
-        <module>app-layout-ui-test-left-responsive-overlay-no-app-bar</module>
-        <module>app-layout-ui-test-left-responsive-small</module>
-        <module>app-layout-ui-test-left-responsive-small-no-app-bar</module>
-        <module>app-layout-ui-test-navigation</module>
-        <module>app-layout-ui-test-top</module>
-        <module>app-layout-ui-test-top-large</module>
-        <module>app-layout-ui-test-left-nested-layout</module>
-    </modules>
+        <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
+    </properties>
 
-    <profiles>
-        <profile>
-            <!-- Vaadin pre-release repositories -->
-            <id>vaadin-prerelease</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- Repository used by many Vaadin add-ons -->
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-            <repositories>
-                <repository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </repository>
-                <repository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </pluginRepository>
-                <pluginRepository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <!-- Replace artifactId with vaadin-core to use only free components -->
+            <artifactId>vaadin</artifactId>
+            <exclusions>
+                <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+                <exclusion>
+                    <groupId>com.vaadin.webjar</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.insites</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymer</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.vaadin</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.webcomponents</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Added to provide logging output as Vaadin uses -->
+        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>app-layout-addon</artifactId>
+            <version>4.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Testing and Selenide Dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>5.2.8</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>jetty:run</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+            <!-- Jetty plugin for easy testing without a server -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.19.v20190610</version>
+                <configuration>
+                    <!-- If using IntelliJ IDEA with autocompilation, this
+                    might cause lots of unnecessary compilations in the
+                    background.-->
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <!-- Use war output directory to get the webpack files -->
+                    <webAppConfig>
+                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                    </webAppConfig>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <stopPort>8081</stopPort>
+                    <stopWait>5</stopWait>
+                    <stopKey>${project.artifactId}</stopKey>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>deploy-war</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*IntegrationTest</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/*IntegrationTest</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-frontend</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

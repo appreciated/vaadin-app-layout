@@ -81,7 +81,7 @@ class AppLayoutTopLarge extends PolymerElement {
         <app-header-layout fullbleed>
             <app-header part="app-bar" slot="header" reveals condenses style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar>
-                    <vaadin-button id="toggle" icon="menu" on-tap="onclick"></vaadin-button>
+                    <vaadin-button id="toggle" theme="tertiary"></vaadin-button>
                 </app-toolbar>
                 <app-toolbar>
                     <div id="app-bar-elements" class="app-bar-content">
@@ -99,9 +99,14 @@ class AppLayoutTopLarge extends PolymerElement {
         return 'app-layout-top-large'
     }
 
+    ready() {
+        super.ready();
+        this.shadowRoot.querySelector("#toggle").addEventListener('click', evt => this.onclick());
+    }
+
     onclick() {
         var drawer = this.shadowRoot.querySelector("#drawer");
-        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        if (!this.shadowRoot.querySelector("#toggle").classList.contains('show-back-arrow')) {
             drawer.toggle();
         } else {
             this.onUpNavigation();

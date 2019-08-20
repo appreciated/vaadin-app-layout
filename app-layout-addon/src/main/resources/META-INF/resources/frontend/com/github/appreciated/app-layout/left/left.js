@@ -115,7 +115,7 @@ class AppLayoutLeft extends PolymerElement {
             }
         </style>
         <app-toolbar part="app-bar">
-            <vaadin-button id="toggle" icon="menu" on-tap="onclick"></vaadin-button>
+            <vaadin-button id="toggle" theme="tertiary"></vaadin-button>
             <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;">
                 <slot name="app-bar-content"></slot>
             </div>
@@ -135,8 +135,13 @@ class AppLayoutLeft extends PolymerElement {
         return 'app-layout-left'
     }
 
+    ready() {
+        super.ready();
+        this.shadowRoot.querySelector("#toggle").addEventListener('click', evt => this.onclick());
+    }
+
     onclick() {
-        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        if (!this.shadowRoot.querySelector("#toggle").classList.contains('show-back-arrow')) {
             this.shadowRoot.querySelector("#drawer").toggle();
         } else {
             this.onUpNavigation();

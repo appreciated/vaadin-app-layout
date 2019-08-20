@@ -36,7 +36,7 @@ public interface TopLayouts {
         Div contentWrapper;
         private HasElement content;
         @Id("toggle")
-        private Button paperIconButton;
+        private Button menuButton;
         private Component title;
         private boolean upNavigationEnabled;
 
@@ -139,7 +139,8 @@ public interface TopLayouts {
 
         @Override
         public void showUpNavigation(boolean visible) {
-            paperIconButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
+            menuButton.getClassNames().set("show-back-arrow", visible);
+            menuButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
         }
 
         @Override
@@ -194,7 +195,7 @@ public interface TopLayouts {
         Div contentWrapper;
 
         @Id("toggle")
-        private Button paperIconButton;
+        private Button menuButton;
 
         @Id("app-bar-elements")
         private Div appBarContent;
@@ -241,7 +242,7 @@ public interface TopLayouts {
 
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
             appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
-            paperIconButton.setIcon(VaadinIcon.ARROW_BACKWARD.create());
+            menuButton.setIcon(VaadinIcon.ARROW_BACKWARD.create());
 
             getElement().appendChild(appBarElements.getElement(), contentElement.getElement());
         }
@@ -327,7 +328,7 @@ public interface TopLayouts {
         @Override
         public void showUpNavigation(boolean visible) {
             appBarContent.getElement().getClassList().set("show-back-arrow", visible);
-            paperIconButton.getElement().getClassList().set("show-back-arrow", visible);
+            menuButton.getElement().getClassList().set("show-back-arrow", visible);
         }
 
         @Override

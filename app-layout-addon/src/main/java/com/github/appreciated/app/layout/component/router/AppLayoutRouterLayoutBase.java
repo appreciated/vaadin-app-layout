@@ -16,32 +16,38 @@ import com.vaadin.flow.router.RouterLayout;
  * the {@link AppLayout}. This can be extended directly if there is another parent layout defining a viewport.
  */
 @CssImport("./com/github/appreciated/app-layout/app-layout-styles-lumo.css")
-public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterLayout {
+public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Div> implements RouterLayout {
 
     private HasElement currentContent;
-    private AppLayout layout;
+    private T layout;
 
     public AppLayoutRouterLayoutBase() {
         getContent().setSizeFull();
         getContent().getElement().getStyle().set("overflow", "auto");
     }
 
+    @Override
+    protected Div initContent() {
+        return new Div();
+    }
+
     public static AppLayout getCurrent() {
         return UIAttributes.get(AppLayout.class);
     }
 
-    public void init(AppLayout layout) {
+    public void init(T layout) {
         setLayout(layout);
         if (currentContent != null) {
             showRouterLayoutContent(currentContent);
         }
     }
 
-    public void setLayout(AppLayout layout) {
+    public void setLayout(T layout) {
         getContent().removeAll();
         this.layout = layout;
         getContent().add(layout);
         UIAttributes.set(AppLayout.class, layout);
+        UIAttributes.set(AppLayoutRouterLayoutBase.class, this);
     }
 
     @Override
@@ -73,6 +79,10 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         }));
     }
 
+    public static <T extends AppLayoutRouterLayoutBase> T getAppLayoutRouterLayout() {
+        return (T) UIAttributes.get(AppLayoutRouterLayoutBase.class);
+    }
+
     public void closeDrawerIfNotPersistent() {
         layout.closeDrawerIfNotPersistent();
     }
@@ -89,7 +99,7 @@ public class AppLayoutRouterLayoutBase extends Composite<Div> implements RouterL
         layout.openDrawer();
     }
 
-    public AppLayout getAppLayout() {
+    public T getAppLayout() {
         return layout;
     }
 

@@ -5,6 +5,7 @@ import com.github.appreciated.app.layout.webcomponents.applayout.AppDrawer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -26,7 +27,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     @Id("content")
     Div contentWrapper;
     @Id("toggle")
-    private Button paperIconButton;
+    private Button menuButton;
     @Id("app-bar-elements")
     private Div appBarElements;
     @Id("drawer")
@@ -63,7 +64,6 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
 
         titleWrapper.getElement().getStyle().set("flex", "1 1").set("overflow", "hidden");
-        //titleWrapper.setWidth("0px");
         getElement().getClassList().add("app-layout");
 
         getElement().appendChild(appBarContentHolder.getElement(), menuElements.getElement(), contentHolder.getElement());
@@ -139,7 +139,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     @Override
     public void showUpNavigation(boolean visible) {
-        paperIconButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
+        menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
+        menuButton.getClassNames().set("show-back-arrow", visible);
+        menuButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
     }
 
     @Override
@@ -181,13 +183,13 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
                     menuElements.add(container);
                 }
                 drawer.getElement().getStyle().remove("display");
-                paperIconButton.getElement().getStyle().remove("display");
+                menuButton.getElement().getStyle().remove("display");
                 getElement().getStyle().remove("--app-layout-drawer-width");
                 getElement().getStyle().remove("--app-layout-drawer-small-width");
             } else {
                 drawer.getElement().getStyle().set("display", "none");
                 menuElements.removeAll();
-                paperIconButton.getElement().getStyle().set("display", "none");
+                menuButton.getElement().getStyle().set("display", "none");
                 getElement().getStyle().set("--app-layout-drawer-width", "0px");
                 getElement().getStyle().set("--app-layout-drawer-small-width", "0px");
             }

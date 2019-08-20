@@ -1,21 +1,23 @@
 package com.github.appreciated.app.layout.component.appbar;
 
+import com.github.appreciated.app.layout.notification.component.NotificationsView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Label;
 
-public class ContextMenuAppBarButton extends Button {
+public class ContextMenuAppBarButton extends ComponentBadgeWrapper<Button> {
     private final ContextMenu contextMenu;
     private Component buttonContent;
 
-    public ContextMenuAppBarButton(Component content) {
-        this.buttonContent = content;
-        setIcon(content);
-        setThemeName("tertiary");
+    public ContextMenuAppBarButton(Component icon) {
+        super(new Button());
+        getWrappedComponent().setIcon(icon);
+        getWrappedComponent().addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         setWidth("var(--app-layout-menu-button-height)");
         setHeight("var(--app-layout-menu-button-height)");
         contextMenu = new ContextMenu();
@@ -56,4 +58,7 @@ public class ContextMenuAppBarButton extends Button {
         return this;
     }
 
+    protected void setContentComponent(NotificationsView notificationsView) {
+
+    }
 }

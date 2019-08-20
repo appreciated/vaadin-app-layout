@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.component.router;
 
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.vaadin.flow.component.page.Viewport;
 
 /**
@@ -7,6 +8,6 @@ import com.vaadin.flow.component.page.Viewport;
  * Viewport cannot be defined on nested layouts.
  */
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public abstract class AppLayoutRouterLayout extends AppLayoutRouterLayoutBase {
+public abstract class AppLayoutRouterLayout<T extends AppLayout> extends AppLayoutRouterLayoutBase<T> {
 
 }

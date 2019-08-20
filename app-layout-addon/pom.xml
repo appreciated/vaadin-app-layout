@@ -21,7 +21,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependencies -->
-        <vaadin.version>14.0.0</vaadin.version>
+        <vaadin.version>14.0.1</vaadin.version>
         <jetty.version>9.4.15.v20190215</jetty.version>
     </properties>
 
@@ -86,11 +86,6 @@
             <artifactId>card</artifactId>
             <version>2.0.0.beta1</version>
         </dependency>
-        <dependency>
-            <groupId>org.webjars.bowergithub.polymerelements</groupId>
-            <artifactId>paper-badge</artifactId>
-            <version>2.1.0</version>
-        </dependency>
         <!--End of web-components elements -->
 
         <dependency>
@@ -133,6 +128,12 @@
                     <supportedPackagings>
                         <supportedPackaging>jar</supportedPackaging>
                     </supportedPackagings>
+                    <webApp>
+                        <resourceBases>
+                            <resourceBase>${project.basedir}/src/main/resources/META-INF/resources</resourceBase>
+                            <resourceBase>${project.basedir}/src/test/resources/</resourceBase>
+                        </resourceBases>
+                    </webApp>
                     <stopKey>${project.artifactId}</stopKey>
                     <stopPort>8081</stopPort>
                 </configuration>

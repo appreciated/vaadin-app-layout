@@ -91,7 +91,7 @@ class AppLayoutLeftResponsiveHybrid extends PolymerElement {
                 margin: var(--app-layout-space-s);
             }
 
-            :host(:not([narrow])) #toggle[icon="menu"] {
+            :host(:not([narrow])) #toggle:not(.show-back-arrow) {
                 display: none;
             }
 
@@ -139,7 +139,7 @@ class AppLayoutLeftResponsiveHybrid extends PolymerElement {
         <app-header-layout id="layout-wrapper" fullbleed>
             <app-header fixed part="app-bar" slot="header">
                 <app-toolbar style="height: var(--app-layout-bar-height);">
-                    <vaadin-button id="toggle" icon="menu" on-tap="onclick"></vaadin-button>
+                    <vaadin-button id="toggle" theme="tertiary"></vaadin-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
                         <slot name="app-bar-content"></slot>
                     </div>
@@ -183,9 +183,14 @@ class AppLayoutLeftResponsiveHybrid extends PolymerElement {
         ];
     }
 
+    ready() {
+        super.ready();
+        this.shadowRoot.querySelector("#toggle").addEventListener('click', evt => this.onclick());
+    }
+
     onclick() {
         var drawer = this.shadowRoot.querySelector("#drawer");
-        if (this.shadowRoot.querySelector("#toggle").getAttribute("icon") !== "arrow-back") {
+        if (!this.shadowRoot.querySelector("#toggle").classList.contains('show-back-arrow')) {
             drawer.toggle();
         } else {
             this.onUpNavigation();
