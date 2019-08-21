@@ -37,4 +37,8 @@ public class PaperBadge extends Component implements HasText {
     public void setIcon(String icon) {
         getElement().setAttribute("icon", icon);
     }
+
+    public void notifyResize() {
+        getElement().callJsFunction("notifyResize");
+    }
 }

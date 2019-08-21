@@ -20,10 +20,9 @@ public class ComponentBadgeWrapper<T extends Component> extends HorizontalLayout
         badge.getElement().getStyle()
                 .set("margin-top", "6px")
                 .set("margin-left", "-14px");
-        add(wrappedComponent);
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
-        add(badge);
+        add(wrappedComponent, badge);
     }
 
     public void setBadgeCaption(String caption) {
@@ -33,6 +32,7 @@ public class ComponentBadgeWrapper<T extends Component> extends HorizontalLayout
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
+        badge.notifyResize();
     }
 
     public T getWrappedComponent() {
