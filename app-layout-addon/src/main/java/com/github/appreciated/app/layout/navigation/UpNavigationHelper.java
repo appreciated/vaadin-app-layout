@@ -7,9 +7,7 @@ import com.vaadin.flow.router.Location;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouteData;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * A helper class that checks whether <a href="https://developer.android.com/training/design-navigation/ancestral-temporal">Up Navigation</a>is available for a specific route,
@@ -30,12 +28,11 @@ public class UpNavigationHelper {
     public static Optional<RouteData> getClosestRoute(Class<? extends Component> navigationTarget) {
         String currentRoute = RouteConfiguration.forSessionScope().getUrl(navigationTarget);
         if (currentRoute.lastIndexOf("/") > 0) {
-            String[] currentRouteParts = currentRoute.substring(0, (currentRoute.lastIndexOf("/"))).split("/");
             Optional<RouteSimilarity> result = RouteConfiguration.forApplicationScope()
                     .getAvailableRoutes()
                     .stream()
                     .filter(routeData -> !routeData.getUrl().equals(currentRoute))
-                    .map(routeData -> new RouteSimilarity(routeData, currentRouteParts))
+                    .map(routeData -> new RouteSimilarity(routeData, currentRoute))
                     .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
             if (result.isPresent()) {
                 return Optional.ofNullable(result.get().getRouteData());
@@ -51,8 +48,9 @@ public class UpNavigationHelper {
     public static boolean shouldHighlight(Class<? extends Component> className, Location location) {
         String[] currentRouteParts = location.getSegments().toArray(new String[]{});
 
-        Optional<RouteSimilarity> result = getUpNavigationHelper().registeredRoutes.keySet().stream()
-                .map(s -> new RouteSimilarity(s, currentRouteParts))
+        Set<RouteData> routes = getUpNavigationHelper().registeredRoutes.keySet();
+        Optional<RouteSimilarity> result = routes.stream()
+                .map(s -> new RouteSimilarity(s, Arrays.stream(currentRouteParts).reduce((s1, s2) -> s1 + "/" + s2).get()))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
 
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
