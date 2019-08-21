@@ -58,4 +58,31 @@ public class RouteSimilarityTest {
 
         Assert.assertEquals(result1, result2);
     }
+
+    @Test
+    public void testRouteSimilarity3() {
+        String[] urls = new String[]{
+                "navigation/view2",
+                "navigation2/view1",
+                "navigation/view1",
+                "navigation/view4",
+                "navigation/view5",
+                "navigation/view6",
+                "navigation/view7",
+                "navigation/view8",
+                "navigation/view9",
+                "navigation"
+        };
+
+        String[] currentRoutePart = new String[]{"navigation/view1"};
+
+        RouteSimilarity r = Arrays.stream(urls)
+                .map(s -> new RouteSimilarity(currentRoutePart, s))
+                .max(Comparator.comparingInt(RouteSimilarity::getSimilarity)).get();
+        String result1 = r.getRoutes()[0];
+        String result2 = urls[2];
+
+        Assert.assertEquals(result1, result2);
+    }
+
 }
