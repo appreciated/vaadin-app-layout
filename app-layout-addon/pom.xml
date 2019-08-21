@@ -72,21 +72,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- web-components elements -->
+        <!-- For menu -->
         <dependency>
             <groupId>com.github.appreciated</groupId>
             <artifactId>iron-collapse</artifactId>
             <version>2.0.0.beta2</version>
         </dependency>
-
-        <!-- For Notifications -->
         <dependency>
             <groupId>com.github.appreciated</groupId>
-            <artifactId>card</artifactId>
-            <version>2.0.0.beta1</version>
+            <artifactId>paper-ripple</artifactId>
+            <version>2.0.0</version>
         </dependency>
-        <!--End of web-components elements -->
 
+        <!--End of web-components elements -->
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>

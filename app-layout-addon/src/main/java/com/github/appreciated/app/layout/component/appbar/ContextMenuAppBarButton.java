@@ -8,7 +8,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.html.Label;
 
 public class ContextMenuAppBarButton extends ComponentBadgeWrapper<Button> {
     private final ContextMenu contextMenu;
@@ -23,11 +22,6 @@ public class ContextMenuAppBarButton extends ComponentBadgeWrapper<Button> {
         contextMenu = new ContextMenu();
         contextMenu.setOpenOnClick(true);
         contextMenu.setTarget(this);
-        Label message = new Label("-");
-        contextMenu.addItem("First menu item", e -> message.setText("Clicked on the first item"));
-        contextMenu.addItem("Second menu item", e -> message.setText("Clicked on the second item"));
-        MenuItem item = contextMenu.addItem("Disabled menu item", e -> message.setText("This cannot happen"));
-        item.setEnabled(false);
     }
 
     public Component getButtonContent() {

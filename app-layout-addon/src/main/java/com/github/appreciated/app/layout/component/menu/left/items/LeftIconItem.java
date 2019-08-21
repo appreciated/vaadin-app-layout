@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
-import com.github.appreciated.app.layout.component.menu.left.LeftMenu;
 import com.github.appreciated.ripple.PaperRipple;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;

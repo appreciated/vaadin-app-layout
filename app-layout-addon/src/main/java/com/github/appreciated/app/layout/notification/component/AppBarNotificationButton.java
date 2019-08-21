@@ -36,15 +36,7 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
 
             @Override
             public void onNotificationAdded(T notification) {
-                /*if (!isOpened()) {
-                    NotificationViewWithoutWrapper view = new NotificationViewWithoutWrapper<>(notification, holder);
-                    view.setWidth("200px");
-                    com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(view);
-                    notificationView.setPosition(com.vaadin.flow.component.notification.Notification.Position.TOP_END);
-                    notificationView.setDuration(2000);
-                    notificationView.open();
-                }
-                refreshNotifications();*/
+                refreshNotifications();
             }
 
             @Override
@@ -53,11 +45,12 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
             }
         });
         //holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(AppBarNotificationButton.this::close)));
-        // holder.bind(((IconBadgeButton) getTriggerComponent()).getBadge());
+        holder.bind(getBadge());
     }
 
     public void refreshNotifications() {
-        notificationsView.initView();
+        getContextMenu().removeAll();
+        notificationsView.initViews().forEach(this::withItem);
     }
 
     public NotificationsView getNotificationsView() {
