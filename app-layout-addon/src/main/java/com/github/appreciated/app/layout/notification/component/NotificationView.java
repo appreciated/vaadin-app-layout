@@ -6,7 +6,6 @@ import com.github.appreciated.app.layout.notification.NotificationHolder;
 import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.github.appreciated.app.layout.notification.listener.NotificationListener;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -14,7 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.DomListenerRegistration;
 
-public class NotificationView<T extends Notification> extends Div {
+public class NotificationView<T extends Notification> extends HorizontalLayout {
 
     private final VerticalLayout wrapper;
     private final T info;
@@ -63,10 +62,8 @@ public class NotificationView<T extends Notification> extends Div {
         wrapper.setMargin(false);
         wrapper.setPadding(false);
         wrapper.setSpacing(false);
+        wrapper.getElement().setAttribute("theme", "spacing-s");
         add(wrapper);
-
-        add(headerLine);
-        add(descriptionWrapper);
 
         setNotificationListener(listener);
 
@@ -76,17 +73,9 @@ public class NotificationView<T extends Notification> extends Div {
                     listener.onDismiss();
                 }
             });
-            dismissButton.getButton().addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-            dismissButton.getStyle()
-                    .set("position", "absolute")
-                    .set("right", "0px")
-                    .set("top", "0px");
-            dismissButton.getButton().getElement().getStyle().set("line-height", "0px");
-            dismissButton.setWidth("27px");
-            dismissButton.setHeight("27px");
+            dismissButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+            dismissButton.setHeight("unset");
             add(dismissButton);
-            getStyle().set("position", "relative");
-            getStyle().set("padding-right", "27px");
         }
     }
 
