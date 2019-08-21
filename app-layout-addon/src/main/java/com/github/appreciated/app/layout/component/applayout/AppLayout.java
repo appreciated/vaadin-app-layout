@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component.applayout;
 
 import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
+import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -35,5 +36,9 @@ public abstract class AppLayout extends PolymerTemplate<TemplateModel> implement
         if (getContentElement() != null && getContentElement() instanceof Component) {
             UpNavigationHelper.performUpNavigation((Class<? extends Component>) getContentElement().getClass());
         }
+    }
+
+    public static AppLayout getCurrent() {
+        return UIAttributes.get(AppLayout.class);
     }
 }

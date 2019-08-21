@@ -31,10 +31,6 @@ public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Di
         return new Div();
     }
 
-    public static AppLayout getCurrent() {
-        return UIAttributes.get(AppLayout.class);
-    }
-
     public void init(T layout) {
         setLayout(layout);
         if (currentContent != null) {
