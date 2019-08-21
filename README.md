@@ -65,6 +65,7 @@ The issues for this add-on are tracked on its github.com page. All bug reports a
 * `master` the latest version of the app-layout, currently even with `V13`
 * `V8` the version for Vaadin 8 -> App-Layout `1.*`
 * `V10` the version for Vaadin 10 -> App-Layout `2.*`
+* `V13` support is discontinued due to the short support consider to upgrade to Vaadin 14 instead
 * `V14` the version for Vaadin 14 -> App-Layout `4.*`
 
 ## Contributions
