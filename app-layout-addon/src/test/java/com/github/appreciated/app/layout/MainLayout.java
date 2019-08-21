@@ -168,6 +168,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     FOOTER
                             )
                             .build())
+                    .withUpNavigation()
                     .build();
         }
     }

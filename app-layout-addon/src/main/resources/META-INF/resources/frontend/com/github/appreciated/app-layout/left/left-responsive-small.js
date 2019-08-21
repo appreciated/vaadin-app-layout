@@ -103,10 +103,6 @@ class AppLayoutLeftResponsiveSmall extends PolymerElement {
                 margin: var(--app-layout-space-s);
             }
 
-            :host(:not([narrow])) #toggle {
-                display: none;
-            }
-
             :host(:not([narrow])) #toggle:not(.show-back-arrow) {
                 display: none;
             }

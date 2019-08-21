@@ -141,7 +141,7 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
     public void showUpNavigation(boolean visible) {
         menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         menuButton.getClassNames().set("show-back-arrow", visible);
-        menuButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
+        menuButton.setIcon(visible ? VaadinIcon.ARROW_LEFT.create() : VaadinIcon.MENU.create());
     }
 
     @Override

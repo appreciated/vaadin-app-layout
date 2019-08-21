@@ -19,7 +19,7 @@ public class ComponentBadgeWrapper<T extends Component> extends HorizontalLayout
         badge = new PaperBadge("0");
         badge.getElement().getStyle()
                 .set("margin-top", "6px")
-                .set("margin-left", "-6px");
+                .set("margin-left", "-14px");
         add(wrappedComponent);
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);

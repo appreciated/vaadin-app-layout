@@ -46,7 +46,7 @@ class AppLayoutTop extends PolymerElement {
                 --iron-icon-fill-color: #727272;
             }
 
-            #toggle.show-back-arrow {
+            #toggle:not(.show-back-arrow) {
                 display: none;
             }
 

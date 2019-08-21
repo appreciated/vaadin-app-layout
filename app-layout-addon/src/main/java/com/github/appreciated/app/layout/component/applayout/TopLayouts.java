@@ -140,7 +140,7 @@ public interface TopLayouts {
         @Override
         public void showUpNavigation(boolean visible) {
             menuButton.getClassNames().set("show-back-arrow", visible);
-            menuButton.setIcon(visible ? VaadinIcon.ARROW_BACKWARD.create() : VaadinIcon.MENU.create());
+            menuButton.setIcon(visible ? VaadinIcon.ARROW_LEFT.create() : VaadinIcon.MENU.create());
         }
 
         @Override
@@ -242,7 +242,7 @@ public interface TopLayouts {
 
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
             appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
-            menuButton.setIcon(VaadinIcon.ARROW_BACKWARD.create());
+            menuButton.setIcon(VaadinIcon.ARROW_LEFT.create());
 
             getElement().appendChild(appBarElements.getElement(), contentElement.getElement());
         }
