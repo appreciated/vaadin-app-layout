@@ -9,27 +9,30 @@ public class LeftIntegrationTest extends BaseTest {
 
     @Test
     public void testMenu() {
-        WebElement elementRoot = getShadowRootElement("app-layout-left");
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 0);
         clickByCssSelector(".app-menu-item", 1);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 2);
         clickByCssSelector(".app-menu-item", 3);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 4);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 5);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 6);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 7);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 8);
-        clickByID(elementRoot, "#toggle");
+        clickByID(getElementRoot(), "#toggle");
         clickByCssSelector(".app-menu-item", 9);
     }
 
+    WebElement getElementRoot() {
+        return getShadowRootElement("app-layout-left");
+    }
+    
     @Override
     Class getRoutePrefixClass() {
         return LeftBehaviourView.class;

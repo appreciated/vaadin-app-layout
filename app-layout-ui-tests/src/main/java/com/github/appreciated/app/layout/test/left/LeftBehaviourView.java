@@ -2,7 +2,7 @@ package com.github.appreciated.app.layout.test.left;
 
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
-import com.github.appreciated.app.layout.test.nestedlayout.view.*;
+import com.github.appreciated.app.layout.test.left.view.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RoutePrefix;
 
