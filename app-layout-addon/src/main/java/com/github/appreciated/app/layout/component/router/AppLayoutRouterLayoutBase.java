@@ -78,7 +78,7 @@ public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Di
         }));
     }
 
-    public static <T extends AppLayoutRouterLayoutBase> T getAppLayoutRouterLayout() {
+    public static <T extends AppLayoutRouterLayoutBase> T getCurrent() {
         return (T) UIAttributes.get(AppLayoutRouterLayoutBase.class);
     }
 
