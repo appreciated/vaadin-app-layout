@@ -53,6 +53,9 @@ public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Di
     @Override
     public void showRouterLayoutContent(HasElement content) {
         currentContent = content;
+        if (layout == null) {
+            throw new IllegalStateException("init has AppLayoutRouterLayoutBase::init has not yet been called");
+        }
         layout.setAppLayoutContent(content);
         if (layout.isUpNavigationEnabled()) {
             setUpNavigation(content);
