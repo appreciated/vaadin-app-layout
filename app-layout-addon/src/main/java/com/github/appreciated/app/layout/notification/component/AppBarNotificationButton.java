@@ -37,6 +37,14 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
             @Override
             public void onNotificationAdded(T notification) {
                 refreshNotifications();
+                if (!AppBarNotificationButton.this.getContextMenu().isOpened()) {
+                    DisplayableNotificationView view = new DisplayableNotificationView<>(notification, holder);
+                    view.setWidth("200px");
+                    com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(view);
+                    notificationView.setPosition(com.vaadin.flow.component.notification.Notification.Position.TOP_END);
+                    notificationView.setDuration(2000);
+                    notificationView.open();
+                }
             }
 
             @Override
