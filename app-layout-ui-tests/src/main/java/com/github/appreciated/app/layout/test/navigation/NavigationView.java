@@ -2,13 +2,13 @@ package com.github.appreciated.app.layout.test.navigation;
 
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorView;
+import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
 import com.github.appreciated.app.layout.test.navigation.view.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RoutePrefix;
 
 @RoutePrefix(absolute = true, value = "navigation")
-public class NavigationView extends AbstractLeftBehaviorView {
+public class NavigationView extends AbstractLeftBehaviorBasicView {
 
     @Override
     public Behaviour getVariant() {
