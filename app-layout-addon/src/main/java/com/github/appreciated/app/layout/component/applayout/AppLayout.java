@@ -15,19 +15,19 @@ import com.vaadin.flow.templatemodel.TemplateModel;
 public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
 
     public void toggleDrawer() {
-        getDrawer().getElement().callFunction("toggle");
+        getDrawer().getElement().callJsFunction("toggle");
     }
 
     public void openDrawer() {
-        getDrawer().getElement().callFunction("open");
+        getDrawer().getElement().callJsFunction("open");
     }
 
     public void closeDrawerIfNotPersistent() {
-        getElement().callFunction("closeIfNotPersistent");
+        getElement().callJsFunction("closeIfNotPersistent");
     }
 
     public void closeDrawer() {
-        getDrawer().getElement().callFunction("close");
+        getDrawer().getElement().callJsFunction("close");
     }
 
     @EventHandler
