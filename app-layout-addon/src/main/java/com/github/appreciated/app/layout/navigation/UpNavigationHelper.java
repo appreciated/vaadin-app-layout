@@ -22,38 +22,16 @@ public class UpNavigationHelper {
     }
 
     public static boolean routeHasUpNavigation(Class<? extends Component> navigationTarget) {
-        return getClosestRoute(navigationTarget).isPresent();
+        Optional<RouteData> routeData = getRouteForClassName(navigationTarget);
+        return routeData.filter(data -> !getUpNavigationHelper().registeredRoutes.containsKey(data)).isPresent();
     }
 
-    public static Optional<RouteData> getClosestRoute(Class<? extends Component> navigationTarget) {
-        String currentRoute = RouteConfiguration.forSessionScope().getUrl(navigationTarget);
-        if (currentRoute.lastIndexOf("/") > 0) {
-            Optional<RouteSimilarity> result = RouteConfiguration.forApplicationScope()
-                    .getAvailableRoutes()
-                    .stream()
-                    .filter(routeData -> !routeData.getUrl().equals(currentRoute))
-                    .map(routeData -> new RouteSimilarity(routeData, currentRoute))
-                    .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
-            if (result.isPresent()) {
-                return Optional.ofNullable(result.get().getRouteData());
-            }
-        }
-        return Optional.empty();
-    }
-
-    public static void performUpNavigation(Class<? extends Component> currentNavigation) {
-        getClosestRoute(currentNavigation).ifPresent(routeData -> UI.getCurrent().navigate(routeData.getUrl()));
-    }
-
-    public static boolean shouldHighlight(Class<? extends Component> className, Location location) {
-        String[] currentRouteParts = location.getSegments().toArray(new String[]{});
-
-        Set<RouteData> routes = getUpNavigationHelper().registeredRoutes.keySet();
-        Optional<RouteSimilarity> result = routes.stream()
-                .map(s -> new RouteSimilarity(s, Arrays.stream(currentRouteParts).reduce((s1, s2) -> s1 + "/" + s2).get()))
-                .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
-
-        return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
+    private static Optional<RouteData> getRouteForClassName(Class<? extends Component> className) {
+        return RouteConfiguration.forSessionScope()
+                .getAvailableRoutes()
+                .stream()
+                .filter(routeData -> routeData.getNavigationTarget() == className)
+                .findFirst();
     }
 
     public static UpNavigationHelper getUpNavigationHelper() {
@@ -67,6 +45,51 @@ public class UpNavigationHelper {
         UIAttributes.set(UpNavigationHelper.class, new UpNavigationHelper());
     }
 
+    public static Optional<RouteSimilarity> getClosestRoute(String url, String[] availableRoutes) {
+        if (url.lastIndexOf("/") > 0) {
+            Optional<RouteSimilarity> result = Arrays.stream(availableRoutes)
+                    .filter(routeData -> !routeData.equals(url))
+                    .map(routeData -> new RouteSimilarity(routeData, url))
+                    .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
+            if (result.isPresent()) {
+                return result;
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static void performUpNavigation(Class<? extends Component> currentNavigation) {
+        getClosestRoute(RouteConfiguration.forSessionScope().getUrl(currentNavigation))
+                .ifPresent(routeData -> UI.getCurrent().navigate(routeData.getUrl()));
+    }
+
+    public static Optional<RouteData> getClosestRoute(String url) {
+        if (url.lastIndexOf("/") > 0) {
+            Optional<RouteSimilarity> result = RouteConfiguration.forApplicationScope()
+                    .getAvailableRoutes()
+                    .stream()
+                    .filter(routeData -> !routeData.getUrl().equals(url))
+                    .map(routeData -> new RouteSimilarity(routeData, url))
+                    .filter(routeSimilarity -> routeSimilarity.getSimilarity() > 0)
+                    .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
+            if (result.isPresent()) {
+                return Optional.ofNullable(result.get().getRouteData());
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static boolean shouldHighlight(Class<? extends Component> className, Location location) {
+        String currentRoute = location.getSegments().stream().reduce((s1, s2) -> s1 + "/" + s2).get();
+
+        Set<RouteData> routes = getUpNavigationHelper().registeredRoutes.keySet();
+        Optional<RouteSimilarity> result = routes.stream()
+                .map(s -> new RouteSimilarity(s, currentRoute))
+                .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
+
+        return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
+    }
+
     /**
      * We need to be able to differenciate between routes that have been added to the
      *
@@ -77,11 +100,7 @@ public class UpNavigationHelper {
     }
 
     public void register(Class<? extends Component> className) {
-        RouteConfiguration.forSessionScope()
-                .getAvailableRoutes()
-                .stream()
-                .filter(routeData -> routeData.getNavigationTarget() == className)
-                .findFirst()
+        getRouteForClassName(className)
                 .ifPresent(routeData -> registeredRoutes.put(routeData, RouteConfiguration.forSessionScope().getUrl(className)));
     }
 

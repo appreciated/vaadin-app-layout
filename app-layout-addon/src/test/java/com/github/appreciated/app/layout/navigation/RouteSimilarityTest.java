@@ -22,15 +22,14 @@ public class RouteSimilarityTest {
                 "navigation"
         };
 
-        String[] currentRoutePart = new String[]{"navigation"};
+        String currentRoutePart = "navigation";
 
         RouteSimilarity r = Arrays.stream(urls)
                 .map(s -> new RouteSimilarity(currentRoutePart, s))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity)).get();
-        String result1 = r.getRoutes()[0];
         String result2 = urls[9];
 
-        Assert.assertEquals(result1, result2);
+        Assert.assertEquals(r.getRouteString(), result2);
     }
 
     @Test
@@ -48,12 +47,12 @@ public class RouteSimilarityTest {
                 ""
         };
 
-        String[] currentRoutePart = new String[]{""};
+        String currentRoutePart = "";
 
         RouteSimilarity r = Arrays.stream(urls)
                 .map(s -> new RouteSimilarity(currentRoutePart, s))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity)).get();
-        String result1 = r.getRoutes()[0];
+        String result1 = r.getRouteString();
         String result2 = urls[9];
 
         Assert.assertEquals(result1, result2);
@@ -71,15 +70,15 @@ public class RouteSimilarityTest {
                 "navigation/view7",
                 "navigation/view8",
                 "navigation/view9",
-                "navigation"
+                "navigation",
         };
 
-        String[] currentRoutePart = new String[]{"navigation/view1"};
+        String currentRoutePart = "navigation/view1";
 
         RouteSimilarity r = Arrays.stream(urls)
                 .map(s -> new RouteSimilarity(currentRoutePart, s))
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity)).get();
-        String result1 = r.getRoutes()[0];
+        String result1 = r.getRouteString();
         String result2 = urls[2];
 
         Assert.assertEquals(result1, result2);
