@@ -23,7 +23,7 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
         LeftNavigationItem menu = new LeftNavigationItem("View9", VaadinIcon.MENU.create(), getViewForI(9));
         notificationHolder.bind(home.getBadge());
         badgeHolder.bind(menu.getBadge());
-        init(AppLayoutBuilder.get(getVariant())
+        AppLayoutBuilder builder = AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
@@ -45,6 +45,8 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
                                 .add(new LeftNavigationItem("View8", VaadinIcon.COG.create(), getViewForI(8)))
                                 .add(menu)
                                 .build()
-                ).build());
+                );
+        furtherConfiguration(builder);
+        init(builder.build());
     }
 }
