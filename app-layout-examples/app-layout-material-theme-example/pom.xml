@@ -3,8 +3,6 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.github.appreciated.examples</groupId>
     <artifactId>app-layout-material-theme-example</artifactId>
     <name>App Layout Addon Examples - Material Theme</name>
     <version>${project.parent.version}</version>
@@ -32,7 +30,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependencies -->
-        <vaadin.version>12.0.5</vaadin.version>
+        <vaadin.version>14.0.1</vaadin.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
     </properties>
 
