@@ -53,7 +53,11 @@ public interface LeftLayouts {
 
   abstract class AbstractLeftResponsive extends AbstractLeftAppLayoutBase {
 
-      /** Sets the responsive width. */
+      /**
+       * Sets the responsive width.
+       *
+       * @param width width in pixels
+       */
       public void setResponsiveWidth(String width) {
           getElement().setProperty("responsiveWidth", width);
       }
@@ -81,12 +85,18 @@ public interface LeftLayouts {
 
   abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
 
-      /** Sets the responsive width for narrow-mode. */
+      /**
+       * Sets the responsive width for narrow-mode.
+       * @param width width in pixels
+       */
       public void setResponsiveWidthNarrow(String width) {
           getElement().setProperty("responsiveWidthNarrow", width);
       }
 
-      /** Sets the responsive width for wide-mode. */
+      /**
+       * Sets the responsive width for wide-mode.
+       * @param width width in pixels
+       */
       public void setResponsiveWidthWide(String width) {
           getElement().setProperty("responsiveWidthWide", width);
       }

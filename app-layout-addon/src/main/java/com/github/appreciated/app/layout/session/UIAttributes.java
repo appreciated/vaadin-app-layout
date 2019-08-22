@@ -28,10 +28,10 @@ public class UIAttributes {
     }
 
     /**
-     * Needs to be called from the UI Thread.
+     *  Needs to be called from the UI Thread.
      * @param type
+     * @param value
      * @param <T>
-     * @return
      */
     public static <T> void set(Class<T> type, T value) {
         UIAttributes session = getSession();
