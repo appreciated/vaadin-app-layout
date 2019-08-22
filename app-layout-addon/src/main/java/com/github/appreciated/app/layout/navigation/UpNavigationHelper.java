@@ -8,6 +8,7 @@ import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouteData;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * A helper class that checks whether <a href="https://developer.android.com/training/design-navigation/ancestral-temporal">Up Navigation</a>is available for a specific route,
@@ -22,16 +23,15 @@ public class UpNavigationHelper {
     }
 
     public static boolean routeHasUpNavigation(Class<? extends Component> navigationTarget) {
-        Optional<RouteData> routeData = getRouteForClassName(navigationTarget);
-        return routeData.filter(data -> !getUpNavigationHelper().registeredRoutes.containsKey(data)).isPresent();
+        return getRoutesForClassName(navigationTarget)
+                .anyMatch(data -> !getUpNavigationHelper().registeredRoutes.containsKey(data));
     }
 
-    private static Optional<RouteData> getRouteForClassName(Class<? extends Component> className) {
+    private static Stream<RouteData> getRoutesForClassName(Class<? extends Component> className) {
         return RouteConfiguration.forSessionScope()
                 .getAvailableRoutes()
                 .stream()
-                .filter(routeData -> routeData.getNavigationTarget() == className)
-                .findFirst();
+                .filter(routeData -> routeData.getNavigationTarget() == className);
     }
 
     public static UpNavigationHelper getUpNavigationHelper() {
@@ -68,7 +68,8 @@ public class UpNavigationHelper {
             Optional<RouteSimilarity> result = RouteConfiguration.forApplicationScope()
                     .getAvailableRoutes()
                     .stream()
-                    .filter(routeData -> !routeData.getUrl().equals(url))
+                    .filter(routeData -> !routeData.getUrl().equals(url) ||
+                            routeData.getRouteAliases().stream().anyMatch(routeAliasData -> routeAliasData.getUrl().equals(url)))
                     .map(routeData -> new RouteSimilarity(routeData, url))
                     .filter(routeSimilarity -> routeSimilarity.getSimilarity() > 0)
                     .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
@@ -91,7 +92,7 @@ public class UpNavigationHelper {
     }
 
     /**
-     * We need to be able to differenciate between routes that have been added to the
+     * We need to be able to differentiate between routes that have been added to the menu and generally available routes.
      *
      * @param className
      */
@@ -100,8 +101,10 @@ public class UpNavigationHelper {
     }
 
     public void register(Class<? extends Component> className) {
-        getRouteForClassName(className)
-                .ifPresent(routeData -> registeredRoutes.put(routeData, RouteConfiguration.forSessionScope().getUrl(className)));
+        getRoutesForClassName(className)
+                .forEach(routeData -> {
+                    registeredRoutes.put(routeData, RouteConfiguration.forSessionScope().getUrl(className));
+                });
     }
 
 }

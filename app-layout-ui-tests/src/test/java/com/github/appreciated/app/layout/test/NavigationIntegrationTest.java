@@ -14,7 +14,7 @@ public class NavigationIntegrationTest extends BaseTest {
     @Test
     public void testHighlight() {
 
-        openWebsite("view1");
+        openWebsite("");
         $$(".app-menu-item").get(1).shouldHave(Condition.attribute("highlight"));
         $$(".app-menu-item").get(2).shouldNotHave(Condition.attribute("highlight"));
         $$(".app-menu-item").get(3).shouldNotHave(Condition.attribute("highlight"));
@@ -38,7 +38,7 @@ public class NavigationIntegrationTest extends BaseTest {
         $$(".app-menu-item").get(9).shouldNotHave(Condition.attribute("highlight"));
         $$(".app-menu-item").get(10).shouldNotHave(Condition.attribute("highlight"));
 
-        openWebsite("view1");
+        openWebsite("");
         $$(".app-menu-item").get(1).shouldHave(Condition.attribute("highlight"));
         $$(".app-menu-item").get(2).shouldNotHave(Condition.attribute("highlight"));
         $$(".app-menu-item").get(3).shouldNotHave(Condition.attribute("highlight"));

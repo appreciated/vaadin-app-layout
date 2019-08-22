@@ -17,7 +17,9 @@ public class RouteSimilarity {
     public RouteSimilarity(RouteData routeData, String currentRoute) {
         this.route = routeData.getNavigationTarget();
         this.routeData = routeData;
-        this.similarity = calculateSimilarity(routeData.getUrl(), currentRoute);
+        int urlSimilarity = calculateSimilarity(routeData.getUrl(), currentRoute);
+        int routeAliasSimilarity = routeData.getRouteAliases().stream().map(routeAliasData -> calculateSimilarity(routeAliasData.getUrl(), currentRoute)).max(Integer::compareTo).orElse(0);
+        similarity = Math.max(urlSimilarity, routeAliasSimilarity);
     }
 
     private int calculateSimilarity(String url, String currentRoute) {
