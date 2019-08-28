@@ -171,9 +171,9 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
 
     /**
      * Hiding the menu will hide all menu elements also on the client side.
-     * </br> Note that you still have to make sure that an unauthorized user is unable to access the paths available in the menu!
+     * Note that you still have to make sure that an unauthorized user is unable to access the paths available in the menu!
      *
-     * @param isMenuVisible
+     * @param isMenuVisible whether the menu is visible
      */
     public void setMenuVisible(boolean isMenuVisible) {
         if (isMenuVisible != this.isMenuVisible) { // only do something if the state was changed

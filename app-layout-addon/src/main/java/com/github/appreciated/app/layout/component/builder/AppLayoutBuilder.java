@@ -32,8 +32,8 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * Creates a title {@link Component} and set it in the app-bar of the {@link AppLayout}
      *
-     * @param title
-     * @return
+     * @param title title as string
+     * @return the builder
      */
     public AppLayoutBuilder withTitle(String title) {
         setTitle(title);
@@ -43,7 +43,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * Sets a title {@link Component} in the app-bar of the {@link AppLayout}
      *
-     * @param title
+     * @param title title as string
      */
     public void setTitle(String title) {
         Span span = new Span(title);
@@ -59,7 +59,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * Sets the {@link Component} that is supposed to represent the title in the app-bar
      *
-     * @param titleComponent
+     * @param titleComponent component that will the the title
      */
     public void setTitleComponent(Component titleComponent) {
         this.titleComponent = titleComponent;
@@ -68,7 +68,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * Sets the title component by using {@link AppLayoutBuilder#setTitleComponent(Component)}
      *
-     * @param component
+     * @param component the title component
      * @return Itself to allow method chaining
      */
     public AppLayoutBuilder withTitle(Component component) {
@@ -79,7 +79,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * Builds the layout and returns an instance of an AppLayout which also is a Component
      *
-     * @return
+     * @return the build AppLayout instance
      */
     public AppLayout build() {
         if (titleComponent != null) {
@@ -99,7 +99,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     /**
      * set the app-bar {@link Component} of the {@link AppLayout} that is built
      *
-     * @param component
+     * @param component the build app-bar component
      * @return Itself to allow method chaining
      */
     public AppLayoutBuilder withAppBar(Component component) {
@@ -112,7 +112,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     }
 
     /**
-     * @param component
+     * @param component the app menu component
      * @return Itself to allow method chaining
      */
     public AppLayoutBuilder withAppMenu(Component component) {
