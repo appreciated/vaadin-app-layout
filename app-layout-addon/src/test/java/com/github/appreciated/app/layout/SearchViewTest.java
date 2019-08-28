@@ -27,10 +27,11 @@ public class SearchViewTest extends HorizontalLayout {
                 new TestEntitiy("Header2", "Description2"),
                 new TestEntitiy("Header3", "Description3")
         ));
-        button.setDataProvider(dataProvider, s -> new Query<>(testEntity -> testEntity.getHeader().startsWith(s)));
+        button.setDataProvider(dataProvider, s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)));
         button.setDataViewProvider(result -> result.map(o -> {
             RippleClickableCard card = new RippleClickableCard(new Item(o.getHeader(), o.getDescription()));
             card.setWidthFull();
+            card.setBackground("var(--lumo-base-color)");
             return card;
         }));
         add(button);
