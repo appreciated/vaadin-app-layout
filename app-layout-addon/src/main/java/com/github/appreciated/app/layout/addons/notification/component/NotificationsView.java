@@ -1,6 +1,6 @@
-package com.github.appreciated.app.layout.notification.component;
+package com.github.appreciated.app.layout.addons.notification.component;
 
-import com.github.appreciated.app.layout.notification.NotificationHolder;
+import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;

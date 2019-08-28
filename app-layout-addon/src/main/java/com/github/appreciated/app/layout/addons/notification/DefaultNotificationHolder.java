@@ -1,7 +1,8 @@
-package com.github.appreciated.app.layout.notification;
+package com.github.appreciated.app.layout.addons.notification;
 
+import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
+import com.vaadin.flow.server.Command;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.time.ZoneId;
@@ -39,6 +40,11 @@ public class DefaultNotificationHolder extends NotificationHolder<DefaultNotific
         super(listener, notifications);
     }
 
+    /**
+     * Adds a notification to {@link NotificationHolder} this method must be invoked from the UI thread, this can be done by using {@link com.vaadin.flow.component.UI#access(Command)}. Also the {@link com.vaadin.flow.component.page.Push} annotation must be added to the {@link com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout}
+     *
+     * @param notification the instance of the {@link com.github.appreciated.app.layout.addons.notification.entity.Notification} that is being added
+     */
     @Override
     public void addNotification(DefaultNotification notification) {
         super.addNotification(notification);

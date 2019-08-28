@@ -1,6 +1,4 @@
-package com.github.appreciated.app.layout.notification.entitiy;
-
-import com.github.appreciated.app.layout.design.Styles;
+package com.github.appreciated.app.layout.addons.notification.entity;
 
 public enum Priority {
     ERROR(4, "var(--app-layout-notification-error-color)"),

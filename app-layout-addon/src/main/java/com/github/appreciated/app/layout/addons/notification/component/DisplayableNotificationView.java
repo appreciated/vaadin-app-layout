@@ -1,9 +1,9 @@
-package com.github.appreciated.app.layout.notification.component;
+package com.github.appreciated.app.layout.addons.notification.component;
 
+import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
+import com.github.appreciated.app.layout.addons.notification.entity.Notification;
+import com.github.appreciated.app.layout.addons.notification.listener.NotificationListener;
 import com.github.appreciated.app.layout.component.menu.RoundImage;
-import com.github.appreciated.app.layout.notification.NotificationHolder;
-import com.github.appreciated.app.layout.notification.entitiy.Notification;
-import com.github.appreciated.app.layout.notification.listener.NotificationListener;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;

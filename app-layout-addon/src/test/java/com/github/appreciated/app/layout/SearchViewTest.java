@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout;
 
+import com.github.appreciated.app.layout.addons.search.SearchButton;
 import com.github.appreciated.app.layout.navigation.TestEntitiy;
-import com.github.appreciated.app.layout.search.SearchButton;
 import com.github.appreciated.card.RippleClickableCard;
 import com.github.appreciated.card.content.Item;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

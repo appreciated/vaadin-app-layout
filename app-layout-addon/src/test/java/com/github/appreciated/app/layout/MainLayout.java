@@ -1,5 +1,9 @@
 package com.github.appreciated.app.layout;
 
+import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
+import com.github.appreciated.app.layout.addons.notification.entity.Priority;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
@@ -15,10 +19,6 @@ import com.github.appreciated.app.layout.component.menu.top.item.TopClickableIte
 import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
-import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.app.layout.notification.entitiy.Priority;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -28,9 +28,9 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
 import java.util.function.Consumer;
 
+import static com.github.appreciated.app.layout.addons.notification.entity.Priority.MEDIUM;
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
-import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 /**
  * The main view contains a button and a template element.

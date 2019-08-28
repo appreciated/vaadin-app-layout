@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.search;
+package com.github.appreciated.app.layout.addons.search;
 
 import com.github.appreciated.card.RippleClickableCard;
 

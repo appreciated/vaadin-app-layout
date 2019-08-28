@@ -1,5 +1,8 @@
 package com.github.appreciated.example.theme;
 
+import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -8,9 +11,6 @@ import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenu
 import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
-import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.HtmlImport;

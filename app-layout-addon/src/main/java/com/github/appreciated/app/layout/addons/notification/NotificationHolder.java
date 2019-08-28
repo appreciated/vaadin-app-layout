@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.notification;
+package com.github.appreciated.app.layout.addons.notification;
 
+import com.github.appreciated.app.layout.addons.notification.entity.Notification;
 import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
-import com.github.appreciated.app.layout.notification.entitiy.Notification;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
 

@@ -1,7 +1,7 @@
-package com.github.appreciated.app.layout.notification.entitiy;
+package com.github.appreciated.app.layout.addons.notification.entity;
 
+import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.appbar.ComponentBadgeWrapper;
-import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
 
 import java.time.LocalDateTime;
 

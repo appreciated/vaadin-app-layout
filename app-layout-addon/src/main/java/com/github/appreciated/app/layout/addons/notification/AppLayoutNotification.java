@@ -1,6 +1,6 @@
-package com.github.appreciated.app.layout.notification;
+package com.github.appreciated.app.layout.addons.notification;
 
-import com.github.appreciated.app.layout.notification.entitiy.Notification;
+import com.github.appreciated.app.layout.addons.notification.entity.Notification;
 import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.UI;
 

@@ -1,5 +1,9 @@
 package com.github.appreciated.app.layout.test.base;
 
+import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
+import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
+import com.github.appreciated.app.layout.addons.notification.entity.Priority;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -9,18 +13,14 @@ import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationIt
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
-import com.github.appreciated.app.layout.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton;
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification;
-import com.github.appreciated.app.layout.notification.entitiy.Priority;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 
+import static com.github.appreciated.app.layout.addons.notification.entity.Priority.MEDIUM;
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
-import static com.github.appreciated.app.layout.notification.entitiy.Priority.MEDIUM;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")

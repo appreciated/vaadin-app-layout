@@ -1,14 +1,15 @@
-package com.github.appreciated.app.layout.notification.entitiy;
+package com.github.appreciated.app.layout.addons.notification.entity;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * An implementation of {@link Notification}.
+ * The default implementation of {@link Notification}.
  */
 public class DefaultNotification implements Notification {
-
+    /**
+     * The title of the notification
+     */
     private String title;
     private String description;
     private String image;

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.component.appbar;
 
-import com.github.appreciated.app.layout.notification.component.NotificationsView;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationsView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
