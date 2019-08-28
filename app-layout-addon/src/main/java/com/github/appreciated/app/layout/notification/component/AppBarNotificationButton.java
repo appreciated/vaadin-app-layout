@@ -22,12 +22,7 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
         this.notificationsView = new NotificationsView(holder);
         this.setContentComponent(notificationsView);
         setClassName("app-bar-notification-button");
-        getStyle().set("--paper-menu-button-dropdown-background", "transparent")
-                .set("--shadow-elevation-2dp_-_box-shadow", "0px")
-                .set("--paper-menu-button-dropdown_-_margin-top", "var(--app-layout-bar-height)")
-                .set("--paper-menu-button-dropdown_-_margin-right", "7px");
 
-        //setHorizontalAlignment(HorizontalAlignment.RIGHT);
         holder.addNotificationsChangeListener(new NotificationsChangeListener<T>() {
             @Override
             public void onNotificationChanges(NotificationHolder<T> holder) {
@@ -52,7 +47,6 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
 
             }
         });
-        //holder.addClickListener(newStatus -> getUI().ifPresent(ui -> ui.access(AppBarNotificationButton.this::close)));
         holder.bind(getBadge());
     }
 
