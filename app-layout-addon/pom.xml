@@ -84,6 +84,18 @@
             <version>2.0.0</version>
         </dependency>
 
+        <!-- For search -->
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>iron-overlay-behavior</artifactId>
+            <version>2.0.0.beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.appreciated</groupId>
+            <artifactId>card</artifactId>
+            <version>2.0.0.beta1</version>
+        </dependency>
+
         <!--End of web-components elements -->
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
