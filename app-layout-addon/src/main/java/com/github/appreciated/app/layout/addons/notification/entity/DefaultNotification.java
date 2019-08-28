@@ -1,5 +1,7 @@
 package com.github.appreciated.app.layout.addons.notification.entity;
 
+import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 

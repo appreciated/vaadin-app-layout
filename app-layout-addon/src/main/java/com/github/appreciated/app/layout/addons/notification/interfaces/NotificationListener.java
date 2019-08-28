@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.addons.notification.listener;
+package com.github.appreciated.app.layout.addons.notification.interfaces;
 
 public interface NotificationListener {
     void onClick();

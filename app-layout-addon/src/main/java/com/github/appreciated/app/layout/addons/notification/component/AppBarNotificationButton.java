@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.addons.notification.component;
 
 import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.NotificationsChangeListener;
-import com.github.appreciated.app.layout.addons.notification.entity.Notification;
+import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
+import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
 import com.github.appreciated.app.layout.component.appbar.ContextMenuAppBarButton;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
