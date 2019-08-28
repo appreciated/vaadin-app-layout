@@ -20,7 +20,6 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
     public AppBarNotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
         super(icon.create());
         this.notificationsView = new NotificationsView(holder);
-        this.setContentComponent(notificationsView);
         setClassName("app-bar-notification-button");
 
         holder.addNotificationsChangeListener(new NotificationsChangeListener<T>() {
@@ -52,7 +51,7 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
 
     public void refreshNotifications() {
         getContextMenu().removeAll();
-        notificationsView.initViews().forEach(this::withItem);
+        notificationsView.initViews().forEach(this::addItem);
     }
 
     public NotificationsView getNotificationsView() {

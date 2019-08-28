@@ -66,6 +66,7 @@ html {
     --app-layout-app-bar-large-object-display: visible;
     --app-layout-notification-error-color: var(--lumo-error-color);
     --app-layout-notification-warning-color: #fdd835;
+    --iron-overlay-backdrop-background-color: var(--lumo-shade-20pct);
 }
 
 html[theme~="dark"] {

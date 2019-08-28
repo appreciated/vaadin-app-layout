@@ -4,6 +4,10 @@ import com.github.appreciated.app.layout.addons.notification.DefaultNotification
 import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
+import com.github.appreciated.app.layout.addons.profile.AppBarProfileButtonBuilder;
+import com.github.appreciated.app.layout.addons.search.AppBarSearchButton;
+import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButton;
+import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButtonBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
@@ -19,13 +23,20 @@ import com.github.appreciated.app.layout.component.menu.top.item.TopClickableIte
 import com.github.appreciated.app.layout.component.menu.top.item.TopNavigationItem;
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
+import com.github.appreciated.app.layout.navigation.TestSearchResult;
+import com.github.appreciated.card.RippleClickableCard;
+import com.github.appreciated.card.content.Item;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.provider.Query;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 import static com.github.appreciated.app.layout.addons.notification.entity.Priority.MEDIUM;
@@ -43,6 +54,9 @@ public class MainLayout extends AppLayoutRouterLayout {
     private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
     private Behaviour variant = Behaviour.LEFT_RESPONSIVE_HYBRID;
     private Thread currentThread;
+
+    private AppBarSearchOverlayButton<TestSearchResult> button;
+    private ListDataProvider<TestSearchResult> dataProvider;
 
     public MainLayout() {
         init(getLayoutConfiguration(variant));
@@ -75,6 +89,30 @@ public class MainLayout extends AppLayoutRouterLayout {
 
     private AppLayout getLayoutConfiguration(Behaviour variant) {
         this.variant = variant;
+
+        dataProvider = new ListDataProvider<>(Arrays.asList(
+                new TestSearchResult("Header1", "Description1"),
+                new TestSearchResult("Header2", "Description2"),
+                new TestSearchResult("Header3", "Description3"),
+                new TestSearchResult("Header4", "Description4"),
+                new TestSearchResult("Header5", "Description5"),
+                new TestSearchResult("Header6", "Description6"),
+                new TestSearchResult("Header7", "Description7"),
+                new TestSearchResult("Header8", "Description8"),
+                new TestSearchResult("Header9", "Description9"),
+                new TestSearchResult("Header10", "Description10")
+        ));
+
+        button = new AppBarSearchOverlayButtonBuilder<TestSearchResult>()
+                .withDataProvider(dataProvider)
+                .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
+                .withDataViewProvider(queryResult -> queryResult.map(result -> {
+                    RippleClickableCard card = new RippleClickableCard(new Item(result.getHeader(), result.getDescription()));
+                    card.setWidthFull();
+                    card.setBackground("var(--lumo-base-color)");
+                    return card;
+                }))
+                .build();
         if (!this.variant.isTop()) {
             LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
             LeftNavigationItem menu = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View9.class);
@@ -87,6 +125,14 @@ public class MainLayout extends AppLayoutRouterLayout {
                     .withIcon("/frontend/images/logo.png")
                     .withAppBar(AppBarBuilder
                             .get()
+                            .add(button)
+                            .add(AppBarProfileButtonBuilder.get()
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .build()
+                            )
+                            .add(new AppBarSearchButton())
                             .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(LeftAppMenuBuilder
@@ -149,6 +195,13 @@ public class MainLayout extends AppLayoutRouterLayout {
                     .withTitle("App Layout")
                     .withAppBar(AppBarBuilder
                             .get()
+                            .add(button)
+                            .add(AppBarProfileButtonBuilder.get()
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .build()
+                            )
                             .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(TopAppMenuBuilder

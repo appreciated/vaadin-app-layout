@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.navigation;
 
-public class TestEntitiy {
+public class TestSearchResult {
     String header;
     String description;
 
-    public TestEntitiy(String header, String description) {
+    public TestSearchResult(String header, String description) {
         this.header = header;
         this.description = description;
     }

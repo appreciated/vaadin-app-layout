@@ -1,4 +1,4 @@
-package com.github.appreciated.app.layout.addons.search;
+package com.github.appreciated.app.layout.addons.search.overlay;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -12,21 +12,21 @@ import com.vaadin.flow.function.SerializablePredicate;
 
 import java.util.function.Function;
 
-public class SearchButton<T> extends Button {
-    private final SearchView<T> searchView;
+public class AppBarSearchOverlayButton<T> extends Button {
+    private final SearchOverlayView<T> searchView;
 
-    public SearchButton() {
+    public AppBarSearchOverlayButton() {
         this(VaadinIcon.SEARCH);
     }
 
-    public SearchButton(VaadinIcon icon) {
+    public AppBarSearchOverlayButton(VaadinIcon icon) {
         this(icon.create());
     }
 
-    public SearchButton(Component icon) {
+    public AppBarSearchOverlayButton(Component icon) {
         super(icon);
         addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
-        searchView = new SearchView<>();
+        searchView = new SearchOverlayView<>();
         addClickListener(event -> searchView.open());
     }
 
@@ -42,15 +42,19 @@ public class SearchButton<T> extends Button {
         attachEvent.getUI().add(searchView);
     }
 
+    public SearchOverlayView<T> getSearchView() {
+        return searchView;
+    }
+
     public void setDataViewProvider(DataViewProvider<T> provider) {
         this.searchView.setDataViewProvider(provider);
     }
 
-    public void setDataProvider(ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider, Function<String, Query<T, SerializablePredicate<T>>> query) {
-        this.searchView.setDataProvider(dataProvider, query);
+    public void setDataProvider(ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider) {
+        this.searchView.setDataProvider(dataProvider);
     }
 
-    public SearchView<T> getSearchView() {
-        return searchView;
+    public void setQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> query) {
+        this.searchView.setQueryProvider(query);
     }
 }

@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.component.appbar;
 
-import com.github.appreciated.app.layout.addons.notification.component.NotificationsView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -32,27 +31,19 @@ public class ContextMenuAppBarButton extends ComponentBadgeWrapper<Button> {
         return contextMenu;
     }
 
-    public ContextMenuAppBarButton withItem(String text) {
+    public void addItem(String text) {
         contextMenu.addItem(text);
-        return this;
     }
 
-    public ContextMenuAppBarButton withItem(Component component) {
+    public void addItem(Component component) {
         contextMenu.addItem(component);
-        return this;
     }
 
-    public ContextMenuAppBarButton withItem(String text, ComponentEventListener<ClickEvent<MenuItem>> clickListener) {
+    public void addItem(String text, ComponentEventListener<ClickEvent<MenuItem>> clickListener) {
         contextMenu.addItem(text, clickListener);
-        return this;
     }
 
-    public ContextMenuAppBarButton withItem(Component component, ComponentEventListener<ClickEvent<MenuItem>> clickListener) {
+    public void addItem(Component component, ComponentEventListener<ClickEvent<MenuItem>> clickListener) {
         contextMenu.addItem(component, clickListener);
-        return this;
-    }
-
-    protected void setContentComponent(NotificationsView notificationsView) {
-
     }
 }
