@@ -44,7 +44,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
         item.setHighlightCondition((routerLink, event) -> false);
         item.setHighlightAction((routerLink, highlight) -> {
         });
-        ironIcon = new IronIcon("icons", "expand-more");
+        ironIcon = new IronIcon("vaadin", "chevron-down-small");
 
         ironIcon.getElement().getStyle()
                 .set("fill", "var(--expand-icon-fill-color)")
