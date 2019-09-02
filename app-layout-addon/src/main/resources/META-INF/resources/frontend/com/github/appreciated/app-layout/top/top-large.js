@@ -81,7 +81,9 @@ class AppLayoutTopLarge extends PolymerElement {
         <app-header-layout fullbleed>
             <app-header part="app-bar" slot="header" reveals condenses style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar>
-                    <vaadin-button id="toggle" theme="tertiary"></vaadin-button>
+                    <vaadin-button id="toggle" theme="large tertiary icon">
+                         <iron-icon icon="lumo:menu" slot="prefix"></iron-icon>
+                    </vaadin-button>
                 </app-toolbar>
                 <app-toolbar>
                     <div id="app-bar-elements" class="app-bar-content">

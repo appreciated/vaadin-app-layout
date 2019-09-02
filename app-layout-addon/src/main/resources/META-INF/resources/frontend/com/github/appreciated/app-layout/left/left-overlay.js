@@ -98,7 +98,9 @@ class AppLayoutLeftOverlay extends PolymerElement {
             }
         </style>
         <app-toolbar part="app-bar">
-            <vaadin-button id="toggle" theme="tertiary"></vaadin-button>
+            <vaadin-button id="toggle" theme="large tertiary icon">
+                 <iron-icon icon="lumo:menu" slot="prefix"></iron-icon>
+            </vaadin-button>
             <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;">
                 <slot name="app-bar-content"></slot>
             </div>

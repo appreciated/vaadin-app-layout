@@ -6,6 +6,7 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -139,6 +140,7 @@ public interface TopLayouts {
 
         @Override
         public void showUpNavigation(boolean visible) {
+            menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
             menuButton.getClassNames().set("show-back-arrow", visible);
             menuButton.setIcon(visible ? VaadinIcon.ARROW_LEFT.create() : VaadinIcon.MENU.create());
         }
@@ -328,6 +330,7 @@ public interface TopLayouts {
         @Override
         public void showUpNavigation(boolean visible) {
             appBarContent.getElement().getClassList().set("show-back-arrow", visible);
+            menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
             menuButton.getElement().getClassList().set("show-back-arrow", visible);
         }
 

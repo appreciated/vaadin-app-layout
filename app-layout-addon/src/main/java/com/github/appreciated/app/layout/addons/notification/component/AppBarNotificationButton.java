@@ -4,7 +4,6 @@ import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
 import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
 import com.github.appreciated.app.layout.component.appbar.ContextMenuAppBarButton;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
@@ -12,7 +11,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-@CssImport("./com/github/appreciated/app-layout/styles/app-bar-notification-button-style.css")
 public class AppBarNotificationButton<T extends Notification> extends ContextMenuAppBarButton {
 
     private NotificationsView notificationsView;
