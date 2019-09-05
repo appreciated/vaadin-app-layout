@@ -78,8 +78,8 @@ public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Di
         }));
     }
 
-    public static <T extends AppLayoutRouterLayoutBase> T getCurrent() {
-        return (T) UIAttributes.get(AppLayoutRouterLayoutBase.class);
+    public static <V extends AppLayoutRouterLayoutBase> V getCurrent(Class<V> mainAppLayoutClass) {
+        return (V) UIAttributes.get(AppLayoutRouterLayoutBase.class);
     }
 
     public void closeDrawerIfNotPersistent() {

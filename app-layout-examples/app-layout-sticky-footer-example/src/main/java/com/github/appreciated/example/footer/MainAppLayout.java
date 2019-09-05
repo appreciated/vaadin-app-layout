@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.addons.notification.DefaultNotification
 import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
@@ -25,14 +26,14 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-public class MainAppLayout extends AppLayoutRouterLayout {
+public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsiveHybrid> {
 
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
     public MainAppLayout() {
         notifications.addClickListener(notification -> {/* ... */});
-        init(AppLayoutBuilder
+        init((LeftLayouts.LeftResponsiveHybrid) AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
@@ -54,5 +55,13 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         ), FOOTER)
                         .build())
                 .build());
+    }
+
+    public DefaultBadgeHolder getBadge() {
+        return badge;
+    }
+
+    public DefaultNotificationHolder getNotifications() {
+        return notifications;
     }
 }

@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.addons.notification.DefaultNotification
 import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
@@ -24,7 +25,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
-public class MainAppLayout extends AppLayoutRouterLayout {
+public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
 
@@ -34,12 +35,12 @@ public class MainAppLayout extends AppLayoutRouterLayout {
         LeftNavigationItem menuEntry = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View6.class);
         badge.bind(menuEntry.getBadge());
 
-        init(AppLayoutBuilder
+        init((LeftLayouts.LeftResponsive) AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
                         .get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                        .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
@@ -83,5 +84,13 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                         ), FOOTER)
                         .build())
                 .build());
+    }
+
+    public DefaultNotificationHolder getNotifications() {
+        return notifications;
+    }
+
+    public DefaultBadgeHolder getBadge() {
+        return badge;
     }
 }

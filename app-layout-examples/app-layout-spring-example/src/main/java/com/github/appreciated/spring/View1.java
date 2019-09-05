@@ -1,12 +1,11 @@
 package com.github.appreciated.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = "", layout = MainAppLayout.class)
 public class View1 extends VerticalLayout {
@@ -23,6 +22,8 @@ public class View1 extends VerticalLayout {
         add(getLabel());
         add(getLabel());
         add(getLabel());
+
+
     }
 
     Paragraph getLabel() {

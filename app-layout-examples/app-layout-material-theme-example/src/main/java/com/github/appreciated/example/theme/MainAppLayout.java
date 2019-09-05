@@ -13,7 +13,6 @@ import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderIte
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionItem;
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
@@ -32,9 +31,9 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @Theme(Material.class)
 public class MainAppLayout extends AppLayoutRouterLayout {
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
 
     public MainAppLayout() {
+        DefaultNotificationHolder notifications = new DefaultNotificationHolder();
         notifications.addClickListener(notification -> {/* ... */});
 
         notifications.addNotification(new DefaultNotification("Test1", "Test2"));
@@ -44,7 +43,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
 
         Component appBar = AppBarBuilder
                 .get()
-                .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notifications))
                 .build();
 
         LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
@@ -109,16 +108,5 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)
                 .build());
-    }
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        /**
-         * Using the @Theme Annotation to set the Dark Theme will cause some issues with shadows which will appear in
-         * the wrong color making them seemingly invisible instead do it the following way as long as the issue is not
-         * solved see here -> https://github.com/vaadin/flow/issues/4765
-         */
-        //getUI().get().getPage().executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")");
     }
 }
