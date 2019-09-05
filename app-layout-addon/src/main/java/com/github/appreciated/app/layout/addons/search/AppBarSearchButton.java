@@ -1,11 +1,10 @@
 package com.github.appreciated.app.layout.addons.search;
 
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.DetachEvent;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.textfield.TextField;
 
 public class AppBarSearchButton extends Button {
     private final SearchView searchView;
@@ -35,5 +34,9 @@ public class AppBarSearchButton extends Button {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
         attachEvent.getUI().add(searchView);
+    }
+
+    public void addValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
+        searchView.addValueChangeListener(listener);
     }
 }

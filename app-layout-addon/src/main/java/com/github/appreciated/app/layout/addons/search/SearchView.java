@@ -2,6 +2,8 @@ package com.github.appreciated.app.layout.addons.search;
 
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
+import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -49,5 +51,9 @@ public class SearchView extends IronOverlay {
 
     public TextField getSearchField() {
         return searchField;
+    }
+
+    public void addValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
+        searchField.addValueChangeListener(listener);
     }
 }
