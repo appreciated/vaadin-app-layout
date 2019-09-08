@@ -26,7 +26,6 @@
         <module>app-layout-annotation-example</module>
         <module>app-layout-material-theme-example</module>
         <module>app-layout-plain-example</module>
-        <module>app-layout-production-example</module>
         <module>app-layout-spring-example</module>
         <module>app-layout-sticky-footer-example</module>
         <module>app-layout-theme-example</module>
