@@ -45,7 +45,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
                         .addToSection(new LeftHeaderItem("Menu-Header",
-                                "Version 3.0.0",
+                                "Version 4.0.0",
                                 "/frontend/images/logo.png"
                         ), HEADER)
                         .addToSection(new LeftClickableItem("Clickable Entry",
