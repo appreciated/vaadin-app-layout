@@ -2,7 +2,7 @@
 [![Lastest version on vaadin.com/directory](https://img.shields.io/vaadin-directory/version/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
 [![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/rating/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
 [![Lastest release date on vaadin.com/directory](https://img.shields.io/vaadin-directory/release-date/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
-
+[![Build Status](https://dev.azure.com/GoebelJohannes/GoebelJohannes/_apis/build/status/appreciated.vaadin-app-layout?branchName=master)](https://dev.azure.com/GoebelJohannes/GoebelJohannes/_build/latest?definitionId=1&branchName=master)
 
 ## Integration of the \<app-layout\> for Vaadin
 A collection of ready to use templates for the Webcomponent [\<app-layout\>](https://www.webcomponents.org/element/PolymerElements/app-layout)
