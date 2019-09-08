@@ -9,3 +9,5 @@
 /app-layout-ui-tests/build/
 /app-layout-ui-tests/selenium/
 **/bower_components/
+**/webpack.config.js
+**/webpack.generated.js
