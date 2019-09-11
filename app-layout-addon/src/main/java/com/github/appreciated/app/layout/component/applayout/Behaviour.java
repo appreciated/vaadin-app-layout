@@ -43,7 +43,9 @@ public enum Behaviour {
     public AppLayout getInstance() {
         try {
             return className.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
+            throw new IllegalStateException("The Behaviour could not be instantiated, this usually happens due to missing template files at runtime. Please make sure to run `mvn vaadin:prepare-frontend` before starting again!");
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return null;

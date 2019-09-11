@@ -6,6 +6,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * This is the supposed entry class to build an instance of the app-layout. The {@link AppLayoutBuilder} is a builder pattern.
  */
@@ -17,7 +19,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
     private boolean upNavigation;
     private boolean swipeOpen = true;
 
-    private AppLayoutBuilder(AppLayout instance) {
+    private AppLayoutBuilder(@NotNull AppLayout instance) {
         this.instance = instance;
     }
 
@@ -89,7 +91,7 @@ public class AppLayoutBuilder implements ComponentBuilder {
             instance.setIconComponent(imageComponent);
         }
         if (swipeOpen && instance.getDrawer() != null) {
-            instance.getDrawer().getElement().setAttribute("swipe-open",true);
+            instance.getDrawer().getElement().setAttribute("swipe-open", true);
         }
         instance.setUpNavigationEnabled(upNavigation);
         instance.init();
@@ -136,14 +138,8 @@ public class AppLayoutBuilder implements ComponentBuilder {
     public AppLayoutBuilder withIcon(String url) {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
-        image.getStyle().set("margin","var(--app-layout-space-s)");
+        image.getStyle().set("margin", "var(--app-layout-space-s)");
         return withIconComponent(image);
-    }
-
-
-    public AppLayoutBuilder withSwipeOpen(boolean swipeOpen) {
-        this.swipeOpen = swipeOpen;
-        return this;
     }
 
     /**
@@ -152,6 +148,11 @@ public class AppLayoutBuilder implements ComponentBuilder {
      */
     public AppLayoutBuilder withIconComponent(Component image) {
         this.imageComponent = image;
+        return this;
+    }
+
+    public AppLayoutBuilder withSwipeOpen(boolean swipeOpen) {
+        this.swipeOpen = swipeOpen;
         return this;
     }
 
