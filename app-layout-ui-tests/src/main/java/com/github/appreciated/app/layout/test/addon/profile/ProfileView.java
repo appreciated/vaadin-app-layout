@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.test.addon.profile;
 
-import com.github.appreciated.app.layout.addons.profile.AppBarProfileButtonBuilder;
+import com.github.appreciated.app.layout.addons.profile.builder.AppBarProfileButtonBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.test.addon.profile.view.*;

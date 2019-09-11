@@ -4,7 +4,8 @@ import com.github.appreciated.app.layout.addons.notification.DefaultNotification
 import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
-import com.github.appreciated.app.layout.addons.profile.AppBarProfileButtonBuilder;
+import com.github.appreciated.app.layout.addons.profile.builder.AppBarImageProfileButtonBuilder;
+import com.github.appreciated.app.layout.addons.profile.builder.AppBarProfileButtonBuilder;
 import com.github.appreciated.app.layout.addons.search.AppBarSearchButton;
 import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButton;
 import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButtonBuilder;
@@ -106,12 +107,13 @@ public class MainLayout extends AppLayoutRouterLayout {
         button = new AppBarSearchOverlayButtonBuilder<TestSearchResult>()
                 .withDataProvider(dataProvider)
                 .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
-                .withDataViewProvider(queryResult -> queryResult.map(result -> {
-                    RippleClickableCard card = new RippleClickableCard(new Item(result.getHeader(), result.getDescription()));
+                .withDataViewProvider(queryResult -> {
+                    RippleClickableCard card = new RippleClickableCard(new Item(queryResult.getHeader(), queryResult.getDescription()));
                     card.setWidthFull();
                     card.setBackground("var(--lumo-base-color)");
                     return card;
-                }))
+                })
+                .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.getHeader()))
                 .build();
         if (!this.variant.isTop()) {
             LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
@@ -132,7 +134,13 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     .withItem("Profile", event -> Notification.show("Profile clicked"))
                                     .build()
                             )
-                            .add(new AppBarSearchButton())
+                            .add(AppBarImageProfileButtonBuilder.get("/frontend/images/logo.png")
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .withItem("Profile", event -> Notification.show("Profile clicked"))
+                                    .build()
+                            )
+                            .add(new AppBarSearchButton().withValueChangeListener(event -> Notification.show(event.getValue())))
                             .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(LeftAppMenuBuilder

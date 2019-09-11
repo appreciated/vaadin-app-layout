@@ -45,12 +45,12 @@ public class SearchView extends AbstractLeftBehaviorBasicView {
         AppBarSearchOverlayButton<TestSearchResult> button = new AppBarSearchOverlayButtonBuilder<TestSearchResult>()
                 .withDataProvider(dataProvider)
                 .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
-                .withDataViewProvider(queryResult -> queryResult.map(result -> {
+                .withDataViewProvider(result -> {
                     RippleClickableCard card = new RippleClickableCard(new Item(result.getHeader(), result.getDescription()));
                     card.setWidthFull();
                     card.setBackground("var(--lumo-base-color)");
                     return card;
-                }))
+                })
                 .build();
 
         builder.withAppBar(button);
