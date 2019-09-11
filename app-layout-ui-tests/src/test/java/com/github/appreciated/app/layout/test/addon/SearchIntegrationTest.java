@@ -6,7 +6,7 @@ import com.github.appreciated.app.layout.test.addon.notification.NotificationVie
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
-public class SearchTest extends BaseTest {
+public class SearchIntegrationTest extends BaseTest {
 
     @Test
     public void testMenu() {
