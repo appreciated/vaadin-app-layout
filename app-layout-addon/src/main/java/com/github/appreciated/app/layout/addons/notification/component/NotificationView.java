@@ -17,11 +17,15 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
 
     private final VerticalLayout wrapper;
     private final T info;
+    private final NotificationHolder<T> holder;
+    private final boolean isNotification;
     private IconButton dismissButton;
     private DomListenerRegistration registration;
 
-    public NotificationView(T info, NotificationHolder<T> holder, NotificationListener listener) {
+    public NotificationView(T info, NotificationHolder<T> holder, NotificationListener listener, boolean isNotification) {
         this.info = info;
+        this.holder = holder;
+        this.isNotification = isNotification;
         setWidth("100%");
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
@@ -54,7 +58,9 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
             RoundImage image = new RoundImage(info.getImage());
             descriptionWrapper.add(image);
         }
-        setHighlightBorder(!info.isRead());
+        if (!isNotification) {
+            setHighlightBorder(!info.isRead());
+        }
         HorizontalLayout headerLine = new HorizontalLayout(title, dot, timeAgo);
         headerLine.setSpacing(false);
         headerLine.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -66,16 +72,18 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
         add(wrapper);
 
         setNotificationListener(listener);
-
-        if (info.isDismissable()) {
-            dismissButton = new IconButton(VaadinIcon.CLOSE_SMALL.create(), paperIconButtonClickEvent -> {
-                if (listener != null) {
-                    listener.onDismiss();
-                }
-            });
-            dismissButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-            dismissButton.setHeight("unset");
-            add(dismissButton);
+        if (!isNotification) {
+            if (info.isDismissable()) {
+                dismissButton = new IconButton(VaadinIcon.CLOSE_SMALL.create(), paperIconButtonClickEvent -> {
+                    if (listener != null) {
+                        listener.onDismiss();
+                    }
+                });
+                dismissButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+                dismissButton.setHeight("unset");
+                add(dismissButton);
+                getElement().getStyle().set("padding-right", "0");
+            }
         }
     }
 

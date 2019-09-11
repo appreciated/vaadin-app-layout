@@ -57,6 +57,11 @@ public class DefaultNotificationHolder extends NotificationHolder<DefaultNotific
     }
 
     @Override
+    PairComponentFactory<NotificationHolder<DefaultNotification>, DefaultNotification> getCardComponentProvider() {
+        return new DefaultNotificationCardComponentFactory<>();
+    }
+
+    @Override
     public Function<DefaultNotification, String> getDateTimeFormatter() {
         return dateTimeFormatter;
     }

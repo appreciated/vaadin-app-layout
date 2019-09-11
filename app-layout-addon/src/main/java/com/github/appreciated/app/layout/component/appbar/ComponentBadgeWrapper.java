@@ -16,7 +16,7 @@ public class ComponentBadgeWrapper<T extends Component> extends HorizontalLayout
 
     public ComponentBadgeWrapper(T wrappedComponent) {
         this.wrappedComponent = wrappedComponent;
-        badge = new PaperBadge("0");
+        badge = new PaperBadge();
         badge.getElement().getStyle()
                 .set("margin-top", "6px")
                 .set("margin-left", "-14px");

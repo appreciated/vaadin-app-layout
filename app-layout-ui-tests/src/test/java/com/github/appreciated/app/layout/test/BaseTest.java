@@ -59,7 +59,7 @@ public abstract class BaseTest {
         return ((RoutePrefix) prefix.getAnnotation(RoutePrefix.class)).value();
     }
 
-    abstract Class getRoutePrefixClass();
+    public abstract Class getRoutePrefixClass();
 
     public void clickByCssSelector(String cssSelector, int i) {
         clickElement($$(cssSelector).get(i));

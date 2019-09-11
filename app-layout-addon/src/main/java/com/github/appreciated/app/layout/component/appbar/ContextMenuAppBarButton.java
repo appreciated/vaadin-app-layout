@@ -21,6 +21,7 @@ public class ContextMenuAppBarButton extends ComponentBadgeWrapper<Button> {
         contextMenu = new ContextMenu();
         contextMenu.setOpenOnClick(true);
         contextMenu.setTarget(this);
+        ((Component) getBadge()).setVisible(false);
     }
 
     public Component getButtonContent() {

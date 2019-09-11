@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public abstract class NotificationHolder<T extends Notification> implements Serializable{
 
     private PairComponentFactory<NotificationHolder<T>, T> componentProvider;
+    private PairComponentFactory<NotificationHolder<T>, T> cardComponentProvider;
 
     private List<T> notifications = new ArrayList<>();
     private List<NotificationsChangeListener<T>> notificationsChangeListeners = new ArrayList<>();
@@ -36,6 +37,11 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
             addClickListener(listener);
         }
         setComponentProvider(getComponentProvider());
+        setCardComponentProvider(getCardComponentProvider());
+    }
+
+    public void setCardComponentProvider(PairComponentFactory<NotificationHolder<T>, T> componentProvider) {
+        this.cardComponentProvider = componentProvider;
     }
 
     public NotificationHolder(T... notifications) {
@@ -53,6 +59,8 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     }
 
     abstract PairComponentFactory<NotificationHolder<T>, T> getComponentProvider();
+
+    abstract PairComponentFactory<NotificationHolder<T>, T> getCardComponentProvider();
 
     public void setComponentProvider(PairComponentFactory<NotificationHolder<T>, T> componentProvider) {
         this.componentProvider = componentProvider;
@@ -75,13 +83,25 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
         return components.stream().sorted(comparator).map(this::getComponent).collect(Collectors.toList());
     }
 
+    public List<Component> getNotificationCards(boolean showAll) {
+        List<T> components = getNotifications();
+        if (!showAll) {
+            components = components.size() > 4 ? components.subList(0, 4) : components;
+        }
+        return components.stream().sorted(comparator).map(this::getCardComponent).collect(Collectors.toList());
+    }
+
     public List<T> getNotifications() {
         notifications.sort(comparator);
         return notifications;
     }
 
-    private Component getComponent(T message) {
+    public Component getComponent(T message) {
         return componentProvider.getComponent(this, message);
+    }
+
+    public Component getCardComponent(T message) {
+        return cardComponentProvider.getComponent(this, message);
     }
 
     /**
@@ -138,19 +158,6 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
 
     public void addNotificationsChangeListener(NotificationsChangeListener<T> listener) {
         notificationsChangeListeners.add(listener);
-    }
-
-    public Component[] getNotificationViews(boolean showAll) {
-        List<T> components = getNotifications();
-        if (!showAll) {
-            components = components.size() > 4 ? components.subList(0, 4) : components;
-        }
-        return components
-                .stream()
-                .sorted(comparator)
-                .map(this::getComponent)
-                .collect(Collectors.toList())
-                .toArray(new Component[]{});
     }
 
     public void onNotificationClicked(T info) {

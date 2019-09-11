@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.button.Button;
@@ -10,6 +11,7 @@ import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.function.SerializablePredicate;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class AppBarSearchOverlayButton<T> extends Button {
@@ -46,7 +48,7 @@ public class AppBarSearchOverlayButton<T> extends Button {
         return searchView;
     }
 
-    public void setDataViewProvider(DataViewProvider<T> provider) {
+    public void setDataViewProvider(Function<T, ClickNotifier> provider) {
         this.searchView.setDataViewProvider(provider);
     }
 
@@ -56,5 +58,13 @@ public class AppBarSearchOverlayButton<T> extends Button {
 
     public void setQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> query) {
         this.searchView.setQueryProvider(query);
+    }
+
+    public void setQueryResultListener(Consumer<T> queryResultListener) {
+        this.searchView.setQueryResultListener(queryResultListener);
+    }
+
+    public void setCloseOnQueryResult(boolean closeOnQueryResult) {
+        this.searchView.setCloseOnQueryResult(closeOnQueryResult);
     }
 }

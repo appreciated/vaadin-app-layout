@@ -3,7 +3,12 @@ package com.github.appreciated.app.layout.addons.notification.component;
 import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
 import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
-import com.github.appreciated.app.layout.component.appbar.ContextMenuAppBarButton;
+import com.github.appreciated.app.layout.component.appbar.ComponentBadgeWrapper;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.DetachEvent;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
@@ -11,13 +16,29 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-public class AppBarNotificationButton<T extends Notification> extends ContextMenuAppBarButton {
+public class AppBarNotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> {
 
-    private NotificationsView notificationsView;
+    private final NotificationsOverlayView<T> notificationOverlay;
+    private NotificationHolder<T> holder;
+
+    public AppBarNotificationButton() {
+        this(VaadinIcon.SEARCH);
+    }
+
+    public AppBarNotificationButton(VaadinIcon icon) {
+        this(icon.create());
+    }
+
+    public AppBarNotificationButton(Component icon) {
+        super(new Button(icon));
+        getWrappedComponent().addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
+        notificationOverlay = new NotificationsOverlayView<>();
+        addClickListener(event -> notificationOverlay.open());
+    }
 
     public AppBarNotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
-        super(icon.create());
-        this.notificationsView = new NotificationsView(holder);
+        this(icon.create());
+        this.holder = holder;
         setClassName("app-bar-notification-button");
 
         holder.addNotificationsChangeListener(new NotificationsChangeListener<T>() {
@@ -29,10 +50,8 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
             @Override
             public void onNotificationAdded(T notification) {
                 refreshNotifications();
-                if (!AppBarNotificationButton.this.getContextMenu().isOpened()) {
-                    DisplayableNotificationView view = new DisplayableNotificationView<>(notification, holder);
-                    view.setWidth("200px");
-                    com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(view);
+                if (!notificationOverlay.getOpened()) {
+                    com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(holder.getComponent(notification));
                     notificationView.setPosition(com.vaadin.flow.component.notification.Notification.Position.TOP_END);
                     notificationView.setDuration(2000);
                     notificationView.open();
@@ -45,14 +64,26 @@ public class AppBarNotificationButton<T extends Notification> extends ContextMen
             }
         });
         holder.bind(getBadge());
+        notificationOverlay.setHolder(holder);
     }
 
     public void refreshNotifications() {
-        getContextMenu().removeAll();
-        notificationsView.initViews().forEach(this::addItem);
+        notificationOverlay.refreshNotificationViews();
     }
 
-    public NotificationsView getNotificationsView() {
-        return notificationsView;
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        super.onDetach(detachEvent);
+        notificationOverlay.getElement().removeFromParent();
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        attachEvent.getUI().add(notificationOverlay);
+    }
+
+    public NotificationsOverlayView<T> getNotificationOverlay() {
+        return notificationOverlay;
     }
 }

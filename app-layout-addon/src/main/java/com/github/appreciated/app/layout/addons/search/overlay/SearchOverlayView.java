@@ -2,6 +2,8 @@ package com.github.appreciated.app.layout.addons.search.overlay;
 
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
+import com.vaadin.flow.component.ClickNotifier;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -15,6 +17,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializablePredicate;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -25,9 +28,12 @@ public class SearchOverlayView<T> extends IronOverlay {
     private HorizontalLayout searchFieldWrapper = new HorizontalLayout(closeButton, searchField);
     private VerticalLayout wrapper = new VerticalLayout(searchFieldWrapper, results);
 
-    private DataViewProvider<T> dataViewProvider;
+    private Function<T, ClickNotifier> dataViewProvider;
     private ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider;
     private Function<String, Query<T, SerializablePredicate<T>>> queryProvider;
+
+    private Consumer<T> queryResultListener;
+    private boolean closeOnQueryResult = true;
 
     public SearchOverlayView() {
         getElement().getStyle().set("width", "100%");
@@ -45,8 +51,19 @@ public class SearchOverlayView<T> extends IronOverlay {
         searchField.addValueChangeListener(event -> {
             results.removeAll();
             List<T> result = dataProvider.fetch(queryProvider.apply(event.getValue())).collect(Collectors.toList());
-            dataViewProvider.getComponentsForQueryResult(result.stream())
-                    .forEach(results::add);
+            result.stream()
+                    .map(t -> new QueryPair<>(t, dataViewProvider.apply(t)))
+                    .forEach(clickNotifier -> {
+                        results.add((Component) clickNotifier.getNotifier());
+                        clickNotifier.getNotifier().addClickListener(clickEvent -> {
+                            if (closeOnQueryResult) {
+                                this.close();
+                            }
+                            if (queryResultListener != null) {
+                                queryResultListener.accept(clickNotifier.getQuery());
+                            }
+                        });
+                    });
         });
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
         searchField.setWidthFull();
@@ -82,11 +99,11 @@ public class SearchOverlayView<T> extends IronOverlay {
         searchField.focus();
     }
 
-    public DataViewProvider<T> getDataViewProvider() {
+    public Function<T, ClickNotifier> getDataViewProvider() {
         return dataViewProvider;
     }
 
-    public void setDataViewProvider(DataViewProvider<T> dataViewProvider) {
+    public void setDataViewProvider(Function<T, ClickNotifier> dataViewProvider) {
         this.dataViewProvider = dataViewProvider;
     }
 
@@ -112,5 +129,13 @@ public class SearchOverlayView<T> extends IronOverlay {
 
     public void setQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> queryProvider) {
         this.queryProvider = queryProvider;
+    }
+
+    public void setQueryResultListener(Consumer<T> queryResultListener) {
+        this.queryResultListener = queryResultListener;
+    }
+
+    public void setCloseOnQueryResult(boolean closeOnQueryResult) {
+        this.closeOnQueryResult = closeOnQueryResult;
     }
 }

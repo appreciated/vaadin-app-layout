@@ -36,6 +36,11 @@ public class AppBarSearchButton extends Button {
         attachEvent.getUI().add(searchView);
     }
 
+    public AppBarSearchButton withValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
+        addValueChangeListener(listener);
+        return this;
+    }
+
     public void addValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
         searchView.addValueChangeListener(listener);
     }

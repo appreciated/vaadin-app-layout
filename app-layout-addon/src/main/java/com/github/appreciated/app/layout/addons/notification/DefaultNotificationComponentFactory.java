@@ -19,6 +19,6 @@ public class DefaultNotificationComponentFactory<T extends Notification> impleme
             public void onDismiss() {
                 holder.onNotificationDismissed(info);
             }
-        });
+        }, true);
     }
 }
