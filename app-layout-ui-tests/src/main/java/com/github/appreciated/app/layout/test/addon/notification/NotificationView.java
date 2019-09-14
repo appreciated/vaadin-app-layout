@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.test.addon.notification;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -26,11 +26,13 @@ public class NotificationView extends AbstractLeftBehaviorBasicView {
     @Override
     public void furtherConfiguration(AppLayoutBuilder builder) {
         DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
-        notificationHolder.addNotification(new DefaultNotification("Header 1", "Description 1"));
-        notificationHolder.addNotification(new DefaultNotification("Header 2", "Description 2"));
-        notificationHolder.addNotification(new DefaultNotification("Header 3", "Description 3"));
-        notificationHolder.addNotification(new DefaultNotification("Header 4", "Description 4"));
-        notificationHolder.addNotification(new DefaultNotification("Header 5", "Description 5"));
-        builder.withAppBar(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder));
+        notificationHolder.add(
+                new DefaultNotification("Header 1", "Description 1"),
+                new DefaultNotification("Header 2", "Description 2"),
+                new DefaultNotification("Header 3", "Description 3"),
+                new DefaultNotification("Header 4", "Description 4"),
+                new DefaultNotification("Header 5", "Description 5")
+        );
+        getAppBar().add(new NotificationButton<>(VaadinIcon.BELL, notificationHolder));
     }
 }

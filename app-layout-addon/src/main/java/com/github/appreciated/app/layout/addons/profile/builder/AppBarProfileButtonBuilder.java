@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.addons.profile.builder;
 
-import com.github.appreciated.app.layout.addons.profile.AppBarProfileButton;
+import com.github.appreciated.app.layout.addons.profile.ProfileButton;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -8,10 +8,10 @@ import com.vaadin.flow.component.contextmenu.MenuItem;
 
 public class AppBarProfileButtonBuilder {
 
-    private final AppBarProfileButton appBarProfileButton;
+    private final ProfileButton appBarProfileButton;
 
     private AppBarProfileButtonBuilder() {
-        appBarProfileButton = new AppBarProfileButton();
+        appBarProfileButton = new ProfileButton();
     }
 
     public static AppBarProfileButtonBuilder get() {
@@ -38,7 +38,7 @@ public class AppBarProfileButtonBuilder {
         return this;
     }
 
-    public AppBarProfileButton build() {
+    public ProfileButton build() {
         return appBarProfileButton;
     }
 }

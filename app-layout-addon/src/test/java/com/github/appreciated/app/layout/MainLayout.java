@@ -1,14 +1,14 @@
 package com.github.appreciated.app.layout;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
 import com.github.appreciated.app.layout.addons.profile.builder.AppBarImageProfileButtonBuilder;
 import com.github.appreciated.app.layout.addons.profile.builder.AppBarProfileButtonBuilder;
-import com.github.appreciated.app.layout.addons.search.AppBarSearchButton;
-import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButton;
-import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButtonBuilder;
+import com.github.appreciated.app.layout.addons.search.SearchButton;
+import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButton;
+import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButtonBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
@@ -56,7 +56,7 @@ public class MainLayout extends AppLayoutRouterLayout {
     private Behaviour variant = Behaviour.LEFT_RESPONSIVE_HYBRID;
     private Thread currentThread;
 
-    private AppBarSearchOverlayButton<TestSearchResult> button;
+    private SearchOverlayButton<TestSearchResult> button;
     private ListDataProvider<TestSearchResult> dataProvider;
 
     public MainLayout() {
@@ -104,7 +104,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                 new TestSearchResult("Header10", "Description10")
         ));
 
-        button = new AppBarSearchOverlayButtonBuilder<TestSearchResult>()
+        button = new SearchOverlayButtonBuilder<TestSearchResult>()
                 .withDataProvider(dataProvider)
                 .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
                 .withDataViewProvider(queryResult -> {
@@ -140,59 +140,54 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     .withItem("Profile", event -> Notification.show("Profile clicked"))
                                     .build()
                             )
-                            .add(new AppBarSearchButton().withValueChangeListener(event -> Notification.show(event.getValue())))
-                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
+                            .add(new SearchButton().withValueChangeListener(event -> Notification.show(event.getValue())))
+                            .add(new NotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(LeftAppMenuBuilder
                             .get()
-                            .addToSection(new LeftHeaderItem("App-Layout",
-                                    "Version 3.0.0",
+                            .addToSection(HEADER, new LeftHeaderItem("App-Layout",
+                                    "Version 4.0.0",
                                     "/frontend/images/logo.png"
-                            ), HEADER)
-                            .addToSection(new LeftClickableItem("Set Behaviour HEADER",
+                            ), new LeftClickableItem("Set Behaviour HEADER",
                                     VaadinIcon.COG.create(),
                                     clickEvent -> openModeSelector(this.variant)
-                            ), HEADER)
-                            .add(home)
-                            .add(new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class))
-                            .add(LeftSubMenuBuilder
-                                    .get("My Submenu 1", VaadinIcon.PLUS.create())
-                                    .add(LeftSubMenuBuilder
-                                            .get("My Submenu 2", VaadinIcon.PLUS.create())
-                                            .add(new LeftNavigationItem("Charts",
-                                                    VaadinIcon.SPLINE_CHART.create(),
-                                                    View2.class
-                                            ))
-                                            .add(new LeftNavigationItem("Contact",
+                            ))
+                            .add(home,
+                                    new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class),
+                                    LeftSubMenuBuilder.get("My Submenu 1", VaadinIcon.PLUS.create())
+                                            .add(LeftSubMenuBuilder
+                                                    .get("My Submenu 2", VaadinIcon.PLUS.create())
+                                                    .add(new LeftNavigationItem("Charts",
+                                                                    VaadinIcon.SPLINE_CHART.create(),
+                                                                    View2.class
+                                                            ),
+                                                            new LeftNavigationItem("Contact",
+                                                                    VaadinIcon.CONNECT.create(),
+                                                                    View3.class
+                                                            ), new LeftNavigationItem("More",
+                                                                    VaadinIcon.COG.create(),
+                                                                    View4.class
+                                                            ))
+                                                    .build())
+                                            .add(new LeftNavigationItem("Contact1",
                                                     VaadinIcon.CONNECT.create(),
-                                                    View3.class
+                                                    View5.class
                                             ))
-                                            .add(new LeftNavigationItem("More",
-                                                    VaadinIcon.COG.create(),
-                                                    View4.class
+                                            .add(new LeftNavigationItem("More1", VaadinIcon.COG.create(), View6.class))
+                                            .build(), new LeftSectionItem(),
+                                    LeftSubMenuBuilder.get("My Submenu 3")
+                                            .add(new LeftNavigationItem("Contact2",
+                                                    VaadinIcon.CONNECT.create(),
+                                                    View7.class
                                             ))
-                                            .build())
-                                    .add(new LeftNavigationItem("Contact1",
-                                            VaadinIcon.CONNECT.create(),
-                                            View5.class
-                                    ))
-                                    .add(new LeftNavigationItem("More1", VaadinIcon.COG.create(), View6.class))
-                                    .build())
-                            .add(new LeftSectionItem())
-                            .add(LeftSubMenuBuilder
-                                    .get("My Submenu 3")
-                                    .add(new LeftNavigationItem("Contact2",
-                                            VaadinIcon.CONNECT.create(),
-                                            View7.class
-                                    ))
-                                    .add(new LeftNavigationItem("More2", VaadinIcon.COG.create(), View8.class))
-                                    .build())
-                            .add(new LeftSectionItem("Test"))
-                            .add(menu)
-                            .addToSection(new LeftClickableItem("Set Behaviour FOOTER",
+                                            .add(new LeftNavigationItem("More2", VaadinIcon.COG.create(), View8.class))
+                                            .build(),
+                                    new LeftSectionItem("Test"),
+                                    menu)
+                            .addToSection(FOOTER, new LeftClickableItem("Set Behaviour FOOTER",
                                     VaadinIcon.COG.create(),
                                     clickEvent -> openModeSelector(this.variant)
-                            ), FOOTER)
+                            ))
                             .build())
                     .withUpNavigation()
                     .build();
@@ -210,24 +205,15 @@ public class MainLayout extends AppLayoutRouterLayout {
                                     .withItem("Profile", event -> Notification.show("Profile clicked"))
                                     .build()
                             )
-                            .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notificationHolder))
+                            .add(new NotificationButton<>(VaadinIcon.BELL, notificationHolder))
                             .build())
                     .withAppMenu(TopAppMenuBuilder
                             .get()
-                            .addToSection(new TopClickableItem("Set Behaviour 1",
-                                    VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(this.variant)
-                            ), HEADER)
-                            .add(new TopNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
-                            .add(new TopNavigationItem("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class))
-                            .addToSection(new TopClickableItem("Set Behaviour 2",
-                                    VaadinIcon.COG.create(),
-                                    clickEvent -> openModeSelector(this.variant)
-                            ), FOOTER)
-                            .addToSection(
-                                    new TopNavigationItem("More", VaadinIcon.CONNECT.create(), View3.class),
-                                    FOOTER
-                            )
+                            .add(new TopClickableItem("Set Behaviour 1", VaadinIcon.COG.create(), event -> openModeSelector(this.variant)),
+                                    new TopNavigationItem("Home", VaadinIcon.HOME.create(), View1.class),
+                                    new TopNavigationItem("Contact", VaadinIcon.SPLINE_CHART.create(), View2.class),
+                                    new TopClickableItem("Set Behaviour 2", VaadinIcon.COG.create(), event -> openModeSelector(this.variant)),
+                                    new TopNavigationItem("More", VaadinIcon.CONNECT.create(), View3.class))
                             .build())
                     .withUpNavigation()
                     .build();
@@ -235,7 +221,7 @@ public class MainLayout extends AppLayoutRouterLayout {
     }
 
     private void addNotification(Priority priority) {
-        notificationHolder.addNotification(new DefaultNotification(
+        notificationHolder.add(new DefaultNotification(
                 "Title" + badgeHolder.getCount(),
                 "Description ..............................................."
                         + badgeHolder.getCount(),

@@ -16,27 +16,27 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-public class AppBarNotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> {
+public class NotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> {
 
     private final NotificationsOverlayView<T> notificationOverlay;
     private NotificationHolder<T> holder;
 
-    public AppBarNotificationButton() {
+    public NotificationButton() {
         this(VaadinIcon.SEARCH);
     }
 
-    public AppBarNotificationButton(VaadinIcon icon) {
+    public NotificationButton(VaadinIcon icon) {
         this(icon.create());
     }
 
-    public AppBarNotificationButton(Component icon) {
+    public NotificationButton(Component icon) {
         super(new Button(icon));
         getWrappedComponent().addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         notificationOverlay = new NotificationsOverlayView<>();
         addClickListener(event -> notificationOverlay.open());
     }
 
-    public AppBarNotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
+    public NotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
         this(icon.create());
         this.holder = holder;
         setClassName("app-bar-notification-button");

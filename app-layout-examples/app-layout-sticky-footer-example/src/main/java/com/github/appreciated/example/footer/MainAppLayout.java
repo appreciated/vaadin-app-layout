@@ -1,7 +1,7 @@
 package com.github.appreciated.example.footer;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
@@ -38,21 +38,18 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
                         .get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .addToSection(new LeftHeaderItem("Menu-Header",
-                                "Version 3.0.0",
-                                "/frontend/images/logo.png"
-                        ), HEADER)
-                        .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
-                        .add(new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View2.class))
+                        .addToSection(HEADER,
+                                new LeftHeaderItem("Menu-Header", "Version 4.0.0", "/frontend/images/logo.png")
+                        )
+                        .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class),
+                                new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View2.class))
                         .withStickyFooter()
-                        .addToSection(new LeftClickableItem("Footer Clickable!",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("Clicked!")
-                        ), FOOTER)
+                        .addToSection(FOOTER,
+                                new LeftClickableItem("Footer Clickable!", VaadinIcon.COG.create(), clickEvent -> Notification.show("Clicked!")))
                         .build())
                 .build());
     }

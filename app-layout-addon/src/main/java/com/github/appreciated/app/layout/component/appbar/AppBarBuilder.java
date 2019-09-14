@@ -8,7 +8,7 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppBarBuilder implements ComponentBuilder {
+public class AppBarBuilder implements ComponentBuilder<FlexLayout> {
 
     private List<Component> components = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class AppBarBuilder implements ComponentBuilder {
     }
 
     @Override
-    public Component build() {
+    public FlexLayout build() {
         FlexLayout layout = new FlexLayout(components.toArray(new Component[0]));
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
         return layout;

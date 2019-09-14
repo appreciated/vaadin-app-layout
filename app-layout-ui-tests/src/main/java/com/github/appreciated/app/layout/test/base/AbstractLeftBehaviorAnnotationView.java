@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.test.base;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
@@ -27,10 +27,10 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppBar(
-                        AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder)).build())
+                        AppBarBuilder.get().add(new NotificationButton(VaadinIcon.BELL, notificationHolder)).build())
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new LeftHeaderItem("App-Layout", "Version 3.0.0", "frontend/images/logo.png"), Section.HEADER)
+                                .addToSection(new LeftHeaderItem("App-Layout", "Version 4.0.0", "frontend/images/logo.png"), Section.HEADER)
                                 .addToSection(new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                                 }), Section.HEADER)
                                 .add(home)

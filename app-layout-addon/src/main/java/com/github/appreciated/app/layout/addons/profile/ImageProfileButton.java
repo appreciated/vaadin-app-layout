@@ -2,9 +2,9 @@ package com.github.appreciated.app.layout.addons.profile;
 
 import com.vaadin.flow.component.html.Image;
 
-public class AppBarImageProfileButton extends AppBarProfileButton {
+public class ImageProfileButton extends ProfileButton {
 
-    public AppBarImageProfileButton(Image image) {
+    public ImageProfileButton(Image image) {
         super(image);
         init(image);
     }
@@ -16,7 +16,7 @@ public class AppBarImageProfileButton extends AppBarProfileButton {
         image.getStyle().set("border-radius", "100px");
     }
 
-    public AppBarImageProfileButton(String image) {
+    public ImageProfileButton(String image) {
         super();
         Image imageComponent = new Image(image, "Profile image");
         getWrappedComponent().setIcon(imageComponent);

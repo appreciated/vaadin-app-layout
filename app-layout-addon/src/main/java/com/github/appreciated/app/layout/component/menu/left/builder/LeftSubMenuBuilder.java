@@ -7,13 +7,14 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 /**
  * A Builder to build {@link LeftSubmenu} this builder is meant to be used in combination with the {@link AppLayoutBuilder}
  */
-public class LeftSubMenuBuilder implements ComponentBuilder {
+public class LeftSubMenuBuilder implements ComponentBuilder<LeftSubmenu> {
 
     private final String title;
     private final Icon icon;
@@ -51,16 +52,16 @@ public class LeftSubMenuBuilder implements ComponentBuilder {
     /**
      * Adds a MenuElement
      *
-     * @param element
+     * @param elements
      * @return
      */
-    public LeftSubMenuBuilder add(Component element) {
-        components.add(element);
+    public LeftSubMenuBuilder add(Component... elements) {
+        components.addAll(Arrays.asList(elements));
         return this;
     }
 
     @Override
-    public Component build() {
+    public LeftSubmenu build() {
         return new LeftSubmenu(title, icon, components);
     }
 }

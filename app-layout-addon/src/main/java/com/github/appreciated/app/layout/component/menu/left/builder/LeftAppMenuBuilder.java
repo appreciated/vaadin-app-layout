@@ -10,6 +10,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -31,8 +32,8 @@ public class LeftAppMenuBuilder {
         return new LeftAppMenuBuilder();
     }
 
-    public LeftAppMenuBuilder add(Component element) {
-        return addToSection(element, Section.DEFAULT);
+    public LeftAppMenuBuilder add(Component... element) {
+        return addToSection(Section.DEFAULT, element);
     }
 
     public LeftAppMenuBuilder add(String caption, VaadinIcon icon, Class<? extends Component> className) {
@@ -43,7 +44,12 @@ public class LeftAppMenuBuilder {
         return add(new LeftNavigationItem(caption, icon, className));
     }
 
-    public LeftAppMenuBuilder addToSection(Component element, Section section) {
+    public LeftAppMenuBuilder addToSection(Section section, Component... element) {
+        Arrays.stream(element).forEach(component -> addToSection(component, section));
+        return this;
+    }
+
+    private LeftAppMenuBuilder addToSection(Component element, Section section) {
         switch (section) {
             case HEADER:
                 header.add(element);

@@ -56,7 +56,7 @@ public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
     }
 
     private void addNotification(Priority priority) {
-        notificationHolder.addNotification(new DefaultNotification("Title" + badgeHolder.getCount(), "Description ..............................................." + badgeHolder.getCount(), priority));
+        notificationHolder.add(new DefaultNotification("Title" + badgeHolder.getCount(), "Description ..............................................." + badgeHolder.getCount(), priority));
     }
 
     public void furtherConfiguration(AppLayoutBuilder builder) {

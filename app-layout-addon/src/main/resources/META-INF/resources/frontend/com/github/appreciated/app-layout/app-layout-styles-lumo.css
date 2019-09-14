@@ -69,11 +69,45 @@ html {
     --iron-overlay-backdrop-background-color: var(--lumo-shade-20pct);
 }
 
-html[theme~="dark"] {
+[theme~="dark"] {
+    --app-layout-primary-color: var(--lumo-primary-color);
+    --app-layout-primary-text-color: var(--lumo-primary-text-color);
+    --app-layout-section-divider-color: var(--lumo-contrast-20pct);
+    --app-layout-badge-background: var(--lumo-primary-color);
+    --app-layout-background: var(--lumo-base-color);
+    --app-layout-bar-background-base-color: var(--lumo-base-color);
     --app-layout-bar-background-color: var(--lumo-contrast-10pct);
     --app-layout-bar-font-color: var(--lumo-contrast-90);
+    --app-layout-bar-shadow: var(--lumo-box-shadow-s);
+    --app-layout-drawer-shadow: var(--lumo-box-shadow-s);
+    --app-layout-drawer-background-base-color: var(--lumo-base-color);
     --app-layout-drawer-background-color: var(--lumo-contrast-5pct);
+    --app-layout-drawer-submenu-background-color: var(--lumo-contrast-10pct);
+    --app-layout-drawer-font-color: var(--lumo-contrast-90pct);
+    --app-layout-app-selected-bg-color: var(--lumo-primary-color-10pct);
+    --app-layout-app-color: var(--lumo-secondary-text-color);
+    --app-layout-badge-color: var(--app-layout-bar-font-color);
+    --app-layout-badge-background: var(--lumo-primary-color);
+    --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
+    --app-layout-notification-highlight-color: var(--app-layout-primary-color);
+    --app-layout-notification-font-color: var(--lumo-body-text-color);
+    --app-layout-notification-background-base-color: var(--lumo-base-color);
     --app-layout-notification-background-color: var(--lumo-contrast-10pct);
+    --app-layout-notification-shadow: var(--lumo-box-shadow-s);
+    /* Variables of webcomponents */
+    --paper-drawer-title-background-color: var(--lumo-base-color);
+    --paper-drawer-title-color: var(--lumo-body-text-color);
+    --paper-icon-button-ink-color: var(--lumo-contrast);
+    /* -webkit-tap-highlight-color: transparent; */
+    --paper-tabs-selection-bar-color: var(--lumo-primary-color);
+    --paper-tab-ink: var(--lumo-primary-color);
+    --app-bar-height: var(--app-layout-bar-height);
+    --app-menu-background-color: transparent;
+    --app-menu-selected-bg-color: var(--app-layout-app-selected-bg-color);
+    --app-menu-color: var(--app-layout-drawer-font-color);
+    --app-layout-notification-error-color: var(--lumo-error-color);
+    --app-layout-notification-warning-color: #fdd835;
+    --iron-overlay-backdrop-background-color: var(--lumo-shade-20pct);
 }
 
 body {

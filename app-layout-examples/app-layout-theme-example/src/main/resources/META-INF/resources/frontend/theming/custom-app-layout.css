@@ -1,14 +1,4 @@
-<custom-style>
-    <style>
-        html {
-            --lumo-primary-color-10pct: hsla(174, 41%, 51%, 0.1) !important;
-            --lumo-primary-color-50pct: hsla(174, 41%, 51%, 0.5) !important;
-            --lumo-primary-color: hsl(174, 41%, 51%) !important;
-        }
-    </style>
-</custom-style>
-
-<!--
+/*
 Depending on the behaviour you are using you need to use a different "theme-for" attribute value:
 LEFT                                      = theme-for="app-layout-left"
 LEFT_RESPONSIVE                           = theme-for="app-layout-left-hybrid"
@@ -26,25 +16,22 @@ TOP                                       = theme-for="app-layout-top"
 TOP_LARGE                                 = theme-for="app-layout-top-large"
 
 Note: setting the "id" attribute is required otherwise it will not work!
--->
+*/
 
-<dom-module id="my-custom-layout" theme-for="app-layout-left-hybrid">
-    <template>
-        <style>
-            [part="app-bar"] {
-                border: 1px solid green;
-                background: cyan;
-            }
-            <!-- Since Top behaviors do not have a drawer this will have no effect -->
-            [part="drawer"] {
-                --app-drawer-content-container_-_background-color: transparent !important;
-                border: 1px solid green;
-                background: cyan;
-            }
-            [part="application-content"] {
-                border: 1px solid green;
-                background: cyan;
-            }
-        </style>
-    </template>
-</dom-module>
+
+[part="app-bar"] {
+    border: 1px solid green;
+    background: cyan;
+}
+
+/* Since Top behaviors do not have a drawer this will have no effect on top behaviors*/
+[part="drawer"] {
+    --app-drawer-content-container_-_background-color: transparent !important;
+    border: 1px solid green;
+    background: cyan;
+}
+
+[part="application-content"] {
+    border: 1px solid green;
+    background: cyan;
+}

@@ -47,8 +47,8 @@ public class DefaultNotificationHolder extends NotificationHolder<DefaultNotific
      * @param notification the instance of the {@link Notification} that is being added
      */
     @Override
-    public void addNotification(DefaultNotification notification) {
-        super.addNotification(notification);
+    public void add(DefaultNotification... notification) {
+        super.add(notification);
     }
 
     @Override

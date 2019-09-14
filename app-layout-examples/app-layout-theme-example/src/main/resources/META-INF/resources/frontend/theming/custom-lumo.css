@@ -1,0 +1,7 @@
+/* The addon also inherits some variables from Lumo, so changing Lumo variables will in some cases also have an effect on the look of the app-layout */
+html, [theme~="dark"] {
+    --lumo-primary-color-10pct: hsla(174, 41%, 51%, 0.1);
+    --lumo-primary-color-50pct: hsla(174, 41%, 51%, 0.5);
+    --lumo-primary-color: hsl(174, 41%, 51%);
+    --lumo-primary-text-color: hsl(174, 41%, 51%);
+}

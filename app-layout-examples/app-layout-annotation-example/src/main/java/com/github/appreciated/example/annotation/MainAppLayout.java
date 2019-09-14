@@ -1,7 +1,7 @@
 package com.github.appreciated.example.annotation;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -35,33 +35,34 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
                         .get()
-                        .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .addToSection(new LeftHeaderItem("Menu-Header", "Version 3.0.0",
-                                "/frontend/images/logo.png"), HEADER)
-                        .addToSection(new LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("onClick ...")
-                        ), HEADER)
-                        .add(new LeftNavigationItem(View1.class))
-                        .add(LeftSubMenuBuilder
-                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(LeftSubMenuBuilder
+                        .addToSection(HEADER, new LeftHeaderItem("Menu-Header", "Version 4.0.0",
+                                        "/frontend/images/logo.png"),
+                                new LeftClickableItem("Clickable Entry",
+                                        VaadinIcon.COG.create(),
+                                        clickEvent -> Notification.show("onClick ...")
+                                ))
+                        .add(new LeftNavigationItem(View1.class),
+                                LeftSubMenuBuilder
                                         .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationItem(View2.class))
-                                        .add(new LeftNavigationItem(View3.class))
-                                        .add(new LeftNavigationItem(View4.class))
-                                        .build())
-                                .add(new LeftNavigationItem(View3.class))
-                                .add(new LeftNavigationItem(View4.class))
-                                .build())
-                        .add(new LeftNavigationItem(View5.class))
-                        .addToSection(new LeftClickableItem("Clickable Entry",
+                                        .add(LeftSubMenuBuilder
+                                                        .get("My Submenu", VaadinIcon.PLUS.create())
+                                                        .add(
+                                                                new LeftNavigationItem(View2.class),
+                                                                new LeftNavigationItem(View3.class),
+                                                                new LeftNavigationItem(View4.class))
+                                                        .build(),
+                                                new LeftNavigationItem(View3.class),
+                                                new LeftNavigationItem(View4.class))
+                                        .build(),
+                                new LeftNavigationItem(View5.class))
+                        .addToSection(FOOTER, new LeftClickableItem("Clickable Entry",
                                 VaadinIcon.COG.create(),
                                 clickEvent -> Notification.show("onClick ...")
-                        ), FOOTER)
+                        ))
                         .build())
                 .build());
     }

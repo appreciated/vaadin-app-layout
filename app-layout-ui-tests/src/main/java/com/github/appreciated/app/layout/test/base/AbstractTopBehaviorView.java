@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.test.base;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -38,7 +38,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         init(AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder.get()
-                        .add(new AppBarNotificationButton(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton(VaadinIcon.BELL, notifications))
                         .build()
                 )
                 .withAppMenu(TopAppMenuBuilder.get()
@@ -82,7 +82,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
     }
 
     private void addNotification(Priority priority) {
-        notifications.addNotification(new DefaultNotification("Title" + badge.getCount(), "Description ..............................................." + badge.getCount(), priority));
+        notifications.add(new DefaultNotification("Title" + badge.getCount(), "Description ..............................................." + badge.getCount(), priority));
     }
 
     public abstract Class<? extends Component>[] getViews();

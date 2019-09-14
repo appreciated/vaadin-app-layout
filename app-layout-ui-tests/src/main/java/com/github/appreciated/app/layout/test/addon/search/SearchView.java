@@ -1,7 +1,7 @@
 package com.github.appreciated.app.layout.test.addon.search;
 
-import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButton;
-import com.github.appreciated.app.layout.addons.search.overlay.AppBarSearchOverlayButtonBuilder;
+import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButton;
+import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButtonBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.test.addon.search.view.*;
@@ -42,7 +42,7 @@ public class SearchView extends AbstractLeftBehaviorBasicView {
                 new TestSearchResult("Header10", "Description10")
         ));
 
-        AppBarSearchOverlayButton<TestSearchResult> button = new AppBarSearchOverlayButtonBuilder<TestSearchResult>()
+        SearchOverlayButton<TestSearchResult> button = new SearchOverlayButtonBuilder<TestSearchResult>()
                 .withDataProvider(dataProvider)
                 .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
                 .withDataViewProvider(result -> {

@@ -1,7 +1,7 @@
 package com.github.appreciated.spring;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
@@ -40,7 +40,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
                         .get()
-                        .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()

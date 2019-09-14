@@ -14,18 +14,18 @@ import com.vaadin.flow.function.SerializablePredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class AppBarSearchOverlayButton<T> extends Button {
+public class SearchOverlayButton<T> extends Button {
     private final SearchOverlayView<T> searchView;
 
-    public AppBarSearchOverlayButton() {
+    public SearchOverlayButton() {
         this(VaadinIcon.SEARCH);
     }
 
-    public AppBarSearchOverlayButton(VaadinIcon icon) {
+    public SearchOverlayButton(VaadinIcon icon) {
         this(icon.create());
     }
 
-    public AppBarSearchOverlayButton(Component icon) {
+    public SearchOverlayButton(Component icon) {
         super(icon);
         addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         searchView = new SearchOverlayView<>();

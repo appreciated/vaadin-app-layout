@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.addons.profile.builder;
 
-import com.github.appreciated.app.layout.addons.profile.AppBarImageProfileButton;
+import com.github.appreciated.app.layout.addons.profile.ImageProfileButton;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -9,14 +9,14 @@ import com.vaadin.flow.component.html.Image;
 
 public class AppBarImageProfileButtonBuilder {
 
-    private final AppBarImageProfileButton appBarProfileButton;
+    private final ImageProfileButton appBarProfileButton;
 
     private AppBarImageProfileButtonBuilder(Image image) {
-        appBarProfileButton = new AppBarImageProfileButton(image);
+        appBarProfileButton = new ImageProfileButton(image);
     }
 
     private AppBarImageProfileButtonBuilder(String image) {
-        appBarProfileButton = new AppBarImageProfileButton(image);
+        appBarProfileButton = new ImageProfileButton(image);
     }
 
     public static AppBarImageProfileButtonBuilder get(Image image) {
@@ -47,7 +47,7 @@ public class AppBarImageProfileButtonBuilder {
         return this;
     }
 
-    public AppBarImageProfileButton build() {
+    public ImageProfileButton build() {
         return appBarProfileButton;
     }
 }

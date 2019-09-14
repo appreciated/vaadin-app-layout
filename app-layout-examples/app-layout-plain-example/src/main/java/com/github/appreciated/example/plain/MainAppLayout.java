@@ -1,7 +1,7 @@
 package com.github.appreciated.example.plain;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
+import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
@@ -42,48 +42,30 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder
                         .get()
-                        .add(new AppBarNotificationButton<>(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
                 .withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .addToSection(new LeftHeaderItem("Menu-Header",
-                                "Version 3.0.0",
-                                "/frontend/images/logo.png"
-                        ), HEADER)
-                        .addToSection(new LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("onClick ...")
-                        ), HEADER)
-                        .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class))
-                        .add(new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class))
-                        .add(LeftSubMenuBuilder
-                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(LeftSubMenuBuilder
-                                        .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationItem("Charts",
-                                                VaadinIcon.SPLINE_CHART.create(),
-                                                View2.class
-                                        ))
-                                        .add(new LeftNavigationItem("Contact",
-                                                VaadinIcon.CONNECT.create(),
-                                                View3.class
-                                        ))
-                                        .add(new LeftNavigationItem("More",
-                                                VaadinIcon.COG.create(),
-                                                View4.class
-                                        ))
-                                        .build())
-                                .add(new LeftNavigationItem("Contact1",
-                                        VaadinIcon.CONNECT.create(),
-                                        View3.class
-                                ))
-                                .add(new LeftNavigationItem("More1", VaadinIcon.COG.create(), View5.class))
-                                .build())
-                        .add(menuEntry)
-                        .addToSection(new LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create(),
-                                clickEvent -> Notification.show("onClick ...")
-                        ), FOOTER)
+                        .addToSection(HEADER,
+                                new LeftHeaderItem("Menu-Header", "Version 4.0.0", "/frontend/images/logo.png"),
+                                new LeftClickableItem("Clickable Entry", VaadinIcon.COG.create(), event -> Notification.show("onClick ..."))
+                        )
+                        .add(new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class),
+                                new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class),
+                                LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                                        .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                                                        .add(new LeftNavigationItem("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class),
+                                                                new LeftNavigationItem("Contact", VaadinIcon.CONNECT.create(), View3.class),
+                                                                new LeftNavigationItem("More", VaadinIcon.COG.create(), View4.class))
+                                                        .build(),
+                                                new LeftNavigationItem("Contact1", VaadinIcon.CONNECT.create(), View3.class),
+                                                new LeftNavigationItem("More1", VaadinIcon.COG.create(), View5.class))
+                                        .build(),
+                                menuEntry
+                        )
+                        .addToSection(FOOTER,
+                                new LeftClickableItem("Clickable Entry", VaadinIcon.COG.create(), clickEvent -> Notification.show("onClick ..."))
+                        )
                         .build())
                 .build());
     }

@@ -6,18 +6,18 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 
-public class AppBarSearchButton extends Button {
+public class SearchButton extends Button {
     private final SearchView searchView;
 
-    public AppBarSearchButton() {
+    public SearchButton() {
         this(VaadinIcon.SEARCH);
     }
 
-    public AppBarSearchButton(VaadinIcon icon) {
+    public SearchButton(VaadinIcon icon) {
         this(icon.create());
     }
 
-    public AppBarSearchButton(Component icon) {
+    public SearchButton(Component icon) {
         super(icon);
         addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         searchView = new SearchView();
@@ -36,7 +36,7 @@ public class AppBarSearchButton extends Button {
         attachEvent.getUI().add(searchView);
     }
 
-    public AppBarSearchButton withValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
+    public SearchButton withValueChangeListener(HasValue.ValueChangeListener<? super AbstractField.ComponentValueChangeEvent<TextField, String>> listener) {
         addValueChangeListener(listener);
         return this;
     }

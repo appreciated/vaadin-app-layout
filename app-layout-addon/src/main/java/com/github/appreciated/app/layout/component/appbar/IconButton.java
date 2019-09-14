@@ -25,7 +25,6 @@ public class IconButton extends Button {
         getElement().getStyle()
                 .set("width", "100%")
                 .set("height", "100%");
-        getElement().setAttribute("id", "button");
     }
 
     @Override

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * This is the supposed entry class to build an instance of the app-layout. The {@link AppLayoutBuilder} is a builder pattern.
  */
-public class AppLayoutBuilder implements ComponentBuilder {
+public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
 
     private AppLayout instance;
     private Component titleComponent;

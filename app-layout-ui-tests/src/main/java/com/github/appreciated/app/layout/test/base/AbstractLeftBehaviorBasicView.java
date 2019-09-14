@@ -1,8 +1,8 @@
 package com.github.appreciated.app.layout.test.base;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
-import com.github.appreciated.app.layout.addons.notification.component.AppBarNotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
@@ -12,8 +12,12 @@ import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigatio
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.github.appreciated.app.layout.entity.Section;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehaviorView {
+
+    private final FlexLayout appBar;
 
     public AbstractLeftBehaviorBasicView() {
         notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
@@ -23,14 +27,18 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
         LeftNavigationItem menu = new LeftNavigationItem("View9", VaadinIcon.MENU.create(), getViewForI(9));
         notificationHolder.bind(home.getBadge());
         badgeHolder.bind(menu.getBadge());
+
+        appBar = AppBarBuilder.get()
+                .add(new IconButton(VaadinIcon.EDIT.create(), event -> Notification.show("IconButton clicked")))
+                .build();
+
         AppLayoutBuilder builder = AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
-                .withAppBar(
-                        AppBarBuilder.get().add(new AppBarNotificationButton(VaadinIcon.BELL, notificationHolder)).build())
+                .withAppBar(appBar)
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new LeftHeaderItem("App-Layout", "Version 3.0.0", "frontend/images/logo.png"), Section.HEADER)
+                                .addToSection(new LeftHeaderItem("App-Layout", "Version 4.0.0", "frontend/images/logo.png"), Section.HEADER)
                                 .addToSection(new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
                                 }), Section.HEADER)
                                 .add(home)
@@ -48,5 +56,9 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
                 );
         furtherConfiguration(builder);
         init(builder.build());
+    }
+
+    public FlexLayout getAppBar() {
+        return appBar;
     }
 }
