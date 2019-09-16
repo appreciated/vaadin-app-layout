@@ -138,4 +138,8 @@ public class SearchOverlayView<T> extends IronOverlay {
     public void setCloseOnQueryResult(boolean closeOnQueryResult) {
         this.closeOnQueryResult = closeOnQueryResult;
     }
+
+    public Button getCloseButton() {
+        return closeButton;
+    }
 }

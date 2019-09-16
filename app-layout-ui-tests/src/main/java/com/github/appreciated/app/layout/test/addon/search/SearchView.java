@@ -10,6 +10,7 @@ import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView
 import com.github.appreciated.card.RippleClickableCard;
 import com.github.appreciated.card.content.Item;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.router.RoutePrefix;
@@ -52,8 +53,12 @@ public class SearchView extends AbstractLeftBehaviorBasicView {
                     card.setBackground("var(--lumo-base-color)");
                     return card;
                 })
+                .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.header + " clicked"))
                 .build();
 
+        button.setId("it-test-search-button");
+        button.getSearchView().getSearchField().setId("it-test-search-field");
+        button.getSearchView().getCloseButton().setId("it-test-search-close");
         builder.withAppBar(button);
     }
 }

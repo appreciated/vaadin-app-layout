@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.test.addon.profile;
 
+import com.github.appreciated.app.layout.addons.profile.ProfileButton;
 import com.github.appreciated.app.layout.addons.profile.builder.AppBarProfileButtonBuilder;
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
@@ -24,10 +25,12 @@ public class ProfileView extends AbstractLeftBehaviorBasicView {
 
     @Override
     public void furtherConfiguration(AppLayoutBuilder builder) {
-        builder.withAppBar(AppBarProfileButtonBuilder.get()
+        ProfileButton button = AppBarProfileButtonBuilder.get()
                 .withItem("Profile Entry 1", event -> Notification.show("Profile Entry 1 clicked"))
                 .withItem("Profile Entry 2", event -> Notification.show("Profile Entry 1 clicked"))
                 .withItem("Profile Entry 3", event -> Notification.show("Profile Entry 1 clicked"))
-                .build());
+                .build();
+        button.setId("it-test-profile-button");
+        builder.withAppBar(button);
     }
 }
