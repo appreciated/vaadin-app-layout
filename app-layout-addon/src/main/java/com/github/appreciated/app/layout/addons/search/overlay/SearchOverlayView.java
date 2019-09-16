@@ -92,6 +92,7 @@ public class SearchOverlayView<T> extends IronOverlay {
                 .set("--lumo-size-m", "var(--lumo-size-xl)")
                 .set("--lumo-contrast-10pct", "transparent");
         results.setHeightFull();
+        results.setWidth("unset");
         add(wrapper);
     }
 
