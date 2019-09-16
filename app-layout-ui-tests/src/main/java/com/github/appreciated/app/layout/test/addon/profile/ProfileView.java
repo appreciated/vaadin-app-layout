@@ -27,10 +27,10 @@ public class ProfileView extends AbstractLeftBehaviorBasicView {
     public void furtherConfiguration(AppLayoutBuilder builder) {
         ProfileButton button = AppBarProfileButtonBuilder.get()
                 .withItem("Profile Entry 1", event -> Notification.show("Profile Entry 1 clicked"))
-                .withItem("Profile Entry 2", event -> Notification.show("Profile Entry 1 clicked"))
-                .withItem("Profile Entry 3", event -> Notification.show("Profile Entry 1 clicked"))
+                .withItem("Profile Entry 2", event -> Notification.show("Profile Entry 2 clicked"))
+                .withItem("Profile Entry 3", event -> Notification.show("Profile Entry 3 clicked"))
                 .build();
-        button.setId("it-test-profile-button");
+        button.getWrappedComponent().setId("it-test-profile-button");
         builder.withAppBar(button);
     }
 }
