@@ -4,7 +4,7 @@ import com.github.appreciated.app.layout.addons.notification.DefaultNotification
 import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
@@ -41,16 +41,14 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 new DefaultNotification("Test4", "Test4")
         );
 
-        Component appBar = AppBarBuilder
-                .get()
+        Component appBar = AppBarBuilder.get()
                 .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                 .build();
 
         LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
         LeftNavigationItem menu = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View8.class);
 
-        Component appMenu = LeftAppMenuBuilder
-                .get()
+        Component appMenu = LeftAppMenuBuilder.get()
                 .addToSection(HEADER,
                         new LeftHeaderItem("App-Layout", "Version 4.0.0", "/frontend/images/logo.png"),
                         new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
@@ -85,7 +83,7 @@ public class MainAppLayout extends AppLayoutRouterLayout {
                 .build();
 
         init(AppLayoutBuilder
-                .get(Behaviour.LEFT_HYBRID)
+                .get(LeftLayouts.LeftResponsive.class)
                 .withTitle("App Layout")
                 .withAppBar(appBar)
                 .withAppMenu(appMenu)

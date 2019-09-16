@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.behavior.leftresponsivehybrid;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
 import com.github.appreciated.app.layout.test.behavior.leftresponsivehybrid.view.*;
 import com.vaadin.flow.component.Component;
@@ -9,8 +10,8 @@ import com.vaadin.flow.router.RoutePrefix;
 @RoutePrefix(absolute = true, value = "leftresponsivehybrid")
 public class LeftResponsiveHybridBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT_RESPONSIVE_HYBRID;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.LeftResponsiveHybrid.class;
     }
 
     @Override

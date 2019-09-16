@@ -3,7 +3,8 @@ package com.github.appreciated.app.layout.test.addon.notification;
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.test.addon.notification.view.*;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
@@ -14,8 +15,8 @@ import com.vaadin.flow.router.RoutePrefix;
 @RoutePrefix(absolute = true, value = "notification")
 public class NotificationView extends AbstractLeftBehaviorBasicView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.Left.class;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.behavior.top;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.TopLayouts;
 import com.github.appreciated.app.layout.test.base.AbstractTopBehaviorView;
 import com.github.appreciated.app.layout.test.behavior.top.view.View1;
 import com.github.appreciated.app.layout.test.behavior.top.view.View2;
@@ -11,8 +12,8 @@ import com.vaadin.flow.router.RoutePrefix;
 @RoutePrefix(absolute = true, value = "top")
 public class TopBehaviourView extends AbstractTopBehaviorView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.TOP;
+    public Class<? extends AppLayout> getVariant() {
+        return TopLayouts.Top.class;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.github.appreciated.example.footer;
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
@@ -33,15 +32,12 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
 
     public MainAppLayout() {
         notifications.addClickListener(notification -> {/* ... */});
-        init((LeftLayouts.LeftResponsiveHybrid) AppLayoutBuilder
-                .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
+        init(AppLayoutBuilder.get(LeftLayouts.LeftResponsiveHybrid.class)
                 .withTitle("App Layout")
-                .withAppBar(AppBarBuilder
-                        .get()
+                .withAppBar(AppBarBuilder.get()
                         .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
-                .withAppMenu(LeftAppMenuBuilder
-                        .get()
+                .withAppMenu(LeftAppMenuBuilder.get()
                         .addToSection(HEADER,
                                 new LeftHeaderItem("Menu-Header", "Version 4.0.0", "/frontend/images/logo.png")
                         )

@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.behavior.left;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
 import com.github.appreciated.app.layout.test.behavior.left.view.*;
 import com.vaadin.flow.component.Component;
@@ -9,8 +10,8 @@ import com.vaadin.flow.router.RoutePrefix;
 @RoutePrefix(absolute = true, value = "left")
 public class LeftBehaviourView extends AbstractLeftBehaviorBasicView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.Left.class;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.github.appreciated.app.layout.test.nestedlayout;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
@@ -17,7 +17,7 @@ import com.vaadin.flow.router.RoutePrefix;
 
 @ParentLayout(MainLayout.class)
 @RoutePrefix(absolute = true, value = "nestedlayout")
-public class NestedLayout extends AppLayoutRouterLayoutBase {
+public class NestedLayout extends AppLayoutRouterLayoutBase<LeftLayouts.Left> {
 
     private static final Class[] VIEWS = {
             View1.class,
@@ -34,26 +34,26 @@ public class NestedLayout extends AppLayoutRouterLayoutBase {
     public NestedLayout() {
         LeftNavigationItem home = new LeftNavigationItem("View1", VaadinIcon.HOME.create(), getViewForI(1));
         LeftNavigationItem menu = new LeftNavigationItem("View9", VaadinIcon.MENU.create(), getViewForI(9));
-        init(AppLayoutBuilder.get(Behaviour.LEFT)
+        init(AppLayoutBuilder.get(LeftLayouts.Left.class)
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new LeftHeaderItem("App-Layout", "Version 4.0.0",
-                                        "frontend/images/logo.png"), Section.HEADER)
-                                .addToSection(new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
-                                }), Section.HEADER)
+                                .addToSection(Section.HEADER,
+                                        new LeftHeaderItem("App-Layout", "Version 4.0.0", "frontend/images/logo.png"),
+                                        new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
+                                        }))
                                 .add(home)
                                 .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationItem("View2", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
-                                        .add(new LeftNavigationItem("View3", VaadinIcon.CONNECT.create(), getViewForI(3)))
-                                        .add(new LeftNavigationItem("View4", VaadinIcon.COG.create(), getViewForI(4)))
-                                        .add(new LeftNavigationItem("View5", VaadinIcon.CONNECT.create(), getViewForI(5)))
-                                        .add(new LeftNavigationItem("View6", VaadinIcon.COG.create(), getViewForI(6)))
+                                        .add(new LeftNavigationItem("View2", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)),
+                                                new LeftNavigationItem("View3", VaadinIcon.CONNECT.create(), getViewForI(3)),
+                                                new LeftNavigationItem("View4", VaadinIcon.COG.create(), getViewForI(4)),
+                                                new LeftNavigationItem("View5", VaadinIcon.CONNECT.create(), getViewForI(5)),
+                                                new LeftNavigationItem("View6", VaadinIcon.COG.create(), getViewForI(6)))
                                         .build())
-                                .add(new LeftNavigationItem("View7", VaadinIcon.COG.create(), getViewForI(7)))
-                                .add(new LeftNavigationItem("View8", VaadinIcon.COG.create(), getViewForI(8)))
-                                .add(menu)
+                                .add(new LeftNavigationItem("View7", VaadinIcon.COG.create(), getViewForI(7)),
+                                        new LeftNavigationItem("View8", VaadinIcon.COG.create(), getViewForI(8)),
+                                        menu)
                                 .build()
                 ).build());
     }

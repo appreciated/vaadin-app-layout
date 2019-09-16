@@ -1,7 +1,6 @@
 package com.github.appreciated.app.layout.component.builder;
 
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -11,24 +10,29 @@ import javax.validation.constraints.NotNull;
 /**
  * This is the supposed entry class to build an instance of the app-layout. The {@link AppLayoutBuilder} is a builder pattern.
  */
-public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
+public class AppLayoutBuilder<T extends AppLayout> implements ComponentBuilder<T> {
 
-    private AppLayout instance;
+    private T instance;
     private Component titleComponent;
     private Component imageComponent;
     private boolean upNavigation;
     private boolean swipeOpen = true;
 
-    private AppLayoutBuilder(@NotNull AppLayout instance) {
+    private AppLayoutBuilder(@NotNull T instance) {
         this.instance = instance;
     }
 
-    public static AppLayoutBuilder get(Behaviour variant) {
-        return new AppLayoutBuilder(variant.getInstance());
+    public static <T extends AppLayout> AppLayoutBuilder<T> get(Class<T> variant) {
+        try {
+            return get(variant.newInstance());
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        throw new IllegalStateException(variant.getName() + " could not be instantiated, please check the logs!");
     }
 
-    public static AppLayoutBuilder get(AppLayout variant) {
-        return new AppLayoutBuilder(variant);
+    public static <T extends AppLayout> AppLayoutBuilder<T> get(T variant) {
+        return new AppLayoutBuilder<>(variant);
     }
 
     /**
@@ -37,7 +41,7 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param title title as string
      * @return the builder
      */
-    public AppLayoutBuilder withTitle(String title) {
+    public AppLayoutBuilder<T> withTitle(String title) {
         setTitle(title);
         return this;
     }
@@ -73,7 +77,7 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param component the title component
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withTitle(Component component) {
+    public AppLayoutBuilder<T> withTitle(Component component) {
         setTitleComponent(component);
         return this;
     }
@@ -83,7 +87,7 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      *
      * @return the build AppLayout instance
      */
-    public AppLayout build() {
+    public T build() {
         if (titleComponent != null) {
             instance.setTitleComponent(titleComponent);
         }
@@ -104,7 +108,7 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param component the build app-bar component
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withAppBar(Component component) {
+    public AppLayoutBuilder<T> withAppBar(Component component) {
         setAppBarComponent(component);
         return this;
     }
@@ -117,13 +121,13 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param component the app menu component
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withAppMenu(Component component) {
+    public AppLayoutBuilder<T> withAppMenu(Component component) {
         setAppMenu(component);
         return this;
     }
 
     /**
-     * Sets the Component that represents the menu on the left hand / the top side (depending which {@link Behaviour} you are using).
+     * Sets the Component that represents the menu on the left hand / the top side (depending which {@link AppLayout} you are using).
      *
      * @param component
      */
@@ -135,7 +139,7 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param url a url to the image that is supposed to be shown in the app bar
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withIcon(String url) {
+    public AppLayoutBuilder<T> withIcon(String url) {
         Image image = new Image(url, "icon");
         image.setHeight("var(--app-layout-menu-button-height)");
         image.getStyle().set("margin", "var(--app-layout-space-s)");
@@ -146,17 +150,17 @@ public class AppLayoutBuilder implements ComponentBuilder<AppLayout> {
      * @param image
      * @return Itself to allow method chaining
      */
-    public AppLayoutBuilder withIconComponent(Component image) {
+    public AppLayoutBuilder<T> withIconComponent(Component image) {
         this.imageComponent = image;
         return this;
     }
 
-    public AppLayoutBuilder withSwipeOpen(boolean swipeOpen) {
+    public AppLayoutBuilder<T> withSwipeOpen(boolean swipeOpen) {
         this.swipeOpen = swipeOpen;
         return this;
     }
 
-    public AppLayoutBuilder withUpNavigation() {
+    public AppLayoutBuilder<T> withUpNavigation() {
         this.upNavigation = true;
         return this;
     }

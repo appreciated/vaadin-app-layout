@@ -3,7 +3,7 @@ package com.github.appreciated.app.layout.test.base;
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
@@ -20,10 +20,9 @@ import static com.github.appreciated.app.layout.addons.notification.entity.Prior
 public abstract class AbstractLeftBehaviorView extends AppLayoutRouterLayout {
     DefaultNotificationHolder notificationHolder;
     DefaultBadgeHolder badgeHolder;
-    private Behaviour variant;
     private Thread currentThread;
 
-    public abstract Behaviour getVariant();
+    public abstract Class<? extends AppLayout> getVariant();
 
     protected Class<? extends Component> getViewForI(int i) {
         return getViews()[i - 1];

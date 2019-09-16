@@ -2,7 +2,8 @@ package com.github.appreciated.app.layout.test.addon.search;
 
 import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButton;
 import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButtonBuilder;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.test.addon.search.view.*;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
@@ -18,8 +19,8 @@ import java.util.Arrays;
 @RoutePrefix(absolute = true, value = "search")
 public class SearchView extends AbstractLeftBehaviorBasicView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.Left.class;
     }
 
     @Override

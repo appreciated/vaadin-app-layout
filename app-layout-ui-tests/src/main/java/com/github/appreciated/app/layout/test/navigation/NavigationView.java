@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.navigation;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorBasicView;
 import com.github.appreciated.app.layout.test.navigation.view.*;
@@ -11,8 +12,8 @@ import com.vaadin.flow.router.RoutePrefix;
 public class NavigationView extends AbstractLeftBehaviorBasicView {
 
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT_HYBRID;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.LeftHybrid.class;
     }
 
     @Override

@@ -11,7 +11,8 @@ import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButt
 import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButtonBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
+import com.github.appreciated.app.layout.component.applayout.TopLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
@@ -53,7 +54,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 public class MainLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
     private DefaultBadgeHolder badgeHolder = new DefaultBadgeHolder();
-    private Behaviour variant = Behaviour.LEFT_RESPONSIVE_HYBRID;
+    private Class<? extends AppLayout> variant = LeftLayouts.LeftResponsiveHybrid.class;
     private Thread currentThread;
 
     private SearchOverlayButton<TestSearchResult> button;
@@ -88,7 +89,7 @@ public class MainLayout extends AppLayoutRouterLayout {
         currentThread.start();
     }
 
-    private AppLayout getLayoutConfiguration(Behaviour variant) {
+    private AppLayout getLayoutConfiguration(Class<? extends AppLayout> variant) {
         this.variant = variant;
 
         dataProvider = new ListDataProvider<>(Arrays.asList(
@@ -115,7 +116,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                 })
                 .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.getHeader()))
                 .build();
-        if (!this.variant.isTop()) {
+        if (this.variant != TopLayouts.Top.class && this.variant == TopLayouts.TopLarge.class) {
             LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), View1.class);
             LeftNavigationItem menu = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View9.class);
 
@@ -229,41 +230,41 @@ public class MainLayout extends AppLayoutRouterLayout {
         ));
     }
 
-    private void openModeSelector(Behaviour variant) {
+    private void openModeSelector(Class<? extends AppLayout> variant) {
         new BehaviourSelector(variant, this::setDrawerVariant).open();
     }
 
-    private void setDrawerVariant(Behaviour variant) {
+    private void setDrawerVariant(Class<? extends AppLayout> variant) {
         this.variant = variant;
         init(getLayoutConfiguration(variant));
     }
 
     class BehaviourSelector extends Dialog {
-        public BehaviourSelector(Behaviour current, Consumer<Behaviour> consumer) {
+        public BehaviourSelector(Class<? extends AppLayout> current, Consumer<Class<? extends AppLayout>> consumer) {
             VerticalLayout layout = new VerticalLayout();
             add(layout);
-            RadioButtonGroup<Behaviour> group = new RadioButtonGroup<>();
+            RadioButtonGroup<Class<? extends AppLayout>> group = new RadioButtonGroup<>();
             group.getElement()
                     .getStyle()
                     .set("display", "flex");
             group.getElement()
                     .getStyle()
                     .set("flexDirection", "column");
-            group.setItems(Behaviour.LEFT,
-                    Behaviour.LEFT_OVERLAY,
-                    Behaviour.LEFT_RESPONSIVE,
-                    Behaviour.LEFT_RESPONSIVE_DOUBLE,
-                    Behaviour.LEFT_HYBRID,
-                    Behaviour.LEFT_HYBRID_SMALL,
-                    Behaviour.LEFT_RESPONSIVE_HYBRID,
-                    Behaviour.LEFT_RESPONSIVE_HYBRID_NO_APP_BAR,
-                    Behaviour.LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR,
-                    Behaviour.LEFT_RESPONSIVE_OVERLAY,
-                    Behaviour.LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR,
-                    Behaviour.LEFT_RESPONSIVE_SMALL,
-                    Behaviour.LEFT_RESPONSIVE_SMALL_NO_APP_BAR,
-                    Behaviour.TOP,
-                    Behaviour.TOP_LARGE
+            group.setItems(LeftLayouts.Left.class,
+                    LeftLayouts.LeftOverlay.class,
+                    LeftLayouts.LeftResponsive.class,
+                    LeftLayouts.LeftResponsiveDouble.class,
+                    LeftLayouts.LeftHybrid.class,
+                    LeftLayouts.LeftHybridSmall.class,
+                    LeftLayouts.LeftResponsiveHybrid.class,
+                    LeftLayouts.LeftResponsiveHybridNoAppBar.class,
+                    LeftLayouts.LeftResponsiveHybridOverlayNoAppBar.class,
+                    LeftLayouts.LeftResponsiveOverlay.class,
+                    LeftLayouts.LeftResponsiveOverlayNoAppBar.class,
+                    LeftLayouts.LeftResponsiveSmall.class,
+                    LeftLayouts.LeftResponsiveSmallNoAppBar.class,
+                    TopLayouts.Top.class,
+                    TopLayouts.TopLarge.class
             );
             group.setValue(current);
             layout.add(group);

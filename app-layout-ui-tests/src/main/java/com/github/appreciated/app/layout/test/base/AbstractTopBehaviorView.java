@@ -5,7 +5,7 @@ import com.github.appreciated.app.layout.addons.notification.component.Notificat
 import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.addons.notification.entity.Priority;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
 import com.github.appreciated.app.layout.component.menu.top.builder.TopAppMenuBuilder;
 import com.github.appreciated.app.layout.component.menu.top.item.TopClickableItem;
@@ -30,7 +30,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
     });
     private DefaultBadgeHolder badge = new DefaultBadgeHolder();
 
-    private Behaviour variant;
+    private Class<? extends AppLayout> variant;
     private Thread currentThread;
 
     public AbstractTopBehaviorView() {
@@ -38,17 +38,21 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         init(AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder.get()
-                        .add(new NotificationButton(VaadinIcon.BELL, notifications))
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build()
                 )
                 .withAppMenu(TopAppMenuBuilder.get()
-                        .addToSection(new TopClickableItem("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
-                        }), Section.HEADER)
-                        .add(new TopNavigationItem("Home", VaadinIcon.HOME.create(), getViewForI(1)))
-                        .add(new TopNavigationItem("Contact", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
-                        .addToSection(new TopClickableItem("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
-                        }), FOOTER)
-                        .addToSection(new TopNavigationItem("More", VaadinIcon.CONNECT.create(), getViewForI(3)), FOOTER).build()
+                        .addToSection(Section.HEADER,
+                                new TopClickableItem("Set Behaviour 1", VaadinIcon.COG.create(), clickEvent -> {
+                                })
+                        )
+                        .add(new TopNavigationItem("Home", VaadinIcon.HOME.create(), getViewForI(1)),
+                                new TopNavigationItem("Contact", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
+                        .addToSection(FOOTER,
+                                new TopClickableItem("Set Behaviour 2", VaadinIcon.COG.create(), clickEvent -> {
+                                }),
+                                new TopNavigationItem("More", VaadinIcon.CONNECT.create(), getViewForI(3))
+                        ).build()
                 ).build());
     }
 
@@ -75,7 +79,7 @@ public abstract class AbstractTopBehaviorView extends AppLayoutRouterLayout {
         currentThread.start();
     }
 
-    public abstract Behaviour getVariant();
+    public abstract Class<? extends AppLayout> getVariant();
 
     private Class<? extends Component> getViewForI(int i) {
         return getViews()[i - 1];

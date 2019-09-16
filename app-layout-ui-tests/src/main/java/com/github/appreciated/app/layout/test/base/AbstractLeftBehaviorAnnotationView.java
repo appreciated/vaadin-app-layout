@@ -30,20 +30,21 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
                         AppBarBuilder.get().add(new NotificationButton(VaadinIcon.BELL, notificationHolder)).build())
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
-                                .addToSection(new LeftHeaderItem("App-Layout", "Version 4.0.0", "frontend/images/logo.png"), Section.HEADER)
-                                .addToSection(new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
-                                }), Section.HEADER)
-                                .add(home)
-                                .add(LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(new LeftNavigationItem(getViewForI(2)))
-                                        .add(new LeftNavigationItem(getViewForI(3)))
-                                        .add(new LeftNavigationItem(getViewForI(4)))
-                                        .add(new LeftNavigationItem(getViewForI(5)))
-                                        .add(new LeftNavigationItem(getViewForI(6)))
-                                        .build())
-                                .add(new LeftNavigationItem(getViewForI(7)))
-                                .add(new LeftNavigationItem(getViewForI(8)))
-                                .add(menu)
+                                .addToSection(Section.HEADER,
+                                        new LeftHeaderItem("App-Layout", "Version 4.0.0", "frontend/images/logo.png"),
+                                        new LeftClickableItem("Set Behaviour HEADER", VaadinIcon.COG.create(), clickEvent -> {
+                                        }))
+                                .add(home,
+                                        LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
+                                                .add(new LeftNavigationItem(getViewForI(2)))
+                                                .add(new LeftNavigationItem(getViewForI(3)))
+                                                .add(new LeftNavigationItem(getViewForI(4)))
+                                                .add(new LeftNavigationItem(getViewForI(5)))
+                                                .add(new LeftNavigationItem(getViewForI(6)))
+                                                .build(),
+                                        new LeftNavigationItem(getViewForI(7)),
+                                        new LeftNavigationItem(getViewForI(8)),
+                                        menu)
                                 .build()
                 );
         furtherConfiguration(builder);

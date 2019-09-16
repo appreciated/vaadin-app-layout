@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.test.annotation;
 
-import com.github.appreciated.app.layout.component.applayout.Behaviour;
+import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.test.annotation.view.*;
 import com.github.appreciated.app.layout.test.base.AbstractLeftBehaviorAnnotationView;
 import com.vaadin.flow.component.Component;
@@ -9,8 +10,8 @@ import com.vaadin.flow.router.RoutePrefix;
 @RoutePrefix(absolute = true, value = "annotation")
 public class AnnotationView extends AbstractLeftBehaviorAnnotationView {
     @Override
-    public Behaviour getVariant() {
-        return Behaviour.LEFT_RESPONSIVE;
+    public Class<? extends AppLayout> getVariant() {
+        return LeftLayouts.LeftResponsive.class;
     }
 
     @Override
