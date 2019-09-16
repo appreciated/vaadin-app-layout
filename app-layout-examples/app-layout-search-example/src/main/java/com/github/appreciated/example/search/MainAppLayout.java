@@ -1,5 +1,6 @@
 package com.github.appreciated.example.search;
 
+import com.github.appreciated.app.layout.addons.search.SearchButton;
 import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButton;
 import com.github.appreciated.app.layout.addons.search.overlay.SearchOverlayButtonBuilder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
@@ -32,44 +33,20 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
 
-    private final ListDataProvider<TestSearchResult> dataProvider;
-    private final SearchOverlayButton<TestSearchResult> button;
 
     public MainAppLayout() {
-        // The data provider that provides the entities for the search
-        dataProvider = new ListDataProvider<>(Arrays.asList(
-                new TestSearchResult("Header1", "Description1"),
-                new TestSearchResult("Header2", "Description2"),
-                new TestSearchResult("Header3", "Description3"),
-                new TestSearchResult("Header4", "Description4"),
-                new TestSearchResult("Header5", "Description5"),
-                new TestSearchResult("Header6", "Description6"),
-                new TestSearchResult("Header7", "Description7"),
-                new TestSearchResult("Header8", "Description8"),
-                new TestSearchResult("Header9", "Description9"),
-                new TestSearchResult("Header10", "Description10")
-        ));
-
-        button = new SearchOverlayButtonBuilder<TestSearchResult>()
-                // add the data provider
-                .withDataProvider(dataProvider)
-                // Set the query that is executed to filter the Entities above
-                .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
-                // Set the producer that produces Components to be shown as search result
-                .withDataViewProvider(queryResult -> {
-                    RippleClickableCard card = new RippleClickableCard(new Item(queryResult.getHeader(), queryResult.getDescription()));
-                    card.setWidthFull();
-                    card.setBackground("var(--lumo-base-color)");
-                    return card;
-                })
-                // A Listener to react if a search result was clicked
-                .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.getHeader()))
-                .build();
+        // An Search overlay
+        SearchOverlayButton<TestSearchResult> searchOverlayButton = initSearchOverlayButton();
+        // An AppBar overlay with a search field
+        SearchButton searchButton = new SearchButton().withValueChangeListener(event -> {
+            /* React manually to user inputs */
+        });
 
         init(AppLayoutBuilder.get(LeftLayouts.LeftResponsive.class)
                 .withTitle("App Layout")
                 .withAppBar(AppBarBuilder.get()
-                        .add(button)
+                        .add(searchButton)
+                        .add(searchOverlayButton)
                         .build())
                 .withAppMenu(LeftAppMenuBuilder.get()
                         .addToSection(HEADER,
@@ -82,5 +59,37 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                         )
                         .build())
                 .build());
+    }
+
+    private SearchOverlayButton<TestSearchResult> initSearchOverlayButton() {
+        // The data provider that provides the entities for the search
+        ListDataProvider<TestSearchResult> listDataProvider = new ListDataProvider<>(Arrays.asList(
+                new TestSearchResult("Header1", "Description1"),
+                new TestSearchResult("Header2", "Description2"),
+                new TestSearchResult("Header3", "Description3"),
+                new TestSearchResult("Header4", "Description4"),
+                new TestSearchResult("Header5", "Description5"),
+                new TestSearchResult("Header6", "Description6"),
+                new TestSearchResult("Header7", "Description7"),
+                new TestSearchResult("Header8", "Description8"),
+                new TestSearchResult("Header9", "Description9"),
+                new TestSearchResult("Header10", "Description10")
+        ));
+
+        return new SearchOverlayButtonBuilder<TestSearchResult>()
+                // add the data provider
+                .withDataProvider(listDataProvider)
+                // Set the query that is executed to filter the Entities above
+                .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
+                // Set the producer that produces Components to be shown as search result
+                .withDataViewProvider(queryResult -> {
+                    RippleClickableCard card = new RippleClickableCard(new Item(queryResult.getHeader(), queryResult.getDescription()));
+                    card.setWidthFull();
+                    card.setBackground("var(--lumo-base-color)");
+                    return card;
+                })
+                // A Listener to react if a search result was clicked
+                .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.getHeader()))
+                .build();
     }
 }
