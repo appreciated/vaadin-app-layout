@@ -66,7 +66,8 @@ public interface TopLayouts {
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
             titleWrapper.setHeight("100%");
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-
+            menuButton.setIcon(VaadinIcon.ARROW_LEFT.create());
+            menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
             getElement().appendChild(appBarElements.getElement(), contentHolder.getElement());
         }
 
@@ -245,7 +246,7 @@ public interface TopLayouts {
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
             appBarElementWrapper.setHeight("var(--app-layout-bar-height)");
             menuButton.setIcon(VaadinIcon.ARROW_LEFT.create());
-
+            menuButton.addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
             getElement().appendChild(appBarElements.getElement(), contentElement.getElement());
         }
 

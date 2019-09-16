@@ -63,7 +63,6 @@ class AppLayoutTop extends PolymerElement {
             <app-header part="app-bar" slot="header" condenses reveals style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <app-toolbar style="transform: translate3d(0px, 0px, 0px);">
                     <vaadin-button id="toggle" theme="large tertiary icon">
-                         <iron-icon icon="lumo:menu" slot="prefix"></iron-icon>
                     </vaadin-button>
                     <div id="app-bar-elements" class="app-bar-content" style="height: 100%;width: 100%;">
                         <slot name="app-bar-content"></slot>

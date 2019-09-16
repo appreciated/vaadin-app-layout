@@ -144,7 +144,6 @@ class AppLayoutLeftHybrid extends PolymerElement {
             <app-header fixed slot="header" part="app-bar">
                 <app-toolbar style="height: var(--app-layout-bar-height);">
                     <vaadin-button id="toggle" theme="large tertiary icon">
-                         <iron-icon icon="lumo:menu" slot="prefix"></iron-icon>
                     </vaadin-button>
                     <div class="app-bar-content" id="app-bar-elements" style="width: 100%;height: 100%;">
                         <slot name="app-bar-content"></slot>
