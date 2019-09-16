@@ -11,3 +11,4 @@
 **/bower_components/
 **/webpack.config.js
 **/webpack.generated.js
+**/node_modules
