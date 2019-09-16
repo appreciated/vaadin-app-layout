@@ -1,11 +1,10 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
 import com.vaadin.flow.data.provider.Query;
@@ -14,7 +13,7 @@ import com.vaadin.flow.function.SerializablePredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class SearchOverlayButton<T> extends Button {
+public class SearchOverlayButton<T> extends IconButton {
     private final SearchOverlayView<T> searchView;
 
     public SearchOverlayButton() {
@@ -27,7 +26,6 @@ public class SearchOverlayButton<T> extends Button {
 
     public SearchOverlayButton(Component icon) {
         super(icon);
-        addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         searchView = new SearchOverlayView<>();
         addClickListener(event -> searchView.open());
     }

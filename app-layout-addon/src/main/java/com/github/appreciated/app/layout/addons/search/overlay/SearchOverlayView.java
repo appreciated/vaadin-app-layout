@@ -1,11 +1,11 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class SearchOverlayView<T> extends IronOverlay {
     private final TextField searchField = new TextField();
-    private final Button closeButton = new Button(VaadinIcon.ARROW_LEFT.create());
+    private final IconButton closeButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
     private VerticalLayout results = new VerticalLayout();
     private HorizontalLayout searchFieldWrapper = new HorizontalLayout(closeButton, searchField);
     private VerticalLayout wrapper = new VerticalLayout(searchFieldWrapper, results);
@@ -46,7 +46,6 @@ public class SearchOverlayView<T> extends IronOverlay {
                 .set("z-index", "1");
         searchFieldWrapper.setWidthFull();
         searchFieldWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        searchFieldWrapper.setSpacing(false);
         searchField.getStyle().set("--lumo-contrast-10pct", "transparent");
         searchField.addValueChangeListener(event -> {
             results.removeAll();
@@ -70,9 +69,6 @@ public class SearchOverlayView<T> extends IronOverlay {
         results.setSizeFull();
         results.setMargin(false);
         results.getStyle().set("overflow", "auto");
-        closeButton.setWidth("var(--app-bar-height)");
-        closeButton.setHeight("var(--app-bar-height)");
-        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         closeButton.addClickListener(event -> {
             searchField.clear();
             close();

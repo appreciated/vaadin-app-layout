@@ -1,12 +1,11 @@
 package com.github.appreciated.app.layout.addons.search;
 
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.vaadin.flow.component.*;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 
-public class SearchButton extends Button {
+public class SearchButton extends IconButton {
     private final SearchView searchView;
 
     public SearchButton() {
@@ -19,7 +18,6 @@ public class SearchButton extends Button {
 
     public SearchButton(Component icon) {
         super(icon);
-        addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
         searchView = new SearchView();
         addClickListener(event -> searchView.open());
     }

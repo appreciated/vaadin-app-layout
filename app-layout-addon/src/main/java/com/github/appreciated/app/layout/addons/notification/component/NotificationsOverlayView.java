@@ -2,12 +2,12 @@ package com.github.appreciated.app.layout.addons.notification.component;
 
 import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.card.Card;
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class NotificationsOverlayView<T extends Notification> extends IronOverlay {
 
-    private final Button backButton = new Button(VaadinIcon.ARROW_LEFT.create());
-    private final Button clearButton = new Button(VaadinIcon.CHECK.create());
+    private final IconButton backButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
+    private final IconButton clearButton = new IconButton(VaadinIcon.CHECK.create());
     private Component overlayTitle = new Label("Notifications");
     private VerticalLayout results = new VerticalLayout();
     private HorizontalLayout appBarWrapper = new HorizontalLayout(backButton, overlayTitle, clearButton);
@@ -43,13 +43,6 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
                 .set("z-index", "1");
         appBarWrapper.setWidthFull();
         appBarWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        appBarWrapper.setSpacing(false);
-        backButton.setWidth("var(--app-bar-height)");
-        backButton.setHeight("var(--app-bar-height)");
-        backButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        clearButton.setWidth("var(--app-bar-height)");
-        clearButton.setHeight("var(--app-bar-height)");
-        clearButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         wrapper.setSizeFull();
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setMargin(false);

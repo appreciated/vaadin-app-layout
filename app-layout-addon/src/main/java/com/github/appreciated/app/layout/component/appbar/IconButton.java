@@ -1,9 +1,10 @@
 package com.github.appreciated.app.layout.component.appbar;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
@@ -11,25 +12,30 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class IconButton extends Button {
 
+    public IconButton(Component icon) {
+        super(icon);
+        init();
+    }
+
+    public IconButton(Component icon, ComponentEventListener<ClickEvent<Button>> clickListener) {
+        super(icon, clickListener);
+        init();
+    }
+
     public IconButton(Icon icon) {
-        this(icon, null);
+        super(icon);
+        init();
     }
 
     public IconButton(Icon icon, ComponentEventListener<ClickEvent<Button>> listener) {
-        setWidth("var(--app-layout-menu-button-height)");
-        setHeight("var(--app-layout-menu-button-height)");
-        setIcon(icon);
-        if (listener != null) {
-            addClickListener(listener);
-        }
-        getElement().getStyle()
-                .set("width", "100%")
-                .set("height", "100%");
+        super(icon, listener);
+        init();
     }
 
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
+    private void init() {
+        setWidth("var(--app-layout-menu-button-height)");
+        setHeight("var(--app-layout-menu-button-height)");
+        addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
     }
 
 }

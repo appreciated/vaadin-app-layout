@@ -5,11 +5,11 @@ import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
 import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
 import com.github.appreciated.app.layout.component.appbar.ComponentBadgeWrapper;
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
@@ -31,8 +31,7 @@ public class NotificationButton<T extends Notification> extends ComponentBadgeWr
     }
 
     public NotificationButton(Component icon) {
-        super(new Button(icon));
-        getWrappedComponent().addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());
+        super(new IconButton(icon));
         notificationOverlay = new NotificationsOverlayView<>();
         addClickListener(event -> notificationOverlay.open());
     }
