@@ -41,7 +41,7 @@ public interface TopLayouts {
         private Component title;
         private boolean upNavigationEnabled;
 
-        Top() {
+        public Top() {
             contentPanel.setSizeFull();
             getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
             appBar.add(titleWrapper, paperTabWrapper, appBarElementWrapper);
@@ -206,7 +206,7 @@ public interface TopLayouts {
         private HasElement content;
         private boolean upNavigationEnabled;
 
-        TopLarge() {
+        public TopLarge() {
             contentPanel.setSizeFull();
 
             paperTabWrapper.getElement().getStyle()
