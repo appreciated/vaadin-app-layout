@@ -26,6 +26,7 @@ public class SearchIntegrationTest extends BaseTest {
     private void openSearch() {
         Selenide.$("#it-test-search-field").shouldNot(Condition.visible);
         Selenide.$("#it-test-search-button").click();
+        sleep(1000);
         Selenide.$("#it-test-search-field").should(Condition.visible);
         Selenide.executeJavaScript("document.getElementById(\"it-test-search-field\").value = \"Header\"");
         sleep(1000);
