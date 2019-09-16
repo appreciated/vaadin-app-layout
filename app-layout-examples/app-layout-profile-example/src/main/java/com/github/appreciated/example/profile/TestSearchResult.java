@@ -1,4 +1,4 @@
-package com.github.appreciated.example.search;
+package com.github.appreciated.example.profile;
 
 public class TestSearchResult {
     private final String header;

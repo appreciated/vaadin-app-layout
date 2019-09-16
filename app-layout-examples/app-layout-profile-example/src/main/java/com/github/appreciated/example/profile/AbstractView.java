@@ -1,4 +1,4 @@
-package com.github.appreciated.example.search;
+package com.github.appreciated.example.profile;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

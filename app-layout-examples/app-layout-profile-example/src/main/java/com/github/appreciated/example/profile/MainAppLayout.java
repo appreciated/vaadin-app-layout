@@ -1,4 +1,4 @@
-package com.github.appreciated.example.search;
+package com.github.appreciated.example.profile;
 
 import com.github.appreciated.app.layout.addons.profile.ProfileButton;
 import com.github.appreciated.app.layout.addons.profile.builder.AppBarProfileButtonBuilder;

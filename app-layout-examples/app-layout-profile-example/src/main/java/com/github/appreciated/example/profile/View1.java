@@ -1,4 +1,4 @@
-package com.github.appreciated.example.search;
+package com.github.appreciated.example.profile;
 
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
