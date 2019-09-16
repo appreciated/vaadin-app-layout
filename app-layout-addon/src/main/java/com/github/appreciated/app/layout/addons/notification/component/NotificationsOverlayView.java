@@ -40,6 +40,7 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
                 .set("height", "var(--app-bar-height)")
                 .set("box-shadow", "var(--app-layout-bar-shadow)")
                 .set("padding", "var(--app-layout-bar-padding)")
+                .set("flex-shrink", "0")
                 .set("z-index", "1");
         appBarWrapper.setWidthFull();
         appBarWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
