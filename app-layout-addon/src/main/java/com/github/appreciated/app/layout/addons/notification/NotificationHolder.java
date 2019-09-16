@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.addons.notification.interfaces.Notifica
 import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
+import com.vaadin.flow.component.UI;
 
 import java.io.Serializable;
 import java.util.*;
@@ -69,6 +70,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
      * @param notifications
      */
     public void add(T... notifications) {
+        if (UI.getCurrent() == null) {
+            throw new IllegalStateException("It seems like NotificationHolder::add wasn't called from the UI Thread. This should be done by using \"UI.getCurrent().access(() -> {})\"");
+        }
         Arrays.stream(notifications).forEach(notification -> {
             recentNotification = notification;
             this.notifications.add(notification);
@@ -97,6 +101,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     }
 
     public void updateBadgeCaptions() {
+        if (UI.getCurrent() == null) {
+            throw new IllegalStateException("It seems like NotificationHolder::updateBadgeCaptions wasn't called from the UI Thread. This should be done by using \"UI.getCurrent().access(() -> {})\"");
+        }
         badgeHolderComponents.forEach(this::updateBadgeCaption);
     }
 
@@ -151,6 +158,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     }
 
     public void clearNotifications() {
+        if (UI.getCurrent() == null) {
+            throw new IllegalStateException("It seems like NotificationHolder::clearNotifications wasn't called from the UI Thread. This should be done by using \"UI.getCurrent().access(() -> {})\"");
+        }
         notifications.clear();
         notifyListeners();
         updateBadgeCaptions();
@@ -201,6 +211,9 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     }
 
     public void remove(T notification) {
+        if (UI.getCurrent() == null) {
+            throw new IllegalStateException("It seems like NotificationHolder::remove wasn't called from the UI Thread. This should be done by using \"UI.getCurrent().access(() -> {})\"");
+        }
         notifications.remove(notification);
         notifyListeners();
         notifyRemoveListeners(notification);
