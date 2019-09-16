@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.addons.notification.component;
 
+import com.github.appreciated.app.layout.addons.NotificationComponent;
 import com.github.appreciated.app.layout.addons.notification.NotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
 import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
@@ -16,7 +17,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  * indicator how many new notifications are available
  */
 
-public class NotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> {
+public class NotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> implements NotificationComponent {
 
     private final NotificationsOverlayView<T> notificationOverlay;
     private NotificationHolder<T> holder;
@@ -39,32 +40,17 @@ public class NotificationButton<T extends Notification> extends ComponentBadgeWr
     public NotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
         this(icon.create());
         this.holder = holder;
+        notificationOverlay.setHolder(holder);
         setClassName("app-bar-notification-button");
-
         holder.addNotificationsChangeListener(new NotificationsChangeListener<T>() {
             @Override
             public void onNotificationChanges(NotificationHolder<T> holder) {
                 refreshNotifications();
             }
-
-            @Override
-            public void onNotificationAdded(T notification) {
-                refreshNotifications();
-                if (!notificationOverlay.getOpened()) {
-                    com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(holder.getComponent(notification));
-                    notificationView.setPosition(com.vaadin.flow.component.notification.Notification.Position.TOP_END);
-                    notificationView.setDuration(2000);
-                    notificationView.open();
-                }
-            }
-
-            @Override
-            public void onNotificationRemoved(T notification) {
-
-            }
         });
         holder.bind(getBadge());
-        notificationOverlay.setHolder(holder);
+        holder.registerNotificationComponent(this);
+        refreshNotifications();
     }
 
     public void refreshNotifications() {
@@ -85,5 +71,10 @@ public class NotificationButton<T extends Notification> extends ComponentBadgeWr
 
     public NotificationsOverlayView<T> getNotificationOverlay() {
         return notificationOverlay;
+    }
+
+    @Override
+    public boolean isDisplayingNotifications() {
+        return notificationOverlay.getOpened();
     }
 }

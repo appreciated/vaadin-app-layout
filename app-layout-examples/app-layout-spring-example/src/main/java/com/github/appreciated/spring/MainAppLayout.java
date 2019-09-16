@@ -48,12 +48,12 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                                 new LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), GridTest.class),
                                 LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
                                         .add(LeftSubMenuBuilder
-                                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                                .add(new LeftNavigationItem("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class),
-                                                        new LeftNavigationItem("Contact", VaadinIcon.CONNECT.create(), View3.class),
-                                                        new LeftNavigationItem("More", VaadinIcon.COG.create(), View4.class))
-                                                .build())
-                                        .add(new LeftNavigationItem("Contact1", VaadinIcon.CONNECT.create(), View3.class),
+                                                        .get("My Submenu", VaadinIcon.PLUS.create())
+                                                        .add(new LeftNavigationItem("Charts", VaadinIcon.SPLINE_CHART.create(), View2.class),
+                                                                new LeftNavigationItem("Contact", VaadinIcon.CONNECT.create(), View3.class),
+                                                                new LeftNavigationItem("More", VaadinIcon.COG.create(), View4.class))
+                                                        .build(),
+                                                new LeftNavigationItem("Contact1", VaadinIcon.CONNECT.create(), View3.class),
                                                 new LeftNavigationItem("More1", VaadinIcon.COG.create(), View5.class))
                                         .build(),
                                 menuEntry)

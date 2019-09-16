@@ -45,11 +45,11 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
                                 )
                                 .add(home,
                                         LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
-                                                .add(new LeftNavigationItem("View2", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)))
-                                                .add(new LeftNavigationItem("View3", VaadinIcon.CONNECT.create(), getViewForI(3)))
-                                                .add(new LeftNavigationItem("View4", VaadinIcon.COG.create(), getViewForI(4)))
-                                                .add(new LeftNavigationItem("View5", VaadinIcon.CONNECT.create(), getViewForI(5)))
-                                                .add(new LeftNavigationItem("View6", VaadinIcon.COG.create(), getViewForI(6)))
+                                                .add(new LeftNavigationItem("View2", VaadinIcon.SPLINE_CHART.create(), getViewForI(2)),
+                                                        new LeftNavigationItem("View3", VaadinIcon.CONNECT.create(), getViewForI(3)),
+                                                        new LeftNavigationItem("View4", VaadinIcon.COG.create(), getViewForI(4)),
+                                                        new LeftNavigationItem("View5", VaadinIcon.CONNECT.create(), getViewForI(5)),
+                                                        new LeftNavigationItem("View6", VaadinIcon.COG.create(), getViewForI(6)))
                                                 .build(),
                                         new LeftNavigationItem("View7", VaadinIcon.COG.create(), getViewForI(7)),
                                         new LeftNavigationItem("View8", VaadinIcon.COG.create(), getViewForI(8)),

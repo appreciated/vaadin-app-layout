@@ -19,6 +19,8 @@
     </prerequisites>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <vaadin.version>14.0.4</vaadin.version>
     </properties>
 

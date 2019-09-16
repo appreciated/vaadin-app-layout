@@ -26,8 +26,10 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
         AppLayoutBuilder builder = AppLayoutBuilder.get(getVariant())
                 .withTitle("App Layout")
                 .withIcon("frontend/images/logo.png")
-                .withAppBar(
-                        AppBarBuilder.get().add(new NotificationButton(VaadinIcon.BELL, notificationHolder)).build())
+                .withAppBar(AppBarBuilder.get()
+                        .add(new NotificationButton<>(VaadinIcon.BELL, notificationHolder))
+                        .build()
+                )
                 .withAppMenu(
                         LeftAppMenuBuilder.get()
                                 .addToSection(Section.HEADER,
@@ -36,11 +38,11 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
                                         }))
                                 .add(home,
                                         LeftSubMenuBuilder.get("My Submenu", VaadinIcon.PLUS.create())
-                                                .add(new LeftNavigationItem(getViewForI(2)))
-                                                .add(new LeftNavigationItem(getViewForI(3)))
-                                                .add(new LeftNavigationItem(getViewForI(4)))
-                                                .add(new LeftNavigationItem(getViewForI(5)))
-                                                .add(new LeftNavigationItem(getViewForI(6)))
+                                                .add(new LeftNavigationItem(getViewForI(2)),
+                                                        new LeftNavigationItem(getViewForI(3)),
+                                                        new LeftNavigationItem(getViewForI(4)),
+                                                        new LeftNavigationItem(getViewForI(5)),
+                                                        new LeftNavigationItem(getViewForI(6)))
                                                 .build(),
                                         new LeftNavigationItem(getViewForI(7)),
                                         new LeftNavigationItem(getViewForI(8)),

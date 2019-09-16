@@ -6,6 +6,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AppBarBuilder implements ComponentBuilder<FlexLayout> {
@@ -19,8 +20,8 @@ public class AppBarBuilder implements ComponentBuilder<FlexLayout> {
         return new AppBarBuilder();
     }
 
-    public AppBarBuilder add(Component component) {
-        components.add(component);
+    public AppBarBuilder add(Component... component) {
+        components.addAll(Arrays.asList(component));
         return this;
     }
 

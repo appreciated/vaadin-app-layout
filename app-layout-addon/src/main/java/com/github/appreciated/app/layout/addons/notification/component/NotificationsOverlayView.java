@@ -12,7 +12,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.server.Command;
 
 import java.util.ArrayList;
 
@@ -23,17 +22,10 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
     private Button closeButton = new Button();
     private HorizontalLayout wrapper = new HorizontalLayout(results);
     private VerticalLayout closeWrapper = new VerticalLayout(closeButton, wrapper);
-    private Boolean showAll = Boolean.FALSE;
     private NotificationHolder holder;
     private String noNotificationText = "No Notifications";
-    private String showAllText = "Show all";
-    private Button showAllButton;
     private Label noNotificationsLabel;
     private ArrayList<Component> views = new ArrayList<>();
-    private Command showAllCommand = () -> {
-        showAll = Boolean.TRUE;
-        initViews();
-    };
 
     public NotificationsOverlayView() {
         getElement().getStyle().set("width", "100%");
@@ -61,6 +53,7 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
         wrapper.getStyle().set("max-width", "100vw");
         results.setSizeFull();
         results.getStyle()
+                .set("max-width", "100%")
                 .set("flex", "0 1 40%")
                 .set("--lumo-size-m", "var(--lumo-size-xl)")
                 .set("--lumo-contrast-10pct", "transparent");
@@ -76,14 +69,6 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
         return wrapper;
     }
 
-    public boolean isShowAll() {
-        return this.showAll;
-    }
-
-    public void setShowAll(boolean showAll) {
-        this.showAll = showAll;
-    }
-
     public void refreshNotificationViews() {
         getResults().removeAll();
         initViews();
@@ -97,15 +82,7 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
     private void initViews() {
         views.clear();
         if (holder.getNotificationSize() > 0) {
-            views.addAll(this.holder.getNotificationCards(showAll));
-
-            if (!showAll && this.holder.getNotificationSize() > 4) {
-                showAllButton = new Button(showAllText);
-                showAllButton.setWidth("100%");
-                showAllButton.setHeight("28px");
-                showAllButton.addClickListener(clickEvent -> showAllCommand.execute());
-                views.add(showAllButton);
-            }
+            views.addAll(this.holder.getNotificationCards());
         } else {
             noNotificationsLabel = new Label(noNotificationText);
             noNotificationsLabel.getStyle().set("color", "var(--app-layout-notification-font-color)")
@@ -120,17 +97,6 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
             wrapper.setWidth("100%");
             wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
             views.add(wrapper);
-        }
-    }
-
-    public void setShowAllCommand(Command showAllCommand) {
-        this.showAllCommand = showAllCommand;
-    }
-
-    public void setShowAllText(String showAllText) {
-        this.showAllText = showAllText;
-        if (this.showAllButton != null) {
-            showAllButton.setText(showAllText);
         }
     }
 

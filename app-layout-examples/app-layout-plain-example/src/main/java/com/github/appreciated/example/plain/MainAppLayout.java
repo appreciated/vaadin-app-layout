@@ -2,6 +2,7 @@ package com.github.appreciated.example.plain;
 
 import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
+import com.github.appreciated.app.layout.addons.notification.entity.DefaultNotification;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -30,8 +31,13 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
 
     public MainAppLayout() {
         DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-        notifications.addClickListener(notification -> {/* ... */});
-
+        notifications.addClickListener(notification -> {/* Use the listener to react on the click on the notification */});
+        notifications.add(
+                new DefaultNotification("Header1", "Very long description 1"),
+                new DefaultNotification("Header2", "Very long description 2"),
+                new DefaultNotification("Header3", "Very long description 3"),
+                new DefaultNotification("Header4", "Very long description 4")
+        );
         LeftNavigationItem menuEntry = new LeftNavigationItem("Menu", VaadinIcon.MENU.create(), View6.class);
         DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
         badge.bind(menuEntry.getBadge());

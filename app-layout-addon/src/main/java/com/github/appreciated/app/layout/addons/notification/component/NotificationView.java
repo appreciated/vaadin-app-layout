@@ -69,6 +69,7 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
         wrapper.setPadding(false);
         wrapper.setSpacing(false);
         wrapper.getElement().setAttribute("theme", "spacing-s");
+        wrapper.getStyle().set("overflow", "hidden");
         add(wrapper);
 
         setNotificationListener(listener);
@@ -80,7 +81,7 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
                     }
                 });
                 dismissButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-                dismissButton.setHeight("unset");
+                dismissButton.setSizeUndefined();
                 add(dismissButton);
                 getElement().getStyle().set("padding-right", "0");
             }

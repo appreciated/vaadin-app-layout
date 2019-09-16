@@ -119,4 +119,12 @@ public abstract class BaseTest {
     public void openWebsite(String relativePath) {
         open(getWebsiteUrl() + "/" + relativePath);
     }
+
+    public void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

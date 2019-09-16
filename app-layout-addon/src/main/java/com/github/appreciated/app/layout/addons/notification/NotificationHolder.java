@@ -1,5 +1,6 @@
 package com.github.appreciated.app.layout.addons.notification;
 
+import com.github.appreciated.app.layout.addons.NotificationComponent;
 import com.github.appreciated.app.layout.addons.notification.interfaces.Notification;
 import com.github.appreciated.app.layout.addons.notification.interfaces.NotificationsChangeListener;
 import com.github.appreciated.app.layout.component.builder.interfaces.PairComponentFactory;
@@ -26,6 +27,7 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     private Notification recentNotification;
     private List<HasText> badgeHolderComponents = new ArrayList<>();
     private Comparator<T> comparator = Comparator.reverseOrder();
+    private ArrayList<NotificationComponent> notificationComponents = new ArrayList<>();
 
     public NotificationHolder(NotificationClickListener<T> listener, T... notifications) {
         this(listener);
@@ -58,75 +60,40 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
 
     public NotificationHolder(T... notifications) {
         this((NotificationClickListener<T>) null);
-        this.notifications.addAll(Arrays.asList(notifications));
+        this.add(notifications);
     }
 
-    public NotificationHolder(Collection<T> notifications) {
-        this((NotificationClickListener<T>) null);
-        this.notifications.addAll(notifications);
+    /**
+     * Needs to be called from UI Thread otherwise there will be issues.
+     *
+     * @param notifications
+     */
+    public void add(T... notifications) {
+        Arrays.stream(notifications).forEach(notification -> {
+            recentNotification = notification;
+            this.notifications.add(notification);
+            notifyAddListeners(notification);
+            if (notificationComponents.stream().noneMatch(NotificationComponent::isDisplayingNotifications)) {
+                com.vaadin.flow.component.notification.Notification notificationView = new com.vaadin.flow.component.notification.Notification(getComponent(notification));
+                notificationView.setPosition(com.vaadin.flow.component.notification.Notification.Position.TOP_END);
+                notificationView.setDuration(2000);
+                notificationView.open();
+            }
+        });
+        notifyListeners();
+        updateBadgeCaptions();
     }
 
-    public NotificationHolder(NotificationClickListener<T> listener, Collection<T> notifications) {
-        this(listener);
-        this.notifications.addAll(notifications);
-    }
-
-    public int getNotificationSize() {
-        return notifications.size();
-    }
-
-    public List<Component> getNotifications(boolean showAll) {
-        List<T> components = getNotifications();
-        if (!showAll) {
-            components = components.size() > 4 ? components.subList(0, 4) : components;
-        }
-        return components.stream().sorted(comparator).map(this::getComponent).collect(Collectors.toList());
-    }
-
-    public List<T> getNotifications() {
-        notifications.sort(comparator);
-        return notifications;
+    private void notifyAddListeners(T notification) {
+        notificationsChangeListeners.forEach(listener -> listener.onNotificationAdded(notification));
     }
 
     public Component getComponent(T message) {
         return componentProvider.getComponent(this, message);
     }
 
-    public List<Component> getNotificationCards(boolean showAll) {
-        List<T> components = getNotifications();
-        if (!showAll) {
-            components = components.size() > 4 ? components.subList(0, 4) : components;
-        }
-        return components.stream().sorted(comparator).map(this::getCardComponent).collect(Collectors.toList());
-    }
-
-    public Component getCardComponent(T message) {
-        return cardComponentProvider.getComponent(this, message);
-    }
-
-    /**
-     * Needs to be called from UI Thread otherwise there will be issues.
-     *
-     * @param notification
-     */
-    public void add(T... notification) {
-        Arrays.stream(notification).forEach(this::addNotification);
-    }
-
-    private void addNotification(T notification) {
-        recentNotification = notification;
-        notifications.add(notification);
-        notifyListeners();
-        notifyAddListeners(notification);
-        updateBadgeCaptions();
-    }
-
     private void notifyListeners() {
         notificationsChangeListeners.forEach(listener -> listener.onNotificationChanges(this));
-    }
-
-    private void notifyAddListeners(T notification) {
-        notificationsChangeListeners.forEach(listener -> listener.onNotificationAdded(notification));
     }
 
     public void updateBadgeCaptions() {
@@ -153,6 +120,34 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
 
     public int getUnreadNotifications() {
         return (int) notifications.stream().filter(notification -> !notification.isRead()).count();
+    }
+
+    public NotificationHolder(Collection<T> notifications) {
+        this((NotificationClickListener<T>) null);
+        this.notifications.addAll(notifications);
+    }
+
+    public NotificationHolder(NotificationClickListener<T> listener, Collection<T> notifications) {
+        this(listener);
+        this.notifications.addAll(notifications);
+    }
+
+    public int getNotificationSize() {
+        return notifications.size();
+    }
+
+    public List<Component> getNotificationCards() {
+        List<T> components = getNotifications();
+        return components.stream().sorted(comparator).map(this::getCardComponent).collect(Collectors.toList());
+    }
+
+    public List<T> getNotifications() {
+        notifications.sort(comparator);
+        return notifications;
+    }
+
+    public Component getCardComponent(T message) {
+        return cardComponentProvider.getComponent(this, message);
     }
 
     public void clearNotifications() {
@@ -200,12 +195,12 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
 
     public void onNotificationDismissed(T info) {
         if (!info.isSticky()) {
-            removeNotification(info);
+            remove(info);
         }
         notifyListeners();
     }
 
-    public void removeNotification(T notification) {
+    public void remove(T notification) {
         notifications.remove(notification);
         notifyListeners();
         notifyRemoveListeners(notification);
@@ -219,6 +214,10 @@ public abstract class NotificationHolder<T extends Notification> implements Seri
     public abstract Function<T, String> getDateTimeFormatter();
 
     public abstract void setDateTimeFormatter(Function<T, String> formatter);
+
+    public void registerNotificationComponent(NotificationComponent notificationButton) {
+        this.notificationComponents.add(notificationButton);
+    }
 
     public interface NotificationClickListener<T> {
         void onNotificationClicked(T notification);
