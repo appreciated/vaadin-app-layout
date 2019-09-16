@@ -7,6 +7,7 @@ import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -17,11 +18,12 @@ import java.util.ArrayList;
 
 public class NotificationsOverlayView<T extends Notification> extends IronOverlay {
 
+    private final Button backButton = new Button(VaadinIcon.ARROW_LEFT.create());
+    private final Button clearButton = new Button(VaadinIcon.CHECK.create());
+    private Component overlayTitle = new Label("Notifications");
     private VerticalLayout results = new VerticalLayout();
-
-    private Button closeButton = new Button();
-    private HorizontalLayout wrapper = new HorizontalLayout(results);
-    private VerticalLayout closeWrapper = new VerticalLayout(closeButton, wrapper);
+    private HorizontalLayout appBarWrapper = new HorizontalLayout(backButton, overlayTitle, clearButton);
+    private VerticalLayout wrapper = new VerticalLayout(appBarWrapper, results);
     private NotificationHolder holder;
     private String noNotificationText = "No Notifications";
     private Label noNotificationsLabel;
@@ -29,35 +31,41 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
 
     public NotificationsOverlayView() {
         getElement().getStyle().set("width", "100%");
+        overlayTitle.getElement().getStyle().set("width", "100%");
         setVerticalAlign(VerticalOrientation.TOP);
-        closeWrapper.getStyle()
-                .set("height", "var(--app-bar-height)");
-        closeButton.setIcon(VaadinIcon.CLOSE.create());
-        closeButton.addClickListener(buttonClickEvent -> close());
-        closeWrapper.setAlignItems(FlexComponent.Alignment.END);
-        closeWrapper.setHeight("100vh");
-        closeWrapper.setMargin(false);
-        closeWrapper.setPadding(false);
-        closeButton.getStyle()
+        backButton.addClickListener(buttonClickEvent -> close());
+        clearButton.addClickListener(buttonClickEvent -> holder.clearNotifications());
+        appBarWrapper.getStyle()
                 .set("background", "var(--app-layout-bar-background-base-color)")
-                .set("height", "64px")
-                .set("width", "64px")
-                .set("border-radius", "100px")
-                .set("margin-right", "14px")
-                .set("margin-top", "26px");
+                .set("height", "var(--app-bar-height)")
+                .set("box-shadow", "var(--app-layout-bar-shadow)")
+                .set("padding", "var(--app-layout-bar-padding)")
+                .set("z-index", "1");
+        appBarWrapper.setWidthFull();
+        appBarWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+        appBarWrapper.setSpacing(false);
+        backButton.setWidth("var(--app-bar-height)");
+        backButton.setHeight("var(--app-bar-height)");
+        backButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        clearButton.setWidth("var(--app-bar-height)");
+        clearButton.setHeight("var(--app-bar-height)");
+        clearButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         wrapper.setSizeFull();
+        wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setMargin(false);
         wrapper.setPadding(false);
         wrapper.setSpacing(false);
-        wrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-        wrapper.getStyle().set("max-width", "100vw");
-        results.setSizeFull();
+        wrapper.getStyle()
+                .set("max-width", "100vw")
+                .set("height", "100vh");
         results.getStyle()
+                .set("overflow-y", "auto")
                 .set("max-width", "100%")
-                .set("flex", "0 1 40%")
+                .set("min-width", "40%")
                 .set("--lumo-size-m", "var(--lumo-size-xl)")
                 .set("--lumo-contrast-10pct", "transparent");
-        add(closeWrapper);
+        results.setHeightFull();
+        add(wrapper);
     }
 
     @Override
@@ -65,7 +73,7 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
         super.open();
     }
 
-    public HorizontalLayout getWrapper() {
+    public VerticalLayout getWrapper() {
         return wrapper;
     }
 
@@ -100,14 +108,31 @@ public class NotificationsOverlayView<T extends Notification> extends IronOverla
         }
     }
 
-    public void setNoNotificationText(String noNotificationText) {
+    public void setNoNotificationsText(String noNotificationText) {
         this.noNotificationText = noNotificationText;
         if (this.noNotificationsLabel != null) {
             noNotificationsLabel.setText(noNotificationText);
         }
     }
 
+    public Component getOverlayTitle() {
+        return overlayTitle;
+    }
+
+    public void setOverlayTitle(Component overlayTitle) {
+        appBarWrapper.replace(this.overlayTitle, overlayTitle);
+        this.overlayTitle = overlayTitle;
+    }
+
     public void setHolder(NotificationHolder<T> holder) {
         this.holder = holder;
+    }
+
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public Button getClearButton() {
+        return clearButton;
     }
 }

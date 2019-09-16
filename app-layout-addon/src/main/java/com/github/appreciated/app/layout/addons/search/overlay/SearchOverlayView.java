@@ -82,14 +82,16 @@ public class SearchOverlayView<T> extends IronOverlay {
         wrapper.setMargin(false);
         wrapper.setPadding(false);
         wrapper.setSpacing(false);
-        wrapper.getStyle().set("max-width", "100vw");
+        wrapper.getStyle()
+                .set("max-width", "100vw")
+                .set("height", "100vh");
         results.getStyle()
-                .set("width", "100%")
-                .set("height", "100vh")
-                .set("min-width", "400px")
-                .set("max-width", "30vw")
+                .set("overflow-y", "auto")
+                .set("max-width", "100%")
+                .set("min-width", "40%")
                 .set("--lumo-size-m", "var(--lumo-size-xl)")
                 .set("--lumo-contrast-10pct", "transparent");
+        results.setHeightFull();
         add(wrapper);
     }
 
