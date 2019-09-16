@@ -7,7 +7,7 @@ import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 /**
- * The interface every {@link Behaviour} is required
+ * The interface every {@link AppLayout} is required
  * to be implemented to allow any {@link com.github.appreciated.app.layout.component.builder.AppLayoutBuilder} to build it.
  */
 
@@ -17,9 +17,9 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     Component getTitleComponent();
 
-    AppDrawer getDrawer();
-
     void setTitleComponent(Component titleComponent);
+
+    AppDrawer getDrawer();
 
     FlexLayout getTitleWrapper();
 
@@ -27,9 +27,9 @@ public interface AppLayoutElementBase extends NavigationElementContainer {
 
     void setAppLayoutContent(HasElement content);
 
-    void setUpNavigationEnabled(boolean enable);
-
     boolean isUpNavigationEnabled();
+
+    void setUpNavigationEnabled(boolean enable);
 
     void showUpNavigation(boolean visible);
 
