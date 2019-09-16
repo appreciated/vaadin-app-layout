@@ -29,8 +29,7 @@ public class NotificationIntegrationTest extends BaseTest {
         sleep(500);
         openMenu();
         sleep(1000);
-        $$("vaadin-button").get(3).click();
-
+        $$("vaadin-button").get(4).click();
         closeMenu();
         Assert.assertEquals("4", getShadowRootElement("paper-badge").findElement(byId("badge-text")).getText());
     }
