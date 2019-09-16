@@ -30,6 +30,7 @@
         <module>app-layout-plain-example</module>
         <module>app-layout-search-example</module>
         <module>app-layout-profile-example</module>
+        <module>app-layout-notification-example</module>
         <module>app-layout-spring-example</module>
         <module>app-layout-sticky-footer-example</module>
         <module>app-layout-theme-example</module>
