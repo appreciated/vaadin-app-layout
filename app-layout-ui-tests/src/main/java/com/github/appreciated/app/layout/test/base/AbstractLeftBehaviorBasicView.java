@@ -1,6 +1,5 @@
 package com.github.appreciated.app.layout.test.base;
 
-import com.github.appreciated.app.layout.addons.notification.DefaultNotificationHolder;
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
 import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
@@ -20,12 +19,9 @@ public abstract class AbstractLeftBehaviorBasicView extends AbstractLeftBehavior
     private final FlexLayout appBar;
 
     public AbstractLeftBehaviorBasicView() {
-        notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
         badgeHolder = new DefaultBadgeHolder();
-        reloadNotifications();
         LeftNavigationItem home = new LeftNavigationItem("View1", VaadinIcon.HOME.create(), getViewForI(1));
         LeftNavigationItem menu = new LeftNavigationItem("View9", VaadinIcon.MENU.create(), getViewForI(9));
-        notificationHolder.bind(home.getBadge());
         badgeHolder.bind(menu.getBadge());
 
         appBar = AppBarBuilder.get()

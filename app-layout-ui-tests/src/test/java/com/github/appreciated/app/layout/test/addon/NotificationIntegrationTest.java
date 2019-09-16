@@ -20,13 +20,17 @@ public class NotificationIntegrationTest extends BaseTest {
         sleep(3000);
         Assert.assertEquals("5", getShadowRootElement("paper-badge").findElement(byId("badge-text")).getText());
         openMenu();
+        sleep(500);
         closeMenu();
+        sleep(500);
         openMenu();
+        sleep(500);
         closeMenu();
-
+        sleep(500);
         openMenu();
         sleep(1000);
         $$("vaadin-button").get(3).click();
+
         closeMenu();
         Assert.assertEquals("4", getShadowRootElement("paper-badge").findElement(byId("badge-text")).getText());
     }

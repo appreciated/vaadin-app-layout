@@ -18,7 +18,6 @@ public abstract class AbstractLeftBehaviorAnnotationView extends AbstractLeftBeh
     public AbstractLeftBehaviorAnnotationView() {
         notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
         badgeHolder = new DefaultBadgeHolder();
-        reloadNotifications();
         LeftNavigationItem home = new LeftNavigationItem(getViewForI(1));
         LeftNavigationItem menu = new LeftNavigationItem(getViewForI(9));
         notificationHolder.bind(home.getBadge());
