@@ -17,6 +17,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.spring.annotation.UIScope;
+import org.springframework.stereotype.Component;
 
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
@@ -24,6 +26,8 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
+@Component
+@UIScope
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
