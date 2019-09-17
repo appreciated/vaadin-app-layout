@@ -10,19 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = "", layout = MainAppLayout.class)
 public class View1 extends VerticalLayout {
 
-    public View1(@Autowired MessageBean bean) {
+    public View1(@Autowired MessageBean bean, @Autowired MainAppLayout appLayout) {
 
     	Button button = new Button("Click me",
                 e -> Notification.show(bean.getMessage()));
         add(button);
 
-        add(getLabel());
-        add(getLabel());
-        add(getLabel());
-        add(getLabel());
-        add(getLabel());
-        add(getLabel());
+        // can access the AppLayout instance via dependency injection
+        int notificationCount = appLayout.getNotifications().getNotificationSize();
+        add(new Paragraph("You have "+notificationCount+" notification(s)"));
 
+        add(getLabel());
+        add(getLabel());
+        add(getLabel());
+        add(getLabel());
+        add(getLabel());
+        add(getLabel());
 
     }
 
