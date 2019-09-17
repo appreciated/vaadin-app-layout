@@ -26,8 +26,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
-@Component
-@UIScope
+@Component @UIScope // optional but useful; allows access to this instance from views, see View1.
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
     private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
