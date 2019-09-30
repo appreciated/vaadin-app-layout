@@ -214,32 +214,33 @@ public interface TopLayouts {
                     .set("flex-grow", "1")
                     .set("flex-shrink", "1")
                     .set("align-self", "flex-end");
-            paperTabWrapper.setWidth("100%");
+            paperTabWrapper.setWidthFull();
             paperTabWrapper.setHeight("var(--app-layout-bar-height)");
             paperTabWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
             getElement().getClassList().addAll(Arrays.asList("app-layout-behaviour-" + getStyleName(), "app-layout"));
             appBar.add(titleWrapper, appBarElementWrapper);
             appBar.setFlexGrow(1.0, titleWrapper);
-            appBar.setWidth("100%");
-            appBar.setHeight("100%");
+            appBar.setWidthFull();
+            appBar.setHeightFull();
             appBarWrapper.add(appBar, paperTabWrapper);
             appBarWrapper.setMargin(false);
             appBarWrapper.setPadding(false);
             appBarWrapper.setSpacing(false);
             appBarElements = new Div();
-            appBarElements.setHeight("100%");
+            appBarElements.setHeightFull();
             appBarElements.getElement().setAttribute("slot", "app-bar-content");
             contentElement = new Div();
-            contentElement.setHeight("100%");
-            contentElement.setWidth("100%");
+            contentElement.setHeightFull();
+            contentElement.setWidthFull();
             contentElement.getElement().setAttribute("slot", "application-content");
             appBarElements.add(appBarWrapper);
             appBarElementWrapper.setSpacing(false);
             appBarElementWrapper.add(appBarElementContainer);
-            appBarElementContainer.setHeight("100%");
+            appBarElementContainer.setHeightFull();
             appBarElementWrapper.setAlignItems(FlexComponent.Alignment.START);
-            titleWrapper.setHeight("100%");
+            titleWrapper.setHeightFull();
+            titleWrapper.setWidthFull();
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
             titleWrapper.setHeight("var(--app-layout-bar-height)");
 
@@ -304,7 +305,9 @@ public interface TopLayouts {
         }
 
         public void setTitleComponent(Component component) {
-            titleWrapper.add(new HorizontalLayout(component));
+            HorizontalLayout wrapper = new HorizontalLayout(component);
+            wrapper.setWidthFull();
+            titleWrapper.add(wrapper);
             this.title = component;
             titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         }

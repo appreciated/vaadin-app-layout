@@ -43,7 +43,6 @@ html {
     --app-layout-badge-small-height: 5px;
     --app-layout-badge-small-top: 22%;
     --app-layout-badge-small-right: -5px;
-    --app-layout-badge-background: var(--lumo-primary-color);
     --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
     --app-layout-notification-highlight-color: var(--app-layout-primary-color);
     --app-layout-notification-font-color: var(--lumo-body-text-color);
@@ -87,7 +86,6 @@ html {
     --app-layout-app-selected-bg-color: var(--lumo-primary-color-10pct);
     --app-layout-app-color: var(--lumo-secondary-text-color);
     --app-layout-badge-color: var(--app-layout-bar-font-color);
-    --app-layout-badge-background: var(--lumo-primary-color);
     --app-layout-badge-font-color: var(--lumo-primary-contrast-color);
     --app-layout-notification-highlight-color: var(--app-layout-primary-color);
     --app-layout-notification-font-color: var(--lumo-body-text-color);
@@ -114,7 +112,7 @@ body {
     overflow-x: hidden;
 }
 
-iron-collapse-layout[opened] > div > iron-icon {
+iron-collapse-layout[opened] > div > .app-menu-item > .collapse-icon {
     transform: translate(0%, -50%) rotate(180deg) !important;
 }
 
@@ -145,11 +143,15 @@ iron-collapse-layout[opened] > div > iron-icon {
 
 .app-menu-item:hover, .app-menu-item[highlight] {
     background: var(--lumo-primary-color-10pct);
-    color: var(--lumo-primary-color);
 }
 
-.app-menu-item .badge {
+.app-menu-item {
+    color: var(--app-layout-app-color, var(--primary-text-color));
+}
 
+.app-menu-item:hover,
+.app-menu-item[highlight] {
+    color: var(--lumo-primary-color);
 }
 
 .app-menu-item iron-icon {

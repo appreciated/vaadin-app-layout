@@ -112,7 +112,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                 .withDataViewProvider(queryResult -> {
                     RippleClickableCard card = new RippleClickableCard(new Item(queryResult.getHeader(), queryResult.getDescription()));
                     card.setWidthFull();
-                    card.setBackground("var(--lumo-base-color)");
+                    card.setBackground("var(--app-layout-bar-background-base-color)");
                     return card;
                 })
                 .withQueryResultListener(testSearchResult -> Notification.show(testSearchResult.getHeader()))

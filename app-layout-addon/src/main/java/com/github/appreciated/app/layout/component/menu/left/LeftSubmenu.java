@@ -45,6 +45,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
         item.setHighlightAction((routerLink, highlight) -> {
         });
         ironIcon = new IronIcon("vaadin", "chevron-down-small");
+        ironIcon.addClassName("collapse-icon");
 
         ironIcon.getElement().getStyle()
                 .set("fill", "var(--expand-icon-fill-color)")
@@ -55,7 +56,8 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
                 .set("transition", "transform 0.3s ease")
                 .set("pointer-events", "none");
 
-        toggleWrapper.add(item, ironIcon);
+        item.add(ironIcon);
+        toggleWrapper.add(item);
         getContent().getElement().appendChild(toggleWrapper.getElement());
         getContent().addCollapsibleContent(submenuContainer);
         getContent().getElement().getStyle().set("width", "100%");
