@@ -13,6 +13,7 @@ import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigatio
 import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
@@ -27,8 +28,9 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@CssImport("./theming/custom-lumo.css") // You can use css CssImport to manipulate the lumo theme
-@CssImport(value = "./theming/custom-app-layout.css", id = "my-custom-layout", themeFor = "app-layout-left-hybrid")
+@StyleSheet("./theming/custom-lumo.css") // You can use css @StyleSheet to overwrite the css variables of the app-layout
+@CssImport(value = "./theming/custom-app-layout.css", themeFor = LeftLayouts.LeftHybrid.TAG)
+// You can use @CssImport style the app-layout using ThemableMixin
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftHybrid> {
 

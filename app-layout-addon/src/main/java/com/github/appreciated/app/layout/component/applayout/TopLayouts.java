@@ -22,9 +22,11 @@ import java.util.Arrays;
 
 public interface TopLayouts {
 
-    @Tag("app-layout-top")
+    @Tag(Top.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top.js")
     class Top extends AppLayout implements PageConfigurator {
+        public final static String TAG = "app-layout-top";
+
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
         private final Div appBarElements;
         private final Div contentHolder;
@@ -182,9 +184,11 @@ public interface TopLayouts {
         }
     }
 
-    @Tag("app-layout-top-large")
+    @Tag(TopLarge.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top-large.js")
     class TopLarge extends AppLayout implements PageConfigurator {
+        public final static String TAG = "app-layout-top-large";
+
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
         private final VerticalLayout contentPanel = new VerticalLayout();
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();

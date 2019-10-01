@@ -1,23 +1,8 @@
 /*
-Depending on the behaviour you are using you need to use a different "theme-for" attribute value:
-LEFT                                      = theme-for="app-layout-left"
-LEFT_RESPONSIVE                           = theme-for="app-layout-left-hybrid"
-LEFT_HYBRID                               = theme-for="app-layout-left-overlay"
-LEFT_HYBRID_SMALL                         = theme-for="app-layout-left-responsive"
-LEFT_RESPONSIVE_HYBRID                    = theme-for="app-layout-left-responsive-hybrid"
-LEFT_RESPONSIVE_HYBRID_NO_APP_BAR         = theme-for="app-layout-left-responsive-hybrid-no-app-bar"
-LEFT_RESPONSIVE_HYBRID_OVERLAY_NO_APP_BAR = theme-for="app-layout-left-responsive-hybrid-overlay-no-app-bar"
-LEFT_OVERLAY                              = theme-for="app-layout-left-responsive-overlay"
-LEFT_RESPONSIVE_OVERLAY                   = theme-for="app-layout-left-responsive-overlay-no-app-bar"
-LEFT_RESPONSIVE_OVERLAY_NO_APP_BAR        = theme-for="app-layout-left-responsive-small"
-LEFT_RESPONSIVE_SMALL                     = theme-for="app-layout-left-responsive-small-no-app-bar"
-
-TOP                                       = theme-for="app-layout-top"
-TOP_LARGE                                 = theme-for="app-layout-top-large"
-
-Note: setting the "id" attribute is required otherwise it will not work!
+Note that you need to import the css file using the @CssImport annotation (NOT the @StyleSheets).
+ Also sure the right AppLayout TAG for the "themeFor" parameter is being used
+ (f.e. when using LeftLayouts.LeftHybrid -> LeftLayouts.LeftHybrid.TAG)
 */
-
 
 [part="app-bar"] {
     border: 1px solid green;

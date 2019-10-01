@@ -8,173 +8,205 @@ import com.vaadin.flow.component.polymertemplate.Id;
 
 public interface LeftLayouts {
 
-  @Tag("app-layout-left")
-  @JsModule("./com/github/appreciated/app-layout/left/left.js")
-  class Left extends AbstractLeftAppLayoutBase {
 
-      @Override
-      public String getStyleName() {
-          return "left";
-      }
-  }
+    @Tag(Left.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left.js")
+    class Left extends AbstractLeftAppLayoutBase {
 
-  @Tag("app-layout-left-hybrid")
-  @JsModule("./com/github/appreciated/app-layout/left/left-hybrid.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-hybrid.css")
-  class LeftHybrid extends AbstractLeftAppLayoutBase {
+        public final static String TAG = "app-layout-left";
 
-      @Override
-      public String getStyleName() {
-          return "left-hybrid";
-      }
-  }
+        @Override
+        public String getStyleName() {
+            return "left";
+        }
+    }
 
-  class LeftHybridSmall extends LeftHybrid {
+    @Tag(LeftHybrid.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-hybrid.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-hybrid.css")
+    class LeftHybrid extends AbstractLeftAppLayoutBase {
 
-      @Id("drawerLayout")
-      AppDrawerLayout layout;
+        public final static String TAG = "app-layout-left-hybrid";
 
-      public LeftHybridSmall() {
-          layout.getElement().getClassList().add("small");
-          this.getElement().getClassList().add("small");
-      }
+        @Override
+        public String getStyleName() {
+            return "left-hybrid";
+        }
+    }
 
-  }
+    class LeftHybridSmall extends LeftHybrid {
 
-  @Tag("app-layout-left-overlay")
-  @JsModule("./com/github/appreciated/app-layout/left/left-overlay.js")
-  class LeftOverlay extends AbstractLeftAppLayoutBase {
+        public final static String TAG = LeftHybrid.TAG;
 
-      @Override
-      public String getStyleName() {
-          return "left-overlay";
-      }
-  }
+        @Id("drawerLayout")
+        AppDrawerLayout layout;
 
-  abstract class AbstractLeftResponsive extends AbstractLeftAppLayoutBase {
+        public LeftHybridSmall() {
+            layout.getElement().getClassList().add("small");
+            this.getElement().getClassList().add("small");
+        }
 
-      /**
-       * Sets the responsive width.
-       *
-       * @param width width in pixels
-       */
-      public void setResponsiveWidth(String width) {
-          getElement().setProperty("responsiveWidth", width);
-      }
+    }
 
-  }
+    @Tag(LeftOverlay.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-overlay.js")
+    class LeftOverlay extends AbstractLeftAppLayoutBase {
+        public final static String TAG = "app-layout-left-overlay";
 
-  @Tag("app-layout-left-responsive")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive.js")
-  class LeftResponsive extends AbstractLeftResponsive {
+        @Override
+        public String getStyleName() {
+            return "left-overlay";
+        }
+    }
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive";
-      }
-  }
+    abstract class AbstractLeftResponsive extends AbstractLeftAppLayoutBase {
 
-  @Tag("app-layout-left-responsive-double")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-double.js")
-  class LeftResponsiveDouble extends AbstractLeftResponsive {
-      @Override
-      public String getStyleName() {
+        /**
+         * Sets the responsive width.
+         *
+         * @param width width in pixels
+         */
+        public void setResponsiveWidth(String width) {
+            getElement().setProperty("responsiveWidth", width);
+        }
+
+    }
+
+    @Tag(LeftResponsive.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive.js")
+    class LeftResponsive extends AbstractLeftResponsive {
+
+        public final static String TAG = "app-layout-left-responsive";
+
+        @Override
+        public String getStyleName() {
+            return "left-responsive";
+        }
+    }
+
+    @Tag(LeftResponsiveDouble.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-double.js")
+    class LeftResponsiveDouble extends AbstractLeftResponsive {
+        public final static String TAG = "app-layout-left-responsive-double";
+
+        @Override
+        public String getStyleName() {
             return "left-responsive-double";
         }
-  }
+    }
 
-  abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
+    abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
 
-      /**
-       * Sets the responsive width for narrow-mode.
-       * @param width width in pixels
-       */
-      public void setResponsiveWidthNarrow(String width) {
-          getElement().setProperty("responsiveWidthNarrow", width);
-      }
+        /**
+         * Sets the responsive width for narrow-mode.
+         *
+         * @param width width in pixels
+         */
+        public void setResponsiveWidthNarrow(String width) {
+            getElement().setProperty("responsiveWidthNarrow", width);
+        }
 
-      /**
-       * Sets the responsive width for wide-mode.
-       * @param width width in pixels
-       */
-      public void setResponsiveWidthWide(String width) {
-          getElement().setProperty("responsiveWidthWide", width);
-      }
+        /**
+         * Sets the responsive width for wide-mode.
+         *
+         * @param width width in pixels
+         */
+        public void setResponsiveWidthWide(String width) {
+            getElement().setProperty("responsiveWidthWide", width);
+        }
 
-  }
+    }
 
-  @Tag("app-layout-left-responsive-hybrid")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
-  class LeftResponsiveHybrid extends AbstractLeftResponsiveHybrid {
+    @Tag(LeftResponsiveHybrid.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
+    class LeftResponsiveHybrid extends AbstractLeftResponsiveHybrid {
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-hybrid";
-      }
-  }
+        public final static String TAG = "app-layout-left-responsive-hybrid";
 
-  @Tag("app-layout-left-responsive-hybrid-no-app-bar")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
-  class LeftResponsiveHybridNoAppBar extends AbstractLeftResponsiveHybrid {
+        @Override
+        public String getStyleName() {
+            return "left-responsive-hybrid";
+        }
+    }
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-hybrid-no-app-bar";
-      }
-  }
+    @Tag(LeftResponsiveHybridNoAppBar.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
+    class LeftResponsiveHybridNoAppBar extends AbstractLeftResponsiveHybrid {
 
-  @Tag("app-layout-left-responsive-hybrid-overlay-no-app-bar")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
-  class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftResponsiveHybrid {
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-hybrid-overlay-no-app-bar";
-      }
-  }
+        public final static String TAG = "app-layout-left-responsive-hybrid-no-app-bar";
 
-  @Tag("app-layout-left-responsive-overlay")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay.js")
-  class LeftResponsiveOverlay extends AbstractLeftResponsive {
+        @Override
+        public String getStyleName() {
+            return "left-responsive-hybrid-no-app-bar";
+        }
+    }
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-overlay";
-      }
-  }
+    @Tag(LeftResponsiveHybridOverlayNoAppBar.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
+    class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftResponsiveHybrid {
 
-  @Tag("app-layout-left-responsive-overlay-no-app-bar")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.js")
-  class LeftResponsiveOverlayNoAppBar extends AbstractLeftResponsive {
+        public final static String TAG = "app-layout-left-responsive-hybrid-overlay-no-app-bar";
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-overlay-no-app-bar";
-      }
-  }
+        @Override
+        public String getStyleName() {
+            return "left-responsive-hybrid-overlay-no-app-bar";
+        }
+    }
 
-  @Tag("app-layout-left-responsive-small")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small.css")
-  class LeftResponsiveSmall extends AbstractLeftResponsive {
+    @Tag(LeftResponsiveOverlay.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay.js")
+    class LeftResponsiveOverlay extends AbstractLeftResponsive {
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-small";
-      }
-  }
 
-  @Tag("app-layout-left-responsive-small-no-app-bar")
-  @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.js")
-  @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
-  class LeftResponsiveSmallNoAppBar extends AbstractLeftResponsive {
+        public final static String TAG = "app-layout-left-responsive-overlay";
 
-      @Override
-      public String getStyleName() {
-          return "left-responsive-small-no-app-bar";
-      }
-  }
+        @Override
+        public String getStyleName() {
+            return "left-responsive-overlay";
+        }
+    }
+
+    @Tag(LeftResponsiveOverlayNoAppBar.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.js")
+    class LeftResponsiveOverlayNoAppBar extends AbstractLeftResponsive {
+
+
+        public final static String TAG = "app-layout-left-responsive-overlay-no-app-bar";
+
+        @Override
+        public String getStyleName() {
+            return "left-responsive-overlay-no-app-bar";
+        }
+    }
+
+    @Tag(LeftResponsiveSmall.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small.css")
+    class LeftResponsiveSmall extends AbstractLeftResponsive {
+
+
+        public final static String TAG = "app-layout-left-responsive-small";
+
+        @Override
+        public String getStyleName() {
+            return "left-responsive-small";
+        }
+    }
+
+    @Tag(LeftResponsiveSmallNoAppBar.TAG)
+    @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.js")
+    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
+    class LeftResponsiveSmallNoAppBar extends AbstractLeftResponsive {
+
+        public final static String TAG = "app-layout-left-responsive-small-no-app-bar";
+
+        @Override
+        public String getStyleName() {
+            return "left-responsive-small-no-app-bar";
+        }
+    }
 }
