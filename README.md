@@ -30,7 +30,7 @@ Add the following lines to you POM
 <dependency>
    <groupId>com.github.appreciated</groupId>
    <artifactId>app-layout-addon</artifactId>
-   <version>LATEST</version>
+   <version></version>
 </dependency>
 
 <!-- Should be there by default
@@ -40,6 +40,13 @@ Add the following lines to you POM
 </repository> 
 --> 
 ```
+
+## Versioning
+
+* Vaadin 8 -> [App-Layout `1.*`](https://vaadin.com/directory/component/app-layout-add-on/1.0.2)
+* Vaadin 10 -> [App-Layout `2.*`](https://vaadin.com/directory/component/app-layout-add-on/2.1.0)
+* Vaadin 13 or Vaadin 14 with bower mode -> [App-Layout `3.*`](https://vaadin.com/directory/component/app-layout-add-on/3.0.0.beta5)
+* Vaadin 14 with NPM Mode -> App-Layout [App-Layout `4.*`](https://vaadin.com/directory/component/app-layout-add-on)
 
 Execute the following command in the at the root of your project
 
@@ -57,9 +64,9 @@ git clone git@github.com:appreciated/vaadin-app-layout.git
 #### 2. 
 
 ```
-cd <project-root-dir>/vaadin-app-layout/
-mvn clean install
-cd <project-root-dir>/vaadin-app-layout/app-layout-addon
+cd <project-root-dir>
+mvn clean install -DskipTests # to skip the integration tests
+cd <project-root-dir>/app-layout-addon
 mvn jetty:run
 ```
 
@@ -69,14 +76,13 @@ To see the demo, navigate to [http://localhost:8080/](http://localhost:8080/)
 
 The issues for this add-on are tracked on its github.com page. All bug reports and feature requests are appreciated. 
 
-
 ## Branching information
 
 * `master` the latest version of the app-layout, currently even with `V13`
-* `V8` the version for Vaadin 8 -> App-Layout `1.*`
-* `V10` the version for Vaadin 10 -> App-Layout `2.*`
+* `V8` version based on Vaadin 8 -> App-Layout `1.*`
+* `V10` version based on Vaadin 10 -> App-Layout `2.*`
 * `V13` support is discontinued due to the short support consider to upgrade to Vaadin 14 instead
-* `V14` the version for Vaadin 14 -> App-Layout `4.*`
+* `V14` version based on Vaadin 14 -> App-Layout `4.*`
 
 ## Contributions
 
