@@ -39,6 +39,6 @@ public class PaperBadge extends Component implements HasText {
     }
 
     public void notifyResize() {
-        getElement().callJsFunction("notifyResize");
+        // getElement().callJsFunction("notifyResize");
     }
 }

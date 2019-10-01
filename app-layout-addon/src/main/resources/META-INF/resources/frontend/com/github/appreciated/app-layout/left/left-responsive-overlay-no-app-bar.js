@@ -7,8 +7,9 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import '@polymer/polymer/lib/elements/custom-style.js';
+import {html, PolymerElement} from '@polymer/polymer';
+import {ThemableMixin} from '@vaadin/vaadin-themable-mixin';
+import {ElementMixin} from '@vaadin/vaadin-element-mixin';
 import '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import '@vaadin/vaadin-icons/vaadin-icons.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
@@ -17,7 +18,7 @@ import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-header-layout/app-header-layout.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 
-class AppLayoutLeftResponsiveOverlayNoAppBar extends PolymerElement {
+class AppLayoutLeftResponsiveOverlayNoAppBar extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     static get template() {
         return html`<style>

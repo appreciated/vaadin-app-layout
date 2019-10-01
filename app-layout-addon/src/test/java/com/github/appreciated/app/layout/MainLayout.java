@@ -38,6 +38,8 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.data.renderer.TextRenderer;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -51,6 +53,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
  */
 
 @Push
+@Theme(value = Lumo.class, variant = Lumo.DARK)
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});
