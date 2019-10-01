@@ -1,4 +1,7 @@
-<p align="center"><img src="https://raw.githubusercontent.com/appreciated/blob/master/app-layout/logo_low_res.png"></p>    
+<p align="center"><img src="https://raw.githubusercontent.com/appreciated/blob/master/app-layout/logo_low_res.png">
+<br>
+<br>
+</p>    
 
 <p align="center">
   <a href="https://vaadin.com/directory/component/app-layout-add-on"><img src="https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg"></a>
@@ -9,7 +12,8 @@
 </p>
 <p align="center">
 A collection of ready to use templates for the Webcomponent <a href="https://www.webcomponents.org/element/PolymerElements/app-layout">&lt;app-layout&gt;</a>
-  
+  <br>
+  <br>
   <img src="https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true">
 </p>
 <br>
