@@ -11,8 +11,10 @@
    <a href="https://dev.azure.com/GoebelJohannes/GoebelJohannes/_build/latest?definitionId=1&branchName=master"><img src="https://dev.azure.com/GoebelJohannes/GoebelJohannes/_apis/build/status/appreciated.vaadin-app-layout?branchName=master" /></a>
 </p>
 <p align="center">
+   <br>
 A collection of ready to use templates for the Webcomponent <a href="https://www.webcomponents.org/element/PolymerElements/app-layout">&lt;app-layout&gt;</a>
   <br>
+   <br>
   <br>
   <img src="https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true">
 </p>
