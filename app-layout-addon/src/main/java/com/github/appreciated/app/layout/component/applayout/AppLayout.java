@@ -5,7 +5,6 @@ import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.templatemodel.TemplateModel;
@@ -14,7 +13,6 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  * Every AppLayout is supposed to derive from a Polymer Template
  */
 @NpmPackage(value = "@polymer/app-layout", version = "3.1.0")
-@StyleSheet("./com/github/appreciated/app-layout/app-layout-styles-lumo.css")
 public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
 
     public static AppLayout getCurrent() {

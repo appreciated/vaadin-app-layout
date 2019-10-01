@@ -74,6 +74,7 @@ class AppLayoutTopLarge extends ElementMixin(ThemableMixin(PolymerElement)) {
                 flex-shrink: 0;
                 opacity: 0.0;
                 transition: opacity ease 0.2s;
+                min-width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
             }
 
             #toggle.show-back-arrow {

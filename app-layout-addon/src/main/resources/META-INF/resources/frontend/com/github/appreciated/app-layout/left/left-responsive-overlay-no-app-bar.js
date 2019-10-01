@@ -91,6 +91,7 @@ class AppLayoutLeftResponsiveOverlayNoAppBar extends ElementMixin(ThemableMixin(
                 width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
                 height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
                 margin: var(--app-layout-space-s);
+                min-width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
             }
 
             :host(:not([narrow])) #toggle:not(.show-back-arrow) {

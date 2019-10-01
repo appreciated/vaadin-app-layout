@@ -33,6 +33,7 @@ public class IconButton extends Button {
     }
 
     private void init() {
+        addClassName("app-layout-icon-button");
         setWidth("var(--app-layout-menu-button-height)");
         setHeight("var(--app-layout-menu-button-height)");
         addThemeNames(ButtonVariant.LUMO_TERTIARY.getVariantName(), ButtonVariant.LUMO_ICON.getVariantName(), ButtonVariant.LUMO_LARGE.getVariantName());

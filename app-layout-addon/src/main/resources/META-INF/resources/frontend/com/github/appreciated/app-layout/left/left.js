@@ -113,7 +113,13 @@ class AppLayoutLeft extends ElementMixin(ThemableMixin(PolymerElement)) {
                 width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
                 height: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
                 margin: var(--app-layout-space-s);
+                min-width: calc(var(--app-layout-bar-height) - calc(var(--app-layout-space-s) * 2));
             }
+            
+            #toggle iron-icon {
+               margin-right: var(--app-layout-bar-toggle-icon-right);
+            }
+            
         </style>
         <app-toolbar part="app-bar">
             <vaadin-button id="toggle" theme="large tertiary icon">

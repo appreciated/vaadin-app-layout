@@ -1,4 +1,4 @@
-.app-layout {
+html {
     --material-size-xs: 1.625rem;
     --material-size-s: 1.875rem;
     --material-size-m: 2.25rem;
@@ -78,6 +78,7 @@
     --app-layout-app-bar-flex-direction: row;
     --app-layout-app-bar-large-object-display: visible;
     --app-layout-notification-error-color: #ff3d00;
+    --app-layout-bar-toggle-icon-right: -4px;
     --app-layout-notification-warning-color: #fdd835;
     /*--iron-overlay-backdrop-background-color: var(--lumo-shade-20pct);*/
 }
@@ -135,6 +136,14 @@ body {
 
 .app-menu-item:hover, .app-menu-item[highlight] {
     /*background: var(--lumo-primary-color-10pct);*/
+}
+
+.app-layout-icon-button {
+    min-width: var(--app-layout-menu-button-height);
+}
+
+.app-layout-icon-button iron-icon {
+    margin-right: -4px;
 }
 
 .app-menu-item {
