@@ -1,15 +1,25 @@
-[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/app-layout-add-on)
-[![Lastest version on vaadin.com/directory](https://img.shields.io/vaadin-directory/version/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
-[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/rating/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
-[![Lastest release date on vaadin.com/directory](https://img.shields.io/vaadin-directory/release-date/app-layout-add-on.svg)](https://vaadin.com/directory/component/app-layout-add-on)
-[![Build Status](https://dev.azure.com/GoebelJohannes/GoebelJohannes/_apis/build/status/appreciated.vaadin-app-layout?branchName=master)](https://dev.azure.com/GoebelJohannes/GoebelJohannes/_build/latest?definitionId=1&branchName=master)
+<p align="center"><img src="https://raw.githubusercontent.com/appreciated/blob/master/app-layout/logo_low_res.png">
+<br>
+<br>
+</p>    
 
-## Integration of the \<app-layout\> for Vaadin
-A collection of ready to use templates for the Webcomponent [\<app-layout\>](https://www.webcomponents.org/element/PolymerElements/app-layout)
+<p align="center">
+  <a href="https://vaadin.com/directory/component/app-layout-add-on"><img src="https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg"></a>
+  <a href="https://vaadin.com/directory/component/app-layout-add-on"><img src="https://img.shields.io/vaadin-directory/version/app-layout-add-on.svg" /></a>
+   <a href="https://vaadin.com/directory/component/app-layout-add-on"><img src="https://img.shields.io/vaadin-directory/rating/app-layout-add-on.svg" /></a>
+   <a href="https://vaadin.com/directory/component/app-layout-add-on"><img src="https://img.shields.io/vaadin-directory/release-date/app-layout-add-on.svg" /></a>
+   <a href="https://dev.azure.com/GoebelJohannes/GoebelJohannes/_build/latest?definitionId=1&branchName=master"><img src="https://dev.azure.com/GoebelJohannes/GoebelJohannes/_apis/build/status/appreciated.vaadin-app-layout?branchName=master" /></a>
+</p>
+<p align="center">
+   <br>
+A collection of ready to use templates for the Webcomponent <a href="https://www.webcomponents.org/element/PolymerElements/app-layout">&lt;app-layout&gt;</a>
+  <br>
+   <br>
+  <br>
+  <img src="https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true">
+</p>
 <br>
 <br>
-<br>
-![Markup](https://github.com/appreciated/blob/blob/master/app-layout/mockup.png?raw=true "App-Layout Markup")
 
 ## [Demo](https://appreciated-collection.herokuapp.com/app-layout/)
 
@@ -20,7 +30,7 @@ Add the following lines to you POM
 <dependency>
    <groupId>com.github.appreciated</groupId>
    <artifactId>app-layout-addon</artifactId>
-   <version>LATEST</version>
+   <version></version>
 </dependency>
 
 <!-- Should be there by default
@@ -30,6 +40,13 @@ Add the following lines to you POM
 </repository> 
 --> 
 ```
+
+## Versioning
+
+* Vaadin 8 -> [App-Layout `1.*`](https://vaadin.com/directory/component/app-layout-add-on/1.0.2)
+* Vaadin 10 -> [App-Layout `2.*`](https://vaadin.com/directory/component/app-layout-add-on/2.1.0)
+* Vaadin 13 or Vaadin 14 with bower mode -> [App-Layout `3.*`](https://vaadin.com/directory/component/app-layout-add-on/3.0.0.beta5)
+* Vaadin 14 with NPM Mode -> App-Layout [App-Layout `4.*`](https://vaadin.com/directory/component/app-layout-add-on)
 
 Execute the following command in the at the root of your project
 
@@ -47,9 +64,9 @@ git clone git@github.com:appreciated/vaadin-app-layout.git
 #### 2. 
 
 ```
-cd <project-root-dir>/vaadin-app-layout/
-mvn clean install
-cd <project-root-dir>/vaadin-app-layout/app-layout-addon
+cd <project-root-dir>
+mvn clean install -DskipTests # to skip the integration tests
+cd <project-root-dir>/app-layout-addon
 mvn jetty:run
 ```
 
@@ -59,14 +76,13 @@ To see the demo, navigate to [http://localhost:8080/](http://localhost:8080/)
 
 The issues for this add-on are tracked on its github.com page. All bug reports and feature requests are appreciated. 
 
-
 ## Branching information
 
 * `master` the latest version of the app-layout, currently even with `V13`
-* `V8` the version for Vaadin 8 -> App-Layout `1.*`
-* `V10` the version for Vaadin 10 -> App-Layout `2.*`
+* `V8` version based on Vaadin 8 -> App-Layout `1.*`
+* `V10` version based on Vaadin 10 -> App-Layout `2.*`
 * `V13` support is discontinued due to the short support consider to upgrade to Vaadin 14 instead
-* `V14` the version for Vaadin 14 -> App-Layout `4.*`
+* `V14` version based on Vaadin 14 -> App-Layout `4.*`
 
 ## Contributions
 
