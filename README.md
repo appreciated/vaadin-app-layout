@@ -23,6 +23,14 @@ A collection of ready to use templates for the Webcomponent <a href="https://www
 
 ## [Demo](https://appreciated-collection.herokuapp.com/app-layout/)
 
+
+## Versioning
+
+* Vaadin 8 -> [App-Layout `1.*`](https://vaadin.com/directory/component/app-layout-add-on/1.0.2)
+* Vaadin 10 -> [App-Layout `2.*`](https://vaadin.com/directory/component/app-layout-add-on/2.1.0)
+* Vaadin 13 or Vaadin 14 with bower mode -> [App-Layout `3.*`](https://vaadin.com/directory/component/app-layout-add-on/3.0.0.beta5)
+* Vaadin 14 with NPM Mode -> App-Layout [App-Layout `4.*`](https://vaadin.com/directory/component/app-layout-add-on)
+
 ## Installation
 
 Add the following lines to you POM
@@ -40,13 +48,6 @@ Add the following lines to you POM
 </repository> 
 --> 
 ```
-
-## Versioning
-
-* Vaadin 8 -> [App-Layout `1.*`](https://vaadin.com/directory/component/app-layout-add-on/1.0.2)
-* Vaadin 10 -> [App-Layout `2.*`](https://vaadin.com/directory/component/app-layout-add-on/2.1.0)
-* Vaadin 13 or Vaadin 14 with bower mode -> [App-Layout `3.*`](https://vaadin.com/directory/component/app-layout-add-on/3.0.0.beta5)
-* Vaadin 14 with NPM Mode -> App-Layout [App-Layout `4.*`](https://vaadin.com/directory/component/app-layout-add-on)
 
 Execute the following command in the at the root of your project
 
