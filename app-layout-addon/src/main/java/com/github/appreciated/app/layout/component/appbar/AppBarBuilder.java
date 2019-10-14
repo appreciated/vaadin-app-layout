@@ -29,6 +29,7 @@ public class AppBarBuilder implements ComponentBuilder<FlexLayout> {
     public FlexLayout build() {
         FlexLayout layout = new FlexLayout(components.toArray(new Component[0]));
         layout.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        layout.setWidthFull();
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
         return layout;
     }

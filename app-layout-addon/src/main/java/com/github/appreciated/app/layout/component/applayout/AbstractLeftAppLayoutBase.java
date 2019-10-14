@@ -44,23 +44,25 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
         appBarContentHolder.setSizeFull();
         appBarContentHolder.getElement().setAttribute("slot", "app-bar-content");
 
-        appBarElementWrapper.getStyle().set("flex", "0 1 auto");
+        appBarElementWrapper.getStyle().set("flex", "0 1 0px");
         appBarElementWrapper.add(appBarElementContainer);
+        appBarElementWrapper.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        appBarElementWrapper.setWidthFull();
         appBarElementWrapper.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
-        appBarElementWrapper.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
         appBarElementContainer.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        appBarElementContainer.setWidthFull();
         titleWrapper.getStyle().set("flex-direction", "var(--app-layout-app-bar-flex-direction)");
+        titleWrapper.setWidthFull();
 
         menuElements = new Div();
-        menuElements.setHeight("100%");
+        menuElements.setHeightFull();
         menuElements.getElement().setAttribute("slot", "drawer-content");
         contentHolder = new Div();
-        contentHolder.setHeight("100%");
-        contentHolder.setWidth("100%");
+        contentHolder.setSizeFull();
         contentHolder.getElement().setAttribute("slot", "application-content");
 
-        titleWrapper.setHeight("100%");
+        titleWrapper.setHeightFull();
         titleWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
 
         titleWrapper.getElement().getStyle().set("flex", "1 1").set("overflow", "hidden");

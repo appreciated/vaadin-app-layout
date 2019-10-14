@@ -220,7 +220,6 @@ class AppLayoutLeftResponsiveDouble extends ElementMixin(ThemableMixin(PolymerEl
 
     ready() {
         super.ready();
-        this.updateNotificationButtonContentAlignment(this.queryMatches);
         this.shadowRoot.querySelector("#toggle").addEventListener('click', evt => this.onclick());
     }
 
@@ -241,23 +240,10 @@ class AppLayoutLeftResponsiveDouble extends ElementMixin(ThemableMixin(PolymerEl
     _onQueryMatchesChanged(event) {
         if (event.detail.value) {
             this.setAttribute("narrow", "");
-            this.updateNotificationButtonContentAlignment(true)
         } else {
             this.removeAttribute("narrow");
-            this.updateNotificationButtonContentAlignment(false);
         }
         this.queryMatches = event.detail.value;
-    }
-
-    updateNotificationButtonContentAlignment(top) {
-        var button = document.querySelector("app-layout-left-responsive-double").querySelector(".app-bar-notification-button");
-        if (top) {
-            button.setAttribute("vertical-align", "top");
-            button.setAttribute("horizontal-align", "right")
-        } else {
-            button.setAttribute("vertical-align", "bottom");
-            button.setAttribute("horizontal-align", "left")
-        }
     }
 
     _computeMediaQuery(responsiveWidth) {
