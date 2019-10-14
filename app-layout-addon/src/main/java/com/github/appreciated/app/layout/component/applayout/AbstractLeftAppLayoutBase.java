@@ -185,14 +185,12 @@ public abstract class AbstractLeftAppLayoutBase extends AppLayout {
                 }
                 drawer.getElement().getStyle().remove("display");
                 menuButton.getElement().getStyle().remove("display");
-                getElement().getStyle().remove("--app-layout-drawer-width");
-                getElement().getStyle().remove("--app-layout-drawer-small-width");
+                getElement().getStyle().remove("--app-drawer-width");
             } else {
                 drawer.getElement().getStyle().set("display", "none");
                 menuElements.removeAll();
                 menuButton.getElement().getStyle().set("display", "none");
-                getElement().getStyle().set("--app-layout-drawer-width", "0px");
-                getElement().getStyle().set("--app-layout-drawer-small-width", "0px");
+                getElement().getStyle().set("--app-drawer-width", "0px");
             }
         }
     }
