@@ -47,7 +47,7 @@ class AppLayoutLeftOverlay extends ElementMixin(ThemableMixin(PolymerElement)) {
 
             app-toolbar {
                 height: var(--app-layout-bar-height);
-                background: var(--app-layout-bar-background-color);
+                background: var(--app-layout-bar-background-base-color);
                 box-shadow: var(--app-layout-bar-shadow);
                 color: var(--app-layout-bar-font-color);
                 padding: var(--app-layout-bar-padding);
@@ -62,14 +62,13 @@ class AppLayoutLeftOverlay extends ElementMixin(ThemableMixin(PolymerElement)) {
             }
 
             app-toolbar:after {
-                background: var(--app-layout-bar-background-base-color);
+                background: var(--app-layout-bar-background-color);
                 position: absolute;
                 content: "";
                 height: 100%;
                 width: 100%;
                 left: 0px;
                 top: 0px;
-                z-index: -1;
             }
 
             #drawer {
