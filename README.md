@@ -12,7 +12,7 @@
 </p>
 <p align="center">
    <br>
-A collection of ready to use templates for the Webcomponent <a href="https://www.webcomponents.org/element/PolymerElements/app-layout">&lt;app-layout&gt;</a>
+A collection of ready to use templates for the Webcomponent <a href="https://www.npmjs.com/package/@polymer/app-layout">&lt;app-layout&gt;</a>
   <br>
    <br>
   <br>
