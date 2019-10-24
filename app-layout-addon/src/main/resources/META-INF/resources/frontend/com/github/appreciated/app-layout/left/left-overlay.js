@@ -55,13 +55,15 @@ class AppLayoutLeftOverlay extends ElementMixin(ThemableMixin(PolymerElement)) {
                 top: 0px;
                 left: 0px;
                 right: 0px;
+                z-index: 1;
             }
 
             #app-bar-elements {
                 min-width: 0;
+                z-index: 1;
             }
 
-            app-toolbar:after {
+            app-toolbar:before {
                 background: var(--app-layout-bar-background-color);
                 position: absolute;
                 content: "";
@@ -78,6 +80,7 @@ class AppLayoutLeftOverlay extends ElementMixin(ThemableMixin(PolymerElement)) {
                     max-width: 100%;
                 };
                 --expand-icon-fill-color: var(--iron-icon-fill-color, currentcolor) !important;
+                z-index: 1;
             }
 
             #drawer .drawer-content {
