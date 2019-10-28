@@ -27,6 +27,7 @@ public class NotificationView<T extends Notification> extends HorizontalLayout {
         this.holder = holder;
         this.isNotification = isNotification;
         setWidth("100%");
+        setAlignItems(Alignment.CENTER);
         Label title = new Label(info.getTitle());
         title.getElement().getStyle()
                 .set("font-size", "15px")
