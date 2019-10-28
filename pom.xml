@@ -61,24 +61,13 @@
     </dependencies>
   </dependencyManagement>
 
-
   <modules>
     <module>app-layout-addon</module>
     <module>app-layout-examples</module>
     <module>app-layout-ui-tests</module>
   </modules>
 
-
   <dependencies>
-
-    <!--DEACTIVATE STATISTICS-->
-    <dependency>
-      <groupId>org.webjars.bowergithub.vaadin</groupId>
-      <artifactId>vaadin-usage-statistics</artifactId>
-      <version>1.0.7-optout</version>
-    </dependency>
-    <!--DEACTIVATE STATISTICS-->
-
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-core</artifactId>
