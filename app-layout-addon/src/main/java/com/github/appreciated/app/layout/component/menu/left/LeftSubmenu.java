@@ -25,12 +25,12 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
     private final LeftIconItem item;
     private final IronIcon ironIcon;
     private final String caption;
-    private final Icon icon;
+    private final Component icon;
     private NavigationElementContainer parent;
     private NavigationElement active;
     private boolean close = true;
 
-    public LeftSubmenu(String caption, Icon icon, List<Component> submenuElements) {
+    public LeftSubmenu(String caption, Component icon, List<Component> submenuElements) {
         submenuContainer = new LeftSubmenuContainer();
         submenuContainer.getStyle()
                 .set("border-radius", "var(--app-layout-menu-button-border-radius)")
@@ -69,7 +69,7 @@ public class LeftSubmenu extends Composite<IronCollapseLayout> implements Naviga
         return submenuContainer;
     }
 
-    public Icon getIcon() {
+    public Component getIcon() {
         return icon;
     }
 

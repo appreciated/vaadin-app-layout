@@ -17,15 +17,15 @@ import java.util.List;
 public class LeftSubMenuBuilder implements ComponentBuilder<LeftSubmenu> {
 
     private final String title;
-    private final Icon icon;
+    private final Component icon;
     private List<Component> components = new ArrayList<>();
 
-    private LeftSubMenuBuilder(String title, Icon icon) {
+    private LeftSubMenuBuilder(String title, Component icon) {
         this.title = title;
         this.icon = icon;
     }
 
-    public static LeftSubMenuBuilder get(String title, Icon icon) {
+    public static LeftSubMenuBuilder get(String title, Component icon) {
         return new LeftSubMenuBuilder(title, icon);
     }
 
@@ -45,7 +45,7 @@ public class LeftSubMenuBuilder implements ComponentBuilder<LeftSubmenu> {
      * @param icon
      * @return
      */
-    public static LeftSubMenuBuilder get(Icon icon) {
+    public static LeftSubMenuBuilder get(Component icon) {
         return new LeftSubMenuBuilder(null, icon);
     }
 

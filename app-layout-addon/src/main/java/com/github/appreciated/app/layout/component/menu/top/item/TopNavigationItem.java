@@ -15,7 +15,7 @@ public class TopNavigationItem extends PaperTab implements NavigationElementCont
 
     private NavigationElementContainer parent;
 
-    public TopNavigationItem(String caption, Icon icon, Component view) {
+    public TopNavigationItem(String caption, Component icon, Component view) {
         super();
         addNavigationElement(new TopNavigationLink(caption, icon, view.getClass()));
     }
@@ -25,7 +25,7 @@ public class TopNavigationItem extends PaperTab implements NavigationElementCont
         applyParentToItem(topNavigationLink);
     }
 
-    public TopNavigationItem(String caption, Icon icon, Class<? extends Component> className) {
+    public TopNavigationItem(String caption, Component icon, Class<? extends Component> className) {
         super();
         addNavigationElement(new TopNavigationLink(caption, icon, className));
     }

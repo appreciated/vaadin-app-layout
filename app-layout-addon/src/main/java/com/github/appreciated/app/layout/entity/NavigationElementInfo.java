@@ -2,6 +2,7 @@ package com.github.appreciated.app.layout.entity;
 
 import com.github.appreciated.app.layout.component.builder.factories.DefaultNavigationElementInfoProducer;
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 /**
@@ -11,10 +12,10 @@ import com.vaadin.flow.component.icon.Icon;
 
 public class NavigationElementInfo {
     String caption;
-    Icon icon;
+    Component icon;
     String route;
 
-    public NavigationElementInfo(String caption, Icon icon, String route) {
+    public NavigationElementInfo(String caption, Component icon, String route) {
         this.caption = caption;
         this.icon = icon;
         this.route = route;
@@ -33,11 +34,11 @@ public class NavigationElementInfo {
         this.caption = caption;
     }
 
-    public Icon getIcon() {
+    public Component getIcon() {
         return icon;
     }
 
-    public void setIcon(Icon icon) {
+    public void setIcon(Component icon) {
         this.icon = icon;
     }
 

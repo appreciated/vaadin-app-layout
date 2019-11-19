@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component.menu.top.item;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
@@ -10,10 +11,10 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class TopClickableItem extends Button {
     private String name;
-    private Icon icon;
+    private Component icon;
     private ComponentEventListener<ClickEvent<?>> listener;
 
-    public TopClickableItem(String name, Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
+    public TopClickableItem(String name, Component icon, ComponentEventListener<ClickEvent<?>> listener) {
         super(name, icon);
         this.name = name;
         this.icon = icon;
@@ -27,7 +28,7 @@ public class TopClickableItem extends Button {
         return name;
     }
 
-    public Icon getIcon() {
+    public Component getIcon() {
         return icon;
     }
 
