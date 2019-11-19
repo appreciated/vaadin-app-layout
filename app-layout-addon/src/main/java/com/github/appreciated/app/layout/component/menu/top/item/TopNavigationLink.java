@@ -17,7 +17,7 @@ public class TopNavigationLink extends RouterLink implements NavigationElement, 
     private Class<? extends Component> className;
     private NavigationElementContainer parent;
 
-    public TopNavigationLink(String caption, Icon icon, Class<? extends Component> className) {
+    public TopNavigationLink(String caption, Component icon, Class<? extends Component> className) {
         super();
         this.className = className;
         HorizontalLayout wrapper = new HorizontalLayout();

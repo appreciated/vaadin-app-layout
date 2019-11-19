@@ -40,7 +40,7 @@ public class LeftAppMenuBuilder {
         return add(new LeftNavigationItem(caption, icon, className));
     }
 
-    public LeftAppMenuBuilder add(String caption, Icon icon, Class<? extends Component> className) {
+    public LeftAppMenuBuilder add(String caption, Component icon, Class<? extends Component> className) {
         return add(new LeftNavigationItem(caption, icon, className));
     }
 

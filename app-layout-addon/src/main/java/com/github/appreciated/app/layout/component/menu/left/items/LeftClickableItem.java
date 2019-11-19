@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component.menu.left.items;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -9,10 +10,10 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class LeftClickableItem extends LeftBadgeIconItem {
     private final String name;
-    private Icon icon;
+    private Component icon;
     private ComponentEventListener<ClickEvent<?>> listener;
 
-    public LeftClickableItem(String name, Icon icon, ComponentEventListener<ClickEvent<?>> listener) {
+    public LeftClickableItem(String name, Component icon, ComponentEventListener<ClickEvent<?>> listener) {
         super(name, icon, null);
         this.name = name;
         this.icon = icon;
@@ -25,7 +26,7 @@ public class LeftClickableItem extends LeftBadgeIconItem {
         return name;
     }
 
-    public Icon getIcon() {
+    public Component getIcon() {
         return icon;
     }
 

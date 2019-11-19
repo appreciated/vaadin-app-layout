@@ -27,18 +27,18 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
     /**
      * The view behind this menu element
      */
-    private Icon icon;
+    private Component icon;
     private Class<? extends Component> className;
 
     private NavigationElementContainer parent;
 
-    public LeftNavigationItem(String caption, Icon icon, Component view) {
+    public LeftNavigationItem(String caption, Component icon, Component view) {
         this(caption, icon, view.getClass());
         this.caption = caption;
         this.icon = icon;
     }
 
-    public LeftNavigationItem(String caption, Icon icon, Class<? extends Component> className) {
+    public LeftNavigationItem(String caption, Component icon, Class<? extends Component> className) {
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
@@ -63,7 +63,7 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         );
     }
 
-    public Icon getIcon() {
+    public Component getIcon() {
         return icon;
     }
 
