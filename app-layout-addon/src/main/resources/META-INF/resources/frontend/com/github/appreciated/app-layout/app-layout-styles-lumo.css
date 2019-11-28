@@ -134,6 +134,6 @@ iron-collapse-layout[opened] > div > .app-menu-item > .collapse-icon {
     flex-shrink: 0;
 }
 
-.app-menu-item label {
+.app-menu-item span {
     margin-left: 18px;
 }

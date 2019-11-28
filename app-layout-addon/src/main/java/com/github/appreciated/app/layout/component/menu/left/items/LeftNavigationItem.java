@@ -6,7 +6,6 @@ import com.github.appreciated.app.layout.component.builder.interfaces.Navigation
 import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
@@ -18,7 +17,6 @@ import com.vaadin.flow.router.BeforeEnterObserver;
  * AppLayout content view.
  */
 public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElement, BeforeEnterObserver {
-    private boolean highlight = false;
     /**
      * The caption of this menu element
      */
