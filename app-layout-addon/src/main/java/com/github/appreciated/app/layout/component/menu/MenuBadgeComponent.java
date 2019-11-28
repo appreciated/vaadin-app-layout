@@ -1,9 +1,9 @@
 package com.github.appreciated.app.layout.component.menu;
 
 import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 
-public class MenuBadgeComponent extends Label implements HasStyle {
+public class MenuBadgeComponent extends Span implements HasStyle {
 
     public MenuBadgeComponent() {
         setWidth("var(--app-layout-badge-width)");

@@ -5,14 +5,13 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasSize;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLink;
 
 public class LeftIconItem extends RouterLink implements HasSize {
 
     private ComponentEventListener<ClickEvent<LeftIconItem>> listener;
-    private Label caption;
+    private Span caption;
     private Component icon;
 
     public LeftIconItem(String caption, Component icon) {
@@ -35,7 +34,7 @@ public class LeftIconItem extends RouterLink implements HasSize {
         if (caption != null) {
             remove(caption);
         }
-        caption = new Label(text);
+        caption = new Span(text);
         add(caption);
     }
 
