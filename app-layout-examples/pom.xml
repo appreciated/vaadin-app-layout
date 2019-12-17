@@ -21,7 +21,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>14.0.11</vaadin.version>
+        <vaadin.version>14.1.2</vaadin.version>
     </properties>
 
     <modules>
