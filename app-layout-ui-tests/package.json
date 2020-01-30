@@ -8,13 +8,13 @@
   },
   "devDependencies": {
     "webpack": "4.30.0",
-    "webpack-cli": "3.3.0",
-    "webpack-dev-server": "3.3.0",
-    "webpack-babel-multi-target-plugin": "2.1.0",
-    "copy-webpack-plugin": "5.0.3",
-    "webpack-merge": "4.2.1",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0",
+    "webpack-babel-multi-target-plugin": "2.3.3",
+    "copy-webpack-plugin": "5.1.0",
+    "webpack-merge": "4.2.2",
     "raw-loader": "3.0.0",
-    "compression-webpack-plugin": "3.0.0"
+    "compression-webpack-plugin": "3.0.1"
   },
-  "vaadinAppPackageHash": "783d70e9e37363f2936dbf9232fc4ec1b3fa84bd8ac174555de43b0f3fe7282f"
+  "vaadinAppPackageHash": "b5422edbf8b5ebb5f769a509c21b3a3ac7a5723bfc20bdb2ad1c5c54853c3103"
 }
