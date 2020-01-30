@@ -57,7 +57,10 @@ public class View1 extends VerticalLayout {
 
         horizontalLayout.add(tabs, pages);
 
-        horizontalLayout.add(new Button("Test"), new Checkbox("My Checkbox"));
+        horizontalLayout.add(new Button("Test", buttonClickEvent -> {
+            Checkbox l = null;
+            l.getLabel();
+        }), new Checkbox("My Checkbox"));
         setMargin(false);
         setPadding(false);
         setSpacing(false);
