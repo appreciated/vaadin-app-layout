@@ -1,46 +1,46 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
-import com.vaadin.flow.component.ClickNotifier;
-import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
-import com.vaadin.flow.data.provider.Query;
-import com.vaadin.flow.function.SerializablePredicate;
-
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import com.vaadin.flow.component.ClickNotifier;
+import com.vaadin.flow.data.provider.DataProvider;
+import com.vaadin.flow.data.provider.Query;
+import com.vaadin.flow.function.SerializablePredicate;
 
 /**
  * A class to build a {@link SearchOverlayButton} with a fluent API
  *
  * @param <T>
  */
-public class SearchOverlayButtonBuilder<T> {
+public class SearchOverlayButtonBuilder<T, F> {
 
-    private Function<String, Query<T, SerializablePredicate<T>>> queryFunction;
+    private Function<String, Query<T, F>> queryFunction;
     private Function<T, ClickNotifier> dataViewProvider;
-    private ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider;
+    private DataProvider<T, F> dataProvider;
     private Consumer<T> queryResultListener;
     private Boolean closeOnQueryResult;
 
     public SearchOverlayButtonBuilder() {
     }
 
-    public SearchOverlayButtonBuilder<T> withQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> queryFunction) {
+    public SearchOverlayButtonBuilder<T, F> withQueryProvider(Function<String, Query<T, F>> queryFunction) {
         this.queryFunction = queryFunction;
         return this;
     }
 
-    public SearchOverlayButtonBuilder<T> withDataViewProvider(Function<T, ClickNotifier> dataViewProvider) {
+    public SearchOverlayButtonBuilder<T, F> withDataViewProvider(Function<T, ClickNotifier> dataViewProvider) {
         this.dataViewProvider = dataViewProvider;
         return this;
     }
 
-    public SearchOverlayButtonBuilder<T> withDataProvider(ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider) {
+    public SearchOverlayButtonBuilder<T, F> withDataProvider(DataProvider<T, F> dataProvider) {
         this.dataProvider = dataProvider;
         return this;
     }
 
-    public SearchOverlayButton<T> build() {
-        SearchOverlayButton<T> appBarSearchButton = new SearchOverlayButton<>();
+    public SearchOverlayButton<T, F> build() {
+        SearchOverlayButton<T, F> appBarSearchButton = new SearchOverlayButton<>();
         appBarSearchButton.setQueryProvider(queryFunction);
         appBarSearchButton.setDataViewProvider(dataViewProvider);
         appBarSearchButton.setDataProvider(dataProvider);
@@ -51,12 +51,12 @@ public class SearchOverlayButtonBuilder<T> {
         return appBarSearchButton;
     }
 
-    public SearchOverlayButtonBuilder<T> withQueryResultListener(Consumer<T> queryResultListener) {
+    public SearchOverlayButtonBuilder<T, F> withQueryResultListener(Consumer<T> queryResultListener) {
         this.queryResultListener = queryResultListener;
         return this;
     }
 
-    public SearchOverlayButtonBuilder<T> withCloseOnQueryResult(boolean closeOnQueryResult) {
+    public SearchOverlayButtonBuilder<T, F> withCloseOnQueryResult(boolean closeOnQueryResult) {
         this.closeOnQueryResult = closeOnQueryResult;
         return this;
     }
