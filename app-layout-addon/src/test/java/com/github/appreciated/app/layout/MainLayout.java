@@ -38,6 +38,7 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.data.renderer.TextRenderer;
+import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -61,7 +62,7 @@ public class MainLayout extends AppLayoutRouterLayout {
     private Class<? extends AppLayout> variant = LeftLayouts.LeftResponsiveHybrid.class;
     private Thread currentThread;
 
-    private SearchOverlayButton<TestSearchResult> button;
+    private SearchOverlayButton<TestSearchResult, SerializablePredicate<TestSearchResult>> button;
     private ListDataProvider<TestSearchResult> dataProvider;
 
     public MainLayout() {
@@ -109,7 +110,7 @@ public class MainLayout extends AppLayoutRouterLayout {
                 new TestSearchResult("Header10", "Description10")
         ));
 
-        button = new SearchOverlayButtonBuilder<TestSearchResult>()
+        button = new SearchOverlayButtonBuilder<TestSearchResult, SerializablePredicate<TestSearchResult>>()
                 .withDataProvider(dataProvider)
                 .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
                 .withDataViewProvider(queryResult -> {
