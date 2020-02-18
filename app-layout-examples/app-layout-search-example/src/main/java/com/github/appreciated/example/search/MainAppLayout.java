@@ -19,6 +19,7 @@ import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.Query;
+import com.vaadin.flow.function.SerializablePredicate;
 
 import java.util.Arrays;
 
@@ -36,7 +37,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
 
     public MainAppLayout() {
         // An Search overlay
-        SearchOverlayButton<TestSearchResult> searchOverlayButton = initSearchOverlayButton();
+        SearchOverlayButton<TestSearchResult, SerializablePredicate<TestSearchResult>> searchOverlayButton = initSearchOverlayButton();
         // An AppBar overlay with a search field
         SearchButton searchButton = new SearchButton().withValueChangeListener(event -> {
             /* React manually to user inputs */
@@ -61,7 +62,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .build());
     }
 
-    private SearchOverlayButton<TestSearchResult> initSearchOverlayButton() {
+    private SearchOverlayButton<TestSearchResult, SerializablePredicate<TestSearchResult>> initSearchOverlayButton() {
         // The data provider that provides the entities for the search
         ListDataProvider<TestSearchResult> listDataProvider = new ListDataProvider<>(Arrays.asList(
                 new TestSearchResult("Header1", "Description1"),
@@ -76,7 +77,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 new TestSearchResult("Header10", "Description10")
         ));
 
-        return new SearchOverlayButtonBuilder<TestSearchResult>()
+        return new SearchOverlayButtonBuilder<TestSearchResult, SerializablePredicate<TestSearchResult>>()
                 // add the data provider
                 .withDataProvider(listDataProvider)
                 // Set the query that is executed to filter the Entities above

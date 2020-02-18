@@ -14,6 +14,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.router.RoutePrefix;
+import com.vaadin.flow.function.SerializablePredicate;
 
 import java.util.Arrays;
 
@@ -44,9 +45,9 @@ public class SearchView extends AbstractLeftBehaviorBasicView {
                 new TestSearchResult("Header10", "Description10")
         ));
 
-        SearchOverlayButton<TestSearchResult> button = new SearchOverlayButtonBuilder<TestSearchResult>()
+        SearchOverlayButton<TestSearchResult, SerializablePredicate<TestSearchResult>> button = new SearchOverlayButtonBuilder<TestSearchResult, SerializablePredicate<TestSearchResult>>()
                 .withDataProvider(dataProvider)
-                .withQueryProvider(s -> new Query<>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
+                .withQueryProvider(s -> new Query<TestSearchResult, SerializablePredicate<TestSearchResult>>(testEntity -> !s.equals("") && testEntity.getHeader().startsWith(s)))
                 .withDataViewProvider(result -> {
                     RippleClickableCard card = new RippleClickableCard(new Item(result.getHeader(), result.getDescription()));
                     card.setWidthFull();
