@@ -1,6 +1,7 @@
 package com.github.appreciated.app.layout.component.router;
 
 import com.github.appreciated.app.layout.component.applayout.AppLayout;
+import com.github.appreciated.app.layout.design.ThemeHelper;
 import com.github.appreciated.app.layout.navigation.UpNavigationHelper;
 import com.github.appreciated.app.layout.session.UIAttributes;
 import com.vaadin.flow.component.AttachEvent;
@@ -18,12 +19,15 @@ import com.vaadin.flow.theme.lumo.Lumo;
  */
 public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Div> implements RouterLayout {
 
+    private final ThemeHelper helper;
     private HasElement currentContent;
     private T layout;
 
     public AppLayoutRouterLayoutBase() {
         getContent().setSizeFull();
         getContent().getElement().getStyle().set("overflow", "auto");
+        // Workaround to hopefully fix the issues with Springboot.
+        helper = new ThemeHelper();
     }
 
     public static <V extends AppLayoutRouterLayoutBase> V getCurrent(Class<V> mainAppLayoutClass) {
