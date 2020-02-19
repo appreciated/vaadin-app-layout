@@ -28,6 +28,8 @@ html {
     --app-layout-menu-button-height: calc(var(--lumo-size-s) * 1.6);
     --app-layout-menu-button-padding: 0 var(--app-layout-space-s);
     --app-layout-menu-button-margin: 0;
+	--app-layout-menu-button-icon-size: 18px;
+	--app-layout-menu-button-collapse-icon-size: 12px;
     --app-layout-menu-toggle-button-padding: var(--app-layout-space-s);
     --app-layout-menu-padding: var(--app-layout-space-s) 0;
     --app-layout-menu-button-border-radius: var(--lumo-border-radius);
@@ -132,6 +134,11 @@ iron-collapse-layout[opened] > div > .app-menu-item > .collapse-icon {
 
 .app-menu-item iron-icon {
     flex-shrink: 0;
+	width: var(--app-layout-menu-button-icon-size);
+}
+
+.app-menu-item iron-icon.collapse-icon {
+	width: var(--app-layout-menu-button-collapse-icon-size);
 }
 
 .app-menu-item span {
