@@ -87,7 +87,7 @@ public abstract class BaseTest {
     }
 
     public String getTextByCssSelector(String cssSelector, int i) {
-        return $$(cssSelector).get(i).$("label", 0).getText();
+        return $$(cssSelector).get(i).$("span", 0).getText();
     }
 
     public String getTextOfElementByCssSelector(String cssSelector, int i) {

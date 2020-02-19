@@ -1,20 +1,20 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.function.SerializablePredicate;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-
-public class SearchOverlayButton<T> extends IconButton {
-    private final SearchOverlayView<T> searchView;
+public class SearchOverlayButton<T, F> extends IconButton {
+    private final SearchOverlayView<T, F> searchView;
 
     public SearchOverlayButton() {
         this(VaadinIcon.SEARCH);
@@ -42,7 +42,7 @@ public class SearchOverlayButton<T> extends IconButton {
         attachEvent.getUI().add(searchView);
     }
 
-    public SearchOverlayView<T> getSearchView() {
+    public SearchOverlayView<T, F> getSearchView() {
         return searchView;
     }
 
@@ -50,11 +50,11 @@ public class SearchOverlayButton<T> extends IconButton {
         this.searchView.setDataViewProvider(provider);
     }
 
-    public void setDataProvider(ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider) {
+    public void setDataProvider(DataProvider<T, F> dataProvider) {
         this.searchView.setDataProvider(dataProvider);
     }
 
-    public void setQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> query) {
+    public void setQueryProvider(Function<String, Query<T, F>> query) {
         this.searchView.setQueryProvider(query);
     }
 

@@ -1,5 +1,10 @@
 package com.github.appreciated.app.layout.addons.search.overlay;
 
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
@@ -11,17 +16,12 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializablePredicate;
 
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-public class SearchOverlayView<T> extends IronOverlay {
+public class SearchOverlayView<T, F> extends IronOverlay {
     private final TextField searchField = new TextField();
     private final IconButton closeButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
     private VerticalLayout results = new VerticalLayout();
@@ -29,8 +29,8 @@ public class SearchOverlayView<T> extends IronOverlay {
     private VerticalLayout wrapper = new VerticalLayout(searchFieldWrapper, results);
 
     private Function<T, ClickNotifier> dataViewProvider;
-    private ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider;
-    private Function<String, Query<T, SerializablePredicate<T>>> queryProvider;
+    private DataProvider<T, F> dataProvider;
+    private Function<String, Query<T, F>> queryProvider;
 
     private Consumer<T> queryResultListener;
     private boolean closeOnQueryResult = true;
@@ -107,11 +107,11 @@ public class SearchOverlayView<T> extends IronOverlay {
         this.dataViewProvider = dataViewProvider;
     }
 
-    public ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> getDataProvider() {
+    public DataProvider<T, F> getDataProvider() {
         return dataProvider;
     }
 
-    public void setDataProvider(ConfigurableFilterDataProvider<T, SerializablePredicate<T>, SerializablePredicate<T>> dataProvider) {
+    public void setDataProvider(DataProvider<T, F> dataProvider) {
         this.dataProvider = dataProvider;
     }
 
@@ -127,7 +127,7 @@ public class SearchOverlayView<T> extends IronOverlay {
         return searchField;
     }
 
-    public void setQueryProvider(Function<String, Query<T, SerializablePredicate<T>>> queryProvider) {
+    public void setQueryProvider(Function<String, Query<T, F>> queryProvider) {
         this.queryProvider = queryProvider;
     }
 
