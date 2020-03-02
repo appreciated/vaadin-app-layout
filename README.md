@@ -99,7 +99,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-The Java Project vaadin-app-layout is written by appreciated and the lovely peole that send pull requests.
+The Java Project vaadin-app-layout is written by appreciated and [the lovely peole that send pull requests](https://github.com/appreciated/vaadin-app-layout/graphs/contributors).
 
 The used Polymer Components are [distributed under the BSD License](https://github.com/Polymer/polymer/blob/master/LICENSE.txt)
 
