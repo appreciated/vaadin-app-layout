@@ -14,6 +14,8 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.RouterLink;
 
 public class TopNavigationLink extends RouterLink implements NavigationElement, BeforeEnterObserver {
+    private static final long serialVersionUID = 1L;
+
     private Class<? extends Component> className;
     private NavigationElementContainer parent;
 

@@ -18,6 +18,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
  */
 
 public class NotificationButton<T extends Notification> extends ComponentBadgeWrapper<Button> implements NotificationComponent {
+    private static final long serialVersionUID = 1L;
 
     private final NotificationsOverlayView<T> notificationOverlay;
     private NotificationHolder<T> holder;

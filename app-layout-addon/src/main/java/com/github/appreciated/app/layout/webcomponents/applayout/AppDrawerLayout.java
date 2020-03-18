@@ -10,5 +10,6 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "@polymer/app-layout", version = "3.1.0")
 @JsModule("@polymer/app-layout/app-drawer-layout/app-drawer-layout.js")
 public class AppDrawerLayout extends Component implements HasComponents {
+    private static final long serialVersionUID = 1L;
 
 }

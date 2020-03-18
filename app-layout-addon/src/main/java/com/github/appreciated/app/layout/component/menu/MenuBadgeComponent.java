@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.Span;
 
 public class MenuBadgeComponent extends Span implements HasStyle {
+    private static final long serialVersionUID = 1L;
 
     public MenuBadgeComponent() {
         setWidth("var(--app-layout-badge-width)");

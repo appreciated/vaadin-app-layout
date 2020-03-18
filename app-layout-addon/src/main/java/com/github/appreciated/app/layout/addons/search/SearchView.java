@@ -13,6 +13,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 public class SearchView extends IronOverlay {
+    private static final long serialVersionUID = 1L;
+
     private final TextField searchField = new TextField();
     private final Button closeButton = new Button(VaadinIcon.ARROW_LEFT.create());
     private HorizontalLayout searchFieldWrapper = new HorizontalLayout(closeButton, searchField);

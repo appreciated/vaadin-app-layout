@@ -4,6 +4,7 @@ import com.github.appreciated.app.layout.component.builder.interfaces.Navigation
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class LeftSubmenuContainer extends VerticalLayout implements NavigationElementContainer {
+    private static final long serialVersionUID = 1L;
 
     public LeftSubmenuContainer() {
         setMargin(false);

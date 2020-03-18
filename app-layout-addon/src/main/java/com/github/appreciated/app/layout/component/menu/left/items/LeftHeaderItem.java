@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
  * A simple container component which may contain an image and two labels concerned component won't be added to its parent
  */
 public class LeftHeaderItem extends Composite<VerticalLayout> {
+    private static final long serialVersionUID = 1L;
 
     public LeftHeaderItem(String title, String subtitle, String src) {
         VerticalLayout content = getContent();

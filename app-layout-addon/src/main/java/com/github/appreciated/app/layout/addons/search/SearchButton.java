@@ -6,6 +6,8 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class SearchButton extends IconButton {
+    private static final long serialVersionUID = 1L;
+
     private final SearchView searchView;
 
     public SearchButton() {

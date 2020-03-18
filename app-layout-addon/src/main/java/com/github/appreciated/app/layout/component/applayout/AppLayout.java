@@ -14,6 +14,7 @@ import com.vaadin.flow.templatemodel.TemplateModel;
  */
 @NpmPackage(value = "@polymer/app-layout", version = "3.1.0")
 public abstract class AppLayout extends PolymerTemplate<TemplateModel> implements AppLayoutElementBase, HasStyle {
+    private static final long serialVersionUID = 1L;
 
     public static AppLayout getCurrent() {
         return UIAttributes.get(AppLayout.class);

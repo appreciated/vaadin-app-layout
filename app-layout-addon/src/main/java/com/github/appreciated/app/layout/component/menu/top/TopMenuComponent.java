@@ -9,6 +9,7 @@ import com.vaadin.flow.component.Component;
 import java.util.Arrays;
 
 public class TopMenuComponent extends PaperTabs implements NavigationElementContainer {
+    private static final long serialVersionUID = 1L;
 
     public TopMenuComponent() {
         setHeight("100%");

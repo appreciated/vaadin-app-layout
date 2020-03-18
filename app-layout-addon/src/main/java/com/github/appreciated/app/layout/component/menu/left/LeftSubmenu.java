@@ -20,6 +20,8 @@ import java.util.List;
  * The component which is used for submenu webcomponents. On click it toggles a css class which causes it to grow / shrink
  */
 public class LeftSubmenu extends Composite<IronCollapseLayout> implements NavigationElementContainer, AfterNavigationObserver, BeforeLeaveObserver {
+    private static final long serialVersionUID = 1L;
+
     private final LeftSubmenuContainer submenuContainer;
     private final Div toggleWrapper;
     private final LeftIconItem item;

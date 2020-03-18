@@ -2,10 +2,12 @@ package com.github.appreciated.app.layout.session;
 
 import com.vaadin.flow.component.UI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UIAttributes {
+public class UIAttributes implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     Map<UI, Map<Class, Object>> map = new HashMap<>();
 
@@ -18,7 +20,7 @@ public class UIAttributes {
      * @param <T>
      * @return
      */
-    public static <T> T get(Class<T> type) {
+    public static <T extends Serializable> T get(Class<T> type) {
         UIAttributes session = getSession();
         UI ui = UI.getCurrent();
         if (!session.map.containsKey(UI.getCurrent())) {
@@ -33,7 +35,7 @@ public class UIAttributes {
      * @param value
      * @param <T>
      */
-    public static <T> void set(Class<T> type, T value) {
+    public static <T extends Serializable> void set(Class<T> type, T value) {
         UIAttributes session = getSession();
         UI ui = UI.getCurrent();
         if (!session.map.containsKey(UI.getCurrent())) {

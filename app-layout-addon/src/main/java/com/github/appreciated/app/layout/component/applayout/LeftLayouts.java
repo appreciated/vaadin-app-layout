@@ -12,6 +12,7 @@ public interface LeftLayouts {
     @Tag(Left.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left.js")
     class Left extends AbstractLeftAppLayoutBase {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left";
 
@@ -25,6 +26,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-hybrid.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-hybrid.css")
     class LeftHybrid extends AbstractLeftAppLayoutBase {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left-hybrid";
 
@@ -35,6 +37,7 @@ public interface LeftLayouts {
     }
 
     class LeftHybridSmall extends LeftHybrid {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = LeftHybrid.TAG;
 
@@ -51,6 +54,8 @@ public interface LeftLayouts {
     @Tag(LeftOverlay.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-overlay.js")
     class LeftOverlay extends AbstractLeftAppLayoutBase {
+        private static final long serialVersionUID = 1L;
+
         public final static String TAG = "app-layout-left-overlay";
 
         @Override
@@ -60,6 +65,7 @@ public interface LeftLayouts {
     }
 
     abstract class AbstractLeftResponsive extends AbstractLeftAppLayoutBase {
+        private static final long serialVersionUID = 1L;
 
         /**
          * Sets the responsive width.
@@ -75,6 +81,7 @@ public interface LeftLayouts {
     @Tag(LeftResponsive.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive.js")
     class LeftResponsive extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left-responsive";
 
@@ -87,6 +94,8 @@ public interface LeftLayouts {
     @Tag(LeftResponsiveDouble.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-double.js")
     class LeftResponsiveDouble extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
+
         public final static String TAG = "app-layout-left-responsive-double";
 
         @Override
@@ -96,6 +105,7 @@ public interface LeftLayouts {
     }
 
     abstract class AbstractLeftResponsiveHybrid extends AbstractLeftAppLayoutBase {
+        private static final long serialVersionUID = 1L;
 
         /**
          * Sets the responsive width for narrow-mode.
@@ -121,6 +131,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
     class LeftResponsiveHybrid extends AbstractLeftResponsiveHybrid {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left-responsive-hybrid";
 
@@ -134,6 +145,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
     class LeftResponsiveHybridNoAppBar extends AbstractLeftResponsiveHybrid {
+        private static final long serialVersionUID = 1L;
 
 
         public final static String TAG = "app-layout-left-responsive-hybrid-no-app-bar";
@@ -148,6 +160,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
     class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftResponsiveHybrid {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left-responsive-hybrid-overlay-no-app-bar";
 
@@ -160,6 +173,7 @@ public interface LeftLayouts {
     @Tag(LeftResponsiveOverlay.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay.js")
     class LeftResponsiveOverlay extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
 
 
         public final static String TAG = "app-layout-left-responsive-overlay";
@@ -173,6 +187,7 @@ public interface LeftLayouts {
     @Tag(LeftResponsiveOverlayNoAppBar.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-overlay-no-app-bar.js")
     class LeftResponsiveOverlayNoAppBar extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
 
 
         public final static String TAG = "app-layout-left-responsive-overlay-no-app-bar";
@@ -187,6 +202,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small.css")
     class LeftResponsiveSmall extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
 
 
         public final static String TAG = "app-layout-left-responsive-small";
@@ -201,6 +217,7 @@ public interface LeftLayouts {
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.js")
     @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
     class LeftResponsiveSmallNoAppBar extends AbstractLeftResponsive {
+        private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-left-responsive-small-no-app-bar";
 

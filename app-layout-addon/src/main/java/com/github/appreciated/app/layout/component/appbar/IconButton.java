@@ -11,6 +11,7 @@ import com.vaadin.flow.component.icon.Icon;
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
  */
 public class IconButton extends Button {
+    private static final long serialVersionUID = 1L;
 
     public IconButton(Component icon) {
         super(icon);

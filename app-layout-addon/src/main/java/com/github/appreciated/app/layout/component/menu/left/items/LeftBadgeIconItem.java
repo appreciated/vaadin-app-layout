@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 
 public class LeftBadgeIconItem extends LeftIconItem {
+    private static final long serialVersionUID = 1L;
 
     private static int idCounter = 0;
 

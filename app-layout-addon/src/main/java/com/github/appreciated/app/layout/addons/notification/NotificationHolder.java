@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  */
 
 public abstract class NotificationHolder<T extends Notification> implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private PairComponentFactory<NotificationHolder<T>, T> componentProvider;
     private PairComponentFactory<NotificationHolder<T>, T> cardComponentProvider;

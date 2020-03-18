@@ -7,6 +7,7 @@ import com.vaadin.flow.router.Location;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouteData;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -14,7 +15,8 @@ import java.util.stream.Stream;
  * A helper class that checks whether <a href="https://developer.android.com/training/design-navigation/ancestral-temporal">Up Navigation</a>is available for a specific route,
  * and helps in finding possible parent views
  */
-public class UpNavigationHelper {
+public class UpNavigationHelper implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private HashMap<RouteData, String> registeredRoutes = new HashMap<>();
 

@@ -14,6 +14,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.DomListenerRegistration;
 
 public class NotificationView<T extends Notification> extends HorizontalLayout {
+    private static final long serialVersionUID = 1L;
 
     private final VerticalLayout wrapper;
     private final T info;
