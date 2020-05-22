@@ -17,6 +17,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.ArrayList;
 
 public class NotificationsOverlayView<T extends Notification> extends IronOverlay {
+    private static final long serialVersionUID = 1L;
 
     private final IconButton backButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
     private final IconButton clearButton = new IconButton(VaadinIcon.CHECK.create());

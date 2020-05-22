@@ -16,6 +16,7 @@ import java.util.function.Function;
  */
 
 public class DefaultNotificationHolder extends NotificationHolder<DefaultNotification> {
+    private static final long serialVersionUID = 1L;
 
     private Function<DefaultNotification, String> dateTimeFormatter = notification -> new PrettyTime().
             format(Date.from(notification.getCreationTime().atZone(ZoneId.systemDefault()).

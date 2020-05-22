@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 @JsModule("@polymer/paper-tabs/paper-tab.js")
 @NpmPackage(value = "@polymer/paper-tabs", version = "3.1.0")
 public class PaperTab extends Component implements FlexComponent, HasText {
+    private static final long serialVersionUID = 1L;
 
     private PaperTabs parent;
 

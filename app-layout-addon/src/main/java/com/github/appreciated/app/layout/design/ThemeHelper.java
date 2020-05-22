@@ -11,6 +11,8 @@ import com.vaadin.flow.component.html.Div;
  * build. The problem is we only need one css at runtime, but both css files need to be in the production build
  */
 public class ThemeHelper extends Div {
+    private static final long serialVersionUID = 1L;
+
     public ThemeHelper() {
     }
 }

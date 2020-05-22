@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Div;
 import java.util.Arrays;
 
 public class LeftMenuComponentWrapper extends Div implements NavigationElementContainer {
+    private static final long serialVersionUID = 1L;
 
     private final LeftMenu menu;
 

@@ -22,6 +22,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializablePredicate;
 
 public class SearchOverlayView<T, F> extends IronOverlay {
+    private static final long serialVersionUID = 1L;
+
     private final TextField searchField = new TextField();
     private final IconButton closeButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
     private VerticalLayout results = new VerticalLayout();

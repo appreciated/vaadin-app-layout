@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
  * A wrapper class for a menu element that is a {@link LeftSectionItem}.
  */
 public class LeftSectionItem extends HorizontalLayout {
+    private static final long serialVersionUID = 1L;
 
     private Label sectionLabel;
     private String name;

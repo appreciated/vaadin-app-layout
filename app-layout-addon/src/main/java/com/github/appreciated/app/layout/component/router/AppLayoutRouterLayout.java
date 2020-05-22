@@ -9,5 +9,6 @@ import com.vaadin.flow.component.page.Viewport;
  */
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public abstract class AppLayoutRouterLayout<T extends AppLayout> extends AppLayoutRouterLayoutBase<T> {
+    private static final long serialVersionUID = 1L;
 
 }

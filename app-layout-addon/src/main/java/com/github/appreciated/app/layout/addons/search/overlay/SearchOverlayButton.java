@@ -14,6 +14,8 @@ import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.function.SerializablePredicate;
 
 public class SearchOverlayButton<T, F> extends IconButton {
+    private static final long serialVersionUID = 1L;
+
     private final SearchOverlayView<T, F> searchView;
 
     public SearchOverlayButton() {

@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
  * A borderless button component which shows an indicator how many new notifications are available in the connected Notification holder.
  */
 public class ComponentBadgeWrapper<T extends Component> extends HorizontalLayout {
+    private static final long serialVersionUID = 1L;
 
     private final PaperBadge badge;
     private T wrappedComponent;

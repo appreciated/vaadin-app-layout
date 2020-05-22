@@ -11,6 +11,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "@polymer/paper-badge", version = "3.0.1")
 @JsModule("@polymer/paper-badge/paper-badge.js")
 public class PaperBadge extends Component implements HasText {
+    private static final long serialVersionUID = 1L;
 
     public PaperBadge() {
         this(null, null);

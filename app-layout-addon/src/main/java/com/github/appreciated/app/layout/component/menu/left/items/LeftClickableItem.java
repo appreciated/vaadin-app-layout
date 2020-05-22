@@ -9,6 +9,8 @@ import com.vaadin.flow.component.icon.Icon;
  * A wrapper class for {@link LeftClickableItem}.
  */
 public class LeftClickableItem extends LeftBadgeIconItem {
+    private static final long serialVersionUID = 1L;
+
     private final String name;
     private Component icon;
     private ComponentEventListener<ClickEvent<?>> listener;

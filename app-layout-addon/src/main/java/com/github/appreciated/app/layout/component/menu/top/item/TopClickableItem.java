@@ -10,6 +10,8 @@ import com.vaadin.flow.component.icon.Icon;
  * A wrapper class for {@link TopClickableItem}.
  */
 public class TopClickableItem extends Button {
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private Component icon;
     private ComponentEventListener<ClickEvent<?>> listener;

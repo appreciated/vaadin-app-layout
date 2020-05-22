@@ -7,6 +7,8 @@ import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 
 public class ContextMenuAppBarButton extends ComponentBadgeWrapper<IconButton> {
+    private static final long serialVersionUID = 1L;
+
     private final ContextMenu contextMenu;
     private Component buttonContent;
 

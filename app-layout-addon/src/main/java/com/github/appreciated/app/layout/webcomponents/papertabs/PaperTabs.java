@@ -13,6 +13,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "@polymer/app-layout", version = "3.1.0")
 @JsModule("@polymer/paper-tabs/paper-tabs.js")
 public class PaperTabs extends Component implements HasComponents, HasSize {
+    private static final long serialVersionUID = 1L;
 
     public void setScrollable(boolean scrollable) {
         getElement().setAttribute("scrollable", scrollable);

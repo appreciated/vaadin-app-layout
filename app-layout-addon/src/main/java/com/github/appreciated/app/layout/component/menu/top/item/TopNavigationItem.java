@@ -12,6 +12,7 @@ import com.vaadin.flow.component.icon.Icon;
  */
 public class TopNavigationItem extends PaperTab implements NavigationElementContainer,
     NavigationElement {
+    private static final long serialVersionUID = 1L;
 
     private NavigationElementContainer parent;
 

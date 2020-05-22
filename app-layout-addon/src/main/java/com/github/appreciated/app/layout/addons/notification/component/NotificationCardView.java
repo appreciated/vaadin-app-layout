@@ -6,6 +6,7 @@ import com.github.appreciated.app.layout.addons.notification.interfaces.Notifica
 import com.github.appreciated.card.RippleClickableCard;
 
 public class NotificationCardView<T extends Notification> extends RippleClickableCard {
+    private static final long serialVersionUID = 1L;
 
     private final NotificationView<T> notfication;
 

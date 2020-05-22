@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLink;
 
 public class LeftIconItem extends RouterLink implements HasSize {
+    private static final long serialVersionUID = 1L;
 
     private ComponentEventListener<ClickEvent<LeftIconItem>> listener;
     private Span caption;

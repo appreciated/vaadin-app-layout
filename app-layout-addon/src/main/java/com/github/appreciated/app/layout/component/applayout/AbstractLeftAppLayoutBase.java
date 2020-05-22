@@ -18,6 +18,7 @@ import static java.util.Arrays.asList;
  * The {@link AbstractLeftAppLayoutBase} is the supposed to be the base of any {@link AppLayoutElementBase} with a "Left Behaviour".
  */
 public abstract class AbstractLeftAppLayoutBase extends AppLayout {
+    private static final long serialVersionUID = 1L;
 
     private final FlexLayout appBarElementWrapper = new FlexLayout();
     private final FlexLayout appBarElementContainer = new FlexLayout();

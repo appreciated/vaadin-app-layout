@@ -6,6 +6,8 @@ import com.vaadin.flow.component.html.Image;
  * A component containing an image which is tweaked by css to be round without overflow with a certain height.
  */
 public class RoundImage extends Image {
+    private static final long serialVersionUID = 1L;
+
     public RoundImage(String icon) {
         this(icon, "75px", "75px");
     }

@@ -17,6 +17,8 @@ import com.vaadin.flow.router.BeforeEnterObserver;
  * AppLayout content view.
  */
 public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationElement, BeforeEnterObserver {
+    private static final long serialVersionUID = 1L;
+
     /**
      * The caption of this menu element
      */

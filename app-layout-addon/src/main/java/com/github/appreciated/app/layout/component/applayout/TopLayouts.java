@@ -25,6 +25,8 @@ public interface TopLayouts {
     @Tag(Top.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top.js")
     class Top extends AppLayout implements PageConfigurator {
+        private static final long serialVersionUID = 1L;
+
         public final static String TAG = "app-layout-top";
 
         private final HorizontalLayout paperTabWrapper = new HorizontalLayout();
@@ -187,6 +189,8 @@ public interface TopLayouts {
     @Tag(TopLarge.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top-large.js")
     class TopLarge extends AppLayout implements PageConfigurator {
+    	private static final long serialVersionUID = 1L;
+    	
         public final static String TAG = "app-layout-top-large";
 
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();

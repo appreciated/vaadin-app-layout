@@ -18,6 +18,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
  * the {@link AppLayout}. This can be extended directly if there is another parent layout defining a viewport.
  */
 public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Div> implements RouterLayout {
+    private static final long serialVersionUID = 1L;
 
     private final ThemeHelper helper;
     private HasElement currentContent;

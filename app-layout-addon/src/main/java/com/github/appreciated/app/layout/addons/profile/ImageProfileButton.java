@@ -3,6 +3,7 @@ package com.github.appreciated.app.layout.addons.profile;
 import com.vaadin.flow.component.html.Image;
 
 public class ImageProfileButton extends ProfileButton {
+    private static final long serialVersionUID = 1L;
 
     public ImageProfileButton(Image image) {
         super(image);
