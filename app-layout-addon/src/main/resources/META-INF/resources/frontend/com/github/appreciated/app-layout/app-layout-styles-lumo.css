@@ -73,7 +73,7 @@ html {
     --app-layout-background: var(--lumo-base-color);
     --app-layout-bar-background-base-color: var(--lumo-base-color);
     --app-layout-bar-background-color: var(--lumo-contrast-10pct);
-    --app-layout-bar-font-color: var(--lumo-contrast-90);
+    --app-layout-bar-font-color: var(--lumo-header-text-color);
     --app-layout-bar-shadow: var(--lumo-box-shadow-s);
     --app-layout-drawer-shadow: var(--lumo-box-shadow-s);
     --app-layout-drawer-background-base-color: var(--lumo-base-color);
