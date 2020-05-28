@@ -10,14 +10,15 @@ html {
     --material-space-l: 1.5rem;
     --material-space-xl: 2.5rem;
     --material-border-radius: 3px;
-    --lumo-box-shadow-s: var(--shadow-elevation-2dp_-_box-shadow);
+    --lumo-box-shadow-s: var(--material-shadow-elevation-2dp);
     --lumo-border-radius: var(--material-border-radius);
+    --lumo-base-color: var(--material-background-color);
     --app-layout-primary-color: var(--material-primary-color);
     --app-layout-primary-text-color: var(--material-primary-text-color);
     --app-layout-space-s: var(--material-space-s);
     --app-layout-section-divider-color: var(--material-divider-color);
     --app-layout-badge-background: var(--material-primary-color);
-    --app-layout-background: var(--material-base-color);
+    --app-layout-background: var(--material-background-color);
     --app-layout-font-size-header: var(--material-font-size-m);
     --app-layout-font-size-menu: var(--material-font-size-m);
     --app-layout-font-size-notifications: var(--material-font-size-m);
@@ -31,10 +32,10 @@ html {
     --app-layout-bar-padding: 0 var(--app-layout-space-s);
     --app-layout-bar-padding-small: 0 0;
     --app-layout-bar-padding-double: 0 0;
-    --app-layout-drawer-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+    --app-layout-drawer-shadow: var(--material-shadow-elevation-2dp);
     --app-layout-drawer-background-base-color: var(--material-background-color);
     --app-layout-drawer-background-color: transparent;
-    --app-layout-drawer-submenu-background-color: var(--material-divider-color);
+    --app-layout-drawer-submenu-background-color: rgba(0, 0, 0, 0.04);
     --app-layout-drawer-font-color: var(--material-body-text-color);
     --app-layout-drawer-width: calc(var(--material-size-xl) * 4.6);
     --app-layout-drawer-small-width: calc(var(--app-layout-bar-height) - 1px);
@@ -62,7 +63,7 @@ html {
     --app-layout-notification-font-color: var(--material-body-text-color);
     --app-layout-notification-background-base-color: var(--primary-background-color);
     --app-layout-notification-background-color: var(--primary-background-color);
-    --app-layout-notification-shadow: var(--shadow-elevation-2dp_-_box-shadow);
+    --app-layout-notification-shadow: var(--material-shadow-elevation-2dp);
     /* Variables of webcomponents */
     --paper-drawer-title-background-color: var(--primary-background-color);
     --paper-drawer-title-color: var(--material-body-text-color);
@@ -144,6 +145,7 @@ iron-collapse-layout[opened] > div > .app-menu-item > .collapse-icon {
 
 .app-layout-icon-button {
     min-width: var(--app-layout-menu-button-height);
+    line-height: 0px !important;
 }
 
 .app-layout-icon-button iron-icon {
@@ -167,6 +169,6 @@ iron-collapse-layout[opened] > div > .app-menu-item > .collapse-icon {
     flex-shrink: 0;
 }
 
-.app-menu-item label {
+.app-menu-item span {
     margin-left: 18px;
 }
