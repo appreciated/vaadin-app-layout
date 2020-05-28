@@ -7,14 +7,15 @@
     "@vaadin/flow-deps": "./target/frontend"
   },
   "devDependencies": {
-    "webpack": "4.30.0",
+    "webpack": "4.42.0",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
     "webpack-babel-multi-target-plugin": "2.3.3",
     "copy-webpack-plugin": "5.1.0",
     "compression-webpack-plugin": "3.0.1",
     "webpack-merge": "4.2.2",
-    "raw-loader": "3.0.0"
+    "raw-loader": "3.0.0",
+    "terser": "4.6.7"
   },
-  "vaadinAppPackageHash": "5c52ea391f04fddb559cdbcddbce95106b12ef4b4d305a08a63bc30db237a11d"
+  "vaadinAppPackageHash": "470235b1f6efa90daaa8a7b8d9fad63fc54e85a721b0b4032d19b20d46b3de53"
 }
