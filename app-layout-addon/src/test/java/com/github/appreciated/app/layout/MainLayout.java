@@ -55,6 +55,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Theme(value = Lumo.class, variant = Lumo.DARK)
+//@Theme(value = Material.class, variant = Material.LIGHT)
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends AppLayoutRouterLayout {
     private DefaultNotificationHolder notificationHolder = new DefaultNotificationHolder(newStatus -> {/*Do something with it*/});

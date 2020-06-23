@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,13 +26,19 @@ public abstract class BaseTest {
 
     @BeforeClass
     public static void init() {
-        Optional<String> version = WebDriverManager.chromedriver().getVersions().stream().max(String::compareTo);
-        if (version.isPresent()) {
-            WebDriverManager.chromedriver().version(version.get()).setup();
-            driver = new ChromeDriver();
-            WebDriverRunner.setWebDriver(driver);
-        } else {
-            throw new IllegalStateException("No Chromedriver found!");
+        List<String> versions = WebDriverManager.chromedriver().getVersions().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        for (String version : versions) {
+            try {
+                // TODO Save the working version somewhere persistent to use it in other ui tests
+                System.out.println("Trying Webdriver with version " + version);
+                WebDriverManager.chromedriver().version(version).setup();
+                driver = new ChromeDriver();
+                WebDriverRunner.setWebDriver(driver);
+                System.out.println("Using Webdriver with version " + version);
+                break;
+            } catch (Exception exception) {
+                System.out.println("Webdriver with version " + version + " not suitable for installed browser");
+            }
         }
     }
 
