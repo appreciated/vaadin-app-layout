@@ -23,22 +23,18 @@ public class NotificationButton<T extends Notification> extends ComponentBadgeWr
     private final NotificationsOverlayView<T> notificationOverlay;
     private NotificationHolder<T> holder;
 
-    public NotificationButton() {
-        this(VaadinIcon.SEARCH);
-    }
-
-    public NotificationButton(VaadinIcon icon) {
-        this(icon.create());
-    }
-
     public NotificationButton(Component icon) {
         super(new IconButton(icon));
         notificationOverlay = new NotificationsOverlayView<>();
         addClickListener(event -> notificationOverlay.open());
     }
 
-    public NotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
-        this(icon.create());
+    public NotificationButton(Component icon, NotificationHolder<T> holder) {
+        this(icon);
+        setHolder(holder);
+    }
+
+    public void setHolder(NotificationHolder<T> holder) {
         this.holder = holder;
         notificationOverlay.setHolder(holder);
         setClassName("app-bar-notification-button");
@@ -51,6 +47,14 @@ public class NotificationButton<T extends Notification> extends ComponentBadgeWr
         holder.bind(getBadge());
         holder.registerNotificationComponent(this);
         refreshNotifications();
+    }
+
+    public NotificationHolder<T> getHolder() {
+        return holder;
+    }
+
+    public NotificationButton(VaadinIcon icon, NotificationHolder<T> holder) {
+        this(icon.create(), holder);
     }
 
     public void refreshNotifications() {

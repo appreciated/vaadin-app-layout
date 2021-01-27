@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Selenide.open;
 public abstract class BaseTest {
     public static WebDriver driver;
     public static int SLEEP = 400;
-
+    
     @BeforeClass
     public static void init() {
         List<String> versions = WebDriverManager.chromedriver().getVersions().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
