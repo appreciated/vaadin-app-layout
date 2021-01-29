@@ -88,6 +88,7 @@ public class UpNavigationHelper implements Serializable {
         Set<RouteData> routes = getUpNavigationHelper().registeredRoutes.keySet();
         Optional<RouteSimilarity> result = routes.stream()
                 .map(s -> new RouteSimilarity(s, currentRoute))
+                .filter(routeSimilarity -> routeSimilarity.getSimilarity() > 0)
                 .max(Comparator.comparingInt(RouteSimilarity::getSimilarity));
 
         return result.filter(routeSimilarity -> routeSimilarity.getRoute() == className).isPresent();
