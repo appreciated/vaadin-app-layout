@@ -1,10 +1,10 @@
 package com.github.appreciated.app.layout.addons.search;
 
+import com.github.appreciated.app.layout.component.appbar.IconButton;
 import com.github.appreciated.ironoverlay.IronOverlay;
 import com.github.appreciated.ironoverlay.VerticalOrientation;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -16,7 +16,7 @@ public class SearchView extends IronOverlay {
     private static final long serialVersionUID = 1L;
 
     private final TextField searchField = new TextField();
-    private final Button closeButton = new Button(VaadinIcon.ARROW_LEFT.create());
+    private final IconButton closeButton = new IconButton(VaadinIcon.ARROW_LEFT.create());
     private HorizontalLayout searchFieldWrapper = new HorizontalLayout(closeButton, searchField);
 
     public SearchView() {
@@ -28,15 +28,13 @@ public class SearchView extends IronOverlay {
                 .set("height", "var(--app-bar-height)")
                 .set("box-shadow", "var(--app-layout-bar-shadow)")
                 .set("padding", "var(--app-layout-bar-padding)")
+                .set("flex-shrink", "0")
                 .set("z-index", "1");
         searchFieldWrapper.setWidthFull();
         searchFieldWrapper.setAlignItems(FlexComponent.Alignment.CENTER);
-        searchFieldWrapper.setSpacing(false);
         searchField.getStyle().set("--lumo-contrast-10pct", "transparent");
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
         searchField.setWidthFull();
-        closeButton.setWidth("var(--app-bar-height)");
-        closeButton.setHeight("var(--app-bar-height)");
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         closeButton.addClickListener(event -> {
             searchField.clear();
