@@ -21,7 +21,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependencies -->
-        <vaadin.version>14.3.5</vaadin.version>
+        <vaadin.version>14.6.2</vaadin.version>
         <jetty.version>9.4.15.v20190215</jetty.version>
     </properties>
 
