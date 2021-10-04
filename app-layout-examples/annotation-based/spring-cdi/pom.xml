@@ -5,7 +5,7 @@
     <groupId>com.github.appreciated</groupId>
     <artifactId>app-layout-spring-cdi-annotation-example</artifactId>
     <packaging>war</packaging>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <name>App Layout Add-on Spring CDI Example</name>
 
     <prerequisites>
@@ -13,8 +13,8 @@
     </prerequisites>
 
     <properties>
-        <vaadin.version>8.6.2</vaadin.version>
-        <vaadin.plugin.version>8.6.2</vaadin.plugin.version>
+        <vaadin.version>8.14.0</vaadin.version>
+        <vaadin.plugin.version>8.14.0</vaadin.plugin.version>
         <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
