@@ -39,6 +39,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             drawerLayout.drawer.toggle();
         }
     });
+    var drawer = document.querySelector('app-drawer');
+    drawer.addEventListener('opened-changed', evt => document.querySelector('app-toolbar').setAttribute('app-drawer-open', drawer.opened));
 </script>
 
 </body>

@@ -10,8 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html>
-<head>
-</head>
+<head></head>
 <body>
 <app-toolbar style="height: var(--app-bar-height);">
     <paper-icon-button id="toggle" icon="menu"></paper-icon-button>
@@ -26,8 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var drawer = document.querySelector('app-drawer');
     document.querySelector('paper-icon-button').addEventListener('click', function () {
         drawer.toggle();
-        document.querySelector('app-toolbar').setAttribute('drawer-opened', drawer.opened);
     });
+    drawer.addEventListener('opened-changed', evt => document.querySelector('app-toolbar').setAttribute('app-drawer-open', drawer.opened));
 </script>
 
 </body>
