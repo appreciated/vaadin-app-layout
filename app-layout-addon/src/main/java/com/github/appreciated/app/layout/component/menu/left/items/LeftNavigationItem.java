@@ -42,6 +42,9 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
+        if (this.icon != null) {
+            this.icon.getElement().getStyle().set("flex-shrink", "0");
+        }
         this.className = className;
         UpNavigationHelper.registerNavigationRoute(className);
         setRoute(UI.getCurrent().getRouter(), className);

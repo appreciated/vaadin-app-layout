@@ -31,7 +31,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 @StyleSheet("./theming/custom-lumo.css") // You can use css @StyleSheet to overwrite the css variables of the app-layout
 @CssImport(value = "./theming/custom-app-layout.css", themeFor = LeftLayouts.LeftHybrid.TAG)
 // You can use @CssImport style the app-layout using ThemableMixin
-@Theme(value = Material.class)
+@Theme(value = Material.LIGHT)
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftHybrid> {
 
     public MainAppLayout() {

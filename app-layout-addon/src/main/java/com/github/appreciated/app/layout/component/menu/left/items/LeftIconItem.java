@@ -45,6 +45,7 @@ public class LeftIconItem extends RouterLink implements HasSize {
         }
         this.icon = icon;
         if (icon != null) {
+            this.icon.getElement().getStyle().set("flex-shrink", "0");
             getElement().insertChild(0, this.icon.getElement());
         }
     }

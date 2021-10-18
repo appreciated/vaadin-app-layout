@@ -24,7 +24,7 @@ public interface LeftLayouts {
 
     @Tag(LeftHybrid.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-hybrid.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-hybrid.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-hybrid.css")
     class LeftHybrid extends AbstractLeftAppLayoutBase {
         private static final long serialVersionUID = 1L;
 
@@ -129,7 +129,7 @@ public interface LeftLayouts {
 
     @Tag(LeftResponsiveHybrid.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-responsive-hybrid.css")
     class LeftResponsiveHybrid extends AbstractLeftResponsiveHybrid {
         private static final long serialVersionUID = 1L;
 
@@ -143,7 +143,7 @@ public interface LeftLayouts {
 
     @Tag(LeftResponsiveHybridNoAppBar.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-responsive-hybrid-no-app-bar.css")
     class LeftResponsiveHybridNoAppBar extends AbstractLeftResponsiveHybrid {
         private static final long serialVersionUID = 1L;
 
@@ -158,7 +158,7 @@ public interface LeftLayouts {
 
     @Tag(LeftResponsiveHybridOverlayNoAppBar.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-responsive-hybrid-overlay-no-app-bar.css")
     class LeftResponsiveHybridOverlayNoAppBar extends AbstractLeftResponsiveHybrid {
         private static final long serialVersionUID = 1L;
 
@@ -200,7 +200,7 @@ public interface LeftLayouts {
 
     @Tag(LeftResponsiveSmall.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-responsive-small.css")
     class LeftResponsiveSmall extends AbstractLeftResponsive {
         private static final long serialVersionUID = 1L;
 
@@ -215,7 +215,7 @@ public interface LeftLayouts {
 
     @Tag(LeftResponsiveSmallNoAppBar.TAG)
     @JsModule("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.js")
-    @StyleSheet("./com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
+    @StyleSheet("./frontend/com/github/appreciated/app-layout/left/left-responsive-small-no-app-bar.css")
     class LeftResponsiveSmallNoAppBar extends AbstractLeftResponsive {
         private static final long serialVersionUID = 1L;
 

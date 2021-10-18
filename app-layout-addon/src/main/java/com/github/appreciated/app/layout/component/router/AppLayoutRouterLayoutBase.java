@@ -82,10 +82,10 @@ public class AppLayoutRouterLayoutBase<T extends AppLayout> extends Composite<Di
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        if (getClass().getAnnotation(Theme.class) != null && getClass().getAnnotation(Theme.class).value() != Lumo.class) {
-            attachEvent.getUI().getPage().addStyleSheet("./com/github/appreciated/app-layout/app-layout-styles-material.css");
+        if (getClass().getAnnotation(Theme.class) != null && !getClass().getAnnotation(Theme.class).value().equals(Lumo.class.getName())) {
+            attachEvent.getUI().getPage().addStyleSheet("./frontend/com/github/appreciated/app-layout/app-layout-styles-material.css");
         } else {
-            attachEvent.getUI().getPage().addStyleSheet("./com/github/appreciated/app-layout/app-layout-styles-lumo.css");
+            attachEvent.getUI().getPage().addStyleSheet("./frontend/com/github/appreciated/app-layout/app-layout-styles-lumo.css");
         }
         getUI().ifPresent(ui -> ui.addAfterNavigationListener(event -> {
             closeDrawerIfNotPersistent();

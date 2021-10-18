@@ -29,7 +29,7 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@Theme(Material.class)
+@Theme(Material.LIGHT)
 public class MainAppLayout extends AppLayoutRouterLayout {
 
     public MainAppLayout() {

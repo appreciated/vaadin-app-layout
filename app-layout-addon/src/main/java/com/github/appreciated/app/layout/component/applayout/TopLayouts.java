@@ -15,8 +15,6 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.server.InitialPageSettings;
-import com.vaadin.flow.server.PageConfigurator;
 
 import java.util.Arrays;
 
@@ -24,7 +22,7 @@ public interface TopLayouts {
 
     @Tag(Top.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top.js")
-    class Top extends AppLayout implements PageConfigurator {
+    class Top extends AppLayout {
         private static final long serialVersionUID = 1L;
 
         public final static String TAG = "app-layout-top";
@@ -180,17 +178,17 @@ public interface TopLayouts {
             return (Component) content;
         }
 
-        @Override
+        /*@Override
         public void configurePage(InitialPageSettings settings) {
             settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
-        }
+        }*/
     }
 
     @Tag(TopLarge.TAG)
     @JsModule("./com/github/appreciated/app-layout/top/top-large.js")
-    class TopLarge extends AppLayout implements PageConfigurator {
-    	private static final long serialVersionUID = 1L;
-    	
+    class TopLarge extends AppLayout {
+        private static final long serialVersionUID = 1L;
+
         public final static String TAG = "app-layout-top-large";
 
         private final HorizontalLayout appBarElementWrapper = new HorizontalLayout();
@@ -366,9 +364,9 @@ public interface TopLayouts {
             }
         }
 
-        @Override
+       /* @Override
         public void configurePage(InitialPageSettings settings) {
             settings.addInlineWithContents("body {overflow-x: hidden !important;}", InitialPageSettings.WrapMode.STYLESHEET);
-        }
+        }*/
     }
 }
