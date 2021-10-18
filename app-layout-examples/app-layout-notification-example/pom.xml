@@ -6,7 +6,7 @@
 
     <name>App Layout Addon Examples - Notifications</name>
     <artifactId>app-layout-notification-example</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>21.0.0-SNAPSHOT</version>
     <groupId>com.github.appreciated.examples</groupId>
     <packaging>war</packaging>
 

@@ -6,7 +6,7 @@
 
     <name>App Layout Addon Examples - Search</name>
     <artifactId>app-layout-search-example</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>21.0.0-SNAPSHOT</version>
     <groupId>com.github.appreciated.examples</groupId>
     <packaging>war</packaging>
 

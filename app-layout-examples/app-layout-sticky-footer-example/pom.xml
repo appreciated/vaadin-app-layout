@@ -6,7 +6,7 @@
 
     <artifactId>app-layout-sticky-footer-example</artifactId>
     <name>App Layout Addon Examples - Sticky Header/Footer</name>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>21.0.0-SNAPSHOT</version>
     <groupId>com.github.appreciated.examples</groupId>
     <packaging>war</packaging>
 
