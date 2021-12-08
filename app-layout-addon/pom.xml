@@ -4,7 +4,7 @@
     <artifactId>app-layout-addon</artifactId>
     <groupId>com.github.appreciated</groupId>
     <modelVersion>4.0.0</modelVersion>
-    <version>21.0.0-SNAPSHOT</version>
+    <version>22.0.0-SNAPSHOT</version>
 
     <name>App Layout Add-on</name>
     <description>Integration of app-layout for Vaadin 21</description>
@@ -21,7 +21,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependencies -->
-        <vaadin.version>21.0.3</vaadin.version>
+        <vaadin.version>22.0.0</vaadin.version>
         <jetty.version>9.4.15.v20190215</jetty.version>
     </properties>
 
