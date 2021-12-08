@@ -9,6 +9,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.RouteParameters;
 
 /**
  * A wrapper class for a MenuElement that is clickable and backed by the Navigator. Which means that
@@ -39,6 +40,10 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
     }
 
     public LeftNavigationItem(String caption, Component icon, Class<? extends Component> className) {
+        this(caption, icon, className, RouteParameters.empty());
+    }
+
+    public LeftNavigationItem(String caption, Component icon, Class<? extends Component> className, RouteParameters parameters) {
         super(caption, icon);
         this.caption = caption;
         this.icon = icon;
@@ -46,8 +51,8 @@ public class LeftNavigationItem extends LeftBadgeIconItem implements NavigationE
             this.icon.getElement().getStyle().set("flex-shrink", "0");
         }
         this.className = className;
-        UpNavigationHelper.registerNavigationRoute(className);
-        setRoute(UI.getCurrent().getRouter(), className);
+        UpNavigationHelper.registerNavigationRoute(className, parameters);
+        setRoute(className, parameters);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event.getLocation()));
     }
 
