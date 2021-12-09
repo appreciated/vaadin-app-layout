@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.RouteParameters;
 import com.vaadin.flow.router.RouterLink;
 
 public class TopNavigationLink extends RouterLink implements NavigationElement, BeforeEnterObserver {
@@ -20,6 +21,10 @@ public class TopNavigationLink extends RouterLink implements NavigationElement, 
     private NavigationElementContainer parent;
 
     public TopNavigationLink(String caption, Component icon, Class<? extends Component> className) {
+        this(caption, icon, className, RouteParameters.empty());
+    }
+
+    public TopNavigationLink(String caption, Component icon, Class<? extends Component> className, RouteParameters parameters) {
         super();
         this.className = className;
         HorizontalLayout wrapper = new HorizontalLayout();
@@ -32,8 +37,8 @@ public class TopNavigationLink extends RouterLink implements NavigationElement, 
         wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
         wrapper.setHeight("100%");
         add(wrapper);
-        UpNavigationHelper.registerNavigationRoute(className);
-        setRoute(UI.getCurrent().getRouter(), className);
+        UpNavigationHelper.registerNavigationRoute(className, parameters);
+        setRoute(className, parameters);
         setHighlightCondition((routerLink, event) -> UpNavigationHelper.shouldHighlight(className, event.getLocation()));
     }
 
