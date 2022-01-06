@@ -27,7 +27,7 @@
 
         <!-- Frontend -->
         <node.version>v8.9.4</node.version>
-        <yarn.version>v1.3.2</yarn.version>
+        <yarn.version>v1.7.0</yarn.version>
         <buildtools.directory>build-tools</buildtools.directory>
         <frontend.directory>src/main/webapp/VAADIN/frontend</frontend.directory>
     </properties>

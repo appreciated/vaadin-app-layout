@@ -56,9 +56,10 @@ The Designer won't be able to successfully compile the SCSS as long as it doesn'
 
 Notes:
 
-Every time you are updating the Addon to a new version you need to run a mvn install otherwise the designer and the scss compiler will continue to use the old theme.
-I do not recommend to include this job for jenkins builds, only for developement purposes.
-To avoid pushing unecessary files to git you might want to add src/main/webapp/VAADIN/addons/ to your .gitignore.
+Every time you are updating the Addon to a new version you need to run a mvn install otherwise the designer and the scss
+compiler will continue to use the old theme. I do not recommend including this job for jenkins builds, only for
+developement purposes. To avoid pushing unecessary files to git you might want to add src/main/webapp/VAADIN/addons/ to
+your .gitignore.
 ````
  <plugin>
     <artifactId>maven-dependency-plugin</artifactId>
