@@ -22,7 +22,7 @@ Add the following lines to you POM
 <!-- Should be there by default
 <repository>
    <id>vaadin-addons</id>
-   <url>http://maven.vaadin.com/vaadin-addons</url>
+   <url>https://maven.vaadin.com/vaadin-addons</url>
 </repository> 
 --> 
 ```

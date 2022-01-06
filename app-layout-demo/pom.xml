@@ -60,7 +60,7 @@
     <repositories>
         <repository>
             <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
         </repository>
     </repositories>
 
@@ -327,7 +327,7 @@
             <repositories>
                 <repository>
                     <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
                 </repository>
                 <repository>
                     <id>vaadin-snapshots</id>
@@ -343,7 +343,7 @@
             <pluginRepositories>
                 <pluginRepository>
                     <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
                 </pluginRepository>
                 <pluginRepository>
                     <id>vaadin-snapshots</id>
