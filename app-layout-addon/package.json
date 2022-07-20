@@ -54,7 +54,7 @@
       "webpack-cli": "3.3.11",
       "webpack": "4.42.0",
       "chokidar": "^3.4.0",
-      "terser": "4.6.7",
+      "terser": "4.8.1",
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.10.3"
     },
@@ -112,7 +112,7 @@
     "webpack-cli": "3.3.11",
     "webpack": "4.42.0",
     "chokidar": "^3.4.0",
-    "terser": "4.6.7",
+    "terser": "4.8.1",
     "webpack-merge": "4.2.2",
     "webpack-dev-server": "3.10.3"
   }
