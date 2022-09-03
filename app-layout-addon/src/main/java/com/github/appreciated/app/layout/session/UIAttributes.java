@@ -21,12 +21,7 @@ public class UIAttributes implements Serializable {
      * @return
      */
     public static <T extends Serializable> T get(Class<T> type) {
-        UIAttributes session = getSession();
-        UI ui = UI.getCurrent();
-        if (!session.map.containsKey(UI.getCurrent())) {
-            session.map.put(ui, new HashMap<>());
-        }
-        return (T) session.map.get(ui).get(type);
+        return (T) getSession().getCurrentUIData().get(type);
     }
 
     /**
@@ -36,12 +31,18 @@ public class UIAttributes implements Serializable {
      * @param <T>
      */
     public static <T extends Serializable> void set(Class<T> type, T value) {
-        UIAttributes session = getSession();
+    	getSession().getCurrentUIData().put(type, value);
+    }
+
+    private Map<Class, Object> getCurrentUIData() {
         UI ui = UI.getCurrent();
-        if (!session.map.containsKey(UI.getCurrent())) {
-            session.map.put(ui, new HashMap<>());
+        if (!map.containsKey(ui)) {
+            map.put(ui, new HashMap<>());
+            ui.addDetachListener(event -> {
+                map.remove(ui);
+            });
         }
-        session.map.get(ui).put(type, value);
+        return map.get(ui);
     }
 
     private static UIAttributes getSession() {
