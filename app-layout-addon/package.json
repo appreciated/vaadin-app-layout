@@ -51,12 +51,12 @@
       "copy-webpack-plugin": "5.1.1",
       "compression-webpack-plugin": "4.0.1",
       "raw-loader": "3.1.0",
-      "webpack-cli": "3.3.11",
-      "webpack": "4.42.0",
+      "webpack-cli": "5.1.4",
+      "webpack": "5.92.0",
       "chokidar": "^3.4.0",
       "terser": "4.6.7",
       "webpack-merge": "4.2.2",
-      "webpack-dev-server": "3.10.3"
+      "webpack-dev-server": "5.0.4"
     },
     "hash": "5a10117f2d3e616cd3682d9d6aad4e6e09e3f6c8265bb17b22cbdef32f21490b"
   },
@@ -109,11 +109,11 @@
     "copy-webpack-plugin": "5.1.1",
     "compression-webpack-plugin": "4.0.1",
     "raw-loader": "3.1.0",
-    "webpack-cli": "3.3.11",
-    "webpack": "4.42.0",
+    "webpack-cli": "5.1.4",
+    "webpack": "5.92.0",
     "chokidar": "^3.4.0",
     "terser": "4.6.7",
     "webpack-merge": "4.2.2",
-    "webpack-dev-server": "3.10.3"
+    "webpack-dev-server": "5.0.4"
   }
 }
