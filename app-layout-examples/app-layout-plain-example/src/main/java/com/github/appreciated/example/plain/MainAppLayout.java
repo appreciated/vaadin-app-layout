@@ -11,8 +11,6 @@ import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 import com.github.appreciated.app.layout.entity.DefaultBadgeHolder;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.page.Push;
-import com.vaadin.flow.component.page.Viewport;
 
 import static com.github.appreciated.app.layout.entity.Section.FOOTER;
 import static com.github.appreciated.app.layout.entity.Section.HEADER;
@@ -21,8 +19,6 @@ import static com.github.appreciated.app.layout.entity.Section.HEADER;
  * The main view contains a button and a template element.
  */
 
-@Push
-@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
 
     public MainAppLayout() {
